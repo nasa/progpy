@@ -1,0 +1,741 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>prog_algs Guide &#8212; ProgPy Python Packages 1.4.0 documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="prog_server Guide" href="prog_server_guide.html" />
+    <link rel="prev" title="prog_models Guide" href="prog_models_guide.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/software_name.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.4.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_models_guide.html">
+   prog_models Guide
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   prog_algs Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_server_guide.html">
+   prog_server Guide
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="api_ref.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_algs.html">
+     prog_algs API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/Prediction.html">
+       Prediction
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/Predictor.html">
+       Predictors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html">
+       State Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html">
+       ToEPredictionProfile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/UncertainData.html">
+       Uncertain Data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_models.html">
+     prog_models API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/DataModel.html">
+       DataModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/DataSets.html">
+       Datasets
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/IncludedModels.html">
+       Included Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/LinearModel.html">
+       LinearModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">
+       PrognosticsModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/SimResult.html">
+       SimResult
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_server.html">
+     prog_server API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/load_ests.html">
+       Load Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/prog_client.html">
+       prog_client
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/prog_server.html">
+       ProgServer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">
+       Prog Server API
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="releases.html">
+   Release Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dev_guide.html">
+   Developers Guide &amp; Project Plan
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/prog_algs_guide.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing">
+   Installing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-structures">
+     Data Structures
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use">
+   Use
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extending">
+   Extending
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>prog_algs Guide</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing">
+   Installing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-structures">
+     Data Structures
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use">
+   Use
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extending">
+   Extending
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="prog-algs-guide">
+<h1>prog_algs Guide<a class="headerlink" href="#prog-algs-guide" title="Permalink to this headline">#</a></h1>
+<iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_algs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/prog_algs/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
+<p>The Prognostic Algorithms Package is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code>) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.</p>
+<section id="installing">
+<h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">#</a></h2>
+<p>The latest stable release of <cite>prog_algs</cite> is hosted on PyPi. For most users (unless you want to contribute to the development of <cite>prog_algs</cite>), this version will be adequate. To install from the command line, use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install prog_algs
+</pre></div>
+</div>
+<details class="summary-installing-pre-release-versions-with-github">
+<summary>Installing Pre-Release Versions with GitHub</summary><p>Users who would like to contribute to <cite>prog_algs</cite> or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/prog_algs">prog_algs GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/nasa/prog_algs
+<span class="gp">$ </span><span class="nb">cd</span> prog_algs
+<span class="gp">$ </span>git checkout dev
+<span class="gp">$ </span>pip install -e .
+</pre></div>
+</div>
+</details></section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
+<p>The structure of the packages is illustrated below:</p>
+<img alt="_images/package_structure.png" src="_images/package_structure.png" />
+<p>Prognostics is performed using <a class="reference external" href="state_estimators.html">State Estimators</a> and <a class="reference external" href="predictors.html">Predictors</a>. State Estimators are resposible for estimating the current state of the modeled system using sensor data and a prognostics model (see: <a class="reference external" href="https://github.com/nasa/prog_models">prog_models package</a>). The state estimator then produces an estimate of the system state with uncertainty in the form of an <a class="reference external" href="uncertain_data.html">uncertain data object</a>. This state estimate is used by the predictor to predict when events will occur (Time of Event, ToE - returned as an <a class="reference external" href="uncertain_data.html">uncertain data object</a>), and future system states (returned as a <a class="reference external" href="prediction.html#id1">Prediction object</a>).</p>
+<section id="data-structures">
+<h3>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">#</a></h3>
+<dl class="simple">
+<dt>A few custom data structures are available for storing and manipulating prognostics data of various forms. These structures are listed below and desribed on their respective pages:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="api_ref/prog_models/SimResult.html#prog_models.sim_result.SimResult" title="prog_models.sim_result.SimResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.sim_result.SimResult</span></code></a> : The result of a single simulation (without uncertainty). Can be used to store inputs, outputs, states, event_states, observables, etc. Is returned by the model.simulate_to* methods.</p></li>
+<li><p><a class="reference internal" href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.uncertain_data.UncertainData</span></code></a>: Used throughout the package to represent data with uncertainty. There are a variety of subclasses of UncertainData to represent data with uncertainty in different forms (e.g., <a class="reference internal" href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.ScalarData" title="prog_algs.uncertain_data.ScalarData"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.uncertain_data.ScalarData</span></code></a>, <a class="reference internal" href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.MultivariateNormalDist" title="prog_algs.uncertain_data.MultivariateNormalDist"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.uncertain_data.MultivariateNormalDist</span></code></a>, <a class="reference internal" href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UnweightedSamples" title="prog_algs.uncertain_data.UnweightedSamples"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.uncertain_data.UnweightedSamples</span></code></a>). Notibly, this is used to represent the output of a StateEstimator’s <cite>estimate</cite> method, individual snapshots of a prediction, and the time of event estimate from a predictor’s <cite>predict</cite> method.</p></li>
+<li><p><a class="reference internal" href="api_ref/prog_algs/Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.Prediction</span></code></a>: Prediction of future values (with uncertainty) of some variable (e.g., <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a>, <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a>, <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a>, <a class="reference internal" href="glossary.html#term-event-state"><span class="xref std std-term">event state</span></a>, etc.). The <cite>predict</cite> method of predictors return this.</p></li>
+<li><p><a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code></a> : The time of prediction estimates from multiple predictions. This data structure can be treated as a dictionary of time of prediction to toe prediction.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+<section id="use">
+<h2>Use<a class="headerlink" href="#use" title="Permalink to this headline">#</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/prog_algs/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
+<p>The best way to learn how to use <cite>prog_algs</cite> is through the <a class="reference external" href="https://mybinder.org/v2/gh/nasa/prog_algs/master?labpath=tutorial.ipynb">tutorial</a>. There are also a number of examples which show different aspects of the package, summarized and linked below:</p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/793440e96b47eee071c6169a58aacb54/basic_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example</span></code></a></dt><dd><span class="target" id="module-basic_example"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model.</p>
+<dl class="simple">
+<dt>Method: An instance of the BatteryCircuit model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
+<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
+<li><p>Prediction of future states (with uncertainty) and the times at which the event threshold will be reached</p></li>
+<li><p>Metrics tools are used to further investigate the results of prediction</p></li>
+</ol>
+</dd>
+<dt>Results:</dt><dd><ol class="lowerroman simple">
+<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
+<li><p>Time event is predicted to occur (with uncertainty)</p></li>
+<li><p>Various prediction metrics</p></li>
+<li><p>Figures illustrating results</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/445cf7bb5872bc3fb4468614273223ce/thrown_object_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.thrown_object_example</span></code></a></dt><dd><span class="target" id="module-thrown_object_example"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model. Unlike basic_example, this example uses a model with multiple events (ThrownObject). Prediction only ends when all events are met</p>
+<dl class="simple">
+<dt>Method: An instance of the Thrown Object model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
+<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
+<li><p>Prediction of future states (with uncertainty) and the times at which the event thresholds will be reached</p></li>
+</ol>
+</dd>
+<dt>Results:</dt><dd><ol class="lowerroman simple">
+<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
+<li><p>Time event is predicted to occur (with uncertainty)</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/b0ce3603387e7aa9d47150b177e46978/utpredictor.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.utpredictor</span></code></a></dt><dd><span class="target" id="module-utpredictor"></span><p>An example using the UnscentedTransformPredictor class to predict the degredation of a battery.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/234783871ee7e6c239e46a53e2e5a1cb/benchmarking_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.benchmarking_example</span></code></a></dt><dd><span class="target" id="module-benchmarking_example"></span><p>This example performs benchmarking for a state estimation and prediction with uncertainty given a Prognostics Model. The process and benchmarking analysis are run for various sample sizes.</p>
+<dl class="simple">
+<dt>Method: An instance of the BatteryCircuit model in prog_models is created, state estimation is set up with a chosen state_estimator, and prediction is set up with a chosen predictor.</dt><dd><p>Prediction of future states (with uncertainty) is then performed for various sample sizes.
+Metrics are calculated and displayed for each run.</p>
+</dd>
+<dt>Results:</dt><dd><ol class="lowerroman simple">
+<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction for each distinct sample size</p></li>
+<li><p>Time event is predicted to occur (with uncertainty)</p></li>
+<li><p>Various prediction metrics, including alpha-lambda metric</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/58f5f0c9dc87a40dac5420b5ba373eaf/eol_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.eol_event</span></code></a></dt><dd><span class="target" id="module-eol_event"></span><p>This example demonstrates a use case where someone wants to predict the first event (i.e., End Of Life (EOL)) of a system. Many system models have multiple events that can occur. In some prognostics applications, users are not interested in predicting a specific event, and are instead interested in when the first event occurs, regardless of the event. This example demonstrates how to predict the first event of a system.</p>
+<p>Method: An instance of ThrownObject is used for this example. In this case it is trivial because the event ‘falling’ will always occur before ‘impact’, but for some other models that might not be true. The ThrownObject class is subclassed to add a new event ‘EOL’ which occurs if any other event occurs. The new model is then instantiated and used for prognostics like in basic_example. Prediction specifically specifies EOL as the event to be predicted.</p>
+<p>Results:</p>
+<blockquote>
+<div><ol class="lowerroman simple">
+<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
+<li><p>Time the event ‘EOL’ is predicted to occur (with uncertainty)</p></li>
+<li><p>Histogram of the event ‘EOL’</p></li>
+</ol>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/341975e0d32cbd13267902b1f2dc291d/horizon.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.horizon</span></code></a></dt><dd><span class="target" id="module-horizon"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model with a specific prediction horizon. This prediction horizon marks the end of the “time of interest” for the prediction. Often this represents the end of a mission or sufficiently in the future where the user is unconcerned with the events</p>
+<dl class="simple">
+<dt>Method: An instance of the Thrown Object model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
+<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
+<li><p>Prediction of future states (with uncertainty) and the times at which the event thresholds will be reached, within the prediction horizon. All events outside the horizon come back as None and are ignored in metrics</p></li>
+</ol>
+</dd>
+<dt>Results:</dt><dd><ol class="lowerroman simple">
+<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
+<li><p>Time event is predicted to occur (with uncertainty)</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/95185cf727a21ad753717b8332bb063f/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></dt><dd><span class="target" id="module-kalman_filter"></span><p>This example demonstrates use of the Kalman Filter State Estimator with a LinearModel.</p>
+<p>First, a linear model is defined. Then the KF State estimator is used with fake data to estimate state.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/b997c950df7e2f695c19319712091ba3/measurement_eqn_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.measurement_eqn_example</span></code></a></dt><dd><span class="target" id="module-measurement_eqn_example"></span><p>This example performs a state estimation with uncertainty given a Prognostics Model for a system in which not all output values are measured.</p>
+<dl class="simple">
+<dt>Method: An instance of the BatteryCircuit model in prog_models is created. We assume that we are only measuring one of the output values, and we define a subclass to remove the other output value.</dt><dd><p>Estimation of the current state is performed at various time steps, using the defined state_estimator.</p>
+</dd>
+<dt>Results:</dt><dd><ol class="lowerroman simple">
+<li><p>Estimate of the current state given various times</p></li>
+<li><p>Display of results, such as prior and posterior state estimate values and SOC</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/05795c561b0fb31137ef5fd753641074/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd><span class="target" id="module-new_state_estimator_example"></span><p>An example illustrating the creation of a new state estimator.</p>
+<p>In this example a basic state estimator is constructed by subclassing the StateEstimator class. This StateEstimator is then demonstrated with a ThrownObject model</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></dt><dd><span class="target" id="module-playback"></span><p>This example performs state estimation and prediction using playback data.</p>
+<dl class="simple">
+<dt>Method: An instance of the BatteryCircuit model in prog_models is created, the state estimation is set up by defining a state_estimator, and the prediction method is set up by defining a predictor.</dt><dd><p>Prediction is then performed using playback data. For each data point:
+1) The necessary data is extracted (time, current load, output values) and corresponding values defined (t, i, and z)
+2) The current state estimate is performed and samples are drawn from this distribution
+3) Prediction performed to get future states (with uncertainty) and the times at which the event threshold will be reached</p>
+</dd>
+<dt>Results:</dt><dd><ol class="lowerroman simple">
+<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
+<li><p>Time event is predicted to occur (with uncertainty)</p></li>
+<li><p>Various prediction metrics</p></li>
+<li><p>Figures illustrating results</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/8e88b82d4689eed3ccf37d5a3def248e/predict_specific_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.predict_specific_event</span></code></a></dt><dd><span class="target" id="module-predict_specific_event"></span><p>In this example we are using the UTPredictor to predict a specific event, in this case impact. This will then ignore the other events which are not of interest.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/4020f035b915e34fe49e1d40b9aff42b/particle_filter_battery_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.particle_filter_battery_example</span></code></a></dt><dd><span class="target" id="module-particle_filter_battery_example"></span><p>In this example the BatteryElectroChemEOD model is used with a particle filter to estimate the state of the battery</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/0c3148e089dc17af5515eff7ec298a11/tutorial.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">tutorial</span></code></a></p></li>
+</ul>
+</section>
+<section id="extending">
+<h2>Extending<a class="headerlink" href="#extending" title="Permalink to this headline">#</a></h2>
+<p>New <a class="reference internal" href="glossary.html#term-state-estimator"><span class="xref std std-term">state estimator</span></a> and <a class="reference internal" href="glossary.html#term-predictor"><span class="xref std std-term">predictor</span></a> are created by extending the <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.StateEstimator" title="prog_algs.state_estimators.StateEstimator"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.StateEstimator</span></code></a> and <a class="reference internal" href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.Predictor" title="prog_algs.predictors.Predictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.Predictor</span></code></a> class, respectively.</p>
+<p>See <a class="reference download internal" download="" href="_downloads/05795c561b0fb31137ef5fd753641074/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a> for an example of this approach.</p>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="prog_models_guide.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">prog_models Guide</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="prog_server_guide.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">prog_server Guide</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle<br/>
+  
+      &copy; Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+
+Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
+
+  </body>
+</html>

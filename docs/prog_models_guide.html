@@ -1,0 +1,776 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>prog_models Guide &#8212; ProgPy Python Packages 1.4.0 documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="prog_algs Guide" href="prog_algs_guide.html" />
+    <link rel="prev" title="ProgPy Prognostics Python Packages" href="index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/software_name.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.4.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   prog_models Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_algs_guide.html">
+   prog_algs Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_server_guide.html">
+   prog_server Guide
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="api_ref.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_algs.html">
+     prog_algs API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/Prediction.html">
+       Prediction
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/Predictor.html">
+       Predictors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html">
+       State Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html">
+       ToEPredictionProfile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/UncertainData.html">
+       Uncertain Data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_models.html">
+     prog_models API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/DataModel.html">
+       DataModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/DataSets.html">
+       Datasets
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/IncludedModels.html">
+       Included Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/LinearModel.html">
+       LinearModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">
+       PrognosticsModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/SimResult.html">
+       SimResult
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_server.html">
+     prog_server API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/load_ests.html">
+       Load Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/prog_client.html">
+       prog_client
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/prog_server.html">
+       ProgServer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">
+       Prog Server API
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="releases.html">
+   Release Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dev_guide.html">
+   Developers Guide &amp; Project Plan
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/prog_models_guide.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing">
+   Installing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-started">
+   Getting Started
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#building-new-models">
+     Building New Models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model-examples">
+     Data Model Examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simulation">
+     Simulation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-specific-examples">
+     Model-Specific Examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other">
+     Other
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tips">
+   Tips
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>prog_models Guide</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing">
+   Installing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-started">
+   Getting Started
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#building-new-models">
+     Building New Models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-model-examples">
+     Data Model Examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simulation">
+     Simulation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-specific-examples">
+     Model-Specific Examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other">
+     Other
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tips">
+   Tips
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="prog-models-guide">
+<h1>prog_models Guide<a class="headerlink" href="#prog-models-guide" title="Permalink to this headline">#</a></h1>
+<iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_models&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><p>The Prognostics Models Package (<code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code>) is a Python framework for defining, building, using, and testing models for prognostics (computation of remaining useful life) of engineering systems. It also provides a set of prognostics models for select components developed within this framework, suitable for use in prognostics applications for these components and can be used in conjunction with the Prognostics Algorithms Library to perform research in prognostics methods.</p>
+<section id="installing">
+<h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">#</a></h2>
+<p>The latest stable release of <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code> is hosted on PyPi. For most users (unless you want to contribute to the development of <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code>), the version on PyPi will be adequate. To install from the command line, use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install prog_models
+</pre></div>
+</div>
+<details class="summary-installing-pre-release-versions">
+<summary>Installing Pre-Release Versions</summary><p>Users who would like to contribute to <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code> or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/prog_models">prog_models GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/nasa/prog_models
+<span class="gp">$ </span><span class="nb">cd</span> prog_models
+<span class="gp">$ </span>git checkout dev
+<span class="gp">$ </span>pip install -e .
+</pre></div>
+</div>
+</div></blockquote>
+</details></section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/prog_models/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
+<p>The best way to learn how to use <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code> is through the <a class="reference external" href="https://mybinder.org/v2/gh/nasa/prog_models/master?labpath=tutorial.ipynb">tutorial</a>. There are also a number of examples that show different aspects of the package, summarized and linked in the below sections</p>
+<section id="building-new-models">
+<h3>Building New Models<a class="headerlink" href="#building-new-models" title="Permalink to this headline">#</a></h3>
+<p>New models are constructed by subclassing <code class="xref py py-class docutils literal notranslate"><span class="pre">PrognosticsModel</span></code> as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template <a class="reference download internal" download="" href="_downloads/3c5224a1564fb7226c7f5deb8cdd9f3e/prog_model_template.py"><code class="xref download docutils literal notranslate"><span class="pre">prog_model_template.ProgModelTemplate</span></code></a>, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a> will then work with your new model.</p>
+<p>For simple linear models, users can choose to subclass the simpler <code class="xref py py-class docutils literal notranslate"><span class="pre">LinearModel</span></code> class, as illustrated in the second example. Some methods and algorithms only function on linear models.</p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/ce3587166811ef0cd28f4edcf195c60e/new_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_model</span></code></a></dt><dd><span class="target" id="module-new_model"></span><p>Example defining and testing a new model.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/863933ac0f3e7d454c420a01034525b3/linear_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.linear_model</span></code></a></dt><dd><span class="target" id="module-linear_model"></span><p>This example shows the use of the LinearModel class, a subclass of PrognosticsModel for models that can be described as a linear time series.</p>
+<p>The model is used in a simulation, and the state is printed every second</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<details class="summary-advanced-features-in-model-building">
+<summary>Advanced features in model building</summary><ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/124917318b8aeda76cd308154fd2eaf9/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd><span class="target" id="module-derived_params"></span><p>Example demonstrating ways to use the derived parameters feature for model building.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/31b6deef1d3aace088df741bfddb10f9/state_limits.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.state_limits</span></code></a></dt><dd><span class="target" id="module-state_limits"></span><p>Example demonstrating when and how to identify model state limits.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/1e5a767a460fa630bbb4ed98c93e87bf/events.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.events</span></code></a></dt><dd><span class="target" id="module-events"></span><p>Example further illustrating the concept of ‘events’ which generalizes EOL.</p>
+<p>‘Events’ is the term used to describe something to be predicted.
+Generally in the PHM community these are referred to as End of Life (EOL).
+However, they can be much more.</p>
+<p>In the prog_models package, events can be anything that needs to be predicted.
+Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds, or any Event of Interest (EOI).</p>
+<p>This example demonstrates how events can be used in your applications.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+</details></section>
+<section id="data-model-examples">
+<h3>Data Model Examples<a class="headerlink" href="#data-model-examples" title="Permalink to this headline">#</a></h3>
+<p>For data-driven models such as those using neural networks, the <code class="xref py py-func docutils literal notranslate"><span class="pre">DataModel.from_data()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">DataModel.from_model()</span></code> methods are used to construct new models. The use of these is demonstrated in the following examples.</p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/5325e8e93d0aa3df393b9d77f56c9160/lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.lstm_model</span></code></a></dt><dd><span class="target" id="module-lstm_model"></span><p>Example building a LSTMStateTransitionModel from data. This is a simple example of how to use the LSTMStateTransitionModel class.</p>
+<p>In this example, we generate fake data using the ThrownObject model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own. We then use the generated model and compare to the original model.</p>
+<p>Finally, we repeat the exercise with data from the more complex BatteryElectroChemEOD model.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/c8c9cf630cf663d27db8c6af85ffab4a/full_lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.full_lstm_model</span></code></a></dt><dd><span class="target" id="module-full_lstm_model"></span><p>Example building a full model with events and thresholds using LSTMStateTransitionModel.</p>
+<p>In this example, we generate fake data using the ThrownObject model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own.</p>
+<p>We then create a subclass of the LSTMStateTransitionModel, defining the event_state and threshold equations as a function of output. We use the generated model and compare to the original model.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/3e4a5d9b856c25c6b0bf84730581c560/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a></dt><dd><span class="target" id="module-generate_surrogate"></span><p>Example of generating a Dynamic Mode Decomposition surrogate model using the battery model</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+</section>
+<section id="simulation">
+<h3>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">#</a></h3>
+<p>One of the most basic of functions using a model is simulation. Use of simulation is described in the following examples:</p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/78f1d719759ecec596bbb1d3cd04db84/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd><span class="target" id="module-sim"></span><p>Example of a battery being simulated for a set period of time and then till threshold is met.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/b9f89cfe4825dfd3e1ac080af9dcf54e/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd><span class="target" id="module-noise"></span><p>Example demonstrating approaches for adding and handling model noise</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/f18535a152570e60fa41f5fba932422a/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd><span class="target" id="module-future_loading"></span><p>Example demonstrating ways to use future loading.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/5b3ab2dda487fa3d828b6cadf3955046/dynamic_step_size.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dynamic_step_size</span></code></a></dt><dd><span class="target" id="module-dynamic_step_size"></span><p>Example demonstrating ways to use the dynamic step size feature. This feature allows users to define a time-step that changes with time or state.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+</section>
+<section id="model-specific-examples">
+<h3>Model-Specific Examples<a class="headerlink" href="#model-specific-examples" title="Permalink to this headline">#</a></h3>
+<p>These examples illustrate use of the models provided in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models.models</span></code> module.</p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/c234367290acf8de0cb8c64a0b97191d/sim_battery_eol.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_battery_eol</span></code></a></dt><dd><span class="target" id="module-sim_battery_eol"></span><p>Example of a battery being simulated until End of Life (EOL). Battery capacity decreases with use. In this case, EOL is defined as when the battery capacity falls below some acceptable threshold (i.e., what we define as useful capacity).</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/daafe64ff08a2ab2ed2ab052cf9985bf/sim_pump.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_pump</span></code></a></dt><dd><span class="target" id="module-sim_pump"></span><p>Example of a centrifugal pump being simulated until threshold is met.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/2176a8ad664aae49752084c44b205627/sim_valve.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_valve</span></code></a></dt><dd><span class="target" id="module-sim_valve"></span><p>Example of a pneumatic valve being simulated until threshold is met.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/379b8420d5a1e67e122db8eacfc78796/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a></dt><dd><span class="target" id="module-sim_powertrain"></span><p>Example of a powertrain being simulated for a set amount of time.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/6a1ef040b1b1816faac11de7b6788010/visualize.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.visualize</span></code></a></dt><dd><span class="target" id="module-visualize"></span><p>Example demonstrating the Visualization Module.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+</section>
+<section id="other">
+<h3>Other<a class="headerlink" href="#other" title="Permalink to this headline">#</a></h3>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/7e3375e02d53d89020ab722466e41449/benchmarking.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.benchmarking</span></code></a></dt><dd><span class="target" id="module-benchmarking"></span><p>Example benchmarking the computational efficiency of models.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/caaed269579b6156f6d8d9d68d3cb5bb/sensitivity.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sensitivity</span></code></a></dt><dd><span class="target" id="module-sensitivity"></span><p>Example performing a sensitivity analysis on a new model.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/a9f5f00132a2ac6b21c976835cdb0e04/dataset.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dataset</span></code></a></dt><dd><span class="target" id="module-dataset"></span><p>Example downloading and using a NASA prognostics dataset.</p>
+<p>In this example, a battery dataset is downloaded from the NASA PCoE data repository. This dataset is then accessed and plotted.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/51fcca34e00ecb68f3c3fcbb6a7c6f66/param_est.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.param_est</span></code></a></dt><dd><span class="target" id="module-param_est"></span><p>Example demonstrating the model parameter estimation feature.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><br></p>
+</section>
+</section>
+<section id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>To predict a certain partial <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> (e.g., 50% SOH), create a new <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">event</span></a> (e.g., ‘SOH_50’) override the event_state and threshold_met equations to also predict that additional state.</p></li>
+<li><p>If you’re only doing diagnostics without prognostics- just define a next_state equation with no change of <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> and don’t perform prediction. The <a class="reference internal" href="glossary.html#term-state-estimator"><span class="xref std std-term">state estimator</span></a> can still be used to estimate if any of the :term:<a href="#id1"><span class="problematic" id="id2">`</span></a>event`s have occured.</p></li>
+<li><p>Sudden <span class="xref std std-term">event`s use a binary :term:`event state</span> (1=healthy, 0=failed).</p></li>
+<li><p>You can predict as many <span class="xref std std-term">event`s as you would like, sometimes one :term:`event</span> must happen before another, in this case the <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">event</span></a> occurance for <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">event</span></a> 1 can be a part of the equation for <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">event</span></a> 2 (‘event 2’: event_1 and [OTHER LOGIC]).</p></li>
+</ul>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">ProgPy Prognostics Python Packages</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="prog_algs_guide.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">prog_algs Guide</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle<br/>
+  
+      &copy; Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+
+Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
+
+  </body>
+</html>

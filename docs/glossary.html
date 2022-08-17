@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Glossary &#8212; ProgPy Python Packages 1.4.0 documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developers Guide &amp; Project Plan" href="dev_guide.html" />
+    <link rel="prev" title="Release Notes" href="releases.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/software_name.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.4.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_models_guide.html">
+   prog_models Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_algs_guide.html">
+   prog_algs Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_server_guide.html">
+   prog_server Guide
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="api_ref.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_algs.html">
+     prog_algs API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/Prediction.html">
+       Prediction
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/Predictor.html">
+       Predictors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html">
+       State Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html">
+       ToEPredictionProfile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/UncertainData.html">
+       Uncertain Data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_models.html">
+     prog_models API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/DataModel.html">
+       DataModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/DataSets.html">
+       Datasets
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/IncludedModels.html">
+       Included Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/LinearModel.html">
+       LinearModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">
+       PrognosticsModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/SimResult.html">
+       SimResult
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_server.html">
+     prog_server API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/load_ests.html">
+       Load Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/prog_client.html">
+       prog_client
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/prog_server.html">
+       ProgServer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">
+       Prog Server API
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="releases.html">
+   Release Notes
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dev_guide.html">
+   Developers Guide &amp; Project Plan
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/glossary.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Glossary</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="glossary">
+<h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">#</a></h1>
+<dl class="glossary simple">
+<dt id="term-event">event<a class="headerlink" href="#term-event" title="Permalink to this term">#</a></dt><dd><p>Something that can be predicted (e.g., system failure). An event has either occurred or not.</p>
+</dd>
+<dt id="term-event-state">event state<a class="headerlink" href="#term-event-state" title="Permalink to this term">#</a></dt><dd><p>Progress towards <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> occurring. Defined as a number where an event state of 0 indicates the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> has occurred and 1 indicates no progress towards the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> (i.e., fully healthy operation for a failure event). For a gradually occurring <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> (e.g., discharge) the number will progress from 1 to 0 as the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> nears. In prognostics, event state is frequently called “State of Health”.</p>
+</dd>
+<dt id="term-future-load">future load<a class="headerlink" href="#term-future-load" title="Permalink to this term">#</a></dt><dd><p><a class="reference internal" href="#term-input"><span class="xref std std-term">input</span></a> (i.e., loading) expected to be applied to a system at future times</p>
+</dd>
+<dt id="term-input">input<a class="headerlink" href="#term-input" title="Permalink to this term">#</a></dt><dd><p>Control or loading applied to the system being modeled (e.g., current drawn from a battery). Input is frequently denoted by u.</p>
+</dd>
+<dt id="term-measurement-noise">measurement noise<a class="headerlink" href="#term-measurement-noise" title="Permalink to this term">#</a></dt><dd><p>Represents uncertainty in the measurement process (e.g., sensor sensitivity, sensor misalignements, environmental effects), applied to <a class="reference internal" href="#term-output"><span class="xref std std-term">output</span></a>.</p>
+</dd>
+<dt id="term-model">model<a class="headerlink" href="#term-model" title="Permalink to this term">#</a></dt><dd><p>A subclass of <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a> the describes the behavior of a system. Models are typically physics-based, data-driven (i.e., subclasses of <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel</span></code></a>), or some hybrid approach (e.g., physics informed machine learning).</p>
+</dd>
+<dt id="term-output">output<a class="headerlink" href="#term-output" title="Permalink to this term">#</a></dt><dd><p>Measured sensor values from a system (e.g., voltage and temperature of a battery). Output is frequently denoted by z.</p>
+</dd>
+<dt id="term-performance-metric">performance metric<a class="headerlink" href="#term-performance-metric" title="Permalink to this term">#</a></dt><dd><p>Performance characteristics of a system that are a function of system state, but are not directly measured.</p>
+</dd>
+<dt id="term-prediction">prediction<a class="headerlink" href="#term-prediction" title="Permalink to this term">#</a></dt><dd><p>A prediction of something (e.g., <a class="reference internal" href="#term-input"><span class="xref std std-term">input</span></a>, <a class="reference internal" href="#term-state"><span class="xref std std-term">state</span></a>, <a class="reference internal" href="#term-output"><span class="xref std std-term">output</span></a>, <a class="reference internal" href="#term-event-state"><span class="xref std std-term">event state</span></a>, etc.), with uncertainty, at one or more future times, a result of a <a class="reference internal" href="#term-predictor"><span class="xref std std-term">predictor</span></a> prediction step (<a class="reference internal" href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.Predictor.predict" title="prog_algs.predictors.Predictor.predict"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_algs.predictors.Predictor.predict()</span></code></a>). For example- a prediction of the future <a class="reference internal" href="#term-state"><span class="xref std std-term">state</span></a> of a system at certain specified savepoints, returned from prediction using a <a class="reference internal" href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.MonteCarlo" title="prog_algs.predictors.MonteCarlo"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.MonteCarlo</span></code></a> predictor.</p>
+</dd>
+<dt id="term-predictor">predictor<a class="headerlink" href="#term-predictor" title="Permalink to this term">#</a></dt><dd><p>An algorithm that is used to predict future states, given the initial state, a model, and an estimate of <a class="reference internal" href="#term-future-load"><span class="xref std std-term">future load</span></a>. E.g., <a class="reference internal" href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.MonteCarlo" title="prog_algs.predictors.MonteCarlo"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.MonteCarlo</span></code></a>.</p>
+</dd>
+<dt id="term-process-noise">process noise<a class="headerlink" href="#term-process-noise" title="Permalink to this term">#</a></dt><dd><p>Represents uncertainty in the model transition (e.g., model uncertainty), applied to <a class="reference internal" href="#term-state"><span class="xref std std-term">state</span></a> during state transition.</p>
+</dd>
+<dt id="term-state">state<a class="headerlink" href="#term-state" title="Permalink to this term">#</a></dt><dd><p>Internal parameters (typically hidden states) used to represent the state of the system- can be same as inputs/outputs but do not have to be.  State is frequently denoted as x</p>
+</dd>
+<dt id="term-state-estimator">state estimator<a class="headerlink" href="#term-state-estimator" title="Permalink to this term">#</a></dt><dd><p>An algorithm that is used to estimate the <a class="reference internal" href="#term-state"><span class="xref std std-term">state</span></a> of the system, given measurements and a model, defined in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_algs.state_estimators</span></code> subpackage (e.g., <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.UnscentedKalmanFilter" title="prog_algs.state_estimators.UnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.UnscentedKalmanFilter</span></code></a>).</p>
+</dd>
+<dt id="term-surrogate">surrogate<a class="headerlink" href="#term-surrogate" title="Permalink to this term">#</a></dt><dd><p>A model that approximates the behavior of another model. Often used to generate a faster version of a model (e.g., for resource-constrained applications or to be used in optimization) or to test a data model. Generated using <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.generate_surrogate" title="prog_models.PrognosticsModel.generate_surrogate"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.generate_surrogate()</span></code></a> method.</p>
+</dd>
+</dl>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="releases.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Release Notes</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="dev_guide.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Developers Guide &amp; Project Plan</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle<br/>
+  
+      &copy; Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+
+Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
+
+  </body>
+</html>

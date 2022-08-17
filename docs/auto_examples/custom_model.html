@@ -1,0 +1,570 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; ProgPy Python Packages 1.4.0 documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/software_name.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.4.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../prog_models_guide.html">
+   prog_models Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../prog_algs_guide.html">
+   prog_algs Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../prog_server_guide.html">
+   prog_server Guide
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../api_ref.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../api_ref/prog_algs.html">
+     prog_algs API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_algs/Prediction.html">
+       Prediction
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_algs/Predictor.html">
+       Predictors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_algs/StateEstimator.html">
+       State Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_algs/ToEPredictionProfile.html">
+       ToEPredictionProfile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_algs/UncertainData.html">
+       Uncertain Data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../api_ref/prog_models.html">
+     prog_models API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_models/DataModel.html">
+       DataModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_models/DataSets.html">
+       Datasets
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_models/IncludedModels.html">
+       Included Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_models/LinearModel.html">
+       LinearModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_models/PrognosticModel.html">
+       PrognosticsModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_models/SimResult.html">
+       SimResult
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../api_ref/prog_server.html">
+     prog_server API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_server/load_ests.html">
+       Load Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_server/prog_client.html">
+       prog_client
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../api_ref/prog_server/prog_server.html">
+       ProgServer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">
+       Prog Server API
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../releases.html">
+   Release Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dev_guide.html">
+   Developers Guide &amp; Project Plan
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/auto_examples/custom_model.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><no title></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-custom-model-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<p class="sphx-glr-example-title" id="sphx-glr-auto-examples-custom-model-py">Example building a custom model with LSTMStateTransitionModel.</p>
+<p>For most cases, you will be able to use the standard LSTMStateTransitionModel.from_data class with configuration (see the LSTMStateTransitionModel class for more details). However, sometimes you might want to add custom layers, or other complex components. In that case, you will build a custom model and pass it into LSTMStateTransitionModel.</p>
+<p>In this example, we generate fake data using the BatteryElectroChemEOD model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own.</p>
+<p>We build and fit a custom model using keras.layers. Finally, we compare performance to the standard format and the original model.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+
+<span class="kn">from</span> <span class="nn">prog_models.data_models</span> <span class="kn">import</span> <span class="n">LSTMStateTransitionModel</span>
+<span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryElectroChemEOD</span>
+
+<span class="k">def</span> <span class="nf">run_example</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating data...&#39;</span><span class="p">)</span>
+    <span class="n">batt</span> <span class="o">=</span> <span class="n">BatteryElectroChemEOD</span><span class="p">()</span>
+    <span class="n">future_loading_eqns</span> <span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="n">batt</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="o">+</span><span class="mf">1.5</span><span class="o">*</span><span class="n">load</span><span class="p">})</span> <span class="k">for</span> <span class="n">load</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+    <span class="c1"># Generate data with different loading and step sizes</span>
+    <span class="c1"># Adding the step size as an element of the output</span>
+    <span class="n">training_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">input_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">output_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">i</span><span class="o">/</span><span class="mi">3</span><span class="o">+</span><span class="mf">0.25</span>
+        <span class="k">for</span> <span class="n">loading_eqn</span> <span class="ow">in</span> <span class="n">future_loading_eqns</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">batt</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">loading_eqn</span><span class="p">,</span> <span class="n">save_freq</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">u_i</span><span class="o">.</span><span class="n">matrix</span><span class="p">[:][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="n">dt</span><span class="p">]))</span> <span class="k">for</span> <span class="n">u_i</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">inputs</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">outputs</span>
+            <span class="n">training_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+            <span class="n">input_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+            <span class="n">output_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+    <span class="c1"># Step 2: Build standard model</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Building standard model...&quot;</span><span class="p">)</span>
+    <span class="n">m_batt</span> <span class="o">=</span> <span class="n">LSTMStateTransitionModel</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">input_data</span><span class="p">,</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">output_data</span><span class="p">,</span>
+        <span class="n">window</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+        <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">units</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>  <span class="c1"># Additional units given the increased complexity of the system</span>
+        <span class="n">input_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;dt&#39;</span><span class="p">],</span>
+        <span class="n">output_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Step 3: Build custom model</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Building custom model...&#39;</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">u_all</span><span class="p">,</span> <span class="n">z_all</span><span class="p">)</span> <span class="o">=</span> <span class="n">LSTMStateTransitionModel</span><span class="o">.</span><span class="n">pre_process_data</span><span class="p">(</span><span class="n">training_data</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+    <span class="c1"># Normalize</span>
+    <span class="n">n_inputs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">training_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">u_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">u_all</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,:</span><span class="n">n_inputs</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">u_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">u_all</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,:</span><span class="n">n_inputs</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># If there&#39;s no variation- dont normalize</span>
+    <span class="n">u_std</span><span class="p">[</span><span class="n">u_std</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">z_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">z_all</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">z_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">z_all</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># If there&#39;s no variation- dont normalize</span>
+    <span class="n">z_std</span><span class="p">[</span><span class="n">z_std</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Add output (since z_t-1 is last input)</span>
+    <span class="n">u_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">u_mean</span><span class="p">,</span> <span class="n">z_mean</span><span class="p">))</span>
+    <span class="n">u_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">u_std</span><span class="p">,</span> <span class="n">z_std</span><span class="p">))</span>
+
+    <span class="n">u_all</span> <span class="o">=</span> <span class="p">(</span><span class="n">u_all</span> <span class="o">-</span> <span class="n">u_mean</span><span class="p">)</span><span class="o">/</span><span class="n">u_std</span>
+    <span class="n">z_all</span> <span class="o">=</span> <span class="p">(</span><span class="n">z_all</span> <span class="o">-</span> <span class="n">z_mean</span><span class="p">)</span><span class="o">/</span><span class="n">z_std</span>
+
+    <span class="c1"># u_mean and u_std act on the column vector form (from inputcontainer)</span>
+    <span class="c1"># so we need to transpose them to a column vector</span>
+    <span class="n">normalization</span> <span class="o">=</span> <span class="p">(</span><span class="n">u_mean</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">u_std</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">z_mean</span><span class="p">,</span> <span class="n">z_std</span><span class="p">)</span>
+
+    <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s2">&quot;jena_sense.keras&quot;</span><span class="p">,</span> <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">u_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Bidirectional</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">128</span><span class="p">))(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">z_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">z_all</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;rmsprop&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mae&quot;</span><span class="p">])</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">u_all</span><span class="p">,</span> <span class="n">z_all</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">callbacks</span> <span class="o">=</span> <span class="n">callbacks</span><span class="p">,</span> <span class="n">validation_split</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1"># Step 4: Build LSTMStateTransitionModel</span>
+    <span class="n">m_custom</span> <span class="o">=</span> <span class="n">LSTMStateTransitionModel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">normalization</span><span class="o">=</span><span class="n">normalization</span><span class="p">,</span>
+        <span class="n">input_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;dt&#39;</span><span class="p">],</span>
+        <span class="n">output_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Step 5: Simulate</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Simulating...&#39;</span><span class="p">)</span>
+    <span class="n">t_counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">x_counter</span> <span class="o">=</span> <span class="n">batt</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">future_loading</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">batt</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">future_loading2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">t_counter</span><span class="p">,</span> <span class="n">x_counter</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">batt</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">x_counter</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">m_batt</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;t_t-1&#39;</span><span class="p">:</span> <span class="n">z</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span> <span class="s1">&#39;v_t-1&#39;</span><span class="p">:</span> <span class="n">z</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span> <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="n">t</span> <span class="o">-</span> <span class="n">t_counter</span><span class="p">})</span>
+        <span class="n">x_counter</span> <span class="o">=</span> <span class="n">batt</span><span class="o">.</span><span class="n">next_state</span><span class="p">(</span><span class="n">x_counter</span><span class="p">,</span> <span class="n">future_loading</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span> <span class="o">-</span> <span class="n">t_counter</span><span class="p">)</span>
+        <span class="n">t_counter</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="k">return</span> <span class="n">z</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">batt</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">future_loading</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">m_batt</span><span class="o">.</span><span class="n">simulate_to</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">future_loading2</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">results_custom</span> <span class="o">=</span> <span class="n">m_custom</span><span class="o">.</span><span class="n">simulate_to</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">future_loading2</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Step 6: Compare performance</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comparing performance...&#39;</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;original model&#39;</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;generated model&#39;</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">results_custom</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;custom model&#39;</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">run_example</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-custom-model-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/dd90523c294730d38024b15ef5fe8bf6/custom_model.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">custom_model.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/2fce35805a321f89bc690688db5d368c/custom_model.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">custom_model.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle<br/>
+  
+      &copy; Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+
+Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
+
+  </body>
+</html>

@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Release Notes &#8212; ProgPy Python Packages 1.4.0 documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="ProgServer" href="api_ref/prog_server/prog_server.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/software_name.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.4.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_models_guide.html">
+   prog_models Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_algs_guide.html">
+   prog_algs Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prog_server_guide.html">
+   prog_server Guide
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="api_ref.html">
+   API Reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_algs.html">
+     prog_algs API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/Prediction.html">
+       Prediction
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/Predictor.html">
+       Predictors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html">
+       State Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html">
+       ToEPredictionProfile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_algs/UncertainData.html">
+       Uncertain Data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_models.html">
+     prog_models API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/DataModel.html">
+       DataModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/DataSets.html">
+       Datasets
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/IncludedModels.html">
+       Included Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/LinearModel.html">
+       LinearModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">
+       PrognosticsModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/SimResult.html">
+       SimResult
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="api_ref/prog_server.html">
+     prog_server API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/load_ests.html">
+       Load Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/prog_client.html">
+       prog_client
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_server/prog_server.html">
+       ProgServer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">
+       Prog Server API
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Release Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dev_guide.html">
+   Developers Guide &amp; Project Plan
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/releases.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updates-in-v1-3">
+   Updates in V1.3
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-models">
+     prog_models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-algs">
+     prog_algs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-server">
+     prog_server
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-client">
+     prog_client
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updates-in-v1-2">
+   Updates in V1.2
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     prog_models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     prog_algs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updates-in-v1-1">
+   Updates in V1.1
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     prog_models
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#electrochemistry-model-updates">
+       ElectroChemistry Model Updates
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#centrifugalpump-model-updates">
+       CentrifugalPump Model Updates
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pneumaticvalve-model-updates">
+       PneumaticValve Model Updates
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Release Notes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updates-in-v1-3">
+   Updates in V1.3
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-models">
+     prog_models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-algs">
+     prog_algs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-server">
+     prog_server
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-client">
+     prog_client
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updates-in-v1-2">
+   Updates in V1.2
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     prog_models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     prog_algs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updates-in-v1-1">
+   Updates in V1.1
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     prog_models
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#electrochemistry-model-updates">
+       ElectroChemistry Model Updates
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#centrifugalpump-model-updates">
+       CentrifugalPump Model Updates
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pneumaticvalve-model-updates">
+       PneumaticValve Model Updates
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="release-notes">
+<h1><a class="toc-backref" href="#contents">Release Notes</a><a class="headerlink" href="#release-notes" title="Permalink to this headline">#</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes" id="id4">Release Notes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#updates-in-v1-3" id="id5">Updates in V1.3</a></p>
+<ul>
+<li><p><a class="reference internal" href="#prog-models" id="id6">prog_models</a></p></li>
+<li><p><a class="reference internal" href="#prog-algs" id="id7">prog_algs</a></p></li>
+<li><p><a class="reference internal" href="#prog-server" id="id8">prog_server</a></p></li>
+<li><p><a class="reference internal" href="#prog-client" id="id9">prog_client</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#updates-in-v1-2" id="id10">Updates in V1.2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id11">prog_models</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id12">prog_algs</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#updates-in-v1-1" id="id13">Updates in V1.1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id14">prog_models</a></p>
+<ul>
+<li><p><a class="reference internal" href="#electrochemistry-model-updates" id="id15">ElectroChemistry Model Updates</a></p></li>
+<li><p><a class="reference internal" href="#centrifugalpump-model-updates" id="id16">CentrifugalPump Model Updates</a></p></li>
+<li><p><a class="reference internal" href="#pneumaticvalve-model-updates" id="id17">PneumaticValve Model Updates</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="updates-in-v1-3">
+<h2><a class="toc-backref" href="#contents">Updates in V1.3</a><a class="headerlink" href="#updates-in-v1-3" title="Permalink to this headline">#</a></h2>
+<section id="prog-models">
+<h3><a class="toc-backref" href="#contents">prog_models</a><a class="headerlink" href="#prog-models" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Surrogate Models</strong> Added initial draft of new feature to generate surrogate models automatically from <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a>. (See <a class="reference download internal" download="" href="_downloads/3e4a5d9b856c25c6b0bf84730581c560/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a> example). Initial implementation uses Dynamic Mode Decomposition. Additional Surrogate Model Generation approaches will be explored for future releases. [Developed by NASA’s DRF Project]</p></li>
+<li><p><strong>New Example Models</strong> Added new <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.DCMotor" title="prog_models.models.DCMotor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.DCMotor</span></code></a>, <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.ESC" title="prog_models.models.ESC"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.ESC</span></code></a>, and <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.Powertrain" title="prog_models.models.Powertrain"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.Powertrain</span></code></a> models (See <a class="reference download internal" download="" href="_downloads/379b8420d5a1e67e122db8eacfc78796/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a> example) [Developed by NASA’s SWS Project]</p></li>
+<li><p><strong>Datasets</strong> Added new feature that allows users to access prognostic datasets programmatically (See <a class="reference download internal" download="" href="_downloads/a9f5f00132a2ac6b21c976835cdb0e04/dataset.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dataset</span></code></a>)</p></li>
+<li><p>Added new <a class="reference internal" href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a> class - Linear Prognostics Models can be represented by a Linear Model. Similar to PrognosticsModels, LinearModels are created by subclassing the LinearModel class. Some algorithms will only work with Linear Models. See <a class="reference download internal" download="" href="_downloads/863933ac0f3e7d454c420a01034525b3/linear_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.linear_model</span></code></a> example for detail</p></li>
+<li><p>Added new StateContainer/InputContainer/OutputContainer objects for classes which allow for data access in matrix form and enforce expected keys.</p></li>
+<li><p>Added new metric for SimResult: <a class="reference internal" href="api_ref/prog_models/SimResult.html#prog_models.sim_result.SimResult.monotonicity" title="prog_models.sim_result.SimResult.monotonicity"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.sim_result.SimResult.monotonicity()</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="api_ref/prog_models/SimResult.html#prog_models.sim_result.SimResult.plot" title="prog_models.sim_result.SimResult.plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.sim_result.SimResult.plot()</span></code></a> now automatically shows legends</p></li>
+<li><p>Added drag to <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.ThrownObject" title="prog_models.models.ThrownObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.ThrownObject</span></code></a> model, making the model non-linear. Degree of nonlinearity can be effected using the model parameters (e.g., coefficient of drag cd).</p></li>
+<li><p><cite>observables</cite> from previous releases are now called <cite>performance_metrics</cite></p></li>
+<li><p>model.simulate_to* now returns named tuple, allowing for access by property name (e.g., result.states)</p></li>
+<li><p>Updates to <a class="reference internal" href="api_ref/prog_models/SimResult.html#prog_models.sim_result.SimResult" title="prog_models.sim_result.SimResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.sim_result.SimResult</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.sim_result.LazySimResult</span></code> for robustness</p></li>
+<li><p>Various performance improvements and bug fixes</p></li>
+</ul>
+</section>
+<section id="prog-algs">
+<h3><a class="toc-backref" href="#contents">prog_algs</a><a class="headerlink" href="#prog-algs" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>New State Estimator Added</strong> <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.KalmanFilter" title="prog_algs.state_estimators.KalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.KalmanFilter</span></code></a>. Works with models derived from <a class="reference internal" href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a>. See <a class="reference download internal" download="" href="_downloads/95185cf727a21ad753717b8332bb063f/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></p></li>
+<li><p><strong>New Predictor Added</strong> <a class="reference internal" href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.UnscentedTransformPredictor" title="prog_algs.predictors.UnscentedTransformPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.UnscentedTransformPredictor</span></code></a>. See <a class="reference download internal" download="" href="_downloads/b0ce3603387e7aa9d47150b177e46978/utpredictor.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.utpredictor</span></code></a></p></li>
+<li><p>Initial state estimate (x0) can now be passed as <cite>UncertainData</cite> to represent initial state uncertainty. See <a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></p></li>
+<li><p>Added new metrics for <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code></a>: Prognostics horizon, Cumulative Relative Accuracy (CRA). See <a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></p></li>
+<li><p>Added ability to plot <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code></a>: profile.plot(). See <a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></p></li>
+<li><p>Added new metric for <a class="reference internal" href="api_ref/prog_algs/Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.Prediction</span></code></a>: Monotonicity, Relative Accuracy (RA)</p></li>
+<li><p>Added new metric for <a class="reference internal" href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.uncertain_data.UncertainData</span></code></a> (and subclasses): Root Mean Square Error (RMSE)</p></li>
+<li><p>Added new describe method for <a class="reference internal" href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.uncertain_data.UncertainData</span></code></a> (and subclasses)</p></li>
+<li><p>Add support for python 3.10</p></li>
+<li><p>Various performance improvements and bugfixes</p></li>
+</ul>
+</section>
+<section id="prog-server">
+<h3><a class="toc-backref" href="#contents">prog_server</a><a class="headerlink" href="#prog-server" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Added ability to set state using pickled prog_algs.uncertain_data.UncertainData type</p></li>
+</ul>
+</section>
+<section id="prog-client">
+<h3><a class="toc-backref" href="#contents">prog_client</a><a class="headerlink" href="#prog-client" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Added new set_state method</p></li>
+</ul>
+</section>
+</section>
+<section id="updates-in-v1-2">
+<h2><a class="toc-backref" href="#contents">Updates in V1.2</a><a class="headerlink" href="#updates-in-v1-2" title="Permalink to this headline">#</a></h2>
+<section id="id1">
+<h3><a class="toc-backref" href="#contents">prog_models</a><a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>New Feature: Vectorized Models</dt><dd><ul>
+<li><p>Distributed models were vectorized to support vectorized sample-based prognostics approaches</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>New Feature: Dynamic Step Sizes</dt><dd><ul>
+<li><p>Now step size can be a function of time or state</p></li>
+<li><p>See <cite>examples.dynamic_step_size</cite> for more information</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>New Feature: New method model.apply_bounds</dt><dd><ul>
+<li><p>This method allows for other classes to use applied bound limits</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Simulate_to* methods can now specify initial time. Also, outputs are now optional</p></li>
+<li><p>Various bug fixes</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#contents">prog_algs</a><a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>New Feature: Histogram and Scatter Plot of UncertainData.</p></li>
+<li><dl class="simple">
+<dt>New Feature: Vectorized particle filter.</dt><dd><ul>
+<li><p>Particle Filter State Estimator is now vectorized for vectorized models - this significantly improves performance.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>New Feature: Unscented Transform Predictor.</dt><dd><ul>
+<li><p>New predictor that propogates sigma points forward to estimate time of event and future states.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>New Feature: <cite>Prediction</cite> class to represent predicted future values.</p></li>
+<li><p>New Feature: <cite>ToEPredictionProfile</cite> class to represent and operate on the result of multiple predictions generated at different prediction times.</p></li>
+<li><p>Added metrics <cite>percentage_in_bounds</cite> and <cite>metrics</cite> and plots to UncertainData .</p></li>
+<li><p>Add support for Python3.9.</p></li>
+<li><p>General Bugfixes.</p></li>
+</ul>
+</section>
+</section>
+<section id="updates-in-v1-1">
+<h2><a class="toc-backref" href="#contents">Updates in V1.1</a><a class="headerlink" href="#updates-in-v1-1" title="Permalink to this headline">#</a></h2>
+<section id="id3">
+<h3><a class="toc-backref" href="#contents">prog_models</a><a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>New Feature: Derived Parameters</dt><dd><ul>
+<li><p>Users can specify callbacks for parameters that are defined from others. These callbacks will be called when the dependency parameter is updated.</p></li>
+<li><p>See <cite>examples.derived_params</cite> for more information.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>New Feature: Parameter Estimation</dt><dd><ul>
+<li><p>Users can use the estimate_parameters method to estimate all or select parameters.</p></li>
+<li><p>see <cite>examples.param_est</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>New Feature: Automatic Noise Generation</dt><dd><ul>
+<li><p>Now noise is automatically generated when next_state/dx (process_noise) and output (measurement_noise). This removed the need to explicitly call apply_*_noise functions in these methods.</p></li>
+<li><p>See <cite>examples.noise</cite> for more details in setting noise</p></li>
+<li><p>For any classes users created using V1.0.*, you should remove any call to apply_*_noise functions to prevent double noise application.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>New Feature: Configurable State Bounds</dt><dd><ul>
+<li><p>Users can specify the range of valid values for each state (e.g., a temperature in celcius would have to be greater than -273.15 - absolute zero)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>New Feature: Simulation Result Class</dt><dd><ul>
+<li><p>Simulations now return a simulation result object for each value (e.g., output, input, state, etc)</p></li>
+<li><p>These simulation result objects can be used just like the previous lists.</p></li>
+<li><p>Output and Event State are now “Lazily Evaluated”. This speeds up simulation when intermediate states are not printed and these properties are not used</p></li>
+<li><p>A plot method has been added directly to the class (e.g., <cite>event_states.plot()</cite>)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>New Feature: Intermediate Result Printing</dt><dd><ul>
+<li><p>Use the print parameter to enable printing intermediate results during a simulation</p></li>
+<li><p>e.g., <cite>model.simulate_to_threshold(…, print=True)</cite></p></li>
+<li><p>Note: This slows down simulation performance</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Added support for python 3.9</p></li>
+<li><p>Various bug fixes</p></li>
+</ul>
+<section id="electrochemistry-model-updates">
+<h4><a class="toc-backref" href="#contents">ElectroChemistry Model Updates</a><a class="headerlink" href="#electrochemistry-model-updates" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><p>New Feature: Added thermal effects. Now the model include how the temperature is effected by use. Previous implementation only included effects of temperature on performance.</p></li>
+<li><p>New Feature: Added <cite>degraded_capacity</cite> (i.e., EOL) event to model. There are now three different models: BatteryElectroChemEOL (degraded_capacity only), BatteryElectroChemEOD (discharge only), and BatteryElectroChemEODEOL (combined). BatteryElectroChem is an alias for BatteryElectroChemEODEOL.</p></li>
+<li><p>New Feature: Updated SOC (EOD Event State) calculation to include voltage when near V_EOD. This prevents a situation where the voltage is below lower bound but SOC &gt; 0.</p></li>
+</ul>
+</section>
+<section id="centrifugalpump-model-updates">
+<h4><a class="toc-backref" href="#contents">CentrifugalPump Model Updates</a><a class="headerlink" href="#centrifugalpump-model-updates" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><dl class="simple">
+<dt>New Feature: Added CentrifugalPumpBase class where wear rates are parameters instead of part of the state vector.</dt><dd><ul>
+<li><p>Some users may use this class for prognostics, then use the parameter estimation tool occasionally to update the wear rates, which change very slowly.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Bugfix: Fixed bug where some event states were returned as negative</p></li>
+<li><p>Bugfix: Fixed bug where some states were saved as parameters instead of part of the state.</p></li>
+<li><p>Added example on use of CentrifugalPump Model (see <cite>examples.sim_pump</cite>)</p></li>
+<li><p>Performance improvements</p></li>
+</ul>
+</section>
+<section id="pneumaticvalve-model-updates">
+<h4><a class="toc-backref" href="#contents">PneumaticValve Model Updates</a><a class="headerlink" href="#pneumaticvalve-model-updates" title="Permalink to this headline">#</a></h4>
+<ul class="simple">
+<li><dl class="simple">
+<dt>New Feature: Added PneumaticValveBase class where wear rates are parameters instead of part of the state vector.</dt><dd><ul>
+<li><p>Some users may use this class for prognostics, then use the parameter estimation tool occasionally to update the wear rates, which change very slowly.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Added example on use of PneumaticValve Model (see <cite>examples.sim_valve</cite>)</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="api_ref/prog_server/prog_server.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">ProgServer</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="glossary.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Glossary</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle<br/>
+  
+      &copy; Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+
+Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
+
+  </body>
+</html>

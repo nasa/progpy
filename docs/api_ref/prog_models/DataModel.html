@@ -1,0 +1,1090 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>DataModel &#8212; ProgPy Python Packages 1.4.0 documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Datasets" href="DataSets.html" />
+    <link rel="prev" title="prog_models API Reference" href="../prog_models.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/software_name.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.4.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../prog_models_guide.html">
+   prog_models Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../prog_algs_guide.html">
+   prog_algs Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../prog_server_guide.html">
+   prog_server Guide
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../api_ref.html">
+   API Reference
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../prog_algs.html">
+     prog_algs API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../prog_algs/Prediction.html">
+       Prediction
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../prog_algs/Predictor.html">
+       Predictors
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../prog_algs/StateEstimator.html">
+       State Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../prog_algs/ToEPredictionProfile.html">
+       ToEPredictionProfile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../prog_algs/UncertainData.html">
+       Uncertain Data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="../prog_models.html">
+     prog_models API Reference
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       DataModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="DataSets.html">
+       Datasets
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="IncludedModels.html">
+       Included Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="LinearModel.html">
+       LinearModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="PrognosticModel.html">
+       PrognosticsModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="SimResult.html">
+       SimResult
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../prog_server.html">
+     prog_server API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../prog_server/load_ests.html">
+       Load Estimators
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../prog_server/prog_client.html">
+       prog_client
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../prog_server/prog_server.html">
+       ProgServer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">
+       Prog Server API
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../releases.html">
+   Release Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../dev_guide.html">
+   Developers Guide &amp; Project Plan
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/api_ref/prog_models/DataModel.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constructing-datamodels">
+   Constructing DataModels
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#from-data">
+     From Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#from-another-prognosticsmodel-i-e-surrogate">
+     From Another PrognosticsModel (i.e., Surrogate)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-constructor">
+     Using Constructor
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#included-datamodels">
+   Included DataModels
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dmdmodel">
+     DMDModel
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lstmstatetransitionmodel">
+     LSTMStateTransitionModel
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datamodel-interface">
+   DataModel Interface
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>DataModel</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constructing-datamodels">
+   Constructing DataModels
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#from-data">
+     From Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#from-another-prognosticsmodel-i-e-surrogate">
+     From Another PrognosticsModel (i.e., Surrogate)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-constructor">
+     Using Constructor
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#included-datamodels">
+   Included DataModels
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dmdmodel">
+     DMDModel
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lstmstatetransitionmodel">
+     LSTMStateTransitionModel
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datamodel-interface">
+   DataModel Interface
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="datamodel">
+<h1>DataModel<a class="headerlink" href="#datamodel" title="Permalink to this headline">#</a></h1>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> class is the base class for all data-based models. It is a subclass of <code class="xref py py-class docutils literal notranslate"><span class="pre">PrognosticsModel</span></code>, allowing it to be used interchangeably with physics-based models.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../../_downloads/5325e8e93d0aa3df393b9d77f56c9160/lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.lstm_model</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="../../_downloads/c8c9cf630cf663d27db8c6af85ffab4a/full_lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.full_lstm_model</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="../../_downloads/bec0de5b758ecc33efbc94e5d3fb8d01/custom_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.custom_model</span></code></a></p></li>
+</ul>
+<section id="constructing-datamodels">
+<h2>Constructing DataModels<a class="headerlink" href="#constructing-datamodels" title="Permalink to this headline">#</a></h2>
+<p>There are a few ways to construct a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> object, described below.</p>
+<section id="from-data">
+<h3>From Data<a class="headerlink" href="#from-data" title="Permalink to this headline">#</a></h3>
+<p>This is the most common way to construct a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> object, using the <code class="xref py py-func docutils literal notranslate"><span class="pre">DataModel.from_data()</span></code> method. It involves using one or more runs of data to train the model. Each DataModel class expects different data from the following set: times, inputs, states, outputs, and event_states. See documentation for the specific algorithm to see what it expects. Below is an example if it’s use with the LSTMStateTransitionModel, which expects inputs and outputs.</p>
+<details class="summary-example">
+<summary>example</summary><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">LSTMStateTransitionModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">input_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">run1</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">run2</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">run3</span><span class="o">.</span><span class="n">inputs</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">run1</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">run2</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">run3</span><span class="o">.</span><span class="n">outputs</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">LSTMStateTransitionModel</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">output_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+<section id="from-another-prognosticsmodel-i-e-surrogate">
+<h3>From Another PrognosticsModel (i.e., Surrogate)<a class="headerlink" href="#from-another-prognosticsmodel-i-e-surrogate" title="Permalink to this headline">#</a></h3>
+<p>Surrogate models are constructed using the <code class="xref py py-func docutils literal notranslate"><span class="pre">DataModel.from_model()</span></code> Class Method. These models are trained using data from the original model, i.e., as a surrogate for the original model. The original model is not modified. Below is an example if it’s use. In this example a surrogate (m2) of the original ThrownObject Model (m) is created, and can then be used interchangeably with the original model.</p>
+<details class="summary-example">
+<summary>example</summary><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">ThrownObject</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">LSTMStateTransitionModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">ThrownObject</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_loading</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({})</span>  <span class="c1"># No input for thrown object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">LSTMStateTransitionModel</span><span class="o">.</span><span class="n">from_model</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">future_loading</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Surrogate models are generally less accurate than the original model. This method is used either to create a quicker version of the original model (see <code class="xref py py-class docutils literal notranslate"><span class="pre">DMDModel</span></code>) or to test the performance of a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> approach.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">PrognosticsModel.generate_surrogate()</span></code></p>
+</div>
+</section>
+<section id="using-constructor">
+<h3>Using Constructor<a class="headerlink" href="#using-constructor" title="Permalink to this headline">#</a></h3>
+<p>This method is the least frequently used, and it is very specific to the <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> class being constructed. For example: <code class="xref py py-class docutils literal notranslate"><span class="pre">DMDModel</span></code> classes are constructed using the DMD Matrix, and <code class="xref py py-class docutils literal notranslate"><span class="pre">LSTMStateTransitionModel</span></code> classes are constructed using a trained Keras Model.</p>
+<p>See example <a class="reference download internal" download="" href="../../_downloads/bec0de5b758ecc33efbc94e5d3fb8d01/custom_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.custom_model</span></code></a></p>
+</section>
+</section>
+<section id="included-datamodels">
+<h2>Included DataModels<a class="headerlink" href="#included-datamodels" title="Permalink to this headline">#</a></h2>
+<p>The following DataModels are included in the package. A new DataModel can be created by subclassing <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code>, implementing the abstract methods of both <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">PrognosticsModel</span></code>.</p>
+<section id="dmdmodel">
+<h3>DMDModel<a class="headerlink" href="#dmdmodel" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.data_models.</span></span><span class="sig-name descname"><span class="pre">DMDModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dmd_matrix</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel" title="Permalink to this definition">#</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.0.</span></p>
+</div>
+<p>A subclass of <a class="reference internal" href="LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a> and <a class="reference internal" href="#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel</span></code></a> that uses Dynamic Mode Decomposition to simulate a system throughout time.</p>
+<p>Given an initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> of the system and the expected <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> throughout time, this class defines a model that can approximate the dynamics of the system throughout time until threshold is met. This model can be fully data-driven (using from_data) or a <a class="reference internal" href="../../glossary.html#term-surrogate"><span class="xref std std-term">surrogate</span></a> of another model (using from_model) where internal states of a high-fidelity model augment the purely data-driven method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dmd_matrix</strong> (<em>np.ndarray</em>) – Matrix used by DMD</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of input keys</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Time step</p></li>
+<li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of output keys</p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em> or </em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.StateContainer" title="prog_models.PrognosticsModel.StateContainer"><em>StateContainer</em></a>) – Initial state of the system</p></li>
+<li><p><strong>state_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of state keys</p></li>
+<li><p><strong>event_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of event keys</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>DMD does not generate accurate approximations for all models, especially highly non-linear sections, and can be sensitive to the training data time step.</p>
+<p>In general, the approximation is less accurate if the DMD matrix is unstable.
+Additionally, this implementation does not yet include all functionalities of DMD (e.g. reducing the system’s dimensions through SVD). Further functionalities will be included in future releases.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.from_data">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.from_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a DMD model from data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>times</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>]</em>) – list of input data for use in data. Each element is the times for a single run of size (n_times)</p></li>
+<li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> data for use in data. Each element is the inputs for a single run of size (n_times, n_inputs)</p></li>
+<li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> data for use in data. Each element is the outputs for a single run of size (n_times, n_outputs)</p></li>
+<li><p><strong>states</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em><em>, </em><em>optional</em>) – list of <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> data for use in data. Each element is the states for a single run of size (n_times, n_states)</p></li>
+<li><p><strong>event_states</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em><em>, </em><em>optional</em>) – list of <a class="reference internal" href="../../glossary.html#term-event-state"><span class="xref std std-term">event state</span></a> data for use in data. Each element is the event states for a single run of size (n_times, n_event_states)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>trim_data_to</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Fraction (0-1) of data resulting from <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a> used to train DMD surrogate model
+e.g. if trim_data_to = 0.7 and the simulated data spans from t=0 to 100, the surrogate model is trained on the data from t=0 to 70</p>
+<p>Note: To trim data to a set time, use the ‘horizon’ parameter</p>
+</p></li>
+<li><p><strong>stability_tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Value that determines the tolerance for DMD matrix stability</p></li>
+<li><p><strong>training_noise</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Noise added to the training data sampled from a standard normal distribution with standard deviation of training_noise</p></li>
+<li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> keys</p></li>
+<li><p><strong>state_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> keys</p></li>
+<li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> keys</p></li>
+<li><p><strong>event_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> keys</p></li>
+</ul>
+</dd>
+</dl>
+<p>Additionally, other keyword arguments from <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Model generated from data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#prog_models.data_models.DMDModel" title="prog_models.data_models.DMDModel">DMDModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.from_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_functions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.from_model" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a Data Model from an existing PrognosticsModel (i.e., a surrogate model). Generates data through simulation with supplied load functions. Then calls <a class="reference internal" href="#prog_models.data_models.DMDModel.from_data" title="prog_models.data_models.DMDModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">from_data()</span></code></a> to generate the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – Model to generate data from</p></li>
+<li><p><strong>load_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>function</em><em>]</em>) – Each index is a callable loading function of (t, x = None) -&gt; z used to predict <a class="reference internal" href="../../glossary.html#term-future-load"><span class="xref std std-term">future load</span></a> at a given time (t) and <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> (x)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>add_dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If the timestep should be added as an input</p>
+</dd>
+</dl>
+<p>Addditional configuration parameters from <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a>. These can be an array (of same length as load_functions) of config for each individual sim, or one value to apply to all
+Additional configuration parameters from <cite>from_data</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Trained PrognosticsModel</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel">DataModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="lstmstatetransitionmodel">
+<h3>LSTMStateTransitionModel<a class="headerlink" href="#lstmstatetransitionmodel" title="Permalink to this headline">#</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="prog_models.data_models.LSTMStateTransitionModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.data_models.</span></span><span class="sig-name descname"><span class="pre">LSTMStateTransitionModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.LSTMStateTransitionModel" title="Permalink to this definition">#</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.0.</span></p>
+</div>
+<p>A State Transition Model with no <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> using an Keras LSTM Model.
+State transition models map from the <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> at time t and <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> at time t-1 plus historical data from a set window to the :term`output` at time t.</p>
+<p>Most users will use the <cite>LSTMStateTransitionModel.from_data</cite> method to create a model, but the model can be created by passing in a model directly into the constructor. The LSTM model in this method maps from [u_t-n+1, z_t-n, …, u_t, z_t-1] to z_t. Past <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> are stored in the <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> internal <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a>. Actual calculation of <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> is performed when :py:func`LSTMStateTransitionModel.output` is called. When using in simulation that may not be until the simulation results are accessed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>keras.Model</em>) – Keras model to use for state transition</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of input keys</p></li>
+<li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of output keys</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>LSTMStateTransitionModel.from_data
+examples.lstm_model</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.LSTMStateTransitionModel.from_data">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresh_met</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.LSTMStateTransitionModel.from_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate a LSTMStateTransitionModel from data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> data for use in data. Each element is the inputs for a single run of size (n_times, n_inputs)</p></li>
+<li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> data for use in data. Each element is the outputs for a single run of size (n_times, n_outputs)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of historical points used in the model. I.e, if window is 3, the model will map from [t-3, t-2, t-1] to t</p></li>
+<li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of keys to use to identify <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a>. If not supplied u[#] will be used to idenfiy inputs</p></li>
+<li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of keys to use to identify <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a>. If not supplied z[#] will be used to idenfiy outputs</p></li>
+<li><p><strong>validation_percentage</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Percentage of data to use for validation, between 0-1</p></li>
+<li><p><strong>epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of epochs (i.e., iterations) to train the model. More epochs means better results (to a point), but more time to train. Note: large numbers of epochs may result in overfitting.</p></li>
+<li><p><strong>layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of LSTM layers to use. More layers can represent more complex systems, but are less efficient. Note: 2 layers is typically enough for most complex systems. Default: 1</p></li>
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>]</em>) – number of units (i.e., dimensionality of output state) used in each lstm layer. Using a scalar value will use the same number of units for each layer.</p></li>
+<li><p><strong>activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Activation function to use for each layer</p></li>
+<li><p><strong>dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Dropout rate to be applied. Dropout helps avoid overfitting</p></li>
+<li><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If the data should be normalized. This is recommended for most cases.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Generated Model</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#prog_models.data_models.LSTMStateTransitionModel" title="prog_models.data_models.LSTMStateTransitionModel">LSTMStateTransitionModel</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM">https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM</a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.LSTMStateTransitionModel.from_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.prognostics_model.PrognosticsModel"><span class="pre">prog_models.prognostics_model.PrognosticsModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#prog_models.data_models.DataModel" title="prog_models.data_models.data_model.DataModel"><span class="pre">prog_models.data_models.data_model.DataModel</span></a></span></span><a class="headerlink" href="#prog_models.data_models.LSTMStateTransitionModel.from_model" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a Data Model from an existing PrognosticsModel (i.e., a surrogate model). Generates data through simulation with supplied load functions. Then calls <a class="reference internal" href="#prog_models.data_models.LSTMStateTransitionModel.from_data" title="prog_models.data_models.LSTMStateTransitionModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">from_data()</span></code></a> to generate the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – Model to generate data from</p></li>
+<li><p><strong>load_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>function</em><em>]</em>) – Each index is a callable loading function of (t, x = None) -&gt; z used to predict <a class="reference internal" href="../../glossary.html#term-future-load"><span class="xref std std-term">future load</span></a> at a given time (t) and <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> (x)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>add_dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If the timestep should be added as an input</p>
+</dd>
+</dl>
+<p>Addditional configuration parameters from <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a>. These can be an array (of same length as load_functions) of config for each individual sim, or one value to apply to all
+Additional configuration parameters from <cite>from_data</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Trained PrognosticsModel</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel">DataModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="datamodel-interface">
+<h2>DataModel Interface<a class="headerlink" href="#datamodel-interface" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.data_models.</span></span><span class="sig-name descname"><span class="pre">DataModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel" title="Permalink to this definition">#</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.0.</span></p>
+</div>
+<p>Abstract Base Class for all Data Models (e.g., <a class="reference internal" href="#prog_models.data_models.LSTMStateTransitionModel" title="prog_models.data_models.LSTMStateTransitionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LSTMStateTransitionModel</span></code></a>). Defines the interface and all common tools. To create a new Data-Driven model, first subclass this, then define the abstract methods from this class and <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>PrognosticsModel</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.calc_error">
+<span class="sig-name descname"><span class="pre">calc_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DataModel.calc_error" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate Mean Squared Error (MSE) between simulated and observed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>times</strong> (<em>[</em><em>double</em><em>]</em>) – array of times for each sample</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>]</em>) – array of input dictionaries where input[x] corresponds to time[x]</p></li>
+<li><p><strong>outputs</strong> (<em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>]</em>) – array of output dictionaries where output[x] corresponds to time[x]</p></li>
+<li><p><strong>kwargs</strong> – <p>Configuration parameters, such as:</p>
+<div class="line-block">
+<div class="line">x0 [dict]: Initial state</div>
+<div class="line">dt [double] : time step</div>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Total error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>double</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.estimate_params">
+<span class="sig-name descname"><span class="pre">estimate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DataModel.estimate_params" title="Permalink to this definition">#</a></dt>
+<dd><p>Estimate the model parameters given data. Overrides model parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>runs</strong> (<em>array</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>]</em>) – data from all runs, where runs[0] is the data from run 0. Each run consists of a tuple of arrays of times, input dicts, and output dicts</p></li>
+<li><p><strong>keys</strong> (<em>[</em><em>string</em><em>]</em>) – Parameter keys to optimize</p></li>
+<li><p><strong>kwargs</strong> – <p>Configuration parameters. Supported parameters include:</p>
+<div class="line-block">
+<div class="line">method: Optimization method- see scikit.optimize.minimize</div>
+<div class="line">options: Options passed to optimizer</div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<p>See: examples.param_est</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.from_data">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#prog_models.data_models.DataModel" title="prog_models.data_models.data_model.DataModel"><span class="pre">prog_models.data_models.data_model.DataModel</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DataModel.from_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a Data Model from data. This class is overwritten by specific data-driven classes (e.g., <a class="reference internal" href="#prog_models.data_models.LSTMStateTransitionModel" title="prog_models.data_models.LSTMStateTransitionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">LSTMStateTransitionModel</span></code></a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>times</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>]</em>) – list of input data for use in data. Each element is the times for a single run of size (n_times)</p></li>
+<li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> data for use in data. Each element is the inputs for a single run of size (n_times, n_inputs)</p></li>
+<li><p><strong>states</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> data for use in data. Each element is the states for a single run of size (n_times, n_states)</p></li>
+<li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> data for use in data. Each element is the outputs for a single run of size (n_times, n_outputs)</p></li>
+<li><p><strong>event_states</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-event-state"><span class="xref std std-term">event state</span></a> data for use in data. Each element is the event states for a single run of size (n_times, n_event_states)</p></li>
+<li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> keys</p></li>
+<li><p><strong>state_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> keys</p></li>
+<li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> keys</p></li>
+<li><p><strong>event_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> keys</p></li>
+</ul>
+</dd>
+</dl>
+<p>See specific data class for more additional keyword arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Trained PrognosticsModel</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel">DataModel</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Replace DataModel with specific classname below</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">DataModel</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.from_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.prognostics_model.PrognosticsModel"><span class="pre">prog_models.prognostics_model.PrognosticsModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#prog_models.data_models.DataModel" title="prog_models.data_models.data_model.DataModel"><span class="pre">prog_models.data_models.data_model.DataModel</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DataModel.from_model" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a Data Model from an existing PrognosticsModel (i.e., a surrogate model). Generates data through simulation with supplied load functions. Then calls <a class="reference internal" href="#prog_models.data_models.DataModel.from_data" title="prog_models.data_models.DataModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">from_data()</span></code></a> to generate the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – Model to generate data from</p></li>
+<li><p><strong>load_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>function</em><em>]</em>) – Each index is a callable loading function of (t, x = None) -&gt; z used to predict <a class="reference internal" href="../../glossary.html#term-future-load"><span class="xref std std-term">future load</span></a> at a given time (t) and <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> (x)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>add_dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If the timestep should be added as an input</p>
+</dd>
+</dl>
+<p>Addditional configuration parameters from <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a>. These can be an array (of same length as load_functions) of config for each individual sim, or one value to apply to all
+Additional configuration parameters from <cite>from_data</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Trained PrognosticsModel</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel">DataModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.generate_surrogate">
+<span class="sig-name descname"><span class="pre">generate_surrogate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_functions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dmd'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.generate_surrogate" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate a surrogate model to approximate the higher-fidelity model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>load_functions</strong> (<em>list of callable functions</em>) – Each index is a callable loading function of (t, x = None) -&gt; z used to predict future loading (output) at a given time (t) and state (x)</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – String indicating surrogate modeling method to be used</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>keywords</strong> (<em>Includes all keyword arguments from simulate_to_threshold</em><em> (</em><em>except save_pts</em><em>)</em><em>, </em><em>and the following additional</em>) – </p></li>
+<li><p><strong>dt</strong> (<em>Number</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – Same as in simulate_to_threshold; for DMD, this value is the time step of the training data</p></li>
+<li><p><strong>save_freq</strong> (<em>Number</em><em>, </em><em>optional</em>) – Same as in simulate_to_threshold; for DMD, this value is the time step with which the surrogate model is generated</p></li>
+<li><p><strong>state_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – List of state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – List of input keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – List of output keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>event_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – List of event_state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>SurrogateModel()</strong> – Instance of SurrogateModel class</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>class</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>See examples/generate_surrogate</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.simulate_to">
+<span class="sig-name descname"><span class="pre">simulate_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">collections.namedtuple</span></span></span><a class="headerlink" href="#prog_models.data_models.DataModel.simulate_to" title="Permalink to this definition">#</a></dt>
+<dd><p>Simulate prognostics model for a given number of seconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>number</em>) – <p>Time to which the model will be simulated in seconds (≥ 0.0)</p>
+<p>e.g., time = 200</p>
+</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p></li>
+<li><p><strong>first_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that dont use this</p></li>
+<li><p><strong>options</strong> (<em>kwargs</em><em>, </em><em>optional</em>) – <p>Configuration options for the simulation</p>
+<p>Note: configuration of the model is set through model.parameters</p>
+<p>Supported parameters: see <cite>simulate_to_threshold</cite></p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>number</em>) – Times for each simulated point</p></li>
+<li><p><strong>inputs</strong> (<em>[dict]</em>) – Future input (from future_loading_eqn) for each time in times</p></li>
+<li><p><strong>states</strong> (<em>[dict]</em>) – Estimated states for each time in times</p></li>
+<li><p><strong>outputs</strong> (<em>[dict]</em>) – Estimated outputs for each time in times</p></li>
+<li><p><strong>event_states</strong> (<em>[dict]</em>) – Estimated event state (e.g., SOH), between 1-0 where 0 is event occurance, for each time in times</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ProgModelInputException</strong> – </p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#prog_models.data_models.DataModel.simulate_to_threshold" title="prog_models.data_models.DataModel.simulate_to_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to_threshold</span></code></a></p>
+</div>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">def future_load_eqn(t):</div>
+<div class="line-block">
+<div class="line">if t&lt; 5.0: # Load is 3.0 for first 5 seconds</div>
+<div class="line-block">
+<div class="line">return 3.0</div>
+</div>
+<div class="line">else:</div>
+<div class="line-block">
+<div class="line">return 5.0</div>
+</div>
+</div>
+<div class="line">first_output = {‘o1’: 3.2, ‘o2’: 1.2}</div>
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">(times, inputs, states, outputs, event_states) = m.simulate_to(200, future_load_eqn, first_output)</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.simulate_to_threshold">
+<span class="sig-name descname"><span class="pre">simulate_to_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">collections.namedtuple</span></span></span><a class="headerlink" href="#prog_models.data_models.DataModel.simulate_to_threshold" title="Permalink to this definition">#</a></dt>
+<dd><p>Simulate prognostics model until any or specified threshold(s) have been met</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>future_loading_eqn</strong> (<em>callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>t0</strong> (<em>Number</em><em>, </em><em>optional</em>) – Starting time for simulation in seconds (default: 0.0)</p></li>
+<li><p><strong>dt</strong> (<em>Number</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/string.html#module-string" title="(in Python v3.10)"><em>string</em></a><em>, or </em><em>function</em><em>, </em><em>optional</em>) – <p>Number: constant time step (s), e.g. dt = 0.1</p>
+<p>function (t, x) -&gt; dt</p>
+<p>Tuple: (mode, dt), where modes could be constant or auto. If auto, dt is maximum step size</p>
+<p>string: mode - ‘auto’ or ‘constant’</p>
+</p></li>
+<li><p><strong>integration_method</strong> (<em>String</em><em>, </em><em>optional</em>) – Integration method, e.g. ‘rk4’ or ‘euler’ (default: ‘euler’)</p></li>
+<li><p><strong>save_freq</strong> (<em>Number</em><em>, </em><em>optional</em>) – Frequency at which output is saved (s), e.g., save_freq = 10</p></li>
+<li><p><strong>save_pts</strong> (<em>List</em><em>[</em><em>Number</em><em>]</em><em>, </em><em>optional</em>) – Additional ordered list of custom times where output is saved (s), e.g., save_pts= [50, 75]</p></li>
+<li><p><strong>horizon</strong> (<em>Number</em><em>, </em><em>optional</em>) – maximum time that the model will be simulated forward (s), e.g., horizon = 1000</p></li>
+<li><p><strong>first_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that dont use this</p></li>
+<li><p><strong>threshold_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Keys for events that will trigger the end of simulation.
+If blank, simulation will occur if any event will be met ()</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – initial state dict, e.g., x= {‘x1’: 10, ‘x2’: -5.3}</p></li>
+<li><p><strong>thresholds_met_eqn</strong> (<em>function/lambda</em><em>, </em><em>optional</em>) – custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
+<li><p><strong>print</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>toggle intermediate printing, e.g., print = True</p>
+<p>e.g., m.simulate_to_threshold(eqn, z, dt=0.1, save_pts=[1, 2])</p>
+</p></li>
+<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – toggle progress bar printing, e.g., progress = True</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>Array[number]</em>) – Times for each simulated point</p></li>
+<li><p><strong>inputs</strong> (<em>SimResult</em>) – Future input (from future_loading_eqn) for each time in times</p></li>
+<li><p><strong>states</strong> (<em>SimResult</em>) – Estimated states for each time in times</p></li>
+<li><p><strong>outputs</strong> (<em>SimResult</em>) – Estimated outputs for each time in times</p></li>
+<li><p><strong>event_states</strong> (<em>SimResult</em>) – Estimated event state (e.g., SOH), between 1-0 where 0 is event occurance, for each time in times</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ProgModelInputException</strong> – </p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#prog_models.data_models.DataModel.simulate_to" title="prog_models.data_models.DataModel.simulate_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to</span></code></a></p>
+</div>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">def future_load_eqn(t):</div>
+<div class="line-block">
+<div class="line">if t&lt; 5.0: # Load is 3.0 for first 5 seconds</div>
+<div class="line-block">
+<div class="line">return {‘load’: 3.0}</div>
+</div>
+<div class="line">else:</div>
+<div class="line-block">
+<div class="line">return {‘load’: 5.0}</div>
+</div>
+</div>
+<div class="line">first_output = {‘o1’: 3.2, ‘o2’: 1.2}</div>
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">(times, inputs, states, outputs, event_states) = m.simulate_to_threshold(future_load_eqn, first_output)</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>configuration of the model is set through model.parameters.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.summary" title="Permalink to this definition">#</a></dt>
+<dd><p>Print a summary of the model</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../prog_models.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">prog_models API Reference</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="DataSets.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Datasets</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle<br/>
+  
+      &copy; Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+
+Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
+
+  </body>
+</html>

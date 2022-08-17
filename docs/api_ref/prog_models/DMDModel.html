@@ -1,0 +1,899 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>data_models.DMDModel &#8212; ProgPy Python Packages 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="DataModel" href="DataModel.html" />
+    <link rel="prev" title="prog_models API Reference" href="../prog_models.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="data-models-dmdmodel">
+<h1>data_models.DMDModel<a class="headerlink" href="#data-models-dmdmodel" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.data_models.</span></span><span class="sig-name descname"><span class="pre">DMDModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dmd_matrix</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>A subclass of LinearModel and DataModel that uses Dynamic Mode Decomposition to simulate a system throughout time.</p>
+<p>Given an initial state of the system and the expected inputs throughout time, this class defines a model that can approximate the dynamics of the system throughout time until threshold is met. This model can be fully data-driven (using from_data) or a surrogate of another model (using from_model) where internal states of a high-fidelity model augment the purely data-driven method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dmd_matrix</strong> (<em>Matrix used by DMD</em>) – </p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><em>Srt</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – </p></li>
+<li><p><strong>trim_data_to</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – <p>Value between 0 and 1 that determines fraction of data resulting from simulate_to_threshold that is used to train DMD surrogate model
+e.g. if trim_data_to = 0.7 and the simulated data spans from t=0 to t=100, the surrogate model is trained on the data from t=0 to t=70</p>
+<p>Note: To trim data to a set time, use the ‘horizon’ parameter</p>
+</p></li>
+<li><p><strong>stability_tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Value that determines the tolerance for DMD matrix stability</p></li>
+<li><p><strong>training_noise</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>, </em><em>optional</em>) – Noise added to the training data sampled from a standard normal distribution with standard deviation of training_noise</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">Method 1: from data
+&gt;&gt;&gt; from prog_models.data_models import DMDModel
+&gt;&gt;&gt; m = DMDModel.from_data(inputs= input_data, outputs = output_data)  # Generating from data</div>
+</div>
+<div class="line-block">
+<div class="line">Method 2: from a model
+&gt;&gt;&gt; from prog_models.data_models import DMDModel
+&gt;&gt;&gt; m = DMDModel.from_model(other_model, loading_equations)</div>
+</div>
+<div class="line-block">
+<div class="line">Method 3: from DMD Matrix
+&gt;&gt;&gt; from prog_models.data_models import DMDModel
+&gt;&gt;&gt; m = DMDModel(DMD_Matrix, input_keys = [‘i’], output_keys = [‘t’, ‘v’])</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>DMD does not generate accurate approximations for all models, especially highly non-linear sections, and can be sensitive to the training data time step.
+In general, the approximation is less accurate if the DMD matrix is unstable.
+Additionally, this implementation does not yet include all functionalities of DMD (e.g. reducing the system’s dimensions through SVD). Further functionalities will be included in future releases.</p>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.SimulationResults">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SimulationResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_states</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.SimulationResults" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.SimulationResults.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.SimulationResults.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return number of occurrences of value.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.SimulationResults.event_states">
+<span class="sig-name descname"><span class="pre">event_states</span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.SimulationResults.event_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.SimulationResults.index">
+<span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9223372036854775807</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.SimulationResults.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return first index of value.</p>
+<p>Raises ValueError if the value is not present.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.SimulationResults.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.SimulationResults.inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.SimulationResults.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.SimulationResults.outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.SimulationResults.states">
+<span class="sig-name descname"><span class="pre">states</span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.SimulationResults.states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.SimulationResults.times">
+<span class="sig-name descname"><span class="pre">times</span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.SimulationResults.times" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.apply_limits">
+<span class="sig-name descname"><span class="pre">apply_limits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.apply_limits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply state bound limits. Any state outside of limits will be set to the closest limit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>x</strong> – Bounded state, with keys defined by model.states
+e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.apply_measurement_noise">
+<span class="sig-name descname"><span class="pre">apply_measurement_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.apply_measurement_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply measurement noise to the measurement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>output, with keys defined by model.outputs</p>
+<p>e.g., z = {‘abc’: 332.1, ‘def’: 221.003} given outputs = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>z</strong> – output, with applied noise, with keys defined by model.outputs</p>
+<p>e.g., z = {‘abc’: 332.2, ‘def’: 221.043} given outputs = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">z = {‘z1’: 2.2}</div>
+<div class="line">z = m.apply_measurement_noise(z)</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Configured using parameters <cite>measurement_noise</cite> and <cite>measurement_noise_dist</cite></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.apply_process_noise">
+<span class="sig-name descname"><span class="pre">apply_process_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.apply_process_noise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply process noise to the state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p></li>
+<li><p><strong>dt</strong> (<em>Number</em><em>, </em><em>optional</em>) – Time step (e.g., dt = 0.1)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>x</strong> – state, with applied noise, with keys defined by model.states
+e.g., x = {‘abc’: 332.2, ‘def’: 221.043} given states = [‘abc’, ‘def’]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">u = {‘u1’: 3.2}</div>
+<div class="line">z = {‘z1’: 2.2}</div>
+<div class="line">x = m.initialize(u, z) # Initialize first state</div>
+<div class="line">x = m.apply_process_noise(x)</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Configured using parameters <cite>process_noise</cite> and <cite>process_noise_dist</cite></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.calc_error">
+<span class="sig-name descname"><span class="pre">calc_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.calc_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate Mean Squared Error (MSE) between simulated and observed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>times</strong> (<em>[</em><em>double</em><em>]</em>) – array of times for each sample</p></li>
+<li><p><strong>inputs</strong> (<em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>]</em>) – array of input dictionaries where input[x] corresponds to time[x]</p></li>
+<li><p><strong>outputs</strong> (<em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>]</em>) – array of output dictionaries where output[x] corresponds to time[x]</p></li>
+<li><p><strong>kwargs</strong> – <p>Configuration parameters, such as:</p>
+<div class="line-block">
+<div class="line">x0 [dict]: Initial state</div>
+<div class="line">dt [double] : time step</div>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Total error</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>double</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.dx">
+<span class="sig-name descname"><span class="pre">dx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.dx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the first derivative of state <cite>x</cite> at a specific time <cite>t</cite>, given state and input</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p></li>
+<li><p><strong>u</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>Inputs, with keys defined by model.inputs</p>
+<p>e.g., u = {‘i’:3.2} given inputs = [‘i’]</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>dx</strong> – First derivitive of state, with keys defined by model.states</p>
+<p>e.g., dx = {‘abc’: 3.1, ‘def’: -2.003} given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = DerivProgModel() # Replace with specific model being simulated</div>
+<div class="line">u = {‘u1’: 3.2}</div>
+<div class="line">z = {‘z1’: 2.2}</div>
+<div class="line">x = m.initialize(u, z) # Initialize first state</div>
+<div class="line">dx = m.dx(x, u) # Returns first derivative of state given input u</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#prog_models.data_models.DMDModel.next_state" title="prog_models.data_models.DMDModel.next_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_state</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A model should overwrite either <cite>next_state</cite> or <cite>dx</cite>. Override <cite>dx</cite> for continuous models,
+and <cite>next_state</cite> for discrete, where the behavior cannot be described by the first derivative</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.estimate_params">
+<span class="sig-name descname"><span class="pre">estimate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.estimate_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate the model parameters given data. Overrides model parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>runs</strong> (<em>array</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>]</em>) – data from all runs, where runs[0] is the data from run 0. Each run consists of a tuple of arrays of times, input dicts, and output dicts</p></li>
+<li><p><strong>keys</strong> (<em>[</em><em>string</em><em>]</em>) – Parameter keys to optimize</p></li>
+<li><p><strong>kwargs</strong> – <p>Configuration parameters. Supported parameters include:</p>
+<div class="line-block">
+<div class="line">method: Optimization method- see scikit.optimize.minimize</div>
+<div class="line">options: Options passed to optimizer</div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<p>See: examples.param_est</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.event_state">
+<span class="sig-name descname"><span class="pre">event_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.event_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate event states (i.e., measures of progress towards event (0-1, where 0 means event has occured))</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>event_state</strong> – Event States, with keys defined by prognostics_model.events.</p>
+<p>e.g., event_state = {‘EOL’:0.32} given events = [‘EOL’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">u = {‘u1’: 3.2}</div>
+<div class="line">z = {‘z1’: 2.2}</div>
+<div class="line">x = m.initialize(u, z) # Initialize first state</div>
+<div class="line">event_state = m.event_state(x) # Returns {‘e1’: 0.8, ‘e2’: 0.6}</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Default is to return an empty array (for system models that do not include any events)</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#prog_models.data_models.DMDModel.threshold_met" title="prog_models.data_models.DMDModel.threshold_met"><code class="xref py py-obj docutils literal notranslate"><span class="pre">threshold_met</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.from_data">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.from_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Data Model from data. This class is overwritten by specific data-driven classes (e.g., LSTM)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>times</strong> (<em>List</em><em>[</em><em>List</em><em>]</em>) – list of input data for use in data. Each element is the times for a single run of size (n_times)</p></li>
+<li><p><strong>inputs</strong> (<em>List</em><em>[</em><em>Array</em><em>]</em>) – list of input data for use in data. Each element is the inputs for a single run of size (n_times, n_inputs)</p></li>
+<li><p><strong>states</strong> (<em>List</em><em>[</em><em>Array</em><em>]</em>) – list of state data for use in data. Each element is the states for a single run of size (n_times, n_states)</p></li>
+<li><p><strong>outputs</strong> (<em>List</em><em>[</em><em>Array</em><em>]</em>) – list of output data for use in data. Each element is the outputs for a single run of size (n_times, n_outputs)</p></li>
+<li><p><strong>event_states</strong> (<em>List</em><em>[</em><em>Array</em><em>]</em>) – list of event state data for use in data. Each element is the event states for a single run of size (n_times, n_event_states)</p></li>
+<li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of input keys</p></li>
+<li><p><strong>state_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of state keys</p></li>
+<li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of output keys</p></li>
+<li><p><strong>event_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of event keys</p></li>
+<li><p><strong>information</strong> (<em>See specific data class for more</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Trained PrognosticsModel</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="DataModel.html#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel">DataModel</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line"># Replace DataModel with specific classname below
+m = DataModel.from_data(data)</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.from_model">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_functions</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.from_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Data Model from an existing PrognosticsModel (i.e., a surrogate model). Generates data through simulation with supplied load functions. Then calls from_data to generate the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – Model to generate data from</p></li>
+<li><p><strong>load_functions</strong> (<em>List</em><em>[</em><em>Function</em><em>]</em>) – Each index is a callable loading function of (t, x = None) -&gt; z used to predict future loading (output) at a given time (t) and state (x)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>add_dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If the timestep should be added as an input</p></li>
+<li><p><strong>array</strong> (<em>Addditional configuration parameters from PrognosticsModel.simulate_to_threshold. These can be an</em>) – </p></li>
+<li><p><strong>from_data</strong> (<em>Additional configuration parameters from</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Trained PrognosticsModel</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="DataModel.html#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel">DataModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.generate_model">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialize_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">next_state_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_state_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'process_noise':</span> <span class="pre">0.1}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.prognostics_model.PrognosticsModel"><span class="pre">PrognosticsModel</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.generate_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>[DEPRECIATED] Generate a new prognostics model from individual model functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Dictionary containing keys required by model. Must include <cite>inputs</cite>, <cite>outputs</cite>, and <cite>states</cite>. Can also include <cite>events</cite></p></li>
+<li><p><strong>initialize_eqn</strong> (<em>callable</em>) – Equation to initialize first state of the model. See <cite>initialize</cite></p></li>
+<li><p><strong>output_eqn</strong> (<em>callable</em>) – Equation to calculate the outputs (measurements) for the model. See <cite>output</cite></p></li>
+<li><p><strong>next_state_eqn</strong> (<em>callable</em>) – <p>Equation to calculate next_state from current state. See <cite>next_state</cite>.</p>
+<p>Use this for discrete functions</p>
+</p></li>
+<li><p><strong>dx_eqn</strong> (<em>callable</em>) – <p>Equation to calculate dx from current state. See <cite>dx</cite>.</p>
+<p>Use this for continuous functions</p>
+</p></li>
+<li><p><strong>event_state_eqn</strong> (<em>callable</em><em>, </em><em>optional</em>) – Equation to calculate the state for each event of the model. See <cite>event_state</cite></p></li>
+<li><p><strong>threshold_eqn</strong> (<em>callable</em><em>, </em><em>optional</em>) – Equation to calculate if the threshold has been met for each event in model. See <cite>threshold_met</cite></p></li>
+<li><p><strong>config</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – Any configuration parameters for the model</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>model</strong> – A callable PrognosticsModel</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel">PrognosticsModel</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ProgModelInputException</strong> – </p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">keys = {</div>
+<div class="line-block">
+<div class="line">‘inputs’: [‘u1’, ‘u2’],</div>
+<div class="line">‘states’: [‘x1’, ‘x2’, ‘x3’],</div>
+<div class="line">‘outputs’: [‘z1’],</div>
+<div class="line">‘events’: [‘e1’, ‘e2’]</div>
+</div>
+<div class="line">}</div>
+<div class="line"><br /></div>
+<div class="line">m = PrognosticsModel.generate_model(keys, initialize_eqn, next_state_eqn, output_eqn, event_state_eqn, threshold_eqn)</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.generate_surrogate">
+<span class="sig-name descname"><span class="pre">generate_surrogate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_functions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dmd'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.generate_surrogate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a surrogate model to approximate the higher-fidelity model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>load_functions</strong> (<em>list of callable functions</em>) – Each index is a callable loading function of (t, x = None) -&gt; z used to predict future loading (output) at a given time (t) and state (x)</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – String indicating surrogate modeling method to be used</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>keywords</strong> (<em>Includes all keyword arguments from simulate_to_threshold</em><em> (</em><em>except save_pts</em><em>)</em><em>, </em><em>and the following additional</em>) – </p></li>
+<li><p><strong>dt</strong> (<em>Number</em><em> or </em><em>function</em><em>, </em><em>optional</em>) – Same as in simulate_to_threshold; for DMD, this value is the time step of the training data</p></li>
+<li><p><strong>save_freq</strong> (<em>Number</em><em>, </em><em>optional</em>) – Same as in simulate_to_threshold; for DMD, this value is the time step with which the surrogate model is generated</p></li>
+<li><p><strong>state_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – List of state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – List of input keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – List of output keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>event_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) – List of event_state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>SurrogateModel()</strong> – Instance of SurrogateModel class</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>class</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>See examples/generate_surrogate</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.initialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate initial state given inputs and outputs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>Inputs, with keys defined by model.inputs</p>
+<p>e.g., u = {‘i’:3.2} given inputs = [‘i’]</p>
+</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>Outputs, with keys defined by model.outputs</p>
+<p>e.g., z = {‘t’:12.4, ‘v’:3.3} given inputs = [‘t’, ‘v’]</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>x</strong> – First state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<dl class="simple">
+<dt>:</dt><dd><p>m = PrognosticsModel() # Replace with specific model being simulated
+u = {‘u1’: 3.2}
+z = {‘z1’: 2.2}
+x = m.initialize(u, z) # Initialize first state</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.matrixCheck">
+<span class="sig-name descname"><span class="pre">matrixCheck</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.matrixCheck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Public class method for checking matrices dimensions across all properties of the model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.next_state">
+<span class="sig-name descname"><span class="pre">next_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.next_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>State transition equation: Calculate next state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p></li>
+<li><p><strong>u</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>Inputs, with keys defined by model.inputs</p>
+<p>e.g., u = {‘i’:3.2} given inputs = [‘i’]</p>
+</p></li>
+<li><p><strong>dt</strong> (<em>number</em>) – <p>Timestep size in seconds (≥ 0)</p>
+<p>e.g., dt = 0.1</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>x</strong> – Next state, with keys defined by model.states
+e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">u = {‘u1’: 3.2}</div>
+<div class="line">z = {‘z1’: 2.2}</div>
+<div class="line">x = m.initialize(u, z) # Initialize first state</div>
+<div class="line">x = m.next_state(x, u, 0.1) # Returns state at 3.1 seconds given input u</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#prog_models.data_models.DMDModel.dx" title="prog_models.data_models.DMDModel.dx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dx</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A model should overwrite either <cite>next_state</cite> or <cite>dx</cite>. Override <cite>dx</cite> for continuous models, and <cite>next_state</cite> for discrete, where the behavior cannot be described by the first derivative</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.observables">
+<span class="sig-name descname"><span class="pre">observables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.observables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate performance metrics where</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>pm</strong> – Performance Metrics, with keys defined by model.performance_metric_keys.</p>
+<p>e.g., pm = {‘tMax’:33, ‘iMax’:19} given performance_metric_keys = [‘tMax’, ‘iMax’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">u = {‘u1’: 3.2}</div>
+<div class="line">z = {‘z1’: 2.2}</div>
+<div class="line">x = m.initialize(u, z) # Initialize first state</div>
+<div class="line">pm = m.performance_metrics(x) # Returns {‘tMax’:33, ‘iMax’:19}</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.output">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate outputs given state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>z</strong> – Outputs, with keys defined by model.outputs.</p>
+<p>e.g., z = {‘t’:12.4, ‘v’:3.3} given outputs = [‘t’, ‘v’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">u = {‘u1’: 3.2}</div>
+<div class="line">z = {‘z1’: 2.2}</div>
+<div class="line">x = m.initialize(u, z) # Initialize first state</div>
+<div class="line">z = m.output(x) # Returns {‘o1’: 1.2}</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.performance_metrics">
+<span class="sig-name descname"><span class="pre">performance_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.performance_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate performance metrics where</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>pm</strong> – Performance Metrics, with keys defined by model.performance_metric_keys.</p>
+<p>e.g., pm = {‘tMax’:33, ‘iMax’:19} given performance_metric_keys = [‘tMax’, ‘iMax’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">u = {‘u1’: 3.2}</div>
+<div class="line">z = {‘z1’: 2.2}</div>
+<div class="line">x = m.initialize(u, z) # Initialize first state</div>
+<div class="line">pm = m.performance_metrics(x) # Returns {‘tMax’:33, ‘iMax’:19}</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.simulate_to">
+<span class="sig-name descname"><span class="pre">simulate_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">namedtuple</span></span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.simulate_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulate prognostics model for a given number of seconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>number</em>) – <p>Time to which the model will be simulated in seconds (≥ 0.0)</p>
+<p>e.g., time = 200</p>
+</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p></li>
+<li><p><strong>first_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that dont use this</p></li>
+<li><p><strong>options</strong> (<em>kwargs</em><em>, </em><em>optional</em>) – <p>Configuration options for the simulation</p>
+<p>Note: configuration of the model is set through model.parameters</p>
+<p>Supported parameters: see <cite>simulate_to_threshold</cite></p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>number</em>) – Times for each simulated point</p></li>
+<li><p><strong>inputs</strong> (<em>[dict]</em>) – Future input (from future_loading_eqn) for each time in times</p></li>
+<li><p><strong>states</strong> (<em>[dict]</em>) – Estimated states for each time in times</p></li>
+<li><p><strong>outputs</strong> (<em>[dict]</em>) – Estimated outputs for each time in times</p></li>
+<li><p><strong>event_states</strong> (<em>[dict]</em>) – Estimated event state (e.g., SOH), between 1-0 where 0 is event occurance, for each time in times</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ProgModelInputException</strong> – </p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#prog_models.data_models.DMDModel.simulate_to_threshold" title="prog_models.data_models.DMDModel.simulate_to_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to_threshold</span></code></a></p>
+</div>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">def future_load_eqn(t):</div>
+<div class="line-block">
+<div class="line">if t&lt; 5.0: # Load is 3.0 for first 5 seconds</div>
+<div class="line-block">
+<div class="line">return 3.0</div>
+</div>
+<div class="line">else:</div>
+<div class="line-block">
+<div class="line">return 5.0</div>
+</div>
+</div>
+<div class="line">first_output = {‘o1’: 3.2, ‘o2’: 1.2}</div>
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">(times, inputs, states, outputs, event_states) = m.simulate_to(200, future_load_eqn, first_output)</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.simulate_to_threshold">
+<span class="sig-name descname"><span class="pre">simulate_to_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.simulate_to_threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulate prognostics model until any or specified threshold(s) have been met</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>future_loading_eqn</strong> (<em>callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>t0</strong> (<em>Number</em><em>, </em><em>optional</em>) – Starting time for simulation in seconds (default: 0.0)</p></li>
+<li><p><strong>dt</strong> (<em>Number</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/string.html#module-string" title="(in Python v3.10)"><em>string</em></a><em>, or </em><em>function</em><em>, </em><em>optional</em>) – <p>Number: constant time step (s), e.g. dt = 0.1</p>
+<p>function (t, x) -&gt; dt</p>
+<p>Tuple: (mode, dt), where modes could be constant or auto. If auto, dt is maximum step size</p>
+<p>string: mode - ‘auto’ or ‘constant’</p>
+</p></li>
+<li><p><strong>integration_method</strong> (<em>String</em><em>, </em><em>optional</em>) – Integration method, e.g. ‘rk4’ or ‘euler’ (default: ‘euler’)</p></li>
+<li><p><strong>save_freq</strong> (<em>Number</em><em>, </em><em>optional</em>) – Frequency at which output is saved (s), e.g., save_freq = 10</p></li>
+<li><p><strong>save_pts</strong> (<em>List</em><em>[</em><em>Number</em><em>]</em><em>, </em><em>optional</em>) – Additional ordered list of custom times where output is saved (s), e.g., save_pts= [50, 75]</p></li>
+<li><p><strong>horizon</strong> (<em>Number</em><em>, </em><em>optional</em>) – maximum time that the model will be simulated forward (s), e.g., horizon = 1000</p></li>
+<li><p><strong>first_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that dont use this</p></li>
+<li><p><strong>threshold_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – Keys for events that will trigger the end of simulation.
+If blank, simulation will occur if any event will be met ()</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – initial state dict, e.g., x= {‘x1’: 10, ‘x2’: -5.3}</p></li>
+<li><p><strong>thresholds_met_eqn</strong> (<em>function/lambda</em><em>, </em><em>optional</em>) – custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
+<li><p><strong>print</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>toggle intermediate printing, e.g., print = True</p>
+<p>e.g., m.simulate_to_threshold(eqn, z, dt=0.1, save_pts=[1, 2])</p>
+</p></li>
+<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – toggle progress bar printing, e.g., progress = True</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>Array[number]</em>) – Times for each simulated point</p></li>
+<li><p><strong>inputs</strong> (<em>SimResult</em>) – Future input (from future_loading_eqn) for each time in times</p></li>
+<li><p><strong>states</strong> (<em>SimResult</em>) – Estimated states for each time in times</p></li>
+<li><p><strong>outputs</strong> (<em>SimResult</em>) – Estimated outputs for each time in times</p></li>
+<li><p><strong>event_states</strong> (<em>SimResult</em>) – Estimated event state (e.g., SOH), between 1-0 where 0 is event occurance, for each time in times</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ProgModelInputException</strong> – </p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#prog_models.data_models.DMDModel.simulate_to" title="prog_models.data_models.DMDModel.simulate_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to</span></code></a></p>
+</div>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">def future_load_eqn(t):</div>
+<div class="line-block">
+<div class="line">if t&lt; 5.0: # Load is 3.0 for first 5 seconds</div>
+<div class="line-block">
+<div class="line">return {‘load’: 3.0}</div>
+</div>
+<div class="line">else:</div>
+<div class="line-block">
+<div class="line">return {‘load’: 5.0}</div>
+</div>
+</div>
+<div class="line">first_output = {‘o1’: 3.2, ‘o2’: 1.2}</div>
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">(times, inputs, states, outputs, event_states) = m.simulate_to_threshold(future_load_eqn, first_output)</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>configuration of the model is set through model.parameters.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.threshold_met">
+<span class="sig-name descname"><span class="pre">threshold_met</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DMDModel.threshold_met" title="Permalink to this definition">¶</a></dt>
+<dd><p>For each event threshold, calculate if it has been met</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = {‘abc’: 332.1, ‘def’: 221.003} given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>thresholds_met</strong> – If each threshold has been met (bool), with keys defined by prognostics_model.events</p>
+<p>e.g., thresholds_met = {‘EOL’: False} given events = [‘EOL’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">u = {‘u1’: 3.2}</div>
+<div class="line">z = {‘z1’: 2.2}</div>
+<div class="line">x = m.initialize(u, z) # Initialize first state</div>
+<div class="line">threshold_met = m.threshold_met(x) # returns {‘e1’: False, ‘e2’: False}</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If not overwritten, the default behavior is to say the threshold is met if the event state is &lt;= 0</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#prog_models.data_models.DMDModel.event_state" title="prog_models.data_models.DMDModel.event_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">event_state</span></code></a></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/software_name.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Python packages aiding research and development in prognostics and health management</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../prog_models_guide.html">prog_models Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../prog_algs_guide.html">prog_algs Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../prog_server_guide.html">prog_server Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../api_ref.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../prog_algs.html">prog_models API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../prog_models.html">prog_models API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prog_server.html">prog_models API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_guide.html">Developers Guide &amp; Project Plan</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../../api_ref.html">API Reference</a><ul>
+  <li><a href="../prog_models.html">prog_models API Reference</a><ul>
+      <li>Previous: <a href="../prog_models.html" title="previous chapter">prog_models API Reference</a></li>
+      <li>Next: <a href="DataModel.html" title="next chapter">DataModel</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
+
+  </body>
+</html>
