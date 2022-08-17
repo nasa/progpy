@@ -717,7 +717,7 @@ The following dependencies are used in the project:
    * Usage Rights: Released under the MIT License
    * Future Support: expected- urllib3 is a common tool still under development and actively supported
 
-* `tensorflow <https://www.tensorflow.org>__
+* `tensorflow <https://www.tensorflow.org>`__
 
    * Requirements met: Machine learning algorithms
    * Documentation: https://www.tensorflow.org

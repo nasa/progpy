@@ -4,6 +4,21 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in V1.4
+-----------------------
+
+prog_models
+**************
+
+prog_algs
+**********
+
+prog_server
+************
+
+prog_client
+************
+
 Updates in V1.3
 -----------------------
 
