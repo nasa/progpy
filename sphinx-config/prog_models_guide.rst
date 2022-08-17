@@ -42,9 +42,9 @@ The best way to learn how to use :py:mod:`prog_models` is through the `tutorial 
 Building New Models
 ******************************
 
-New models are constructed by subclassing :py:class:`PrognosticsModel` as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template :download:`prog_model_template.ProgModelTemplate <../../prog_models/prog_model_template.py>`, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in :class:`prog_models.PrognosticsModel` will then work with your new model. 
+New models are constructed by subclassing :py:class:`prog_models.PrognosticsModel` as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template :download:`prog_model_template.ProgModelTemplate <../../prog_models/prog_model_template.py>`, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in :class:`prog_models.PrognosticsModel` will then work with your new model. 
 
-For simple linear models, users can choose to subclass the simpler :py:class:`LinearModel` class, as illustrated in the second example. Some methods and algorithms only function on linear models.
+For simple linear models, users can choose to subclass the simpler :py:class:`prog_models.LinearModel` class, as illustrated in the second example. Some methods and algorithms only function on linear models.
 
 * :download:`examples.new_model <../../prog_models/examples/new_model.py>`
     .. automodule:: new_model
@@ -75,7 +75,7 @@ For simple linear models, users can choose to subclass the simpler :py:class:`Li
 
 Data Model Examples
 ******************************
-For data-driven models such as those using neural networks, the :py:func:`DataModel.from_data` and :py:func:`DataModel.from_model` methods are used to construct new models. The use of these is demonstrated in the following examples.
+For data-driven models such as those using neural networks, the :py:func:`prog_models.data_models.DataModel.from_data` and :py:func:`prog_models.data_models.DataModel.from_model` methods are used to construct new models. The use of these is demonstrated in the following examples.
 
 * :download:`examples.lstm_model <../../prog_models/examples/lstm_model.py>`
     .. automodule:: lstm_model
@@ -173,6 +173,6 @@ Other
 Tips
 ----
 * To predict a certain partial :term:`state` (e.g., 50% SOH), create a new :term:`event` (e.g., 'SOH_50') override the event_state and threshold_met equations to also predict that additional state.
-* If you're only doing diagnostics without prognostics- just define a next_state equation with no change of :term:`state` and don't perform prediction. The :term:`state estimator` can still be used to estimate if any of the :term:`event`s have occured.
-* Sudden :term:`event`s use a binary :term:`event state` (1=healthy, 0=failed).
-* You can predict as many :term:`event`s as you would like, sometimes one :term:`event` must happen before another, in this case the :term:`event` occurance for :term:`event` 1 can be a part of the equation for :term:`event` 2 ('event 2': event_1 and [OTHER LOGIC]).
+* If you're only doing diagnostics without prognostics- just define a next_state equation with no change of :term:`state` and don't perform prediction. The :term:`state estimator` can still be used to estimate if any of the :term:`events<event>` have occured.
+* Sudden :term:`event's<event>` use a binary :term:`event state` (1=healthy, 0=failed).
+* You can predict as many :term:`events<event>` as you would like, sometimes one :term:`event` must happen before another, in this case the :term:`event` occurance for event 1 can be a part of the equation for event 2 ('event 2': event_1 and [OTHER LOGIC]).
