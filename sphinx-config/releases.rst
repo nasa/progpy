@@ -1,8 +1,8 @@
 Release Notes
 =================
 
-..  contents:: 
-    :backlinks: top
+.. ..  contents:: 
+..     :backlinks: top
 
 Updates in V1.3
 -----------------------

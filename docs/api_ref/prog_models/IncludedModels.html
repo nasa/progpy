@@ -801,17 +801,17 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.CentrifugalPumpBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">CentrifugalPumpBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.CentrifugalPumpBase" title="Permalink to this definition">#</a></dt>
-<dd><p>Prognostics model for a Centrifugal Pump as described in the following paper:
+<dd><p>Prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a Centrifugal Pump as described in the following paper:
 <cite>M. Daigle and K. Goebel, “Model-based Prognostics with Concurrent Damage Progression Processes,” IEEE Transactions on Systems, Man, and Cybernetics: Systems, vol. 43, no. 4, pp. 535-546, May 2013. https://www.researchgate.net/publication/260652495_Model-Based_Prognostics_With_Concurrent_Damage_Progression_Processes</cite></p>
 <dl>
-<dt>Events (4)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (4)</dt><dd><div class="line-block">
 <div class="line">ImpellerWearFailure: Failure of the impeller due to wear</div>
 <div class="line">PumpOilOverheat: Overheat of the pump oil</div>
 <div class="line">RadialBearingOverheat: Overheat of the radial bearing</div>
 <div class="line">ThrustBearingOverheat: Overhead of the thrust bearing</div>
 </div>
 </dd>
-<dt>Inputs/Loading: (5)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">Inputs/Loading</span></a>: (5)</dt><dd><div class="line-block">
 <div class="line">Tamb: Ambient Temperature (K)</div>
 <div class="line">V: Voltage</div>
 <div class="line">pdisch: Discharge Pressure (Pa)</div>
@@ -819,7 +819,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <div class="line">wsync: Synchronous Rotational Speed of Supply Voltage (rad/sec)</div>
 </div>
 </dd>
-<dt>States: (9)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (9)</dt><dd><div class="line-block">
 <div class="line">A: Impeller Area (m^2)</div>
 <div class="line">Q: Flow Rate into Pump (m^3/s)</div>
 <div class="line">To: Oil Temperature (K)</div>
@@ -831,7 +831,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <div class="line">QLeak: Leak Flow Rate (m^3/s)</div>
 </div>
 </dd>
-<dt>Outputs/Measurements: (5)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (5)</dt><dd><div class="line-block">
 <div class="line">Qout: Discharge Flow (m^3/s)</div>
 <div class="line">To: Oil Temperature (K)</div>
 <div class="line">Tr: Radial Bearing Temperature (K)</div>
@@ -843,14 +843,14 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><em>Srt</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Process noise (applied at dx/next_state).
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
 Can be number (e.g., .2) applied to every state, a dictionary of values for each
 state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
-<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for process noise (e.g., normal, uniform, triangular)</p></li>
-<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><em>Srt</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Measurement noise (applied in output eqn).
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
 Can be number (e.g., .2) applied to every output, a dictionary of values for each
 output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
-<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for measurement noise (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
 <li><p><strong>pAtm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Atmospheric pressure</p></li>
 <li><p><strong>a2</strong> (<em>a0</em><em>, </em><em>a1</em><em>,</em>) – empirical coefficients for flow torque eqn</p></li>
 <li><p><strong>A</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – impeller blade area</p></li>
@@ -873,7 +873,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <li><p><strong>HOil3</strong> (<em>HOil1</em><em>, </em><em>HOil2</em><em>,</em>) – </p></li>
 <li><p><strong>wThrust</strong> (<em>wA</em><em>, </em><em>wRadial</em><em>,</em>) – Wear rates. See also CentrifugalPumpWithWear</p></li>
 <li><p><strong>lim</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Parameter limits</p></li>
-<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Initial state</p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -895,22 +895,22 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.CentrifugalPumpWithWear">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">CentrifugalPumpWithWear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.CentrifugalPumpWithWear" title="Permalink to this definition">#</a></dt>
-<dd><p>Prognostics model for a centrifugal pump with wear parameters as part of the model state. This is identical to CentrifugalPumpBase, only CentrifugalPumpBase has the wear params as parameters instead of states</p>
+<dd><p>Prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a centrifugal pump with wear parameters as part of the model state. This is identical to CentrifugalPumpBase, only CentrifugalPumpBase has the wear params as parameters instead of states</p>
 <p>This class implements a Centrifugal Pump model as described in the following paper:
 <cite>M. Daigle and K. Goebel, “Model-based Prognostics with Concurrent Damage Progression Processes,” IEEE Transactions on Systems, Man, and Cybernetics: Systems, vol. 43, no. 4, pp. 535-546, May 2013. https://www.researchgate.net/publication/260652495_Model-Based_Prognostics_With_Concurrent_Damage_Progression_Processes</cite></p>
 <dl>
-<dt>Events (4)</dt><dd><p>See CentrifugalPumpBase</p>
+<dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (4)</dt><dd><p>See CentrifugalPumpBase</p>
 </dd>
-<dt>Inputs/Loading: (5)</dt><dd><p>See CentrifugalPumpBase</p>
+<dt><a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">Inputs/Loading</span></a>: (5)</dt><dd><p>See CentrifugalPumpBase</p>
 </dd>
-<dt>States: (12)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (12)</dt><dd><div class="line-block">
 <div class="line">States from CentrifugalPumpBase +</div>
 <div class="line">wA: Wear Rate for Impeller Area</div>
 <div class="line">wRadial: Wear Rate for Radial (thrust) Friction Coefficient</div>
 <div class="line">wRadial: Wear Rate for Rolling Friction Coefficient</div>
 </div>
 </dd>
-<dt>Outputs/Measurements: (5)</dt><dd><p>See CentrifugalPumpBase</p>
+<dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (5)</dt><dd><p>See CentrifugalPumpBase</p>
 </dd>
 <dt>Model Configuration Parameters:</dt><dd><p>See CentrifugalPumpBase</p>
 </dd>
@@ -931,10 +931,10 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.PneumaticValveBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">PneumaticValveBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.PneumaticValveBase" title="Permalink to this definition">#</a></dt>
-<dd><p>Prognostics model for a Pneumatic Valve model as described in the following paper:
+<dd><p>Prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a Pneumatic Valve model as described in the following paper:
 <cite>M. Daigle and K. Goebel, “A Model-based Prognostics Approach Applied to Pneumatic Valves,” International Journal of Prognostics and Health Management, vol. 2, no. 2, August 2011. https://papers.phmsociety.org/index.php/ijphm/article/view/1359</cite></p>
 <dl>
-<dt>Events: (5)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (5)</dt><dd><div class="line-block">
 <div class="line">Bottom Leak: Failure due to a leak at the bottom pneumatic port</div>
 <div class="line">Top Leak: Failure due to a leak at the top pneumatic port</div>
 <div class="line">Internal Leak: Failure due to an internal leak at the seal surrounding the piston</div>
@@ -942,14 +942,14 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <div class="line">Friction Failure: Failure due to increase in friction along the piston with wear</div>
 </div>
 </dd>
-<dt>Inputs/Loading: (4)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">Inputs/Loading</span></a>: (4)</dt><dd><div class="line-block">
 <div class="line">pL: Fluid pressure at the left side of the plug (Pa)</div>
 <div class="line">pR: Fluid pressure at the right side of the plug (Pa)</div>
 <div class="line">uBot: input pressure at the bottom pneumatic port (Pa)</div>
 <div class="line">uTop: input pressure at the botton pneumatic port (Pa)</div>
 </div>
 </dd>
-<dt>States: (10)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (10)</dt><dd><div class="line-block">
 <div class="line">Aeb: Area of the leak at the bottom pneumatic port</div>
 <div class="line">Aet: Area of the leak at the top pneumatic port</div>
 <div class="line">Ai: Area of the internal leak</div>
@@ -962,7 +962,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <div class="line">pDiff: Difference in pressure between the left and the right</div>
 </div>
 </dd>
-<dt>Outputs/Measurements: 6</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: 6</dt><dd><div class="line-block">
 <div class="line">Q: Flowrate</div>
 <div class="line">iB: Is the piston at the bottom (bool)</div>
 <div class="line">iT: Is the piston at the top (bool)</div>
@@ -975,14 +975,14 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><em>Srt</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Process noise (applied at dx/next_state).
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
 Can be number (e.g., .2) applied to every state, a dictionary of values for each
 state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
-<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for process noise (e.g., normal, uniform, triangular)</p></li>
-<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><em>Srt</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Measurement noise (applied in output eqn).
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
 Can be number (e.g., .2) applied to every output, a dictionary of values for each
 output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
-<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for measurement noise (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
 <li><p><strong>g</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Acceleration due to gravity (m/s^2)</p></li>
 <li><p><strong>pAtm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Atmospheric pressure (Pa)</p></li>
 <li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Plug mass (kg)</p></li>
@@ -1032,17 +1032,17 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.PneumaticValveWithWear">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">PneumaticValveWithWear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.PneumaticValveWithWear" title="Permalink to this definition">#</a></dt>
-<dd><p>Prognostics model for a pneumatic valve with wear parameters as part of the model state. This is identical to PneumaticValveBase, only PneumaticValveBase has the wear params as parameters instead of states</p>
+<dd><p>Prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a pneumatic valve with wear parameters as part of the model state. This is identical to PneumaticValveBase, only PneumaticValveBase has the wear params as parameters instead of states</p>
 <p>This class implements a Pneumatic Valve model as described in the following paper:
 <cite>M. Daigle and K. Goebel, “A Model-based Prognostics Approach Applied to Pneumatic Valves,” International Journal of Prognostics and Health Management, vol. 2, no. 2, August 2011. https://www.phmsociety.org/node/602</cite></p>
 <dl class="simple">
-<dt>Events (4)</dt><dd><p>See PneumaticValveBase</p>
+<dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (4)</dt><dd><p>See PneumaticValveBase</p>
 </dd>
-<dt>Inputs/Loading: (5)</dt><dd><p>See PneumaticValveBase</p>
+<dt><a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">Inputs/Loading</span></a>: (5)</dt><dd><p>See PneumaticValveBase</p>
 </dd>
-<dt>States: (12)</dt><dd><p>States from PneumaticValveBase +  wb, wi, wk, wr, wt</p>
+<dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (12)</dt><dd><p>States from PneumaticValveBase +  wb, wi, wk, wr, wt</p>
 </dd>
-<dt>Outputs/Measurements: (5)</dt><dd><p>See PneumaticValveBase</p>
+<dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (5)</dt><dd><p>See PneumaticValveBase</p>
 </dd>
 <dt>Model Configuration Parameters:</dt><dd><p>See PneumaticValveBase</p>
 </dd>
@@ -1056,7 +1056,10 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.DCMotor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">DCMotor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.DCMotor" title="Permalink to this definition">#</a></dt>
-<dd><p>Model of DC Motor.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.0.</span></p>
+</div>
+<p><a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">Model</span></a> of DC Motor.</p>
 <p>References:
 Matteo Corbetta, Chetan S. Kulkarni. An approach for uncertainty quantification and management of unmanned aerial vehicle health.
 Annual Conference of the PHM Society, Scottsdale, AZ, 2019. <a class="reference external" href="http://papers.phmsociety.org/index.php/phmconf/article/view/847">http://papers.phmsociety.org/index.php/phmconf/article/view/847</a></p>
@@ -1064,44 +1067,47 @@ Annual Conference of the PHM Society, Scottsdale, AZ, 2019. <a class="reference 
 Asia Pacific Conference of the Prognostics and Health Management Society, 2017. <a class="reference external" href="https://ntrs.nasa.gov/citations/20200000579">https://ntrs.nasa.gov/citations/20200000579</a></p>
 <p>This model was developed by NASA’s System Wide Safety (SWS) Project. <a class="reference external" href="https://www.nasa.gov/aeroresearch/programs/aosp/sws/">https://www.nasa.gov/aeroresearch/programs/aosp/sws/</a></p>
 <dl>
-<dt>Events: (0)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (0)</dt><dd><div class="line-block">
 <div class="line">None</div>
 </div>
 </dd>
-<dt>Inputs/Loading: (4)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">Inputs/Loading</span></a>: (4)</dt><dd><div class="line-block">
 <div class="line">v_a, v_b, v_c: Voltages at a, b, c</div>
 <div class="line">t_l: Torque from load</div>
 </div>
 </dd>
-<dt>States: (5)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (5)</dt><dd><div class="line-block">
 <div class="line">i_a, i_b, i_c: Currents provided to motor</div>
 <div class="line">v_rot: Rotational velocity (rad/sec)</div>
 <div class="line">theta: Angle of motor (rad)</div>
 </div>
 </dd>
-<dt>Outputs: (2)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (2)</dt><dd><div class="line-block">
 <div class="line">v_rot: Rotational velocity (rad/sec)</div>
 <div class="line">theta: Angle of motor (rad)</div>
 </div>
 </dd>
-<dt>Model Configuration Parameters:</dt><dd><div class="line-block">
-<div class="line">process_noise : Process noise (applied at dx/next_state).
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
 Can be number (e.g., .2) applied to every state, a dictionary of values for each
-state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</div>
-<div class="line">process_noise_dist : Optional, distribution for process noise (e.g., normal, uniform, triangular)</div>
-<div class="line">measurement_noise : Measurement noise (applied in output eqn)
+state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
 Can be number (e.g., .2) applied to every output, a dictionary of values for each
-output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</div>
-<div class="line">measurement_noise_dist : Optional, distribution for measurement noise (e.g., normal, uniform, triangular)</div>
-<div class="line">x0: Initial State</div>
-<div class="line">L: Inductance (H)</div>
-<div class="line">M: Mutual inductance (H)</div>
-<div class="line">R: Resistance (Ohm)</div>
-<div class="line">K: back emf constant / Torque constant (V/rad/sec)</div>
-<div class="line">B: Friction in motor / Damping (Not a function of thrust) (Nm/(rad/s))</div>
-<div class="line">Po: no of poles in rotor</div>
-<div class="line">J: Load moment of inertia (neglecting motor shaft inertia) (Kg*m^2)</div>
-</div>
+output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Inductance (H)</p></li>
+<li><p><strong>M</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Mutual inductance (H)</p></li>
+<li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Resistance (Ohm)</p></li>
+<li><p><strong>K</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – back emf constant / Torque constant (V/rad/sec)</p></li>
+<li><p><strong>B</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Friction in motor / Damping (Not a function of thrust) (Nm/(rad/s))</p></li>
+<li><p><strong>Po</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – no of poles in rotor</p></li>
+<li><p><strong>J</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Load moment of inertia (neglecting motor shaft inertia) (Kg*m^2)</p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1112,7 +1118,10 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.ESC">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">ESC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.ESC" title="Permalink to this definition">#</a></dt>
-<dd><p>Simple Electronic-Speed Controller (ESC) model for powertrain modeling.
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.0.</span></p>
+</div>
+<p>Simple Electronic-Speed Controller (ESC) <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for powertrain modeling.
 This model replicates the behavior of the speed controller with pulse-width modulation (PWM) and commutation matrix.
 Duty cycle simulated with a square wave using scipy signal.square function.</p>
 <p>References:
@@ -1121,46 +1130,46 @@ Annual Conference of the PHM Society, Scottsdale, AZ, 2019. <a class="reference 
 <p>George E. Gorospe Jr, Chetan S. Kulkarni, Edward Hogge, Andrew Hsu, and Natalie Ownby. A Study of the Degradation of Electronic Speed Controllers forBrushless DC Motors.
 Asia Pacific Conference of the Prognostics and Health Management Society, 2017. <a class="reference external" href="https://ntrs.nasa.gov/citations/20200000579">https://ntrs.nasa.gov/citations/20200000579</a></p>
 <p>This model was developed by NASA’s System Wide Safety (SWS) Project. <a class="reference external" href="https://www.nasa.gov/aeroresearch/programs/aosp/sws/">https://www.nasa.gov/aeroresearch/programs/aosp/sws/</a></p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3.0.</span></p>
-</div>
 <dl>
-<dt>Events: (0)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (0)</dt><dd><div class="line-block">
 <div class="line">None</div>
 </div>
 </dd>
-<dt>Inputs/Loading: (3)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">Inputs/Loading</span></a>: (3)</dt><dd><div class="line-block">
 <div class="line">duty :        Duty cycle [-], percentage the input is “on” (i.e., voltage is supplied). 0 = no voltage supply (always closed), 1 = 100% voltage supply (always open).</div>
 <div class="line">theta :       rotor position [rad].</div>
 <div class="line">v :           voltage [V], voltage input from Battery (after DC converter, should be constant).</div>
 </div>
 </dd>
-<dt>States: (4)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (4)</dt><dd><div class="line-block">
 <div class="line">v_a :         3-phase voltage value, first phase, [V], input to the motor</div>
 <div class="line">v_b :         3-phase voltage value, second phase, [V], input to the motor</div>
 <div class="line">v_c :         3-phase voltage value, third phase [V], input to the motor</div>
 <div class="line">t :           time value [s].</div>
 </div>
 </dd>
-<dt>Outputs: (4)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (4)</dt><dd><div class="line-block">
 <div class="line">v_a :         3-phase voltage value, first phase, [V], input to the motor</div>
 <div class="line">v_b :         3-phase voltage value, second phase, [V], input to the motor</div>
 <div class="line">v_c :         3-phase voltage value, third phase [V], input to the motor</div>
 <div class="line">t :           time value [s].</div>
 </div>
 </dd>
-<dt>Model Configuration Parameters:</dt><dd><div class="line-block">
-<div class="line">sawtooth_freq :       Frequency of PWM signal [Hz], default value in default_parameters.</div>
-<div class="line">x0 :                  Initial state containing v_a, v_b, v_c and t.</div>
-<div class="line">process_noise :       Process noise (applied at dx/next_state).
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
 Can be number (e.g., .2) applied to every state, a dictionary of values for each
-state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</div>
-<div class="line">process_noise_dist :  Optional, distribution for process noise (e.g., normal, uniform, triangular)</div>
-<div class="line">measurement_noise :   Measurement noise (applied in output eqn)
+state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
 Can be number (e.g., .2) applied to every output, a dictionary of values for each
-output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</div>
-<div class="line">measurement_noise_dist :  Optional, distribution for measurement noise (e.g., normal, uniform, triangular)</div>
-</div>
+output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>sawtooth_freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Frequency of PWM signal [Hz], default value in default_parameters.</p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1171,7 +1180,10 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.Powertrain">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">Powertrain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">esc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">motor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.Powertrain" title="Permalink to this definition">#</a></dt>
-<dd><p>Powertrain model composed of ESC and DC motor (with the option to add propeller load using parameter Cq).
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.3.0.</span></p>
+</div>
+<p>Powertrain <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> composed of ESC and DC motor (with the option to add propeller load using parameter Cq).
 The powertrain model is used to simulate the motor dynamics including the effect of the speed controller and pulse-width modulation.</p>
 <p>Parameters for a standard propeller for commercial UAV are also added to the powertrain model, so that the load torque
 acting on the motor can be computed. At this stage, the propeller is modeled simply as a load torque proportional to the square of the rotor speed.
@@ -1185,20 +1197,17 @@ Annual Conference of the PHM Society, Scottsdale, AZ, 2019. <a class="reference 
 Asia Pacific Conference of the Prognostics and Health Management Society, 2017. <a class="reference external" href="https://ntrs.nasa.gov/citations/20200000579">https://ntrs.nasa.gov/citations/20200000579</a></p>
 <p>R.P. Palanisamy C. Kulkarni, M. Corbetta, P. Banerjee “Fault Detection and Performance Monitoring of Propellers in Electric UAV”, 2022 IEEE Aerospace</p>
 <p>This model was developed by NASA’s System Wide Safety (SWS) Project. <a class="reference external" href="https://www.nasa.gov/aeroresearch/programs/aosp/sws/">https://www.nasa.gov/aeroresearch/programs/aosp/sws/</a></p>
-<div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3.0.</span></p>
-</div>
 <dl>
-<dt>Events: (0)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (0)</dt><dd><div class="line-block">
 <div class="line">None</div>
 </div>
 </dd>
-<dt>Inputs: (2)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">Inputs/Loading</span></a>: (2)</dt><dd><div class="line-block">
 <div class="line">duty :        Duty cycle [-], percentage the input is “on” (i.e., voltage is supplied). 0 = no voltage supply (always closed), 1 = 100% voltage supply (always open).</div>
 <div class="line">v :           voltage [V], voltage input from Battery (after DC converter, should be constant).</div>
 </div>
 </dd>
-<dt>States: (5)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (5)</dt><dd><div class="line-block">
 <div class="line">v_a :         3-phase voltage value, first phase, [V], input to the motor</div>
 <div class="line">v_b :         3-phase voltage value, second phase, [V], input to the motor</div>
 <div class="line">v_c :         3-phase voltage value, third phase [V], input to the motor</div>
@@ -1210,24 +1219,27 @@ Asia Pacific Conference of the Prognostics and Health Management Society, 2017. 
 <div class="line">theta :       Motor rotor position [rad]</div>
 </div>
 </dd>
-<dt>Outputs: (2)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (2)</dt><dd><div class="line-block">
 <div class="line">v_rot :       Motor angular velocity [rad/s]</div>
 <div class="line">theta :       Motor rotor position [rad]</div>
 </div>
 </dd>
-<dt>Model Configuration Parameters:</dt><dd><div class="line-block">
-<div class="line">process_noise :       Process noise (applied at dx/next_state).
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
 Can be number (e.g., .2) applied to every state, a dictionary of values for each
-state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</div>
-<div class="line">process_noise_dist :  Optional, distribution for process noise (e.g., normal, uniform, triangular)</div>
-<div class="line">measurement_noise :   Measurement noise (applied in output eqn)
+state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
 Can be number (e.g., .2) applied to every output, a dictionary of values for each
-output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</div>
-<div class="line">measurement_noise_dist :  Optional, distribution for measurement noise (e.g., normal, uniform, triangular)</div>
-<div class="line">c_q :                 Dimensionless coefficient of torque of the propeller [-], (APC data, derived).</div>
-<div class="line">rho :                 Air density [Kg/m^3].</div>
-<div class="line">D:                    Propeller diameter [m].</div>
-</div>
+output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform,</p></li>
+<li><p><strong>c_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Dimensionless coefficient of torque of the propeller [-], (APC data, derived).</p></li>
+<li><p><strong>rho</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Air density [Kg/m^3].</p></li>
+<li><p><strong>D</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Propeller diameter [m].</p></li>
+</ul>
 </dd>
 </dl>
 <div class="admonition note">
@@ -1246,22 +1258,22 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</div>
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.ThrownObject">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">ThrownObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.ThrownObject" title="Permalink to this definition">#</a></dt>
-<dd><p>Simple Non-Linear Model that similates an object thrown into the air with air resistance</p>
+<dd><p>Simple Non-Linear <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> that similates an object thrown into the air with air resistance</p>
 <dl>
-<dt>Events (2)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (2)</dt><dd><div class="line-block">
 <div class="line">falling: The object is falling</div>
 <div class="line">impact: The object has hit the ground</div>
 </div>
 </dd>
 </dl>
-<p>Inputs/Loading: (0)</p>
+<p><a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">Inputs/Loading</span></a>: (0)</p>
 <dl>
-<dt>States: (2)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (2)</dt><dd><div class="line-block">
 <div class="line">x: Position in space (m)</div>
 <div class="line">v: Velocity in space (m/s)</div>
 </div>
 </dd>
-<dt>Outputs/Measurements: (1)</dt><dd><div class="line-block">
+<dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (1)</dt><dd><div class="line-block">
 <div class="line">x: Position in space (m)</div>
 </div>
 </dd>
@@ -1269,14 +1281,14 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</div>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><em>Srt</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Process noise (applied at dx/next_state).
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
 Can be number (e.g., .2) applied to every state, a dictionary of values for each
 state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
-<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for process noise (e.g., normal, uniform, triangular)</p></li>
-<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><em>Srt</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Measurement noise (applied in output eqn).
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
 Can be number (e.g., .2) applied to every output, a dictionary of values for each
 output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
-<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for measurement noise (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
 <li><p><strong>g</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Acceleration due to gravity (m/s^2). Default is 9.81 m/s^2 (standard gravity)</p></li>
 <li><p><strong>thrower_height</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Height of the thrower (m). Default is 1.83 m</p></li>
 <li><p><strong>throwing_speed</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Speed at which the ball is thrown (m/s). Default is 40 m/s</p></li>

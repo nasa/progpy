@@ -380,25 +380,27 @@ title="Print to PDF"
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.</span></span><span class="sig-name descname"><span class="pre">PrognosticsModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.PrognosticsModel" title="Permalink to this definition">#</a></dt>
-<dd><p>A general time-variant state space model of system degradation behavior.</p>
+<dd><p>A general time-variant state space <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> of system degradation behavior.</p>
 <p>The PrognosticsModel class is a wrapper around a mathematical model of a system as represented by a state, output, input, event_state and threshold equation.</p>
 <p>A Model also has a parameters structure, which contains fields for various model parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><em>Srt</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Process noise (applied at dx/next_state).
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
 Can be number (e.g., .2) applied to every state, a dictionary of values for each
 state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
-<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for process noise (e.g., normal, uniform, triangular)</p></li>
-<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><em>Srt</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Measurement noise (applied in output eqn).
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
 Can be number (e.g., .2) applied to every output, a dictionary of values for each
 output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
-<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for measurement noise (e.g., normal, uniform, triangular)</p></li>
-<li><p><strong>model</strong> (<em>Additional parameters specific to the</em>) – </p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ProgModelTypeError</strong><strong>, </strong><strong>ProgModelInputException</strong><strong>, </strong><strong>ProgModelException</strong> – </p>
+</dl>
+<p>Additional parameters specific to the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ProgModelTypeError</strong><strong>, </strong><strong>ProgModelInputException</strong><strong>, </strong><strong>ProgModelException</strong> – </p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -461,7 +463,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py attribute">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.inputs">
 <span class="sig-name descname"><span class="pre">inputs</span></span><a class="headerlink" href="#prog_models.PrognosticsModel.inputs" title="Permalink to this definition">#</a></dt>
-<dd><p>Identifiers for each input</p>
+<dd><p>Identifiers for each <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
@@ -472,7 +474,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py attribute">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.states">
 <span class="sig-name descname"><span class="pre">states</span></span><a class="headerlink" href="#prog_models.PrognosticsModel.states" title="Permalink to this definition">#</a></dt>
-<dd><p>Identifiers for each state</p>
+<dd><p>Identifiers for each <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
@@ -483,7 +485,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py attribute">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.outputs">
 <span class="sig-name descname"><span class="pre">outputs</span></span><a class="headerlink" href="#prog_models.PrognosticsModel.outputs" title="Permalink to this definition">#</a></dt>
-<dd><p>Identifiers for each output</p>
+<dd><p>Identifiers for each <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>]</p>
@@ -505,7 +507,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py attribute">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.events">
 <span class="sig-name descname"><span class="pre">events</span></span><a class="headerlink" href="#prog_models.PrognosticsModel.events" title="Permalink to this definition">#</a></dt>
-<dd><p>Identifiers for each event predicted</p>
+<dd><p>Identifiers for each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> predicted</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>], optional</p>
@@ -516,7 +518,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py attribute">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.StateContainer">
 <span class="sig-name descname"><span class="pre">StateContainer</span></span><a class="headerlink" href="#prog_models.PrognosticsModel.StateContainer" title="Permalink to this definition">#</a></dt>
-<dd><p>Class for state container - used for representing state</p>
+<dd><p>Class for state container - used for representing <a href="#id1"><span class="problematic" id="id2">:state:`state`</span></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>DictLikeMatrixWrapper</p>
@@ -527,7 +529,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py attribute">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.OutputContainer">
 <span class="sig-name descname"><span class="pre">OutputContainer</span></span><a class="headerlink" href="#prog_models.PrognosticsModel.OutputContainer" title="Permalink to this definition">#</a></dt>
-<dd><p>Class for output container - used for representing output</p>
+<dd><p>Class for output container - used for representing <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>DictLikeMatrixWrapper</p>
@@ -538,7 +540,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py attribute">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.InputContainer">
 <span class="sig-name descname"><span class="pre">InputContainer</span></span><a class="headerlink" href="#prog_models.PrognosticsModel.InputContainer" title="Permalink to this definition">#</a></dt>
-<dd><p>Class for input container - used for representing input</p>
+<dd><p>Class for input container - used for representing <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>DictLikeMatrixWrapper</p>

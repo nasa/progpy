@@ -549,45 +549,11 @@ title="Print to PDF"
               <div>
                 
   <section id="release-notes">
-<h1><a class="toc-backref" href="#contents">Release Notes</a><a class="headerlink" href="#release-notes" title="Permalink to this headline">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#release-notes" id="id4">Release Notes</a></p>
-<ul>
-<li><p><a class="reference internal" href="#updates-in-v1-3" id="id5">Updates in V1.3</a></p>
-<ul>
-<li><p><a class="reference internal" href="#prog-models" id="id6">prog_models</a></p></li>
-<li><p><a class="reference internal" href="#prog-algs" id="id7">prog_algs</a></p></li>
-<li><p><a class="reference internal" href="#prog-server" id="id8">prog_server</a></p></li>
-<li><p><a class="reference internal" href="#prog-client" id="id9">prog_client</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#updates-in-v1-2" id="id10">Updates in V1.2</a></p>
-<ul>
-<li><p><a class="reference internal" href="#id1" id="id11">prog_models</a></p></li>
-<li><p><a class="reference internal" href="#id2" id="id12">prog_algs</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#updates-in-v1-1" id="id13">Updates in V1.1</a></p>
-<ul>
-<li><p><a class="reference internal" href="#id3" id="id14">prog_models</a></p>
-<ul>
-<li><p><a class="reference internal" href="#electrochemistry-model-updates" id="id15">ElectroChemistry Model Updates</a></p></li>
-<li><p><a class="reference internal" href="#centrifugalpump-model-updates" id="id16">CentrifugalPump Model Updates</a></p></li>
-<li><p><a class="reference internal" href="#pneumaticvalve-model-updates" id="id17">PneumaticValve Model Updates</a></p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+<h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">#</a></h1>
 <section id="updates-in-v1-3">
-<h2><a class="toc-backref" href="#contents">Updates in V1.3</a><a class="headerlink" href="#updates-in-v1-3" title="Permalink to this headline">#</a></h2>
+<h2>Updates in V1.3<a class="headerlink" href="#updates-in-v1-3" title="Permalink to this headline">#</a></h2>
 <section id="prog-models">
-<h3><a class="toc-backref" href="#contents">prog_models</a><a class="headerlink" href="#prog-models" title="Permalink to this headline">#</a></h3>
+<h3>prog_models<a class="headerlink" href="#prog-models" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><strong>Surrogate Models</strong> Added initial draft of new feature to generate surrogate models automatically from <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a>. (See <a class="reference download internal" download="" href="_downloads/3e4a5d9b856c25c6b0bf84730581c560/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a> example). Initial implementation uses Dynamic Mode Decomposition. Additional Surrogate Model Generation approaches will be explored for future releases. [Developed by NASA’s DRF Project]</p></li>
 <li><p><strong>New Example Models</strong> Added new <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.DCMotor" title="prog_models.models.DCMotor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.DCMotor</span></code></a>, <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.ESC" title="prog_models.models.ESC"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.ESC</span></code></a>, and <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.Powertrain" title="prog_models.models.Powertrain"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.Powertrain</span></code></a> models (See <a class="reference download internal" download="" href="_downloads/379b8420d5a1e67e122db8eacfc78796/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a> example) [Developed by NASA’s SWS Project]</p></li>
@@ -604,7 +570,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="prog-algs">
-<h3><a class="toc-backref" href="#contents">prog_algs</a><a class="headerlink" href="#prog-algs" title="Permalink to this headline">#</a></h3>
+<h3>prog_algs<a class="headerlink" href="#prog-algs" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><strong>New State Estimator Added</strong> <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.KalmanFilter" title="prog_algs.state_estimators.KalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.KalmanFilter</span></code></a>. Works with models derived from <a class="reference internal" href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a>. See <a class="reference download internal" download="" href="_downloads/95185cf727a21ad753717b8332bb063f/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></p></li>
 <li><p><strong>New Predictor Added</strong> <a class="reference internal" href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.UnscentedTransformPredictor" title="prog_algs.predictors.UnscentedTransformPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.UnscentedTransformPredictor</span></code></a>. See <a class="reference download internal" download="" href="_downloads/b0ce3603387e7aa9d47150b177e46978/utpredictor.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.utpredictor</span></code></a></p></li>
@@ -619,22 +585,22 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="prog-server">
-<h3><a class="toc-backref" href="#contents">prog_server</a><a class="headerlink" href="#prog-server" title="Permalink to this headline">#</a></h3>
+<h3>prog_server<a class="headerlink" href="#prog-server" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Added ability to set state using pickled prog_algs.uncertain_data.UncertainData type</p></li>
 </ul>
 </section>
 <section id="prog-client">
-<h3><a class="toc-backref" href="#contents">prog_client</a><a class="headerlink" href="#prog-client" title="Permalink to this headline">#</a></h3>
+<h3>prog_client<a class="headerlink" href="#prog-client" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Added new set_state method</p></li>
 </ul>
 </section>
 </section>
 <section id="updates-in-v1-2">
-<h2><a class="toc-backref" href="#contents">Updates in V1.2</a><a class="headerlink" href="#updates-in-v1-2" title="Permalink to this headline">#</a></h2>
+<h2>Updates in V1.2<a class="headerlink" href="#updates-in-v1-2" title="Permalink to this headline">#</a></h2>
 <section id="id1">
-<h3><a class="toc-backref" href="#contents">prog_models</a><a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<h3>prog_models<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Vectorized Models</dt><dd><ul>
@@ -663,7 +629,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="id2">
-<h3><a class="toc-backref" href="#contents">prog_algs</a><a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<h3>prog_algs<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>New Feature: Histogram and Scatter Plot of UncertainData.</p></li>
 <li><dl class="simple">
@@ -689,9 +655,9 @@ title="Print to PDF"
 </section>
 </section>
 <section id="updates-in-v1-1">
-<h2><a class="toc-backref" href="#contents">Updates in V1.1</a><a class="headerlink" href="#updates-in-v1-1" title="Permalink to this headline">#</a></h2>
+<h2>Updates in V1.1<a class="headerlink" href="#updates-in-v1-1" title="Permalink to this headline">#</a></h2>
 <section id="id3">
-<h3><a class="toc-backref" href="#contents">prog_models</a><a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<h3>prog_models<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Derived Parameters</dt><dd><ul>
@@ -748,7 +714,7 @@ title="Print to PDF"
 <li><p>Various bug fixes</p></li>
 </ul>
 <section id="electrochemistry-model-updates">
-<h4><a class="toc-backref" href="#contents">ElectroChemistry Model Updates</a><a class="headerlink" href="#electrochemistry-model-updates" title="Permalink to this headline">#</a></h4>
+<h4>ElectroChemistry Model Updates<a class="headerlink" href="#electrochemistry-model-updates" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>New Feature: Added thermal effects. Now the model include how the temperature is effected by use. Previous implementation only included effects of temperature on performance.</p></li>
 <li><p>New Feature: Added <cite>degraded_capacity</cite> (i.e., EOL) event to model. There are now three different models: BatteryElectroChemEOL (degraded_capacity only), BatteryElectroChemEOD (discharge only), and BatteryElectroChemEODEOL (combined). BatteryElectroChem is an alias for BatteryElectroChemEODEOL.</p></li>
@@ -756,7 +722,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="centrifugalpump-model-updates">
-<h4><a class="toc-backref" href="#contents">CentrifugalPump Model Updates</a><a class="headerlink" href="#centrifugalpump-model-updates" title="Permalink to this headline">#</a></h4>
+<h4>CentrifugalPump Model Updates<a class="headerlink" href="#centrifugalpump-model-updates" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Added CentrifugalPumpBase class where wear rates are parameters instead of part of the state vector.</dt><dd><ul>
@@ -772,7 +738,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="pneumaticvalve-model-updates">
-<h4><a class="toc-backref" href="#contents">PneumaticValve Model Updates</a><a class="headerlink" href="#pneumaticvalve-model-updates" title="Permalink to this headline">#</a></h4>
+<h4>PneumaticValve Model Updates<a class="headerlink" href="#pneumaticvalve-model-updates" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Added PneumaticValveBase class where wear rates are parameters instead of part of the state vector.</dt><dd><ul>

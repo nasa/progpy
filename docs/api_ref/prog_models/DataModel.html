@@ -604,6 +604,28 @@ e.g. if trim_data_to = 0.7 and the simulated data spans from t=0 to 100, the sur
 </dd>
 </dl>
 <p>Additionally, other keyword arguments from <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.dmd_matrix">
+<span class="sig-name descname"><span class="pre">dmd_matrix</span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.dmd_matrix" title="Permalink to this definition">#</a></dt>
+<dd><p>Dynamic Mode Decomposition Matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prog_models.data_models.DMDModel.dt">
+<span class="sig-name descname"><span class="pre">dt</span></span><a class="headerlink" href="#prog_models.data_models.DMDModel.dt" title="Permalink to this definition">#</a></dt>
+<dd><p>Time step of data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Model generated from data</p>
@@ -666,6 +688,17 @@ State transition models map from the <a class="reference internal" href="../../g
 </ul>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="prog_models.data_models.LSTMStateTransitionModel.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#prog_models.data_models.LSTMStateTransitionModel.model" title="Permalink to this definition">#</a></dt>
+<dd><p>Keras model to use for state transition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>keras.Model</p>
+</dd>
+</dl>
+</dd></dl>
+
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>LSTMStateTransitionModel.from_data

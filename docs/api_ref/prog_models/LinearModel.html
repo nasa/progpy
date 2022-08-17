@@ -32,6 +32,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="PrognosticsModel" href="PrognosticModel.html" />
@@ -380,15 +381,17 @@ title="Print to PDF"
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.LinearModel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.</span></span><span class="sig-name descname"><span class="pre">LinearModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel" title="Permalink to this definition">#</a></dt>
-<dd><dl class="simple">
-<dt>A linear prognostics model. Used when behavior can be described using a simple linear time-series model defined by the following equations:</dt><dd><ul class="simple">
-<li><p>dx/dt = Ax + Bu + E</p></li>
-<li><p>z = Cx + D</p></li>
-<li><p>es = Fx + G</p></li>
-</ul>
-</dd>
-</dl>
-<p>where x is state, u is input, z is output and es is event state</p>
+<dd><blockquote>
+<div><p>A linear prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a>. Used when behavior can be described using a simple linear time-series model defined by the following equations:</p>
+<div class="math notranslate nohighlight">
+\[\]</div>
+</div></blockquote>
+<dl>
+<dt>rac{dx}{dt} = Ax + Bu + E</dt><dd><blockquote>
+<div><p>z = Cx + D
+es = Fx + G</p>
+</div></blockquote>
+<p>where x is <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a>, u is <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a>, z is <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> and es is <a class="reference internal" href="../../glossary.html#term-event-state"><span class="xref std std-term">event state</span></a></p>
 <dl class="simple">
 <dt>Linear Models must inherit from this class and define the following properties:</dt><dd><ul class="simple">
 <li><p>A: 2-d numpy.array[float], dimensions: n_states x n_states</p></li>
@@ -398,11 +401,13 @@ title="Print to PDF"
 <li><p>E: 1-d numpy.array[float], optional (zeros by default), dimensions: n_states x 1</p></li>
 <li><p>F: 2-d numpy.array[float], dimensions: n_es x n_states</p></li>
 <li><p>G: 1-d numpy.array[float], optional (zeros by default), dimensions: n_es x 1</p></li>
-<li><p>inputs:  list[str] - input keys</p></li>
-<li><p>states:  list[str] - state keys</p></li>
-<li><p>outputs: list[str] - output keys</p></li>
-<li><p>events:  list[str] - event keys</p></li>
+<li><p>inputs:  list[str] - <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> keys</p></li>
+<li><p>states:  list[str] - <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> keys</p></li>
+<li><p>outputs: list[str] - <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> keys</p></li>
+<li><p>events:  list[str] - <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> keys</p></li>
 </ul>
+</dd>
+</dl>
 </dd>
 </dl>
 <dl class="py method">
