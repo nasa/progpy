@@ -134,6 +134,7 @@ Post-Release Checklist
 Updating Documentation 
 ------------------------
 Use the following command to update documentation (requires sphinx):
+
 .. code-block: bash
 
     sphinx-build sphinx_config docs\
@@ -150,8 +151,8 @@ New versions are uploaded upon release (i.e., merging into master branch). The R
 
 See `here <https://packaging.python.org/guides/distributing-packages-using-setuptools/#packaging-your-project>`_
 
-NPR 7150
---------
+NPR 7150 NASA Software Engineering Requirements
+--------------------------------------------------
 NASA software must comply with the requirements enumarated in `NPR 7150 <https://nodis3.gsfc.nasa.gov/displayDir.cfm?t=NPR&c=7150&s=2B>`__. See the `NASA Software Engineering and Assurance Handbook <https://swehb.nasa.gov>`__ for more information.
 
 Intention is to expand the scope of use to also include its inclusion in Ground software tools that support mission planning or formulation; Ground software that operates a research, development, test, or evaluation laboratory (i.e., not a major engineering/research facility); or Ground software that provides decision support for non-mission-critical situations and airborn software whose anomalous behavior would cause or contribute to a failure of system function resulting in a minor failure condition for the airborne vehicle,
@@ -326,6 +327,8 @@ Software Assurance
 | 022   | Software Assurance               | FC         | This document       |
 +-------+----------------------------------+------------+---------------------+
 
+See checklists at top of page for software assurance activities. Additionally, some software activities are enforced by github branch policies.
+
 Safety Critical Software
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -342,6 +345,8 @@ Safety Critical Software
 +-------+----------------------------------+------------+---------------------+
 | 220   | Safety Critical Reqs             | NA         | Not safety critical |
 +-------+----------------------------------+------------+---------------------+
+
+This software is not safety critical, see :ref:`NPR 7150 NASA Software Engineering Requirements` for more details
 
 Automatic Generation of Source Code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -491,7 +496,8 @@ Static Analysis Methods Used:
 * Github Dependabot Alerts: Tracks dependencies, alerts of any issues. 
 
 Testing
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 +-------+----------------------------------+------------+------------------------------------------------------------------------------------------------------+
 | SWE # | Description                      | Compliance | Evidence                                                                                             |
 +=======+==================================+============+======================================================================================================+
@@ -540,7 +546,7 @@ Notes on SWE-068: Evaluate Test Results:
   * Code coverage is also reviewed as part of the release process 
 
 Operations, Maintenance, and Retirement
-----------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------------------------+------------+------------------------------------------------------------------------------------------------------+
 | SWE # | Description                      | Compliance | Evidence                                                                                             |
@@ -578,7 +584,7 @@ Retirement Plan:
 * All internal documents about the software will be archived in the Diagnostics and Prognostics Group's Teams OneDrive folder
 
 Configuration Management
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------------------------+------------+-------------------------------------------------------------------+
 | SWE # | Description                      | Compliance | Evidence                                                          |
@@ -631,7 +637,7 @@ Note on SWE084- Configuration Audits: Configuration audits are conducted in part
    * That a schedule exists for the next release and is in the proper place
 
 Non-Conformances
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-------+----------------------------------+------------+-------------------------------------------------------------------+
 | SWE # | Description                      | Compliance | Evidence                                                          |
@@ -644,7 +650,7 @@ Non-Conformances
 +-------+----------------------------------+------------+-------------------------------------------------------------------+
 
 Transition to a Higher Class
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 +-------+----------------------------------+------------+-------------------------------------------------------------------+
 | SWE # | Description                      | Compliance | Evidence                                                          |
 +=======+==================================+============+===================================================================+
