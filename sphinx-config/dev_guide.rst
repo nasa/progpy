@@ -346,7 +346,7 @@ Safety Critical Software
 | 220   | Safety Critical Reqs             | NA         | Not safety critical |
 +-------+----------------------------------+------------+---------------------+
 
-This software is not safety critical, see :ref:`NPR 7150 NASA Software Engineering Requirements` for more details
+This software is not safety critical, see [NPR 7150 NASA Software Engineering Requirements](https://nasa.github.io/progpy/dev_guide.html#npr-7150-nasa-software-engineering-requirements) for more details
 
 Automatic Generation of Source Code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -354,6 +354,8 @@ Automatic Generation of Source Code
 +-------+----------------------------------+------------+---------------------+
 | SWE # | Description                      | Compliance | Evidence            |
 +=======+==================================+============+=====================+
+| 146   | Autogen Software Reqs            | NA         | No autogen          |
++-------+----------------------------------+------------+---------------------+
 | 206   | Autogen Software                 | NA         | No autogen          |
 +-------+----------------------------------+------------+---------------------+
 
