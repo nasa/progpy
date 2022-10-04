@@ -65,8 +65,8 @@ The best way to learn how to use `prog_algs` is through the `tutorial <https://m
 
 |br|
 
-* :download:`examples.thrown_object_example <../../prog_algs/examples/thrown_object_example.py>`
-    .. automodule:: thrown_object_example
+* :download:`examples.basic_example_battery <../../prog_algs/examples/basic_example_battery.py>`
+    .. automodule:: basic_example_battery
 
 |br|
 
