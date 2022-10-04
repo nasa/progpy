@@ -70,11 +70,6 @@ The best way to learn how to use `prog_algs` is through the `tutorial <https://m
 
 |br|
 
-* :download:`examples.utpredictor <../../prog_algs/examples/utpredictor.py>`
-    .. automodule:: utpredictor
-
-|br|
-
 * :download:`examples.benchmarking_example <../../prog_algs/examples/benchmarking_example.py>`
     .. automodule:: benchmarking_example
 
