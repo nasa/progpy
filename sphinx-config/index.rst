@@ -14,7 +14,7 @@ ProgPy consists of a set of packages, described below. See the documentation spe
 
 * :py:mod:`prog_models` : Tools for defining, building, using, and testing models for prognostics
 * :py:mod:`prog_algs` : Tools for performing and benchmarking prognostics and state estimation
-* :py:mod:`prog_server` and :py:mod:`prog_client` : A simplified implementation of a Software Oriented Architecture (SOA) for performing prognostics and associated client
+* :py:mod:`prog_server` and :py:mod:`prog_client` : A simplified implementation of a Service-Oriented Architecture (SOA) for performing prognostics and associated client
 
 .. toctree::
    :maxdepth: 2
