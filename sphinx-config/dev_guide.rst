@@ -135,6 +135,7 @@ Updating Documentation
 ------------------------
 Use the following command to update documentation (requires sphinx):
 .. code-block: bash
+
     sphinx-build sphinx_config docs\
 
 Uploading new version to PyPI
@@ -142,6 +143,7 @@ Uploading new version to PyPI
 New versions are uploaded upon release (i.e., merging into master branch). The Release Checklist must be complete prior to release
 
 .. code-block: bash
+
     python -m build --sdist
     python -m build --wheel
     twine upload dist/*
