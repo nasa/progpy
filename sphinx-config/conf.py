@@ -71,6 +71,7 @@ html_theme = 'sphinx_book_theme'
 
 # Set sphinx logo
 html_logo = '_static/software_name.png'
+html_favicon = '_static/nasa_logo.ico'
 
 html_static_path = ['_static']
 html_theme_options = {
