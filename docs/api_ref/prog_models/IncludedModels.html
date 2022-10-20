@@ -32,6 +32,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="LinearModel" href="LinearModel.html" />
@@ -566,7 +567,7 @@ title="Print to PDF"
                 
   <section id="included-models">
 <h1>Included Models<a class="headerlink" href="#included-models" title="Permalink to this headline">#</a></h1>
-<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models`</span></code> package is distributed with a few pre-constructed models that can  be used in simulation or prognostics (with the <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_algs</span></code> package). These models are summarized in the following sections.</p>
+<p>The <a class="reference internal" href="../../prog_models_guide.html#prog-models-guide"><span class="std std-ref">prog_models</span></a> package is distributed with a few pre-constructed models that can  be used in simulation or prognostics (with the <a class="reference internal" href="../../prog_algs_guide.html#prog-algs-guide"><span class="std std-ref">prog_algs</span></a> package). These models are summarized in the following sections.</p>
 <section id="battery-model-circuit">
 <h2>Battery Model - Circuit<a class="headerlink" href="#battery-model-circuit" title="Permalink to this headline">#</a></h2>
 <dl class="py class">
@@ -608,8 +609,17 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <li><p><strong>qMax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Maximum Charge</p></li>
 <li><p><strong>CMax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Maximum Capacity</p></li>
 <li><p><strong>VEOD</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – End of Discharge Voltage Threshold</p></li>
-<li><p><strong>Cbp3</strong> (<em>Cb0</em><em>, </em><em>Cbp0</em><em>, </em><em>Cbp1</em><em>, </em><em>Cbp2</em><em>,</em>) – Battery Capacity Parameters</p></li>
-<li><p><strong>Ccp</strong> (<em>Rs</em><em>, </em><em>Cs</em><em>, </em><em>Rcp0</em><em>, </em><em>Rcp1</em><em>, </em><em>Rcp2</em><em>,</em>) – R-C Pair Parameter</p></li>
+<li><p><strong>Cb0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Battery Capacity Parameter</p></li>
+<li><p><strong>Cbp0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Battery Capacity Parameter</p></li>
+<li><p><strong>Cbp1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Battery Capacity Parameter</p></li>
+<li><p><strong>Cbp2</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Battery Capacity Parameter</p></li>
+<li><p><strong>Cbp3</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Battery Capacity Parameter</p></li>
+<li><p><strong>Rs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – R-C Pair Parameter</p></li>
+<li><p><strong>Cs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – R-C Pair Parameter</p></li>
+<li><p><strong>Rcp0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – R-C Pair Parameter</p></li>
+<li><p><strong>Rcp1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – R-C Pair Parameter</p></li>
+<li><p><strong>Rcp2</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – R-C Pair Parameter</p></li>
+<li><p><strong>Ccp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – R-C Pair Parameter</p></li>
 <li><p><strong>Ta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Ambient Temperature</p></li>
 <li><p><strong>Jt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Temperature parameter</p></li>
 <li><p><strong>ha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Heat transfer coefficient, ambient</p></li>
@@ -656,6 +666,10 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (2)</dt><dd><div class="line-block">
 <div class="line">t: Temperature of battery (°C)</div>
 <div class="line">v: Voltage supplied by battery</div>
+</div>
+</dd>
+<dt><a class="reference internal" href="../../glossary.html#term-performance-metric"><span class="xref std std-term">Performance Metrics</span></a>: (1)</dt><dd><div class="line-block">
+<div class="line">max_i : The maximum current (amps) that can be sustained before steady-state voltage falls below VEOD. Decreases with discharge</div>
 </div>
 </dd>
 </dl>
@@ -736,7 +750,9 @@ Can be number (e.g., .2) applied to every output, a dictionary of values for eac
 output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
 <li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for measurement noise (e.g., normal, uniform, triangular)</p></li>
 <li><p><strong>qMaxThreshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Threshold for qMax (for threshold_met and event_state), after which the InsufficientCapacity event has occured. Note: Battery manufacturers specify a threshold of 70-80% of qMax</p></li>
-<li><p><strong>wd</strong> (<em>wq</em><em>, </em><em>wr</em><em>,</em>) – Wear rate for qMax, Ro, and D respectively</p></li>
+<li><p><strong>wq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Wear rate for qMax, Ro, and D respectively</p></li>
+<li><p><strong>wr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Wear rate for qMax, Ro, and D respectively</p></li>
+<li><p><strong>wd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Wear rate for qMax, Ro, and D respectively</p></li>
 <li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p></li>
 </ul>
 </dd>
@@ -852,14 +868,17 @@ Can be number (e.g., .2) applied to every output, a dictionary of values for eac
 output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
 <li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
 <li><p><strong>pAtm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Atmospheric pressure</p></li>
-<li><p><strong>a2</strong> (<em>a0</em><em>, </em><em>a1</em><em>,</em>) – empirical coefficients for flow torque eqn</p></li>
+<li><p><strong>a0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – empirical coefficient for flow torque eqn</p></li>
+<li><p><strong>a1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – empirical coefficient for flow torque eqn</p></li>
+<li><p><strong>a2</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – empirical coefficient for flow torque eqn</p></li>
 <li><p><strong>A</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – impeller blade area</p></li>
 <li><p><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
 <li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Pole Phases</p></li>
 <li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Pole Pairs</p></li>
 <li><p><strong>I</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – impeller/shaft/motor lumped inertia</p></li>
 <li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – lumped friction parameter (minus bearing friction)</p></li>
-<li><p><strong>R2</strong> (<em>R1</em><em>,</em>) – </p></li>
+<li><p><strong>R1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
+<li><p><strong>R2</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
 <li><p><strong>L1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
 <li><p><strong>FluidI</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Pump fluid inertia</p></li>
 <li><p><strong>c</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Pump flow coefficient</p></li>
@@ -871,7 +890,9 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <li><p><strong>HRadial2</strong> (<em>HRadial1</em><em>,</em>) – </p></li>
 <li><p><strong>mcOil</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
 <li><p><strong>HOil3</strong> (<em>HOil1</em><em>, </em><em>HOil2</em><em>,</em>) – </p></li>
-<li><p><strong>wThrust</strong> (<em>wA</em><em>, </em><em>wRadial</em><em>,</em>) – Wear rates. See also CentrifugalPumpWithWear</p></li>
+<li><p><strong>wA</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Wear rates. See also CentrifugalPumpWithWear</p></li>
+<li><p><strong>wRadial</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Wear rates. See also CentrifugalPumpWithWear</p></li>
+<li><p><strong>wThrust</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Wear rates. See also CentrifugalPumpWithWear</p></li>
 <li><p><strong>lim</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Parameter limits</p></li>
 <li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p></li>
 </ul>
@@ -999,7 +1020,10 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <li><p><strong>gas_mass</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Molar mass of supply gas (kg/mol)</p></li>
 <li><p><strong>gas_temp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Temperature of supply gas (K)</p></li>
 <li><p><strong>gas_R</strong> (<em>gas_gamma</em><em>, </em><em>gas_z</em><em>,</em>) – Supply gas parameters</p></li>
-<li><p><strong>Cb</strong> (<em>At</em><em>, </em><em>Ct</em><em>, </em><em>Ab</em><em>,</em>) – </p></li>
+<li><p><strong>At</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
+<li><p><strong>Ct</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
+<li><p><strong>Ab</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
+<li><p><strong>Cb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – </p></li>
 <li><p><strong>AbMax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Max limit for state Aeb</p></li>
 <li><p><strong>AtMax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Max limit for state Aet</p></li>
 <li><p><strong>AiMax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Max limit for state Ai</p></li>
@@ -1110,6 +1134,90 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="prog_models.models.DCMotorSP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">DCMotorSP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.DCMotorSP" title="Permalink to this definition">#</a></dt>
+<dd><blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.4.0.</span></p>
+</div>
+<p><a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">Model</span></a> of single-phase DC Motor, as defined by the following equations:</p>
+<p>:math:<a href="#id1"><span class="problematic" id="id2">`</span></a></p>
+</div></blockquote>
+<p>rac{d_i}{dt} =
+rac{1}{L1}*(V-E-R*i)`</p>
+<blockquote>
+<div><p>:math:<a href="#id3"><span class="problematic" id="id4">`</span></a></p>
+</div></blockquote>
+<p>rac{<a href="#id5"><span class="problematic" id="id6">d_</span></a>omega}{dt} =
+rac{1}{J_t} * (T_e - T_l - B * omega)`</p>
+<blockquote>
+<div><p>where:</p>
+<ul class="simple">
+<li><p>i       current, A</p></li>
+<li><p><span class="math">\omega</span>   rotor speed, rad/s</p></li>
+<li><p>V       input voltage, V</p></li>
+<li><p>E       back-emf voltage, V</p></li>
+<li><p>R       armature resistance, Ohm</p></li>
+<li><p>Jt      total inertia (rotor + propeller or load), kg*m^2</p></li>
+<li><p><span class="math">T_e</span>     driving torque (electrical), Nm</p></li>
+<li><p><span class="math">T_l</span>     load torque (mechanical), Nm</p></li>
+<li><p>B       friction coefficient, Nm/(rad/s)</p></li>
+<li><p>t       time, s</p></li>
+</ul>
+<dl>
+<dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (0)</dt><dd><div class="line-block">
+<div class="line">None</div>
+</div>
+</dd>
+<dt><a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">Inputs/Loading</span></a>: (2)</dt><dd><div class="line-block">
+<div class="line">v: Voltage</div>
+<div class="line">t_l: Torque from load</div>
+</div>
+</dd>
+<dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (2)</dt><dd><div class="line-block">
+<div class="line">i: current (A)</div>
+<div class="line">v_rot: Rotational velocity (rad/sec)</div>
+</div>
+</dd>
+<dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (1)</dt><dd><div class="line-block">
+<div class="line">v_rot: Rotational velocity (rad/sec)</div>
+</div>
+</dd>
+</dl>
+<blockquote>
+<div><dl class="simple">
+<dt>process_noise<span class="classifier">Optional, float or Dict[str, float]</span></dt><dd><p><a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
+Can be number (e.g., .2) applied to every state, a dictionary of values for each
+state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p>
+</dd>
+<dt>process_noise_dist<span class="classifier">Optional, String</span></dt><dd><p>distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p>
+</dd>
+<dt>measurement_noise<span class="classifier">Optional, float or Dict[str, float]</span></dt><dd><p><a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
+Can be number (e.g., .2) applied to every output, a dictionary of values for each
+output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p>
+</dd>
+<dt>measurement_noise_dist<span class="classifier">Optional, String</span></dt><dd><p>distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p>
+</dd>
+<dt>L<span class="classifier">float</span></dt><dd><p>Self-inductance (H)</p>
+</dd>
+<dt>M: float</dt><dd><p>Mutual inductance (H)</p>
+</dd>
+<dt>R: float</dt><dd><p>Armature Resistance (Ohm)</p>
+</dd>
+<dt>Kt: float</dt><dd><p>back emf constant / Torque constant (V/rad/sec)</p>
+</dd>
+<dt>B: float</dt><dd><p>Friction in motor / Damping (Not a function of thrust) (Nm/(rad/s))</p>
+</dd>
+<dt>J: float</dt><dd><p>Load moment of inertia (neglecting motor shaft inertia) (Kg*m^2)</p>
+</dd>
+<dt>x0<span class="classifier">dict[str, float]</span></dt><dd><p>Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
 </dd></dl>
 
 </section>

@@ -4,7 +4,9 @@
 """
 Example downloading and using a NASA prognostics dataset.
 
-In this example, a battery dataset is downloaded from the NASA PCoE data repository. This dataset is then accessed and plotted. 
+.. collapse:: More details
+
+    In this example, a battery dataset is downloaded from the NASA PCoE data repository. This dataset is then accessed and plotted. 
 """
 
 DATASET_ID = 1
@@ -44,11 +46,11 @@ def run_example():
     import matplotlib.pyplot as plt
     plt.figure()
     plt.subplot(2, 1, 1)
-    plt.plot(data[4][:, 0], data[4][:, 1])
+    plt.plot(data[4]['relativeTime'], data[4]['current'])
     plt.ylabel('Current (A)')
 
     plt.subplot(2, 1, 2)
-    plt.plot(data[4][:, 0], data[4][:, 2])
+    plt.plot(data[4]['relativeTime'], data[4]['voltage'])
     plt.ylabel('Voltage (V)')
     plt.xlabel('Time (s)')
     plt.title('Run 4')
@@ -57,7 +59,7 @@ def run_example():
     indices = [i for i, x in enumerate(desc['runs']) if 'reference discharge' in x['desc'] and 'rest' not in x['desc']]
     plt.figure()
     for i in indices:
-        plt.plot(data[i][:, 0], data[i][:, 2], label=f"Run {i}")
+        plt.plot(data[i]['relativeTime'], data[i]['voltage'], label=f"Run {i}")
     plt.title('Reference discharge profiles')
     plt.xlabel('Time (s)')
     plt.ylabel('Voltage (V)')

@@ -95,6 +95,9 @@ def run_example():
 
     # Notice that the prediction wasn't updated every time step. It takes a bit of time to perform a prediction.
 
+    # Note: You can also get the model from prog_server to work with directly.
+    model = session.get_model()
+
 # This allows the module to be executed directly
 if __name__ == '__main__':
     run_example()

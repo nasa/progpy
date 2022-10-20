@@ -68,7 +68,8 @@ class ThrownObject(LinearModel):
     C = np.array([[1, 0]])
     F = None # Will override method
 
-    # The Default parameters. Overwritten by passing parameters dictionary into constructor
+    # The Default parameters. 
+    # Overwritten by passing parameters dictionary into constructor
     default_parameters = {
         'thrower_height': 1.83,  # m
         'throwing_speed': 40,  # m/s
@@ -77,12 +78,15 @@ class ThrownObject(LinearModel):
 
     def initialize(self, u=None, z=None):
         return self.StateContainer({
-            'x': self.parameters['thrower_height'],  # Thrown, so initial altitude is height of thrower
-            'v': self.parameters['throwing_speed']  # Velocity at which the ball is thrown - this guy is a professional baseball pitcher
+            'x': self.parameters['thrower_height'],
+            # Thrown, so initial altitude is height of thrower
+            'v': self.parameters['throwing_speed']
+            # Velocity at which the ball is thrown - this guy is a professional baseball pitcher
             })
     
     # This is actually optional. Leaving thresholds_met empty will use the event state to define thresholds.
-    #  Threshold = Event State == 0. However, this implementation is more efficient, so we included it
+    #  Threshold is met when Event State == 0. 
+    # However, this implementation is more efficient, so we included it
     def threshold_met(self, x):
         return {
             'falling': x['v'] < 0,
@@ -107,7 +111,8 @@ def run_example():
     kf = KalmanFilter(m, x_guess)
 
     # Step 3: Run the Kalman Filter State Estimator
-    # Here we're using simulated data from the thrown_object. In a real application you would be using sensor data from the system
+    # Here we're using simulated data from the thrown_object. 
+    # In a real application you would be using sensor data from the system
     dt = 0.01  # Time step (s)
     print_freq = 50  # Print every print_freq'th iteration
     x = m.initialize()

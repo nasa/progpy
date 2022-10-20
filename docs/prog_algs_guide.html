@@ -32,6 +32,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="prog_server Guide" href="prog_server_guide.html" />
@@ -459,15 +460,15 @@ title="Print to PDF"
   <section id="prog-algs-guide">
 <h1>prog_algs Guide<a class="headerlink" href="#prog-algs-guide" title="Permalink to this headline">#</a></h1>
 <iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_algs&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/prog_algs/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
-<p>The Prognostic Algorithms Package is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code>) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.</p>
+<p>The Prognostic Algorithms Package is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from <a class="reference internal" href="prog_models_guide.html#prog-models-guide"><span class="std std-ref">prog_models</span></a>) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.</p>
 <section id="installing">
 <h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">#</a></h2>
-<p>The latest stable release of <cite>prog_algs</cite> is hosted on PyPi. For most users (unless you want to contribute to the development of <cite>prog_algs</cite>), this version will be adequate. To install from the command line, use the following command:</p>
+<p>The latest stable release of prog_algs is hosted on PyPi. For most users (unless you want to contribute to the development of <cite>prog_algs</cite>), this version will be adequate. To install from the command line, use the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install prog_algs
 </pre></div>
 </div>
 <details class="summary-installing-pre-release-versions-with-github">
-<summary>Installing Pre-Release Versions with GitHub</summary><p>Users who would like to contribute to <cite>prog_algs</cite> or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/prog_algs">prog_algs GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
+<summary>Installing Pre-Release Versions with GitHub</summary><p>Users who would like to contribute to prog_algs or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/prog_algs">prog_algs GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/nasa/prog_algs
 <span class="gp">$ </span><span class="nb">cd</span> prog_algs
 <span class="gp">$ </span>git checkout dev
@@ -501,6 +502,26 @@ title="Print to PDF"
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/793440e96b47eee071c6169a58aacb54/basic_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example</span></code></a></dt><dd><span class="target" id="module-basic_example"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model.</p>
 <dl class="simple">
+<dt>Method: An instance of the ThrownObject model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
+<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
+<li><p>Prediction of future states (with uncertainty) and the times at which the event threshold will be reached</p></li>
+<li><p>Metrics tools are used to further investigate the results of prediction</p></li>
+</ol>
+</dd>
+<dt>Results:</dt><dd><ol class="lowerroman simple">
+<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
+<li><p>Time event is predicted to occur (with uncertainty)</p></li>
+<li><p>Various prediction metrics</p></li>
+<li><p>Figures illustrating results</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/134152f7c47b3c3fa2378dcb3ac443d7/basic_example_battery.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example_battery</span></code></a></dt><dd><span class="target" id="module-basic_example_battery"></span><p>This example extends the “basic example” to perform a state estimation and prediction with uncertainty given a more complicated. Models, state estimators, and predictors can be switched out. See documentation nasa.github.io/progpy for description of options</p>
+<dl class="simple">
 <dt>Method: An instance of the BatteryCircuit model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
 <li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
 <li><p>Prediction of future states (with uncertainty) and the times at which the event threshold will be reached</p></li>
@@ -518,37 +539,6 @@ title="Print to PDF"
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/445cf7bb5872bc3fb4468614273223ce/thrown_object_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.thrown_object_example</span></code></a></dt><dd><span class="target" id="module-thrown_object_example"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model. Unlike basic_example, this example uses a model with multiple events (ThrownObject). Prediction only ends when all events are met</p>
-<dl class="simple">
-<dt>Method: An instance of the Thrown Object model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
-<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
-<li><p>Prediction of future states (with uncertainty) and the times at which the event thresholds will be reached</p></li>
-</ol>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time event is predicted to occur (with uncertainty)</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
-</dl>
-</li>
-</ul>
-<p><br></p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/b0ce3603387e7aa9d47150b177e46978/utpredictor.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.utpredictor</span></code></a></dt><dd><span class="target" id="module-utpredictor"></span><p>An example using the UnscentedTransformPredictor class to predict the degredation of a battery.</p>
-</dd>
-</dl>
-</li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/234783871ee7e6c239e46a53e2e5a1cb/benchmarking_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.benchmarking_example</span></code></a></dt><dd><span class="target" id="module-benchmarking_example"></span><p>This example performs benchmarking for a state estimation and prediction with uncertainty given a Prognostics Model. The process and benchmarking analysis are run for various sample sizes.</p>
 <dl class="simple">
@@ -565,9 +555,6 @@ Metrics are calculated and displayed for each run.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/58f5f0c9dc87a40dac5420b5ba373eaf/eol_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.eol_event</span></code></a></dt><dd><span class="target" id="module-eol_event"></span><p>This example demonstrates a use case where someone wants to predict the first event (i.e., End Of Life (EOL)) of a system. Many system models have multiple events that can occur. In some prognostics applications, users are not interested in predicting a specific event, and are instead interested in when the first event occurs, regardless of the event. This example demonstrates how to predict the first event of a system.</p>
 <p>Method: An instance of ThrownObject is used for this example. In this case it is trivial because the event ‘falling’ will always occur before ‘impact’, but for some other models that might not be true. The ThrownObject class is subclassed to add a new event ‘EOL’ which occurs if any other event occurs. The new model is then instantiated and used for prognostics like in basic_example. Prediction specifically specifies EOL as the event to be predicted.</p>
@@ -582,9 +569,6 @@ Metrics are calculated and displayed for each run.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/341975e0d32cbd13267902b1f2dc291d/horizon.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.horizon</span></code></a></dt><dd><span class="target" id="module-horizon"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model with a specific prediction horizon. This prediction horizon marks the end of the “time of interest” for the prediction. Often this represents the end of a mission or sufficiently in the future where the user is unconcerned with the events</p>
 <dl class="simple">
@@ -602,18 +586,12 @@ Metrics are calculated and displayed for each run.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/95185cf727a21ad753717b8332bb063f/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></dt><dd><span class="target" id="module-kalman_filter"></span><p>This example demonstrates use of the Kalman Filter State Estimator with a LinearModel.</p>
 <p>First, a linear model is defined. Then the KF State estimator is used with fake data to estimate state.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/b997c950df7e2f695c19319712091ba3/measurement_eqn_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.measurement_eqn_example</span></code></a></dt><dd><span class="target" id="module-measurement_eqn_example"></span><p>This example performs a state estimation with uncertainty given a Prognostics Model for a system in which not all output values are measured.</p>
 <dl class="simple">
@@ -628,18 +606,12 @@ Metrics are calculated and displayed for each run.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/05795c561b0fb31137ef5fd753641074/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd><span class="target" id="module-new_state_estimator_example"></span><p>An example illustrating the creation of a new state estimator.</p>
 <p>In this example a basic state estimator is constructed by subclassing the StateEstimator class. This StateEstimator is then demonstrated with a ThrownObject model</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></dt><dd><span class="target" id="module-playback"></span><p>This example performs state estimation and prediction using playback data.</p>
 <dl class="simple">
@@ -659,26 +631,16 @@ Metrics are calculated and displayed for each run.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/8e88b82d4689eed3ccf37d5a3def248e/predict_specific_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.predict_specific_event</span></code></a></dt><dd><span class="target" id="module-predict_specific_event"></span><p>In this example we are using the UTPredictor to predict a specific event, in this case impact. This will then ignore the other events which are not of interest.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/4020f035b915e34fe49e1d40b9aff42b/particle_filter_battery_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.particle_filter_battery_example</span></code></a></dt><dd><span class="target" id="module-particle_filter_battery_example"></span><p>In this example the BatteryElectroChemEOD model is used with a particle filter to estimate the state of the battery</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/0c3148e089dc17af5515eff7ec298a11/tutorial.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">tutorial</span></code></a></p></li>
 </ul>
 </section>
 <section id="extending">

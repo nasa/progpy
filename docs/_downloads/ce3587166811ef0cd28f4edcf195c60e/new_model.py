@@ -2,7 +2,9 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 """
-Example defining and testing a new model. 
+Example defining and using a new prognostics model.  
+
+In this example a simple model of an object thrown upward into the air is defined. That model is then used in simulation under different conditions and the results are displayed in different formats.
 """
 
 from prog_models import PrognosticsModel
@@ -28,18 +30,17 @@ class ThrownObject(PrognosticsModel):
 
     # The Default parameters. Overwritten by passing parameters dictionary into constructor
     default_parameters = {
-        'thrower_height': 1.83,  # m
-        'throwing_speed': 40,  # m/s
+        'x0': {  # Initial State
+            'x': 1.83,  # Height of thrower (m)
+            'v': 40  # Velocity at which the ball is thrown (m/s)
+        },
         'g': -9.81,  # Acceleration due to gravity in m/s^2
         'process_noise': 0.0  # amount of noise in each step
     }
 
-    def initialize(self, u, z):
-        self.max_x = 0.0
-        return self.StateContainer({
-            'x': self.parameters['thrower_height'],  # Thrown, so initial altitude is height of thrower
-            'v': self.parameters['throwing_speed']  # Velocity at which the ball is thrown - this guy is a professional baseball pitcher
-            })
+    def initialize(self, *args, **kwargs):
+        self.max_x = 0  # Set maximum height
+        return super().initialize(*args, **kwargs)
     
     def dx(self, x, u):
         return self.StateContainer({'x': x['v'],
@@ -59,7 +60,7 @@ class ThrownObject(PrognosticsModel):
     def event_state(self, x): 
         self.max_x = max(self.max_x, x['x'])  # Maximum altitude
         return {
-            'falling': max(x['v']/self.parameters['throwing_speed'],0),  # Throwing speed is max speed
+            'falling': max(x['v']/self.parameters['x0']['v'],0),  # Throwing speed is max speed
             'impact': max(x['x']/self.max_x,0)  # 1 until falling begins, then it's fraction of height
         }
 

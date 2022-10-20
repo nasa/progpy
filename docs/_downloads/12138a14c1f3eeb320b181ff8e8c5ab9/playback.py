@@ -16,6 +16,9 @@ Results:
     iv) Figures illustrating results
 """
 
+import csv
+import numpy as np
+
 from prog_models.models import BatteryCircuit as Battery
 # VVV Uncomment this to use Electro Chemistry Model VVV
 # from prog_models.models import BatteryElectroChem as Battery
@@ -31,10 +34,6 @@ from prog_algs.predictors import UnscentedTransformPredictor as Predictor
 # from prog_algs.predictors import MonteCarlo as Predictor
 
 from prog_algs.uncertain_data.multivariate_normal_dist import MultivariateNormalDist
-
-import csv
-import matplotlib.pyplot as plt
-import numpy as np
 
 # Constants
 NUM_SAMPLES = 20

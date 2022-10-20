@@ -32,6 +32,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Developers Guide &amp; Project Plan" href="dev_guide.html" />
@@ -378,7 +379,7 @@ title="Print to PDF"
   <section id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">#</a></h1>
 <dl class="glossary simple">
-<dt id="term-event">event<a class="headerlink" href="#term-event" title="Permalink to this term">#</a></dt><dd><p>Something that can be predicted (e.g., system failure). An event has either occurred or not.</p>
+<dt id="term-event">event<a class="headerlink" href="#term-event" title="Permalink to this term">#</a></dt><dd><p>Something that can be predicted (e.g., system failure). An event has either occurred or not. See also: <a class="reference internal" href="#term-threshold"><span class="xref std std-term">threshold</span></a></p>
 </dd>
 <dt id="term-event-state">event state<a class="headerlink" href="#term-event-state" title="Permalink to this term">#</a></dt><dd><p>Progress towards <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> occurring. Defined as a number where an event state of 0 indicates the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> has occurred and 1 indicates no progress towards the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> (i.e., fully healthy operation for a failure event). For a gradually occurring <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> (e.g., discharge) the number will progress from 1 to 0 as the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> nears. In prognostics, event state is frequently called “State of Health”.</p>
 </dd>
@@ -405,6 +406,8 @@ title="Print to PDF"
 <dt id="term-state-estimator">state estimator<a class="headerlink" href="#term-state-estimator" title="Permalink to this term">#</a></dt><dd><p>An algorithm that is used to estimate the <a class="reference internal" href="#term-state"><span class="xref std std-term">state</span></a> of the system, given measurements and a model, defined in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_algs.state_estimators</span></code> subpackage (e.g., <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.UnscentedKalmanFilter" title="prog_algs.state_estimators.UnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.UnscentedKalmanFilter</span></code></a>).</p>
 </dd>
 <dt id="term-surrogate">surrogate<a class="headerlink" href="#term-surrogate" title="Permalink to this term">#</a></dt><dd><p>A model that approximates the behavior of another model. Often used to generate a faster version of a model (e.g., for resource-constrained applications or to be used in optimization) or to test a data model. Generated using <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.generate_surrogate" title="prog_models.PrognosticsModel.generate_surrogate"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.generate_surrogate()</span></code></a> method.</p>
+</dd>
+<dt id="term-threshold">threshold<a class="headerlink" href="#term-threshold" title="Permalink to this term">#</a></dt><dd><p>The conditions under which an <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> is considered to have occurred.</p>
 </dd>
 </dl>
 </section>

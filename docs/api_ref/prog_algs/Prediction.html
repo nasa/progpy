@@ -32,6 +32,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Predictors" href="Predictor.html" />
@@ -462,26 +463,27 @@ title="Print to PDF"
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.Prediction.monotonicity">
 <span class="sig-name descname"><span class="pre">monotonicity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#prog_algs.predictors.Prediction.monotonicity" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate monotonicty for a single prediction.
-Given a single prediction, for each event: go through all predicted states and compare those to the next one.
+<dd><dl>
+<dt>Calculate monotonicty for a single prediction.</dt><dd><p>Given a single prediction, for each event: go through all predicted states and compare those to the next one.
 Calculates monotonicity for each event key using its associated mean value in UncertainData.</p>
-<p>monotonoicity = <a href="#id1"><span class="problematic" id="id2">|Σsign(i+1 - i) / N-1|</span></a>
-Where N is number of measurements and sign indicates sign of calculation.
-Coble, J., et. al. (2021). Identifying Optimal Prognostic Parameters from Data: A Genetic Algorithms Approach. Annual Conference of the PHM Society.
-<a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a>
-Baptistia, M., et. al. (2022). Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306.
-<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>None</strong> – </p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Value between [0, 1] indicating monotonicity of a given event for the Prediction.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>)</p>
+<p>:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>monotonoicity = | Sigma</p>
 </dd>
 </dl>
+<p>rac{sign(i+1 - i)}{N-1}|`</p>
+<blockquote>
+<div><p>Where N is number of measurements and sign indicates sign of calculation.</p>
+<p>Coble, J., et. al. (2021). Identifying Optimal Prognostic Parameters from D
+ata: A Genetic Algorithms Approach. Annual Conference of the PHM Society.
+<a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a></p>
+<p>Baptistia, M., et. al. (2022). Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306.
+<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a></p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>None</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict (str, float): Value between [0, 1] indicating monotonicity of a given event for the Prediction.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -555,26 +557,27 @@ recommended.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.UnweightedSamplesPrediction.monotonicity">
 <span class="sig-name descname"><span class="pre">monotonicity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#prog_algs.predictors.UnweightedSamplesPrediction.monotonicity" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate monotonicty for a single prediction.
-Given a single prediction, for each event: go through all predicted states and compare those to the next one.
+<dd><dl>
+<dt>Calculate monotonicty for a single prediction.</dt><dd><p>Given a single prediction, for each event: go through all predicted states and compare those to the next one.
 Calculates monotonicity for each event key using its associated mean value in UncertainData.</p>
-<p>monotonoicity = <a href="#id3"><span class="problematic" id="id4">|Σsign(i+1 - i) / N-1|</span></a>
-Where N is number of measurements and sign indicates sign of calculation.
-Coble, J., et. al. (2021). Identifying Optimal Prognostic Parameters from Data: A Genetic Algorithms Approach. Annual Conference of the PHM Society.
-<a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a>
-Baptistia, M., et. al. (2022). Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306.
-<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>None</strong> – </p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Value between [0, 1] indicating monotonicity of a given event for the Prediction.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>)</p>
+<p>:math:<a href="#id3"><span class="problematic" id="id4">`</span></a>monotonoicity = | Sigma</p>
 </dd>
 </dl>
+<p>rac{sign(i+1 - i)}{N-1}|`</p>
+<blockquote>
+<div><p>Where N is number of measurements and sign indicates sign of calculation.</p>
+<p>Coble, J., et. al. (2021). Identifying Optimal Prognostic Parameters from D
+ata: A Genetic Algorithms Approach. Annual Conference of the PHM Society.
+<a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a></p>
+<p>Baptistia, M., et. al. (2022). Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306.
+<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a></p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>None</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict (str, float): Value between [0, 1] indicating monotonicity of a given event for the Prediction.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">

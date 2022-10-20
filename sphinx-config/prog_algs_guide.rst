@@ -8,12 +8,12 @@ prog_algs Guide
 .. image:: https://mybinder.org/badge_logo.svg
  :target: https://mybinder.org/v2/gh/nasa/prog_algs/master?labpath=tutorial.ipynb
 
-The Prognostic Algorithms Package is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from :py:mod:`prog_models`) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.
+The Prognostic Algorithms Package is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from :ref:`prog_models<prog_models Guide>`) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.
 
 Installing
 -----------------------
 
-The latest stable release of `prog_algs` is hosted on PyPi. For most users (unless you want to contribute to the development of `prog_algs`), this version will be adequate. To install from the command line, use the following command:
+The latest stable release of prog_algs is hosted on PyPi. For most users (unless you want to contribute to the development of `prog_algs`), this version will be adequate. To install from the command line, use the following command:
 
 .. code-block:: console
 
@@ -21,7 +21,7 @@ The latest stable release of `prog_algs` is hosted on PyPi. For most users (unle
 
 .. collapse:: Installing Pre-Release Versions with GitHub
 
-    Users who would like to contribute to `prog_algs` or would like to use pre-release features can do so using the `prog_algs GitHub repo <https://github.com/nasa/prog_algs>`__. This isn't recommended for most users as this version may be unstable. To do this, use the following commands:
+    Users who would like to contribute to prog_algs or would like to use pre-release features can do so using the `prog_algs GitHub repo <https://github.com/nasa/prog_algs>`__. This isn't recommended for most users as this version may be unstable. To do this, use the following commands:
 
     .. code-block:: console
 
@@ -56,66 +56,38 @@ Use
 
 The best way to learn how to use `prog_algs` is through the `tutorial <https://mybinder.org/v2/gh/nasa/prog_algs/master?labpath=tutorial.ipynb>`__. There are also a number of examples which show different aspects of the package, summarized and linked below:
 
-.. |br| raw:: html
-
-     <br>
-
 * :download:`examples.basic_example <../../prog_algs/examples/basic_example.py>`
     .. automodule:: basic_example
-
-|br|
 
 * :download:`examples.basic_example_battery <../../prog_algs/examples/basic_example_battery.py>`
     .. automodule:: basic_example_battery
 
-|br|
-
 * :download:`examples.benchmarking_example <../../prog_algs/examples/benchmarking_example.py>`
     .. automodule:: benchmarking_example
-
-|br|
 
 * :download:`examples.eol_event <../../prog_algs/examples/eol_event.py>`
     .. automodule:: eol_event
 
-|br|
-
 * :download:`examples.horizon <../../prog_algs/examples/horizon.py>`
     .. automodule:: horizon
-
-|br|
 
 * :download:`examples.kalman_filter <../../prog_algs/examples/kalman_filter.py>`
     .. automodule:: kalman_filter
 
-|br|
-
 * :download:`examples.measurement_eqn_example <../../prog_algs/examples/measurement_eqn_example.py>`
     .. automodule:: measurement_eqn_example
-
-|br|
 
 * :download:`examples.new_state_estimator_example <../../prog_algs/examples/new_state_estimator_example.py>`
     .. automodule:: new_state_estimator_example
 
-|br|
-
 * :download:`examples.playback <../../prog_algs/examples/playback.py>`
     .. automodule:: playback
-
-|br|
 
 * :download:`examples.predict_specific_event <../../prog_algs/examples/predict_specific_event.py>`
     .. automodule:: predict_specific_event
 
-|br|
-
 * :download:`examples.particle_filter_battery_example <../../prog_algs/examples/particle_filter_battery_example.py>`
     .. automodule:: particle_filter_battery_example
-
-|br|
-
-* :download:`tutorial <../../prog_algs/tutorial.ipynb>`
 
 Extending
 ---------

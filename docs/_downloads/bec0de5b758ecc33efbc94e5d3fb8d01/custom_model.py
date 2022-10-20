@@ -4,11 +4,13 @@
 """
 Example building a custom model with LSTMStateTransitionModel.
 
-For most cases, you will be able to use the standard LSTMStateTransitionModel.from_data class with configuration (see the LSTMStateTransitionModel class for more details). However, sometimes you might want to add custom layers, or other complex components. In that case, you will build a custom model and pass it into LSTMStateTransitionModel.
+.. collapse:: More details
 
-In this example, we generate fake data using the BatteryElectroChemEOD model. This is a case where we're generating a surrogate model from the physics-based model. For cases where you're generating a model from data (e.g., collected from a testbed or a real-world environment), you'll replace that generated data with your own. 
+    For most cases, you will be able to use the standard LSTMStateTransitionModel.from_data class with configuration (see the LSTMStateTransitionModel class for more details). However, sometimes you might want to add custom layers, or other complex components. In that case, you will build a custom model and pass it into LSTMStateTransitionModel.
 
-We build and fit a custom model using keras.layers. Finally, we compare performance to the standard format and the original model.
+    In this example, we generate fake data using the BatteryElectroChemEOD model. This is a case where we're generating a surrogate model from the physics-based model. For cases where you're generating a model from data (e.g., collected from a testbed or a real-world environment), you'll replace that generated data with your own. 
+
+    We build and fit a custom model using keras.layers. Finally, we compare performance to the standard format and the original model.
 """
 
 import matplotlib.pyplot as plt
@@ -25,7 +27,6 @@ def run_example():
     future_loading_eqns = [lambda t, x=None: batt.InputContainer({'i': 1+1.5*load}) for load in range(6)]
     # Generate data with different loading and step sizes
     # Adding the step size as an element of the output
-    training_data = []
     input_data = []
     output_data = []
     for i in range(9):
@@ -34,7 +35,7 @@ def run_example():
             d = batt.simulate_to_threshold(loading_eqn, save_freq=dt, dt=dt) 
             u = np.array([np.hstack((u_i.matrix[:][0].T, [dt])) for u_i in d.inputs], dtype=float)
             z = d.outputs
-            training_data.append((u, z))
+
             input_data.append(u)
             output_data.append(z)
 
@@ -47,14 +48,15 @@ def run_example():
         epochs=30, 
         units=64,  # Additional units given the increased complexity of the system
         input_keys = ['i', 'dt'],
-        output_keys = ['t', 'v'])   
+        output_keys = ['t', 'v'])
+    m_batt.plot_history() 
 
     # Step 3: Build custom model
     print('Building custom model...')
-    (u_all, z_all) = LSTMStateTransitionModel.pre_process_data(training_data, window=12)
+    (u_all, z_all, _, _) = LSTMStateTransitionModel.pre_process_data(input_data, output_data, window=12)
     
     # Normalize
-    n_inputs = len(training_data[0][0][0])
+    n_inputs = len(input_data[0][0])
     u_mean = np.mean(u_all[:,0,:n_inputs], axis=0)
     u_std = np.std(u_all[:,0,:n_inputs], axis=0)
     # If there's no variation- dont normalize 
@@ -84,14 +86,15 @@ def run_example():
     x = layers.Dense(z_all.shape[1] if z_all.ndim == 2 else 1)(x)
     model = keras.Model(inputs, x)
     model.compile(optimizer="rmsprop", loss="mse", metrics=["mae"])
-    model.fit(u_all, z_all, epochs=30, callbacks = callbacks, validation_split = 0.1)
+    history = model.fit(u_all, z_all, epochs=30, callbacks = callbacks, validation_split = 0.1)
 
     # Step 4: Build LSTMStateTransitionModel
     m_custom = LSTMStateTransitionModel(model, 
         normalization=normalization, 
         input_keys = ['i', 'dt'],
-        output_keys = ['t', 'v']
+        output_keys = ['t', 'v'], history=history  # Provide history so plot_history will work
     )
+    m_custom.plot_history()
 
     # Step 5: Simulate
     print('Simulating...')

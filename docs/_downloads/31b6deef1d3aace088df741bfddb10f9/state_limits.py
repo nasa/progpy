@@ -3,6 +3,8 @@
 
 """
 Example demonstrating when and how to identify model state limits. 
+
+In this example, state limits are defined for the ThrownObject Model. These are limits on the range of each state. The use of this feature is then demonstrated.
 """
 
 from prog_models.models.thrown_object import ThrownObject

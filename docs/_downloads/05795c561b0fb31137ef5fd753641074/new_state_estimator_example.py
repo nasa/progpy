@@ -6,9 +6,11 @@ An example illustrating the creation of a new state estimator.
 In this example a basic state estimator is constructed by subclassing the StateEstimator class. This StateEstimator is then demonstrated with a ThrownObject model
 """
 
+import random
+
 from prog_algs.state_estimators import StateEstimator
 from prog_algs.uncertain_data import ScalarData
-import random
+
 
 class BlindlyStumbleEstimator(StateEstimator):
     """

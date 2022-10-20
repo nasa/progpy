@@ -2,7 +2,7 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 """
-Example benchmarking the computational efficiency of models. 
+Example benchmarking the computational efficiency of models.
 """
 
 from timeit import timeit

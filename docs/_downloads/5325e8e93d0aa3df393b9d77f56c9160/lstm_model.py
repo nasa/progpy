@@ -4,9 +4,11 @@
 """
 Example building a LSTMStateTransitionModel from data. This is a simple example of how to use the LSTMStateTransitionModel class.
 
-In this example, we generate fake data using the ThrownObject model. This is a case where we're generating a surrogate model from the physics-based model. For cases where you're generating a model from data (e.g., collected from a testbed or a real-world environment), you'll replace that generated data with your own. We then use the generated model and compare to the original model.
+.. collapse:: More details
 
-Finally, we repeat the exercise with data from the more complex BatteryElectroChemEOD model.
+    In this example, we generate fake data using the ThrownObject model. This is a case where we're generating a surrogate model from the physics-based model. For cases where you're generating a model from data (e.g., collected from a testbed or a real-world environment), you'll replace that generated data with your own. We then use the generated model and compare to the original model.
+
+    Finally, we repeat the exercise with data from the more complex BatteryElectroChemEOD model.
 """
 
 import matplotlib.pyplot as plt
@@ -43,8 +45,14 @@ def run_example():
         inputs = [data.inputs],
         outputs = [data.outputs],  
         window=4, 
-        epochs=30,
-        output_keys = ['x'])    
+        epochs=30,  # Maximum number of epochs, may stop earlier if early stopping enabled
+        output_keys = ['x'])
+
+    # We can see the training history
+    # Should show the model progressively getting better (i.e., the loss going down).
+    # If val_loss starts going up again, then we may be overtraining
+    m2.plot_history()
+    plt.show()
     
     # Step 3: Use model to simulate_to time of threshold
     print('Simulating with generated model...')
@@ -104,7 +112,7 @@ def run_example():
         window=4, 
         epochs=30, 
         input_keys = ['dt'],
-        output_keys = ['x'])  
+        output_keys = ['x']) 
     # Note, since we're generating from a model, we could also have done this:
     # m3 = LSTMStateTransitionModel.from_model(
     #     m,
@@ -112,6 +120,10 @@ def run_example():
     #     dt = [TIMESTEP, TIMESTEP/2, TIMESTEP/4, TIMESTEP*2, TIMESTEP*4],
     #     window=4, 
     #     epochs=30)  
+
+    # Take a look at the training history
+    m3.plot_history()
+    plt.show() 
 
     # Step 4: Simulate with model
     t_counter = 0
@@ -139,6 +151,7 @@ def run_example():
     # Example 3- More complicated system
     # Here we will create a model for a more complicated system
     # For this example we will use the BatteryElectroChemEOD model
+    # We also include the event state (SOC)
     # -----------------------------------------------------
     print('\n------------------------------------------\nExample 3...')
     print('Generating data...')
@@ -148,23 +161,36 @@ def run_example():
     # Adding the step size as an element of the output
     input_data = []
     output_data = []
+    es_data = []
+    t_met_data = []
     for i in range(9):
         dt = i/3+0.25
         for loading_eqn in future_loading_eqns:
             d = batt.simulate_to_threshold(loading_eqn, save_freq=dt, dt=dt) 
             input_data.append(np.array([np.hstack((u_i.matrix[:][0].T, [dt])) for u_i in d.inputs], dtype=float))
             output_data.append(d.outputs)
+            es_data.append(d.event_states)
+            t_met = [[False]for _ in d.times]
+            t_met[-1][0] = True  # Threshold has been met at the last timestep
+            t_met_data.append(t_met)
   
     # Step 2: Generate Model
     print('Building model...') 
     m_batt = LSTMStateTransitionModel.from_data(
         inputs = input_data,
         outputs = output_data,
+        event_states = es_data,
+        t_met = t_met_data,
         window=12, 
-        epochs=3, 
+        epochs=10, 
         units=64,  # Additional units given the increased complexity of the system
         input_keys = ['i', 'dt'],
-        output_keys = ['t', 'v']) 
+        output_keys = ['t', 'v'],
+        event_keys=['EOD']) 
+
+    # Take a look at the training history.
+    m_batt.plot_history()
+    plt.show()
 
     # Step 3: Simulate with model
     t_counter = 0
@@ -185,12 +211,14 @@ def run_example():
     # Using a dt not used in training will demonstrate the model's 
     # ability to handle different timesteps not part of training set
     data = batt.simulate_to_threshold(future_loading, dt=1, save_freq=1)
-    results = m_batt.simulate_to(data.times[-1], future_loading2, dt=1, save_freq=1)
+    results = m_batt.simulate_to_threshold(future_loading2, dt=1, save_freq=1)
 
     # Step 5: Compare Results
     print('Comparing results...')
     data.outputs.plot(title='original model', compact=False)
     results.outputs.plot(title='generated model', compact=False)
+    data.event_states.plot(title='original model', compact=False)
+    results.event_states.plot(title='generated model', compact=False)
     plt.show()
 
     # This last example isn't a perfect fit, but it matches the behavior pretty well

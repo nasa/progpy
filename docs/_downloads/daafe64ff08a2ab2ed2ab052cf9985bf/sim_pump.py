@@ -6,7 +6,8 @@ Example of a centrifugal pump being simulated until threshold is met.
 """
 
 from prog_models.models import CentrifugalPump
-
+import matplotlib.pyplot as plt  
+from prog_models.sim_result import SimResult
 def run_example(): 
     # Step 1: Setup Pump
     pump = CentrifugalPump(process_noise= 0)
@@ -43,16 +44,17 @@ def run_example():
     simulated_results = pump.simulate_to_threshold(future_loading, first_output, **config)
 
     # Step 4: Plot Results
-    from prog_models.visualize import plot_timeseries
-    plot_timeseries(simulated_results.times, simulated_results.inputs, options={'compact': False, 'title': 'Inputs',
-                                                    'xlabel': 'time', 'ylabel':{lbl: lbl for lbl in pump.inputs}})
-    plot_timeseries(simulated_results.times, simulated_results.states, options={'compact': False, 'title': 'States', 'xlabel': 'time', 'ylabel': ''})
-    plot_timeseries(simulated_results.times, simulated_results.outputs, options={'compact': False, 'title': 'Outputs', 'xlabel': 'time', 'ylabel': ''})
-    plot_timeseries(simulated_results.times, simulated_results.event_states, options={'compact': False, 'title': 'Events', 'xlabel': 'time', 'ylabel': ''})
-    thresholds_met = [pump.threshold_met(x) for x in simulated_results.states]
-    plot_timeseries(simulated_results.times, thresholds_met, options={'compact': True, 'title': 'Events', 'xlabel': 'time', 'ylabel': ''}, legend = {'display': True})
+    simulated_results.inputs.plot(compact = False, title = 'Inputs', xlabel = 'time', ylabel = {lbl: lbl for lbl in pump.inputs})
+    simulated_results.outputs.plot(compact = False, title = 'Outputs', xlabel = 'time', ylabel = '')
+    simulated_results.states.plot(compact = False, title = 'States', xlabel = 'time', ylabel = '')
+    simulated_results.event_states.plot(compact = False, title = 'Events', xlabel = 'time', ylabel = '')
 
-    import matplotlib.pyplot as plt    
+    thresholds_met = [pump.threshold_met(x) for x in simulated_results.states]
+    thresholds_met = SimResult(simulated_results.times, thresholds_met)
+    thresholds_met.plot(compact = False, title = 'Threshold Met', xlabel = 'time', ylabel = '')
+    
+
+
     plt.show()
 
 # This allows the module to be executed directly 

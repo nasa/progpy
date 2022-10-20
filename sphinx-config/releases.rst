@@ -9,15 +9,33 @@ Updates in V1.4
 
 prog_models
 **************
+* **Data-Driven Models**
+
+  * Created new :py:class:`prog_models.data_models.DataModel` class as interface/superclass for all data-driven models. Data-driven models are interchangeable with physics-based models. DataModels can be trained using data (.:py:meth:`prog_models.data_models.DataModel.from_data`), or an existing model (:py:meth:`prog_models.data_models.DataModel.from_model`)
+  * Introduced new LSTM State Transition DataModel. See :download:`examples.lstm_model <../../prog_models/examples/lstm_model.py>`, :download:`examples.full_lstm_model <../../prog_models/examples/full_lstm_model.py>`, and :download:`examples.custom_model <../../prog_models/examples/custom_model.py>` for examples of use
+  * DMD model (:py:class:`prog_models.data_models.DMDModel`) updated to new data-driven model interface. Can now be created from data as well as an existing model
+  * Added ability to integrate training noise to data for DMD Model (:py:class:`prog_models.data_models.DMDModel`)
+
+* **New Model**: Single-Phase DC Motor (:py:class:`prog_models.models.DCMotorSP`)
+* Added the ability to select integration method when simulation. Current options are Euler and RK4
+* New feature allowing serialization of model parameters as JSON. See :py:meth:`prog_models.PrognosticsModel.to_json`, :py:meth:`prog_models.PrognosticsModel.from_json`, and serialization example (:download:`examples.serialization <../../prog_models/examples/serialization.py>`)
+* Added automatic step size feature in simulation. When enabled, step size will adapt to meet the exact save_pts and save_freq. Step size range can also be bounded
+* New Example Model: Simple Paris' Law (:py:class:`prog_models.models.ParisLawCrackGrowth`)
+* Added ability to set bounds when estimating parameters (See :py:meth:`prog_models.PrognosticsModel.estimate_params`)
+* Initialize method is now optional
+* Various bug fixes and performance improvements
 
 prog_algs
 **********
+* Added new :py:class:`prog_algs.predictors.ToEPredictionProfile` Metric: Monotonicity. See :py:func:`prog_algs.predictors.ToEPredictionProfile.monotonicity`
+* Updated to support prog_models v1.4
+* Various bug fixes and performance improvements
 
-prog_server
-************
-
-prog_client
-************
+prog_server and prog_client
+****************************
+* Added new endpoint (GET /api/v1/session/{id}/model) and client function (:py:meth:`prog_client.Session.get_model`) to get the model from the server.
+* Updated to support prog_models and prog_algs v1.4
+* Various bug fixes and performance improvements
 
 Updates in V1.3
 -----------------------
@@ -48,7 +66,7 @@ prog_models
 prog_algs
 **********
 * **New State Estimator Added** :class:`prog_algs.state_estimators.KalmanFilter`. Works with models derived from :class:`prog_models.LinearModel`. See :download:`examples.kalman_filter <../../prog_algs/examples/kalman_filter.py>`
-* **New Predictor Added** :class:`prog_algs.predictors.UnscentedTransformPredictor`. See :download:`examples.utpredictor <../../prog_algs/examples/utpredictor.py>`
+* **New Predictor Added** :class:`prog_algs.predictors.UnscentedTransformPredictor`.
 * Initial state estimate (x0) can now be passed as `UncertainData` to represent initial state uncertainty. See :download:`examples.playback <../../prog_algs/examples/playback.py>`
 * Added new metrics for :class:`prog_algs.predictors.ToEPredictionProfile`: Prognostics horizon, Cumulative Relative Accuracy (CRA). See :download:`examples.playback <../../prog_algs/examples/playback.py>`
 * Added ability to plot :class:`prog_algs.predictors.ToEPredictionProfile`: profile.plot(). See :download:`examples.playback <../../prog_algs/examples/playback.py>`

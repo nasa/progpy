@@ -32,6 +32,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="prog_algs Guide" href="prog_algs_guide.html" />
@@ -488,15 +489,15 @@ title="Print to PDF"
                 
   <section id="prog-models-guide">
 <h1>prog_models Guide<a class="headerlink" href="#prog-models-guide" title="Permalink to this headline">#</a></h1>
-<iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_models&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><p>The Prognostics Models Package (<code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code>) is a Python framework for defining, building, using, and testing models for prognostics (computation of remaining useful life) of engineering systems. It also provides a set of prognostics models for select components developed within this framework, suitable for use in prognostics applications for these components and can be used in conjunction with the Prognostics Algorithms Library to perform research in prognostics methods.</p>
+<iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_models&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><p>The Prognostics Models Package (prog_models) is a Python framework for defining, building, using, and testing models for prognostics (computation of remaining useful life) of engineering systems. It also provides a set of prognostics models for select components developed within this framework, suitable for use in prognostics applications for these components and can be used in conjunction with the Prognostics Algorithms Package (<a class="reference internal" href="prog_algs_guide.html#prog-algs-guide"><span class="std std-ref">prog_algs</span></a>) to perform research in prognostics methods.</p>
 <section id="installing">
 <h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">#</a></h2>
-<p>The latest stable release of <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code> is hosted on PyPi. For most users (unless you want to contribute to the development of <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code>), the version on PyPi will be adequate. To install from the command line, use the following command:</p>
+<p>The latest stable release of prog_models is hosted on PyPi. For most users (unless you want to contribute to the development of prog_models), the version on PyPi will be adequate. To install from the command line, use the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install prog_models
 </pre></div>
 </div>
 <details class="summary-installing-pre-release-versions">
-<summary>Installing Pre-Release Versions</summary><p>Users who would like to contribute to <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code> or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/prog_models">prog_models GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
+<summary>Installing Pre-Release Versions</summary><p>Users who would like to contribute to prog_models or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/prog_models">prog_models GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
 <blockquote>
 <div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/nasa/prog_models
 <span class="gp">$ </span><span class="nb">cd</span> prog_models
@@ -509,20 +510,18 @@ title="Print to PDF"
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h2>
 <a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/prog_models/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
-<p>The best way to learn how to use <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models</span></code> is through the <a class="reference external" href="https://mybinder.org/v2/gh/nasa/prog_models/master?labpath=tutorial.ipynb">tutorial</a>. There are also a number of examples that show different aspects of the package, summarized and linked in the below sections</p>
+<p>The best way to learn how to use prog_models is through the <a class="reference external" href="https://mybinder.org/v2/gh/nasa/prog_models/master?labpath=tutorial.ipynb">tutorial</a>. There are also a number of examples that show different aspects of the package, summarized and linked in the below sections</p>
 <section id="building-new-models">
 <h3>Building New Models<a class="headerlink" href="#building-new-models" title="Permalink to this headline">#</a></h3>
 <p>New models are constructed by subclassing <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a> as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template <a class="reference download internal" download="" href="_downloads/3c5224a1564fb7226c7f5deb8cdd9f3e/prog_model_template.py"><code class="xref download docutils literal notranslate"><span class="pre">prog_model_template.ProgModelTemplate</span></code></a>, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a> will then work with your new model.</p>
 <p>For simple linear models, users can choose to subclass the simpler <a class="reference internal" href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a> class, as illustrated in the second example. Some methods and algorithms only function on linear models.</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/ce3587166811ef0cd28f4edcf195c60e/new_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_model</span></code></a></dt><dd><span class="target" id="module-new_model"></span><p>Example defining and testing a new model.</p>
+<dt><a class="reference download internal" download="" href="_downloads/ce3587166811ef0cd28f4edcf195c60e/new_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_model</span></code></a></dt><dd><span class="target" id="module-new_model"></span><p>Example defining and using a new prognostics model.</p>
+<p>In this example a simple model of an object thrown upward into the air is defined. That model is then used in simulation under different conditions and the results are displayed in different formats.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/863933ac0f3e7d454c420a01034525b3/linear_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.linear_model</span></code></a></dt><dd><span class="target" id="module-linear_model"></span><p>This example shows the use of the LinearModel class, a subclass of PrognosticsModel for models that can be described as a linear time series.</p>
 <p>The model is used in a simulation, and the state is printed every second</p>
@@ -530,71 +529,76 @@ title="Print to PDF"
 </dl>
 </li>
 </ul>
-<p><br></p>
 <details class="summary-advanced-features-in-model-building">
 <summary>Advanced features in model building</summary><ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/124917318b8aeda76cd308154fd2eaf9/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd><span class="target" id="module-derived_params"></span><p>Example demonstrating ways to use the derived parameters feature for model building.</p>
-</dd>
+<details class="summary-more-details">
+<summary>More details</summary><p>In this example, a derived parameter (i.e., a parameter that is a function of another parameter) are defined for the simple ThrownObject model. These parameters are then calculated whenever their dependency parameters are updates, eliminating the need to calculate each timestep in simulation. The functionality of this feature is then demonstrated.</p>
+</details></dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/31b6deef1d3aace088df741bfddb10f9/state_limits.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.state_limits</span></code></a></dt><dd><span class="target" id="module-state_limits"></span><p>Example demonstrating when and how to identify model state limits.</p>
+<p>In this example, state limits are defined for the ThrownObject Model. These are limits on the range of each state. The use of this feature is then demonstrated.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/1e5a767a460fa630bbb4ed98c93e87bf/events.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.events</span></code></a></dt><dd><span class="target" id="module-events"></span><p>Example further illustrating the concept of ‘events’ which generalizes EOL.</p>
-<p>‘Events’ is the term used to describe something to be predicted.
+<details class="summary-more-details">
+<summary>More details</summary><p>:term:’Events&lt;event&gt;’ is the term used to describe something to be predicted.
 Generally in the PHM community these are referred to as End of Life (EOL).
 However, they can be much more.</p>
 <p>In the prog_models package, events can be anything that needs to be predicted.
 Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds, or any Event of Interest (EOI).</p>
 <p>This example demonstrates how events can be used in your applications.</p>
-</dd>
+</details></dd>
 </dl>
 </li>
 </ul>
-<p><br></p>
 </details></section>
 <section id="data-model-examples">
 <h3>Data Model Examples<a class="headerlink" href="#data-model-examples" title="Permalink to this headline">#</a></h3>
-<p>For data-driven models such as those using neural networks, the <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.from_data" title="prog_models.data_models.DataModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel.from_data()</span></code></a> and <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.from_model" title="prog_models.data_models.DataModel.from_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel.from_model()</span></code></a> methods are used to construct new models. The use of these is demonstrated in the following examples.</p>
+<p>Data-driven models, such as those using neural networks, are defined by subclassing the <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel</span></code></a> class. The <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.from_data" title="prog_models.data_models.DataModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel.from_data()</span></code></a> and <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.from_model" title="prog_models.data_models.DataModel.from_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel.from_model()</span></code></a> methods are used to construct new models. The use of these is demonstrated in the following examples.</p>
 <ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/5325e8e93d0aa3df393b9d77f56c9160/lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.lstm_model</span></code></a></dt><dd><span class="target" id="module-lstm_model"></span><p>Example building a LSTMStateTransitionModel from data. This is a simple example of how to use the LSTMStateTransitionModel class.</p>
-<p>In this example, we generate fake data using the ThrownObject model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own. We then use the generated model and compare to the original model.</p>
+<details class="summary-more-details">
+<summary>More details</summary><p>In this example, we generate fake data using the ThrownObject model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own. We then use the generated model and compare to the original model.</p>
 <p>Finally, we repeat the exercise with data from the more complex BatteryElectroChemEOD model.</p>
-</dd>
+</details></dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/c8c9cf630cf663d27db8c6af85ffab4a/full_lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.full_lstm_model</span></code></a></dt><dd><span class="target" id="module-full_lstm_model"></span><p>Example building a full model with events and thresholds using LSTMStateTransitionModel.</p>
-<p>In this example, we generate fake data using the ThrownObject model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own.</p>
+<details class="summary-more-details">
+<summary>More details</summary><p>In this example, we generate fake data using the ThrownObject model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own.</p>
 <p>We then create a subclass of the LSTMStateTransitionModel, defining the event_state and threshold equations as a function of output. We use the generated model and compare to the original model.</p>
-</dd>
+</details></dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/3e4a5d9b856c25c6b0bf84730581c560/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a></dt><dd><span class="target" id="module-generate_surrogate"></span><p>Example of generating a Dynamic Mode Decomposition surrogate model using the battery model</p>
-</dd>
+<dt><a class="reference download internal" download="" href="_downloads/3e4a5d9b856c25c6b0bf84730581c560/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a></dt><dd><span class="target" id="module-generate_surrogate"></span><p>Example of generating a Dynamic Mode Decomposition surrogate model from a battery model.</p>
+<details class="summary-more-details">
+<summary>More details</summary><p>In this example, an instance of a battery model is created. The DMD DataModel is used to generate a surrogate of this battery model for specific loading schemes. This surrogate can be used in place of the original model, approximating it’s behavior. Frequently, surrogate models run faster than the original, at the cost of some accuracy. The performance of the two models are then compared.</p>
+</details></dd>
 </dl>
 </li>
 </ul>
-<p><br></p>
-</section>
+<details class="summary-advanced-features-in-data-models">
+<summary>Advanced features in data-models</summary><ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/bec0de5b758ecc33efbc94e5d3fb8d01/custom_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.custom_model</span></code></a></dt><dd><span class="target" id="module-custom_model"></span><p>Example building a custom model with LSTMStateTransitionModel.</p>
+<details class="summary-more-details">
+<summary>More details</summary><p>For most cases, you will be able to use the standard LSTMStateTransitionModel.from_data class with configuration (see the LSTMStateTransitionModel class for more details). However, sometimes you might want to add custom layers, or other complex components. In that case, you will build a custom model and pass it into LSTMStateTransitionModel.</p>
+<p>In this example, we generate fake data using the BatteryElectroChemEOD model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own.</p>
+<p>We build and fit a custom model using keras.layers. Finally, we compare performance to the standard format and the original model.</p>
+</details></dd>
+</dl>
+</li>
+</ul>
+</details></section>
 <section id="simulation">
 <h3>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">#</a></h3>
 <p>One of the most basic of functions using a model is simulation. Use of simulation is described in the following examples:</p>
@@ -604,32 +608,22 @@ Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/b9f89cfe4825dfd3e1ac080af9dcf54e/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd><span class="target" id="module-noise"></span><p>Example demonstrating approaches for adding and handling model noise</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/f18535a152570e60fa41f5fba932422a/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd><span class="target" id="module-future_loading"></span><p>Example demonstrating ways to use future loading.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/5b3ab2dda487fa3d828b6cadf3955046/dynamic_step_size.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dynamic_step_size</span></code></a></dt><dd><span class="target" id="module-dynamic_step_size"></span><p>Example demonstrating ways to use the dynamic step size feature. This feature allows users to define a time-step that changes with time or state.</p>
 </dd>
 </dl>
 </li>
 </ul>
-<p><br></p>
 </section>
 <section id="model-specific-examples">
 <h3>Model-Specific Examples<a class="headerlink" href="#model-specific-examples" title="Permalink to this headline">#</a></h3>
@@ -640,40 +634,27 @@ Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/daafe64ff08a2ab2ed2ab052cf9985bf/sim_pump.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_pump</span></code></a></dt><dd><span class="target" id="module-sim_pump"></span><p>Example of a centrifugal pump being simulated until threshold is met.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/2176a8ad664aae49752084c44b205627/sim_valve.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_valve</span></code></a></dt><dd><span class="target" id="module-sim_valve"></span><p>Example of a pneumatic valve being simulated until threshold is met.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/379b8420d5a1e67e122db8eacfc78796/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a></dt><dd><span class="target" id="module-sim_powertrain"></span><p>Example of a powertrain being simulated for a set amount of time.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/6a1ef040b1b1816faac11de7b6788010/visualize.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.visualize</span></code></a></dt><dd><span class="target" id="module-visualize"></span><p>Example demonstrating the Visualization Module.</p>
+<dt><a class="reference download internal" download="" href="_downloads/d693501cc396088cca1fcc5921e9a3ff/sim_dcmotor_singlephase.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_dcmotor_singlephase</span></code></a></dt><dd><span class="target" id="module-sim_dcmotor_singlephase"></span><p>Example of a DC motor being simulated for a set amount of time, using the single-phase dcmotor model.</p>
 </dd>
 </dl>
 </li>
 </ul>
-<p><br></p>
 </section>
 <section id="other">
 <h3>Other<a class="headerlink" href="#other" title="Permalink to this headline">#</a></h3>
@@ -683,33 +664,29 @@ Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/caaed269579b6156f6d8d9d68d3cb5bb/sensitivity.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sensitivity</span></code></a></dt><dd><span class="target" id="module-sensitivity"></span><p>Example performing a sensitivity analysis on a new model.</p>
 </dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/a9f5f00132a2ac6b21c976835cdb0e04/dataset.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dataset</span></code></a></dt><dd><span class="target" id="module-dataset"></span><p>Example downloading and using a NASA prognostics dataset.</p>
-<p>In this example, a battery dataset is downloaded from the NASA PCoE data repository. This dataset is then accessed and plotted.</p>
-</dd>
+<details class="summary-more-details">
+<summary>More details</summary><p>In this example, a battery dataset is downloaded from the NASA PCoE data repository. This dataset is then accessed and plotted.</p>
+</details></dd>
 </dl>
 </li>
-</ul>
-<p><br></p>
-<ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/51fcca34e00ecb68f3c3fcbb6a7c6f66/param_est.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.param_est</span></code></a></dt><dd><span class="target" id="module-param_est"></span><p>Example demonstrating the model parameter estimation feature.</p>
 </dd>
 </dl>
 </li>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/0f1106d2e6e9fdf810b85394e9e69aed/serialization.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.serialization</span></code></a></dt><dd><span class="target" id="module-serialization"></span><p>Example of serializing and de-serializing a battery model using JSON and pickling methods</p>
+</dd>
+</dl>
+</li>
 </ul>
-<p><br></p>
 </section>
 </section>
 <section id="tips">

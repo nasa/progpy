@@ -32,6 +32,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Datasets" href="DataSets.html" />
@@ -670,7 +671,7 @@ Additional configuration parameters from <cite>from_data</cite></p>
 <h3>LSTMStateTransitionModel<a class="headerlink" href="#lstmstatetransitionmodel" title="Permalink to this headline">#</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.data_models.LSTMStateTransitionModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.data_models.</span></span><span class="sig-name descname"><span class="pre">LSTMStateTransitionModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.LSTMStateTransitionModel" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.data_models.</span></span><span class="sig-name descname"><span class="pre">LSTMStateTransitionModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_state_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_met_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.LSTMStateTransitionModel" title="Permalink to this definition">#</a></dt>
 <dd><div class="versionadded">
 <p><span class="versionmodified added">New in version 1.4.0.</span></p>
 </div>
@@ -679,12 +680,18 @@ State transition models map from the <a class="reference internal" href="../../g
 <p>Most users will use the <cite>LSTMStateTransitionModel.from_data</cite> method to create a model, but the model can be created by passing in a model directly into the constructor. The LSTM model in this method maps from [u_t-n+1, z_t-n, …, u_t, z_t-1] to z_t. Past <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> are stored in the <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> internal <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a>. Actual calculation of <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> is performed when :py:func`LSTMStateTransitionModel.output` is called. When using in simulation that may not be until the simulation results are accessed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>model</strong> (<em>keras.Model</em>) – Keras model to use for state transition</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_model</strong> (<em>keras.Model</em>) – If a state model is present, maps from the state_model outputs to model <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a>. Otherwise, maps from model inputs to model <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a></p></li>
+<li><p><strong>state_model</strong> (<em>keras.Model</em><em>, </em><em>optional</em>) – Keras model to use for state transition</p></li>
+<li><p><strong>event_state_model</strong> (<em>keras.Model</em><em>, </em><em>optional</em>) – If a state model is present, maps from the state_model outputs to <a class="reference internal" href="../../glossary.html#term-event-state"><span class="xref std std-term">event state</span></a>. Otherwise, maps from model inputs to <a class="reference internal" href="../../glossary.html#term-event-state"><span class="xref std std-term">event state</span></a></p></li>
+<li><p><strong>t_met_model</strong> (<em>keras.Model</em><em>, </em><em>optional</em>) – If a state model is present, maps from the state_model outputs to if the threshold has been met. Otherwise, maps from model inputs to if the threshold has not been met</p></li>
+</ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of input keys</p></li>
 <li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of output keys</p></li>
+<li><p><strong>event_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of event keys</p></li>
 </ul>
 </dd>
 </dl>
@@ -706,13 +713,15 @@ examples.lstm_model</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.data_models.LSTMStateTransitionModel.from_data">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresh_met</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.LSTMStateTransitionModel.from_data" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_met</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.LSTMStateTransitionModel.from_data" title="Permalink to this definition">#</a></dt>
 <dd><p>Generate a LSTMStateTransitionModel from data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a> data for use in data. Each element is the inputs for a single run of size (n_times, n_inputs)</p></li>
 <li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em>) – list of <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> data for use in data. Each element is the outputs for a single run of size (n_times, n_outputs)</p></li>
+<li><p><strong>event_states</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em><em>, </em><em>optional</em>) – list of <a class="reference internal" href="../../glossary.html#term-event-state"><span class="xref std std-term">event state</span></a> data for use in data. Each element is the event state for a single run of size (n_times, n_events)</p></li>
+<li><p><strong>t_met</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><em>np.array</em><em>]</em><em>, </em><em>optional</em>) – list of <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> met data for use in data. Each element is if the threshold has been met for a single run of size (n_times, n_events)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -720,6 +729,7 @@ examples.lstm_model</p>
 <li><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of historical points used in the model. I.e, if window is 3, the model will map from [t-3, t-2, t-1] to t</p></li>
 <li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of keys to use to identify <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a>. If not supplied u[#] will be used to idenfiy inputs</p></li>
 <li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of keys to use to identify <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a>. If not supplied z[#] will be used to idenfiy outputs</p></li>
+<li><p><strong>event_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – List of keys to use to identify events for <a class="reference internal" href="../../glossary.html#term-event-state"><span class="xref std std-term">event state</span></a> and <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> met. If not supplied event[#] will be used to identify events</p></li>
 <li><p><strong>validation_percentage</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Percentage of data to use for validation, between 0-1</p></li>
 <li><p><strong>epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of epochs (i.e., iterations) to train the model. More epochs means better results (to a point), but more time to train. Note: large numbers of epochs may result in overfitting.</p></li>
 <li><p><strong>layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of LSTM layers to use. More layers can represent more complex systems, but are less efficient. Note: 2 layers is typically enough for most complex systems. Default: 1</p></li>
@@ -727,6 +737,9 @@ examples.lstm_model</p>
 <li><p><strong>activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Activation function to use for each layer</p></li>
 <li><p><strong>dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Dropout rate to be applied. Dropout helps avoid overfitting</p></li>
 <li><p><strong>normalize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If the data should be normalized. This is recommended for most cases.</p></li>
+<li><p><strong>early_stopping</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If early stopping is desired. Default is True</p></li>
+<li><p><strong>early_stop.cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Configuration to pass into early stopping callback (if enabled). See keras documentation (<a class="reference external" href="https://keras.io/api/callbacks/early_stopping">https://keras.io/api/callbacks/early_stopping</a>) for options. E.g., {‘patience’: 5}</p></li>
+<li><p><strong>workers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of workers to use when training. One worker indicates no multiprocessing</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Returns</dt>
@@ -786,6 +799,56 @@ Additional configuration parameters from <cite>from_data</cite></p>
 <p class="admonition-title">See also</p>
 <p>PrognosticsModel</p>
 </div>
+<dl class="py class">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.CustomEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CustomEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipkeys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_circular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_nan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.CustomEncoder" title="Permalink to this definition">#</a></dt>
+<dd><p>Custom encoder to serialize parameters</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.CustomEncoder.default">
+<span class="sig-name descname"><span class="pre">default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.CustomEncoder.default" title="Permalink to this definition">#</a></dt>
+<dd><p>Implement this method in a subclass such that it returns
+a serializable object for <code class="docutils literal notranslate"><span class="pre">o</span></code>, or calls the base implementation
+(to raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>).</p>
+<p>For example, to support arbitrary iterators, you could
+implement default like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">iterable</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    <span class="c1"># Let the base class default method raise the TypeError</span>
+    <span class="k">return</span> <span class="n">JSONEncoder</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.CustomEncoder.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.CustomEncoder.encode" title="Permalink to this definition">#</a></dt>
+<dd><p>Return a JSON string representation of a Python data structure.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">json.encoder</span> <span class="kn">import</span> <span class="n">JSONEncoder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JSONEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">]})</span>
+<span class="go">&#39;{&quot;foo&quot;: [&quot;bar&quot;, &quot;baz&quot;]}&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.CustomEncoder.iterencode">
+<span class="sig-name descname"><span class="pre">iterencode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_one_shot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.CustomEncoder.iterencode" title="Permalink to this definition">#</a></dt>
+<dd><p>Encode the given object and yield each string
+representation as available.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">JSONEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">iterencode</span><span class="p">(</span><span class="n">bigobject</span><span class="p">):</span>
+    <span class="n">mysocket</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.data_models.DataModel.calc_error">
 <span class="sig-name descname"><span class="pre">calc_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DataModel.calc_error" title="Permalink to this definition">#</a></dt>
@@ -869,6 +932,28 @@ Additional configuration parameters from <cite>from_data</cite></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Replace DataModel with specific classname below</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">DataModel</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.from_json">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.from_json" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a new prognostics model from a previously generated model that was serialized as a JSON object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – JSON serialized parameters necessary to build a model
+See to_json method</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Model generated from serialized parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel">PrognosticsModel</a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This serialization only works for models that include all parameters necessary to generate the model in model.parameters.</p>
 </div>
 </dd></dl>
 
@@ -1063,6 +1148,16 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <dt class="sig sig-object py" id="prog_models.data_models.DataModel.summary">
 <span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.summary" title="Permalink to this definition">#</a></dt>
 <dd><p>Print a summary of the model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.to_json" title="Permalink to this definition">#</a></dt>
+<dd><p>Serialize parameters as JSON objects</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method only serializes the values of the prognostics model parameters (model.parameters)</p>
+</div>
 </dd></dl>
 
 </dd></dl>

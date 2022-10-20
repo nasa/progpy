@@ -4,14 +4,16 @@
 """
 Example further illustrating the concept of 'events' which generalizes EOL. 
 
-'Events' is the term used to describe something to be predicted. 
-Generally in the PHM community these are referred to as End of Life (EOL). 
-However, they can be much more.
+.. collapse:: More details
 
-In the prog_models package, events can be anything that needs to be predicted. 
-Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds, or any Event of Interest (EOI). 
+    :term:'Events<event>' is the term used to describe something to be predicted. 
+    Generally in the PHM community these are referred to as End of Life (EOL). 
+    However, they can be much more.
 
-This example demonstrates how events can be used in your applications. 
+    In the prog_models package, events can be anything that needs to be predicted. 
+    Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds, or any Event of Interest (EOI). 
+
+    This example demonstrates how events can be used in your applications. 
 """
 from prog_models.models import BatteryElectroChemEOD
 

@@ -32,6 +32,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Glossary" href="glossary.html" />
@@ -374,8 +375,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-3">
-   Updates in V1.3
+  <a class="reference internal nav-link" href="#updates-in-v1-4">
+   Updates in V1.4
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -385,6 +386,28 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#prog-algs">
+     prog_algs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-server-and-prog-client">
+     prog_server and prog_client
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updates-in-v1-3">
+   Updates in V1.3
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     prog_models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
      prog_algs
     </a>
    </li>
@@ -406,12 +429,12 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#id3">
      prog_models
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
+    <a class="reference internal nav-link" href="#id4">
      prog_algs
     </a>
    </li>
@@ -423,7 +446,7 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id5">
      prog_models
     </a>
     <ul class="nav section-nav flex-column">
@@ -466,8 +489,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-3">
-   Updates in V1.3
+  <a class="reference internal nav-link" href="#updates-in-v1-4">
+   Updates in V1.4
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -477,6 +500,28 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#prog-algs">
+     prog_algs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prog-server-and-prog-client">
+     prog_server and prog_client
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#updates-in-v1-3">
+   Updates in V1.3
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     prog_models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
      prog_algs
     </a>
    </li>
@@ -498,12 +543,12 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#id3">
      prog_models
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
+    <a class="reference internal nav-link" href="#id4">
      prog_algs
     </a>
    </li>
@@ -515,7 +560,7 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
+    <a class="reference internal nav-link" href="#id5">
      prog_models
     </a>
     <ul class="nav section-nav flex-column">
@@ -550,10 +595,50 @@ title="Print to PDF"
                 
   <section id="release-notes">
 <h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">#</a></h1>
-<section id="updates-in-v1-3">
-<h2>Updates in V1.3<a class="headerlink" href="#updates-in-v1-3" title="Permalink to this headline">#</a></h2>
+<section id="updates-in-v1-4">
+<h2>Updates in V1.4<a class="headerlink" href="#updates-in-v1-4" title="Permalink to this headline">#</a></h2>
 <section id="prog-models">
 <h3>prog_models<a class="headerlink" href="#prog-models" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>Data-Driven Models</strong></p>
+<ul>
+<li><p>Created new <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel</span></code></a> class as interface/superclass for all data-driven models. Data-driven models are interchangeable with physics-based models. DataModels can be trained using data (.:py:meth:<cite>prog_models.data_models.DataModel.from_data</cite>), or an existing model (<a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.from_model" title="prog_models.data_models.DataModel.from_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel.from_model()</span></code></a>)</p></li>
+<li><p>Introduced new LSTM State Transition DataModel. See <a class="reference download internal" download="" href="_downloads/5325e8e93d0aa3df393b9d77f56c9160/lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.lstm_model</span></code></a>, <a class="reference download internal" download="" href="_downloads/c8c9cf630cf663d27db8c6af85ffab4a/full_lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.full_lstm_model</span></code></a>, and <a class="reference download internal" download="" href="_downloads/bec0de5b758ecc33efbc94e5d3fb8d01/custom_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.custom_model</span></code></a> for examples of use</p></li>
+<li><p>DMD model (<a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DMDModel" title="prog_models.data_models.DMDModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DMDModel</span></code></a>) updated to new data-driven model interface. Can now be created from data as well as an existing model</p></li>
+<li><p>Added ability to integrate training noise to data for DMD Model (<a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DMDModel" title="prog_models.data_models.DMDModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DMDModel</span></code></a>)</p></li>
+</ul>
+</li>
+<li><p><strong>New Model</strong>: Single-Phase DC Motor (<a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.DCMotorSP" title="prog_models.models.DCMotorSP"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.DCMotorSP</span></code></a>)</p></li>
+<li><p>Added the ability to select integration method when simulation. Current options are Euler and RK4</p></li>
+<li><p>New feature allowing serialization of model parameters as JSON. See <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.to_json" title="prog_models.PrognosticsModel.to_json"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.to_json()</span></code></a>, <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.from_json" title="prog_models.PrognosticsModel.from_json"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.from_json()</span></code></a>, and serialization example (<a class="reference download internal" download="" href="_downloads/0f1106d2e6e9fdf810b85394e9e69aed/serialization.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.serialization</span></code></a>)</p></li>
+<li><p>Added automatic step size feature in simulation. When enabled, step size will adapt to meet the exact save_pts and save_freq. Step size range can also be bounded</p></li>
+<li><p>New Example Model: Simple Paris’ Law (<code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.ParisLawCrackGrowth</span></code>)</p></li>
+<li><p>Added ability to set bounds when estimating parameters (See <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.estimate_params" title="prog_models.PrognosticsModel.estimate_params"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.estimate_params()</span></code></a>)</p></li>
+<li><p>Initialize method is now optional</p></li>
+<li><p>Various bug fixes and performance improvements</p></li>
+</ul>
+</section>
+<section id="prog-algs">
+<h3>prog_algs<a class="headerlink" href="#prog-algs" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Added new <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code></a> Metric: Monotonicity. See <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile.monotonicity" title="prog_algs.predictors.ToEPredictionProfile.monotonicity"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile.monotonicity()</span></code></a></p></li>
+<li><p>Updated to support prog_models v1.4</p></li>
+<li><p>Various bug fixes and performance improvements</p></li>
+</ul>
+</section>
+<section id="prog-server-and-prog-client">
+<h3>prog_server and prog_client<a class="headerlink" href="#prog-server-and-prog-client" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Added new endpoint (GET /api/v1/session/{id}/model) and client function (<a class="reference internal" href="api_ref/prog_server/prog_client.html#prog_client.Session.get_model" title="prog_client.Session.get_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_client.Session.get_model()</span></code></a>) to get the model from the server.</p></li>
+<li><p>Updated to support prog_models and prog_algs v1.4</p></li>
+<li><p>Various bug fixes and performance improvements</p></li>
+</ul>
+</section>
+</section>
+<section id="updates-in-v1-3">
+<h2>Updates in V1.3<a class="headerlink" href="#updates-in-v1-3" title="Permalink to this headline">#</a></h2>
+<section id="id1">
+<h3>prog_models<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><strong>Surrogate Models</strong> Added initial draft of new feature to generate surrogate models automatically from <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a>. (See <a class="reference download internal" download="" href="_downloads/3e4a5d9b856c25c6b0bf84730581c560/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a> example). Initial implementation uses Dynamic Mode Decomposition. Additional Surrogate Model Generation approaches will be explored for future releases. [Developed by NASA’s DRF Project]</p></li>
 <li><p><strong>New Example Models</strong> Added new <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.DCMotor" title="prog_models.models.DCMotor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.DCMotor</span></code></a>, <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.ESC" title="prog_models.models.ESC"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.ESC</span></code></a>, and <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.Powertrain" title="prog_models.models.Powertrain"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.Powertrain</span></code></a> models (See <a class="reference download internal" download="" href="_downloads/379b8420d5a1e67e122db8eacfc78796/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a> example) [Developed by NASA’s SWS Project]</p></li>
@@ -569,11 +654,11 @@ title="Print to PDF"
 <li><p>Various performance improvements and bug fixes</p></li>
 </ul>
 </section>
-<section id="prog-algs">
-<h3>prog_algs<a class="headerlink" href="#prog-algs" title="Permalink to this headline">#</a></h3>
+<section id="id2">
+<h3>prog_algs<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><strong>New State Estimator Added</strong> <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.KalmanFilter" title="prog_algs.state_estimators.KalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.KalmanFilter</span></code></a>. Works with models derived from <a class="reference internal" href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a>. See <a class="reference download internal" download="" href="_downloads/95185cf727a21ad753717b8332bb063f/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></p></li>
-<li><p><strong>New Predictor Added</strong> <a class="reference internal" href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.UnscentedTransformPredictor" title="prog_algs.predictors.UnscentedTransformPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.UnscentedTransformPredictor</span></code></a>. See <a class="reference download internal" download="" href="_downloads/b0ce3603387e7aa9d47150b177e46978/utpredictor.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.utpredictor</span></code></a></p></li>
+<li><p><strong>New Predictor Added</strong> <a class="reference internal" href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.UnscentedTransformPredictor" title="prog_algs.predictors.UnscentedTransformPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.UnscentedTransformPredictor</span></code></a>.</p></li>
 <li><p>Initial state estimate (x0) can now be passed as <cite>UncertainData</cite> to represent initial state uncertainty. See <a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></p></li>
 <li><p>Added new metrics for <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code></a>: Prognostics horizon, Cumulative Relative Accuracy (CRA). See <a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></p></li>
 <li><p>Added ability to plot <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code></a>: profile.plot(). See <a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></p></li>
@@ -599,8 +684,8 @@ title="Print to PDF"
 </section>
 <section id="updates-in-v1-2">
 <h2>Updates in V1.2<a class="headerlink" href="#updates-in-v1-2" title="Permalink to this headline">#</a></h2>
-<section id="id1">
-<h3>prog_models<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<section id="id3">
+<h3>prog_models<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Vectorized Models</dt><dd><ul>
@@ -628,8 +713,8 @@ title="Print to PDF"
 <li><p>Various bug fixes</p></li>
 </ul>
 </section>
-<section id="id2">
-<h3>prog_algs<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<section id="id4">
+<h3>prog_algs<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>New Feature: Histogram and Scatter Plot of UncertainData.</p></li>
 <li><dl class="simple">
@@ -656,8 +741,8 @@ title="Print to PDF"
 </section>
 <section id="updates-in-v1-1">
 <h2>Updates in V1.1<a class="headerlink" href="#updates-in-v1-1" title="Permalink to this headline">#</a></h2>
-<section id="id3">
-<h3>prog_models<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<section id="id5">
+<h3>prog_models<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Derived Parameters</dt><dd><ul>

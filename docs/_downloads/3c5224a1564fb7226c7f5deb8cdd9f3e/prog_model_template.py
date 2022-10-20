@@ -10,8 +10,9 @@
 
 # Note: To preserve vectorization use numpy math function (e.g., maximum, minimum, sign, sqrt, etc.) instead of non-vectorized functions (max, min, etc.)
 
-from prog_models import PrognosticsModel
 from numpy import inf
+
+from prog_models import PrognosticsModel
 
 # REPLACE THIS WITH DERIVED PARAMETER CALLBACKS (IF ANY)
 # See examples.derived_params
@@ -58,10 +59,18 @@ class ProgModelTemplate(PrognosticsModel):
     ]
 
     # REPLACE THE FOLLOWING LIST WITH CONFIGURED PARAMETERS
-    default_parameters = { # Set default parameters
+    # Note- everything required to configure the model 
+    # should be in parameters- this is to enable the serialization features 
+    default_parameters = {  # Set default parameters
         'Example Parameter 1': 0,
         'Example Parameter 2': 3,
-        'process_noise': 0.1, # Process noise
+        'process_noise': 0.1,  # Process noise
+        'x0': {  # Initial state  
+            'Examples State 1': 1.5,
+            'Examples State 2': -935,
+            'Examples State 3': 42.1,
+            'Examples State 4': 0
+        }
     }
 
     # REPLACE THE FOLLOWING WITH STATE BOUNDS IF NEEDED
@@ -87,6 +96,10 @@ class ProgModelTemplate(PrognosticsModel):
     def __init__(self, **kwargs):
         """
         Constructor for model
+
+        Note 
+        ----
+        To use the JSON serialization capabilities in to_json and from_json, model.parameters must include everything necessary for initialize, including any keyword arguments.
         """
         # ADD OPTIONS CHECKS HERE
 
@@ -99,40 +112,46 @@ class ProgModelTemplate(PrognosticsModel):
 
         super().__init__(**kwargs) # Run Parent constructor
 
+    # Model Initialization - there are two ways to provide the logic to initialize model state. 
+    # 1. Provide the initial state in parameters['x0'], or
+    # 2. Provide an Initialization function
+    #
+    # If following method 2, uncomment the initialize function, below.
     # Sometimes initial input (u) and initial output (z) are needed to initialize the model
     # In that case remove the '= None' for the appropriate argument
     # Note: If they are needed, that requirement propogated through to the simulate_to* functions
-    def initialize(self, u=None, z=None):
-        """
-        Calculate initial state given inputs and outputs
+    # UNCOMMENT THIS FUNCTION FOR COMPLEX INITIALIZATION
+    # def initialize(self, u=None, z=None):
+    #     """
+    #     Calculate initial state given inputs and outputs
 
-        Parameters
-        ----------
-        u : dict
-            Inputs, with keys defined by model.inputs.
-            e.g., u = {'i':3.2} given inputs = ['i']
-        z : dict
-            Outputs, with keys defined by model.outputs.
-            e.g., z = {'t':12.4, 'v':3.3} given inputs = ['t', 'v']
+    #     Parameters
+    #     ----------
+    #     u : dict
+    #         Inputs, with keys defined by model.inputs.
+    #         e.g., u = {'i':3.2} given inputs = ['i']
+    #     z : dict
+    #         Outputs, with keys defined by model.outputs.
+    #         e.g., z = {'t':12.4, 'v':3.3} given inputs = ['t', 'v']
 
-        Returns
-        -------
-        x : dict
-            First state, with keys defined by model.states
-            e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
-        """
+    #     Returns
+    #     -------
+    #     x : dict
+    #         First state, with keys defined by model.states
+    #         e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
+    #     """
 
-        # REPLACE BELOW WITH LOGIC TO CALCULATE INITIAL STATE
-        # NOTE: KEYS FOR x0 MATCH 'states' LIST ABOVE
+    #     # REPLACE BELOW WITH LOGIC TO CALCULATE INITIAL STATE
+    #     # NOTE: KEYS FOR x0 MATCH 'states' LIST ABOVE
 
-        # YOU CAN ACCESS ANY PARAMETERS USING self.parameters[key]
-        x0 = {
-            'Examples State 1': 99.2,
-            'Examples State 2': False,
-            'Examples State 3': 44,
-            'Examples State 4': [1, 2, 3]
-        }
-        return self.StateContainer(x0)
+    #     # YOU CAN ACCESS ANY PARAMETERS USING self.parameters[key]
+    #     x0 = {
+    #         'Examples State 1': 99.2,
+    #         'Examples State 2': False,
+    #         'Examples State 3': 44,
+    #         'Examples State 4': [1, 2, 3]
+    #     }
+    #     return self.StateContainer(x0)
 
     # UNCOMMENT THIS FUNCTION FOR CONTINUOUS MODELS
     # def dx(self, t, x, u):

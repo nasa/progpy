@@ -4,10 +4,11 @@
 In this example the BatteryElectroChemEOD model is used with a particle filter to estimate the state of the battery
 """
 
-from prog_models.models import BatteryElectroChemEOD
-from prog_algs import *
 import numpy as np
 import matplotlib.pyplot as plt
+
+from prog_models.models import BatteryElectroChemEOD
+from prog_algs import *
 
 def run_example():
     ## Setup

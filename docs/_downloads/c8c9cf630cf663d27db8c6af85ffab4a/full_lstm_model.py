@@ -4,9 +4,11 @@
 """
 Example building a full model with events and thresholds using LSTMStateTransitionModel. 
 
-In this example, we generate fake data using the ThrownObject model. This is a case where we're generating a surrogate model from the physics-based model. For cases where you're generating a model from data (e.g., collected from a testbed or a real-world environment), you'll replace that generated data with your own. 
+.. collapse:: More details
 
-We then create a subclass of the LSTMStateTransitionModel, defining the event_state and threshold equations as a function of output. We use the generated model and compare to the original model.
+    In this example, we generate fake data using the ThrownObject model. This is a case where we're generating a surrogate model from the physics-based model. For cases where you're generating a model from data (e.g., collected from a testbed or a real-world environment), you'll replace that generated data with your own. 
+
+    We then create a subclass of the LSTMStateTransitionModel, defining the event_state and threshold equations as a function of output. We use the generated model and compare to the original model.
 """
 
 import matplotlib.pyplot as plt
@@ -93,6 +95,7 @@ def run_example():
         epochs=30, 
         input_keys = ['dt'],
         output_keys = m.states)
+    m2.plot_history()
 
     # Step 5: Simulate with model
     t_counter = 0

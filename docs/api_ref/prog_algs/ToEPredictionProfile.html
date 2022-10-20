@@ -32,6 +32,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Uncertain Data" href="UncertainData.html" />
@@ -406,7 +407,7 @@ title="Print to PDF"
 <li><p><strong>lambda_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Prediction time at or after which metric is evaluated. Evaluation occurs at this time (if a prediction exists) or the next prediction following.</p></li>
 <li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – percentage bounds around time to event (where 0.2 allows 20% error TtE)</p></li>
 <li><p><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – portion of prediction that must be within those bounds</p></li>
-<li><p><strong>kwargs</strong> (<em>optional</em><em>, </em><em>keyword arguments</em>) – <p>configuration arguments. Accepted arge include:</p>
+<li><p><strong>kwargs</strong> (<em>optional</em><em>, </em><em>keyword arguments</em>) – <p>configuration arguments. Accepted args include:</p>
 <blockquote>
 <div><ul>
 <li><p>keys (list[string]): list of keys to use. If not provided, all keys are used.</p></li>
@@ -433,21 +434,20 @@ title="Print to PDF"
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.ToEPredictionProfile.cumulative_relative_accuracy">
 <span class="sig-name descname"><span class="pre">cumulative_relative_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ground_truth</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#prog_algs.predictors.ToEPredictionProfile.cumulative_relative_accuracy" title="Permalink to this definition">#</a></dt>
-<dd><p>Compute cumulative relative accuracy for a given profile, defined as the normalized sum of relative prediction accuracies at specific time instances.</p>
-<p>CRA = Σ(RA)/N for each event
-Where Σ is summation of all relative accuracies for a given profile and N is the total count of profiles (Journal Prognostics Health Management, Saxena et al.)
-:param ground_truth: Dictionary containing ground truth; specified as key, value pairs for event and its value. E.g, {‘event1’: 47.3, ‘event2’: 52.1, ‘event3’: 46.1}
-:type ground_truth: dict
-:param kwargs: configuration arguments. Accepted args include:
-:type kwargs: optional</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Dictionary containing cumulative relative accuracy (value) for each event (key). e.g., {‘event1’: 12.3, ‘event2’: 15.1}</p>
+<dd><blockquote>
+<div><p>Compute cumulative relative accuracy for a given profile, defined as the normalized sum of relative prediction accuracies at specific time instances.</p>
+<p>:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>CRA = Sigma(</p>
+</div></blockquote>
+<p>rac{RA}{N} )` for each event</p>
+<blockquote>
+<div><p>Where <span class="math">\Sigma</span> is summation of all relative accuracies for a given profile and N is the total count of profiles (Journal Prognostics Health Management, Saxena et al.)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>ground_truth (dict): Dictionary containing ground truth; specified as key, value pairs for event and its value. E.g, {‘event1’: 47.3, ‘event2’: 52.1, ‘event3’: 46.1}</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+<dt>Returns:</dt><dd><p>dict: Dictionary containing cumulative relative accuracy (value) for each event (key). e.g., {‘event1’: 12.3, ‘event2’: 15.1}</p>
 </dd>
 </dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -470,51 +470,59 @@ Where Σ is summation of all relative accuracies for a given profile and N is th
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.ToEPredictionProfile.monotonicity">
 <span class="sig-name descname"><span class="pre">monotonicity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#prog_algs.predictors.ToEPredictionProfile.monotonicity" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate monotonicty for a prediction profile.
-Given a prediction profile, for each prediction: go through all predicted states and compare those to the next one.
+<dd><dl>
+<dt>Calculate monotonicty for a prediction profile.</dt><dd><p>Given a prediction profile, for each prediction: go through all predicted states and compare those to the next one.
 Calculates monotonicity for each prediction key using its associated mean value in UncertainData.</p>
-<p>monotonoicity = <a href="#id1"><span class="problematic" id="id2">|Σsign(i+1 - i) / N-1|</span></a>
-Where N is number of measurements and sign indicates sign of calculation.
-Coble, J., et. al. (2021). Identifying Optimal Prognostic Parameters from Data: A Genetic Algorithms Approach. Annual Conference of the PHM Society.
-<a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a>
-Baptistia, M., et. al. (2022). Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306.
-<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>toe_profile</strong> (<a class="reference internal" href="#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><em>ToEPredictionProfile</em></a>) – A profile of predictions, the combination of multiple predictions</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dictionary where keys represent a profile and dict is a subdictionary representing an event and its respective monotonicitiy value between [0, 1].</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a>)</p>
+<p>:math:<a href="#id3"><span class="problematic" id="id4">`</span></a>monotonoicity = |Sigma</p>
 </dd>
 </dl>
+<p>rac{sign(i+1 - i)}{N-1}|`</p>
+<blockquote>
+<div><p>Where N is number of measurements and sign indicates sign of calculation.</p>
+<p>Coble, J., et. al. (2021). Identifying Optimal Prognostic Parameters from Data: A Genetic Algorithms Approach. Annual Conference of the PHM Society.
+<a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a></p>
+<p>Baptistia, M., et. al. (2022). Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306.
+<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a></p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>toe_profile (ToEPredictionProfile): A profile of predictions, the combination of multiple predictions</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict (str, dict): Dictionary where keys represent a profile and dict is a subdictionary representing an event and its respective monotonicitiy value between [0, 1].</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.ToEPredictionProfile.plot">
 <span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ground_truth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_algs.predictors.ToEPredictionProfile.plot" title="Permalink to this definition">#</a></dt>
-<dd><p>Produce an alpha-beta plot depicting the TtE distribution by time of prediction.</p>
+<dd><p>Produce an alpha-beta plot depicting the TtE distribution by time of prediction for each event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ground_truth</strong> – dict = None
+<li><p><strong>ground_truth</strong> – dict
 Optional dictionary argument containing event and its respective ground truth value; none by default and plotted if specified</p></li>
 <li><p><strong>alpha</strong> – float
 Optional alpha value; none by default and plotted if specified</p></li>
-<li><p><strong>show</strong> – bool = True
-Optional bool value; specify whether to display generated plots or not</p></li>
+<li><p><strong>show</strong> – bool
+Optional bool value; specify whether to display generated plots. Default is true</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>dict</dt><dd><p>Collection of generated matplotlib figures for each event in profile</p>
+<dd class="field-even"><p><dl>
+<dt>dict[str, Figure]</dt><dd><p>Collection of generated matplotlib figures for each event in profile</p>
+<p>e.g., {‘event1’: Fig, ‘event2’: Fig}</p>
 </dd>
 </dl>
 </p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gt</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;event1&#39;</span><span class="p">:</span> <span class="mi">3442</span><span class="p">,</span> <span class="s1">&#39;event2&#39;</span><span class="p">:</span> <span class="mi">175</span><span class="p">}</span> <span class="c1"># Ground Truth</span>
+<span class="n">figs</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gt</span><span class="p">)</span> <span class="c1"># Figure with ground truth line</span>
+<span class="n">figs</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span> <span class="c1"># Figure with ground truth line and 20% alpha bounds</span>
+<span class="n">figs</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gt</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Dont display figure</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -532,13 +540,14 @@ Optional bool value; specify whether to display generated plots or not</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.ToEPredictionProfile.prognostic_horizon">
 <span class="sig-name descname"><span class="pre">prognostic_horizon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">criteria_eqn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ground_truth</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#prog_algs.predictors.ToEPredictionProfile.prognostic_horizon" title="Permalink to this definition">#</a></dt>
-<dd><p>Compute prognostic horizon metric, defined as the difference between a time ti, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event.
-PH = ToE - ti
-:param toe_profile: A profile of predictions, the combination of multiple predictions
-:type toe_profile: ToEPredictionProfile
-:param criteria_eqn: A function (toe: UncertainData, ground_truth: dict[str, float]) -&gt; dict[str, bool] calculating whether a prediction in ToEPredictionProfile meets some criteria.</p>
-<blockquote>
-<div><div class="line-block">
+<dd><p>Compute prognostic horizon metric, defined as the difference between a time ti, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event.</p>
+<p><span class="math">PH = ToE - ti</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>toe_profile</strong> (<a class="reference internal" href="#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><em>ToEPredictionProfile</em></a>) – A profile of predictions, the combination of multiple predictions</p></li>
+<li><p><strong>criteria_eqn</strong> (<em>Callable function</em>) – <p>A function (toe: UncertainData, ground_truth: dict[str, float]) -&gt; dict[str, bool] calculating whether a prediction in ToEPredictionProfile meets some criteria.</p>
+<div class="line-block">
 <div class="line">Args:</div>
 <div class="line-block">
 <div class="line">* toe (UncertainData): A single prediction of Time of Event (ToE)</div>
@@ -549,10 +558,7 @@ PH = ToE - ti
 <div class="line">e.g., {‘event1’: True, ‘event2’: False}</div>
 </div>
 </div>
-</div></blockquote>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
+</p></li>
 <li><p><strong>ground_truth</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Dictionary containing ground truth; specified as key, value pairs for event and its value. E.g, {‘event1’: 47.3, ‘event2’: 52.1, ‘event3’: 46.1}</p></li>
 <li><p><strong>kwargs</strong> (<em>optional</em>) – configuration arguments. Accepted args include:
 * print (bool): Boolean specifying whether the prognostic horizon metric should be printed.</p></li>
