@@ -10,9 +10,8 @@ Example of generating a Dynamic Mode Decomposition surrogate model from a batter
 
 """
 
-from prog_models.models import BatteryElectroChemEOD as Battery
-
 import matplotlib.pyplot as plt
+from prog_models.models import BatteryElectroChemEOD as Battery
 
 def run_example(): 
     ### Example 1: Standard DMD Application 

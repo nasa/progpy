@@ -23,6 +23,11 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -32,6 +37,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -89,27 +95,39 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../prog_models_guide.html">
-   prog_models Guide
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../guide.html">
+   ProgPy Guide
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../prog_algs_guide.html">
-   prog_algs Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../prog_server_guide.html">
-   prog_server Guide
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prog_models_guide.html">
+     prog_models Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prog_algs_guide.html">
+     prog_algs Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prog_server_guide.html">
+     prog_server Guide
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../../api_ref.html">
    API Reference
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -118,8 +136,8 @@
     <a class="reference internal" href="../prog_algs.html">
      prog_algs API Reference
     </a>
-    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-    <label for="toctree-checkbox-2">
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -155,8 +173,8 @@
     <a class="reference internal" href="../prog_models.html">
      prog_models API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-    <label for="toctree-checkbox-3">
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -197,8 +215,8 @@
     <a class="reference internal" href="../prog_server.html">
      prog_server API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-    <label for="toctree-checkbox-4">
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -434,20 +452,20 @@ title="Print to PDF"
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.ToEPredictionProfile.cumulative_relative_accuracy">
 <span class="sig-name descname"><span class="pre">cumulative_relative_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ground_truth</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#prog_algs.predictors.ToEPredictionProfile.cumulative_relative_accuracy" title="Permalink to this definition">#</a></dt>
-<dd><blockquote>
-<div><p>Compute cumulative relative accuracy for a given profile, defined as the normalized sum of relative prediction accuracies at specific time instances.</p>
-<p>:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>CRA = Sigma(</p>
-</div></blockquote>
-<p>rac{RA}{N} )` for each event</p>
-<blockquote>
-<div><p>Where <span class="math">\Sigma</span> is summation of all relative accuracies for a given profile and N is the total count of profiles (Journal Prognostics Health Management, Saxena et al.)</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>ground_truth (dict): Dictionary containing ground truth; specified as key, value pairs for event and its value. E.g, {‘event1’: 47.3, ‘event2’: 52.1, ‘event3’: 46.1}</p>
+<dd><p>Compute cumulative relative accuracy for a given profile, defined as the normalized sum of relative prediction accuracies at specific time instances.</p>
+<p><span class="math notranslate nohighlight">\(CRA = \Sigma( \dfrac{RA}{N} )\)</span> for each event</p>
+<p>Where <span class="math notranslate nohighlight">\(\Sigma\)</span> is summation of all relative accuracies for a given profile and N is the total count of profiles (Journal Prognostics Health Management, Saxena et al.)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ground_truth</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – Dictionary containing ground truth; specified as key, value pairs for event and its value. E.g, {‘event1’: 47.3, ‘event2’: 52.1, ‘event3’: 46.1}</p>
 </dd>
-<dt>Returns:</dt><dd><p>dict: Dictionary containing cumulative relative accuracy (value) for each event (key). e.g., {‘event1’: 12.3, ‘event2’: 15.1}</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary containing cumulative relative accuracy (value) for each event (key). e.g., {‘event1’: 12.3, ‘event2’: 15.1}</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
 </dd>
 </dl>
-</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -470,26 +488,26 @@ title="Print to PDF"
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.ToEPredictionProfile.monotonicity">
 <span class="sig-name descname"><span class="pre">monotonicity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#prog_algs.predictors.ToEPredictionProfile.monotonicity" title="Permalink to this definition">#</a></dt>
-<dd><dl>
-<dt>Calculate monotonicty for a prediction profile.</dt><dd><p>Given a prediction profile, for each prediction: go through all predicted states and compare those to the next one.
+<dd><p>Calculate monotonicty for a prediction profile.
+Given a prediction profile, for each prediction: go through all predicted states and compare those to the next one.
 Calculates monotonicity for each prediction key using its associated mean value in UncertainData.</p>
-<p>:math:<a href="#id3"><span class="problematic" id="id4">`</span></a>monotonoicity = |Sigma</p>
-</dd>
-</dl>
-<p>rac{sign(i+1 - i)}{N-1}|`</p>
-<blockquote>
-<div><p>Where N is number of measurements and sign indicates sign of calculation.</p>
+<p><span class="math notranslate nohighlight">\(monotonoicity = \|\Sigma \dfrac{sign(i+1 - i)}{N-1}\|\)</span></p>
+<p>Where N is number of measurements and sign indicates sign of calculation.</p>
 <p>Coble, J., et. al. (2021). Identifying Optimal Prognostic Parameters from Data: A Genetic Algorithms Approach. Annual Conference of the PHM Society.
 <a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a></p>
 <p>Baptistia, M., et. al. (2022). Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306.
 <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a></p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>toe_profile (ToEPredictionProfile): A profile of predictions, the combination of multiple predictions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>toe_profile</strong> (<a class="reference internal" href="#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><em>ToEPredictionProfile</em></a>) – A profile of predictions, the combination of multiple predictions</p>
 </dd>
-<dt>Returns:</dt><dd><p>dict (str, dict): Dictionary where keys represent a profile and dict is a subdictionary representing an event and its respective monotonicitiy value between [0, 1].</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary where keys represent a profile and dict is a subdictionary representing an event and its respective monotonicitiy value between [0, 1].</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a>)</p>
 </dd>
 </dl>
-</div></blockquote>
 </dd></dl>
 
 <dl class="py method">
@@ -541,7 +559,7 @@ Optional bool value; specify whether to display generated plots. Default is true
 <dt class="sig sig-object py" id="prog_algs.predictors.ToEPredictionProfile.prognostic_horizon">
 <span class="sig-name descname"><span class="pre">prognostic_horizon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">criteria_eqn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ground_truth</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#prog_algs.predictors.ToEPredictionProfile.prognostic_horizon" title="Permalink to this definition">#</a></dt>
 <dd><p>Compute prognostic horizon metric, defined as the difference between a time ti, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event.</p>
-<p><span class="math">PH = ToE - ti</span></p>
+<p><span class="math notranslate nohighlight">\(PH = ToE - ti\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

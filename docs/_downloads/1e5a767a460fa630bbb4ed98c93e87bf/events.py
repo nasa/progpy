@@ -15,6 +15,7 @@ Example further illustrating the concept of 'events' which generalizes EOL.
 
     This example demonstrates how events can be used in your applications. 
 """
+import matplotlib.pyplot as plt
 from prog_models.models import BatteryElectroChemEOD
 
 def run_example():
@@ -23,7 +24,7 @@ def run_example():
     # We of course are interested in end of discharge, but for this example we
     # have a requirement that says the battery must not fall below 5% State of Charge (SOC)
     # Note: SOC is the event state for the End of Discharge (EOD) event
-    # Event states, like SOC go between 0 and 1, where 1 is healthy and at 0 the event has occured. 
+    # Event states, like SOC go between 0 and 1, where 1 is healthy and at 0 the event has occurred. 
     # So, 5% SOC corresponds to an 'EOD' event state of 0.05
     # Additionally, we have two warning thresholds (yellow and red)
 
@@ -85,7 +86,6 @@ def run_example():
 
     # 2c: Plot results
     simulated_results.event_states.plot()
-    import matplotlib.pyplot as plt
     plt.show()
 
 # This allows the module to be executed directly 

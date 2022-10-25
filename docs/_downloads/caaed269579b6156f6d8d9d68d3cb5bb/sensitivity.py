@@ -5,9 +5,9 @@
 Example performing a sensitivity analysis on a new model. 
 """
 
+import numpy as np
 # Deriv prog model was selected because the model can be described as x' = x + dx*dt
 from prog_models.models.thrown_object import ThrownObject
-import numpy as np
 
 def run_example():
     # Demo model

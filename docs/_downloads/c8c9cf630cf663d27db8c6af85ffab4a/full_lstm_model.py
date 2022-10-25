@@ -13,7 +13,6 @@ Example building a full model with events and thresholds using LSTMStateTransiti
 
 import matplotlib.pyplot as plt
 import numpy as np
-
 from prog_models.data_models import LSTMStateTransitionModel
 from prog_models.models import ThrownObject
 

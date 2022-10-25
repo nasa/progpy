@@ -23,6 +23,11 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -88,27 +93,39 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_models_guide.html">
-   prog_models Guide
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="guide.html">
+   ProgPy Guide
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_algs_guide.html">
-   prog_algs Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_server_guide.html">
-   prog_server Guide
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_models_guide.html">
+     prog_models Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_algs_guide.html">
+     prog_algs Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_server_guide.html">
+     prog_server Guide
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="api_ref.html">
    API Reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -117,8 +134,8 @@
     <a class="reference internal" href="api_ref/prog_algs.html">
      prog_algs API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-    <label for="toctree-checkbox-2">
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -154,8 +171,8 @@
     <a class="reference internal" href="api_ref/prog_models.html">
      prog_models API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-    <label for="toctree-checkbox-3">
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -196,8 +213,8 @@
     <a class="reference internal" href="api_ref/prog_server.html">
      prog_server API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-    <label for="toctree-checkbox-4">
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -755,62 +772,10 @@ title="Print to PDF"
               <div>
                 
   <section id="developers-guide-project-plan">
-<h1><a class="toc-backref" href="#contents">Developers Guide &amp; Project Plan</a><a class="headerlink" href="#developers-guide-project-plan" title="Permalink to this headline">#</a></h1>
+<h1>Developers Guide &amp; Project Plan<a class="headerlink" href="#developers-guide-project-plan" title="Permalink to this headline">#</a></h1>
 <p>This document includes some details relevant for developers working on any of the Python Prognostics Packages Tools (prog_models, prog_algs, prog_server)</p>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#developers-guide-project-plan" id="id1">Developers Guide &amp; Project Plan</a></p>
-<ul>
-<li><p><a class="reference internal" href="#installing-from-a-branch" id="id2">Installing from a Branch</a></p></li>
-<li><p><a class="reference internal" href="#contributing" id="id3">Contributing</a></p></li>
-<li><p><a class="reference internal" href="#notes-for-developers" id="id4">Notes for Developers</a></p></li>
-<li><p><a class="reference internal" href="#project-roles" id="id5">Project Roles</a></p></li>
-<li><p><a class="reference internal" href="#branching-strategy" id="id6">Branching Strategy</a></p>
-<ul>
-<li><p><a class="reference internal" href="#pr-checklist" id="id7">PR Checklist</a></p></li>
-<li><p><a class="reference internal" href="#release-checklist" id="id8">Release Checklist</a></p></li>
-<li><p><a class="reference internal" href="#post-release-checklist" id="id9">Post-Release Checklist</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#updating-documentation" id="id10">Updating Documentation</a></p></li>
-<li><p><a class="reference internal" href="#uploading-new-version-to-pypi" id="id11">Uploading new version to PyPI</a></p></li>
-<li><p><a class="reference internal" href="#npr-7150-nasa-software-engineering-requirements" id="id12">NPR 7150 NASA Software Engineering Requirements</a></p>
-<ul>
-<li><p><a class="reference internal" href="#compliance-notation-legend" id="id13">Compliance Notation Legend</a></p></li>
-<li><p><a class="reference internal" href="#compliance-matrix" id="id14">Compliance Matrix</a></p>
-<ul>
-<li><p><a class="reference internal" href="#life-cycle-management" id="id15">Life Cycle Management</a></p></li>
-<li><p><a class="reference internal" href="#cost-estimation" id="id16">Cost Estimation</a></p></li>
-<li><p><a class="reference internal" href="#schedules" id="id17">Schedules</a></p></li>
-<li><p><a class="reference internal" href="#classification" id="id18">Classification</a></p></li>
-<li><p><a class="reference internal" href="#software-assurance" id="id19">Software Assurance</a></p></li>
-<li><p><a class="reference internal" href="#safety-critical-software" id="id20">Safety Critical Software</a></p></li>
-<li><p><a class="reference internal" href="#automatic-generation-of-source-code" id="id21">Automatic Generation of Source Code</a></p></li>
-<li><p><a class="reference internal" href="#reuse" id="id22">Reuse</a></p></li>
-<li><p><a class="reference internal" href="#cybersecurity" id="id23">Cybersecurity</a></p></li>
-<li><p><a class="reference internal" href="#bi-directional-traceability" id="id24">Bi-Directional Traceability</a></p></li>
-<li><p><a class="reference internal" href="#requirements" id="id25">Requirements</a></p></li>
-<li><p><a class="reference internal" href="#implementation" id="id26">Implementation</a></p></li>
-<li><p><a class="reference internal" href="#testing" id="id27">Testing</a></p></li>
-<li><p><a class="reference internal" href="#operations-maintenance-and-retirement" id="id28">Operations, Maintenance, and Retirement</a></p></li>
-<li><p><a class="reference internal" href="#configuration-management" id="id29">Configuration Management</a></p></li>
-<li><p><a class="reference internal" href="#non-conformances" id="id30">Non-Conformances</a></p></li>
-<li><p><a class="reference internal" href="#transition-to-a-higher-class" id="id31">Transition to a Higher Class</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#aquisition-options" id="id32">Aquisition Options</a></p></li>
-<li><p><a class="reference internal" href="#requirement-tracking" id="id33">Requirement Tracking</a></p></li>
-<li><p><a class="reference internal" href="#dependencies" id="id34">Dependencies</a></p></li>
-<li><p><a class="reference internal" href="#tracability-notes" id="id35">Tracability Notes</a></p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
 <section id="installing-from-a-branch">
-<h2><a class="toc-backref" href="#contents">Installing from a Branch</a><a class="headerlink" href="#installing-from-a-branch" title="Permalink to this headline">#</a></h2>
+<h2>Installing from a Branch<a class="headerlink" href="#installing-from-a-branch" title="Permalink to this headline">#</a></h2>
 <dl class="simple">
 <dt>To install the package package from a specific branch. First clone the repository and checkout the branch. Then navigate into the repository directory and use the following command:</dt><dd><p><cite>pip install -e .</cite></p>
 </dd>
@@ -818,12 +783,12 @@ title="Print to PDF"
 <p>This command installs the package using the checked-out version.</p>
 </section>
 <section id="contributing">
-<h2><a class="toc-backref" href="#contents">Contributing</a><a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h2>
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h2>
 <p>New external (non-NASA or NASA contractor) developers must complete either the <a class="reference external" href="https://github.com/nasa/prog_models/tree/master/forms">organizational or individual Contributor License Agreement (CLA)</a>.</p>
 <p>Curious about what needs to be done? Have an idea for a new feature? Find a bug? Check out open issues <a class="reference external" href="https://github.com/nasa/prog_models/issues">prog_models</a>, <a class="reference external" href="https://github.com/nasa/prog_algs/issues">prog_algs</a>, <a class="reference external" href="https://github.com/nasa/prog_server/issues">prog_server</a>.</p>
 </section>
 <section id="notes-for-developers">
-<h2><a class="toc-backref" href="#contents">Notes for Developers</a><a class="headerlink" href="#notes-for-developers" title="Permalink to this headline">#</a></h2>
+<h2>Notes for Developers<a class="headerlink" href="#notes-for-developers" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Configuration-controlled items: source code, tests, test workflow, issues (requirements, non-conformances, bugs, etc.), milestones, examples, tutorial, templates, project plan (this document), and documentation</p></li>
 <li><p>The package itself is stored in the src directory.</p></li>
@@ -889,20 +854,20 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="project-roles">
-<h2><a class="toc-backref" href="#contents">Project Roles</a><a class="headerlink" href="#project-roles" title="Permalink to this headline">#</a></h2>
+<h2>Project Roles<a class="headerlink" href="#project-roles" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Project Lead/Software Assurance Officer: Christopher Teubert</p></li>
 <li><p>Developers: See <a class="reference external" href="https://github.com/nasa/prog_models/graphs/contributors">prog_models developers</a>, <a class="reference external" href="https://github.com/nasa/prog_algs/graphs/contributors">prog_algs developers</a>, <a class="reference external" href="https://github.com/nasa/prog_server/graphs/contributors">prog_server developers</a></p></li>
 </ul>
 </section>
 <section id="branching-strategy">
-<h2><a class="toc-backref" href="#contents">Branching Strategy</a><a class="headerlink" href="#branching-strategy" title="Permalink to this headline">#</a></h2>
+<h2>Branching Strategy<a class="headerlink" href="#branching-strategy" title="Permalink to this headline">#</a></h2>
 <p>Our project is following the git strategy described <a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model/">here</a>. Release branches are not required. Details specific to each branch are described below.</p>
 <p><cite>master</cite>: Every merge into the master branch is done using a pull request (never commiting directly), is assigned a release number, and must comply with the release checklist. The release checklist is a software assurance tool.</p>
 <p><cite>dev</cite>: Every commit on the dev branch should be functional. All unit tests must function before commiting to dev or merging another branch. Merging into dev should only be done through a PR, unless only documentation has been updated.</p>
 <p><cite>Feature Branches</cite>: These branches include changes specific to a new feature. Before merging into dev unit tests should all run, tests should be added for the feature, and documentation should be updated as appropriate.</p>
 <section id="pr-checklist">
-<h3><a class="toc-backref" href="#contents">PR Checklist</a><a class="headerlink" href="#pr-checklist" title="Permalink to this headline">#</a></h3>
+<h3>PR Checklist<a class="headerlink" href="#pr-checklist" title="Permalink to this headline">#</a></h3>
 <ul>
 <li><dl class="simple">
 <dt>Each PR into dev or master must be checked by someone on the team other than the author.</dt><dd><ul class="simple">
@@ -940,7 +905,7 @@ title="Print to PDF"
 <p>Note: when making change to this, update the message in the github actions workflows</p>
 </section>
 <section id="release-checklist">
-<h3><a class="toc-backref" href="#contents">Release Checklist</a><a class="headerlink" href="#release-checklist" title="Permalink to this headline">#</a></h3>
+<h3>Release Checklist<a class="headerlink" href="#release-checklist" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>[Complete - done in PRs to dev] Code review - all software must be checked by someone other than the author</p></li>
 <li><p>Check that each new feature has corresponding tests</p></li>
@@ -980,7 +945,7 @@ title="Print to PDF"
 <p>Note: when making change to this, update the message in the github actions workflows</p>
 </section>
 <section id="post-release-checklist">
-<h3><a class="toc-backref" href="#contents">Post-Release Checklist</a><a class="headerlink" href="#post-release-checklist" title="Permalink to this headline">#</a></h3>
+<h3>Post-Release Checklist<a class="headerlink" href="#post-release-checklist" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>For prog_server: Update openapi specs on <a class="reference external" href="https://app.swaggerhub.com/apis/teubert/prog_server/1.0.0-oas3">SwaggerHub</a></p></li>
 <li><p>Send notes to Software Release Office (SRO) of updated version number</p></li>
@@ -990,16 +955,16 @@ title="Print to PDF"
 </section>
 </section>
 <section id="updating-documentation">
-<h2><a class="toc-backref" href="#contents">Updating Documentation</a><a class="headerlink" href="#updating-documentation" title="Permalink to this headline">#</a></h2>
+<h2>Updating Documentation<a class="headerlink" href="#updating-documentation" title="Permalink to this headline">#</a></h2>
 <p>Use the following command to update documentation (requires sphinx):</p>
 </section>
 <section id="uploading-new-version-to-pypi">
-<h2><a class="toc-backref" href="#contents">Uploading new version to PyPI</a><a class="headerlink" href="#uploading-new-version-to-pypi" title="Permalink to this headline">#</a></h2>
+<h2>Uploading new version to PyPI<a class="headerlink" href="#uploading-new-version-to-pypi" title="Permalink to this headline">#</a></h2>
 <p>New versions are uploaded upon release (i.e., merging into master branch). The Release Checklist must be complete prior to release</p>
 <p>See <a class="reference external" href="https://packaging.python.org/guides/distributing-packages-using-setuptools/#packaging-your-project">here</a></p>
 </section>
 <section id="npr-7150-nasa-software-engineering-requirements">
-<h2><a class="toc-backref" href="#contents">NPR 7150 NASA Software Engineering Requirements</a><a class="headerlink" href="#npr-7150-nasa-software-engineering-requirements" title="Permalink to this headline">#</a></h2>
+<h2>NPR 7150 NASA Software Engineering Requirements<a class="headerlink" href="#npr-7150-nasa-software-engineering-requirements" title="Permalink to this headline">#</a></h2>
 <p>NASA software must comply with the requirements enumarated in <a class="reference external" href="https://nodis3.gsfc.nasa.gov/displayDir.cfm?t=NPR&amp;c=7150&amp;s=2B">NPR 7150</a>. See the <a class="reference external" href="https://swehb.nasa.gov">NASA Software Engineering and Assurance Handbook</a> for more information.</p>
 <p>Intention is to expand the scope of use to also include its inclusion in Ground software tools that support mission planning or formulation; Ground software that operates a research, development, test, or evaluation laboratory (i.e., not a major engineering/research facility); or Ground software that provides decision support for non-mission-critical situations and airborn software whose anomalous behavior would cause or contribute to a failure of system function resulting in a minor failure condition for the airborne vehicle,
 or whose anomalous behavior would cause or contribute to a failure of system function with no effect on airborne vehicle operational capability or pilot workload. The classification for this increased scope is described below</p>
@@ -1029,7 +994,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 <li><p>Does the software process data or analyze trends that lead directly to safety decisions (e.g., determining when to turn power off to a wind tunnel to prevent system destruction)? NO</p></li>
 </ul>
 <section id="compliance-notation-legend">
-<h3><a class="toc-backref" href="#contents">Compliance Notation Legend</a><a class="headerlink" href="#compliance-notation-legend" title="Permalink to this headline">#</a></h3>
+<h3>Compliance Notation Legend<a class="headerlink" href="#compliance-notation-legend" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>FC: Fully Compliant</p></li>
 <li><p>T: Tailored (Specific tailoring described in mitigation) <a class="reference external" href="https://swehb.nasa.gov/display/7150/SWE-121+-+Document+Alternate+Requirements">SWE-121</a></p></li>
@@ -1039,11 +1004,11 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="compliance-matrix">
-<h3><a class="toc-backref" href="#contents">Compliance Matrix</a><a class="headerlink" href="#compliance-matrix" title="Permalink to this headline">#</a></h3>
+<h3>Compliance Matrix<a class="headerlink" href="#compliance-matrix" title="Permalink to this headline">#</a></h3>
 <p>This matrix tracks the compliance of this software and the project’s software engineering practices with the requirements from 7150.2.</p>
 <p>Note: for requirements with different evidence for the different softwares, they have a capital M (for ProgModels), A (for ProgAlgs) or S (for ProgServer) following the requirement.</p>
 <section id="life-cycle-management">
-<h4><a class="toc-backref" href="#contents">Life Cycle Management</a><a class="headerlink" href="#life-cycle-management" title="Permalink to this headline">#</a></h4>
+<h4>Life Cycle Management<a class="headerlink" href="#life-cycle-management" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 6%" />
@@ -1211,7 +1176,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="cost-estimation">
-<h4><a class="toc-backref" href="#contents">Cost Estimation</a><a class="headerlink" href="#cost-estimation" title="Permalink to this headline">#</a></h4>
+<h4>Cost Estimation<a class="headerlink" href="#cost-estimation" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 6%" />
@@ -1249,7 +1214,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 <p>Responsibility for cost accounting for these contributions is delegated to the project(s) conducting them. Cost of contributing to the Prognostics Python Packages should be represented in their project plans and other documents.</p>
 </section>
 <section id="schedules">
-<h4><a class="toc-backref" href="#contents">Schedules</a><a class="headerlink" href="#schedules" title="Permalink to this headline">#</a></h4>
+<h4>Schedules<a class="headerlink" href="#schedules" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 6%" />
@@ -1290,7 +1255,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 <p>Note: Release checklist includes confirming schedule exists for next release</p>
 </section>
 <section id="classification">
-<h4><a class="toc-backref" href="#contents">Classification</a><a class="headerlink" href="#classification" title="Permalink to this headline">#</a></h4>
+<h4>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 6%" />
@@ -1320,7 +1285,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </table>
 </section>
 <section id="software-assurance">
-<h4><a class="toc-backref" href="#contents">Software Assurance</a><a class="headerlink" href="#software-assurance" title="Permalink to this headline">#</a></h4>
+<h4>Software Assurance<a class="headerlink" href="#software-assurance" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 9%" />
@@ -1346,7 +1311,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 <p>See checklists at top of page for software assurance activities. Additionally, some software activities are enforced by github branch policies.</p>
 </section>
 <section id="safety-critical-software">
-<h4><a class="toc-backref" href="#contents">Safety Critical Software</a><a class="headerlink" href="#safety-critical-software" title="Permalink to this headline">#</a></h4>
+<h4>Safety Critical Software<a class="headerlink" href="#safety-critical-software" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 9%" />
@@ -1392,7 +1357,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 <p>This software is not safety critical, see [NPR 7150 NASA Software Engineering Requirements](<a class="reference external" href="https://nasa.github.io/progpy/dev_guide.html#npr-7150-nasa-software-engineering-requirements">https://nasa.github.io/progpy/dev_guide.html#npr-7150-nasa-software-engineering-requirements</a>) for more details</p>
 </section>
 <section id="automatic-generation-of-source-code">
-<h4><a class="toc-backref" href="#contents">Automatic Generation of Source Code</a><a class="headerlink" href="#automatic-generation-of-source-code" title="Permalink to this headline">#</a></h4>
+<h4>Automatic Generation of Source Code<a class="headerlink" href="#automatic-generation-of-source-code" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 9%" />
@@ -1422,7 +1387,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </table>
 </section>
 <section id="reuse">
-<h4><a class="toc-backref" href="#contents">Reuse</a><a class="headerlink" href="#reuse" title="Permalink to this headline">#</a></h4>
+<h4>Reuse<a class="headerlink" href="#reuse" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 6%" />
@@ -1472,7 +1437,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="cybersecurity">
-<h4><a class="toc-backref" href="#contents">Cybersecurity</a><a class="headerlink" href="#cybersecurity" title="Permalink to this headline">#</a></h4>
+<h4>Cybersecurity<a class="headerlink" href="#cybersecurity" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 7%" />
@@ -1566,7 +1531,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="bi-directional-traceability">
-<h4><a class="toc-backref" href="#contents">Bi-Directional Traceability</a><a class="headerlink" href="#bi-directional-traceability" title="Permalink to this headline">#</a></h4>
+<h4>Bi-Directional Traceability<a class="headerlink" href="#bi-directional-traceability" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 5%" />
@@ -1591,7 +1556,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </table>
 </section>
 <section id="requirements">
-<h4><a class="toc-backref" href="#contents">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h4>
+<h4>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 5%" />
@@ -1646,7 +1611,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="implementation">
-<h4><a class="toc-backref" href="#contents">Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h4>
+<h4>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 5%" />
@@ -1709,7 +1674,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="testing">
-<h4><a class="toc-backref" href="#contents">Testing</a><a class="headerlink" href="#testing" title="Permalink to this headline">#</a></h4>
+<h4>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 5%" />
@@ -1825,7 +1790,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="operations-maintenance-and-retirement">
-<h4><a class="toc-backref" href="#contents">Operations, Maintenance, and Retirement</a><a class="headerlink" href="#operations-maintenance-and-retirement" title="Permalink to this headline">#</a></h4>
+<h4>Operations, Maintenance, and Retirement<a class="headerlink" href="#operations-maintenance-and-retirement" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 5%" />
@@ -1892,7 +1857,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="configuration-management">
-<h4><a class="toc-backref" href="#contents">Configuration Management</a><a class="headerlink" href="#configuration-management" title="Permalink to this headline">#</a></h4>
+<h4>Configuration Management<a class="headerlink" href="#configuration-management" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 6%" />
@@ -2007,7 +1972,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="non-conformances">
-<h4><a class="toc-backref" href="#contents">Non-Conformances</a><a class="headerlink" href="#non-conformances" title="Permalink to this headline">#</a></h4>
+<h4>Non-Conformances<a class="headerlink" href="#non-conformances" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 6%" />
@@ -2042,7 +2007,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </table>
 </section>
 <section id="transition-to-a-higher-class">
-<h4><a class="toc-backref" href="#contents">Transition to a Higher Class</a><a class="headerlink" href="#transition-to-a-higher-class" title="Permalink to this headline">#</a></h4>
+<h4>Transition to a Higher Class<a class="headerlink" href="#transition-to-a-higher-class" title="Permalink to this headline">#</a></h4>
 <table class="table">
 <colgroup>
 <col style="width: 6%" />
@@ -2068,15 +2033,15 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </section>
 </section>
 <section id="aquisition-options">
-<h3><a class="toc-backref" href="#contents">Aquisition Options</a><a class="headerlink" href="#aquisition-options" title="Permalink to this headline">#</a></h3>
+<h3>Aquisition Options<a class="headerlink" href="#aquisition-options" title="Permalink to this headline">#</a></h3>
 <p>Assessed, there are some existing prognostics tools but no general Python package that can support model-based prognostics like we need and no general python package that can support model-based prognostics is an Service Oriented Architecture (SOA) like we need (prog_server).</p>
 </section>
 <section id="requirement-tracking">
-<h3><a class="toc-backref" href="#contents">Requirement Tracking</a><a class="headerlink" href="#requirement-tracking" title="Permalink to this headline">#</a></h3>
+<h3>Requirement Tracking<a class="headerlink" href="#requirement-tracking" title="Permalink to this headline">#</a></h3>
 <p>Requirements are tracked as issues with the “Enhancement” label (See <a class="reference external" href="https://github.com/nasa/prog_models/labels/enhancement">prog_models</a>, <a class="reference external" href="https://github.com/nasa/prog_algs/labels/enhancement">prog_algs</a>, <a class="reference external" href="https://github.com/nasa/prog_server/labels/enhancement">prog_server</a> Enhancement Issues). An issue template is used to ensure that the requirement has the desired information. Issues are closed to indicate the requirement has been met. Closing a requirement issue is done with a pull request, which is linked to the relevant requirement, for tracability. Closing the requirement issue requires a code review (see above for details), and requires implementation of passing tests that test the requirement (i.e., verification tests). The tests are reviewed with the code implementing the requirement. Issues are assigned to a milestone (i.e., release) indicating the requirements for that release. Github automatically tracks any changes to the issues (i.e., requirements)</p>
 </section>
 <section id="dependencies">
-<h3><a class="toc-backref" href="#contents">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this headline">#</a></h3>
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">#</a></h3>
 <p>The following dependencies are used in the project:</p>
 <ul>
 <li><p><a class="reference external" href="https://numpy.org/">numpy</a></p>
@@ -2177,7 +2142,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="tracability-notes">
-<h3><a class="toc-backref" href="#contents">Tracability Notes</a><a class="headerlink" href="#tracability-notes" title="Permalink to this headline">#</a></h3>
+<h3>Tracability Notes<a class="headerlink" href="#tracability-notes" title="Permalink to this headline">#</a></h3>
 <p>Hazards and non-conformances are tracked as issues with the label bug (See <a class="reference external" href="https://github.com/nasa/prog_models/labels/bug">prog_models</a>, <a class="reference external" href="https://github.com/nasa/prog_algs/labels/bug">prog_algs</a>, <a class="reference external" href="https://github.com/nasa/prog_server/labels/bug">prog_server</a>). In the template for a bug report, there is a section asking for relevant enhancement issues (i.e., requirements). This linking establishes tracability from hazards/non-conformances to the underlying requirement. These linkings are automatically marked by the github system in the requirement issue. Additionally, to close an enhancement issue (i.e., requirement), passing verification tests must be created and checked in. The PR where these tests are created and the implementation is completed is linked to the issue establishing tracability from requirement -&gt; verification test. These tests run automatically at every change/PR.</p>
 <p>Additionally, requirements are assigned to milestones/releases, establishing bi-directional tracability to these</p>
 <p>Summary: The following tracabilities are maintained:</p>

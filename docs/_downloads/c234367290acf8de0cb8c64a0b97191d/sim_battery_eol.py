@@ -6,7 +6,6 @@ Example of a battery being simulated until End of Life (EOL). Battery capacity d
 """
 
 import matplotlib.pyplot as plt
-
 from prog_models.models import BatteryElectroChem as Battery
 
 def run_example(): 

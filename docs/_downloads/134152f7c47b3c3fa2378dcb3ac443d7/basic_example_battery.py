@@ -26,6 +26,9 @@ from prog_algs.predictors import MonteCarlo as Predictor
 # VVV Uncomment this to use UnscentedTransform Predictor VVV
 # from prog_algs.predictors import UnscentedTransformPredictor as Predictor
 
+import seaborn as sns
+sns.set()
+
 def run_example():
     # Step 1: Setup model & future loading
     # Measurement noise
@@ -81,7 +84,7 @@ def run_example():
     mc = Predictor(batt)
 
     # Step 3b: Perform a prediction
-    NUM_SAMPLES = 5
+    NUM_SAMPLES = 100
     STEP_SIZE = 0.1
     SAVE_FREQ = 100  # How often to save results
     mc_results = mc.predict(filt.x, future_loading, n_samples = NUM_SAMPLES, dt=STEP_SIZE, save_freq = SAVE_FREQ)
@@ -124,10 +127,10 @@ def run_example():
     # Here we will plot the states at t0, 25% to ToE, 50% to ToE, 75% to ToE, and ToE
     fig = mc_results.states.snapshot(0).plot_scatter(label = "t={} s".format(int(mc_results.times[0])))  # 0
     quarter_index = int(len(mc_results.times)/4)
-    mc_results.states.snapshot(quarter_index).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index])))  # 25%
-    mc_results.states.snapshot(quarter_index*2).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index*2])))  # 50%
-    mc_results.states.snapshot(quarter_index*3).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index*3])))  # 75%
-    mc_results.states.snapshot(-1).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[-1])))  # 100%
+    # mc_results.states.snapshot(quarter_index).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index])))  # 25%
+    # mc_results.states.snapshot(quarter_index*2).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index*2])))  # 50%
+    # mc_results.states.snapshot(quarter_index*3).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index*3])))  # 75%
+    # mc_results.states.snapshot(-1).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[-1])))  # 100%
 
     mc_results.time_of_event.plot_hist()
     

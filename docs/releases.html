@@ -23,6 +23,11 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -89,27 +94,39 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_models_guide.html">
-   prog_models Guide
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="guide.html">
+   ProgPy Guide
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_algs_guide.html">
-   prog_algs Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_server_guide.html">
-   prog_server Guide
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_models_guide.html">
+     prog_models Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_algs_guide.html">
+     prog_algs Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_server_guide.html">
+     prog_server Guide
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="api_ref.html">
    API Reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -118,8 +135,8 @@
     <a class="reference internal" href="api_ref/prog_algs.html">
      prog_algs API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-    <label for="toctree-checkbox-2">
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -155,8 +172,8 @@
     <a class="reference internal" href="api_ref/prog_models.html">
      prog_models API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-    <label for="toctree-checkbox-3">
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -197,8 +214,8 @@
     <a class="reference internal" href="api_ref/prog_server.html">
      prog_server API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-    <label for="toctree-checkbox-4">
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -658,7 +675,7 @@ title="Print to PDF"
 <h3>prog_algs<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><strong>New State Estimator Added</strong> <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.KalmanFilter" title="prog_algs.state_estimators.KalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.KalmanFilter</span></code></a>. Works with models derived from <a class="reference internal" href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a>. See <a class="reference download internal" download="" href="_downloads/95185cf727a21ad753717b8332bb063f/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></p></li>
-<li><p><strong>New Predictor Added</strong> <a class="reference internal" href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.UnscentedTransformPredictor" title="prog_algs.predictors.UnscentedTransformPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.UnscentedTransformPredictor</span></code></a>.</p></li>
+<li><p><strong>New Predictor Added</strong> <a class="reference internal" href="prog_algs_guide.html#prog_algs.predictors.UnscentedTransformPredictor" title="prog_algs.predictors.UnscentedTransformPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.UnscentedTransformPredictor</span></code></a>.</p></li>
 <li><p>Initial state estimate (x0) can now be passed as <cite>UncertainData</cite> to represent initial state uncertainty. See <a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></p></li>
 <li><p>Added new metrics for <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code></a>: Prognostics horizon, Cumulative Relative Accuracy (CRA). See <a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></p></li>
 <li><p>Added ability to plot <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code></a>: profile.plot(). See <a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></p></li>

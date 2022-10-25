@@ -4,10 +4,9 @@
 Example of serializing and de-serializing a battery model using JSON and pickling methods
 """
 
-from prog_models.models import BatteryElectroChemEOD as Battery
-
 import matplotlib.pyplot as plt
 import pickle
+from prog_models.models import BatteryElectroChemEOD as Battery
 
 def run_example():  
     ## Step 1: Create a model object

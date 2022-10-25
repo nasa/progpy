@@ -5,9 +5,10 @@
 Example demonstrating ways to use future loading. 
 """
 
+import matplotlib.pyplot as plt
+from numpy.random import normal
 from prog_models.models import BatteryCircuit
 from statistics import mean
-from numpy.random import normal
 
 def run_example(): 
     m = BatteryCircuit()
@@ -40,7 +41,7 @@ def run_example():
 
     ## Example 2: Moving Average loading 
     # This is useful in cases where you are running reoccuring simulations, and are measuring the actual load on the system, 
-    # but dont have a good way of predicting it, and you expect loading to be steady
+    # but don't have a good way of predicting it, and you expect loading to be steady
 
     def future_loading(t, x=None):
         return future_loading.load
@@ -168,7 +169,6 @@ def run_example():
     # In this example future_loading.t has to be updated with current time before each prediction.
 
     # Show plots
-    import matplotlib.pyplot as plt
     plt.show()
 
 # This allows the module to be executed directly 

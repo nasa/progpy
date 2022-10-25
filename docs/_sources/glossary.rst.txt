@@ -23,16 +23,13 @@ Glossary
       Performance characteristics of a system that are a function of system state, but are not directly measured.
 
     state
-      Internal parameters (typically hidden states) used to represent the state of the system- can be same as inputs/outputs but do not have to be.  State is frequently denoted as x
+      Internal variables (typically hidden states) used to represent the state of the system- can be same as inputs/outputs but do not have to be.  State is frequently denoted as x
+
+    hidden state
+      :term:`state` that is not directly measurable
 
     state estimator
       An algorithm that is used to estimate the :term:`state` of the system, given measurements and a model, defined in the :py:mod:`prog_algs.state_estimators` subpackage (e.g., :py:class:`prog_algs.state_estimators.UnscentedKalmanFilter`).
-
-    process noise
-      Represents uncertainty in the model transition (e.g., model uncertainty), applied to :term:`state` during state transition.
-
-    measurement noise
-      Represents uncertainty in the measurement process (e.g., sensor sensitivity, sensor misalignements, environmental effects), applied to :term:`output`.
 
     predictor
       An algorithm that is used to predict future states, given the initial state, a model, and an estimate of :term:`future load`. E.g., :py:class:`prog_algs.predictors.MonteCarlo`.
@@ -48,4 +45,27 @@ Glossary
 
     threshold
       The conditions under which an :term:`event` is considered to have occurred.
+
+    prognostics
+      Prediction of (a) future performance and/or (b) the time of event for one or more events of interest for a system or system of systems
+
+    data-driven model
+      A model where the behavior is learned from data. In ProgPy, data-driven models derive from the parent class :py:class:`prog_models.data_models.DataModel`. A common example of data-driven models is models using neural networks (e.g., :py:class:`prog_models.data_models.LSTMStateTransitionModel`).
+
+    physics-based model
+      A model where behavior is described by the physics of the system. Physics-based models are typically :term:`parameterized<parameters>`, so that exact behavior of the system can be configured or learned (through parameter estimation).
+
+    parameters
+      Parameters describe a system. They are used to specialize a generic model to the specific system of interest.
+
+    process noise
+      Noise applied in the state transition method. Process noise is used to represent uncertainty in the state transition process (e.g., uncertainty in the quality of your model or your model configuration :term:`parameters`, environmental effects)
+
+    measurement noise
+      Noise applied in the output method. Measurement noise is used to represent uncertainty in your measurements. This can represent such things as uncertainty in the logic of the model's output method or sensor noise. 
+
+    future loading noise
+      Noise applied in the user provided :term:`future load` function. This is used to represent uncertainty in how the system is loaded in the future. 
       
+    state estimation
+      State estimation is the process from which the internal model :term:`state` (x) is estimated using :term:`input` (i.e., loading) and :term:`output` (i.e., sensor data). State estimation is necessary for cases where model state isn't directly measurable (i.e., `hidden state`) or where there is sensor noise. Most state estimators estimate the state with some representation of uncertainty. An algorithm that perform state estimation is called a :term:`state estimator` and is included in the prog_algs.state_estimators package

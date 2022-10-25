@@ -7,8 +7,8 @@ This example shows the use of the LinearModel class, a subclass of PrognosticsMo
 The model is used in a simulation, and the state is printed every second
 """
 
-from prog_models import LinearModel
 import numpy as np
+from prog_models import LinearModel
 
 class ThrownObject(LinearModel):
     """

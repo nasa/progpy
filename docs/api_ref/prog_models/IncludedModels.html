@@ -23,6 +23,11 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -32,6 +37,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -89,27 +95,39 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../prog_models_guide.html">
-   prog_models Guide
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../guide.html">
+   ProgPy Guide
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../prog_algs_guide.html">
-   prog_algs Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../prog_server_guide.html">
-   prog_server Guide
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prog_models_guide.html">
+     prog_models Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prog_algs_guide.html">
+     prog_algs Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../prog_server_guide.html">
+     prog_server Guide
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../../api_ref.html">
    API Reference
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -118,8 +136,8 @@
     <a class="reference internal" href="../prog_algs.html">
      prog_algs API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-    <label for="toctree-checkbox-2">
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -155,8 +173,8 @@
     <a class="reference internal" href="../prog_models.html">
      prog_models API Reference
     </a>
-    <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-    <label for="toctree-checkbox-3">
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -197,8 +215,8 @@
     <a class="reference internal" href="../prog_server.html">
      prog_server API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-    <label for="toctree-checkbox-4">
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -644,9 +662,8 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.BatteryElectroChemEOD">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">BatteryElectroChemEOD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.BatteryElectroChemEOD" title="Permalink to this definition">#</a></dt>
-<dd><p>Vectorized prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a battery, represented by an electrochemical equations as described in the following paper:
-<cite>M. Daigle and C. Kulkarni, “Electrochemistry-based Battery Modeling for Prognostics,” Annual Conference of the Prognostics and Health Management Society 2013, pp. 249-261, New Orleans, LA, October 2013. https://papers.phmsociety.org/index.php/phmconf/article/view/2252</cite>. This model predicts the end of discharge event.</p>
-<p>The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the <cite>Prognostics Center of Excellence Data Repository https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/</cite>.</p>
+<dd><p>Vectorized prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a battery, represented by an electrochemical equations as described in <a href="#id24"><span class="problematic" id="id1">[0]_</span></a>. This model predicts the end of discharge event.</p>
+<p>The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the Prognostics Center of Excellence Data Repository <a href="#id25"><span class="problematic" id="id2">[1]_</span></a>.</p>
 <dl>
 <dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (1)</dt><dd><p>EOD: End of Discharge</p>
 </dd>
@@ -714,6 +731,17 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#prog_models.models.BatteryElectroChemEOL" title="prog_models.models.BatteryElectroChemEOL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatteryElectroChemEOL</span></code></a>, <a class="reference internal" href="#prog_models.models.BatteryElectroChem" title="prog_models.models.BatteryElectroChem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatteryElectroChem</span></code></a>, <a class="reference internal" href="#prog_models.models.BatteryElectroChemEODEOL" title="prog_models.models.BatteryElectroChemEODEOL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatteryElectroChemEODEOL</span></code></a></p>
 </div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets">0</span></dt>
+<dd><ol class="upperalpha simple" start="13">
+<li><p>Daigle and C. Kulkarni, “Electrochemistry-based Battery Modeling for Prognostics,” Annual Conference of the Prognostics and Health Management Society 2013, pp. 249-261, New Orleans, LA, October 2013. <a class="reference external" href="https://papers.phmsociety.org/index.php/phmconf/article/view/2252">https://papers.phmsociety.org/index.php/phmconf/article/view/2252</a></p></li>
+</ol>
+</dd>
+<dt class="label" id="id4"><span class="brackets">1</span></dt>
+<dd><p>Prognostics Center of Excellence Data Repository <a class="reference external" href="https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/">https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/</a>.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -722,9 +750,8 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.BatteryElectroChemEOL">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">BatteryElectroChemEOL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.BatteryElectroChemEOL" title="Permalink to this definition">#</a></dt>
-<dd><p>Vectorized prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a battery degredation, represented by an electrochemical model as described in the following paper:
-<cite>M. Daigle and C. Kulkarni, “End-of-discharge and End-of-life Prediction in Lithium-ion Batteries with Electrochemistry-based Aging Models,” AIAA SciTech Forum 2016, San Diego, CA. https://arc.aiaa.org/doi/pdf/10.2514/6.2016-2132</cite></p>
-<p>The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the <cite>Prognostics Center of Excellence Data Repository https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/</cite>.</p>
+<dd><p>Vectorized prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a battery degredation, represented by an electrochemical model as described in <a href="#id26"><span class="problematic" id="id5">[0]_</span></a></p>
+<p>The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the Prognostics Center of Excellence Data Repository[1]_.</p>
 <dl>
 <dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (1)</dt><dd><p>InsufficientCapacity: Insufficient battery capacity</p>
 </dd>
@@ -749,7 +776,7 @@ state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
 Can be number (e.g., .2) applied to every output, a dictionary of values for each
 output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
 <li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for measurement noise (e.g., normal, uniform, triangular)</p></li>
-<li><p><strong>qMaxThreshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Threshold for qMax (for threshold_met and event_state), after which the InsufficientCapacity event has occured. Note: Battery manufacturers specify a threshold of 70-80% of qMax</p></li>
+<li><p><strong>qMaxThreshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Threshold for qMax (for threshold_met and event_state), after which the InsufficientCapacity event has occurred. Note: Battery manufacturers specify a threshold of 70-80% of qMax</p></li>
 <li><p><strong>wq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Wear rate for qMax, Ro, and D respectively</p></li>
 <li><p><strong>wr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Wear rate for qMax, Ro, and D respectively</p></li>
 <li><p><strong>wd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Wear rate for qMax, Ro, and D respectively</p></li>
@@ -761,6 +788,17 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#prog_models.models.BatteryElectroChemEOD" title="prog_models.models.BatteryElectroChemEOD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatteryElectroChemEOD</span></code></a>, <a class="reference internal" href="#prog_models.models.BatteryElectroChem" title="prog_models.models.BatteryElectroChem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatteryElectroChem</span></code></a>, <a class="reference internal" href="#prog_models.models.BatteryElectroChemEODEOL" title="prog_models.models.BatteryElectroChemEODEOL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatteryElectroChemEODEOL</span></code></a></p>
 </div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id6"><span class="brackets">0</span></dt>
+<dd><ol class="upperalpha simple" start="13">
+<li><p>Daigle and C. Kulkarni, “End-of-discharge and End-of-life Prediction in Lithium-ion Batteries with Electrochemistry-based Aging Models,” AIAA SciTech Forum 2016, San Diego, CA. <a class="reference external" href="https://arc.aiaa.org/doi/pdf/10.2514/6.2016-2132">https://arc.aiaa.org/doi/pdf/10.2514/6.2016-2132</a></p></li>
+</ol>
+</dd>
+<dt class="label" id="id7"><span class="brackets">1</span></dt>
+<dd><p>Prognostics Center of Excellence Data Repository <a class="reference external" href="https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/">https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/</a>.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -775,12 +813,8 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.BatteryElectroChemEODEOL">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">BatteryElectroChemEODEOL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.BatteryElectroChemEODEOL" title="Permalink to this definition">#</a></dt>
-<dd><p>Prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a battery degredation and discharge, represented by an electrochemical model as described in the following papers:</p>
-<ol class="arabic simple">
-<li><p><cite>M. Daigle and C. Kulkarni, “End-of-discharge and End-of-life Prediction in Lithium-ion Batteries with Electrochemistry-based Aging Models,” AIAA SciTech Forum 2016, San Diego, CA. https://arc.aiaa.org/doi/pdf/10.2514/6.2016-2132</cite></p></li>
-<li><p><cite>M. Daigle and C. Kulkarni, “Electrochemistry-based Battery Modeling for Prognostics,” Annual Conference of the Prognostics and Health Management Society 2013, pp. 249-261, New Orleans, LA, October 2013. https://papers.phmsociety.org/index.php/phmconf/article/view/2252</cite></p></li>
-</ol>
-<p>The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the <cite>Prognostics Center of Excellence Data Repository https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/</cite>.</p>
+<dd><p>Prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a battery degredation and discharge, represented by an electrochemical model as described in <a href="#id27"><span class="problematic" id="id8">[0]_</span></a> and <a href="#id28"><span class="problematic" id="id9">[1]_</span></a></p>
+<p>The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the Prognostics Center of Excellence Data Repository <a class="footnote-reference brackets" href="#id13" id="id10">2</a>.</p>
 <dl>
 <dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (2)</dt><dd><div class="line-block">
 <div class="line">EOD: End of Discharge</div>
@@ -805,6 +839,22 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <p class="admonition-title">Note</p>
 <p>For keyword arguments, see BatteryElectroChemEOD, BatteryElectroChemEOL</p>
 </div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id11"><span class="brackets">0</span></dt>
+<dd><ol class="upperalpha simple" start="13">
+<li><p>Daigle and C. Kulkarni, “Electrochemistry-based Battery Modeling for Prognostics,” Annual Conference of the Prognostics and Health Management Society 2013, pp. 249-261, New Orleans, LA, October 2013. <a class="reference external" href="https://papers.phmsociety.org/index.php/phmconf/article/view/2252">https://papers.phmsociety.org/index.php/phmconf/article/view/2252</a></p></li>
+</ol>
+</dd>
+<dt class="label" id="id12"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="13">
+<li><p>Daigle and C. Kulkarni, “End-of-discharge and End-of-life Prediction in Lithium-ion Batteries with Electrochemistry-based Aging Models,” AIAA SciTech Forum 2016, San Diego, CA. <a class="reference external" href="https://arc.aiaa.org/doi/pdf/10.2514/6.2016-2132">https://arc.aiaa.org/doi/pdf/10.2514/6.2016-2132</a></p></li>
+</ol>
+</dd>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id10">2</a></span></dt>
+<dd><p>Prognostics Center of Excellence Data Repository <a class="reference external" href="https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/">https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/</a>.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -817,8 +867,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.CentrifugalPumpBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">CentrifugalPumpBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.CentrifugalPumpBase" title="Permalink to this definition">#</a></dt>
-<dd><p>Prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a Centrifugal Pump as described in the following paper:
-<cite>M. Daigle and K. Goebel, “Model-based Prognostics with Concurrent Damage Progression Processes,” IEEE Transactions on Systems, Man, and Cybernetics: Systems, vol. 43, no. 4, pp. 535-546, May 2013. https://www.researchgate.net/publication/260652495_Model-Based_Prognostics_With_Concurrent_Damage_Progression_Processes</cite></p>
+<dd><p>Prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a Centrifugal Pump as described in <a href="#id29"><span class="problematic" id="id14">[0]_</span></a>.</p>
 <dl>
 <dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (4)</dt><dd><div class="line-block">
 <div class="line">ImpellerWearFailure: Failure of the impeller due to wear</div>
@@ -902,6 +951,14 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#prog_models.models.CentrifugalPumpWithWear" title="prog_models.models.CentrifugalPumpWithWear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CentrifugalPumpWithWear</span></code></a></p>
 </div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id15"><span class="brackets">0</span></dt>
+<dd><ol class="upperalpha simple" start="13">
+<li><p>Daigle and K. Goebel, “Model-based Prognostics with Concurrent Damage Progression Processes,” IEEE Transactions on Systems, Man, and Cybernetics: Systems, vol. 43, no. 4, pp. 535-546, May 2013. <a class="reference external" href="https://www.researchgate.net/publication/260652495_Model-Based_Prognostics_With_Concurrent_Damage_Progression_Processes">https://www.researchgate.net/publication/260652495_Model-Based_Prognostics_With_Concurrent_Damage_Progression_Processes</a></p></li>
+</ol>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -917,8 +974,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dt class="sig sig-object py" id="prog_models.models.CentrifugalPumpWithWear">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">CentrifugalPumpWithWear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.CentrifugalPumpWithWear" title="Permalink to this definition">#</a></dt>
 <dd><p>Prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for a centrifugal pump with wear parameters as part of the model state. This is identical to CentrifugalPumpBase, only CentrifugalPumpBase has the wear params as parameters instead of states</p>
-<p>This class implements a Centrifugal Pump model as described in the following paper:
-<cite>M. Daigle and K. Goebel, “Model-based Prognostics with Concurrent Damage Progression Processes,” IEEE Transactions on Systems, Man, and Cybernetics: Systems, vol. 43, no. 4, pp. 535-546, May 2013. https://www.researchgate.net/publication/260652495_Model-Based_Prognostics_With_Concurrent_Damage_Progression_Processes</cite></p>
+<p>This class implements a Centrifugal Pump model as described in <a href="#id30"><span class="problematic" id="id16">[0]_</span></a>.</p>
 <dl>
 <dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (4)</dt><dd><p>See CentrifugalPumpBase</p>
 </dd>
@@ -940,6 +996,14 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#prog_models.models.CentrifugalPumpBase" title="prog_models.models.CentrifugalPumpBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CentrifugalPumpBase</span></code></a></p>
 </div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id17"><span class="brackets">0</span></dt>
+<dd><ol class="upperalpha simple" start="13">
+<li><p>Daigle and K. Goebel, “Model-based Prognostics with Concurrent Damage Progression Processes,” IEEE Transactions on Systems, Man, and Cybernetics: Systems, vol. 43, no. 4, pp. 535-546, May 2013. <a class="reference external" href="https://www.researchgate.net/publication/260652495_Model-Based_Prognostics_With_Concurrent_Damage_Progression_Processes">https://www.researchgate.net/publication/260652495_Model-Based_Prognostics_With_Concurrent_Damage_Progression_Processes</a></p></li>
+</ol>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -1084,11 +1148,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <p><span class="versionmodified added">New in version 1.3.0.</span></p>
 </div>
 <p><a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">Model</span></a> of DC Motor.</p>
-<p>References:
-Matteo Corbetta, Chetan S. Kulkarni. An approach for uncertainty quantification and management of unmanned aerial vehicle health.
-Annual Conference of the PHM Society, Scottsdale, AZ, 2019. <a class="reference external" href="http://papers.phmsociety.org/index.php/phmconf/article/view/847">http://papers.phmsociety.org/index.php/phmconf/article/view/847</a></p>
-<p>George E. Gorospe Jr, Chetan S. Kulkarni, Edward Hogge, Andrew Hsu, and Natalie Ownby. A Study of the Degradation of Electronic Speed Controllers forBrushless DC Motors.
-Asia Pacific Conference of the Prognostics and Health Management Society, 2017. <a class="reference external" href="https://ntrs.nasa.gov/citations/20200000579">https://ntrs.nasa.gov/citations/20200000579</a></p>
+<p>References: <a href="#id31"><span class="problematic" id="id18">[0]_</span></a>, <a href="#id32"><span class="problematic" id="id19">[1]_</span></a>.</p>
 <p>This model was developed by NASA’s System Wide Safety (SWS) Project. <a class="reference external" href="https://www.nasa.gov/aeroresearch/programs/aosp/sws/">https://www.nasa.gov/aeroresearch/programs/aosp/sws/</a></p>
 <dl>
 <dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (0)</dt><dd><div class="line-block">
@@ -1134,38 +1194,40 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 </ul>
 </dd>
 </dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id20"><span class="brackets">0</span></dt>
+<dd><p>Matteo Corbetta, Chetan S. Kulkarni. An approach for uncertainty quantification and management of unmanned aerial vehicle health.</p>
+</dd>
+</dl>
+<p>Annual Conference of the PHM Society, Scottsdale, AZ, 2019. <a class="reference external" href="http://papers.phmsociety.org/index.php/phmconf/article/view/847">http://papers.phmsociety.org/index.php/phmconf/article/view/847</a>
+.. [1] George E. Gorospe Jr, Chetan S. Kulkarni, Edward Hogge, Andrew Hsu, and Natalie Ownby. A Study of the Degradation of Electronic Speed Controllers forBrushless DC Motors.
+Asia Pacific Conference of the Prognostics and Health Management Society, 2017. <a class="reference external" href="https://ntrs.nasa.gov/citations/20200000579">https://ntrs.nasa.gov/citations/20200000579</a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.DCMotorSP">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">DCMotorSP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.DCMotorSP" title="Permalink to this definition">#</a></dt>
-<dd><blockquote>
-<div><div class="versionadded">
+<dd><div class="versionadded">
 <p><span class="versionmodified added">New in version 1.4.0.</span></p>
 </div>
 <p><a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">Model</span></a> of single-phase DC Motor, as defined by the following equations:</p>
-<p>:math:<a href="#id1"><span class="problematic" id="id2">`</span></a></p>
-</div></blockquote>
-<p>rac{d_i}{dt} =
-rac{1}{L1}*(V-E-R*i)`</p>
-<blockquote>
-<div><p>:math:<a href="#id3"><span class="problematic" id="id4">`</span></a></p>
-</div></blockquote>
-<p>rac{<a href="#id5"><span class="problematic" id="id6">d_</span></a>omega}{dt} =
-rac{1}{J_t} * (T_e - T_l - B * omega)`</p>
-<blockquote>
-<div><p>where:</p>
+<div class="math notranslate nohighlight">
+\[\dfrac{d_i}{dt} = \dfrac{1}{L1}*(V-E-R*i)\]</div>
+<div class="math notranslate nohighlight">
+\[\dfrac{d_{\omega}}{dt} = \dfrac{1}{J_t} * (T_e - T_l - B * \omega)\]</div>
+<p>where:</p>
 <ul class="simple">
 <li><p>i       current, A</p></li>
-<li><p><span class="math">\omega</span>   rotor speed, rad/s</p></li>
+<li><p><span class="math notranslate nohighlight">\(\omega\)</span>   rotor speed, <span class="math notranslate nohighlight">\(\dfrac{rad}{s}\)</span></p></li>
 <li><p>V       input voltage, V</p></li>
 <li><p>E       back-emf voltage, V</p></li>
 <li><p>R       armature resistance, Ohm</p></li>
-<li><p>Jt      total inertia (rotor + propeller or load), kg*m^2</p></li>
-<li><p><span class="math">T_e</span>     driving torque (electrical), Nm</p></li>
-<li><p><span class="math">T_l</span>     load torque (mechanical), Nm</p></li>
-<li><p>B       friction coefficient, Nm/(rad/s)</p></li>
-<li><p>t       time, s</p></li>
+<li><p><span class="math notranslate nohighlight">\(J_t\)</span>      total inertia (rotor + propeller or load), <span class="math notranslate nohighlight">\(kg*m^2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T_e\)</span>     driving torque (electrical), <span class="math notranslate nohighlight">\(N*m\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T_l\)</span>     load torque (mechanical), <span class="math notranslate nohighlight">\(N*m\)</span></p></li>
+<li><p>B       friction coefficient, <span class="math notranslate nohighlight">\(\dfrac{N*m}{rad/s}\)</span></p></li>
+<li><p>t       time, <span class="math notranslate nohighlight">\(s\)</span></p></li>
 </ul>
 <dl>
 <dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (0)</dt><dd><div class="line-block">
@@ -1187,37 +1249,29 @@ rac{1}{J_t} * (T_e - T_l - B * omega)`</p>
 </div>
 </dd>
 </dl>
-<blockquote>
-<div><dl class="simple">
-<dt>process_noise<span class="classifier">Optional, float or Dict[str, float]</span></dt><dd><p><a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
 Can be number (e.g., .2) applied to every state, a dictionary of values for each
-state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p>
-</dd>
-<dt>process_noise_dist<span class="classifier">Optional, String</span></dt><dd><p>distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p>
-</dd>
-<dt>measurement_noise<span class="classifier">Optional, float or Dict[str, float]</span></dt><dd><p><a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
+state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em> or </em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
 Can be number (e.g., .2) applied to every output, a dictionary of values for each
-output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p>
-</dd>
-<dt>measurement_noise_dist<span class="classifier">Optional, String</span></dt><dd><p>distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p>
-</dd>
-<dt>L<span class="classifier">float</span></dt><dd><p>Self-inductance (H)</p>
-</dd>
-<dt>M: float</dt><dd><p>Mutual inductance (H)</p>
-</dd>
-<dt>R: float</dt><dd><p>Armature Resistance (Ohm)</p>
-</dd>
-<dt>Kt: float</dt><dd><p>back emf constant / Torque constant (V/rad/sec)</p>
-</dd>
-<dt>B: float</dt><dd><p>Friction in motor / Damping (Not a function of thrust) (Nm/(rad/s))</p>
-</dd>
-<dt>J: float</dt><dd><p>Load moment of inertia (neglecting motor shaft inertia) (Kg*m^2)</p>
-</dd>
-<dt>x0<span class="classifier">dict[str, float]</span></dt><dd><p>Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p>
+output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>L</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Self-inductance (H)</p></li>
+<li><p><strong>M</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Mutual inductance (H)</p></li>
+<li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Armature Resistance (Ohm)</p></li>
+<li><p><strong>Kt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – back emf constant / Torque constant (V/rad/sec)</p></li>
+<li><p><strong>B</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Friction in motor / Damping (Not a function of thrust) (Nm/(rad/s))</p></li>
+<li><p><strong>J</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Total load moment of inertia (motor shaft + load) (Kg*m^2) - alternately, you can set these separately as Js and Jl</p></li>
+<li><p><strong>Js</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Moment of inertia of motor shaft (kg*m^2) - one component of J</p></li>
+<li><p><strong>Jl</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Moment of inertia from load (kg*m^2) - one component of J. Note load is whatever the motor is attached to (e.g., propeller, valve, axil, etc.)</p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a><em>]</em>) – Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p></li>
+</ul>
 </dd>
 </dl>
-</div></blockquote>
-</div></blockquote>
 </dd></dl>
 
 </section>
@@ -1232,11 +1286,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p>
 <p>Simple Electronic-Speed Controller (ESC) <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> for powertrain modeling.
 This model replicates the behavior of the speed controller with pulse-width modulation (PWM) and commutation matrix.
 Duty cycle simulated with a square wave using scipy signal.square function.</p>
-<p>References:
-Matteo Corbetta, Chetan S. Kulkarni. An approach for uncertainty quantification and management of unmanned aerial vehicle health.
-Annual Conference of the PHM Society, Scottsdale, AZ, 2019. <a class="reference external" href="http://papers.phmsociety.org/index.php/phmconf/article/view/847">http://papers.phmsociety.org/index.php/phmconf/article/view/847</a></p>
-<p>George E. Gorospe Jr, Chetan S. Kulkarni, Edward Hogge, Andrew Hsu, and Natalie Ownby. A Study of the Degradation of Electronic Speed Controllers forBrushless DC Motors.
-Asia Pacific Conference of the Prognostics and Health Management Society, 2017. <a class="reference external" href="https://ntrs.nasa.gov/citations/20200000579">https://ntrs.nasa.gov/citations/20200000579</a></p>
+<p>References: <a href="#id33"><span class="problematic" id="id21">[0]_</span></a>, <a href="#id34"><span class="problematic" id="id22">[1]_</span></a>.</p>
 <p>This model was developed by NASA’s System Wide Safety (SWS) Project. <a class="reference external" href="https://www.nasa.gov/aeroresearch/programs/aosp/sws/">https://www.nasa.gov/aeroresearch/programs/aosp/sws/</a></p>
 <dl>
 <dt><a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">Events</span></a>: (0)</dt><dd><div class="line-block">
@@ -1280,6 +1330,15 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 </ul>
 </dd>
 </dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id23"><span class="brackets">0</span></dt>
+<dd><p>Matteo Corbetta, Chetan S. Kulkarni. An approach for uncertainty quantification and management of unmanned aerial vehicle health.</p>
+</dd>
+</dl>
+<p>Annual Conference of the PHM Society, Scottsdale, AZ, 2019. <a class="reference external" href="http://papers.phmsociety.org/index.php/phmconf/article/view/847">http://papers.phmsociety.org/index.php/phmconf/article/view/847</a>
+.. [1] George E. Gorospe Jr, Chetan S. Kulkarni, Edward Hogge, Andrew Hsu, and Natalie Ownby. A Study of the Degradation of Electronic Speed Controllers forBrushless DC Motors.
+Asia Pacific Conference of the Prognostics and Health Management Society, 2017. <a class="reference external" href="https://ntrs.nasa.gov/citations/20200000579">https://ntrs.nasa.gov/citations/20200000579</a></p>
 </dd></dl>
 
 </section>
@@ -1398,6 +1457,10 @@ Can be number (e.g., .2) applied to every output, a dictionary of values for eac
 output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
 <li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><em>String</em>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
 <li><p><strong>g</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Acceleration due to gravity (m/s^2). Default is 9.81 m/s^2 (standard gravity)</p></li>
+<li><p><strong>rho</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Air density (kg/m^3). Default is 1.225 (air density at sea level). Used in drag calculation</p></li>
+<li><p><strong>A</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Cross sectional area of object (m^2)</p></li>
+<li><p><strong>m</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Mass of object (kg)</p></li>
+<li><p><strong>cd</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Coefficient of drag</p></li>
 <li><p><strong>thrower_height</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Height of the thrower (m). Default is 1.83 m</p></li>
 <li><p><strong>throwing_speed</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Speed at which the ball is thrown (m/s). Default is 40 m/s</p></li>
 </ul>

@@ -13,7 +13,6 @@ Example building a LSTMStateTransitionModel from data. This is a simple example 
 
 import matplotlib.pyplot as plt
 import numpy as np
-
 from prog_models.data_models import LSTMStateTransitionModel
 from prog_models.models import ThrownObject, BatteryElectroChemEOD
 

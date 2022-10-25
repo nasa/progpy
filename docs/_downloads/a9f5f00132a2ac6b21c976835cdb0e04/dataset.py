@@ -9,19 +9,20 @@ Example downloading and using a NASA prognostics dataset.
     In this example, a battery dataset is downloaded from the NASA PCoE data repository. This dataset is then accessed and plotted. 
 """
 
+import matplotlib.pyplot as plt
+import pickle
+from prog_models.datasets import nasa_battery
 DATASET_ID = 1
 
 def run_example():
     # Step 1: Download and import the dataset for a single battery
     # Note: This may take some time
-    from prog_models.datasets import nasa_battery
     print('Downloading... ', end='')
     (desc, data) = nasa_battery.load_data(DATASET_ID)
     print('done')
 
     # We recommend saving the dataset to disk for future use
-    # This way you dont have to download it each time
-    import pickle
+    # This way you don't have to download it each time
     pickle.dump((desc, data), open(f'dataset_{DATASET_ID}.pkl', 'wb'))
 
     # Step 2: Access the dataset description
@@ -43,7 +44,6 @@ def run_example():
     print(f"Details of run 4: {desc['runs'][4]}")
 
     # Plot the run
-    import matplotlib.pyplot as plt
     plt.figure()
     plt.subplot(2, 1, 1)
     plt.plot(data[4]['relativeTime'], data[4]['current'])

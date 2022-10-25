@@ -3,9 +3,6 @@ Developers Guide & Project Plan
 
 This document includes some details relevant for developers working on any of the Python Prognostics Packages Tools (prog_models, prog_algs, prog_server)
 
-..  contents:: 
-    :backlinks: top
-
 Installing from a Branch 
 ------------------------
 To install the package package from a specific branch. First clone the repository and checkout the branch. Then navigate into the repository directory and use the following command:

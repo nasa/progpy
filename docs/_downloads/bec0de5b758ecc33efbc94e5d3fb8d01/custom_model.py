@@ -15,11 +15,10 @@ Example building a custom model with LSTMStateTransitionModel.
 
 import matplotlib.pyplot as plt
 import numpy as np
-from tensorflow import keras
-from tensorflow.keras import layers
-
 from prog_models.data_models import LSTMStateTransitionModel
 from prog_models.models import BatteryElectroChemEOD
+from tensorflow import keras
+from tensorflow.keras import layers
 
 def run_example():
     print('Generating data...')
@@ -59,11 +58,11 @@ def run_example():
     n_inputs = len(input_data[0][0])
     u_mean = np.mean(u_all[:,0,:n_inputs], axis=0)
     u_std = np.std(u_all[:,0,:n_inputs], axis=0)
-    # If there's no variation- dont normalize 
+    # If there's no variation- don't normalize 
     u_std[u_std == 0] = 1
     z_mean = np.mean(z_all, axis=0)
     z_std = np.std(z_all, axis=0)
-    # If there's no variation- dont normalize 
+    # If there's no variation- don't normalize 
     z_std[z_std == 0] = 1
 
     # Add output (since z_t-1 is last input)

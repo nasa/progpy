@@ -22,6 +22,11 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -30,6 +35,7 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/tabs.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="#" />
@@ -86,27 +92,39 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_models_guide.html">
-   prog_models Guide
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="guide.html">
+   ProgPy Guide
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_algs_guide.html">
-   prog_algs Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_server_guide.html">
-   prog_server Guide
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_models_guide.html">
+     prog_models Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_algs_guide.html">
+     prog_algs Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_server_guide.html">
+     prog_server Guide
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="api_ref.html">
    API Reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -115,8 +133,8 @@
     <a class="reference internal" href="api_ref/prog_algs.html">
      prog_algs API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-    <label for="toctree-checkbox-2">
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -152,8 +170,8 @@
     <a class="reference internal" href="api_ref/prog_models.html">
      prog_models API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-    <label for="toctree-checkbox-3">
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -194,8 +212,8 @@
     <a class="reference internal" href="api_ref/prog_server.html">
      prog_server API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-    <label for="toctree-checkbox-4">
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -476,9 +494,9 @@ title="Fullscreen mode"
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel">DataModel (class in prog_models.data_models)</a>
+      <li><a href="glossary.html#term-data-driven-model"><strong>data-driven model</strong></a>
 </li>
-      <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.CustomEncoder">DataModel.CustomEncoder (class in prog_models.data_models)</a>
+      <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel">DataModel (class in prog_models.data_models)</a>
 </li>
       <li>
     dataset
@@ -491,25 +509,17 @@ title="Fullscreen mode"
 </li>
       <li><a href="api_ref/prog_models/IncludedModels.html#prog_models.models.DCMotorSP">DCMotorSP (class in prog_models.models)</a>
 </li>
-      <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.CustomEncoder.default">default() (prog_models.data_models.DataModel.CustomEncoder method)</a>
-
-      <ul>
-        <li><a href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel.CustomEncoder.default">(prog_models.LinearModel.CustomEncoder method)</a>
-</li>
-        <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.CustomEncoder.default">(prog_models.PrognosticsModel.CustomEncoder method)</a>
-</li>
-      </ul></li>
       <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.default_parameters">default_parameters (prog_models.PrognosticsModel attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     derived_params
 
       <ul>
-        <li><a href="prog_models_guide.html#module-derived_params">module</a>
+        <li><a href="prog_models_guide.html#module-0">module</a>, <a href="prog_models_guide.html#module-derived_params">[1]</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData.describe">describe() (prog_algs.uncertain_data.UncertainData method)</a>
 </li>
       <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DMDModel.dmd_matrix">dmd_matrix (prog_models.data_models.DMDModel attribute)</a>
@@ -537,14 +547,6 @@ title="Fullscreen mode"
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.CustomEncoder.encode">encode() (prog_models.data_models.DataModel.CustomEncoder method)</a>
-
-      <ul>
-        <li><a href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel.CustomEncoder.encode">(prog_models.LinearModel.CustomEncoder method)</a>
-</li>
-        <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.CustomEncoder.encode">(prog_models.PrognosticsModel.CustomEncoder method)</a>
-</li>
-      </ul></li>
       <li>
     eol_event
 
@@ -628,11 +630,13 @@ title="Fullscreen mode"
       </ul></li>
       <li><a href="glossary.html#term-future-load"><strong>future load</strong></a>
 </li>
+      <li><a href="glossary.html#term-future-loading-noise"><strong>future loading noise</strong></a>
+</li>
       <li>
     future_loading
 
       <ul>
-        <li><a href="prog_models_guide.html#module-future_loading">module</a>
+        <li><a href="prog_models_guide.html#module-3">module</a>, <a href="prog_models_guide.html#module-future_loading">[1]</a>
 </li>
       </ul></li>
   </ul></td>
@@ -684,6 +688,10 @@ title="Fullscreen mode"
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="glossary.html#term-hidden-state"><strong>hidden state</strong></a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     horizon
 
@@ -711,12 +719,12 @@ title="Fullscreen mode"
       </ul></li>
       <li><a href="glossary.html#term-input"><strong>input</strong></a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.InputContainer">InputContainer (prog_models.PrognosticsModel attribute)</a>
 </li>
       <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.inputs">inputs (prog_models.PrognosticsModel attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session.is_init">is_init() (prog_client.Session method)</a>
 </li>
       <li><a href="api_ref/prog_server/prog_server.html#prog_server.is_running">is_running() (in module prog_server)</a>
@@ -725,14 +733,6 @@ title="Fullscreen mode"
 </li>
       <li><a href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile.items">items() (prog_algs.predictors.ToEPredictionProfile method)</a>
 </li>
-      <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.CustomEncoder.iterencode">iterencode() (prog_models.data_models.DataModel.CustomEncoder method)</a>
-
-      <ul>
-        <li><a href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel.CustomEncoder.iterencode">(prog_models.LinearModel.CustomEncoder method)</a>
-</li>
-        <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.CustomEncoder.iterencode">(prog_models.PrognosticsModel.CustomEncoder method)</a>
-</li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -773,16 +773,14 @@ title="Fullscreen mode"
       </ul></li>
       <li><a href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel">LinearModel (class in prog_models)</a>
 </li>
-      <li><a href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel.CustomEncoder">LinearModel.CustomEncoder (class in prog_models)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/prog_models/DataSets.html#prog_models.datasets.nasa_battery.load_data">load_data() (in module prog_models.datasets.nasa_battery)</a>
 
       <ul>
         <li><a href="api_ref/prog_models/DataSets.html#prog_models.datasets.nasa_cmapss.load_data">(in module prog_models.datasets.nasa_cmapss)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     lstm_model
 
@@ -843,7 +841,7 @@ title="Fullscreen mode"
 </li>
         <li><a href="prog_models_guide.html#module-dataset">dataset</a>
 </li>
-        <li><a href="prog_models_guide.html#module-derived_params">derived_params</a>
+        <li><a href="prog_models_guide.html#module-0">derived_params</a>, <a href="prog_models_guide.html#module-derived_params">[1]</a>
 </li>
         <li><a href="prog_models_guide.html#module-dynamic_step_size">dynamic_step_size</a>
 </li>
@@ -853,7 +851,7 @@ title="Fullscreen mode"
 </li>
         <li><a href="prog_models_guide.html#module-full_lstm_model">full_lstm_model</a>
 </li>
-        <li><a href="prog_models_guide.html#module-future_loading">future_loading</a>
+        <li><a href="prog_models_guide.html#module-3">future_loading</a>, <a href="prog_models_guide.html#module-future_loading">[1]</a>
 </li>
         <li><a href="prog_models_guide.html#module-generate_surrogate">generate_surrogate</a>
 </li>
@@ -869,9 +867,9 @@ title="Fullscreen mode"
 </li>
         <li><a href="prog_models_guide.html#module-new_model">new_model</a>
 </li>
-        <li><a href="prog_algs_guide.html#module-new_state_estimator_example">new_state_estimator_example</a>
+        <li><a href="prog_algs_guide.html#module-0">new_state_estimator_example</a>, <a href="prog_algs_guide.html#module-new_state_estimator_example">[1]</a>
 </li>
-        <li><a href="prog_models_guide.html#module-noise">noise</a>
+        <li><a href="prog_models_guide.html#module-2">noise</a>, <a href="prog_models_guide.html#module-noise">[1]</a>
 </li>
         <li><a href="prog_server_guide.html#module-online_prog">online_prog</a>
 </li>
@@ -891,7 +889,7 @@ title="Fullscreen mode"
 </li>
         <li><a href="prog_models_guide.html#module-serialization">serialization</a>
 </li>
-        <li><a href="prog_models_guide.html#module-sim">sim</a>
+        <li><a href="prog_models_guide.html#module-1">sim</a>, <a href="prog_models_guide.html#module-sim">[1]</a>
 </li>
         <li><a href="prog_models_guide.html#module-sim_battery_eol">sim_battery_eol</a>
 </li>
@@ -920,6 +918,8 @@ title="Fullscreen mode"
       </ul></li>
       <li><a href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.MonteCarlo">MonteCarlo (class in prog_algs.predictors)</a>
 </li>
+      <li><a href="prog_algs_guide.html#prog_algs.predictors.MonteCarloPredictor">MonteCarloPredictor (in module prog_algs.predictors)</a>
+</li>
       <li><a href="api_ref/prog_server/load_ests.html#prog_server.models.load_ests.MovingAverage">MovingAverage() (in module prog_server.models.load_ests)</a>
 </li>
       <li><a href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.MultivariateNormalDist">MultivariateNormalDist (class in prog_algs.uncertain_data)</a>
@@ -941,7 +941,7 @@ title="Fullscreen mode"
     new_state_estimator_example
 
       <ul>
-        <li><a href="prog_algs_guide.html#module-new_state_estimator_example">module</a>
+        <li><a href="prog_algs_guide.html#module-0">module</a>, <a href="prog_algs_guide.html#module-new_state_estimator_example">[1]</a>
 </li>
       </ul></li>
   </ul></td>
@@ -956,7 +956,7 @@ title="Fullscreen mode"
     noise
 
       <ul>
-        <li><a href="prog_models_guide.html#module-noise">module</a>
+        <li><a href="prog_models_guide.html#module-2">module</a>, <a href="prog_models_guide.html#module-noise">[1]</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1008,8 +1008,12 @@ title="Fullscreen mode"
         <li><a href="prog_models_guide.html#module-param_est">module</a>
 </li>
       </ul></li>
-      <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.parameters">parameters (prog_models.PrognosticsModel attribute)</a>
+      <li><a href="glossary.html#term-parameters"><strong>parameters</strong></a>
+
+      <ul>
+        <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.parameters">(prog_models.PrognosticsModel attribute)</a>
 </li>
+      </ul></li>
       <li>
     particle_filter_battery_example
 
@@ -1017,7 +1021,7 @@ title="Fullscreen mode"
         <li><a href="prog_algs_guide.html#module-particle_filter_battery_example">module</a>
 </li>
       </ul></li>
-      <li><a href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.ParticleFilter">ParticleFilter (class in prog_algs.state_estimators)</a>
+      <li><a href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.ParticleFilter">ParticleFilter (class in prog_algs.state_estimators)</a>, <a href="prog_algs_guide.html#prog_algs.state_estimators.ParticleFilter">[1]</a>
 </li>
       <li><a href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData.percentage_in_bounds">percentage_in_bounds() (prog_algs.uncertain_data.UncertainData method)</a>
 </li>
@@ -1031,6 +1035,8 @@ title="Fullscreen mode"
         <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.performance_metrics">(prog_models.PrognosticsModel method)</a>
 </li>
       </ul></li>
+      <li><a href="glossary.html#term-physics-based-model"><strong>physics-based model</strong></a>
+</li>
       <li>
     playback
 
@@ -1048,10 +1054,10 @@ title="Fullscreen mode"
 </li>
       <li><a href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData.plot_scatter">plot_scatter() (prog_algs.uncertain_data.UncertainData method)</a>
 </li>
-      <li><a href="api_ref/prog_models/IncludedModels.html#prog_models.models.PneumaticValve">PneumaticValve (in module prog_models.models)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_ref/prog_models/IncludedModels.html#prog_models.models.PneumaticValve">PneumaticValve (in module prog_models.models)</a>
+</li>
       <li><a href="api_ref/prog_models/IncludedModels.html#prog_models.models.PneumaticValveBase">PneumaticValveBase (class in prog_models.models)</a>
 </li>
       <li><a href="api_ref/prog_models/IncludedModels.html#prog_models.models.PneumaticValveWithWear">PneumaticValveWithWear (class in prog_models.models)</a>
@@ -1094,9 +1100,9 @@ title="Fullscreen mode"
       </ul></li>
       <li><a href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile.prognostic_horizon">prognostic_horizon() (prog_algs.predictors.ToEPredictionProfile method)</a>
 </li>
-      <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel">PrognosticsModel (class in prog_models)</a>
+      <li><a href="glossary.html#term-prognostics"><strong>prognostics</strong></a>
 </li>
-      <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.CustomEncoder">PrognosticsModel.CustomEncoder (class in prog_models)</a>
+      <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel">PrognosticsModel (class in prog_models)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1148,7 +1154,7 @@ title="Fullscreen mode"
     sim
 
       <ul>
-        <li><a href="prog_models_guide.html#module-sim">module</a>
+        <li><a href="prog_models_guide.html#module-1">module</a>, <a href="prog_models_guide.html#module-sim">[1]</a>
 </li>
       </ul></li>
       <li>
@@ -1216,6 +1222,8 @@ title="Fullscreen mode"
 </li>
       <li><a href="glossary.html#term-state"><strong>state</strong></a>
 </li>
+      <li><a href="glossary.html#term-state-estimation"><strong>state estimation</strong></a>
+</li>
       <li><a href="glossary.html#term-state-estimator"><strong>state estimator</strong></a>
 </li>
       <li>
@@ -1279,9 +1287,9 @@ title="Fullscreen mode"
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData">UncertainData (class in prog_algs.uncertain_data)</a>
 </li>
-      <li><a href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.UnscentedKalmanFilter">UnscentedKalmanFilter (class in prog_algs.state_estimators)</a>
+      <li><a href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.UnscentedKalmanFilter">UnscentedKalmanFilter (class in prog_algs.state_estimators)</a>, <a href="prog_algs_guide.html#prog_algs.state_estimators.UnscentedKalmanFilter">[1]</a>
 </li>
-      <li><a href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.UnscentedTransformPredictor">UnscentedTransformPredictor (class in prog_algs.predictors)</a>
+      <li><a href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.UnscentedTransformPredictor">UnscentedTransformPredictor (class in prog_algs.predictors)</a>, <a href="prog_algs_guide.html#prog_algs.predictors.UnscentedTransformPredictor">[1]</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>

@@ -108,8 +108,8 @@ def run_example():
     threshs_met = m.threshold_met(simulated_results.states[-1])
     for (key, met) in threshs_met.items():
         if met:
-            event_occured = key
-    print('\nThis event that occured first: ', event_occured)
+            event_occurred = key
+    print('\nThis event that occurred first: ', event_occurred)
     # It falls before it hits the gorund, obviously
 
     # Metrics can be analyzed from the simulation results. For example: monotonicity

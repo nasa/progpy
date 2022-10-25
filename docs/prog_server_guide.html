@@ -23,6 +23,11 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -31,6 +36,7 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/tabs.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -89,27 +95,39 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_models_guide.html">
-   prog_models Guide
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="guide.html">
+   ProgPy Guide
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="prog_algs_guide.html">
-   prog_algs Guide
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   prog_server Guide
-  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_models_guide.html">
+     prog_models Guide
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prog_algs_guide.html">
+     prog_algs Guide
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     prog_server Guide
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="api_ref.html">
    API Reference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -118,8 +136,8 @@
     <a class="reference internal" href="api_ref/prog_algs.html">
      prog_algs API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-    <label for="toctree-checkbox-2">
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -155,8 +173,8 @@
     <a class="reference internal" href="api_ref/prog_models.html">
      prog_models API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-    <label for="toctree-checkbox-3">
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -197,8 +215,8 @@
     <a class="reference internal" href="api_ref/prog_server.html">
      prog_server API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-    <label for="toctree-checkbox-4">
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -375,20 +393,23 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installing">
-   Installing
+  <a class="reference internal nav-link" href="#installing-prog-server">
+   Installing prog_server
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#installing-from-pip-recommended">
-     Installing from pip (recommended)
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use">
-   Use
+  <a class="reference internal nav-link" href="#about">
+   About
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#starting-the-prog-server">
+   Starting the prog_server
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   Examples
   </a>
  </li>
 </ul>
@@ -411,20 +432,23 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installing">
-   Installing
+  <a class="reference internal nav-link" href="#installing-prog-server">
+   Installing prog_server
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#installing-from-pip-recommended">
-     Installing from pip (recommended)
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#use">
-   Use
+  <a class="reference internal nav-link" href="#about">
+   About
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#starting-the-prog-server">
+   Starting the prog_server
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   Examples
   </a>
  </li>
 </ul>
@@ -443,44 +467,61 @@ title="Print to PDF"
 <p>The PaaS Sandbox is actually two packages, prog_server and prog_client. The prog_server package is a prognostics server that provides the REST API. The prog_client package is a python client that provides functions to interact with the server via the REST API.</p>
 <p>prog_server uses the <a class="reference internal" href="prog_algs_guide.html#prog-algs-guide"><span class="std std-ref">Prognostics Algorithms Package</span></a> and <a class="reference internal" href="prog_models_guide.html#prog-models-guide"><span class="std std-ref">Prognostics Models Package</span></a>.</p>
 <p>The PaaS Sandbox is a simplified version of the Prognostics As-A-Service Architecture implented as the PaaS/SWS Safety Service software by the NASA System Wide Safety (SWS) project, building upon the original work of the Convergent Aeronautics Solutions (CAS) project. This implementation is a research tool, and is therefore missing important features that should be present in a full implementation of the PaaS architecture such as authentication and persistent state management.</p>
-<section id="installing">
-<h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">#</a></h2>
-<section id="installing-from-pip-recommended">
-<h3>Installing from pip (recommended)<a class="headerlink" href="#installing-from-pip-recommended" title="Permalink to this headline">#</a></h3>
-<p>The latest stable release of <cite>prog_server</cite> is hosted on PyPi. For most users (unless you want to contribute to the development of <cite>prog_server</cite>), the version on PyPi will be adequate. To install from the command line, use the following command:</p>
+<section id="installing-prog-server">
+<h2>Installing prog_server<a class="headerlink" href="#installing-prog-server" title="Permalink to this headline">#</a></h2>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Stable Version (Recommended)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Pre-release</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>The latest stable release of <cite>prog_server</cite> is hosted on PyPi. For most users (unless you want to contribute to the development of <cite>prog_server</cite>), the version on PyPi will be adequate. To install from the command line, use the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install prog_server
 </pre></div>
 </div>
-<details class="summary-installing-pre-release-versions-with-github">
-<summary>Installing pre-release versions with GitHub</summary><p>Users who would like to contribute to <cite>prog_server</cite> or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/prog_server">prog_server GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To use this version, use the following commands:</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Users who would like to contribute to <cite>prog_server</cite> or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/prog_server">prog_server GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To use this version, use the following commands:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/nasa/prog_server
 <span class="gp">$ </span><span class="nb">cd</span> prog_server
 <span class="gp">$ </span>git checkout dev
 <span class="gp">$ </span>pip install -e .
 </pre></div>
 </div>
-</details><p><cite>prog_server</cite> uses the <a href="#id3"><span class="problematic" id="id4">:ref:`Prognostics Algorithms Package &lt;prog_algs Guide&gt;`__</span></a> and <a class="reference internal" href="prog_models_guide.html#prog-models-guide"><span class="std std-ref">Prognostics Models Package</span></a>. The best way to learn how to use prog_server is to first learn how to use these packages. See <a class="reference internal" href="prog_algs_guide.html#prog-algs-guide"><span class="std std-ref">Prognostics Algorithms Package Docs</span></a> and <a class="reference internal" href="prog_models_guide.html#prog-models-guide"><span class="std std-ref">Prognostics Models Package Docs</span></a> for more details.</p>
-<p>The PaaS Sandbox is actually two packages, <cite>prog_server</cite> and <cite>prog_client</cite>. The <cite>prog_server</cite> package is the server that provides the REST API. The <cite>prog_client</cite> package is a python client that uses the REST API (see <a class="reference external" href="prog_client.html">prog_client</a>). The <cite>prog_server</cite> package is the PaaS Sandbox Server. Once started the server can accept requests from one or more applications requesting prognostics, using its REST API (described in <cite>prog_server_api</cite>).</p>
+</div></div>
 </section>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this headline">#</a></h2>
+<p><cite>prog_server</cite> uses the <a class="reference internal" href="prog_algs_guide.html#prog-algs-guide"><span class="std std-ref">Prognostics Algorithms Package</span></a> and <a class="reference internal" href="prog_models_guide.html#prog-models-guide"><span class="std std-ref">Prognostics Models Package</span></a>. The best way to learn how to use prog_server is to first learn how to use these packages. See <a class="reference internal" href="prog_algs_guide.html#prog-algs-guide"><span class="std std-ref">Prognostics Algorithms Package Docs</span></a> and <a class="reference internal" href="prog_models_guide.html#prog-models-guide"><span class="std std-ref">Prognostics Models Package Docs</span></a> for more details.</p>
+<p>The PaaS Sandbox is actually two packages, <code class="docutils literal notranslate"><span class="pre">prog_server</span></code> and <code class="docutils literal notranslate"><span class="pre">prog_client</span></code>. The <code class="docutils literal notranslate"><span class="pre">prog_server</span></code> package is the server that provides the REST API. The <code class="docutils literal notranslate"><span class="pre">prog_client</span></code> package is a python client that uses the REST API (see <a class="reference external" href="prog_client.html">prog_client</a>). The <code class="docutils literal notranslate"><span class="pre">prog_server</span></code> package is the PaaS Sandbox Server. Once started the server can accept requests from one or more applications requesting prognostics, using its REST API (described in <cite>prog_server_api</cite>).</p>
 </section>
-<section id="use">
-<h2>Use<a class="headerlink" href="#use" title="Permalink to this headline">#</a></h2>
-<p>There are two methods for starting the prog_server. The first is by running the module directly. For example,</p>
+<section id="starting-the-prog-server">
+<h2>Starting the prog_server<a class="headerlink" href="#starting-the-prog-server" title="Permalink to this headline">#</a></h2>
+<p>There are two methods for starting the prog_server, described below:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">Command line</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Programatically</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>Generally, you can start the prog_server by running the module, like this:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m prog_server
 </pre></div>
 </div>
-<p>The second method is by starting it programatically in python. For example,</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">prog_server</span>
+<div class="tip admonition">
+<p class="admonition-title">Note</p>
+<p>You can force the server to start in debug mode using the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag. For example, <code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">python</span></span> <span class="operator"><span class="pre">-</span></span><span class="name"><span class="pre">m</span></span> <span class="name"><span class="pre">prog_server</span></span> <span class="operator"><span class="pre">--</span></span><span class="name"><span class="pre">debug</span></span></code></p>
+</div>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>There are two methods to start the prog_server in python. The first, below, is non-blocking allowing users to perform other functions while the server is running.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">prog_server</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prog_server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span> <span class="c1"># Starts the server in a new process (is non-blocking)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prog_server</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span> <span class="c1"># Stops the server</span>
 </pre></div>
 </div>
-<p>or</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">prog_server</span>
+<p>The second method, illustrated below, is blocking, meaning that the python shell will be blocked until the server is exited (e.g., by keyboard interrupt)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">prog_server</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prog_server</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1"># Starts the server- blocking.</span>
 </pre></div>
 </div>
+<p>Both run and start accept the following optional keyword arguments:</p>
+<ul class="simple">
+<li><p><strong>host</strong> (str): Server host address. Defaults to ‘127.0.0.1’</p></li>
+<li><p><strong>port</strong> (int): Server port address. Defaults to 5000</p></li>
+<li><p><strong>debug</strong> (bool): If the server is to be started in debug mode</p></li>
+</ul>
+</div></div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
 <p>The best way to learn how to use prog_server is to look at examples. There are a number of examples included with prog_server, listed below:</p>
 <ul>
 <li><dl>

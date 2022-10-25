@@ -6,7 +6,6 @@ Example demonstrating approaches for adding and handling model noise
 """
 
 import matplotlib.pyplot as plt
-
 from prog_models.models.thrown_object import ThrownObject
 
 def run_example():

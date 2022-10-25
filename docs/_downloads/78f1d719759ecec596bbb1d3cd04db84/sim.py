@@ -6,9 +6,9 @@ Example of a battery being simulated for a set period of time and then till thre
 """
 
 import matplotlib.pyplot as plt
-
 from prog_models.models import BatteryElectroChem
 from prog_models.models import BatteryCircuit as Battery
+
 # VVV Uncomment this to use Electro Chemistry Model VVV
 # Battery = BatteryElectroChem
 

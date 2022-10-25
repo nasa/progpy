@@ -19,9 +19,7 @@ ProgPy consists of a set of packages, described below. See the documentation spe
    :hidden:
    :glob:
 
-   prog_models_guide
-   prog_algs_guide
-   prog_server_guide
+   guide
    api_ref
    releases
    glossary

@@ -44,7 +44,7 @@ release = "1.4.0"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.coverage', "sphinx.ext.githubpages", 'sphinx.ext.napoleon', 'sphinx.ext.intersphinx', 'sphinx_toolbox.collapse', 'sphinx_toolbox.shields', 'sphinx.ext.autosectionlabel', 'sphinx.ext.imgmath']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.coverage', "sphinx.ext.githubpages", 'sphinx.ext.napoleon', 'sphinx.ext.intersphinx', 'sphinx_toolbox.collapse', 'sphinx_toolbox.shields', 'sphinx.ext.autosectionlabel', 'sphinx_tabs.tabs', 'sphinx_panels']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -72,6 +72,10 @@ html_theme = 'sphinx_book_theme'
 # Set sphinx logo
 html_logo = '_static/software_name.png'
 html_favicon = '_static/nasa_logo.ico'
+
+html_css_files = [
+    'css/custom.css',
+]
 
 html_static_path = ['_static']
 html_theme_options = {
