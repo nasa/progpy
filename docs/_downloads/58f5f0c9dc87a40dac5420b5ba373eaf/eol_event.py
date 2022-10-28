@@ -11,6 +11,7 @@ Results:
     iii) Histogram of the event 'EOL'
 """
 
+import matplotlib.pyplot as plt
 from prog_models.models import ThrownObject
 from prog_algs.predictors import MonteCarlo
 from prog_algs.uncertain_data import ScalarData
@@ -34,7 +35,7 @@ def run_example():
             return t_met
     
     # Step 2: Create instance of subclass
-    m = ThrownObjectWithEOL(process_noise=0.05)
+    m = ThrownObjectWithEOL(process_noise=1)
 
     # Step 3: Setup for prediction
     pred = MonteCarlo(m)
@@ -43,12 +44,12 @@ def run_example():
     state = ScalarData(m.initialize())
 
     # Step 4: Predict to EOL event
-    pred_results = pred.predict(state, future_loading, events=['EOL'], dt=0.025)
+    pred_results = pred.predict(state, future_loading, events=['EOL'], dt=0.01, n_samples=50)
+    # In this case EOL is when the object starts falling
+    # But for some models where events aren't sequential, there might be a mixture of events in the EOL
 
     # Step 5: Plot results
     pred_results.time_of_event.plot_hist()
-
-    import matplotlib.pyplot as plt
     plt.show()
 
 # This allows the module to be executed directly 

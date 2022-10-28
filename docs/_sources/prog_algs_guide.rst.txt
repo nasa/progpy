@@ -51,7 +51,7 @@ Data Structures
 
 A few custom data structures are available for storing and manipulating prognostics data of various forms. These structures are listed below and desribed on their respective pages:
  * :py:class:`prog_models.sim_result.SimResult` : The result of a single simulation (without uncertainty). Can be used to store inputs, outputs, states, event_states, observables, etc. Is returned by the model.simulate_to* methods.
- * :py:class:`prog_algs.uncertain_data.UncertainData`: Used throughout the package to represent data with uncertainty. There are a variety of subclasses of UncertainData to represent data with uncertainty in different forms (e.g., :py:class:`prog_algs.uncertain_data.ScalarData`, :py:class:`prog_algs.uncertain_data.MultivariateNormalDist`, :py:class:`prog_algs.uncertain_data.UnweightedSamples`). Notibly, this is used to represent the output of a StateEstimator's `estimate` method, individual snapshots of a prediction, and the time of event estimate from a predictor's `predict` method.
+ * :py:class:`prog_algs.uncertain_data.UncertainData`: Used throughout the package to represent data with uncertainty. There are a variety of subclasses of UncertainData to represent data with uncertainty in different forms (e.g., :py:class:`prog_algs.uncertain_data.ScalarData`, :py:class:`prog_algs.uncertain_data.MultivariateNormalDist`, :py:class:`prog_algs.uncertain_data.UnweightedSamples`). Notably, this is used to represent the output of a StateEstimator's `estimate` method, individual snapshots of a prediction, and the time of event estimate from a predictor's `predict` method.
  * :py:class:`prog_algs.predictors.Prediction`: Prediction of future values (with uncertainty) of some variable (e.g., :term:`input`, :term:`state`, :term:`output`, :term:`event state`, etc.). The `predict` method of predictors return this. 
  * :py:class:`prog_algs.predictors.ToEPredictionProfile` : The time of prediction estimates from multiple predictions. This data structure can be treated as a dictionary of time of prediction to toe prediction. 
 
@@ -72,9 +72,21 @@ The internal state is stored in the estimators x property as a UncertainData sub
 
     ProgPy includes a number of state estimators in the *prog_algs.state_estimators* package. The most commonly used of these are highlighted below. See `State Estimators <https://nasa.github.io/progpy/api_ref/prog_algs/StateEstimator.html>`__ for a full list of supported state estimators.
 
-    .. autoclass:: prog_algs.state_estimators.UnscentedKalmanFilter
+    * **Unscented Kalman Filter (UKF)**: A type of kalman filter for non-linear models where the state distribution is represented by a set of sigma points, calculated by an unscented tranform. Sigma points are propogated forward and then compared with the measurement to update the distribution. The resulting state is represented by a :py:class:`prog_algs.uncertain_data.MultivariateNormalDist`. By it's nature, UKFs are much faster than Particle Filters, but they fit the data to a normal distribution, resulting in some loss of information.
+    * **Particle Filter (PF)**: A sample-based state estimation algorithm, where the distribution of likely states is represented by a set of unweighted samples. These samples are propagated forward and then weighted according to the likelihood of the measurement (given those samples) to update the distribution. The resulting state is represented by a :py:class:`prog_algs.uncertain_data.UnweightedSamples`. By its nature, PF is more accurate than a UKF, but much slower. Full accuracy of PF can be adjusted by increasing or decreasing the number of samples
+    * **Kalman Filter (KF)**: A Simple efficient Kalman Filter for linear systems where state is represented by a mean and covariance matrix. The resulting state is represented by a :py:class:`prog_algs.uncertain_data.MultivariateNormalDist`. Only works with Prognostic Models inheriting from :py:class:`prog_models.LinearModel`. 
 
-    .. autoclass:: prog_algs.state_estimators.ParticleFilter
+    .. dropdown:: UKF Details
+
+        .. autoclass:: prog_algs.state_estimators.UnscentedKalmanFilter
+    
+    .. dropdown:: PF Details
+
+        .. autoclass:: prog_algs.state_estimators.ParticleFilter
+
+    .. dropdown:: KF Details
+
+        .. autoclass:: prog_algs.state_estimators.ParticleFilter
 
 .. dropdown:: Example
 
@@ -111,13 +123,13 @@ Example
 Prediction
 -----------
 
-Prediction is the process by which future states are estimates, given the initial state (e.g., from State Estimation), a model, and an estimate of :term:`future load`. An algorithm used to do this is called a :term:`predictor`. Prediction is often computationally expensive, especially for sample-based approaches with strict precision requirements (which therefore require large number of samples).
+Prediction is the process by which future states are estimated, given the initial state (e.g., from State Estimation), a model, and an estimate of :term:`future load`. An algorithm used to do this is called a :term:`predictor`. Prediction is often computationally expensive, especially for sample-based approaches with strict precision requirements (which therefore require large number of samples).
 
 With this framework, there are a number of results that can be predicted. The exact prediction results are selected based on the needs of the end-user. The most common prediction results are Time of Event (ToE) and Time to Event (TtE). Time of Event at a specific prediction time (:math:`t_P`) is defined as the time when the event is expected to occur (with uncertainty), or equivalently, the time where the event state for that event is zero. Time to Event is defined as the time to ToE (:math:`TtE = ToE - t_P`). In prognostics, ToE and TtE are often referred to as End of Life (EOL) and Remaining Useful Life (RUL), respectively.
 
 Beyond these, results of prediction can also include event state, outputs, performance metrics, and system states at different future times, including at ToE. For approaches that predict ToE with uncertainty, some users consider Probability of Success (PoS) or Probability of Failure (PoF). PoF is defined as the percentage of predictions that result in failure before the prognostics horizon (:math:`PoS \triangleq 1 - PoF`).
 
-A predictors predict method is used to perform prediction, generally defined below:
+A predictors ``predict`` method is used to perform prediction, generally defined below:
 
 .. code-block:: python
 
@@ -127,7 +139,7 @@ Where x0 is the initial state as an UncertainData object (often the output of st
 
 The result of the predict method is a named tuple with the following members:
 
-* **times**: array of times for each savepoin such that times[i] corresponds to inputs.snapshot(i)
+* **times**: array of times for each savepoint such that times[i] corresponds to inputs.snapshot(i)
 * **inputs**: :py:class:`prog_algs.predictors.Prediction` object containing inputs used to perform prediction such that inputs.snapshot(i) corresponds to times[i]
 * **outputs**: :py:class:`prog_algs.predictors.Prediction` object containing  predicted outputs at each savepoint such that outputs.snapshot(i) corresponds to times[i]
 * **event_states**: :py:class:`prog_algs.predictors.Prediction` object containing predicted event states at each savepoint such that event_states.snapshot(i) corresponds to times[i]
@@ -139,9 +151,18 @@ The stepsize and times at which results are saved can be defined like in a simul
 
     ProgPy includes a number of predictors in the *prog_algs.predictors* package. The most commonly used of these are highlighted below. See `Predictors <https://nasa.github.io/progpy/api_ref/prog_algs/Predictors.html>`__ for a full list of supported predictors.
 
-    .. autoclass:: prog_algs.predictors.UnscentedTransformPredictor
+    * **Unscented Transform (UT)**: A type of predictor for non-linear models where the state distribution is represented by a set of sigma points, calculated by an unscented tranform. Sigma points are propogated forward with time until the pass the threshold. The times at which each sigma point passes the threshold are converted to a distribution of time of event. The predicted future states and time of event are represented by a :py:class:`prog_algs.uncertain_data.MultivariateNormalDist`. By it's nature, UTs are much faster than MCs, but they fit the data to a normal distribution, resulting in some loss of information.
+    * **Monte Carlo (MC)**: A sample-based prediction algorithm, where the distribution of likely states is represented by a set of unweighted samples. These samples are propagated forward with time. By its nature, MC is more accurate than a PF, but much slower. The predicted future states and time of event are represented by a :py:class:`prog_algs.uncertain_data.UnweightedSamples`. Full accuracy of MC can be adjusted by increasing or decreasing the number of samples
 
-    .. autoclass:: prog_algs.predictors.MonteCarloPredictor
+    .. dropdown:: UT Details
+
+        .. autoclass:: prog_algs.predictors.UnscentedTransformPredictor
+
+    .. dropdown:: MC Details
+
+        .. autoclass:: prog_algs.predictors.MonteCarlo
+
+        .. autoclass:: prog_algs.predictors.MonteCarloPredictor
 
 Extending
 *************
@@ -155,7 +176,7 @@ Analyzing Results
 State Estimation
 *******************
 
-There results of the state estimation are stored in an object of type :class:`prog_algs.uncertain_data.UncertainData`. This class contains a number of methods for analyzing a state estimate. This includes methods for obtaining statistics about the distribution, including the following:
+The results of the state estimation are stored in an object of type :class:`prog_algs.uncertain_data.UncertainData`. This class contains a number of methods for analyzing a state estimate. This includes methods for obtaining statistics about the distribution, including the following:
 
 * **mean**: The mean value of the state estimate distribution.
 * **median**: The median value of the state estimate distribution.
@@ -234,7 +255,7 @@ Time of Event (ToE)
 
 Time of Event is also stored as an object of type :class:`prog_algs.uncertain_data.UncertainData`, so the analysis functions described in :ref:`State Estimation` are also available for a ToE estimate. See :ref:`State Estimation` or :class:`prog_algs.uncertain_data.UncertainData` documentation for details.
 
-In additional to these standard UncertainData metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.
+In addition to these standard UncertainData metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.
 
 Below is an example calculating probability of success:
 
@@ -248,7 +269,7 @@ ToE Prediction Profile
 
 A :class:`prog_algs.predictors.ToEPredictionProfile` contains Time of Event (ToE) predictions performed at multiple points. ToEPredictionProfile is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:
 
-* **alpha_lambda**: Whether the prediction falls within specified limits at particular times with respect to a performance measure[#Goebel2017]_ [#Saxena2010]_
+* **alpha_lambda**: Whether the prediction falls within specified limits at particular times with respect to a performance measure [#Goebel2017]_ [#Saxena2010]_
 * **cumulate relitive accuracy**: The sum of the relative accuracies of each prediction, given a ground truth
 * **monotonicity**: The monotonicity of the prediction series [#Baptista2022]_ [#Coble2021]_
 * **prognostic_horizon**: The difference between a time :math:`t_i`, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event [#Goebel2017]_ [#Saxena2010]_
@@ -273,8 +294,8 @@ The best way to learn how to use `prog_algs` is through the `tutorial <https://m
 * :download:`examples.basic_example_battery <../../prog_algs/examples/basic_example_battery.py>`
     .. automodule:: basic_example_battery
 
-* :download:`examples.benchmarking_example <../../prog_algs/examples/benchmarking_example.py>`
-    .. automodule:: benchmarking_example
+.. * :download:`examples.benchmarking_example <../../prog_algs/examples/benchmarking_example.py>`
+..     .. automodule:: benchmarking_example
 
 * :download:`examples.eol_event <../../prog_algs/examples/eol_event.py>`
     .. automodule:: eol_event

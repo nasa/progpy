@@ -5,64 +5,76 @@ The :ref:`prog_models<prog_models Guide>` package is distributed with a few pre-
 .. ..  contents:: 
 ..     :backlinks: top
 
-Battery Model - Circuit
--------------------------------------------------------------
-.. autoclass:: prog_models.models.BatteryCircuit
-
-Battery Model - Electro Chemistry
+Battery Model
 -------------------------------------------------------------
 
-There are three different flavors of Electro Chemistry Battery Models distributed with the package, described below
+.. tabs::
 
-End of Discharge
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. autoclass:: prog_models.models.BatteryElectroChemEOD
+    .. tab:: ElectroChem (EOD)
 
-End of Life (i.e., InsufficientCapacity)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. autoclass:: prog_models.models.BatteryElectroChemEOL
+        .. autoclass:: prog_models.models.BatteryElectroChemEOD
 
-End of Discharge, End of Life (i.e., InsufficientCapacity & EOD)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. autoclass:: prog_models.models.BatteryElectroChem
+    .. tab:: ElectroChem (EOL)
 
-.. autoclass:: prog_models.models.BatteryElectroChemEODEOL
+        .. autoclass:: prog_models.models.BatteryElectroChemEOL
+
+    .. tab:: ElectroChem (Combo)
+
+        .. autoclass:: prog_models.models.BatteryElectroChem
+
+        .. autoclass:: prog_models.models.BatteryElectroChemEODEOL
+
+    .. tab:: Circuit
+
+        .. autoclass:: prog_models.models.BatteryCircuit
+
 
 Pump Model
 -------------------------------------------------------------
 
 There are two variants of the pump model based on if the wear parameters are estimated as part of the state. The models are described below
 
-Pump Model (Base)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. autoclass:: prog_models.models.CentrifugalPumpBase
+.. tabs::
 
-Pump Model (With Wear)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. autoclass:: prog_models.models.CentrifugalPump
+    .. tab:: Base Model
 
-.. autoclass:: prog_models.models.CentrifugalPumpWithWear
+        .. autoclass:: prog_models.models.CentrifugalPumpBase
+
+    .. tab:: With Wear As State
+
+        .. autoclass:: prog_models.models.CentrifugalPump
+
+        .. autoclass:: prog_models.models.CentrifugalPumpWithWear
 
 Pneumatic Valve
 -------------------------------------------------------------
 
 There are two variants of the valve model based on if the wear parameters are estimated as part of the state. The models are described below
 
-Pneumatic Valve (Base)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. autoclass:: prog_models.models.PneumaticValveBase
+.. tabs::
 
-Pneumatic Valve (With Wear)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. autoclass:: prog_models.models.PneumaticValve
+    .. tab:: Base Model
 
-.. autoclass:: prog_models.models.PneumaticValveWithWear
+        .. autoclass:: prog_models.models.PneumaticValveBase
+
+    .. tab:: With Wear As State
+
+        .. autoclass:: prog_models.models.PneumaticValve
+
+        .. autoclass:: prog_models.models.PneumaticValveWithWear
 
 DC Motor
 -------------------------------------------------------------
-.. autoclass:: prog_models.models.DCMotor
 
-.. autoclass:: prog_models.models.DCMotorSP
+.. tabs:: 
+
+    .. tab:: Single Phase
+
+        .. autoclass:: prog_models.models.DCMotorSP
+
+    .. tab:: Triple Phase
+
+        .. autoclass:: prog_models.models.DCMotor
 
 ESC
 -------------------------------------------------------------

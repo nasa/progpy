@@ -22,20 +22,19 @@ Here's an example of its use. In this example we use the :py:class:`ThrownObject
 
 See tutorial and examples for more information and additional features.
 
-..  contents:: 
-    :backlinks: top
-
 Included Predictors
 -----------------------
 The following predictors are included with this package. A new predictor can be created by subclassing :py:class:`Predictor`. See also: `predictor_template.py`
 
-Monte Carlo Predictor
-**********************
-.. autoclass:: prog_algs.predictors.MonteCarlo
+.. tabs::
 
-Unscented Transform Predictor
-*****************************
-.. autoclass:: prog_algs.predictors.UnscentedTransformPredictor
+   .. tab:: Monte Carlo Predictor
+
+      .. autoclass:: prog_algs.predictors.MonteCarlo
+
+   .. tab:: Unscented Transform Predictor
+      
+      .. autoclass:: prog_algs.predictors.UnscentedTransformPredictor
 
 Predictor Interface
 -----------------------

@@ -35,7 +35,7 @@ Glossary
       An algorithm that is used to predict future states, given the initial state, a model, and an estimate of :term:`future load`. E.g., :py:class:`prog_algs.predictors.MonteCarlo`.
 
     prediction
-      A prediction of something (e.g., :term:`input`, :term:`state`, :term:`output`, :term:`event state`, etc.), with uncertainty, at one or more future times, a result of a :term:`predictor` prediction step (:py:func:`prog_algs.predictors.Predictor.predict`). For example- a prediction of the future :term:`state` of a system at certain specified savepoints, returned from prediction using a :py:class:`prog_algs.predictors.MonteCarlo` predictor. 
+      A prediction of something (e.g., :term:`input`, :term:`state`, :term:`output`, :term:`event state`, etc.), with uncertainty, at one or more future times, as a result of a :term:`predictor` prediction step (:py:func:`prog_algs.predictors.Predictor.predict`). For example- a prediction of the future :term:`state` of a system at certain specified savepoints, returned from prediction using a :py:class:`prog_algs.predictors.MonteCarlo` predictor. 
 
     surrogate
       A model that approximates the behavior of another model. Often used to generate a faster version of a model (e.g., for resource-constrained applications or to be used in optimization) or to test a data model. Generated using :py:func:`prog_models.PrognosticsModel.generate_surrogate` method.
@@ -47,7 +47,7 @@ Glossary
       The conditions under which an :term:`event` is considered to have occurred.
 
     prognostics
-      Prediction of (a) future performance and/or (b) the time of event for one or more events of interest for a system or system of systems
+      Prediction of (a) future performance and/or (b) the time at which one or more events of interest occur, for a system or a system of systems
 
     data-driven model
       A model where the behavior is learned from data. In ProgPy, data-driven models derive from the parent class :py:class:`prog_models.data_models.DataModel`. A common example of data-driven models is models using neural networks (e.g., :py:class:`prog_models.data_models.LSTMStateTransitionModel`).
@@ -68,4 +68,4 @@ Glossary
       Noise applied in the user provided :term:`future load` function. This is used to represent uncertainty in how the system is loaded in the future. 
       
     state estimation
-      State estimation is the process from which the internal model :term:`state` (x) is estimated using :term:`input` (i.e., loading) and :term:`output` (i.e., sensor data). State estimation is necessary for cases where model state isn't directly measurable (i.e., `hidden state`) or where there is sensor noise. Most state estimators estimate the state with some representation of uncertainty. An algorithm that perform state estimation is called a :term:`state estimator` and is included in the prog_algs.state_estimators package
+      State estimation is the process from which the internal model :term:`state` (x) is estimated using :term:`input` (i.e., loading) and :term:`output` (i.e., sensor data). State estimation is necessary for cases where model state isn't directly measurable (i.e., `hidden state`) or where there is sensor noise. Most state estimators estimate the state with some representation of uncertainty. An algorithm that performs state estimation is called a :term:`state estimator` and is included in the prog_algs.state_estimators package

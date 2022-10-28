@@ -11,13 +11,13 @@ prog_models
 **************
 * **Data-Driven Models**
 
-  * Created new :py:class:`prog_models.data_models.DataModel` class as interface/superclass for all data-driven models. Data-driven models are interchangeable with physics-based models. DataModels can be trained using data (.:py:meth:`prog_models.data_models.DataModel.from_data`), or an existing model (:py:meth:`prog_models.data_models.DataModel.from_model`)
-  * Introduced new LSTM State Transition DataModel. See :download:`examples.lstm_model <../../prog_models/examples/lstm_model.py>`, :download:`examples.full_lstm_model <../../prog_models/examples/full_lstm_model.py>`, and :download:`examples.custom_model <../../prog_models/examples/custom_model.py>` for examples of use
+  * Created new :py:class:`prog_models.data_models.DataModel` class as interface/superclass for all data-driven models. Data-driven models are interchangeable in use (e.g., simulation, use with prog_algs) with physics-based models. DataModels can be trained using data (:py:meth:`prog_models.data_models.DataModel.from_data`), or an existing model (:py:meth:`prog_models.data_models.DataModel.from_model`)
+  * Introduced new LSTM State Transition DataModel (:py:class:`prog_models.data_models.LSTMStateTransitionModel`). See :download:`examples.lstm_model <../../prog_models/examples/lstm_model.py>`, :download:`examples.full_lstm_model <../../prog_models/examples/full_lstm_model.py>`, and :download:`examples.custom_model <../../prog_models/examples/custom_model.py>` for examples of use
   * DMD model (:py:class:`prog_models.data_models.DMDModel`) updated to new data-driven model interface. Can now be created from data as well as an existing model
   * Added ability to integrate training noise to data for DMD Model (:py:class:`prog_models.data_models.DMDModel`)
 
 * **New Model**: Single-Phase DC Motor (:py:class:`prog_models.models.DCMotorSP`)
-* Added the ability to select integration method when simulation. Current options are Euler and RK4
+* Added the ability to select integration method when simulating (see ``integration_method`` keywork argument for :py:func:`prog_models.PrognosticsModel.simulate_to_threshold`). Current options are Euler and RK4
 * New feature allowing serialization of model parameters as JSON. See :py:meth:`prog_models.PrognosticsModel.to_json`, :py:meth:`prog_models.PrognosticsModel.from_json`, and serialization example (:download:`examples.serialization <../../prog_models/examples/serialization.py>`)
 * Added automatic step size feature in simulation. When enabled, step size will adapt to meet the exact save_pts and save_freq. Step size range can also be bounded
 * New Example Model: Simple Paris' Law (:py:class:`prog_models.models.ParisLawCrackGrowth`)

@@ -4,15 +4,16 @@
 In this example we are using the UTPredictor to predict a specific event, in this case impact. This will then ignore the other events which are not of interest.
 """
 
+from prog_algs import state_estimators, predictors
 from prog_models.models.thrown_object import ThrownObject
-from prog_algs import *
 
 def run_example():
     ## Setup
     m = ThrownObject()
     initial_state = m.initialize()
+    load = m.InputContainer({}) # Optimization - create once
     def future_loading(t, x = None):
-        return m.InputContainer({})
+        return load
 
     ## State Estimation - perform a single ukf state estimate step
     filt = state_estimators.UnscentedKalmanFilter(m, initial_state)

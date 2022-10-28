@@ -36,6 +36,7 @@
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/tabs.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -395,18 +396,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#included-predictors">
    Included Predictors
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#monte-carlo-predictor">
-     Monte Carlo Predictor
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#unscented-transform-predictor">
-     Unscented Transform Predictor
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#predictor-interface">
@@ -436,18 +425,6 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#included-predictors">
    Included Predictors
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#monte-carlo-predictor">
-     Monte Carlo Predictor
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#unscented-transform-predictor">
-     Unscented Transform Predictor
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#predictor-interface">
@@ -465,7 +442,7 @@ title="Print to PDF"
               <div>
                 
   <section id="predictors">
-<h1><a class="toc-backref" href="#contents">Predictors</a><a class="headerlink" href="#predictors" title="Permalink to this headline">#</a></h1>
+<h1>Predictors<a class="headerlink" href="#predictors" title="Permalink to this headline">#</a></h1>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Predictor</span></code> uses a state estimate (type <code class="xref py py-class docutils literal notranslate"><span class="pre">UncertainData</span></code> subclass, output of a <code class="xref py py-class docutils literal notranslate"><span class="pre">StateEstimator</span></code>), information about expected future loading, and a <code class="xref py py-class docutils literal notranslate"><span class="pre">PrognosticsModel</span></code> (see: <a class="reference external" href="https://github.com/nasa/prog_models">prog_models package</a>) to predict both future states (also outputs, performance metrics, event_states) at predefined points and the time that an event will occur (Time of Event, ToE) with uncertainty.</p>
 <p>Here’s an example of its use. In this example we use the <code class="xref py py-class docutils literal notranslate"><span class="pre">ThrownObject</span></code> model and the <code class="xref py py-class docutils literal notranslate"><span class="pre">MonteCarlo</span></code> predictor, and we save the state every 1s. We also use a scalar first state (i.e., no uncertainty).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">ThrownObject</span>
@@ -483,28 +460,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>See tutorial and examples for more information and additional features.</p>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#predictors" id="id1">Predictors</a></p>
-<ul>
-<li><p><a class="reference internal" href="#included-predictors" id="id2">Included Predictors</a></p>
-<ul>
-<li><p><a class="reference internal" href="#monte-carlo-predictor" id="id3">Monte Carlo Predictor</a></p></li>
-<li><p><a class="reference internal" href="#unscented-transform-predictor" id="id4">Unscented Transform Predictor</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#predictor-interface" id="id5">Predictor Interface</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
 <section id="included-predictors">
-<h2><a class="toc-backref" href="#contents">Included Predictors</a><a class="headerlink" href="#included-predictors" title="Permalink to this headline">#</a></h2>
+<h2>Included Predictors<a class="headerlink" href="#included-predictors" title="Permalink to this headline">#</a></h2>
 <p>The following predictors are included with this package. A new predictor can be created by subclassing <code class="xref py py-class docutils literal notranslate"><span class="pre">Predictor</span></code>. See also: <cite>predictor_template.py</cite></p>
-<section id="monte-carlo-predictor">
-<h3><a class="toc-backref" href="#contents">Monte Carlo Predictor</a><a class="headerlink" href="#monte-carlo-predictor" title="Permalink to this headline">#</a></h3>
-<dl class="py class">
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Monte Carlo Predictor</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Unscented Transform Predictor</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><dl class="py class">
 <dt class="sig sig-object py" id="prog_algs.predictors.MonteCarlo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.predictors.</span></span><span class="sig-name descname"><span class="pre">MonteCarlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.predictors.MonteCarlo" title="Permalink to this definition">#</a></dt>
 <dd><p>Class for performing a monte-carlo model-based prediction.</p>
@@ -515,7 +475,7 @@ title="Print to PDF"
 </dd>
 <dt>dt<span class="classifier">float</span></dt><dd><p>Simulation step size (s), e.g., 0.1</p>
 </dd>
-<dt>events<span class="classifier">List[string]</span></dt><dd><p>Events to predict (subset of model.events) e.g., [‘event1’, ‘event2’]</p>
+<dt>events<span class="classifier">list[str]</span></dt><dd><p>Events to predict (subset of model.events) e.g., [‘event1’, ‘event2’]</p>
 </dd>
 <dt>horizon<span class="classifier">float</span></dt><dd><p>Prediction horizon (s)</p>
 </dd>
@@ -523,15 +483,12 @@ title="Print to PDF"
 </dd>
 <dt>save_freq<span class="classifier">float</span></dt><dd><p>Frequency at which results are saved (s)</p>
 </dd>
-<dt>save_pts<span class="classifier">List[float]</span></dt><dd><p>Any additional savepoints (s) e.g., [10.1, 22.5]</p>
+<dt>save_pts<span class="classifier">list[float]</span></dt><dd><p>Any additional savepoints (s) e.g., [10.1, 22.5]</p>
 </dd>
 </dl>
 </dd></dl>
 
-</section>
-<section id="unscented-transform-predictor">
-<h3><a class="toc-backref" href="#contents">Unscented Transform Predictor</a><a class="headerlink" href="#unscented-transform-predictor" title="Permalink to this headline">#</a></h3>
-<dl class="py class">
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><dl class="py class">
 <dt class="sig sig-object py" id="prog_algs.predictors.UnscentedTransformPredictor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.predictors.</span></span><span class="sig-name descname"><span class="pre">UnscentedTransformPredictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.predictors.UnscentedTransformPredictor" title="Permalink to this definition">#</a></dt>
 <dd><p>Class for performing model-based prediction using an unscented transform.</p>
@@ -546,13 +503,13 @@ title="Print to PDF"
 </dd>
 <dt>dt<span class="classifier">float</span></dt><dd><p>Simulation step size (s), e.g., 0.1</p>
 </dd>
-<dt>events<span class="classifier">List[string]</span></dt><dd><p>Events to predict (subset of model.events) e.g., [‘event1’, ‘event2’]</p>
+<dt>events<span class="classifier">list[str]</span></dt><dd><p>Events to predict (subset of model.events) e.g., [‘event1’, ‘event2’]</p>
 </dd>
 <dt>horizon<span class="classifier">float</span></dt><dd><p>Prediction horizon (s)</p>
 </dd>
 <dt>save_freq<span class="classifier">float</span></dt><dd><p>Frequency at which results are saved (s)</p>
 </dd>
-<dt>save_pts<span class="classifier">List[float]</span></dt><dd><p>Any additional savepoints (s) e.g., [10.1, 22.5]</p>
+<dt>save_pts<span class="classifier">list[float]</span></dt><dd><p>Any additional savepoints (s) e.g., [10.1, 22.5]</p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -561,10 +518,10 @@ title="Print to PDF"
 </div>
 </dd></dl>
 
-</section>
+</div></div>
 </section>
 <section id="predictor-interface">
-<h2><a class="toc-backref" href="#contents">Predictor Interface</a><a class="headerlink" href="#predictor-interface" title="Permalink to this headline">#</a></h2>
+<h2>Predictor Interface<a class="headerlink" href="#predictor-interface" title="Permalink to this headline">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_algs.predictors.Predictor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.predictors.</span></span><span class="sig-name descname"><span class="pre">Predictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.predictors.Predictor" title="Permalink to this definition">#</a></dt>
@@ -582,37 +539,37 @@ title="Print to PDF"
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.Predictor.predict">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.uncertain_data.UncertainData"><span class="pre">prog_algs.uncertain_data.uncertain_data.UncertainData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">prog_algs.predictors.prediction.PredictionResults</span></span></span><a class="headerlink" href="#prog_algs.predictors.Predictor.predict" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.uncertain_data.UncertainData"><span class="pre">prog_algs.uncertain_data.uncertain_data.UncertainData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">prog_algs.predictors.prediction.PredictionResults</span></span></span><a class="headerlink" href="#prog_algs.predictors.Predictor.predict" title="Permalink to this definition">#</a></dt>
 <dd><p>Perform a single prediction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>state</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a>) – Distribution representing current state of the system</p></li>
 <li><p><strong>future_loading_eqn</strong> (<em>function</em><em> (</em><em>t</em><em>, </em><em>x</em><em>) </em><em>-&gt; z</em>) – Function to generate an estimate of loading at future time t, and state x</p></li>
-<li><p><strong>options</strong> (<em>optional</em><em>, </em><em>keyword arguments</em>) – <p>The following configuration parameters are supported:</p>
-<ul>
-<li><p>dt (float): Simulation step size (s), e.g., 0.1</p></li>
-<li><p>events (list[string]): Events to predict (subset of model.events) e.g., [‘event1’, ‘event2’]</p></li>
-<li><p>horizon (float): Prediction horizon (s)</p></li>
-<li><p>save_freq (float): Frequency at which results are saved (s)</p></li>
-<li><p>save_pts (list[float]): Any additional savepoints (s) e.g., [10.1, 22.5]</p></li>
-</ul>
-</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>times (List[float]): Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]</p></li>
-<li><p>inputs (Prediction): Inputs at each savepoint such that inputs.snapshot(i) is the input distribution (type UncertainData) at times[i]</p></li>
-<li><p>states (Prediction): States at each savepoint such that states.snapshot(i) is the state distribution (type UncertainData) at times[i]</p></li>
-<li><p>outputs (Prediction): Outputs at each savepoint such that outputs.snapshot(i) is the output distribution (type UncertainData) at times[i]</p></li>
-<li><p>event_states (Prediction): Event states at each savepoint such that event_states.snapshot(i) is the event state distribution (type UncertainData) at times[i]</p></li>
-<li><p>time_of_event (UncertainData): Distribution of predicted Time of Event (ToE) for each predicted event, represented by some subclass of UncertaintData (e.g., MultivariateNormalDist)</p></li>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Simulation step size (s), e.g., 0.1</p></li>
+<li><p><strong>events</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Events to predict (subset of model.events) e.g., [‘event1’, ‘event2’]</p></li>
+<li><p><strong>horizon</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Prediction horizon (s)</p></li>
+<li><p><strong>save_freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Frequency at which results are saved (s)</p></li>
+<li><p><strong>save_pts</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em>) – Any additional savepoints (s) e.g., [10.1, 22.5]</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>times (list[float]): Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]</p></li>
+<li><p>inputs (<a class="reference internal" href="Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prediction</span></code></a>): Inputs at each savepoint such that inputs.snapshot(i) is the input distribution (type UncertainData) at times[i]</p></li>
+<li><p>states (<a class="reference internal" href="Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prediction</span></code></a>): States at each savepoint such that states.snapshot(i) is the state distribution (type UncertainData) at times[i]</p></li>
+<li><p>outputs (<a class="reference internal" href="Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prediction</span></code></a>): Outputs at each savepoint such that outputs.snapshot(i) is the output distribution (type UncertainData) at times[i]</p></li>
+<li><p>event_states (<a class="reference internal" href="Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prediction</span></code></a>): Event states at each savepoint such that event_states.snapshot(i) is the event state distribution (type UncertainData) at times[i]</p></li>
+<li><p>time_of_event (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.uncertain_data.UncertainData</span></code></a>): Distribution of predicted Time of Event (ToE) for each predicted event, represented by some subclass of UncertaintData (e.g., <code class="xref py py-class docutils literal notranslate"><span class="pre">MultivariateNormalDist</span></code>)</p></li>
 </ul>
 </p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>results from prediction as NameTuple, including</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>NamedTuple</p>
 </dd>
 </dl>
 </dd></dl>

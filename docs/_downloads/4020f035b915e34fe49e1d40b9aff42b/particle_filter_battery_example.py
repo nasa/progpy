@@ -4,11 +4,10 @@
 In this example the BatteryElectroChemEOD model is used with a particle filter to estimate the state of the battery
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
-
-from prog_models.models import BatteryElectroChemEOD
+import numpy as np
 from prog_algs import *
+from prog_models.models import BatteryElectroChemEOD
 
 def run_example():
     ## Setup
@@ -34,9 +33,9 @@ def run_example():
     battery = BatteryElectroChemEOD(process_noise= Q_vars,
                                     measurement_noise = R_vars, 
                                     dt = dt)
+    load = battery.InputContainer({"i": 1})  # Optimization
     def future_loading(t, x=None):
-        load = 1
-        return battery.InputContainer({"i": load})
+        return load
 
     # Simulate data until EOD
     start_u = future_loading(0)

@@ -17,12 +17,9 @@ Results:
 from prog_models.models import ThrownObject
 from prog_algs import *
 
-import seaborn as sns
-sns.set()
-
 def run_example():
     # Step 1: Setup model & future loading
-    m = ThrownObject(process_noise = 0, measurement_noise = 0)
+    m = ThrownObject(process_noise = 1)
     def future_loading(t, x = None):
         # No load for a thrown object
         return m.InputContainer({})
@@ -66,7 +63,7 @@ def run_example():
     mc = predictors.MonteCarlo(m)
 
     # Step 3b: Perform a prediction
-    NUM_SAMPLES = 10
+    NUM_SAMPLES = 50
     STEP_SIZE = 0.01
     mc_results = mc.predict(filt.x, future_loading, n_samples = NUM_SAMPLES, dt=STEP_SIZE, save_freq=STEP_SIZE)
     print('Predicted time of event (ToE): ', mc_results.time_of_event.mean)

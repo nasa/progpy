@@ -18,6 +18,8 @@ Results:
 
 import csv
 import numpy as np
+from prog_algs.predictors import ToEPredictionProfile
+from prog_algs.uncertain_data.multivariate_normal_dist import MultivariateNormalDist
 
 from prog_models.models import BatteryCircuit as Battery
 # VVV Uncomment this to use Electro Chemistry Model VVV
@@ -27,13 +29,9 @@ from prog_algs.state_estimators import UnscentedKalmanFilter as StateEstimator
 # VVV Uncomment this to use UnscentedKalmanFilter instead VVV
 # from prog_algs.state_estimators import ParticleFilter as StateEstimator
 
-from prog_algs.predictors import ToEPredictionProfile
-
 from prog_algs.predictors import UnscentedTransformPredictor as Predictor
 # VVV Uncomment this to use MonteCarloPredictor instead
 # from prog_algs.predictors import MonteCarlo as Predictor
-
-from prog_algs.uncertain_data.multivariate_normal_dist import MultivariateNormalDist
 
 # Constants
 NUM_SAMPLES = 20
@@ -64,8 +62,9 @@ def run_example():
     filt = StateEstimator(batt, x0, num_particles = NUM_PARTICLES)
 
     # Setup Prediction
+    load = batt.InputContainer({'i': 2.35})
     def future_loading(t, x=None):
-        return {'i': 2.35}
+        return load
     Q = np.diag([batt.parameters['process_noise'][key] for key in batt.states])
     R = np.diag([batt.parameters['measurement_noise'][key] for key in batt.outputs])
     mc = Predictor(batt, Q = Q, R = R)

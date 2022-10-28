@@ -27,19 +27,24 @@ def run_example():
 
     # Step 2: Setup model & future loading
     batt = MyBattery()
-    def future_loading(t, x={}):
+    loads = [  # Define loads here to accelerate prediction
+        batt.InputContainer({'i': 2}),
+        batt.InputContainer({'i': 1}),
+        batt.InputContainer({'i': 4}),
+        batt.InputContainer({'i': 2}),
+        batt.InputContainer({'i': 3})
+    ]
+    def future_loading(t, x = None):
         # Variable (piece-wise) future loading scheme 
         if (t < 600):
-            i = 2
+            return loads[0]
         elif (t < 900):
-            i = 1
+            return loads[1]
         elif (t < 1800):
-            i = 4
+            return loads[2]
         elif (t < 3000):
-            i = 2
-        else:
-            i = 3
-        return batt.InputContainer({'i': i})
+            return loads[3]
+        return loads[-1]
 
     x0 = batt.parameters['x0']
 

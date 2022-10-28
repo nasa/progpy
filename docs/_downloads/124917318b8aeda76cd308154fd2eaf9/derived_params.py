@@ -4,9 +4,9 @@
 """
 Example demonstrating ways to use the derived parameters feature for model building. 
 
-.. collapse:: More details
+.. dropdown:: More details
     
-    In this example, a derived parameter (i.e., a parameter that is a function of another parameter) are defined for the simple ThrownObject model. These parameters are then calculated whenever their dependency parameters are updates, eliminating the need to calculate each timestep in simulation. The functionality of this feature is then demonstrated.
+    In this example, a derived parameter (i.e., a parameter that is a function of another parameter) are defined for the simple ThrownObject model. These parameters are then calculated whenever their dependency parameters are updated, eliminating the need to calculate each timestep in simulation. The functionality of this feature is then demonstrated.
 """
 
 from prog_models.models.thrown_object import ThrownObject

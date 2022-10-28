@@ -12,15 +12,17 @@ Interface
 Implemented UncertainData Types
 --------------------------------
 
-Unweighted Samples
-******************
-.. autoclass:: prog_algs.uncertain_data.UnweightedSamples
-   :members: key
+.. tabs::
 
-Multivariate Normal Distribution
-********************************
-.. autoclass:: prog_algs.uncertain_data.MultivariateNormalDist
+   .. tab:: Unweighted Samples
 
-Scalar Data (i.e., no uncertainty)
-**********************************
-.. autoclass:: prog_algs.uncertain_data.ScalarData
+      .. autoclass:: prog_algs.uncertain_data.UnweightedSamples
+         :members: key
+
+   .. tab:: Multivariate Normal Distribution
+
+      .. autoclass:: prog_algs.uncertain_data.MultivariateNormalDist
+
+   .. tab:: Scalar
+
+      .. autoclass:: prog_algs.uncertain_data.ScalarData

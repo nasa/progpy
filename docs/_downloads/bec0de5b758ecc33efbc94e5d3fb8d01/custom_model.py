@@ -4,7 +4,7 @@
 """
 Example building a custom model with LSTMStateTransitionModel.
 
-.. collapse:: More details
+.. dropdown:: More details
 
     For most cases, you will be able to use the standard LSTMStateTransitionModel.from_data class with configuration (see the LSTMStateTransitionModel class for more details). However, sometimes you might want to add custom layers, or other complex components. In that case, you will build a custom model and pass it into LSTMStateTransitionModel.
 

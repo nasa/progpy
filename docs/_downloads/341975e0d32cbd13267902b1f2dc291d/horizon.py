@@ -12,13 +12,9 @@ Results:
     ii) Time event is predicted to occur (with uncertainty)
 """
 
-from pprint import pprint
-
 from prog_models.models.thrown_object import ThrownObject
-# VVV Uncomment this to use Electro Chemistry Model VVV
-# from prog_models.models import BatteryElectroChem as Battery
-
 from prog_algs import *
+from pprint import pprint
 
 def run_example():
     # Step 1: Setup model & future loading

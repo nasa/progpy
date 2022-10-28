@@ -1,12 +1,13 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration. All Rights Reserved.
 
 """
-This example extends the "basic example" to perform a state estimation and prediction with uncertainty given a more complicated. Models, state estimators, and predictors can be switched out. See documentation nasa.github.io/progpy for description of options
+This example extends the "basic example" to perform a state estimation and prediction with uncertainty given a more complicated model. Models, state estimators, and predictors can be switched out. See documentation nasa.github.io/progpy for description of options
  
 Method: An instance of the BatteryCircuit model in prog_models is created, and the prediction process is achieved in three steps:
     1) State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate
     2) Prediction of future states (with uncertainty) and the times at which the event threshold will be reached
     3) Metrics tools are used to further investigate the results of prediction
+
 Results: 
     i) Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction
     ii) Time event is predicted to occur (with uncertainty)
@@ -26,9 +27,6 @@ from prog_algs.predictors import MonteCarlo as Predictor
 # VVV Uncomment this to use UnscentedTransform Predictor VVV
 # from prog_algs.predictors import UnscentedTransformPredictor as Predictor
 
-import seaborn as sns
-sns.set()
-
 def run_example():
     # Step 1: Setup model & future loading
     # Measurement noise
@@ -36,20 +34,27 @@ def run_example():
         't': 2, 
         'v': 0.02
     }
-    batt = Battery(measurement_noise = R_vars)
+    batt = Battery(process_noise = 0.25, measurement_noise = R_vars)
+    # Creating the input containers outside of the function accelerates prediction
+    loads = [
+        batt.InputContainer({'i': 2}),
+        batt.InputContainer({'i': 1}),
+        batt.InputContainer({'i': 4}),
+        batt.InputContainer({'i': 2}),
+        batt.InputContainer({'i': 3})
+    ]
     def future_loading(t, x = None):
         # Variable (piece-wise) future loading scheme 
         if (t < 600):
-            i = 2
+            return loads[0]
         elif (t < 900):
-            i = 1
+            return loads[1]
         elif (t < 1800):
-            i = 4
+            return loads[2]
         elif (t < 3000):
-            i = 2
-        else:
-            i = 3
-        return batt.InputContainer({'i': i})
+            return loads[3]
+        return loads[-1]
+
     initial_state = batt.initialize()
 
     # Step 2: Demonstrating state estimator
@@ -84,7 +89,7 @@ def run_example():
     mc = Predictor(batt)
 
     # Step 3b: Perform a prediction
-    NUM_SAMPLES = 100
+    NUM_SAMPLES = 25
     STEP_SIZE = 0.1
     SAVE_FREQ = 100  # How often to save results
     mc_results = mc.predict(filt.x, future_loading, n_samples = NUM_SAMPLES, dt=STEP_SIZE, save_freq = SAVE_FREQ)
@@ -127,10 +132,10 @@ def run_example():
     # Here we will plot the states at t0, 25% to ToE, 50% to ToE, 75% to ToE, and ToE
     fig = mc_results.states.snapshot(0).plot_scatter(label = "t={} s".format(int(mc_results.times[0])))  # 0
     quarter_index = int(len(mc_results.times)/4)
-    # mc_results.states.snapshot(quarter_index).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index])))  # 25%
-    # mc_results.states.snapshot(quarter_index*2).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index*2])))  # 50%
-    # mc_results.states.snapshot(quarter_index*3).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index*3])))  # 75%
-    # mc_results.states.snapshot(-1).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[-1])))  # 100%
+    mc_results.states.snapshot(quarter_index).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index])))  # 25%
+    mc_results.states.snapshot(quarter_index*2).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index*2])))  # 50%
+    mc_results.states.snapshot(quarter_index*3).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[quarter_index*3])))  # 75%
+    mc_results.states.snapshot(-1).plot_scatter(fig = fig, label = "t={} s".format(int(mc_results.times[-1])))  # 100%
 
     mc_results.time_of_event.plot_hist()
     

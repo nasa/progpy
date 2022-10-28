@@ -29,17 +29,17 @@ class ThrownObject(LinearModel):
 
     Keyword Args
     ------------
-        process_noise : Optional, float or Dict[Srt, float]
+        process_noise : Optional, float or dict[Srt, float]
           Process noise (applied at dx/next_state). 
           Can be number (e.g., .2) applied to every state, a dictionary of values for each 
           state (e.g., {'x1': 0.2, 'x2': 0.3}), or a function (x) -> x
-        process_noise_dist : Optional, String
+        process_noise_dist : Optional, str
           distribution for process noise (e.g., normal, uniform, triangular)
-        measurement_noise : Optional, float or Dict[Srt, float]
+        measurement_noise : Optional, float or dict[Srt, float]
           Measurement noise (applied in output eqn).
           Can be number (e.g., .2) applied to every output, a dictionary of values for each
           output (e.g., {'z1': 0.2, 'z2': 0.3}), or a function (z) -> z
-        measurement_noise_dist : Optional, String
+        measurement_noise_dist : Optional, str
           distribution for measurement noise (e.g., normal, uniform, triangular)
         g : Optional, float
             Acceleration due to gravity (m/s^2). Default is 9.81 m/s^2 (standard gravity)

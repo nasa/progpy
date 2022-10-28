@@ -54,7 +54,7 @@ Inputs are one of the inputs to the state transition model, described in :ref:`S
 States
 ^^^^^^^^^^^^^^^^^^^^
 
-ProgPy prognostic models are state-transition models. The internal :term:`state` of the system at any time is represented by one or more (frequently :term:`hidden<hidden state>`) state variable, represented by a StateContainer. Each model has a discrete set of states, the keys of which are defined by the *states* property.
+ProgPy prognostic models are state-transition models. The internal :term:`state` of the system at any time is represented by one or more (frequently :term:`hidden<hidden state>`) state variables, represented by the custom type StateContainer. Each model has a discrete set of states, the keys of which are defined by the *states* property.
 
 For example, the example ThrownObject model has two states, position (x) and velocity (v).
 
@@ -69,9 +69,9 @@ States are transitioned forward in time using the state transition equation.
 
     </div>
 
-where :math:`x(t)` is :term:`state`, at time :math:`t`, :math:`u(t)` is :term:input at time :math:`t`, :math:`dt` is the stepsize, and :math:`\Theta` are the model :term:`parameters`.
+where :math:`x(t)` is :term:`state`, at time :math:`t`, :math:`u(t)` is :term:`input` at time :math:`t`, :math:`dt` is the stepsize, and :math:`\Theta` are the model :term:`parameters`.
 
-In a ProgPy model, this state transition can be represented one of two ways, either discrete and continuous, depending on the nature of state transition. In the case of continuous models, state transition behavior is defined by defining the first derivative, using the :py:func:`prog_models.PrognosticsModel.dx` method. For discrete models, state transition behavior is defined using the :py:func:`prog_models.PrognosticsModel.next_state` method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.
+In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of continuous models, state transition behavior is defined by defining the first derivative, using the :py:func:`prog_models.PrognosticsModel.dx` method. For discrete models, state transition behavior is defined using the :py:func:`prog_models.PrognosticsModel.next_state` method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.
 
 .. image:: images/next_state.png
 
@@ -133,7 +133,7 @@ Outputs are a function of only the system state (x) and :term:`parameters` (:mat
 Events 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Traditionally users may have heard the prognostic problem as estimating the Remaining Useful Life (RUL) of a system. ProgPy generallizes this concept with the concept of :term:`events<event>`. ProgPy Prognostic Models contain one or more events which can be predicted. Systems frequently have more than one failure mode, each of these modes can be represented by a separate event. For example, a valve model might have separate events for an internal leak and a leak at the input. Or a battery model might have events for insufficient capacity, thermal runaway, and low-voltage. 
+Traditionally users may have heard the prognostic problem as estimating the Remaining Useful Life (RUL) of a system. ProgPy generalizes this concept with the concept of :term:`events<event>`. ProgPy Prognostic Models contain one or more events which can be predicted. Systems frequently have more than one failure mode, each of these modes can be represented by a separate event. For example, a valve model might have separate events for an internal leak and a leak at the input. Or a battery model might have events for insufficient capacity, thermal runaway, and low-voltage. 
 
 Additionally, events can be used to predict other events of interest beyond failure, such as special system states or warning thresholds. For example, the above battery model might also have an warning event for when battery capacity reaches 50% of the original capacity because of battery aging with use.
 
@@ -203,9 +203,9 @@ If threshold_met is not specified, threshold_met is defined as when event_state 
 Parameters
 ^^^^^^^^^^^^^^^
 
-Parameters are used to configure the behaviro of a model. For parameterized :term:`physics-based<physics-based model>` models, parameters are used to configure the general system to match the behavior of the specific system. For example, parameters of the general battery model can be used to configure the model to describe the behavior of a specific battery.
+Parameters are used to configure the behavior of a model. For parameterized :term:`physics-based<physics-based model>` models, parameters are used to configure the general system to match the behavior of the specific system. For example, parameters of the general battery model can be used to configure the model to describe the behavior of a specific battery.
 
-Models define a *default_parameters* property, that are the default parameters for that model. After construction, the parameters for a specific model can be accessed using the *parameters* property. For example,
+Models define a ``default_parameters`` property, that are the default parameters for that model. After construction, the parameters for a specific model can be accessed using the *parameters* property. For example, for a model `m`
 
 .. code-block:: python
 
@@ -230,7 +230,7 @@ The specific parameters are very specific to the system being modeled. For examp
 Noise
 ^^^^^^^^^^^
 
-In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods [#Goebel2017]_. This model-based prognostic approach incorporates this uncertainty in four forms: initial state uncertainty (:math:`x_0`), :term:`process noise`,, and :term:`future loading noise`.
+In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods [#Goebel2017]_. This model-based prognostic approach incorporates this uncertainty in four forms: initial state uncertainty (:math:`x_0`), :term:`process noise`, :term:`measurement noise`, and :term:`future loading noise`.
 
 .. dropdown:: Process Noise
 
@@ -306,7 +306,7 @@ Building New Models
 
     .. tab:: data-driven
 
-        new :term:`data-driven models<data-driven model>`, such as those using neural networks, are created by subclassing the :py:class:`prog_models.data_models.DataModel` class.
+        New :term:`data-driven models<data-driven model>`, such as those using neural networks, are created by subclassing the :py:class:`prog_models.data_models.DataModel` class, overriding the ``from_data`` method.
         
         The :py:func:`prog_models.data_models.DataModel.from_data` and :py:func:`prog_models.data_models.DataModel.from_model` methods are used to construct new models from data or an existing model (i.e., :term:`surrogate`), respectively. The use of these is demonstrated in the following examples.
 
@@ -326,11 +326,12 @@ Building New Models
 
 Wether you're using :term:`data-driven<data-driven model>`, :term:`physics-based<physics-based model>`, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see `Parameter Estimation`) and validate the model.
 
-ProgPy includes some example datasets. See `ProgPy Datasets <https://nasa.github.io/progpy/api_ref/prog_models/DataSets.html>`_ and the example below for details.
+ProgPy includes some example datasets. See `ProgPy Datasets <https://nasa.github.io/progpy/api_ref/prog_models/DataSets.html>`_ and the example below for details. 
 
 * :download:`examples.dataset <../../prog_models/examples/dataset.py>`
     .. automodule:: dataset
 
+.. note:: To use the dataset feature, you must install the requests package.
 
 Using provided models
 ----------------------------
@@ -396,8 +397,8 @@ One of the most basic of functions using a model is simulation. Simulation is th
 
     * *Static Step Size*: Provide a single number. Simulation will move forward at this rate. Example, :pythoncode:`m.simulate_to_threshold(..., dt=0.1)`
     * *Automatic Dynamic Step Size*: Step size is adjusted automatically to hit each save_pt and save_freq exactly. Example, :pythoncode:`m.simulate_to_threshold(..., dt='auto')`
-    * *Bounded Automatic Dynamic Step Size*: Step size is adjusted automatically to hit each save_pt and save_freq exactly, with a maximum step size. Example, :pythoncode:`m.simulate_to_threshold(..., dt=('auto', 0.5)`
-    * *Functional Dynamic Step Size*: Step size is provided as a function of time and state. This is the most flexible approach. Example, :pythoncode:`m.simulate_to_threshold(..., dt= lambda t, x : max(0.75 - t*0.01, 0.25)`
+    * *Bounded Automatic Dynamic Step Size*: Step size is adjusted automatically to hit each save_pt and save_freq exactly, with a maximum step size. Example, :pythoncode:`m.simulate_to_threshold(..., dt=('auto', 0.5))`
+    * *Functional Dynamic Step Size*: Step size is provided as a function of time and state. This is the most flexible approach. Example, :pythoncode:`m.simulate_to_threshold(..., dt= lambda t, x : max(0.75 - t*0.01, 0.25))`
 
 .. dropdown:: Integration Methods
 
@@ -430,7 +431,7 @@ Parameter estimation is an important step in prognostics. Parameter estimation i
 
 Sometimes model parameters are directly measurable (e.g., dimensions of blades on rotor). For these parameters, estimating them is a simple act of direct measurement. For parameters that cannot be directly measured, they're typically estimated using observed data. 
 
-Generally, parameter estimation is done by tuning the parameters of the model so that simulation best matches the behavior observed in some available data. in ProgPy, this is done using the :py:meth:`prog_models.PrognosticsModel.param_est` method. This method takes :term:`input` and :term:`output` data from one or more runs, and uses scipy.optimize.minimize function to estimate the parameters of the model.
+Generally, parameter estimation is done by tuning the parameters of the model so that simulation best matches the behavior observed in some available data. In ProgPy, this is done using the :py:meth:`prog_models.PrognosticsModel.estimate_params` method. This method takes :term:`input` and :term:`output` data from one or more runs, and uses scipy.optimize.minimize function to estimate the parameters of the model.
 
 .. code-block:: python
     
@@ -460,7 +461,7 @@ Results of a simulation can be visualized using the plot method. For example:
 
 See :py:meth:`prog_models.sim_result.SimResult.plot` for more details on plotting capabilities
 
-Other
+Other Examples
 ----------------------------
 
 * :download:`examples.benchmarking <../../prog_models/examples/benchmarking.py>`

@@ -49,7 +49,7 @@ ProgPy uses the following definition for :term:`prognostics`:
 
 .. topic:: Prognostics
 
-   Prediction of (a) future performance and/or (b) the time of event for one or more events of interest for a system or system of systems
+   Prediction of (a) future performance and/or (b) the time at which one or more events of interest occur, for a system or a system of systems
 
 This is similar to those described in [#Goebel2017]_. This approach is intended to be generic, capable of describing system behavior based on physical principles (i.e., physics-based), learning from data (i.e., data-based), or hybrid approaches (e.g., Physics-Informed Machine Learning). 
 
@@ -63,7 +63,7 @@ Functionality for creation, simulation, and analysis of models can be found in t
 
 ProgPy divides the prognostic process into two steps: :term:`state estimation<state estimator>` and :term:`prediction<predictor>`. State estimation is the process of determining the current system state (x), with some uncertainty, given the system parameters (:math:`\Theta`), system loading (u) and measurements (z). There are various methods used for this, such as Kalman Filters and Particle Filters. These methods utilize a prognostics model, comparing measurements (z) with those predicted from the system output equation.
 
-In the prediction step, the state estimate at the prediction time and system model are used together to estimate system degradation with time. This is most commonly done using a variant of the Monte Carlo method with the model state transition equation. Prediction is often computationally expensive, especially for sample-based approaches with strict precision requirements (which therefore require large number of samples).
+In the prediction step, the state estimate at the prediction time and system model are used together to estimate system degradation with time. This is most commonly done using a variant of the Monte Carlo method with the model state transition equation. Prediction is often computationally expensive, especially for sample-based approaches with strict precision requirements (which therefore require large number of samples). ProgPy provides some potential solutions to combat this, such as :term:`surrogate` models, vectorization, and model configuration options.
 
 Algorithms for :term:`state estimation<state estimator>` and :term:`prediction<predictor>` along with tools analyzing and visualizing results of state estimation and prediction, managing uncertainty, and creating new state estimators or predictors can be found in the :ref:`prog_algs<prog_algs Guide>` package. For more information see the :ref:`prog_algs Guide`.
 

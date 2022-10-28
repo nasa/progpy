@@ -4,7 +4,7 @@
 """
 Example building a LSTMStateTransitionModel from data. This is a simple example of how to use the LSTMStateTransitionModel class.
 
-.. collapse:: More details
+.. dropdown:: More details
 
     In this example, we generate fake data using the ThrownObject model. This is a case where we're generating a surrogate model from the physics-based model. For cases where you're generating a model from data (e.g., collected from a testbed or a real-world environment), you'll replace that generated data with your own. We then use the generated model and compare to the original model.
 

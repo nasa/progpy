@@ -7,9 +7,9 @@ First, a linear model is defined. Then the KF State estimator is used with fake 
 """
 
 import numpy as np
-
 from prog_models import LinearModel
 from prog_algs.state_estimators import KalmanFilter
+
 
 # Linear Model for an object thrown into the air
 class ThrownObject(LinearModel):

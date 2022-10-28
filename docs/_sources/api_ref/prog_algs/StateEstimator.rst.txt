@@ -25,17 +25,19 @@ Included State Estimators
 -------------------------
 The following state estimators are included with this package. A new state estimator can be created by subclassing `prog_algs.state_estimators.StateEstimator`. See also: `state_estimator_template.py`
 
-Kalman Filter
-*************************
-.. autoclass:: prog_algs.state_estimators.KalmanFilter
+.. tabs:: prog_algs
 
-Unscented Kalman Filter
-*************************
-.. autoclass:: prog_algs.state_estimators.UnscentedKalmanFilter
+   .. tab:: Particle Filter
 
-Particle Filter
-*************************
-.. autoclass:: prog_algs.state_estimators.ParticleFilter
+      .. autoclass:: prog_algs.state_estimators.ParticleFilter
+
+   .. tab:: Unscented Kalman Filter
+
+      .. autoclass:: prog_algs.state_estimators.UnscentedKalmanFilter
+   
+   .. tab:: Kalman Filter
+
+      .. autoclass:: prog_algs.state_estimators.KalmanFilter
 
 State Estimator Interface
 -------------------------
