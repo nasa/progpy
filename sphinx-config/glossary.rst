@@ -69,3 +69,21 @@ Glossary
       
     state estimation
       State estimation is the process from which the internal model :term:`state` (x) is estimated using :term:`input` (i.e., loading) and :term:`output` (i.e., sensor data). State estimation is necessary for cases where model state isn't directly measurable (i.e., `hidden state`) or where there is sensor noise. Most state estimators estimate the state with some representation of uncertainty. An algorithm that performs state estimation is called a :term:`state estimator` and is included in the prog_algs.state_estimators package
+
+    time of event
+      The time at which an :term:`event` is predicted to occur (i.e., when :term:`threshold` is reached). Sometimes abbreviated as ToE. When the event of interest is failure, this is frequently referred to as End of Life (EOL).
+
+    time to event
+      The time remaining until :term:`time of event`. Sometimes abbreviated as TtE. When the :term:`event`` of interest is failure, this is frequently referred to as Remaining Useful Life (RUL). :math:`TtE = ToE - t` where :math:`t` is the current time. Sometimes abbreviated as TtE.
+
+    time of prediction
+      The time at which a prediction is performed. Sometimes abbreviated as ToP or :math:`t_p`.
+
+    time of measurement
+      The time at which the last measurement was performed that was used for state estimation. Sometimes abbreviated as ToM or :math:`t_m`.
+
+    direct-prediction model
+      A model where the :term:`time of event` is directly estimated from the current state, instead of predicted through simulation to threshold. These are implemented using the :py:meth:`prog_models.PrognosticsModel.time_to_event` method.
+
+    state-transition model
+      A model where the :term:`time of event` is predicted through simulation to threshold. Most prognostic models are state-transition models.

@@ -10,12 +10,12 @@ from prog_models.models import BatteryElectroChem as Battery
 
 def run_example(): 
     # Step 1: Create a model object
-    batt = Battery()
+    batt = Battery(wq=-5e-4, wr=3e-8, wd=3e-4)
 
     # Step 2: Define future loading function 
     # Here we're using a function designed to charge until 0.95, 
     # then discharge until 0.05
-    load = 1
+    load = batt.InputContainer({'i': 1})
 
     def future_loading(t, x=None):
         nonlocal load 
@@ -25,11 +25,11 @@ def run_example():
             # Current event state in the form {'EOD': <(0, 1)>, 'InsufficientCapacity': <(0, 1)>}
             event_state = batt.event_state(x)
             if event_state["EOD"] > 0.95:
-                load = 1  # Discharge
-            elif event_state["EOD"] < 0.05:
-                load = -1  # Charge
+                load = batt.InputContainer({'i': 1})  # Discharge
+            elif event_state["EOD"] < 0.1:
+                load = batt.InputContainer({'i': -1})  # Charge
         # Rule for loading at initialization
-        return batt.InputContainer({'i': load})
+        return load
 
     # Step 3: Simulate to Capacity is insufficient Threshold
     print('\n\n------------------------------------------------')

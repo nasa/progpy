@@ -4,8 +4,6 @@
 """
 Example downloading and using a NASA prognostics dataset.
 
-.. note:: To use the dataset feature, you must install the requests package.
-
 .. dropdown:: More details
 
     In this example, a battery dataset is downloaded from the NASA PCoE data repository. This dataset is then accessed and plotted. 

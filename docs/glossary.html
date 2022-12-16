@@ -37,6 +37,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -196,6 +197,11 @@
      <li class="toctree-l3">
       <a class="reference internal" href="api_ref/prog_models/LinearModel.html">
        LinearModel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/Loading.html">
+       Loading
       </a>
      </li>
      <li class="toctree-l3">
@@ -398,6 +404,8 @@ title="Print to PDF"
 <dl class="glossary simple">
 <dt id="term-data-driven-model">data-driven model<a class="headerlink" href="#term-data-driven-model" title="Permalink to this term">#</a></dt><dd><p>A model where the behavior is learned from data. In ProgPy, data-driven models derive from the parent class <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel</span></code></a>. A common example of data-driven models is models using neural networks (e.g., <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.LSTMStateTransitionModel" title="prog_models.data_models.LSTMStateTransitionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.LSTMStateTransitionModel</span></code></a>).</p>
 </dd>
+<dt id="term-direct-prediction-model">direct-prediction model<a class="headerlink" href="#term-direct-prediction-model" title="Permalink to this term">#</a></dt><dd><p>A model where the <a class="reference internal" href="#term-time-of-event"><span class="xref std std-term">time of event</span></a> is directly estimated from the current state, instead of predicted through simulation to threshold. These are implemented using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.time_to_event()</span></code> method.</p>
+</dd>
 <dt id="term-event">event<a class="headerlink" href="#term-event" title="Permalink to this term">#</a></dt><dd><p>Something that can be predicted (e.g., system failure). An event has either occurred or not. See also: <a class="reference internal" href="#term-threshold"><span class="xref std std-term">threshold</span></a></p>
 </dd>
 <dt id="term-event-state">event state<a class="headerlink" href="#term-event-state" title="Permalink to this term">#</a></dt><dd><p>Progress towards <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> occurring. Defined as a number where an event state of 0 indicates the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> has occurred and 1 indicates no progress towards the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> (i.e., fully healthy operation for a failure event). For a gradually occurring <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> (e.g., discharge) the number will progress from 1 to 0 as the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> nears. In prognostics, event state is frequently called “State of Health”.</p>
@@ -436,9 +444,19 @@ title="Print to PDF"
 </dd>
 <dt id="term-state-estimator">state estimator<a class="headerlink" href="#term-state-estimator" title="Permalink to this term">#</a></dt><dd><p>An algorithm that is used to estimate the <a class="reference internal" href="#term-state"><span class="xref std std-term">state</span></a> of the system, given measurements and a model, defined in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_algs.state_estimators</span></code> subpackage (e.g., <a class="reference internal" href="prog_algs_guide.html#prog_algs.state_estimators.UnscentedKalmanFilter" title="prog_algs.state_estimators.UnscentedKalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.UnscentedKalmanFilter</span></code></a>).</p>
 </dd>
+<dt id="term-state-transition-model">state-transition model<a class="headerlink" href="#term-state-transition-model" title="Permalink to this term">#</a></dt><dd><p>A model where the <a class="reference internal" href="#term-time-of-event"><span class="xref std std-term">time of event</span></a> is predicted through simulation to threshold. Most prognostic models are state-transition models.</p>
+</dd>
 <dt id="term-surrogate">surrogate<a class="headerlink" href="#term-surrogate" title="Permalink to this term">#</a></dt><dd><p>A model that approximates the behavior of another model. Often used to generate a faster version of a model (e.g., for resource-constrained applications or to be used in optimization) or to test a data model. Generated using <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.generate_surrogate" title="prog_models.PrognosticsModel.generate_surrogate"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.generate_surrogate()</span></code></a> method.</p>
 </dd>
 <dt id="term-threshold">threshold<a class="headerlink" href="#term-threshold" title="Permalink to this term">#</a></dt><dd><p>The conditions under which an <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> is considered to have occurred.</p>
+</dd>
+<dt id="term-time-of-event">time of event<a class="headerlink" href="#term-time-of-event" title="Permalink to this term">#</a></dt><dd><p>The time at which an <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> is predicted to occur (i.e., when <a class="reference internal" href="#term-threshold"><span class="xref std std-term">threshold</span></a> is reached). Sometimes abbreviated as ToE. When the event of interest is failure, this is frequently referred to as End of Life (EOL).</p>
+</dd>
+<dt id="term-time-of-measurement">time of measurement<a class="headerlink" href="#term-time-of-measurement" title="Permalink to this term">#</a></dt><dd><p>The time at which the last measurement was performed that was used for state estimation. Sometimes abbreviated as ToM or <span class="math notranslate nohighlight">\(t_m\)</span>.</p>
+</dd>
+<dt id="term-time-of-prediction">time of prediction<a class="headerlink" href="#term-time-of-prediction" title="Permalink to this term">#</a></dt><dd><p>The time at which a prediction is performed. Sometimes abbreviated as ToP or <span class="math notranslate nohighlight">\(t_p\)</span>.</p>
+</dd>
+<dt id="term-time-to-event">time to event<a class="headerlink" href="#term-time-to-event" title="Permalink to this term">#</a></dt><dd><p>The time remaining until <a class="reference internal" href="#term-time-of-event"><span class="xref std std-term">time of event</span></a>. Sometimes abbreviated as TtE. When the <span class="xref std std-term">event`</span> of interest is failure, this is frequently referred to as Remaining Useful Life (RUL). <span class="math notranslate nohighlight">\(TtE = ToE - t\)</span> where <span class="math notranslate nohighlight">\(t\)</span> is the current time. Sometimes abbreviated as TtE.</p>
 </dd>
 </dl>
 </section>

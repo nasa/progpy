@@ -197,6 +197,11 @@
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/Loading.html">
+       Loading
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">
        PrognosticsModel
       </a>
@@ -511,10 +516,19 @@ title="Fullscreen mode"
         <li><a href="prog_models_guide.html#module-0">module</a>, <a href="prog_models_guide.html#module-derived_params">[1]</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData.describe">describe() (prog_algs.uncertain_data.UncertainData method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="glossary.html#term-direct-prediction-model"><strong>direct-prediction model</strong></a>
+</li>
+      <li>
+    direct_model
+
+      <ul>
+        <li><a href="prog_models_guide.html#module-direct_model">module</a>
+</li>
+      </ul></li>
       <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DMDModel.dmd_matrix">dmd_matrix (prog_models.data_models.DMDModel attribute)</a>
 </li>
       <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DMDModel">DMDModel (class in prog_models.data_models)</a>
@@ -657,10 +671,10 @@ title="Fullscreen mode"
 </li>
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session.get_event_state">get_event_state() (prog_client.Session method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session.get_model">get_model() (prog_client.Session method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session.get_performance_metrics">get_performance_metrics() (prog_client.Session method)</a>
 </li>
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session.get_predicted_event_state">get_predicted_event_state() (prog_client.Session method)</a>
@@ -674,6 +688,8 @@ title="Fullscreen mode"
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session.get_prediction_status">get_prediction_status() (prog_client.Session method)</a>
 </li>
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session.get_state">get_state() (prog_client.Session method)</a>
+</li>
+      <li><a href="api_ref/prog_models/Loading.html#prog_models.loading.GuassianNoiseLoadWrapper">GuassianNoiseLoadWrapper (class in prog_models.loading)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -712,12 +728,20 @@ title="Fullscreen mode"
       </ul></li>
       <li><a href="glossary.html#term-input"><strong>input</strong></a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.InputContainer">InputContainer (prog_models.PrognosticsModel attribute)</a>
 </li>
       <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.inputs">inputs (prog_models.PrognosticsModel attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.is_direct_model">is_direct_model (prog_models.data_models.DataModel property)</a>
+
+      <ul>
+        <li><a href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel.is_direct_model">(prog_models.LinearModel property)</a>
+</li>
+        <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.is_direct_model">(prog_models.PrognosticsModel property)</a>
+</li>
+      </ul></li>
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session.is_init">is_init() (prog_client.Session method)</a>
 </li>
       <li><a href="api_ref/prog_server/prog_server.html#prog_server.is_running">is_running() (in module prog_server)</a>
@@ -834,6 +858,8 @@ title="Fullscreen mode"
 </li>
         <li><a href="prog_models_guide.html#module-0">derived_params</a>, <a href="prog_models_guide.html#module-derived_params">[1]</a>
 </li>
+        <li><a href="prog_models_guide.html#module-direct_model">direct_model</a>
+</li>
         <li><a href="prog_models_guide.html#module-dynamic_step_size">dynamic_step_size</a>
 </li>
         <li><a href="prog_algs_guide.html#module-eol_event">eol_event</a>
@@ -910,6 +936,8 @@ title="Fullscreen mode"
       <li><a href="api_ref/prog_algs/Predictor.html#prog_algs.predictors.MonteCarlo">MonteCarlo (class in prog_algs.predictors)</a>, <a href="prog_algs_guide.html#prog_algs.predictors.MonteCarlo">[1]</a>
 </li>
       <li><a href="prog_algs_guide.html#prog_algs.predictors.MonteCarloPredictor">MonteCarloPredictor (in module prog_algs.predictors)</a>
+</li>
+      <li><a href="api_ref/prog_models/Loading.html#prog_models.loading.MovingAverage">MovingAverage (class in prog_models.loading)</a>
 </li>
       <li><a href="api_ref/prog_server/load_ests.html#prog_server.models.load_ests.MovingAverage">MovingAverage() (in module prog_server.models.load_ests)</a>
 </li>
@@ -1217,6 +1245,8 @@ title="Fullscreen mode"
 </li>
       <li><a href="glossary.html#term-state-estimator"><strong>state estimator</strong></a>
 </li>
+      <li><a href="glossary.html#term-state-transition-model"><strong>state-transition model</strong></a>
+</li>
       <li>
     state_limits
 
@@ -1254,10 +1284,26 @@ title="Fullscreen mode"
       </ul></li>
       <li><a href="api_ref/prog_models/IncludedModels.html#prog_models.models.ThrownObject">ThrownObject (class in prog_models.models)</a>
 </li>
-      <li><a href="api_ref/prog_models/SimResult.html#prog_models.sim_result.SimResult.time">time() (prog_models.sim_result.SimResult method)</a>
+      <li><a href="glossary.html#term-time-of-event"><strong>time of event</strong></a>
+</li>
+      <li><a href="glossary.html#term-time-of-measurement"><strong>time of measurement</strong></a>
+</li>
+      <li><a href="glossary.html#term-time-of-prediction"><strong>time of prediction</strong></a>
+</li>
+      <li><a href="glossary.html#term-time-to-event"><strong>time to event</strong></a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_ref/prog_models/SimResult.html#prog_models.sim_result.SimResult.time">time() (prog_models.sim_result.SimResult method)</a>
+</li>
+      <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.time_of_event">time_of_event() (prog_models.data_models.DataModel method)</a>
+
+      <ul>
+        <li><a href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel.time_of_event">(prog_models.LinearModel method)</a>
+</li>
+        <li><a href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.time_of_event">(prog_models.PrognosticsModel method)</a>
+</li>
+      </ul></li>
       <li><a href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.to_json">to_json() (prog_models.data_models.DataModel method)</a>
 
       <ul>

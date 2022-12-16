@@ -201,6 +201,11 @@
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/Loading.html">
+       Loading
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">
        PrognosticsModel
       </a>
@@ -454,6 +459,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#building-new-models">
    Building New Models
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#state-transition-models">
+     State-transition Models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#direct-prediction-models">
+     Direct-prediction models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-data">
+     Using Data
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#using-provided-models">
@@ -570,6 +592,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#building-new-models">
    Building New Models
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#state-transition-models">
+     State-transition Models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#direct-prediction-models">
+     Direct-prediction models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-data">
+     Using Data
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#using-provided-models">
@@ -855,13 +894,16 @@ Future Loading Noise<div class="summary-down docutils">
 </section>
 <section id="building-new-models">
 <h2>Building New Models<a class="headerlink" href="#building-new-models" title="Permalink to this headline">#</a></h2>
+<p>ProgPy provides a framework for building new models. Generally, models can be divided into three basis categories: <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a>, <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven models</span></a>, and hybrid models. Additionally, models can rely on state-transition for prediction, or they can use what is called direct-prediction. These two categories are described below.</p>
+<section id="state-transition-models">
+<h3>State-transition Models<a class="headerlink" href="#state-transition-models" title="Permalink to this headline">#</a></h3>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">physics-based</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">data-driven</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a> are constructed by subclassing <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a> as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template <a class="reference download internal" download="" href="_downloads/3c5224a1564fb7226c7f5deb8cdd9f3e/prog_model_template.py"><code class="xref download docutils literal notranslate"><span class="pre">prog_model_template.ProgModelTemplate</span></code></a>, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a> will then work with your new model.</p>
 <p>For simple linear models, users can choose to subclass the simpler <a class="reference internal" href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a> class, as illustrated in the second example. Some methods and algorithms only function on linear models.</p>
 <ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/ce3587166811ef0cd28f4edcf195c60e/new_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_model</span></code></a></dt><dd><span class="target" id="module-new_model"></span><p>Example defining and using a new prognostics model.</p>
-<p>In this example a simple model of an object thrown upward into the air is defined. That model is then used in simulation under different conditions and the results are displayed in different formats.</p>
+<p>In this example a simple state-transition model of an object thrown upward into the air is defined. That model is then used in simulation under different conditions and the results are displayed in different formats.</p>
 </dd>
 </dl>
 </li>
@@ -896,7 +938,7 @@ More details<div class="summary-down docutils">
 </li>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/31b6deef1d3aace088df741bfddb10f9/state_limits.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.state_limits</span></code></a></dt><dd><span class="target" id="module-state_limits"></span><p class="card-text">Example demonstrating when and how to identify model state limits.</p>
-<p class="card-text">In this example, state limits are defined for the ThrownObject Model. These are limits on the range of each state. The use of this feature is then demonstrated.</p>
+<p class="card-text">In this example, state limits are defined for the ThrownObject Model. These are limits on the range of each state for a state-transition model. The use of this feature is then demonstrated.</p>
 </dd>
 </dl>
 </li>
@@ -993,15 +1035,26 @@ More details<div class="summary-down docutils">
 </ul>
 </div>
 </details></div></div>
+</section>
+<section id="direct-prediction-models">
+<h3>Direct-prediction models<a class="headerlink" href="#direct-prediction-models" title="Permalink to this headline">#</a></h3>
+<p><span class="xref std std-term">Direct-prediction models</span> are models that estimate <a class="reference internal" href="glossary.html#term-time-of-event"><span class="xref std std-term">time of event</span></a> directly from the current state, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.</p>
+<ul>
+<li><dl>
+<dt><a class="reference download internal" download="" href="_downloads/e544b7b61c508397101940603daddf04/direct_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.direct_model</span></code></a></dt><dd><span class="target" id="module-direct_model"></span><p>This example demonstrates the Direct Models functionality. Direct models are models that directly estimate time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
+<p>Here a DirectThrownObject model is defined, extending the ThrownObject state transition model from the new_model example. This model is then initialized and used to estimate the time of event from the initial state.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="using-data">
+<h3>Using Data<a class="headerlink" href="#using-data" title="Permalink to this headline">#</a></h3>
 <p>Wether you’re using <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven</span></a>, <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based</span></a>, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see <cite>Parameter Estimation</cite>) and validate the model.</p>
 <p>ProgPy includes some example datasets. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/prog_models/DataSets.html">ProgPy Datasets</a> and the example below for details.</p>
 <ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/a9f5f00132a2ac6b21c976835cdb0e04/dataset.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dataset</span></code></a></dt><dd><span class="target" id="module-dataset"></span><p>Example downloading and using a NASA prognostics dataset.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To use the dataset feature, you must install the requests package.</p>
-</div>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 More details<div class="summary-down docutils">
@@ -1019,6 +1072,7 @@ More details<div class="summary-down docutils">
 <p class="admonition-title">Note</p>
 <p>To use the dataset feature, you must install the requests package.</p>
 </div>
+</section>
 </section>
 <section id="using-provided-models">
 <h2>Using provided models<a class="headerlink" href="#using-provided-models" title="Permalink to this headline">#</a></h2>

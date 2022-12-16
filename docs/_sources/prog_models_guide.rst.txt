@@ -279,6 +279,11 @@ Users of ProgPy will need a model describing the behavior of the system of inter
 Building New Models
 ----------------------
 
+ProgPy provides a framework for building new models. Generally, models can be divided into three basis categories: :term:`physics-based models<physics-based model>`, :term:`data-driven models<data-driven model>`, and hybrid models. Additionally, models can rely on state-transition for prediction, or they can use what is called direct-prediction. These two categories are described below.
+
+State-transition Models
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 .. tabs::
 
     .. tab:: physics-based
@@ -323,6 +328,17 @@ Building New Models
 
             * :download:`examples.custom_model <../../prog_models/examples/custom_model.py>`
                 .. automodule:: custom_model
+
+Direct-prediction models
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:term:`Direct-prediction models<direct-prediction models>` are models that estimate :term:`time of event` directly from the current state, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.
+
+* :download:`examples.direct_model <../../prog_models/examples/direct_model.py>`
+    .. automodule:: direct_model
+
+Using Data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Wether you're using :term:`data-driven<data-driven model>`, :term:`physics-based<physics-based model>`, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see `Parameter Estimation`) and validate the model.
 

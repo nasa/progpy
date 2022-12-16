@@ -198,6 +198,11 @@
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/Loading.html">
+       Loading
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">
        PrognosticsModel
       </a>
@@ -920,7 +925,16 @@ title="Print to PDF"
 </dl>
 </li>
 <li><p>Confirm that all issues associated with the release have been closed (i.e., requirements have been met) or assigned to another release</p></li>
-<li><p>Run unit tests <cite>python -m tests</cite></p></li>
+<li><dl class="simple">
+<dt>Run unit tests <cite>python -m tests</cite> on the following computer types:</dt><dd><ul>
+<li><p>Apple Silicon Mac</p></li>
+<li><p>Intel Mac</p></li>
+<li><p>Windows</p></li>
+<li><p>Linux</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p>If present, run manual tests <cite>python -m tests.test_manual</cite></p></li>
 <li><p>Review the template(s)</p></li>
 <li><p>Review static-analysis/linter results</p></li>
