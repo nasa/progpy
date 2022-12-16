@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Load Estimators &#8212; ProgPy Python Packages 1.4.0 documentation</title>
+    <title>Load Estimators &#8212; ProgPy Python Packages 1.5 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -85,7 +85,7 @@
       <img src="../../_static/software_name.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.4.0 documentation</h1>
+      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.5 documentation</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -407,42 +407,8 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>The following load estimators are supported:</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="prog_server.models.load_ests.Const">
-<span class="sig-prename descclassname"><span class="pre">prog_server.models.load_ests.</span></span><span class="sig-name descname"><span class="pre">Const</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_server.models.load_ests.Const" title="Permalink to this definition">#</a></dt>
-<dd><p>Constant load estimator. Load is assumed to be constant over time.</p>
-<dl class="simple">
-<dt>cfg: dictionary with one key (load) where value is the constant load (dict)</dt><dd><p>e.g., {‘load’: {‘u1’: 0.1}}</p>
-</dd>
-</dl>
-</dd></dl>
-
 <p><br></p>
-<dl class="py function">
-<dt class="sig sig-object py" id="prog_server.models.load_ests.Variable">
-<span class="sig-prename descclassname"><span class="pre">prog_server.models.load_ests.</span></span><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_server.models.load_ests.Variable" title="Permalink to this definition">#</a></dt>
-<dd><p>Variable (i.e. piecewise) load estimator. The piecewise load function is defined in the load_est_cfg as ordered dictionary starting_time: load.</p>
-<dl class="simple">
-<dt>cfg: ordered dictionary starting_time: load. First key should always be 0</dt><dd><p>e.g., {‘0’: {‘u1’: 0.1}, ‘100’: {‘u1’: 0.2}, ‘300’: {‘u1’: 0.3}, ‘500’: {‘u1’: 0.0}}</p>
-</dd>
-</dl>
-</dd></dl>
-
 <p><br></p>
-<dl class="py function">
-<dt class="sig sig-object py" id="prog_server.models.load_ests.MovingAverage">
-<span class="sig-prename descclassname"><span class="pre">prog_server.models.load_ests.</span></span><span class="sig-name descname"><span class="pre">MovingAverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_server.models.load_ests.MovingAverage" title="Permalink to this definition">#</a></dt>
-<dd><p>Moving average load estimator. Load is estimated as the mean of the last <cite>window_size</cite> samples. Noise can be added using the following optional configuration parameters:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>base_std: standard deviation of noise</p></li>
-<li><p>std_slope: Increase in std with time (e.g., 0.1 = increase of 0.1 in std per second)</p></li>
-<li><p>t0: Starting time for calculation of std</p></li>
-</ul>
-</div></blockquote>
-<p>std of applied noise is defined as base_std + std_slope (t-t0). By default no noise is added</p>
-</dd></dl>
-
 </section>
 
 

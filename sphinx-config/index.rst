@@ -32,21 +32,27 @@ Use the following to cite this repository:
 
 @misc{2022_nasa_progpy,
   | author    = {Christopher Teubert and Katelyn Jarvis and Matteo Corbetta and Chetan Kulkarni and Matthew Daigle},
-  | title     = {ProgPy Packages},
-  | month     = October,
-  | year      = 2022,
-  | version   = {1.4},
+  | title     = {ProgPy Python Prognostics Packages},
+  | month     = May,
+  | year      = 2023,
+  | version   = {1.5},
   | url       = {https://nasa.github.io/progpy}
   | }
 
 The corresponding reference should look like this:
 
-C. Teubert, K. Jarvis, M. Corbetta, C. Kulkarni, M. Daigle, Prognostics Model Python Package, v1.4, October 2022. URL https://github.com/nasa/progpy.
+C. Teubert, K. Jarvis, M. Corbetta, C. Kulkarni, M. Daigle, ProgPy Python Prognostics Packages, v1.5, May 2022. URL https://github.com/nasa/progpy.
 
 Contributing and Partnering
 -----------------------------
-ProgPy was developed by researchers of the NASA Prognostics Center of Excellence (PCoE) and `Diagnostics & Prognostics Group <https://www.nasa.gov/content/diagnostics-prognostics>`__, with assistance from our partners: Northrop Grumman, Vanderbilt University, and the German Aerospace Center (DLR). We welcome contributions and are actively interested in partnering with other organizations and researchers. If interested in contibuting, please email Chris Teubert at christopher.a.teubert@nasa.gov.
+ProgPy was developed by researchers of the NASA Prognostics Center of Excellence (PCoE) and `Diagnostics & Prognostics Group <https://www.nasa.gov/content/diagnostics-prognostics>`__, with assistance from our partners. We welcome contributions and are actively interested in partnering with other organizations and researchers. If interested in contibuting, please email Chris Teubert at christopher.a.teubert@nasa.gov.
 
+A big thank you to our partners who have contributed to the design, testing, and/or development of ProgPy:
+
+- German Aerospace Center (DLR) Institute of Maintenance, Repair and Overhaul.
+- Northrop Grumman Corporation (NGC)
+- Research Institutes of Sweden (RISE)
+- Vanderbilt University
 
 Indices and Tables
 -----------------------

@@ -38,7 +38,7 @@ copyright = '2021 United States Government as represented by the Administrator o
 author = 'Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle'
 
 # The full version, including alpha/beta/rc tags
-release = "1.4.0"
+release = "1.5"
 
 # -- General configuration ---------------------------------------------------
 
