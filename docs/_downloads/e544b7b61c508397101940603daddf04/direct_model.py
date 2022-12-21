@@ -33,7 +33,7 @@ def run_example():
             t_impact = -(x['v'] + np.sqrt(x['v']*x['v'] - 2*g*x['x']))/g
             # 0 = v0 - g*t
             t_falling = -x['v']/g
-            return {'impact': t_impact, 'falling': t_falling}
+            return {'falling': t_falling, 'impact': t_impact}
 
     # Note that adding *args and **kwargs is optional.
     # Having these arguments makes the function interchangeable with other models

@@ -49,8 +49,8 @@ ProgPy was developed by researchers of the NASA Prognostics Center of Excellence
 
 A big thank you to our partners who have contributed to the design, testing, and/or development of ProgPy:
 
-- German Aerospace Center (DLR)
-- Northrop Grumman Corporation
+- German Aerospace Center (DLR) Institute of Maintenance, Repair and Overhaul.
+- Northrop Grumman Corporation (NGC)
 - Research Institutes of Sweden (RISE)
 - Vanderbilt University
 

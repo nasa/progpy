@@ -72,9 +72,15 @@ LSTMStateTransitionModel
 .. autoclass:: prog_models.data_models.LSTMStateTransitionModel
    :members: from_data, from_model
 
+PolynomialChaosExpansion
+**************************
+.. autoclass:: prog_models.data_models.PolynomialChaosExpansion
+   :members: from_data, from_model
+
 DataModel Interface
 ---------------------------
 .. autoclass:: prog_models.data_models.DataModel
    :members:
+   :show-inheritance:
    :inherited-members:
    :exclude-members: SimulationResults, generate_model, observables, dx, next_state, initialize, output, event_state, threshold_met, apply_process_noise, apply_measurement_noise, apply_limits, performance_metrics

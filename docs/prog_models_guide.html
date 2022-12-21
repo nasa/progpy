@@ -191,6 +191,11 @@
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/EnsembleModel.html">
+       EnsembleModel
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="api_ref/prog_models/IncludedModels.html">
        Included Models
       </a>
@@ -1038,7 +1043,7 @@ More details<div class="summary-down docutils">
 </section>
 <section id="direct-prediction-models">
 <h3>Direct-prediction models<a class="headerlink" href="#direct-prediction-models" title="Permalink to this headline">#</a></h3>
-<p><span class="xref std std-term">Direct-prediction models</span> are models that estimate <a class="reference internal" href="glossary.html#term-time-of-event"><span class="xref std std-term">time of event</span></a> directly from the current state, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.</p>
+<p><span class="xref std std-term">Direct-prediction models</span> are models that estimate <a class="reference internal" href="glossary.html#term-time-of-event"><span class="xref std std-term">time of event</span></a> directly from the current state and <a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">future load</span></a>, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.</p>
 <ul>
 <li><dl>
 <dt><a class="reference download internal" download="" href="_downloads/e544b7b61c508397101940603daddf04/direct_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.direct_model</span></code></a></dt><dd><span class="target" id="module-direct_model"></span><p>This example demonstrates the Direct Models functionality. Direct models are models that directly estimate time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>

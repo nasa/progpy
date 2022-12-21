@@ -332,7 +332,7 @@ State-transition Models
 Direct-prediction models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:term:`Direct-prediction models<direct-prediction models>` are models that estimate :term:`time of event` directly from the current state, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.
+:term:`Direct-prediction models<direct-prediction models>` are models that estimate :term:`time of event` directly from the current state and :term:`future load`, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.
 
 * :download:`examples.direct_model <../../prog_models/examples/direct_model.py>`
     .. automodule:: direct_model

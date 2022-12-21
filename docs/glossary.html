@@ -190,6 +190,11 @@
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/EnsembleModel.html">
+       EnsembleModel
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="api_ref/prog_models/IncludedModels.html">
        Included Models
       </a>
@@ -404,7 +409,7 @@ title="Print to PDF"
 <dl class="glossary simple">
 <dt id="term-data-driven-model">data-driven model<a class="headerlink" href="#term-data-driven-model" title="Permalink to this term">#</a></dt><dd><p>A model where the behavior is learned from data. In ProgPy, data-driven models derive from the parent class <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel</span></code></a>. A common example of data-driven models is models using neural networks (e.g., <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.LSTMStateTransitionModel" title="prog_models.data_models.LSTMStateTransitionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.LSTMStateTransitionModel</span></code></a>).</p>
 </dd>
-<dt id="term-direct-prediction-model">direct-prediction model<a class="headerlink" href="#term-direct-prediction-model" title="Permalink to this term">#</a></dt><dd><p>A model where the <a class="reference internal" href="#term-time-of-event"><span class="xref std std-term">time of event</span></a> is directly estimated from the current state, instead of predicted through simulation to threshold. These are implemented using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.time_to_event()</span></code> method.</p>
+<dt id="term-direct-prediction-model">direct-prediction model<a class="headerlink" href="#term-direct-prediction-model" title="Permalink to this term">#</a></dt><dd><p>A model where the <a class="reference internal" href="#term-time-of-event"><span class="xref std std-term">time of event</span></a> is directly estimated from the current state and/or <a class="reference internal" href="#term-future-load"><span class="xref std std-term">future load</span></a>, instead of predicted through simulation to threshold. These are implemented using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.time_to_event()</span></code> method.</p>
 </dd>
 <dt id="term-event">event<a class="headerlink" href="#term-event" title="Permalink to this term">#</a></dt><dd><p>Something that can be predicted (e.g., system failure). An event has either occurred or not. See also: <a class="reference internal" href="#term-threshold"><span class="xref std std-term">threshold</span></a></p>
 </dd>

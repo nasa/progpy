@@ -6,42 +6,42 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>prog_server API Reference &#8212; ProgPy Python Packages 1.5 documentation</title>
+    <title>EnsembleModel &#8212; ProgPy Python Packages 1.5 documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <link rel="shortcut icon" href="../_static/nasa_logo.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Load Estimators" href="prog_server/load_ests.html" />
-    <link rel="prev" title="SimResult" href="prog_models/SimResult.html" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Included Models" href="IncludedModels.html" />
+    <link rel="prev" title="Datasets" href="DataSets.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -76,26 +76,26 @@
 <div class="bd-sidebar noprint" id="site-navigation">
     <div class="bd-sidebar__content">
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+    <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
       
       
-      <img src="../_static/software_name.png" class="logo" alt="logo">
+      <img src="../../_static/software_name.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.5 documentation</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../guide.html">
+  <a class="reference internal" href="../../guide.html">
    ProgPy Guide
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -105,24 +105,24 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../prog_models_guide.html">
+    <a class="reference internal" href="../../prog_models_guide.html">
      prog_models Guide
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../prog_algs_guide.html">
+    <a class="reference internal" href="../../prog_algs_guide.html">
      prog_algs Guide
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../prog_server_guide.html">
+    <a class="reference internal" href="../../prog_server_guide.html">
      prog_server Guide
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../api_ref.html">
+  <a class="reference internal" href="../../api_ref.html">
    API Reference
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -132,7 +132,7 @@
   </label>
   <ul class="current">
    <li class="toctree-l2 has-children">
-    <a class="reference internal" href="prog_algs.html">
+    <a class="reference internal" href="../prog_algs.html">
      prog_algs API Reference
     </a>
     <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
@@ -142,106 +142,106 @@
     </label>
     <ul>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/Prediction.html">
+      <a class="reference internal" href="../prog_algs/Prediction.html">
        Prediction
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/Predictor.html">
+      <a class="reference internal" href="../prog_algs/Predictor.html">
        Predictors
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/StateEstimator.html">
+      <a class="reference internal" href="../prog_algs/StateEstimator.html">
        State Estimators
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/ToEPredictionProfile.html">
+      <a class="reference internal" href="../prog_algs/ToEPredictionProfile.html">
        ToEPredictionProfile
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/UncertainData.html">
+      <a class="reference internal" href="../prog_algs/UncertainData.html">
        Uncertain Data
       </a>
      </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
-    <a class="reference internal" href="prog_models.html">
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="../prog_models.html">
      prog_models API Reference
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
     <label for="toctree-checkbox-4">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul>
+    <ul class="current">
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/DataModel.html">
+      <a class="reference internal" href="DataModel.html">
        DataModel
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/DataSets.html">
+      <a class="reference internal" href="DataSets.html">
        Datasets
       </a>
      </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/EnsembleModel.html">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
        EnsembleModel
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/IncludedModels.html">
+      <a class="reference internal" href="IncludedModels.html">
        Included Models
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/LinearModel.html">
+      <a class="reference internal" href="LinearModel.html">
        LinearModel
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/Loading.html">
+      <a class="reference internal" href="Loading.html">
        Loading
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/PrognosticModel.html">
+      <a class="reference internal" href="PrognosticModel.html">
        PrognosticsModel
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/SimResult.html">
+      <a class="reference internal" href="SimResult.html">
        SimResult
       </a>
      </li>
     </ul>
    </li>
-   <li class="toctree-l2 current active has-children">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../prog_server.html">
      prog_server API Reference
     </a>
-    <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
     <label for="toctree-checkbox-5">
      <i class="fas fa-chevron-down">
      </i>
     </label>
     <ul>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_server/load_ests.html">
+      <a class="reference internal" href="../prog_server/load_ests.html">
        Load Estimators
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_server/prog_client.html">
+      <a class="reference internal" href="../prog_server/prog_client.html">
        prog_client
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="prog_server/prog_server.html">
+      <a class="reference internal" href="../prog_server/prog_server.html">
        ProgServer
       </a>
      </li>
@@ -255,17 +255,17 @@
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../releases.html">
+  <a class="reference internal" href="../../releases.html">
    Release Notes
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../glossary.html">
+  <a class="reference internal" href="../../glossary.html">
    Glossary
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../dev_guide.html">
+  <a class="reference internal" href="../../dev_guide.html">
    Developers Guide &amp; Project Plan
   </a>
  </li>
@@ -342,7 +342,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/api_ref/prog_server.rst.txt"
+        <a href="../../_sources/api_ref/prog_models/EnsembleModel.rst.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -391,7 +391,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>prog_server API Reference</h1>
+                <h1>EnsembleModel</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -403,16 +403,25 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="prog-server-api-reference">
-<h1>prog_server API Reference<a class="headerlink" href="#prog-server-api-reference" title="Permalink to this headline">#</a></h1>
-<iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_server&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="prog_server/load_ests.html">Load Estimators</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prog_server/prog_client.html">prog_client</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prog_server/prog_server.html">ProgServer</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
-</ul>
-</div>
+  <section id="ensemblemodel">
+<h1>EnsembleModel<a class="headerlink" href="#ensemblemodel" title="Permalink to this headline">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="prog_models.EnsembleModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.</span></span><span class="sig-name descname"><span class="pre">EnsembleModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.EnsembleModel" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.prognostics_model.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.prognostics_model.PrognosticsModel</span></code></a></p>
+<p>An Ensemble Model is a collection of models which run together. The results of each model are aggregated using the aggregation_method function. This is generally done to improve the accuracy of prediction when you have multiple models that each represent part of the behavior, or represent a distribution of different behaviors.</p>
+<p>Ensembe Models are constructed from a set of other models (e.g., <a href="#id1"><span class="problematic" id="id2">:py:`m = EnsembleModel((m1, m2, m3))`</span></a>). The models then operate functionally as one prognostic model.</p>
+<p>See example <a class="reference download internal" download="" href="../../_downloads/46d1f3f0ff1be63e0a4a42caa85a65f5/ensemble.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.ensemble</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – List of models that form the ensemble</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>aggregation_method</strong> (<em>function</em>) – Function that aggregates the outputs of the models in the ensemble. Default is np.mean</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -423,17 +432,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="prog_models/SimResult.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="DataSets.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">SimResult</p>
+            <p class="prev-next-title">Datasets</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="prog_server/load_ests.html" title="next page">
+    <a class='right-next' id="next-link" href="IncludedModels.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Load Estimators</p>
+        <p class="prev-next-title">Included Models</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -458,7 +467,7 @@ title="Print to PDF"
     </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
 
 
