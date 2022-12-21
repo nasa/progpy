@@ -83,7 +83,7 @@ Glossary
       The time at which the last measurement was performed that was used for state estimation. Sometimes abbreviated as ToM or :math:`t_m`.
 
     direct-prediction model
-      A model where the :term:`time of event` is directly estimated from the current state, instead of predicted through simulation to threshold. These are implemented using the :py:meth:`prog_models.PrognosticsModel.time_to_event` method.
+      A model where the :term:`time of event` is directly estimated from the current state and/or :term:`future load`, instead of predicted through simulation to threshold. These are implemented using the :py:meth:`prog_models.PrognosticsModel.time_to_event` method.
 
     state-transition model
       A model where the :term:`time of event` is predicted through simulation to threshold. Most prognostic models are state-transition models.
