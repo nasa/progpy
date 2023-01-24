@@ -190,6 +190,11 @@
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="../prog_models/EnsembleModel.html">
+       EnsembleModel
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="../prog_models/IncludedModels.html">
        Included Models
       </a>
@@ -470,144 +475,10 @@ title="Print to PDF"
 <p>The following state estimators are included with this package. A new state estimator can be created by subclassing <cite>prog_algs.state_estimators.StateEstimator</cite>. See also: <cite>state_estimator_template.py</cite></p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Particle Filter</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Unscented Kalman Filter</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Kalman Filter</button></div><p>prog_algs</p>
-<div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><dl class="py class">
-<dt class="sig sig-object py" id="prog_algs.state_estimators.ParticleFilter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.state_estimators.</span></span><span class="sig-name descname"><span class="pre">ParticleFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.state_estimators.ParticleFilter" title="Permalink to this definition">#</a></dt>
-<dd><p>Estimates state using a Particle Filter (PF) algorithm.</p>
-<p>This class defines logic for a PF using a Prognostics Model (see Prognostics Model Package). This filter uses measurement data with noise to estimate the state of the system using a particles. At each step, particles are predicted forward (with noise). Particles are resampled with replacement from the existing particles according to how well the particles match the observed measurements.</p>
-<p>The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<a class="reference internal" href="../prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
-See: Prognostics Model Package</p></li>
-<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
-<p>e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – time step (s)</p></li>
-<li><p><strong>num_particles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of particles in particle filter</p></li>
-<li><p><strong>resample_fcn</strong> (<em>function</em><em>, </em><em>optional</em>) – Resampling function ([weights]) -&gt; [indexes] e.g., filterpy.monte_carlo.residual_resample</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><dl class="py class">
-<dt class="sig sig-object py" id="prog_algs.state_estimators.UnscentedKalmanFilter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.state_estimators.</span></span><span class="sig-name descname"><span class="pre">UnscentedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.state_estimators.UnscentedKalmanFilter" title="Permalink to this definition">#</a></dt>
-<dd><p>An Unscented Kalman Filter (UKF) for state estimation</p>
-<p>This class defines logic for performing an unscented kalman filter with a Prognostics Model (see Prognostics Model Package). This filter uses measurement data with noise to generate a state estimate and covariance matrix.</p>
-<p>The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<a class="reference internal" href="../prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
-See: Prognostics Model Package</p></li>
-<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
-<p>e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p><strong>kappa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – time step (s)</p></li>
-<li><p><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Process Noise Matrix</p></li>
-<li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Measurement Noise Matrix</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><dl class="py class">
-<dt class="sig sig-object py" id="prog_algs.state_estimators.KalmanFilter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.state_estimators.</span></span><span class="sig-name descname"><span class="pre">KalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.state_estimators.KalmanFilter" title="Permalink to this definition">#</a></dt>
-<dd><p>A Kalman Filter (KF) for state estimation</p>
-<p>This class defines the logic for performing a kalman filter with a LinearModel (see Prognostics Model Package). This filter uses measurement data with noise to generate a state estimate and covariance matrix.</p>
-<p>The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<a class="reference internal" href="../prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
-See: Prognostics Model Package</p></li>
-<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
-<p>e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – KF Scaling parameter. An alpha &gt; 1 turns this into a fading memory filter.</p></li>
-<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – time step (s)</p></li>
-<li><p><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Process Noise Matrix</p></li>
-<li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Measurement Noise Matrix</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div></div>
+<div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"></div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"></div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"></div></div>
 </section>
 <section id="state-estimator-interface">
 <h2>State Estimator Interface<a class="headerlink" href="#state-estimator-interface" title="Permalink to this headline">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="prog_algs.state_estimators.StateEstimator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.state_estimators.</span></span><span class="sig-name descname"><span class="pre">StateEstimator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.state_estimators.StateEstimator" title="Permalink to this definition">#</a></dt>
-<dd><p>Interface class for state estimators</p>
-<p>Abstract base class for creating state estimators that perform state estimation. Subclasses must implement this interface. Equivilant to “Observers” in NASA’s Matlab Prognostics Algorithm Library</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<a class="reference internal" href="../prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
-See: Prognostics Model Package</p></li>
-<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
-<p>e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
-</p></li>
-</ul>
-</dd>
-</dl>
-<p>See state-estimator specific documentation for speicfic keyword arguments.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="prog_algs.state_estimators.StateEstimator.estimate">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_algs.state_estimators.StateEstimator.estimate" title="Permalink to this definition">#</a></dt>
-<dd><p>Perform one state estimation step (i.e., update the state estimate, filt.x)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Current timestamp in seconds (≥ 0.0)
-e.g., t = 3.4</p></li>
-<li><p><strong>u</strong> (<em>InputContainer</em>) – Measured inputs, with keys defined by model.inputs.
-e.g., u = m.InputContainer({‘i’:3.2}) given inputs = [‘i’]</p></li>
-<li><p><strong>z</strong> (<em>OutputContainer</em>) – Measured outputs, with keys defined by model.outputs.
-e.g., z = m.OutputContainer({‘t’:12.4, ‘v’:3.3}) given outputs = [‘t’, ‘v’]</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method updates the state estimate stored in filt.x, but doesn’t return the updated estimate. Call filt.x to get the updated estimate.</p>
-</div>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="prog_algs.state_estimators.StateEstimator.x">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#prog_algs.state_estimators.StateEstimator.x" title="Permalink to this definition">#</a></dt>
-<dd><p>The current estimated state.</p>
-<p class="rubric">Example</p>
-<p>state = filt.x</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 

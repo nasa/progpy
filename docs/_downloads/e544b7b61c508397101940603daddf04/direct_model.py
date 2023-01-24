@@ -31,8 +31,10 @@ def run_example():
             # 0 = x0 + v0*t - 0.5*g*t^2
             g = self.parameters['g']
             t_impact = -(x['v'] + np.sqrt(x['v']*x['v'] - 2*g*x['x']))/g
+
             # 0 = v0 - g*t
             t_falling = -x['v']/g
+                
             return {'falling': t_falling, 'impact': t_impact}
 
     # Note that adding *args and **kwargs is optional.

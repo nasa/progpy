@@ -9,3 +9,5 @@ prog_models API Reference
    :glob:
 
    prog_models/* 
+
+.. image:: ../images/prog_models_UML.png

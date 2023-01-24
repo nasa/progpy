@@ -407,32 +407,23 @@ Cybersecurity
 
 Cybersecurity risks were assessed, the identified cybersecurity threats and our mitigations are described below:
 
- * Code injection
-
+* Code injection
    * Risk: insertion of hazardous code into an open-source project by malicious actor
    * Mitigation: Strict code review requirements in the repository. Static analysis/security alerts. Vetting for contributors. Branch rules to prohibit direct commits and unapproved additions
    * Validation: Part of automated tests and confirmed in release review
-
- * Programmers Accidentally Introduce Security Risks
-
+* Programmers Accidentally Introduce Security Risks
    * Risk: Programmers accidentally introduce security risks into the codebase
    * Mitigation: Automated Tests. Strict code review requirements in the repository. Static analysis/security alerts. Vetting for contributors. Branch rules to prohibit direct commits and unapproved additions
    * Validation: Part of automated tests and confirmed in release review
-
- * Dependencies
-
+* Dependencies
    * Risk: Dependencies could introduce cybersecurity vulnerabilities
    * Mitigation: GitHub “dependabot” alerts will identify any known issues with package decencies. Also, the project is actively trying to limit the number of dependencies, and only use well-known packages from trusted developers.
    * Validation: Alerts produced by dependabot system. Dependencies must be approved by Project Manager
-
- * Language
-
+* Language
    * Risk: Python itself may introduce cybersecurity vulnerabilities 
    * Mitigation: Python is a well-known language, this risk is low. To mitigate this we only support actively maintained versions.
    * Validation: Will check with each release
-   
 * Unauthorized Access to Hardware [SWE-157]
-
    * Risk: Unauthorized access to hardware (GitHub Servers)
    * Mitigation: Github is a trusted partner who has strict access control. Administrator rights are limited to Project Manager and NASA Org Administrators. Individuals not involved and vetted by the project cannot add to the repository directly (only through PR from fork) 
    * Validation: System configuration validated by PM 7/13/22

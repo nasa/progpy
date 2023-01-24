@@ -32,7 +32,7 @@ Use the following to cite this repository:
 
 @misc{2022_nasa_progpy,
   | author    = {Christopher Teubert and Katelyn Jarvis and Matteo Corbetta and Chetan Kulkarni and Matthew Daigle},
-  | title     = {ProgPy Python Prognostics Packages},
+  | title     = {{ProgPy Python Prognostics Packages}},
   | month     = May,
   | year      = 2023,
   | version   = {1.5},

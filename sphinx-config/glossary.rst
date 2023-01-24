@@ -87,3 +87,9 @@ Glossary
 
     state-transition model
       A model where the :term:`time of event` is predicted through simulation to threshold. Most prognostic models are state-transition models.
+
+    composite model
+      A model consisting of multiple inter-related Prognostics Models, where the :term:`input` of one :term:`model` is a function of the :term:`output` or :term:`state` of another. This is a tool for representing system-of-systems. Composite models are implemented using the :py:class:`prog_models.CompositeModel` class.
+
+    system-of-systems
+      A system consisting of multiple inter-related systems, where one system affects the others. In ProgPy, system-of-systems are reporsented using :term:`composite models <composite model>`. Composite models are implemented using the :py:class:`prog_models.CompositeModel` class.

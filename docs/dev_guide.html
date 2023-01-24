@@ -1506,47 +1506,51 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tbody>
 </table>
 <p>Cybersecurity risks were assessed, the identified cybersecurity threats and our mitigations are described below:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Code injection</p>
-<ul>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Code injection</dt><dd><ul>
 <li><p>Risk: insertion of hazardous code into an open-source project by malicious actor</p></li>
 <li><p>Mitigation: Strict code review requirements in the repository. Static analysis/security alerts. Vetting for contributors. Branch rules to prohibit direct commits and unapproved additions</p></li>
 <li><p>Validation: Part of automated tests and confirmed in release review</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p>Programmers Accidentally Introduce Security Risks</p>
-<ul>
+<li><dl class="simple">
+<dt>Programmers Accidentally Introduce Security Risks</dt><dd><ul>
 <li><p>Risk: Programmers accidentally introduce security risks into the codebase</p></li>
 <li><p>Mitigation: Automated Tests. Strict code review requirements in the repository. Static analysis/security alerts. Vetting for contributors. Branch rules to prohibit direct commits and unapproved additions</p></li>
 <li><p>Validation: Part of automated tests and confirmed in release review</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p>Dependencies</p>
-<ul>
+<li><dl class="simple">
+<dt>Dependencies</dt><dd><ul>
 <li><p>Risk: Dependencies could introduce cybersecurity vulnerabilities</p></li>
 <li><p>Mitigation: GitHub “dependabot” alerts will identify any known issues with package decencies. Also, the project is actively trying to limit the number of dependencies, and only use well-known packages from trusted developers.</p></li>
 <li><p>Validation: Alerts produced by dependabot system. Dependencies must be approved by Project Manager</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-<li><p>Language</p>
-<ul>
+<li><dl class="simple">
+<dt>Language</dt><dd><ul>
 <li><p>Risk: Python itself may introduce cybersecurity vulnerabilities</p></li>
 <li><p>Mitigation: Python is a well-known language, this risk is low. To mitigate this we only support actively maintained versions.</p></li>
 <li><p>Validation: Will check with each release</p></li>
 </ul>
+</dd>
+</dl>
 </li>
-</ul>
-</div></blockquote>
-<ul>
-<li><p>Unauthorized Access to Hardware [SWE-157]</p>
-<blockquote>
-<div><ul class="simple">
+<li><dl class="simple">
+<dt>Unauthorized Access to Hardware [SWE-157]</dt><dd><ul>
 <li><p>Risk: Unauthorized access to hardware (GitHub Servers)</p></li>
 <li><p>Mitigation: Github is a trusted partner who has strict access control. Administrator rights are limited to Project Manager and NASA Org Administrators. Individuals not involved and vetted by the project cannot add to the repository directly (only through PR from fork)</p></li>
 <li><p>Validation: System configuration validated by PM 7/13/22</p></li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
 </li>
 </ul>
 </section>

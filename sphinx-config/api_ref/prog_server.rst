@@ -10,4 +10,5 @@ prog_server API Reference
 
    prog_server/* 
    Prog Server API <https://app.swaggerhub.com/apis-docs/teubert/prog_server>
-   
+
+.. image:: ../images/prog_server_UML.png

@@ -191,6 +191,11 @@
       </a>
      </li>
      <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/EnsembleModel.html">
+       EnsembleModel
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="api_ref/prog_models/IncludedModels.html">
        Included Models
       </a>
@@ -663,36 +668,6 @@ UKF Details<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<dl class="py class">
-<dt class="sig sig-object py" id="prog_algs.state_estimators.UnscentedKalmanFilter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.state_estimators.</span></span><span class="sig-name descname"><span class="pre">UnscentedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.state_estimators.UnscentedKalmanFilter" title="Permalink to this definition">#</a></dt>
-<dd><p class="card-text">An Unscented Kalman Filter (UKF) for state estimation</p>
-<p class="card-text">This class defines logic for performing an unscented kalman filter with a Prognostics Model (see Prognostics Model Package). This filter uses measurement data with noise to generate a state estimate and covariance matrix.</p>
-<p class="card-text">The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p class="card-text"><strong>model</strong> (<a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
-See: Prognostics Model Package</p></li>
-<li><p class="card-text"><strong>x0</strong> (<a class="reference internal" href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p class="card-text">Initial (starting) state, with keys defined by model.states</p>
-<p class="card-text">e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><p class="card-text"><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p class="card-text"><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p class="card-text"><strong>kappa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – time step (s)</p></li>
-<li><p class="card-text"><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Process Noise Matrix</p></li>
-<li><p class="card-text"><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Measurement Noise Matrix</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 </details><details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -701,33 +676,6 @@ PF Details<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<dl class="py class">
-<dt class="sig sig-object py" id="prog_algs.state_estimators.ParticleFilter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.state_estimators.</span></span><span class="sig-name descname"><span class="pre">ParticleFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.state_estimators.ParticleFilter" title="Permalink to this definition">#</a></dt>
-<dd><p class="card-text">Estimates state using a Particle Filter (PF) algorithm.</p>
-<p class="card-text">This class defines logic for a PF using a Prognostics Model (see Prognostics Model Package). This filter uses measurement data with noise to estimate the state of the system using a particles. At each step, particles are predicted forward (with noise). Particles are resampled with replacement from the existing particles according to how well the particles match the observed measurements.</p>
-<p class="card-text">The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p class="card-text"><strong>model</strong> (<a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
-See: Prognostics Model Package</p></li>
-<li><p class="card-text"><strong>x0</strong> (<a class="reference internal" href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p class="card-text">Initial (starting) state, with keys defined by model.states</p>
-<p class="card-text">e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – time step (s)</p></li>
-<li><p class="card-text"><strong>num_particles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of particles in particle filter</p></li>
-<li><p class="card-text"><strong>resample_fcn</strong> (<em>function</em><em>, </em><em>optional</em>) – Resampling function ([weights]) -&gt; [indexes] e.g., filterpy.monte_carlo.residual_resample</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 </details><details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -736,33 +684,6 @@ KF Details<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<dl class="py class">
-<dt class="sig sig-object py" id="id0">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.state_estimators.</span></span><span class="sig-name descname"><span class="pre">ParticleFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">#</a></dt>
-<dd><p class="card-text">Estimates state using a Particle Filter (PF) algorithm.</p>
-<p class="card-text">This class defines logic for a PF using a Prognostics Model (see Prognostics Model Package). This filter uses measurement data with noise to estimate the state of the system using a particles. At each step, particles are predicted forward (with noise). Particles are resampled with replacement from the existing particles according to how well the particles match the observed measurements.</p>
-<p class="card-text">The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p class="card-text"><strong>model</strong> (<a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
-See: Prognostics Model Package</p></li>
-<li><p class="card-text"><strong>x0</strong> (<a class="reference internal" href="api_ref/prog_algs/UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p class="card-text">Initial (starting) state, with keys defined by model.states</p>
-<p class="card-text">e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – time step (s)</p></li>
-<li><p class="card-text"><strong>num_particles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of particles in particle filter</p></li>
-<li><p class="card-text"><strong>resample_fcn</strong> (<em>function</em><em>, </em><em>optional</em>) – Resampling function ([weights]) -&gt; [indexes] e.g., filterpy.monte_carlo.residual_resample</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 </details></div>
 </details><details class="sphinx-bs dropdown card mb-3">
@@ -790,15 +711,13 @@ Example<div class="summary-down docutils">
 </div>
 </details><section id="extending">
 <h3>Extending<a class="headerlink" href="#extending" title="Permalink to this headline">#</a></h3>
-<p>New <a class="reference internal" href="glossary.html#term-state-estimator"><span class="xref std std-term">state estimator</span></a> are created by extending the <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.StateEstimator" title="prog_algs.state_estimators.StateEstimator"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.StateEstimator</span></code></a> class.</p>
+<p>New <a class="reference internal" href="glossary.html#term-state-estimator"><span class="xref std std-term">state estimator</span></a> are created by extending the <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.StateEstimator</span></code> class.</p>
 <p>See <a class="reference download internal" download="" href="_downloads/05795c561b0fb31137ef5fd753641074/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a> for an example of this approach.</p>
 <section id="example">
 <h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h4>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/05795c561b0fb31137ef5fd753641074/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd><span class="target" id="module-new_state_estimator_example"></span><p>An example illustrating the creation of a new state estimator.</p>
-<p>In this example a basic state estimator is constructed by subclassing the StateEstimator class. This StateEstimator is then demonstrated with a ThrownObject model</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/05795c561b0fb31137ef5fd753641074/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -1006,45 +925,13 @@ Histogram<div class="summary-down docutils">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
 <a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/prog_algs/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
 <p>The best way to learn how to use <cite>prog_algs</cite> is through the <a class="reference external" href="https://mybinder.org/v2/gh/nasa/prog_algs/master?labpath=tutorial.ipynb">tutorial</a>. There are also a number of examples which show different aspects of the package, summarized and linked below:</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/793440e96b47eee071c6169a58aacb54/basic_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example</span></code></a></dt><dd><span class="target" id="module-basic_example"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model.</p>
-<dl class="simple">
-<dt>Method: An instance of the ThrownObject model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
-<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
-<li><p>Prediction of future states (with uncertainty) and the times at which the event threshold will be reached</p></li>
-<li><p>Metrics tools are used to further investigate the results of prediction</p></li>
-</ol>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time event is predicted to occur (with uncertainty)</p></li>
-<li><p>Various prediction metrics</p></li>
-<li><p>Figures illustrating results</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/793440e96b47eee071c6169a58aacb54/basic_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/134152f7c47b3c3fa2378dcb3ac443d7/basic_example_battery.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example_battery</span></code></a></dt><dd><span class="target" id="module-basic_example_battery"></span><p>This example extends the “basic example” to perform a state estimation and prediction with uncertainty given a more complicated model. Models, state estimators, and predictors can be switched out. See documentation nasa.github.io/progpy for description of options</p>
-<dl class="simple">
-<dt>Method: An instance of the BatteryCircuit model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
-<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
-<li><p>Prediction of future states (with uncertainty) and the times at which the event threshold will be reached</p></li>
-<li><p>Metrics tools are used to further investigate the results of prediction</p></li>
-</ol>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time event is predicted to occur (with uncertainty)</p></li>
-<li><p>Various prediction metrics</p></li>
-<li><p>Figures illustrating results</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/134152f7c47b3c3fa2378dcb3ac443d7/basic_example_battery.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example_battery</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -1063,76 +950,32 @@ Histogram<div class="summary-down docutils">
 </dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/05795c561b0fb31137ef5fd753641074/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd><span class="target" id="module-0"></span><p>An example illustrating the creation of a new state estimator.</p>
-<p>In this example a basic state estimator is constructed by subclassing the StateEstimator class. This StateEstimator is then demonstrated with a ThrownObject model</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/05795c561b0fb31137ef5fd753641074/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/341975e0d32cbd13267902b1f2dc291d/horizon.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.horizon</span></code></a></dt><dd><span class="target" id="module-horizon"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model with a specific prediction horizon. This prediction horizon marks the end of the “time of interest” for the prediction. Often this represents the end of a mission or sufficiently in the future where the user is unconcerned with the events</p>
-<dl class="simple">
-<dt>Method: An instance of the Thrown Object model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
-<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
-<li><p>Prediction of future states (with uncertainty) and the times at which the event thresholds will be reached, within the prediction horizon. All events outside the horizon come back as None and are ignored in metrics</p></li>
-</ol>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time event is predicted to occur (with uncertainty)</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/341975e0d32cbd13267902b1f2dc291d/horizon.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.horizon</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/95185cf727a21ad753717b8332bb063f/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></dt><dd><span class="target" id="module-kalman_filter"></span><p>This example demonstrates use of the Kalman Filter State Estimator with a LinearModel.</p>
-<p>First, a linear model is defined. Then the KF State estimator is used with fake data to estimate state.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/95185cf727a21ad753717b8332bb063f/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/b997c950df7e2f695c19319712091ba3/measurement_eqn_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.measurement_eqn_example</span></code></a></dt><dd><span class="target" id="module-measurement_eqn_example"></span><p>This example performs a state estimation with uncertainty given a Prognostics Model for a system in which not all output values are measured.</p>
-<dl class="simple">
-<dt>Method: An instance of the BatteryCircuit model in prog_models is created. We assume that we are only measuring one of the output values, and we define a subclass to remove the other output value.</dt><dd><p>Estimation of the current state is performed at various time steps, using the defined state_estimator.</p>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Estimate of the current state given various times</p></li>
-<li><p>Display of results, such as prior and posterior state estimate values and SOC</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/b997c950df7e2f695c19319712091ba3/measurement_eqn_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.measurement_eqn_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></dt><dd><span class="target" id="module-playback"></span><p>This example performs state estimation and prediction using playback data.</p>
-<dl class="simple">
-<dt>Method: An instance of the BatteryCircuit model in prog_models is created, the state estimation is set up by defining a state_estimator, and the prediction method is set up by defining a predictor.</dt><dd><p>Prediction is then performed using playback data. For each data point:
-1) The necessary data is extracted (time, current load, output values) and corresponding values defined (t, i, and z)
-2) The current state estimate is performed and samples are drawn from this distribution
-3) Prediction performed to get future states (with uncertainty) and the times at which the event threshold will be reached</p>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time event is predicted to occur (with uncertainty)</p></li>
-<li><p>Various prediction metrics</p></li>
-<li><p>Figures illustrating results</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/12138a14c1f3eeb320b181ff8e8c5ab9/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/8e88b82d4689eed3ccf37d5a3def248e/predict_specific_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.predict_specific_event</span></code></a></dt><dd><span class="target" id="module-predict_specific_event"></span><p>In this example we are using the UTPredictor to predict a specific event, in this case impact. This will then ignore the other events which are not of interest.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/8e88b82d4689eed3ccf37d5a3def248e/predict_specific_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.predict_specific_event</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/4020f035b915e34fe49e1d40b9aff42b/particle_filter_battery_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.particle_filter_battery_example</span></code></a></dt><dd><span class="target" id="module-particle_filter_battery_example"></span><p>In this example the BatteryElectroChemEOD model is used with a particle filter to estimate the state of the battery</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/4020f035b915e34fe49e1d40b9aff42b/particle_filter_battery_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.particle_filter_battery_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>

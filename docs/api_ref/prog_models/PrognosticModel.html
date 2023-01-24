@@ -734,20 +734,19 @@ and <cite>next_state</cite> for discrete, where the behavior cannot be described
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.estimate_params">
-<span class="sig-name descname"><span class="pre">estimate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_models.PrognosticsModel.estimate_params" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">estimate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_models.PrognosticsModel.estimate_params" title="Permalink to this definition">#</a></dt>
 <dd><p>Estimate the model parameters given data. Overrides model parameters</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>runs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em>]</em>) – data from all runs, where runs[0] is the data from run 0. Each run consists of a tuple of arrays of times, input dicts, and output dicts</p></li>
 <li><p><strong>keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Parameter keys to optimize</p></li>
-</ul>
-</dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
+<li><p><strong>times</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em>) – Array of times for each sample</p></li>
+<li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="#prog_models.PrognosticsModel.InputContainer" title="prog_models.PrognosticsModel.InputContainer"><em>InputContainer</em></a><em>]</em>) – Array of input containers where input[x] corresponds to time[x]</p></li>
+<li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="#prog_models.PrognosticsModel.OutputContainer" title="prog_models.PrognosticsModel.OutputContainer"><em>OutputContainer</em></a><em>]</em>) – Array of output containers where output[x] corresponds to time[x]</p></li>
 <li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Optimization method- see scipy.optimize.minimize for options</p></li>
-<li><p><strong>bounds</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a>) – Bounds for optimization in format ((lower1, upper1), (lower2, upper2), …)</p></li>
+<li><p><strong>bounds</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Bounds for optimization in format ((lower1, upper1), (lower2, upper2), …) or {key1: (lower1, upper1), key2: (lower2, upper2), …}</p></li>
 <li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Options passed to optimizer. see scipy.optimize.minimize for options</p></li>
+<li><p><strong>runs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em>]</em><em>, </em><em>depreciated</em>) – data from all runs, where runs[0] is the data from run 0. Each run consists of a tuple of arrays of times, input dicts, and output dicts. Use inputs, outputs, states, times, etc. instead</p></li>
 </ul>
 </dd>
 </dl>
@@ -1141,6 +1140,38 @@ If blank, simulation will occur if any event will be met ()</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="prog_models.PrognosticsModel.state_at_event">
+<span class="sig-name descname"><span class="pre">state_at_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn=&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.PrognosticsModel.state_at_event" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate the <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> at the time that each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). state_at_event can be implemented by a direct model. For a state tranisition model, this returns the state at which threshold_met returns true for each event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>callable</em><em>, </em><em>optional</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t). Defaults to no outputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>state at each events occurance, with keys defined by model.events</p>
+<p>e.g., state_at_event = {‘impact’: {‘x1’: 10, ‘x2’: 11}, ‘falling’: {‘x1’: 15, ‘x2’: 20}} given events = [‘impact’, ‘falling’] and states = [‘x1’, ‘x2’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>state_at_event (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, StateContainer])</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Also supports arguments from <a class="reference internal" href="#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simulate_to_threshold()</span></code></a></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>threshold_met</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.threshold_met">
 <span class="sig-name descname"><span class="pre">threshold_met</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_models.PrognosticsModel.threshold_met" title="Permalink to this definition">#</a></dt>
 <dd><p>For each event threshold, calculate if it has been met</p>
@@ -1151,12 +1182,12 @@ If blank, simulation will occur if any event will be met ()</p></li>
 </p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p><strong>thresholds_met</strong> – If each threshold has been met (bool), with keys defined by prognostics_model.events</p>
+<dd class="field-even"><p><p>If each threshold has been met (bool), with keys defined by prognostics_model.events</p>
 <p>e.g., thresholds_met = {‘EOL’: False} given events = [‘EOL’]</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+<dd class="field-odd"><p>thresholds_met (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>)</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -1173,14 +1204,14 @@ If blank, simulation will occur if any event will be met ()</p></li>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#prog_models.PrognosticsModel.event_state" title="prog_models.PrognosticsModel.event_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">event_state</span></code></a></p>
+<p>event_state</p>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.PrognosticsModel.time_of_event">
 <span class="sig-name descname"><span class="pre">time_of_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn=&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_models.PrognosticsModel.time_of_event" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate the time at which each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met) from <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a>. time_of_event must be implemented by any direct model. For a state transition model, this returns the time at which threshold_met returns true for each event. A model that implements this is called a “direct model”.</p>
+<dd><p>Calculate the time at which each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). time_of_event must be implemented by any direct model. For a state transition model, this returns the time at which threshold_met returns true for each event. A model that implements this is called a “direct model”.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1191,12 +1222,12 @@ If blank, simulation will occur if any event will be met ()</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p><strong>time_of_event</strong> – time of each event, with keys defined by model.events</p>
+<dd class="field-even"><p><dl>
+<dt>time_of_event (dict)</dt><dd><p>time of each event, with keys defined by model.events</p>
 <p>e.g., time_of_event = {‘impact’: 8.2, ‘falling’: 4.077} given events = [‘impact’, ‘falling’]</p>
-</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+</dl>
+</p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -1205,7 +1236,7 @@ If blank, simulation will occur if any event will be met ()</p></li>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="#prog_models.PrognosticsModel.threshold_met" title="prog_models.PrognosticsModel.threshold_met"><code class="xref py py-obj docutils literal notranslate"><span class="pre">threshold_met</span></code></a></p>
+<p>threshold_met</p>
 </div>
 </dd></dl>
 

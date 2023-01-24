@@ -39,7 +39,7 @@ def run_example():
     m_circuit = BatteryCircuit(process_noise = 0, measurement_noise = 0)
     m_circuit_2 = BatteryCircuit(process_noise = 0, measurement_noise = 0, qMax = 7860)
     m_circuit_3 = BatteryCircuit(process_noise = 0, measurement_noise = 0, qMax = 6700, Rs = 0.055)
-    m_ensemble = EnsembleModel(m_circuit, m_circuit_2, m_circuit_3, process_noise = 0, measurement_noise = 0)
+    m_ensemble = EnsembleModel((m_circuit, m_circuit_2, m_circuit_3), process_noise = 0, measurement_noise = 0)
 
     # Evaluate models
     print('Evaluating models...')
@@ -73,7 +73,7 @@ def run_example():
     # Setup Model
     print('Setting up models...')
     m_electro = BatteryElectroChemEOD(process_noise = 0, measurement_noise = 0)
-    m_ensemble = EnsembleModel(m_circuit, m_electro, process_noise = 0, measurement_noise=0)
+    m_ensemble = EnsembleModel((m_circuit, m_electro), process_noise = 0, measurement_noise=0)
 
     # Evaluate models
     print('Evaluating models...')
