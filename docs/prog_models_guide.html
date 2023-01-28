@@ -181,6 +181,11 @@
     </label>
     <ul>
      <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/CompositeModel.html">
+       CompositeModel
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="api_ref/prog_models/DataModel.html">
        DataModel
       </a>
@@ -503,6 +508,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-models">
+   Multiple Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#other-examples">
    Other Examples
   </a>
@@ -633,6 +643,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualizing-results">
    Visualizing Results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-models">
+   Multiple Models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -1239,6 +1254,37 @@ Integration Methods<div class="summary-down docutils">
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="api_ref/prog_models/SimResult.html#prog_models.sim_result.SimResult.plot" title="prog_models.sim_result.SimResult.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.sim_result.SimResult.plot()</span></code></a> for more details on plotting capabilities</p>
+</section>
+<section id="multiple-models">
+<h2>Multiple Models<a class="headerlink" href="#multiple-models" title="Permalink to this headline">#</a></h2>
+<p>There are two methods in prog_models through which multiple models can be used together: composite models and ensemble models, described below.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Composite models</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Ensemble models</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><p>Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">CompositeModel</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">connections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="p">(</span><span class="s1">&#39;model1.state1&#39;</span><span class="p">,</span> <span class="s1">&#39;model2.input1&#39;</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>        <span class="p">(</span><span class="s1">&#39;model2.state2&#39;</span><span class="p">,</span> <span class="s1">&#39;model1.input2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more information, see the example below:</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/40eed4cd02f1dee80e6faaa22f99843b/composite_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.composite_model</span></code></a></p></li>
+</ul>
+</div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><p>Unlike composite models which model a system of systems, ensemble models are used when to combine the logic of multiple models which describe the same system. This is used when there are multiple models representing different system behaviors or conditions. The results of each model are aggregated in a way that can be defined by the user. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">EnsembleModel</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">aggregator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more information, see the example below:</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/46d1f3f0ff1be63e0a4a42caa85a65f5/ensemble.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.ensemble</span></code></a></p></li>
+</ul>
+</div></div>
 </section>
 <section id="other-examples">
 <h2>Other Examples<a class="headerlink" href="#other-examples" title="Permalink to this headline">#</a></h2>

@@ -180,6 +180,11 @@
     </label>
     <ul>
      <li class="toctree-l3">
+      <a class="reference internal" href="api_ref/prog_models/CompositeModel.html">
+       CompositeModel
+      </a>
+     </li>
+     <li class="toctree-l3">
       <a class="reference internal" href="api_ref/prog_models/DataModel.html">
        DataModel
       </a>
@@ -407,7 +412,7 @@ title="Print to PDF"
   <section id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">#</a></h1>
 <dl class="glossary simple">
-<dt id="term-composite-model">composite model<a class="headerlink" href="#term-composite-model" title="Permalink to this term">#</a></dt><dd><p>A model consisting of multiple inter-related Prognostics Models, where the <a class="reference internal" href="#term-input"><span class="xref std std-term">input</span></a> of one <a class="reference internal" href="#term-model"><span class="xref std std-term">model</span></a> is a function of the <a class="reference internal" href="#term-output"><span class="xref std std-term">output</span></a> or <a class="reference internal" href="#term-state"><span class="xref std std-term">state</span></a> of another. This is a tool for representing system-of-systems. Composite models are implemented using the <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.CompositeModel</span></code> class.</p>
+<dt id="term-composite-model">composite model<a class="headerlink" href="#term-composite-model" title="Permalink to this term">#</a></dt><dd><p>A model consisting of multiple inter-related Prognostics Models, where the <a class="reference internal" href="#term-input"><span class="xref std std-term">input</span></a> of one <a class="reference internal" href="#term-model"><span class="xref std std-term">model</span></a> is a function of the <a class="reference internal" href="#term-output"><span class="xref std std-term">output</span></a> or <a class="reference internal" href="#term-state"><span class="xref std std-term">state</span></a> of another. This is a tool for representing system-of-systems. Composite models are implemented using the <a class="reference internal" href="api_ref/prog_models/CompositeModel.html#prog_models.CompositeModel" title="prog_models.CompositeModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.CompositeModel</span></code></a> class.</p>
 </dd>
 <dt id="term-data-driven-model">data-driven model<a class="headerlink" href="#term-data-driven-model" title="Permalink to this term">#</a></dt><dd><p>A model where the behavior is learned from data. In ProgPy, data-driven models derive from the parent class <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel</span></code></a>. A common example of data-driven models is models using neural networks (e.g., <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.LSTMStateTransitionModel" title="prog_models.data_models.LSTMStateTransitionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.LSTMStateTransitionModel</span></code></a>).</p>
 </dd>
@@ -455,7 +460,7 @@ title="Print to PDF"
 </dd>
 <dt id="term-surrogate">surrogate<a class="headerlink" href="#term-surrogate" title="Permalink to this term">#</a></dt><dd><p>A model that approximates the behavior of another model. Often used to generate a faster version of a model (e.g., for resource-constrained applications or to be used in optimization) or to test a data model. Generated using <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.generate_surrogate" title="prog_models.PrognosticsModel.generate_surrogate"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.generate_surrogate()</span></code></a> method.</p>
 </dd>
-<dt id="term-system-of-systems">system-of-systems<a class="headerlink" href="#term-system-of-systems" title="Permalink to this term">#</a></dt><dd><p>A system consisting of multiple inter-related systems, where one system affects the others. In ProgPy, system-of-systems are reporsented using <a class="reference internal" href="#term-composite-model"><span class="xref std std-term">composite models</span></a>. Composite models are implemented using the <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.CompositeModel</span></code> class.</p>
+<dt id="term-system-of-systems">system-of-systems<a class="headerlink" href="#term-system-of-systems" title="Permalink to this term">#</a></dt><dd><p>A system consisting of multiple inter-related systems, where one system affects the others. In ProgPy, system-of-systems are reporsented using <a class="reference internal" href="#term-composite-model"><span class="xref std std-term">composite models</span></a>. Composite models are implemented using the <a class="reference internal" href="api_ref/prog_models/CompositeModel.html#prog_models.CompositeModel" title="prog_models.CompositeModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.CompositeModel</span></code></a> class.</p>
 </dd>
 <dt id="term-threshold">threshold<a class="headerlink" href="#term-threshold" title="Permalink to this term">#</a></dt><dd><p>The conditions under which an <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> is considered to have occurred.</p>
 </dd>

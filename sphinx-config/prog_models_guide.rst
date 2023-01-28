@@ -477,6 +477,46 @@ Results of a simulation can be visualized using the plot method. For example:
 
 See :py:meth:`prog_models.sim_result.SimResult.plot` for more details on plotting capabilities
 
+Multiple Models
+----------------------------
+
+There are two methods in prog_models through which multiple models can be used together: composite models and ensemble models, described below.
+
+.. tabs::
+
+    .. tab:: Composite models
+
+        Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example, 
+
+        .. code-block:: python
+
+            >>> m = CompositeModel(
+            >>>     models = [model1, model2],
+            >>>     connections = [
+            >>>         ('model1.state1', 'model2.input1'),
+            >>>         ('model2.state2', 'model1.input2')
+            >>>     ]
+            >>> )
+
+        For more information, see the example below:
+
+        * :download:`examples.composite_model <../../prog_models/examples/composite_model.py>`
+    
+    .. tab:: Ensemble models
+
+        Unlike composite models which model a system of systems, ensemble models are used when to combine the logic of multiple models which describe the same system. This is used when there are multiple models representing different system behaviors or conditions. The results of each model are aggregated in a way that can be defined by the user. For example,
+
+        .. code-block:: python
+
+            >>> m = EnsembleModel(
+            >>>     models = [model1, model2],
+            >>>     aggregator = np.mean
+            >>> )
+
+        For more information, see the example below:
+
+        * :download:`examples.ensemble <../../prog_models/examples/ensemble.py>`
+
 Other Examples
 ----------------------------
 

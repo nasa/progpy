@@ -41,7 +41,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Datasets" href="DataSets.html" />
-    <link rel="prev" title="prog_models API Reference" href="../prog_models.html" />
+    <link rel="prev" title="CompositeModel" href="CompositeModel.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -178,6 +178,11 @@
      </i>
     </label>
     <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="CompositeModel.html">
+       CompositeModel
+      </a>
+     </li>
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
        DataModel
@@ -1109,6 +1114,13 @@ Additional configuration parameters from <cite>from_data</cite></p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.is_continuous">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_continuous</span></span><a class="headerlink" href="#prog_models.data_models.DataModel.is_continuous" title="Permalink to this definition">#</a></dt>
+<dd><p>returns: <strong>is_continuous</strong> – True if model is continuous, False if discrete
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="prog_models.data_models.DataModel.is_direct_model">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_direct_model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.data_models.DataModel.is_direct_model" title="Permalink to this definition">#</a></dt>
 <dd><p>If the model is a “direct model” - i.e., a model that directly estimates time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
@@ -1120,6 +1132,13 @@ Additional configuration parameters from <cite>from_data</cite></p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.is_discrete">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_discrete</span></span><a class="headerlink" href="#prog_models.data_models.DataModel.is_discrete" title="Permalink to this definition">#</a></dt>
+<dd><p>returns: <strong>is_discrete</strong> – True if model is discrete, False if continuous
+:rtype: bool</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1367,11 +1386,11 @@ If blank, simulation will occur if any event will be met ()</p></li>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../prog_models.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="CompositeModel.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">prog_models API Reference</p>
+            <p class="prev-next-title">CompositeModel</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="DataSets.html" title="next page">
