@@ -270,7 +270,7 @@ ToE Prediction Profile
 A :class:`prog_algs.predictors.ToEPredictionProfile` contains Time of Event (ToE) predictions performed at multiple points. ToEPredictionProfile is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:
 
 * **alpha_lambda**: Whether the prediction falls within specified limits at particular times with respect to a performance measure [#Goebel2017]_ [#Saxena2010]_
-* **cumulate relitive accuracy**: The sum of the relative accuracies of each prediction, given a ground truth
+* **cumulate relative accuracy**: The sum of the relative accuracies of each prediction, given a ground truth
 * **monotonicity**: The monotonicity of the prediction series [#Baptista2022]_ [#Coble2021]_
 * **prognostic_horizon**: The difference between a time :math:`t_i`, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event [#Goebel2017]_ [#Saxena2010]_
 

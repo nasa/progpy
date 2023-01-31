@@ -439,6 +439,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#propellerload">
+   PropellerLoad
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#thrownobject">
    ThrownObject
   </a>
@@ -490,6 +495,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#powertrain">
    Powertrain
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#propellerload">
+   PropellerLoad
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -1324,6 +1334,16 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <p class="admonition-title">Note</p>
 <p>Powertrain is added on top of any noise in the underlying esc and motor models. To update the esc or motor parameters, access m.esc.parameters and m.motor.paramters, respectively.</p>
 </div>
+</dd></dl>
+
+</section>
+<section id="propellerload">
+<h2>PropellerLoad<a class="headerlink" href="#propellerload" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="prog_models.models.PropellerLoad">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">PropellerLoad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.PropellerLoad" title="Permalink to this definition">#</a></dt>
+<dd><p>This is a simple model of a propeller load. This model estimates load torque as a function of the rotational velocity. When the propeller is spinning faster, drag increases, and the propeller load on the torque increases.</p>
+<p>This model is typically used with the esc and dcmotor models to simulate a motor and propeller system.</p>
 </dd></dl>
 
 </section>

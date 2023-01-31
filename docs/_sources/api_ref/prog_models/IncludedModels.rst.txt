@@ -84,6 +84,10 @@ Powertrain
 -------------------------------------------------------------
 .. autoclass:: prog_models.models.Powertrain
 
+PropellerLoad
+-------------------------------------------------------------
+.. autoclass:: prog_models.models.PropellerLoad
+
 ThrownObject
 -------------------------------------------------------------
 .. autoclass:: prog_models.models.ThrownObject

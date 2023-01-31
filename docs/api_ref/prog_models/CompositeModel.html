@@ -420,21 +420,22 @@ title="Print to PDF"
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a><em>]</em><em>]</em>) – <p>A list of PrognosticsModels to be combined into a single model.
 Provided in one of two forms:</p>
-<ol class="arabic simple">
+<blockquote>
+<div><ol class="arabic simple">
 <li><p>A list of PrognosticsModels. The name of each model will be the class name. A number will be added for duplicates</p></li>
 <li><p>A list of tuples where the first element is the model name and the second element is the model</p></li>
 </ol>
+</div></blockquote>
 <p>Note: Order provided will be the order that models are executed</p>
 </p></li>
-<li><p><strong>connections</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – <p>A list of tuples where the first element is the name of the output or state of one model and the second element is the name of the input of another model.</p>
-<p>The first element of the tuple must be of the form “model_name.output_name” or “model_name.state_name”.</p>
-<p>The second element of the tuple must be of the form “model_name.input_name”.</p>
-<p>For example, if you have two models, “Batt1” and “Batt2”, and you want to connect the output of “Batt1” to the input of “Batt2”, you would use the following connection: (“Batt1.output”, “Batt2.input”)</p>
-</p></li>
+<li><p><strong>connections</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – A list of tuples where the first element is the name of the output or state of one model and the second element is the name of the input of another model.
+The first element of the tuple must be of the form “model_name.output_name” or “model_name.state_name”.
+The second element of the tuple must be of the form “model_name.input_name”.
+For example, if you have two models, “Batt1” and “Batt2”, and you want to connect the output of “Batt1” to the input of “Batt2”, you would use the following connection: (“Batt1.output”, “Batt2.input”)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Model outputs for new combined model in format “model_name.output_name”. Must be subset of all outputs from all provided models. If not provided, all outputs will be included.</p>
+<dd class="field-even"><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Model outputs in format “model_name.output_name”. Must be subset of all outputs from models. If not provided, all outputs will be included.</p>
 </dd>
 </dl>
 </dd></dl>

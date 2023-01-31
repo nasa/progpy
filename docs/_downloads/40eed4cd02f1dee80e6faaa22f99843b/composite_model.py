@@ -7,46 +7,8 @@ Example illustrating how to use the CompositeModel class to create a composite m
 This example creates a composite model of a DC motor with an Electronic Speed Controller and a propeller load. The three composite models are interrelated. The created composite model describes the nature of these interconnections. The resulting powertrain model is then simulated forward with time and the results are plotted. 
 """
 
-from prog_models.models import DCMotor, ESC
-from prog_models import PrognosticsModel, CompositeModel
-
-# Callback for load Model- used below
-def update_Cq(params):
-    return {
-        'C_q': params['c_q'] * params['rho'] * pow(params['D'], 5)
-    }
-
-
-class PropellerLoad(PrognosticsModel):
-    """
-    This is a simple model of a propeller load. This model estimates load torque as a function of the rotational velocity. When the propeller is spinning faster, drag increases, and the propeller load on the torque increases.
-    """
-    inputs = ['v_rot']
-    states = ['t_l']
-    outputs = ['t_l']
-
-    param_callbacks = {
-        'c_q': [update_Cq],
-        'rho': [update_Cq],
-        'D': [update_Cq],
-    }
-
-    default_parameters = {
-        # Load parameters 
-        'c_q': 5.42e-7, # coefficient of torque (APC data, derived) [dimensionless]
-        'rho': 1.225, # (Kg/m^3)
-        'D': 0.381, # (m)
-
-        'x0': {
-            't_l': 0,
-        }
-    }
-
-    def next_state(self, x, u, dt):
-        return self.StateContainer({'t_l': self.parameters['C_q']*u['v_rot']**2})
-    
-    def output(self, x):
-        return x
+from prog_models.models import DCMotor, ESC, PropellerLoad
+from prog_models import CompositeModel
 
 def run_example():
     # First, lets define the composite models

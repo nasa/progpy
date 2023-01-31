@@ -216,7 +216,7 @@ Parameters can be set one of three ways: in model construction, using the *param
 .. code-block:: python
 
     >>> m = SomeModel(some_parameter = 10.2, some_other_parameter = 2.5)
-    >>> m['some_parameter'] = 11.2  # Overriding parameter
+    >>> m.parameters['some_parameter'] = 11.2  # Overriding parameter
 
 The specific parameters are very specific to the system being modeled. For example, a battery might have parameters for the capacity and internal resistance. When using provided models, see the documentation for that model for details on parameters supported.
 
