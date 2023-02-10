@@ -818,7 +818,7 @@ Event Examples<div class="summary-down docutils">
 </div>
 <p>Parameters can be set one of three ways: in model construction, using the <em>parameters</em> property after construction, or using Parameter Estimation feature (See <a class="reference internal" href="#parameter-estimation"><span class="std std-ref">Parameter Estimation</span></a>). The first two are illustrated below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">SomeModel</span><span class="p">(</span><span class="n">some_parameter</span> <span class="o">=</span> <span class="mf">10.2</span><span class="p">,</span> <span class="n">some_other_parameter</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;some_parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">11.2</span>  <span class="c1"># Overriding parameter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;some_parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">11.2</span>  <span class="c1"># Overriding parameter</span>
 </pre></div>
 </div>
 <p>The specific parameters are very specific to the system being modeled. For example, a battery might have parameters for the capacity and internal resistance. When using provided models, see the documentation for that model for details on parameters supported.</p>

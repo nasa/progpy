@@ -31,7 +31,7 @@ from prog_algs.state_estimators import UnscentedKalmanFilter as StateEstimator
 
 from prog_algs.predictors import UnscentedTransformPredictor as Predictor
 # VVV Uncomment this to use MonteCarloPredictor instead
-# from prog_algs.predictors import MonteCarlo as Predictor
+from prog_algs.predictors import MonteCarlo as Predictor
 
 # Constants
 NUM_SAMPLES = 20
@@ -90,7 +90,7 @@ def run_example():
 
             # Prediction Step (every PREDICTION_UPDATE_FREQ steps)
             if (step%PREDICTION_UPDATE_FREQ == 0):
-                mc_results = mc.predict(filt.x, future_loading, t0 = t, n_samples=NUM_SAMPLES, dt=TIME_STEP)
+                mc_results = mc.predict(filt.x, future_loading, t0 = t, n_samples=NUM_SAMPLES, dt=TIME_STEP, save_freq=250, save_pts = [300, 822])
                 metrics = mc_results.time_of_event.metrics()
                 print('  - ToE: {} (sigma: {})'.format(metrics['EOD']['mean'], metrics['EOD']['std']))
                 profile.add_prediction(t, mc_results.time_of_event)

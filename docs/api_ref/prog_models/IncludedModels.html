@@ -979,13 +979,17 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dt class="field-odd">Keyword Arguments</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
-Can be number (e.g., .2) applied to every state, a dictionary of values for each
-state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
-<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+Can be number (e.g., .2) applied to every state, a dictionary of
+values for each state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}),
+or a function (x) -&gt; x</p></li>
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a>
+e.g., normal, uniform, triangular</p></li>
 <li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
-Can be number (e.g., .2) applied to every output, a dictionary of values for each
-output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
-<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+Can be number (e.g., .2) applied to every output, a dictionary of
+values for each output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}),
+or a function (z) -&gt; z</p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a>
+e.g., normal, uniform, triangular</p></li>
 <li><p><strong>g</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Acceleration due to gravity (m/s^2)</p></li>
 <li><p><strong>pAtm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Atmospheric pressure (Pa)</p></li>
 <li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Plug mass (kg)</p></li>
@@ -1217,16 +1221,16 @@ Duty cycle simulated with a square wave using scipy signal.square function.</p>
 </div>
 </dd>
 <dt><a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">States</span></a>: (4)</dt><dd><div class="line-block">
-<div class="line">v_a :         3-phase voltage value, first phase, (V), input to the motor</div>
-<div class="line">v_b :         3-phase voltage value, second phase, (V), input to the motor</div>
-<div class="line">v_c :         3-phase voltage value, third phase (V), input to the motor</div>
+<div class="line">v_a :         3-phase voltage value, first phase, (V), motor input</div>
+<div class="line">v_b :         3-phase voltage value, second phase, (V), motor input</div>
+<div class="line">v_c :         3-phase voltage value, third phase (V), motor input</div>
 <div class="line">t :           time value (s).</div>
 </div>
 </dd>
 <dt><a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">Outputs</span></a>: (4)</dt><dd><div class="line-block">
-<div class="line">v_a :         3-phase voltage value, first phase, (V), input to the motor</div>
-<div class="line">v_b :         3-phase voltage value, second phase, (V), input to the motor</div>
-<div class="line">v_c :         3-phase voltage value, third phase (V), input to the motor</div>
+<div class="line">v_a :         3-phase voltage value, first phase, (V), motor input</div>
+<div class="line">v_b :         3-phase voltage value, second phase, (V), motor input</div>
+<div class="line">v_c :         3-phase voltage value, third phase (V), motor input</div>
 <div class="line">t :           time value (s).</div>
 </div>
 </dd>

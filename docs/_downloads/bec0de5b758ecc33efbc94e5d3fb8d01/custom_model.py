@@ -21,9 +21,11 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 def run_example():
+    WINDOW = 12
+
     print('Generating data...')
     batt = BatteryElectroChemEOD()
-    future_loading_eqns = [lambda t, x=None: batt.InputContainer({'i': 1+1.5*load}) for load in range(6)]
+    future_loading_eqns = [lambda t, x=None: batt.InputContainer({'i': 1+1.4*load}) for load in range(6)]
     # Generate data with different loading and step sizes
     # Adding the step size as an element of the output
     input_data = []
@@ -35,15 +37,16 @@ def run_example():
             u = np.array([np.hstack((u_i.matrix[:][0].T, [dt])) for u_i in d.inputs], dtype=float)
             z = d.outputs
 
-            input_data.append(u)
-            output_data.append(z)
+            if len(u) > WINDOW:
+                input_data.append(u)
+                output_data.append(z)
 
     # Step 2: Build standard model
     print("Building standard model...")
     m_batt = LSTMStateTransitionModel.from_data(
         inputs = input_data,
         outputs = output_data,  
-        window=12, 
+        window=WINDOW, 
         epochs=30, 
         units=64,  # Additional units given the increased complexity of the system
         input_keys = ['i', 'dt'],
