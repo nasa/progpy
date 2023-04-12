@@ -270,10 +270,22 @@
    Glossary
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../dev_guide.html">
    Developers Guide &amp; Project Plan
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../npr7150.html">
+     NPR 7150 NASA Software Engineering Requirements
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -563,28 +575,20 @@ title="Print to PDF"
 <li><p><strong>future_loading_eqn</strong> (<em>function</em><em> (</em><em>t</em><em>, </em><em>x</em><em>) </em><em>-&gt; z</em>) – Function to generate an estimate of loading at future time t, and state x</p></li>
 </ul>
 </dd>
-<dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Simulation step size (s), e.g., 0.1</p></li>
-<li><p><strong>events</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Events to predict (subset of model.events) e.g., [‘event1’, ‘event2’]</p></li>
-<li><p><strong>horizon</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Prediction horizon (s)</p></li>
-<li><p><strong>save_freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Frequency at which results are saved (s)</p></li>
-<li><p><strong>save_pts</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em>) – Any additional savepoints (s) e.g., [10.1, 22.5]</p></li>
-</ul>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><ul class="simple">
-<li><p>times (list[float]): Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]</p></li>
-<li><p>inputs (<a class="reference internal" href="Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prediction</span></code></a>): Inputs at each savepoint such that inputs.snapshot(i) is the input distribution (type UncertainData) at times[i]</p></li>
-<li><p>states (<a class="reference internal" href="Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prediction</span></code></a>): States at each savepoint such that states.snapshot(i) is the state distribution (type UncertainData) at times[i]</p></li>
-<li><p>outputs (<a class="reference internal" href="Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prediction</span></code></a>): Outputs at each savepoint such that outputs.snapshot(i) is the output distribution (type UncertainData) at times[i]</p></li>
-<li><p>event_states (<a class="reference internal" href="Prediction.html#prog_algs.predictors.Prediction" title="prog_algs.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prediction</span></code></a>): Event states at each savepoint such that event_states.snapshot(i) is the event state distribution (type UncertainData) at times[i]</p></li>
-<li><p>time_of_event (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.uncertain_data.UncertainData</span></code></a>): Distribution of predicted Time of Event (ToE) for each predicted event, represented by some subclass of UncertaintData (e.g., <code class="xref py py-class docutils literal notranslate"><span class="pre">MultivariateNormalDist</span></code>)</p></li>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>result from prediction, including</strong> –</p>
+<ul class="simple">
+<li><p>times (List[float]): Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]</p></li>
+<li><p>inputs (Prediction): Inputs at each savepoint such that inputs.snapshot(i) is the input distribution (type UncertainData) at times[i]</p></li>
+<li><p>states (Prediction): States at each savepoint such that states.snapshot(i) is the state distribution (type UncertainData) at times[i]</p></li>
+<li><p>outputs (Prediction): Outputs at each savepoint such that outputs.snapshot(i) is the output distribution (type UncertainData) at times[i]</p></li>
+<li><p>event_states (Prediction): Event states at each savepoint such that event_states.snapshot(i) is the event state distribution (type UncertainData) at times[i]</p></li>
+<li><p>time_of_event (UncertainData): Distribution of predicted Time of Event (ToE) for each predicted event, represented by some subclass of UncertaintData (e.g., MultivariateNormalDist)</p></li>
 </ul>
 </p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>NamedTuple</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>NameTuple</p>
 </dd>
 </dl>
 </dd></dl>

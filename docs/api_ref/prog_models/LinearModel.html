@@ -37,7 +37,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -270,10 +269,22 @@
    Glossary
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../dev_guide.html">
    Developers Guide &amp; Project Plan
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../npr7150.html">
+     NPR 7150 NASA Software Engineering Requirements
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -415,16 +426,22 @@ title="Print to PDF"
 <dt class="sig sig-object py" id="prog_models.LinearModel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.</span></span><span class="sig-name descname"><span class="pre">LinearModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.prognostics_model.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.prognostics_model.PrognosticsModel</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
-<p>A linear prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a>. Used when behavior can be described using a simple linear time-series model defined by the following equations:</p>
-<div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\dfrac{dx}{dt} = Ax + Bu + E\\z = Cx + D\\es = Fx + G\end{aligned}\end{align} \]</div>
+<p>A linear prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a>. Used when behavior can be described using a simple linear time-series model defined by the following equations:
+.. math:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="n">dfrac</span><span class="p">{</span><span class="n">dx</span><span class="p">}{</span><span class="n">dt</span><span class="p">}</span> <span class="o">=</span> <span class="n">Ax</span> <span class="o">+</span> <span class="n">Bu</span> <span class="o">+</span> <span class="n">E</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">Cx</span> <span class="o">+</span> <span class="n">D</span>
+
+<span class="n">es</span> <span class="o">=</span> <span class="n">Fx</span> <span class="o">+</span> <span class="n">G</span>
+</pre></div>
+</div>
 <p>where x is <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a>, u is <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a>, z is <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> and es is <a class="reference internal" href="../../glossary.html#term-event-state"><span class="xref std std-term">event state</span></a></p>
 <dl class="simple">
 <dt>Linear Models must inherit from this class and define the following properties:</dt><dd><ul class="simple">
 <li><p>A: 2-d np.array[float], dimensions: n_states x n_states</p></li>
 <li><p>B: 2-d np.array[float], optional (zeros by default), dimensions: n_states x n_inputs</p></li>
-<li><p>C: 2-d np.array[float], optional (zeros by default), dimensions: n_outputs x n_states</p></li>
-<li><p>D: 1-d np.array[float], dimensions: n_outputs x 1</p></li>
+<li><p>C: 2-d np.array[float], dimensions: n_outputs x n_states</p></li>
+<li><p>D: 1-d np.array[float], optional (zeros by default), dimensions: n_outputs x 1</p></li>
 <li><p>E: 1-d np.array[float], optional (zeros by default), dimensions: n_states x 1</p></li>
 <li><p>F: 2-d np.array[float], dimensions: n_es x n_states</p></li>
 <li><p>G: 1-d np.array[float], optional (zeros by default), dimensions: n_es x 1</p></li>
@@ -488,7 +505,7 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.apply_process_noise">
-<span class="sig-name descname"><span class="pre">apply_process_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel.apply_process_noise" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">apply_process_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel.apply_process_noise" title="Permalink to this definition">#</a></dt>
 <dd><p>Apply process noise to the state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -535,17 +552,35 @@ e.g., x = m.StateContainer({‘abc’: 332.2, ‘def’: 221.043}) given states 
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Error method to use. Supported methods include:
+* MSE (Mean Squared Error)
+* RMSE (Root Mean Squared Error)
+* MAX_E (Maximum Error)
+* MAE (Mean Absolute Error)
+* MAPE (Mean Absolute Percentage Error)</p></li>
 <li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Initial state</p></li>
-<li><p><strong>dt</strong> (<em>double</em><em>, </em><em>optional</em>) – time step</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Minimum time step in simulation. Defaults to 1e99.</p></li>
+<li><p><strong>stability_tol</strong> (<em>double</em><em>, </em><em>optional</em>) – <p>Configurable parameter.
+Configurable cutoff value, between 0 and 1, that determines the fraction of the data points for which the model must be stable.
+In some cases, a prognostics model will become unstable under certain conditions, after which point the model can no longer represent behavior.
+stability_tol represents the fraction of the provided argument <cite>times</cite> that are required to be met in simulation,
+before the model goes unstable in order to produce a valid estimate of mean squared error.</p>
+<p>If the model goes unstable before stability_tol is met, NaN is returned.
+Else, model goes unstable after stability_tol is met, the mean squared error calculated from data up to the instability is returned.</p>
+</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Total error</p>
+<dd class="field-odd"><p>error</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>double</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a></p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MSE()</span></code></p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -593,7 +628,7 @@ and <cite>next_state</cite> for discrete, where the behavior cannot be described
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.estimate_params">
-<span class="sig-name descname"><span class="pre">estimate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_models.LinearModel.estimate_params" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">estimate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nelder-mead'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_models.LinearModel.estimate_params" title="Permalink to this definition">#</a></dt>
 <dd><p>Estimate the model parameters given data. Overrides model parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
@@ -603,6 +638,7 @@ and <cite>next_state</cite> for discrete, where the behavior cannot be described
 <li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.InputContainer" title="prog_models.PrognosticsModel.InputContainer"><em>InputContainer</em></a><em>]</em>) – Array of input containers where input[x] corresponds to time[x]</p></li>
 <li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.OutputContainer" title="prog_models.PrognosticsModel.OutputContainer"><em>OutputContainer</em></a><em>]</em>) – Array of output containers where output[x] corresponds to time[x]</p></li>
 <li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Optimization method- see scipy.optimize.minimize for options</p></li>
+<li><p><strong>error_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Method to use in calculating error. See calc_error for options</p></li>
 <li><p><strong>bounds</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Bounds for optimization in format ((lower1, upper1), (lower2, upper2), …) or {key1: (lower1, upper1), key2: (lower2, upper2), …}</p></li>
 <li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Options passed to optimizer. see scipy.optimize.minimize for options</p></li>
 <li><p><strong>runs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em>]</em><em>, </em><em>depreciated</em>) – data from all runs, where runs[0] is the data from run 0. Each run consists of a tuple of arrays of times, input dicts, and output dicts. Use inputs, outputs, states, times, etc. instead</p></li>
@@ -637,7 +673,7 @@ and <cite>next_state</cite> for discrete, where the behavior cannot be described
 <div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
 <div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
 <div class="line">x = m.initialize(u, z) # Initialize first state</div>
-<div class="line">event_state = m.event_state(x) # Returns {‘e1’: 0.8, ‘e2’: 0.6}</div>
+<div class="line">event_state = m.event_state(x) # Returns {‘EOD’: 1.0}, when m = BatteryCircuit()</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -928,21 +964,15 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 <p><a class="reference internal" href="#prog_models.LinearModel.simulate_to_threshold" title="prog_models.LinearModel.simulate_to_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to_threshold</span></code></a></p>
 </div>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">def future_load_eqn(t):</div>
-<div class="line-block">
-<div class="line">if t&lt; 5.0: # Load is 3.0 for first 5 seconds</div>
-<div class="line-block">
-<div class="line">return 3.0</div>
-</div>
-<div class="line">else:</div>
-<div class="line-block">
-<div class="line">return 5.0</div>
-</div>
-</div>
-<div class="line">first_output = m.OutputContainer({‘o1’: 3.2, ‘o2’: 1.2})</div>
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">(times, inputs, states, outputs, event_states) = m.simulate_to(200, future_load_eqn, first_output)</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 3.0 for first 5 seconds</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="mf">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="k">else</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;o1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;o2&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">event_states</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -996,21 +1026,15 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <p><a class="reference internal" href="#prog_models.LinearModel.simulate_to" title="prog_models.LinearModel.simulate_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to</span></code></a></p>
 </div>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">def future_load_eqn(t):</div>
-<div class="line-block">
-<div class="line">if t&lt; 5.0: # Load is 3.0 for first 5 seconds</div>
-<div class="line-block">
-<div class="line">return m.InputContainer({‘load’: 3.0})</div>
-</div>
-<div class="line">else:</div>
-<div class="line-block">
-<div class="line">return m.InputContainer({‘load’: 5.0})</div>
-</div>
-</div>
-<div class="line">first_output = m.OutputContainer({‘o1’: 3.2, ‘o2’: 1.2})</div>
-<div class="line">(times, inputs, states, outputs, event_states) = m.simulate_to_threshold(future_load_eqn, first_output)</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 3.0 for first 5 seconds</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;load&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="k">else</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;load&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;o1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;o2&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">event_states</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1070,12 +1094,12 @@ If blank, simulation will occur if any event will be met ()</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
-<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
-<div class="line">x = m.initialize(u, z) # Initialize first state</div>
-<div class="line">threshold_met = m.threshold_met(x) # returns {‘e1’: False, ‘e2’: False}</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">threshold_met</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">threshold_met</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># returns {&#39;e1&#39;: False, &#39;e2&#39;: False}</span>
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

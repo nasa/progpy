@@ -269,10 +269,22 @@
    Glossary
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../dev_guide.html">
    Developers Guide &amp; Project Plan
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../npr7150.html">
+     NPR 7150 NASA Software Engineering Requirements
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -415,11 +427,11 @@ title="Print to PDF"
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.</span></span><span class="sig-name descname"><span class="pre">EnsembleModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.EnsembleModel" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.prognostics_model.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.prognostics_model.PrognosticsModel</span></code></a></p>
 <p>An Ensemble Model is a collection of models which run together. The results of each model are aggregated using the aggregation_method function. This is generally done to improve the accuracy of prediction when you have multiple models that each represent part of the behavior, or represent a distribution of different behaviors.</p>
-<p>Ensembe Models are constructed from a set of other models (e.g., <a href="#id1"><span class="problematic" id="id2">:py:`m = EnsembleModel((m1, m2, m3))`</span></a>). The models then operate functionally as one prognostic model.</p>
+<p>Ensembe Models are constructed from a set of other models (e.g., <code class="code highlight python docutils literal notranslate"><span class="name"><span class="pre">m</span></span> <span class="operator"><span class="pre">=</span></span> <span class="name"><span class="pre">EnsembleModel</span></span><span class="punctuation"><span class="pre">((</span></span><span class="name"><span class="pre">m1</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">m2</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">m3</span></span><span class="punctuation"><span class="pre">))</span></span></code>). The models then operate functionally as one prognostic model.</p>
 <p>See example <a class="reference download internal" download="" href="../../_downloads/46d1f3f0ff1be63e0a4a42caa85a65f5/ensemble.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.ensemble</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – List of models that form the ensemble</p>
+<dd class="field-odd"><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a><em>]</em>) – List of at least 2 models that form the ensemble</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><p><strong>aggregation_method</strong> (<em>function</em>) – Function that aggregates the outputs of the models in the ensemble. Default is np.mean</p>

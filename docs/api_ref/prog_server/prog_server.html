@@ -269,10 +269,22 @@
    Glossary
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../dev_guide.html">
    Developers Guide &amp; Project Plan
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../npr7150.html">
+     NPR 7150 NASA Software Engineering Requirements
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -408,8 +420,50 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="progserver">
-<h1>ProgServer<a class="headerlink" href="#progserver" title="Permalink to this headline">#</a></h1>
+  <section id="module-prog_server">
+<span id="progserver"></span><h1>ProgServer<a class="headerlink" href="#module-prog_server" title="Permalink to this headline">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="prog_server.is_running">
+<span class="sig-prename descclassname"><span class="pre">prog_server.</span></span><span class="sig-name descname"><span class="pre">is_running</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#prog_server.is_running" title="Permalink to this definition">#</a></dt>
+<dd><p>Check if the server is running.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prog_server.run">
+<span class="sig-prename descclassname"><span class="pre">prog_server.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_server.run" title="Permalink to this definition">#</a></dt>
+<dd><p>Start the server and block until it is stopped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Server host. Defaults to ‘127.0.0.1’.</p></li>
+<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Server port. Defaults to 5000.</p></li>
+<li><p><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If the server is started in debug mode</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prog_server.start">
+<span class="sig-prename descclassname"><span class="pre">prog_server.</span></span><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_server.start" title="Permalink to this definition">#</a></dt>
+<dd><p>Start the server (not blocking).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Server host. Defaults to ‘127.0.0.1’.</p></li>
+<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Server port. Defaults to 5000.</p></li>
+<li><p><strong>debug</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If the server is started in debug mode</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="prog_server.stop">
+<span class="sig-prename descclassname"><span class="pre">prog_server.</span></span><span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#prog_server.stop" title="Permalink to this definition">#</a></dt>
+<dd><p>Stop the server.</p>
+</dd></dl>
+
 </section>
 
 

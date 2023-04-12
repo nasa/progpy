@@ -151,15 +151,12 @@ class ProgModelTemplate(PrognosticsModel):
     #     return self.StateContainer(x0)
 
     # UNCOMMENT THIS FUNCTION FOR CONTINUOUS MODELS
-    # def dx(self, t, x, u):
+    # def dx(self, x, u):
     #     """
-    #     Returns the first derivative of state `x` at a specific time `t`, given state and input
+    #     Returns the first derivative of state `x` given state and input
     #
     #     Parameters
     #     ----------
-    #     t : number
-    #         Current timestamp in seconds (≥ 0)
-    #         e.g., t = 3.4
     #     x : dict
     #         state, with keys defined by model.states
     #         e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
@@ -179,7 +176,7 @@ class ProgModelTemplate(PrognosticsModel):
     #     | u = {'u1': 3.2}
     #     | z = {'z1': 2.2}
     #     | x = m.initialize(u, z) # Initialize first state
-    #     | dx = m.dx(3.0, x, u) # Returns first derivative of state at 3 seconds given input u
+    #     | dx = m.dx(x, u) # Returns first derivative of state given input u
     #     """
     #
     #     # REPLACE THE FOLLOWING WITH SOMETHING SPECIFC TO YOUR MODEL
@@ -192,15 +189,12 @@ class ProgModelTemplate(PrognosticsModel):
     #     return self.StateContainer(dxdt)
 
     # UNCOMMENT THIS FUNCTION FOR DISCRETE MODELS
-    # def next_state(self, t, x, u, dt):
+    # def next_state(self, x, u, dt):
     #     """
     #     State transition equation: Calculate next state
     #
     #     Parameters
     #     ----------
-    #     t : number
-    #         Current timestamp in seconds (≥ 0)
-    #         e.g., t = 3.4
     #     x : dict
     #         state, with keys defined by model.states
     #         e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']

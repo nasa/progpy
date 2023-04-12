@@ -48,5 +48,11 @@ def run_example():
     
     # Sure enough- parameter estimation determined that the thrower's height wasn't 20 m, instead was closer to 1.9m, a much more reasonable height!
 
+    # Note: You can also adjust the metric that is used to estimate parameters.
+    # This is done by setting the "error_method" argument. 
+    # e.g., m.estimate_params([(times, inputs, outputs)], keys, dt=0.01, error_method='MAX_E')
+    # Default is Mean Squared Error (MSE)
+    # See calc_error method for list of options.
+
 if __name__=='__main__':
     run_example()

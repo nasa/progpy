@@ -40,6 +40,7 @@
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NPR 7150 NASA Software Engineering Requirements" href="npr7150.html" />
     <link rel="prev" title="Glossary" href="glossary.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -268,10 +269,22 @@
    Glossary
   </a>
  </li>
- <li class="toctree-l1 current active">
+ <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
    Developers Guide &amp; Project Plan
   </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="npr7150.html">
+     NPR 7150 NASA Software Engineering Requirements
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -416,11 +429,6 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#notes-for-developers">
-   Notes for Developers
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#project-roles">
    Project Roles
   </a>
@@ -429,157 +437,38 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#branching-strategy">
    Branching Strategy
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pr-checklist">
+   PR Checklist
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#release-checklist">
+   Release Checklist
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pr-checklist">
-     PR Checklist
+    <a class="reference internal nav-link" href="#updating-documentation">
+     Updating Documentation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#release-checklist">
-     Release Checklist
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#post-release-checklist">
-     Post-Release Checklist
+    <a class="reference internal nav-link" href="#uploading-new-version-to-pypi">
+     Uploading new version to PyPI
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updating-documentation">
-   Updating Documentation
+  <a class="reference internal nav-link" href="#post-release-checklist">
+   Post-Release Checklist
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#uploading-new-version-to-pypi">
-   Uploading new version to PyPI
+  <a class="reference internal nav-link" href="#notes-for-developers">
+   Notes for Developers
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#npr-7150-nasa-software-engineering-requirements">
-   NPR 7150 NASA Software Engineering Requirements
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compliance-notation-legend">
-     Compliance Notation Legend
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compliance-matrix">
-     Compliance Matrix
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#life-cycle-management">
-       Life Cycle Management
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#cost-estimation">
-       Cost Estimation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#schedules">
-       Schedules
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#classification">
-       Classification
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#software-assurance">
-       Software Assurance
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#safety-critical-software">
-       Safety Critical Software
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#automatic-generation-of-source-code">
-       Automatic Generation of Source Code
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reuse">
-       Reuse
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#cybersecurity">
-       Cybersecurity
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#bi-directional-traceability">
-       Bi-Directional Traceability
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#requirements">
-       Requirements
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#implementation">
-       Implementation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#testing">
-       Testing
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#operations-maintenance-and-retirement">
-       Operations, Maintenance, and Retirement
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#configuration-management">
-       Configuration Management
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#non-conformances">
-       Non-Conformances
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#transition-to-a-higher-class">
-       Transition to a Higher Class
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aquisition-options">
-     Aquisition Options
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#requirement-tracking">
-     Requirement Tracking
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dependencies">
-     Dependencies
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tracability-notes">
-     Tracability Notes
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -611,11 +500,6 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#notes-for-developers">
-   Notes for Developers
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#project-roles">
    Project Roles
   </a>
@@ -624,157 +508,38 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#branching-strategy">
    Branching Strategy
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pr-checklist">
+   PR Checklist
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#release-checklist">
+   Release Checklist
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pr-checklist">
-     PR Checklist
+    <a class="reference internal nav-link" href="#updating-documentation">
+     Updating Documentation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#release-checklist">
-     Release Checklist
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#post-release-checklist">
-     Post-Release Checklist
+    <a class="reference internal nav-link" href="#uploading-new-version-to-pypi">
+     Uploading new version to PyPI
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updating-documentation">
-   Updating Documentation
+  <a class="reference internal nav-link" href="#post-release-checklist">
+   Post-Release Checklist
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#uploading-new-version-to-pypi">
-   Uploading new version to PyPI
+  <a class="reference internal nav-link" href="#notes-for-developers">
+   Notes for Developers
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#npr-7150-nasa-software-engineering-requirements">
-   NPR 7150 NASA Software Engineering Requirements
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compliance-notation-legend">
-     Compliance Notation Legend
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#compliance-matrix">
-     Compliance Matrix
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#life-cycle-management">
-       Life Cycle Management
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#cost-estimation">
-       Cost Estimation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#schedules">
-       Schedules
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#classification">
-       Classification
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#software-assurance">
-       Software Assurance
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#safety-critical-software">
-       Safety Critical Software
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#automatic-generation-of-source-code">
-       Automatic Generation of Source Code
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reuse">
-       Reuse
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#cybersecurity">
-       Cybersecurity
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#bi-directional-traceability">
-       Bi-Directional Traceability
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#requirements">
-       Requirements
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#implementation">
-       Implementation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#testing">
-       Testing
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#operations-maintenance-and-retirement">
-       Operations, Maintenance, and Retirement
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#configuration-management">
-       Configuration Management
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#non-conformances">
-       Non-Conformances
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#transition-to-a-higher-class">
-       Transition to a Higher Class
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aquisition-options">
-     Aquisition Options
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#requirement-tracking">
-     Requirement Tracking
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dependencies">
-     Dependencies
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tracability-notes">
-     Tracability Notes
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -788,6 +553,8 @@ title="Print to PDF"
                 
   <section id="developers-guide-project-plan">
 <h1>Developers Guide &amp; Project Plan<a class="headerlink" href="#developers-guide-project-plan" title="Permalink to this headline">#</a></h1>
+<div class="toctree-wrapper compound">
+</div>
 <p>This document includes some details relevant for developers working on any of the Python Prognostics Packages Tools (prog_models, prog_algs, prog_server)</p>
 <section id="installing-from-a-branch">
 <h2>Installing from a Branch<a class="headerlink" href="#installing-from-a-branch" title="Permalink to this headline">#</a></h2>
@@ -802,103 +569,40 @@ title="Print to PDF"
 <p>New external (non-NASA or NASA contractor) developers must complete either the <a class="reference external" href="https://github.com/nasa/prog_models/tree/master/forms">organizational or individual Contributor License Agreement (CLA)</a>.</p>
 <p>Curious about what needs to be done? Have an idea for a new feature? Find a bug? Check out open issues <a class="reference external" href="https://github.com/nasa/prog_models/issues">prog_models</a>, <a class="reference external" href="https://github.com/nasa/prog_algs/issues">prog_algs</a>, <a class="reference external" href="https://github.com/nasa/prog_server/issues">prog_server</a>.</p>
 </section>
-<section id="notes-for-developers">
-<h2>Notes for Developers<a class="headerlink" href="#notes-for-developers" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Configuration-controlled items: source code, tests, test workflow, issues (requirements, non-conformances, bugs, etc.), milestones, examples, tutorial, templates, project plan (this document), and documentation</p></li>
-<li><p>The package itself is stored in the src directory.</p></li>
-<li><p>This is a research tool, so when making a design decision between operational efficiency and usability, generally choose the more usable option</p></li>
-<li><p>When supplied by or to the user, values with names (e.g., inputs, states, outputs, event_states, event occurance, etc.) should be supplied as dictionaries (or dict-like objects) where they can be referred to by name.</p></li>
-<li><p>subpackages shall be independent (i.e., not have any dependencies with the wider package or other subpackages) when possible</p></li>
-<li><p>Whenever possible Models, UncertainData types, State Estimators, and Predictors should be interchangable with any other class of the same type (e.g., any model should be interchangable with any other model)</p></li>
-<li><p>Demonstrate common use cases as an example.</p></li>
-<li><p>Python code should comply with <a class="reference external" href="https://peps.python.org/pep-0008/">PEP 8: Python Style Guide</a>, where appropriate
-* See also: <a class="reference external" href="https://trs.jpl.nasa.gov/bitstream/handle/2014/51618/CL%2319-5039.pdf?sequence=1">Writing Clean and Pythonic Code (JPL)</a></p></li>
-<li><p>Code should be complient with the recommendations of <a class="reference external" href="lgtm.com">LGTM</a>, whenever appropriate</p></li>
-<li><p>Every feature should be demonstrated in an example
-* The most commonly used features should be demonstrated in the tutorial</p></li>
-<li><p>Except in the most extreme cases, maintain backwards compatibility for the convenience of existing users
-* If a feature is to be removed, mark it as depreciated for at least 2 releases before removing</p></li>
-<li><dl class="simple">
-<dt>Examples are included in the examples/ directory.</dt><dd><ul>
-<li><p>Examples should cover the major use cases and features. If a major new feature is added, make sure there’s an example demonstrating the feature.</p></li>
-<li><p>For new examples- add to examples __all__ and example tests (tests/test_examples).</p></li>
-<li><p>Also for new examples- add to getting started page in sphinx_config.</p></li>
-<li><p>Examples should include comments explicitly describing each step.</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Tests are included in the tests/ directory.</dt><dd><ul>
-<li><p>Each new feature should have a test. Check this in each PR review.</p></li>
-<li><p>Check test coverage to improve completeness, automatically reported by bot in each PR.</p></li>
-<li><p>For tests- make sure test are quality. They should cover expected input ranges, error handling.</p></li>
-<li><p>There are some example models in prog_models.models.test_models which are useful for testing</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Documentation</dt><dd><ul>
-<li><p>Documentation is autogenerated using sphinx.</p></li>
-<li><p>Configuration is in sphinx_config.</p></li>
-<li><p>Documentation is rebuilt on each release.</p></li>
-<li><p>On each release, documentation can be seen at <a class="reference external" href="https://nasa.github.io/progpy/">nasa.github.io/progpy</a>.</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>GitHub Actions Test Workflow</dt><dd><ul>
-<li><p>Automated tests are defined in the .github/ directory.</p></li>
-<li><p>The repository administrator can add tests to the set required to pass for each PR must be done by .</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Template</dt><dd><ul>
-<li><p>An empty template of a prognostics model is maintained at <cite>prog_models/prog_model_template.py</cite>.</p></li>
-<li><p>An empty template of a state estimator and predictor is maintained at <cite>prog_algs/state_estimator_template.py</cite> and <cite>prog_algs/predictor_template.py</cite>.</p></li>
-<li><p>Any changes to the basic model setup should be documented there.</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p>A tutorial is included in tutorial.ipynb. This required Juypter Notebooks. All major features should be illustrated here.</p></li>
-</ul>
-</section>
 <section id="project-roles">
 <h2>Project Roles<a class="headerlink" href="#project-roles" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Project Lead/Software Assurance Officer: Christopher Teubert</p></li>
+<li><p>Software Lead: Christopher Teubert</p></li>
+<li><p>Software Assurance Officer: Christopher Teubert</p></li>
+<li><p>Deputy Software Lead: Katelyn Jarvis</p></li>
+<li><p>Software Management Team: Software Lead, Software Assurance Officer, and Deputy Software Lead</p></li>
 <li><p>Developers: See <a class="reference external" href="https://github.com/nasa/prog_models/graphs/contributors">prog_models developers</a>, <a class="reference external" href="https://github.com/nasa/prog_algs/graphs/contributors">prog_algs developers</a>, <a class="reference external" href="https://github.com/nasa/prog_server/graphs/contributors">prog_server developers</a></p></li>
 </ul>
 </section>
 <section id="branching-strategy">
 <h2>Branching Strategy<a class="headerlink" href="#branching-strategy" title="Permalink to this headline">#</a></h2>
 <p>Our project is following the git strategy described <a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model/">here</a>. Release branches are not required. Details specific to each branch are described below.</p>
-<p><cite>master</cite>: Every merge into the master branch is done using a pull request (never commiting directly), is assigned a release number, and must comply with the release checklist. The release checklist is a software assurance tool.</p>
-<p><cite>dev</cite>: Every commit on the dev branch should be functional. All unit tests must function before commiting to dev or merging another branch. Merging into dev should only be done through a PR, unless only documentation has been updated.</p>
-<p><cite>Feature Branches</cite>: These branches include changes specific to a new feature. Before merging into dev unit tests should all run, tests should be added for the feature, and documentation should be updated as appropriate.</p>
+<p><cite>master</cite>: Every merge into the master branch is done using a pull request (never commiting directly), is assigned a release number, and must complete the release checklist. The release checklist is a software assurance tool.</p>
+<p><cite>dev</cite>: Every commit on the dev branch should be functional. The PR checklist must be completed before merging into dev. Merging into dev should only be done through a PR, unless only documentation has been updated.</p>
+<p><cite>Feature or Bugfix Branches</cite>: These branches include changes specific to a new feature or fixing a bug.</p>
+<p><cite>Hotfix Branches</cite>: These branches are to fix an urgent issue in master. Hotfixes are branched directly off of master. Hotfixes are merged into both master and dev, after being approved by the Software Management Team.</p>
+</section>
 <section id="pr-checklist">
-<h3>PR Checklist<a class="headerlink" href="#pr-checklist" title="Permalink to this headline">#</a></h3>
-<ul>
+<h2>PR Checklist<a class="headerlink" href="#pr-checklist" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
 <li><dl class="simple">
-<dt>Each PR into dev or master must be checked by someone on the team other than the author.</dt><dd><ul class="simple">
+<dt>If target is dev or master, ensure PR is reviewed by someone other than the author.</dt><dd><ul>
 <li><p>Reviewer should look for bugs, efficiency, readability, testing, and coverage in examples (if relevant).</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><p>Each PR adding a new feature should include a test verifying that feature.</p></li>
-<li><p>All tests must be passing.</p></li>
-<li><p>All errors from static analysis must be resolved.</p></li>
+<li><p>If adding a new feature, ensure there is a test verifying that feature.</p></li>
+<li><p>Ensure errors from static analysis must be resolved.</p></li>
 <li><p>Review the test coverage reports (if there is a change)</p></li>
 <li><p>Review the software benchmarking results (if there is a change)</p></li>
 <li><dl class="simple">
-<dt>For added dependencies (new)</dt><dd><ul class="simple">
+<dt>For added dependencies (new)</dt><dd><ul>
 <li><p>Add to requirements.txt,</p></li>
 <li><p>Add to setup.py,</p></li>
 <li><p>Add to the bottom of dev_guide.rst (this document)</p></li>
@@ -907,21 +611,24 @@ title="Print to PDF"
 </dd>
 </dl>
 </li>
+<li><p>All warnings from static analysis must be reviewed and resolved - if deemed appropriate.</p></li>
+</ul>
+<p>The following items are checked automatically:</p>
+<ul>
+<li><p>Ensure tests are passing.</p></li>
 <li><dl>
-<dt>[Checked automatically] All new files have the following notice on them:</dt><dd><div class="line-block">
+<dt>Check all new files have the following notice on them:</dt><dd><div class="line-block">
 <div class="line">“Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration. All Rights Reserved.”</div>
 </div>
 </dd>
 </dl>
 </li>
-<li><p>All warnings from static analysis must be reviewed and resolved - if deemed appropriate.</p></li>
-<li><p>Final merging can only be performed by the software assurance officer.</p></li>
-<li><p>For merging into master branch - see the Release Checklist below.</p></li>
 </ul>
 <p>Note: when making change to this, update the message in the github actions workflows</p>
 </section>
 <section id="release-checklist">
-<h3>Release Checklist<a class="headerlink" href="#release-checklist" title="Permalink to this headline">#</a></h3>
+<h2>Release Checklist<a class="headerlink" href="#release-checklist" title="Permalink to this headline">#</a></h2>
+<p>A release is the merging of a PR where the target is the master branch.</p>
 <ul class="simple">
 <li><p>[Complete - done in PRs to dev] Code review - all software must be checked by someone other than the author</p></li>
 <li><p>Check that each new feature has corresponding tests</p></li>
@@ -967,10 +674,19 @@ title="Print to PDF"
 <li><p>For releases adding new features- ensure that NASA release process has been followed.</p></li>
 <li><p>Confirm that on GitHub Releases page, the next release has been started and that a schedule is present including at least Release Date, Release Review Date, and Release Branch Opening Date.</p></li>
 </ul>
+<section id="updating-documentation">
+<h3>Updating Documentation<a class="headerlink" href="#updating-documentation" title="Permalink to this headline">#</a></h3>
+<p>Use the following command to update documentation (requires sphinx). Documentation is in the progpy repository.</p>
+</section>
+<section id="uploading-new-version-to-pypi">
+<h3>Uploading new version to PyPI<a class="headerlink" href="#uploading-new-version-to-pypi" title="Permalink to this headline">#</a></h3>
+<p>New versions are uploaded upon release (i.e., merging into master branch). The Release Checklist must be complete prior to release</p>
+<p>See <a class="reference external" href="https://packaging.python.org/guides/distributing-packages-using-setuptools/#packaging-your-project">here</a></p>
 <p>Note: when making change to this, update the message in the github actions workflows</p>
 </section>
+</section>
 <section id="post-release-checklist">
-<h3>Post-Release Checklist<a class="headerlink" href="#post-release-checklist" title="Permalink to this headline">#</a></h3>
+<h2>Post-Release Checklist<a class="headerlink" href="#post-release-checklist" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>For prog_server: Update openapi specs on <a class="reference external" href="https://app.swaggerhub.com/apis/teubert/prog_server/1.0.0-oas3">SwaggerHub</a></p></li>
 <li><p>Send notes to Software Release Office (SRO) of updated version number</p></li>
@@ -978,1221 +694,72 @@ title="Print to PDF"
 <li><p>Send Highlight</p></li>
 </ul>
 </section>
-</section>
-<section id="updating-documentation">
-<h2>Updating Documentation<a class="headerlink" href="#updating-documentation" title="Permalink to this headline">#</a></h2>
-<p>Use the following command to update documentation (requires sphinx):</p>
-</section>
-<section id="uploading-new-version-to-pypi">
-<h2>Uploading new version to PyPI<a class="headerlink" href="#uploading-new-version-to-pypi" title="Permalink to this headline">#</a></h2>
-<p>New versions are uploaded upon release (i.e., merging into master branch). The Release Checklist must be complete prior to release</p>
-<p>See <a class="reference external" href="https://packaging.python.org/guides/distributing-packages-using-setuptools/#packaging-your-project">here</a></p>
-</section>
-<section id="npr-7150-nasa-software-engineering-requirements">
-<h2>NPR 7150 NASA Software Engineering Requirements<a class="headerlink" href="#npr-7150-nasa-software-engineering-requirements" title="Permalink to this headline">#</a></h2>
-<p>NASA software must comply with the requirements enumarated in <a class="reference external" href="https://nodis3.gsfc.nasa.gov/displayDir.cfm?t=NPR&amp;c=7150&amp;s=2B">NPR 7150</a>. See the <a class="reference external" href="https://swehb.nasa.gov">NASA Software Engineering and Assurance Handbook</a> for more information.</p>
-<p>Intention is to expand the scope of use to also include its inclusion in Ground software tools that support mission planning or formulation; Ground software that operates a research, development, test, or evaluation laboratory (i.e., not a major engineering/research facility); or Ground software that provides decision support for non-mission-critical situations and airborn software whose anomalous behavior would cause or contribute to a failure of system function resulting in a minor failure condition for the airborne vehicle,
-or whose anomalous behavior would cause or contribute to a failure of system function with no effect on airborne vehicle operational capability or pilot workload. The classification for this increased scope is described below</p>
+<section id="notes-for-developers">
+<h2>Notes for Developers<a class="headerlink" href="#notes-for-developers" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Effective version: v1.4 (Est. Fall 2022)</p></li>
-<li><p>Software Classification: Class-D (Basic Research and Technology Software)</p></li>
-<li><p>Safety Criticality: Not Safety Critical</p></li>
-<li><p>Assessment done by Christopher Teubert in April 26, 2022</p></li>
-<li><p>Approved July 14, 2022 (Robert Duffy)</p></li>
-</ul>
-<p>Previous Classification:</p>
-<ul class="simple">
-<li><p>Software Classification: Class-E (Research Software)</p></li>
-<li><p>Safety Criticality: Not Safety Critical</p></li>
-<li><p>Assessment done by Christopher Teubert in March 2021</p></li>
-</ul>
-<p>The safety criticality assessment was made based on the responses to the following questions:</p>
-<ul class="simple">
-<li><p>Does the software reside in a safety-critical system? NO</p></li>
-<li><p>The software causes or contributes to a hazard? NO</p></li>
-<li><p>The software provides control or mitigation for hazards? NO</p></li>
-<li><p>The software controls safety-critical functions? NO</p></li>
-<li><p>The software processes safety-critical commands or data? NO</p></li>
-<li><p>The software detects and reports, or takes corrective action, if the system reaches a specific hazardous state? NO</p></li>
-<li><p>The software mitigates damage if a hazard occurs? NO</p></li>
-<li><p>The software resides on the same system (processor) as safety-critical software? NO</p></li>
-<li><p>Does the software process data or analyze trends that lead directly to safety decisions (e.g., determining when to turn power off to a wind tunnel to prevent system destruction)? NO</p></li>
-</ul>
-<section id="compliance-notation-legend">
-<h3>Compliance Notation Legend<a class="headerlink" href="#compliance-notation-legend" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>FC: Fully Compliant</p></li>
-<li><p>T: Tailored (Specific tailoring described in mitigation) <a class="reference external" href="https://swehb.nasa.gov/display/7150/SWE-121+-+Document+Alternate+Requirements">SWE-121</a></p></li>
-<li><p>PC: Partially Compliant</p></li>
-<li><p>NC: Not Compliant</p></li>
-<li><p>NA: Not Applicable</p></li>
-</ul>
-</section>
-<section id="compliance-matrix">
-<h3>Compliance Matrix<a class="headerlink" href="#compliance-matrix" title="Permalink to this headline">#</a></h3>
-<p>This matrix tracks the compliance of this software and the project’s software engineering practices with the requirements from 7150.2.</p>
-<p>Note: for requirements with different evidence for the different softwares, they have a capital M (for ProgModels), A (for ProgAlgs) or S (for ProgServer) following the requirement.</p>
-<section id="life-cycle-management">
-<h4>Life Cycle Management<a class="headerlink" href="#life-cycle-management" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>033</p></td>
-<td><p>Assess Aquisiton Options</p></td>
-<td><p>FC</p></td>
-<td><p>See section below</p></td>
-</tr>
-<tr class="row-odd"><td><p>013</p></td>
-<td><p>Maintain Software Plans</p></td>
-<td><p>FC</p></td>
-<td><p>This document</p></td>
-</tr>
-<tr class="row-even"><td><p>024a</p></td>
-<td><p>Conformance with Project Plan</p></td>
-<td><p>FC</p></td>
-<td><p>Corrective actions are tracked as github issues</p></td>
-</tr>
-<tr class="row-odd"><td><p>024b</p></td>
-<td><p>Project Plan Configuration Mgmt</p></td>
-<td><p>FC</p></td>
-<td><p>Project plan is a tracked object in github</p></td>
-</tr>
-<tr class="row-even"><td><p>034</p></td>
-<td><p>Software Acceptance Criteria</p></td>
-<td><p>FC</p></td>
-<td><p>See Release Checklist, above</p></td>
-</tr>
-<tr class="row-odd"><td><p>036</p></td>
-<td><p>Software Processes</p></td>
-<td><p>FC</p></td>
-<td><p>See notes below</p></td>
-</tr>
-<tr class="row-even"><td><p>037M</p></td>
-<td><p>Document Milestones</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_models/milestones">Milestones</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>037A</p></td>
-<td><p>Document Milestones</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_algs/milestones">Milestones</a></p></td>
-</tr>
-<tr class="row-even"><td><p>037S</p></td>
-<td><p>Document Milestones</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_server/milestones">Milestones</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>039a</p></td>
-<td><p>Monitor integration</p></td>
-<td><p>FC</p></td>
-<td><p>Integration status visible on github pull requests</p></td>
-</tr>
-<tr class="row-even"><td><p>039b</p></td>
-<td><p>Review Verification Activities</p></td>
-<td><p>FC</p></td>
-<td><p>Verification status and results visible on github actions</p></td>
-</tr>
-<tr class="row-odd"><td><p>039c</p></td>
-<td><p>Review Trade Studies</p></td>
-<td><p>FC</p></td>
-<td><p>Trade studies will be documented in github issues</p></td>
-</tr>
-<tr class="row-even"><td><p>039d</p></td>
-<td><p>Audit Development Processes</p></td>
-<td><p>FC</p></td>
-<td><p>Development processes are visible in pull requests and commits</p></td>
-</tr>
-<tr class="row-odd"><td><p>039e</p></td>
-<td><p>Software Reviews</p></td>
-<td><p>FC</p></td>
-<td><p>Software Assurance Officer gives final approval after reviews</p></td>
-</tr>
-<tr class="row-even"><td><p>040aM</p></td>
-<td><p>Products</p></td>
-<td><p>FC</p></td>
-<td><p>Kept in <a class="reference external" href="https://github.com/nasa/prog_models">Repo</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>040aA</p></td>
-<td><p>Products</p></td>
-<td><p>FC</p></td>
-<td><p>Kept in <a class="reference external" href="https://github.com/nasa/prog_algs">Repo</a></p></td>
-</tr>
-<tr class="row-even"><td><p>040aS</p></td>
-<td><p>Products</p></td>
-<td><p>FC</p></td>
-<td><p>Kept in <a class="reference external" href="https://github.com/nasa/prog_server">Repo</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>040b</p></td>
-<td><p>Tracability</p></td>
-<td><p>FC</p></td>
-<td><p>Maintained in PR and issue documentation</p></td>
-</tr>
-<tr class="row-even"><td><p>040c</p></td>
-<td><p>Non-conformances</p></td>
-<td><p>FC</p></td>
-<td><p>See github issues</p></td>
-</tr>
-<tr class="row-odd"><td><p>040dM</p></td>
-<td><p>Change tracking</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_models/commits/">Commits</a></p></td>
-</tr>
-<tr class="row-even"><td><p>040dA</p></td>
-<td><p>Change tracking</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_algs/commits/">Commits</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>040dS</p></td>
-<td><p>Change tracking</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_server/commits/">Commits</a></p></td>
-</tr>
-<tr class="row-even"><td><p>042</p></td>
-<td><p>Electronic Accesss to Source</p></td>
-<td><p>FC</p></td>
-<td><p>See respective github repository</p></td>
-</tr>
-<tr class="row-odd"><td><p>139</p></td>
-<td><p>Comply with 7150</p></td>
-<td><p>FC</p></td>
-<td><p>This document</p></td>
-</tr>
-<tr class="row-even"><td><p>121</p></td>
-<td><p>Tailored Reqs</p></td>
-<td><p>NA</p></td>
-<td><p>No tailoring</p></td>
-</tr>
-<tr class="row-odd"><td><p>125</p></td>
-<td><p>Compliance Matrix</p></td>
-<td><p>FC</p></td>
-<td><p>This document</p></td>
-</tr>
-<tr class="row-even"><td><p>029</p></td>
-<td><p>Software Classification</p></td>
-<td><p>FC</p></td>
-<td><p>This document</p></td>
-</tr>
-<tr class="row-odd"><td><p>027</p></td>
-<td><p>COTS/GOTS/MOTS/OSS</p></td>
-<td><p>FC</p></td>
-<td><p>See dependencies at bottom of page</p></td>
-</tr>
-</tbody>
-</table>
-<p>Note on software processes [SWE 034]:</p>
-<p>The project manager shall establish and maintain the software processes, software documentation plans, list of developed electronic products, deliverables, and list of tasks for the software development that are required for the project’s software developers, as well as the action required (e.g., approval, review) of the Government upon receipt of each of the deliverables.</p>
-<ul class="simple">
-<li><p>Processes are tracked in this document.</p></li>
-<li><p>Documentation, electronic products, and deliverables are tracked in GitHub</p></li>
-<li><p>Tasks are tracked in GitHub issues</p></li>
-<li><p>Actions required are listed in the checklists above</p></li>
-</ul>
-</section>
-<section id="cost-estimation">
-<h4>Cost Estimation<a class="headerlink" href="#cost-estimation" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>015</p></td>
-<td><p>Maintain 1 cost estimate</p></td>
-<td><p>NA</p></td>
-<td><p>See note below</p></td>
-</tr>
-<tr class="row-odd"><td><p>151</p></td>
-<td><p>Cost Estimate Requirements</p></td>
-<td><p>NA</p></td>
-<td><p>See note Below</p></td>
-</tr>
-<tr class="row-even"><td><p>174</p></td>
-<td><p>Submit Planning Parameters</p></td>
-<td><p>NA</p></td>
-<td><p>Specified Center measurement repo does not exist</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Software Cost Estimation Note:</strong></p>
-<p>The Python Prognostics Packages are a collaborative product of multiple projects. As projects use the software they will implement features and fix bugs to accomplish the goals of their projects, with some input from the Project Manager as the chief software architect. These improvements are incorporated into the shared product for the all participating projects to benefit from.</p>
-<p>Responsibility for cost accounting for these contributions is delegated to the project(s) conducting them. Cost of contributing to the Prognostics Python Packages should be represented in their project plans and other documents.</p>
-</section>
-<section id="schedules">
-<h4>Schedules<a class="headerlink" href="#schedules" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>016M</p></td>
-<td><p>Schedule Requirements</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_models/milestones">Milestones</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>016A</p></td>
-<td><p>Schedule Requirements</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_algs/milestones">Milestones</a></p></td>
-</tr>
-<tr class="row-even"><td><p>016S</p></td>
-<td><p>Schedule Requirements</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_server/milestones">Milestones</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>046</p></td>
-<td><p>Maintain Schedule</p></td>
-<td><p>FC</p></td>
-<td><p>See Milestones (from SWE016, above)</p></td>
-</tr>
-</tbody>
-</table>
-<p>Note: Release checklist includes confirming schedule exists for next release</p>
-</section>
-<section id="classification">
-<h4>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>020</p></td>
-<td><p>Software Classification</p></td>
-<td><p>FC</p></td>
-<td><p>This document</p></td>
-</tr>
-<tr class="row-odd"><td><p>176</p></td>
-<td><p>Software Classification</p></td>
-<td><p>FC</p></td>
-<td><p>This document</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="software-assurance">
-<h4>Software Assurance<a class="headerlink" href="#software-assurance" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 9%" />
-<col style="width: 46%" />
-<col style="width: 16%" />
-<col style="width: 28%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>022</p></td>
-<td><p>Software Assurance</p></td>
-<td><p>FC</p></td>
-<td><p>This document</p></td>
-</tr>
-</tbody>
-</table>
-<p>See checklists at top of page for software assurance activities. Additionally, some software activities are enforced by github branch policies.</p>
-</section>
-<section id="safety-critical-software">
-<h4>Safety Critical Software<a class="headerlink" href="#safety-critical-software" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 9%" />
-<col style="width: 46%" />
-<col style="width: 16%" />
-<col style="width: 28%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>205</p></td>
-<td><p>Safety Cricial Software</p></td>
-<td><p>FC</p></td>
-<td><p>See above</p></td>
-</tr>
-<tr class="row-odd"><td><p>023</p></td>
-<td><p>Safety Critical Reqs</p></td>
-<td><p>NA</p></td>
-<td><p>Not safety critical</p></td>
-</tr>
-<tr class="row-even"><td><p>134</p></td>
-<td><p>Safety Critical Reqs</p></td>
-<td><p>NA</p></td>
-<td><p>Not safety critical</p></td>
-</tr>
-<tr class="row-odd"><td><p>219</p></td>
-<td><p>Safety Critical Reqs</p></td>
-<td><p>NA</p></td>
-<td><p>Not safety critical</p></td>
-</tr>
-<tr class="row-even"><td><p>220</p></td>
-<td><p>Safety Critical Reqs</p></td>
-<td><p>NA</p></td>
-<td><p>Not safety critical</p></td>
-</tr>
-</tbody>
-</table>
-<p>This software is not safety critical, see [NPR 7150 NASA Software Engineering Requirements](<a class="reference external" href="https://nasa.github.io/progpy/dev_guide.html#npr-7150-nasa-software-engineering-requirements">https://nasa.github.io/progpy/dev_guide.html#npr-7150-nasa-software-engineering-requirements</a>) for more details</p>
-</section>
-<section id="automatic-generation-of-source-code">
-<h4>Automatic Generation of Source Code<a class="headerlink" href="#automatic-generation-of-source-code" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 9%" />
-<col style="width: 46%" />
-<col style="width: 16%" />
-<col style="width: 28%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>146</p></td>
-<td><p>Autogen Software Reqs</p></td>
-<td><p>NA</p></td>
-<td><p>No autogen</p></td>
-</tr>
-<tr class="row-odd"><td><p>206</p></td>
-<td><p>Autogen Software</p></td>
-<td><p>NA</p></td>
-<td><p>No autogen</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="reuse">
-<h4>Reuse<a class="headerlink" href="#reuse" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>147</p></td>
-<td><p>Reusability Requirements</p></td>
-<td><p>FC</p></td>
-<td><p>See notes below</p></td>
-</tr>
-<tr class="row-odd"><td><p>148M</p></td>
-<td><p>Software Catalog</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://software.nasa.gov/software/ARC-18634-1">prog_models</a></p></td>
-</tr>
-<tr class="row-even"><td><p>148A</p></td>
-<td><p>Software Catalog</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://software.nasa.gov/software/ARC-18635-1">prog_algs</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>148S</p></td>
-<td><p>Software Catalog</p></td>
-<td><p>FC</p></td>
-<td><p>Will be posted soon</p></td>
-</tr>
-</tbody>
-</table>
-<p>Notes on SWE-147: Reusability requirements</p>
-<ul class="simple">
-<li><p>This software is a research support software. As, such it is designed to be reusable and to support a wide variety of use-cases. The requirements and coding standards are specified to ensure re-usability.</p></li>
-<li><p>Examples, Templates, Tutorials, sourcecode, and Documentation will help support reuse</p></li>
-<li><p>Some support will be provided to help users re-use it.</p></li>
-<li><p>The software will be released open-source, helping reduce the barriers to reuse.</p></li>
-<li><p>Design decisions will support ease-of-use</p></li>
-<li><p>Exceptions and warning will be implemented whenever appropriate to help users use the software properly</p></li>
-<li><p>When depricating a feature, notice is provided at least one version of the software prior, in the form of a warning.</p></li>
-</ul>
-</section>
-<section id="cybersecurity">
-<h4>Cybersecurity<a class="headerlink" href="#cybersecurity" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 7%" />
-<col style="width: 36%" />
-<col style="width: 12%" />
-<col style="width: 46%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>156</p></td>
-<td><p>Perform CyberSecurity Assessment</p></td>
-<td><p>FC</p></td>
-<td><p>See below</p></td>
-</tr>
-<tr class="row-odd"><td><p>154</p></td>
-<td><p>Perform CyberSecurity Risks</p></td>
-<td><p>FC</p></td>
-<td><p>See below</p></td>
-</tr>
-<tr class="row-even"><td><p>157</p></td>
-<td><p>Protect Against Unauthorized Access</p></td>
-<td><p>FC</p></td>
-<td><p>See below</p></td>
-</tr>
-<tr class="row-odd"><td><p>159</p></td>
-<td><p>Test CyberSecurity Mitigation</p></td>
-<td><p>FC</p></td>
-<td><p>See below</p></td>
-</tr>
-<tr class="row-even"><td><p>207</p></td>
-<td><p>Secure Coding Practices</p></td>
-<td><p>FC</p></td>
-<td><p>Part of LGTM Static Analysis and Code Reviews</p></td>
-</tr>
-<tr class="row-odd"><td><p>185</p></td>
-<td><p>Static Analysis</p></td>
-<td><p>FC</p></td>
-<td><p>See Static Analysis Notes under Implementation</p></td>
-</tr>
-</tbody>
-</table>
-<p>Cybersecurity risks were assessed, the identified cybersecurity threats and our mitigations are described below:</p>
-<ul class="simple">
+<li><p>Configuration-controlled items: source code, tests, test workflow, issues (requirements, non-conformances, bugs, etc.), milestones, examples, tutorial, templates, project plan (this document and 7150 document), and documentation (in progpy repo)</p></li>
+<li><p>The package itself is stored in the src directory.</p></li>
+<li><p>This is a research tool, so when making a design decision between operational efficiency and usability, generally choose the more usable option</p></li>
+<li><p>When supplied by or to the user, values with names (e.g., inputs, states, outputs, event_states, event occurance, etc.) should be supplied as dictionaries (or dict-like objects) where they can be referred to by name.</p></li>
+<li><p>subpackages shall be independent (i.e., not have any dependencies with the wider package or other subpackages) when possible</p></li>
+<li><p>Whenever possible Models, UncertainData types, State Estimators, and Predictors should be interchangable with any other class of the same type (e.g., any model should be interchangable with any other model)</p></li>
+<li><p>Demonstrate common use cases as an example.</p></li>
+<li><p>Python code should comply with <a class="reference external" href="https://peps.python.org/pep-0008/">PEP 8: Python Style Guide</a>, where appropriate
+* See also: <a class="reference external" href="https://trs.jpl.nasa.gov/bitstream/handle/2014/51618/CL%2319-5039.pdf?sequence=1">Writing Clean and Pythonic Code (JPL)</a></p></li>
+<li><p>Code should be complient with the recommendations of <a class="reference external" href="lgtm.com">LGTM</a>, whenever appropriate</p></li>
+<li><p>Every feature should be demonstrated in an example
+* The most commonly used features should be demonstrated in the tutorial</p></li>
+<li><p>Except in the most extreme cases, maintain backwards compatibility for the convenience of existing users
+* If a feature is to be removed, mark it as depreciated for at least 2 releases before removing</p></li>
 <li><dl class="simple">
-<dt>Code injection</dt><dd><ul>
-<li><p>Risk: insertion of hazardous code into an open-source project by malicious actor</p></li>
-<li><p>Mitigation: Strict code review requirements in the repository. Static analysis/security alerts. Vetting for contributors. Branch rules to prohibit direct commits and unapproved additions</p></li>
-<li><p>Validation: Part of automated tests and confirmed in release review</p></li>
+<dt>Examples are included in the examples/ directory.</dt><dd><ul>
+<li><p>Examples should cover the major use cases and features. If a major new feature is added, make sure there’s an example demonstrating the feature.</p></li>
+<li><p>For new examples- add to examples __all__ and example tests (tests/test_examples).</p></li>
+<li><p>Also for new examples- add to getting started page in sphinx_config.</p></li>
+<li><p>Examples should include comments explicitly describing each step.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Programmers Accidentally Introduce Security Risks</dt><dd><ul>
-<li><p>Risk: Programmers accidentally introduce security risks into the codebase</p></li>
-<li><p>Mitigation: Automated Tests. Strict code review requirements in the repository. Static analysis/security alerts. Vetting for contributors. Branch rules to prohibit direct commits and unapproved additions</p></li>
-<li><p>Validation: Part of automated tests and confirmed in release review</p></li>
+<dt>Tests are included in the tests/ directory.</dt><dd><ul>
+<li><p>Each new feature should have a test. Check this in each PR review.</p></li>
+<li><p>Check test coverage to improve completeness, automatically reported by bot in each PR.</p></li>
+<li><p>For tests- make sure test are quality. They should cover expected input ranges, error handling.</p></li>
+<li><p>There are some example models in prog_models.models.test_models which are useful for testing</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Dependencies</dt><dd><ul>
-<li><p>Risk: Dependencies could introduce cybersecurity vulnerabilities</p></li>
-<li><p>Mitigation: GitHub “dependabot” alerts will identify any known issues with package decencies. Also, the project is actively trying to limit the number of dependencies, and only use well-known packages from trusted developers.</p></li>
-<li><p>Validation: Alerts produced by dependabot system. Dependencies must be approved by Project Manager</p></li>
+<dt>Documentation</dt><dd><ul>
+<li><p>Documentation is autogenerated using sphinx from progpy repository</p></li>
+<li><p>Configuration is in sphinx_config.</p></li>
+<li><p>Documentation is rebuilt on each release.</p></li>
+<li><p>On each release, documentation can be seen at <a class="reference external" href="https://nasa.github.io/progpy/">nasa.github.io/progpy</a>.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Language</dt><dd><ul>
-<li><p>Risk: Python itself may introduce cybersecurity vulnerabilities</p></li>
-<li><p>Mitigation: Python is a well-known language, this risk is low. To mitigate this we only support actively maintained versions.</p></li>
-<li><p>Validation: Will check with each release</p></li>
+<dt>GitHub Actions Test Workflow</dt><dd><ul>
+<li><p>Automated tests are defined in the .github/ directory.</p></li>
+<li><p>The repository administrator can add tests to the set required to pass for each PR must be done by .</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Unauthorized Access to Hardware [SWE-157]</dt><dd><ul>
-<li><p>Risk: Unauthorized access to hardware (GitHub Servers)</p></li>
-<li><p>Mitigation: Github is a trusted partner who has strict access control. Administrator rights are limited to Project Manager and NASA Org Administrators. Individuals not involved and vetted by the project cannot add to the repository directly (only through PR from fork)</p></li>
-<li><p>Validation: System configuration validated by PM 7/13/22</p></li>
+<dt>Template</dt><dd><ul>
+<li><p>An empty template of a prognostics model is maintained at <cite>prog_models/prog_model_template.py</cite>.</p></li>
+<li><p>An empty template of a state estimator and predictor is maintained at <cite>prog_algs/state_estimator_template.py</cite> and <cite>prog_algs/predictor_template.py</cite>.</p></li>
+<li><p>Any changes to the basic model setup should be documented there.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
+<li><p>A tutorial is included in tutorial.ipynb. This required Juypter Notebooks. All major features should be illustrated here.</p></li>
 </ul>
-</section>
-<section id="bi-directional-traceability">
-<h4>Bi-Directional Traceability<a class="headerlink" href="#bi-directional-traceability" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 26%" />
-<col style="width: 9%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>052</p></td>
-<td><p>Tracability</p></td>
-<td><p>FC</p></td>
-<td><p>See Tracability Notes, at bottom of page</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="requirements">
-<h4>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 26%" />
-<col style="width: 9%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>050M</p></td>
-<td><p>Software Requirements</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_models/labels/enhancement">Enhancement Issues</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>050A</p></td>
-<td><p>Software Requirements</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_algs/labels/enhancement">Enhancement Issues</a></p></td>
-</tr>
-<tr class="row-even"><td><p>050S</p></td>
-<td><p>Software Requirements</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_server/labels/enhancement">Enhancement Issues</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>053</p></td>
-<td><p>Requirement Change Tracking</p></td>
-<td><p>FC</p></td>
-<td><p>Tracked in enhancement issues, see comment from SWE050, above</p></td>
-</tr>
-<tr class="row-even"><td><p>054</p></td>
-<td><p>Track Inconsistencies</p></td>
-<td><p>FC</p></td>
-<td><p>Tracked in enhancement issues, see comment from SWE050, above</p></td>
-</tr>
-<tr class="row-odd"><td><p>055</p></td>
-<td><p>Requirement Validation</p></td>
-<td><p>FC</p></td>
-<td><p>See below</p></td>
-</tr>
-</tbody>
-</table>
-<p>Note on SWE-55: Requirement Validation:</p>
-<ul class="simple">
-<li><p>This is a Research Suffort Software. As such it has many different usages that the requirements must fulfill.</p></li>
-<li><p>These usages will be implemented as examples, in the tutorial, or as tests. Running these and inspecting them (part of the release process) will help validate that the requirements (as implmeneted) are correct to enable each use case.</p></li>
-</ul>
-</section>
-<section id="implementation">
-<h4>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 26%" />
-<col style="width: 9%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>061</p></td>
-<td><p>Coding Standards</p></td>
-<td><p>FC</p></td>
-<td><p>See Notes for Developers, above</p></td>
-</tr>
-<tr class="row-odd"><td><p>135</p></td>
-<td><p>Static Analysis</p></td>
-<td><p>FC</p></td>
-<td><p>See list of static analysis tools, below.</p></td>
-</tr>
-<tr class="row-even"><td><p>062</p></td>
-<td><p>Unit Testing</p></td>
-<td><p>FC</p></td>
-<td><p>Unit tests are created with each enhancement, run automatically with each PR.</p></td>
-</tr>
-<tr class="row-odd"><td><p>186</p></td>
-<td><p>Unit Test Repeatability</p></td>
-<td><p>FC</p></td>
-<td><p>Unit tests are created with each enhancement, run automatically with each PR.</p></td>
-</tr>
-<tr class="row-even"><td><p>063M</p></td>
-<td><p>Software Version Description</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_models/releases">See here</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>063A</p></td>
-<td><p>Software Version Description</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_algs/releases">See here</a></p></td>
-</tr>
-<tr class="row-even"><td><p>063S</p></td>
-<td><p>Software Version Description</p></td>
-<td><p>FC</p></td>
-<td><p><a class="reference external" href="https://github.com/nasa/prog_server/releases">See here</a></p></td>
-</tr>
-</tbody>
-</table>
-<p>Static Analysis Methods Used:</p>
-<ul class="simple">
-<li><p>CodeFactor.io (<a class="reference external" href="https://www.codefactor.io/repository/github/nasa/prog_models">prog_models</a>, <a class="reference external" href="https://www.codefactor.io/repository/github/nasa/prog_algs">prog_algs</a>, <a class="reference external" href="https://www.codefactor.io/repository/github/nasa/prog_server">prog_server</a>): Runs automatically in each PR. If issues are detected, they are noted in the PR chat.</p></li>
-<li><p>LGTM (<a class="reference external" href="https://lgtm.com/projects/g/nasa/prog_models/?mode=list">prog_models</a>, <a class="reference external" href="https://lgtm.com/projects/g/nasa/prog_algs/?mode=list">prog_algs</a>, <a class="reference external" href="https://lgtm.com/projects/g/nasa/prog_server/?mode=list">prog_server</a>): Runs automatically in each PR. If issues are detected, they are noted in the PR chat.</p></li>
-<li><p>Codecov (<a class="reference external" href="https://app.codecov.io/gh/nasa/prog_models">prog_models</a>, <a class="reference external" href="https://app.codecov.io/gh/nasa/prog_algs">prog_algs</a>, <a class="reference external" href="https://app.codecov.io/gh/nasa/prog_server">prog_server</a>): Runs automatically in each PR. If issues are detected, they are noted in the PR chat.</p></li>
-<li><p>CodeQL Scanning: Runs automatically in each PR. If issues are detected, they are noted in the PR chat.</p></li>
-<li><p>Github Dependabot Alerts: Tracks dependencies, alerts of any issues.</p></li>
-</ul>
-</section>
-<section id="testing">
-<h4>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 22%" />
-<col style="width: 8%" />
-<col style="width: 66%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>065a</p></td>
-<td><p>Test Plan</p></td>
-<td><p>FC</p></td>
-<td><p>See this document.</p></td>
-</tr>
-<tr class="row-odd"><td><p>065bM</p></td>
-<td><p>Test Procedures</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_models/tree/master/.github/workflows">GitHub Actions Workflows</a>.</p></td>
-</tr>
-<tr class="row-even"><td><p>065bA</p></td>
-<td><p>Test Procedures</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_algs/tree/master/.github/workflows">GitHub Actions Workflows</a>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>065bS</p></td>
-<td><p>Test Procedures</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_server/tree/master/.github/workflows">GitHub Actions Workflows</a>.</p></td>
-</tr>
-<tr class="row-even"><td><p>065cM</p></td>
-<td><p>Tests</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_models/tree/master/tests">tests directory</a>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>065cA</p></td>
-<td><p>Tests</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_algs/tree/master/tests">tests directory</a>.</p></td>
-</tr>
-<tr class="row-even"><td><p>065cS</p></td>
-<td><p>Tests</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_server/tree/master/tests">tests directory</a>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>065dM</p></td>
-<td><p>Test Reports</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_models/actions">Github Actions Results</a>.</p></td>
-</tr>
-<tr class="row-even"><td><p>065dA</p></td>
-<td><p>Test Reports</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_algs/actions">Github Actions Results</a>.</p></td>
-</tr>
-<tr class="row-odd"><td><p>065dS</p></td>
-<td><p>Test Reports</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_server/actions">Github Actions Results</a>.</p></td>
-</tr>
-<tr class="row-even"><td><p>066</p></td>
-<td><p>Verification</p></td>
-<td><p>FC</p></td>
-<td><p>Each requirement has verification tests created before closing. Tests run using GitHub actions</p></td>
-</tr>
-<tr class="row-odd"><td><p>068</p></td>
-<td><p>Evaluate Test Results</p></td>
-<td><p>FC</p></td>
-<td><p>See notes below</p></td>
-</tr>
-<tr class="row-even"><td><p>071</p></td>
-<td><p>Update Test Plans</p></td>
-<td><p>FC</p></td>
-<td><p>Workflow, tests, and this document are updated as requirements change</p></td>
-</tr>
-<tr class="row-odd"><td><p>186M</p></td>
-<td><p>Code Coverage</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://app.codecov.io/gh/nasa/prog_models">Codecov</a></p></td>
-</tr>
-<tr class="row-even"><td><p>186A</p></td>
-<td><p>Code Coverage</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://app.codecov.io/gh/nasa/prog_algs">Codecov</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>186S</p></td>
-<td><p>Code Coverage</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://app.codecov.io/gh/nasa/prog_server">Codecov</a></p></td>
-</tr>
-<tr class="row-even"><td><p>192</p></td>
-<td><p>Reqs that Trace to Hazard</p></td>
-<td><p>FC</p></td>
-<td><p>When potential for hazard is identified, thorough tests are created to prevent the hazard</p></td>
-</tr>
-</tbody>
-</table>
-<p>Notes on SWE-068: Evaluate Test Results:</p>
-<ul class="simple">
-<li><p>All tests are conducted automatically, using github actions, using multiple versions of Python and both dev and release versions of compatable software.</p></li>
-<li><p>Results of the test are compared with expected results automatically. If they do not match what is expected, the test fails and GitHub does not allow merger of the branch into dev/master</p></li>
-<li><p>Whenever a requirement (i.e., feature issue) is implemented, it must include tests that properly cover the requirement. Ensuring that it covers the requirement is part of the code review checklist.</p>
-<ul>
-<li><p>Furthermore, the coverage data is automatically reported on a PR. This will provide additional information to ensure the requirement is tested</p></li>
-<li><p>Code coverage is also reviewed as part of the release process</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="operations-maintenance-and-retirement">
-<h4>Operations, Maintenance, and Retirement<a class="headerlink" href="#operations-maintenance-and-retirement" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 22%" />
-<col style="width: 8%" />
-<col style="width: 66%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>075</p></td>
-<td><p>Ops, Maintenance, and Retirement</p></td>
-<td><p>FC</p></td>
-<td><p>See below</p></td>
-</tr>
-<tr class="row-odd"><td><p>077</p></td>
-<td><p>Record-Keeping</p></td>
-<td><p>FC</p></td>
-<td><p>Records maintained in repository and Sharepoint folder</p></td>
-</tr>
-<tr class="row-even"><td><p>194</p></td>
-<td><p>Delivery Verification</p></td>
-<td><p>FC</p></td>
-<td><p>See Release Checklist and automated unit and verification tests</p></td>
-</tr>
-<tr class="row-odd"><td><p>195</p></td>
-<td><p>Maintainance Standards</p></td>
-<td><p>FC</p></td>
-<td><p>See this document, GitHub records</p></td>
-</tr>
-<tr class="row-even"><td><p>196</p></td>
-<td><p>Retirement Plan</p></td>
-<td><p>FC</p></td>
-<td><p>See Below</p></td>
-</tr>
-</tbody>
-</table>
-<p>Operations and Maintenance: During the operational phase of the software, the team will do the following:</p>
-<ul class="simple">
-<li><p>Provide documentation, examples, tutorial, templates, and source code to users to help them use the software</p></li>
-<li><p>Provide a issues page for users to report issues and suggest features</p></li>
-<li><p>Provide a discussion page for further discussion on best practices and suggestions</p></li>
-<li><p>Monitor and resolve security alerts from users, NASA organiztions, static analysis tools, and GitHub dependency checkers</p></li>
-<li><p>Maintain the requirements (i.e., issues) and releases</p></li>
-<li><p>Maintain and update software assurance and compliance documentation (e.g., this page)</p></li>
-<li><p>Until retirement, maintain the software. This includes:</p>
-<ul>
-<li><p>Providing support for NASA projects using the software and limited support for external users.</p></li>
-<li><p>Fixing bugs, when identified</p></li>
-<li><p>Assisting in incorporating new features and enhancements</p></li>
-</ul>
-</li>
-<li><p>The project team is also responsible for conducting appropriate reviews (e.g., Release Reviews) to ensure the software is ready for use.</p></li>
-</ul>
-<p>Retirement Plan:</p>
-<ul class="simple">
-<li><p>On complete retirement the software, tests, documentation, and other artifacts will continue to be available on GitHub, but a message will be added to the ReadMe and the main page of the documentation indicating that the software is no longer maintained or updated by NASA</p></li>
-<li><p>All internal documents about the software will be archived in the Diagnostics and Prognostics Group’s Teams OneDrive folder</p></li>
-</ul>
-</section>
-<section id="configuration-management">
-<h4>Configuration Management<a class="headerlink" href="#configuration-management" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 28%" />
-<col style="width: 10%" />
-<col style="width: 56%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>079</p></td>
-<td><p>Configuration Management Plan</p></td>
-<td><p>FC</p></td>
-<td><p>See this document</p></td>
-</tr>
-<tr class="row-odd"><td><p>080M</p></td>
-<td><p>Evaluate Sotware Product Changes</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_models/pulls">PRs</a></p></td>
-</tr>
-<tr class="row-even"><td><p>080A</p></td>
-<td><p>Evaluate Sotware Product Changes</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_algs/pulls">PRs</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>080S</p></td>
-<td><p>Evaluate Sotware Product Changes</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_server/pulls">PRs</a></p></td>
-</tr>
-<tr class="row-even"><td><p>081</p></td>
-<td><p>Identify Configuration Items</p></td>
-<td><p>FC</p></td>
-<td><p>See this document</p></td>
-</tr>
-<tr class="row-odd"><td><p>082a</p></td>
-<td><p>Levels of Control</p></td>
-<td><p>FC</p></td>
-<td><p>See this document</p></td>
-</tr>
-<tr class="row-even"><td><p>082b</p></td>
-<td><p>Authorization Authority</p></td>
-<td><p>FC</p></td>
-<td><p>See this document</p></td>
-</tr>
-<tr class="row-odd"><td><p>082c</p></td>
-<td><p>Authorization Authority</p></td>
-<td><p>FC</p></td>
-<td><p>See this document</p></td>
-</tr>
-<tr class="row-even"><td><p>083M</p></td>
-<td><p>Configuration Status</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_models/branches">Branches</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>083A</p></td>
-<td><p>Configuration Status</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_algs/branches">Branches</a></p></td>
-</tr>
-<tr class="row-even"><td><p>083S</p></td>
-<td><p>Configuration Status</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_server/branches">Branches</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>084</p></td>
-<td><p>Configuration Audits</p></td>
-<td><p>FC</p></td>
-<td><p>See Note below</p></td>
-</tr>
-<tr class="row-even"><td><p>085</p></td>
-<td><p>Release Procedures</p></td>
-<td><p>FC</p></td>
-<td><p>See this document</p></td>
-</tr>
-</tbody>
-</table>
-<p>Note on SWE084- Configuration Audits: Configuration audits are conducted in parts throughout the lifecycle process</p>
-<ul>
-<li><p>To a large degree- configuration audits are performed automatically by GitHub actions and branch restrictions. These check the following:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>That tests were run (they are automatically run), passed, and results are recorded</p></li>
-<li><p>That files conform with copyright rules</p></li>
-<li><p>That required code reviews were performed (Requirement for branch merging)</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p>In performing a code review, the reviewing user confirms:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>That the change is linked to a requirement (i.e., feature issue) and the requirement was met or that it is linked to another issue (e.g., bug report)</p></li>
-<li><p>That appropriate tests exist</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p>In performing a release review, the project manager confirms:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>That all issues are completed</p></li>
-<li><p>That all tests pass, have proper documentation</p></li>
-<li><p>That documentation has been updated and matches the code</p></li>
-<li><p>That a schedule exists for the next release and is in the proper place</p></li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-</section>
-<section id="non-conformances">
-<h4>Non-Conformances<a class="headerlink" href="#non-conformances" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 28%" />
-<col style="width: 10%" />
-<col style="width: 56%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>201M</p></td>
-<td><p>Track non-conformances</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_models/issues">Github Issues</a></p></td>
-</tr>
-<tr class="row-odd"><td><p>201A</p></td>
-<td><p>Track non-conformances</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_algs/issues">Github Issues</a></p></td>
-</tr>
-<tr class="row-even"><td><p>201S</p></td>
-<td><p>Track non-conformances</p></td>
-<td><p>FC</p></td>
-<td><p>See <a class="reference external" href="https://github.com/nasa/prog_server/issues">Github Issues</a></p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="transition-to-a-higher-class">
-<h4>Transition to a Higher Class<a class="headerlink" href="#transition-to-a-higher-class" title="Permalink to this headline">#</a></h4>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 28%" />
-<col style="width: 10%" />
-<col style="width: 56%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SWE #</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Compliance</p></th>
-<th class="head"><p>Evidence</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>021</p></td>
-<td><p>Transition to a higher class</p></td>
-<td><p>FC</p></td>
-<td><p>Plans have been updated to reflect the updated classification</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
-<section id="aquisition-options">
-<h3>Aquisition Options<a class="headerlink" href="#aquisition-options" title="Permalink to this headline">#</a></h3>
-<p>Assessed, there are some existing prognostics tools but no general Python package that can support model-based prognostics like we need and no general python package that can support model-based prognostics is an Service Oriented Architecture (SOA) like we need (prog_server).</p>
-</section>
-<section id="requirement-tracking">
-<h3>Requirement Tracking<a class="headerlink" href="#requirement-tracking" title="Permalink to this headline">#</a></h3>
-<p>Requirements are tracked as issues with the “Enhancement” label (See <a class="reference external" href="https://github.com/nasa/prog_models/labels/enhancement">prog_models</a>, <a class="reference external" href="https://github.com/nasa/prog_algs/labels/enhancement">prog_algs</a>, <a class="reference external" href="https://github.com/nasa/prog_server/labels/enhancement">prog_server</a> Enhancement Issues). An issue template is used to ensure that the requirement has the desired information. Issues are closed to indicate the requirement has been met. Closing a requirement issue is done with a pull request, which is linked to the relevant requirement, for tracability. Closing the requirement issue requires a code review (see above for details), and requires implementation of passing tests that test the requirement (i.e., verification tests). The tests are reviewed with the code implementing the requirement. Issues are assigned to a milestone (i.e., release) indicating the requirements for that release. Github automatically tracks any changes to the issues (i.e., requirements)</p>
-</section>
-<section id="dependencies">
-<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">#</a></h3>
-<p>The following dependencies are used in the project:</p>
-<ul>
-<li><p><a class="reference external" href="https://numpy.org/">numpy</a></p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: Various mathematical and array functions</p></li>
-<li><p>Documentation: <a class="reference external" href="https://numpy.org">https://numpy.org</a></p></li>
-<li><p>Usage Rights: Released under the BSD 3-Clause License</p></li>
-<li><p>Future Support: expected- Numpy is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><a class="reference external" href="https://www.scipy.org/">scipy</a></p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: Various mathematical and array functions</p></li>
-<li><p>Documentation: <a class="reference external" href="https://www.scipy.org">https://www.scipy.org</a></p></li>
-<li><p>Usage Rights: Released under the BSD 3-Clause License</p></li>
-<li><p>Future Support: expected- Scipy is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><a class="reference external" href="https://matplotlib.org/">matplotlib</a></p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: Various figure generation methods</p></li>
-<li><p>Documentation: <a class="reference external" href="https://matplotlib.org">https://matplotlib.org</a></p></li>
-<li><p>Usage Rights: Released under the BSD 3-Clause License</p></li>
-<li><p>Future Support: expected- Matplotlib is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><a class="reference external" href="https://pandas.pydata.org/">pandas</a></p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: Various data analysis methods (especially for datasets)</p></li>
-<li><p>Documentation: <a class="reference external" href="https://pandas.pydata.org">https://pandas.pydata.org</a></p></li>
-<li><p>Usage Rights: Released under the BSD 3-Clause License</p></li>
-<li><p>Future Support: expected- Pandas is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><a class="reference external" href="https://www.tensorflow.org">tensorflow</a></p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: Machine learning algorithms</p></li>
-<li><p>Documentation: <a class="reference external" href="https://www.tensorflow.org">https://www.tensorflow.org</a></p></li>
-<li><p>Usage Rights: Released under the Apache License 2.0</p></li>
-<li><p>Future Support: expected- Tensorflow is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><a class="reference external" href="http://chaospy.readthedocs.io">chaospy</a></p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: Uncertainty quantification and polynomial chaos expansion logic</p></li>
-<li><p>Documentation: <a class="reference external" href="http://chaospy.readthedocs.io">http://chaospy.readthedocs.io</a></p></li>
-<li><p>Usage Rights: Released under the MIT License</p></li>
-<li><p>Future Support: expected- Chaospy is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><a class="reference external" href="https://filterpy.readthedocs.io">FilterPy</a> (prog_algs only)</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: Algorithms for state estimators and predictors</p></li>
-<li><p>Documentation: <a class="reference external" href="https://filterpy.readthedocs.io">https://filterpy.readthedocs.io</a></p></li>
-<li><p>Usage Rights: Released under the MIT License</p></li>
-<li><p>Future Support: expected- FilterPy is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><a class="reference external" href="https://requests.readthedocs.io">Requests</a> (prog_server only)</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: HTTP requests</p></li>
-<li><p>Documentation: <a class="reference external" href="https://requests.readthedocs.io">https://requests.readthedocs.io</a></p></li>
-<li><p>Usage Rights: Released under the Apache License</p></li>
-<li><p>Future Support: expected- Requests is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> (prog_server only)</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: Web server</p></li>
-<li><p>Documentation: <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x">https://flask.palletsprojects.com/en/1.1.x</a></p></li>
-<li><p>Usage Rights: Released under the BSD 3-Clause License</p></li>
-<li><p>Future Support: expected- Flask is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><a class="reference external" href="http://urllib3.readthedocs.org">urllib3</a> (prog_server only)</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Requirements met: HTTP requests</p></li>
-<li><p>Documentation: <a class="reference external" href="https://urllib3.readthedocs.org">https://urllib3.readthedocs.org</a></p></li>
-<li><p>Usage Rights: Released under the MIT License</p></li>
-<li><p>Future Support: expected- urllib3 is a common tool still under development and actively supported</p></li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-<p>Notes for all:</p>
-<ul class="simple">
-<li><p>The function and performance of these tools are verified and validated as part of the automated tests and examples. [SWE-027 3.1.14.e]</p></li>
-<li><p>GitHub dependency checker will periodically check for known issues and notify. [SWE-027 3.1.14.f]</p></li>
-</ul>
-</section>
-<section id="tracability-notes">
-<h3>Tracability Notes<a class="headerlink" href="#tracability-notes" title="Permalink to this headline">#</a></h3>
-<p>Hazards and non-conformances are tracked as issues with the label bug (See <a class="reference external" href="https://github.com/nasa/prog_models/labels/bug">prog_models</a>, <a class="reference external" href="https://github.com/nasa/prog_algs/labels/bug">prog_algs</a>, <a class="reference external" href="https://github.com/nasa/prog_server/labels/bug">prog_server</a>). In the template for a bug report, there is a section asking for relevant enhancement issues (i.e., requirements). This linking establishes tracability from hazards/non-conformances to the underlying requirement. These linkings are automatically marked by the github system in the requirement issue. Additionally, to close an enhancement issue (i.e., requirement), passing verification tests must be created and checked in. The PR where these tests are created and the implementation is completed is linked to the issue establishing tracability from requirement -&gt; verification test. These tests run automatically at every change/PR.</p>
-<p>Additionally, requirements are assigned to milestones/releases, establishing bi-directional tracability to these</p>
-<p>Summary: The following tracabilities are maintained:</p>
-<ul class="simple">
-<li><p>Hazard &lt;-&gt; Requirement</p></li>
-<li><p>Non-conformance &lt;-&gt; Requirement</p></li>
-<li><p>Requirement &lt;-&gt; Verification Test &amp; Results</p></li>
-<li><p>Requirement &lt;-&gt; Implementation</p></li>
-<li><p>Release/Milestone &lt;-&gt; Requirement</p></li>
-</ul>
-</section>
 </section>
 </section>
 
@@ -2210,6 +777,13 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Glossary</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="npr7150.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">NPR 7150 NASA Software Engineering Requirements</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
