@@ -17,6 +17,16 @@ To install the package package from a specific branch. First clone the repositor
 
 This command installs the package using the checked-out version.
 
+Running Tests
+------------------------
+The run the progpy tests, first clone the repository and checkout the branch, installing the package using the command above. Then navigate into the repository directory. Next install the tests required dependencies, by using the following commands:
+   `pip install notebook`
+   `pip install testbook`
+   `pip install requests`
+
+Then run the tests using the following command:
+   `python -m tests`
+
 Contributing 
 ---------------
 New external (non-NASA or NASA contractor) developers must complete either the `organizational or individual Contributor License Agreement (CLA) <https://github.com/nasa/prog_models/tree/master/forms>`__. 
@@ -33,7 +43,7 @@ Project Roles
 
 Branching Strategy
 ------------------
-Our project is following the git strategy described `here <https://nvie.com/posts/a-successful-git-branching-model/>`__. Release branches are not required. Details specific to each branch are described below. 
+Our project is following the git strategy described `here <https://nvie.com/posts/a-successful-git-branching-model/>`__. Release branches are not required. Details specific to each branch are described below. We recommend that developers from within NASA watch `this video <https://nasa-my.sharepoint.com/:v:/g/personal/rduffy_ndc_nasa_gov/EYCJK6qffBZNtSKZTOV9nPMBc9cPPF6fniRuKtG2GWvoPA>` on git strategies and best practices.
 
 `master`: Every merge into the master branch is done using a pull request (never commiting directly), is assigned a release number, and must complete the release checklist. The release checklist is a software assurance tool. 
 
