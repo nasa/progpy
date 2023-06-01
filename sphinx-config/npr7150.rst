@@ -579,6 +579,16 @@ The following dependencies are used in the project:
    * Usage Rights: Released under the MIT License
    * Future Support: expected- urllib3 is a common tool still under development and actively supported
 
+* `fastdtw <https://github.com/slaypni/fastdtw>`__ (prog_models only)
+
+   * Requirements met: Dynamic time warping (for dtw metric used in calc_error)
+   * Documentation: https://github.com/slaypni/fastdtw
+   * Usage Rights: Released under the MIT License
+   * Future Support: Unknown- at the time of investigation, the last release was in 3.5 years ago and the last branch was updated 2 years ago. However, the code is simple and the tool is still used by many projects.
+   * Other notes: validated by comparing the output of fastdtw to dtaidistance and the algorithm from the 'Towards Data Science' page (https://towardsdatascience.com/dynamic-time-warping-3933f25fcdd). Additionally, the team inspected the output of the package and it seemed reasonable. 
+
+* 
+
 Notes for all: 
 
 * The function and performance of these tools are verified and validated as part of the automated tests and examples. [SWE-027 3.1.14.e]
