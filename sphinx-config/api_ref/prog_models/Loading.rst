@@ -32,6 +32,8 @@ The second approach for load estimators is a load estimation class. This is used
 Load Estimator Classes
 ----------------------
 
+.. autoclass:: prog_models.loading.Piecewise
+
 .. autoclass:: prog_models.loading.MovingAverage
 
 .. autoclass:: prog_models.loading.GuassianNoiseLoadWrapper
