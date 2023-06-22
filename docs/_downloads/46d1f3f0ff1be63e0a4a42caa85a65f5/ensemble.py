@@ -6,11 +6,11 @@ Example using the Ensemble Model feature
 
 .. dropdown:: More details
 
-    Ensemble model is an approach to modeling where one or more different models are simulated together and then aggregated into a single prediction. This is generally done to improve the accuracy of prediction when you have multiple models that each represent part of the behavior, or represent a distribution of different behaviors. 
+    Ensemble model is an approach to modeling where one or more different models are simulated together and then aggregated into a single prediction. This is generally done to improve the accuracy of prediction when you have multiple models that each represent part of the behavior or represent a distribution of different behaviors. 
 
-    In this example, 4 different equivilant circuit models are setup with different configuration parameters. They are each simulated individually. Then an ensemble model is created for the 4 models, and that is simulated individually. The results are plotted. 
+    In this example, 4 different equivalent circuit models are setup with different configuration parameters. They are each simulated individually. Then an ensemble model is created for the 4 models, and that is simulated individually. The results are plotted. 
 
-    The results are partially skewed by a poorly configured model, so we change the aggregation method to acocunt for that. and resimulate, showing the results
+    The results are partially skewed by a poorly configured model, so we change the aggregation method to account for that. and resimulate, showing the results
 
     Finally, an ensemble model is created for two different models with different states. That model is simulated with time and the results are plotted. 
 """
@@ -55,7 +55,7 @@ def run_example():
     plt.plot(results_ensemble.times, [z['v'] for z in results_ensemble.outputs], color='red', label='ensemble')
     plt.legend()
 
-    # Note: This is a very poor perfoming model
+    # Note: This is a very poor performing model
     # there was an outlier model (m_circuit_3), which effected the quality of the model prediction
     # This can be resolved by using a different aggregation_method. For example, median
     # In a real scenario, you would likely remove this model, this is just to illustrate outlier elimination
@@ -94,7 +94,7 @@ def run_example():
     plt.legend()
     
     # Note that the result may not be exactly between the other two models. 
-    # This is because of aggrigation is done in 2 steps: at state transition and then at output calculation
+    # This is because of aggregation is done in 2 steps: at state transition and then at output calculation
 
 # This allows the module to be executed directly 
 if __name__=='__main__':

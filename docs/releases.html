@@ -1,648 +1,423 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Release Notes &#8212; ProgPy Python Packages 1.5 documentation</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
     <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Glossary" href="glossary.html" />
     <link rel="prev" title="ProgServer" href="api_ref/prog_server/prog_server.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/software_name.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.5 documentation</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/software_name.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/software_name.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="guide.html">
-   ProgPy Guide
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prog_models_guide.html">
-     prog_models Guide
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prog_algs_guide.html">
-     prog_algs Guide
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prog_server_guide.html">
-     prog_server Guide
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="api_ref.html">
-   API Reference
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2 has-children">
-    <a class="reference internal" href="api_ref/prog_algs.html">
-     prog_algs API Reference
-    </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-    <label for="toctree-checkbox-3">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_algs/Prediction.html">
-       Prediction
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_algs/Predictor.html">
-       Predictors
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html">
-       State Estimators
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html">
-       ToEPredictionProfile
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_algs/UncertainData.html">
-       Uncertain Data
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toctree-l2 has-children">
-    <a class="reference internal" href="api_ref/prog_models.html">
-     prog_models API Reference
-    </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-    <label for="toctree-checkbox-4">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_models/CompositeModel.html">
-       CompositeModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_models/DataModel.html">
-       DataModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_models/DataSets.html">
-       Datasets
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_models/EnsembleModel.html">
-       EnsembleModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_models/IncludedModels.html">
-       Included Models
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_models/LinearModel.html">
-       LinearModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_models/Loading.html">
-       Loading
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">
-       PrognosticsModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_models/SimResult.html">
-       SimResult
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toctree-l2 has-children">
-    <a class="reference internal" href="api_ref/prog_server.html">
-     prog_server API Reference
-    </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-    <label for="toctree-checkbox-5">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_server/load_ests.html">
-       Load Estimators
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_server/prog_client.html">
-       prog_client
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="api_ref/prog_server/prog_server.html">
-       ProgServer
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">
-       Prog Server API
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Release Notes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="dev_guide.html">
-   Developers Guide &amp; Project Plan
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-  <label for="toctree-checkbox-6">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="npr7150.html">
-     NPR 7150 NASA Software Engineering Requirements
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">ProgPy Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="prog_models_guide.html">prog_models Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prog_algs_guide.html">prog_algs Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prog_server_guide.html">prog_server Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_ref.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_algs.html">prog_algs API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/Prediction.html">Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/Predictor.html">Predictors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/StateEstimator.html">State Estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html">ToEPredictionProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/UncertainData.html">Uncertain Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_models.html">prog_models API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/CompositeModel.html">CompositeModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/DataModel.html">DataModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/EnsembleModel.html">EnsembleModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/IncludedModels.html">Included Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/LinearModel.html">LinearModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/Loading.html">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">PrognosticsModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/SimResult.html">SimResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/Utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/load_ests.html">Load Estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_client.html">prog_client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_server.html">ProgServer</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="npr7150.html">NPR 7150 NASA Software Engineering Requirements</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/releases.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/releases.rst.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.rst</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-4">
-   Updates in V1.4
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-models">
-     prog_models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-algs">
-     prog_algs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-server-and-prog-client">
-     prog_server and prog_client
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-3">
-   Updates in V1.3
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     prog_models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     prog_algs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-server">
-     prog_server
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-client">
-     prog_client
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-2">
-   Updates in V1.2
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     prog_models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     prog_algs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-1">
-   Updates in V1.1
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     prog_models
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#electrochemistry-model-updates">
-       ElectroChemistry Model Updates
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#centrifugalpump-model-updates">
-       CentrifugalPump Model Updates
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pneumaticvalve-model-updates">
-       PneumaticValve Model Updates
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Release Notes</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-4">
-   Updates in V1.4
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-models">
-     prog_models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-algs">
-     prog_algs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-server-and-prog-client">
-     prog_server and prog_client
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-3">
-   Updates in V1.3
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     prog_models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     prog_algs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-server">
-     prog_server
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#prog-client">
-     prog_client
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-2">
-   Updates in V1.2
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     prog_models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     prog_algs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#updates-in-v1-1">
-   Updates in V1.1
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     prog_models
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#electrochemistry-model-updates">
-       ElectroChemistry Model Updates
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#centrifugalpump-model-updates">
-       CentrifugalPump Model Updates
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pneumaticvalve-model-updates">
-       PneumaticValve Model Updates
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Release Notes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-5">Updates in V1.5</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-models">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-algs">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-server">prog_server</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-4">Updates in V1.4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-server-and-prog-client">prog_server and prog_client</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-3">Updates in V1.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">prog_server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-client">prog_client</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-2">Updates in V1.2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">prog_algs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-1">Updates in V1.1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">prog_models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#electrochemistry-model-updates">ElectroChemistry Model Updates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#centrifugalpump-model-updates">CentrifugalPump Model Updates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pneumaticvalve-model-updates">PneumaticValve Model Updates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section id="release-notes">
-<h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">#</a></h1>
-<section id="updates-in-v1-4">
-<h2>Updates in V1.4<a class="headerlink" href="#updates-in-v1-4" title="Permalink to this headline">#</a></h2>
+<h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this heading">#</a></h1>
+<section id="updates-in-v1-5">
+<h2>Updates in V1.5<a class="headerlink" href="#updates-in-v1-5" title="Permalink to this heading">#</a></h2>
 <section id="prog-models">
-<h3>prog_models<a class="headerlink" href="#prog-models" title="Permalink to this headline">#</a></h3>
+<h3>prog_models<a class="headerlink" href="#prog-models" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Direct Models</strong>: Added support for new model type: Direct Models. Direct Models directly correlate current state and future load to time of event, rather than state-transition models which simulate forward to calculate time of event. They’re created by implementing the <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.time_of_event" title="prog_models.PrognosticsModel.time_of_event"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.time_of_event()</span></code></a>. See <a class="reference download internal" download="" href="_downloads/e544b7b61c508397101940603daddf04/direct_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.direct_model</span></code></a> for example of use.</p></li>
+<li><p>New model types that combine multiple models.</p>
+<ul>
+<li><p><strong>Ensemble Model</strong>: Combinations of multiple models of the same system where results are aggregated. See <a class="reference download internal" download="" href="_downloads/46d1f3f0ff1be63e0a4a42caa85a65f5/ensemble.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.ensemble</span></code></a> for example of use.</p></li>
+<li><p><strong>Composite Model</strong>: Combinations of models of different systems that are interdependent. See <a class="reference download internal" download="" href="_downloads/40eed4cd02f1dee80e6faaa22f99843b/composite_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.composite_model</span></code></a> for example of use.</p></li>
+</ul>
+</li>
+<li><p><strong>New Model</strong>: Aircraft flight model. This is especially important for cases where loading of other systems is a function of flight conditions. See <a class="reference download internal" download="" href="_downloads/912ba6f560fc796ecfebae899799fbca/uav_dynamics_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.uav_dynamics_model</span></code></a> for example of use.</p></li>
+<li><p>New DataModel: Polynomial Chaos Expansion (PCE) Direct Surrogate Model (<a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.PolynomialChaosExpansion" title="prog_models.data_models.PolynomialChaosExpansion"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.PolynomialChaosExpansion</span></code></a>). See <a class="reference download internal" download="" href="_downloads/8845b048e23550d7cd03464611023e4b/chaos.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.chaos</span></code></a> for example of use.</p></li>
+<li><p>Started transition of InputContainers, StateContainers, OutputContainer and SimResult to use Pandas DataFrames. This release will bring the interface more in compliance with DataFrames. v1.6 will fully transition the classes to DataFrames.</p></li>
+<li><p>Implemented new metrics that can be used in <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.calc_error" title="prog_models.PrognosticsModel.calc_error"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.calc_error()</span></code></a>: Root Mean Square Error (RMSE), Maximum Error (MAX_E), Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE), and Dynamic Time Warping (DTW)</p></li>
+<li><p>Error calculation metric (above) can now be set when calling <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.estimate_params" title="prog_models.PrognosticsModel.estimate_params"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.estimate_params()</span></code></a></p></li>
+<li><p>Reworked integration methods in simulation</p>
+<ul>
+<li><p>New integration methods: RK4 and methods from scipy.integrate</p></li>
+<li><p>Integration can now be set at the model level. For continuous models the specified integration method will apply when calling next_state</p></li>
+</ul>
+</li>
+<li><p>Python3.11 support</p></li>
+<li><p>Various bug fixes and performance improvements</p></li>
+</ul>
+</section>
+<section id="prog-algs">
+<h3>prog_algs<a class="headerlink" href="#prog-algs" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Integration method can now be set for state estimation and prediction</p></li>
+<li><p>Minimum time step can now be set in state estimation. This is useful for models that become unstable with large time steps</p></li>
+<li><p>Python3.11 support</p></li>
+</ul>
+</section>
+<section id="prog-server">
+<h3>prog_server<a class="headerlink" href="#prog-server" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Python3.11 support</p></li>
+</ul>
+</section>
+</section>
+<section id="updates-in-v1-4">
+<h2>Updates in V1.4<a class="headerlink" href="#updates-in-v1-4" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3>prog_models<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Data-Driven Models</strong></p>
 <ul>
@@ -662,8 +437,8 @@ title="Print to PDF"
 <li><p>Various bug fixes and performance improvements</p></li>
 </ul>
 </section>
-<section id="prog-algs">
-<h3>prog_algs<a class="headerlink" href="#prog-algs" title="Permalink to this headline">#</a></h3>
+<section id="id2">
+<h3>prog_algs<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Added new <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile" title="prog_algs.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code></a> Metric: Monotonicity. See <a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html#prog_algs.predictors.ToEPredictionProfile.monotonicity" title="prog_algs.predictors.ToEPredictionProfile.monotonicity"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile.monotonicity()</span></code></a></p></li>
 <li><p>Updated to support prog_models v1.4</p></li>
@@ -671,7 +446,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="prog-server-and-prog-client">
-<h3>prog_server and prog_client<a class="headerlink" href="#prog-server-and-prog-client" title="Permalink to this headline">#</a></h3>
+<h3>prog_server and prog_client<a class="headerlink" href="#prog-server-and-prog-client" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Added new endpoint (GET /api/v1/session/{id}/model) and client function (<a class="reference internal" href="api_ref/prog_server/prog_client.html#prog_client.Session.get_model" title="prog_client.Session.get_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_client.Session.get_model()</span></code></a>) to get the model from the server.</p></li>
 <li><p>Updated to support prog_models and prog_algs v1.4</p></li>
@@ -680,9 +455,9 @@ title="Print to PDF"
 </section>
 </section>
 <section id="updates-in-v1-3">
-<h2>Updates in V1.3<a class="headerlink" href="#updates-in-v1-3" title="Permalink to this headline">#</a></h2>
-<section id="id1">
-<h3>prog_models<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<h2>Updates in V1.3<a class="headerlink" href="#updates-in-v1-3" title="Permalink to this heading">#</a></h2>
+<section id="id3">
+<h3>prog_models<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Surrogate Models</strong> Added initial draft of new feature to generate surrogate models automatically from <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a>. (See <a class="reference download internal" download="" href="_downloads/3e4a5d9b856c25c6b0bf84730581c560/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a> example). Initial implementation uses Dynamic Mode Decomposition. Additional Surrogate Model Generation approaches will be explored for future releases. [Developed by NASA’s DRF Project]</p></li>
 <li><p><strong>New Example Models</strong> Added new <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.DCMotor" title="prog_models.models.DCMotor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.DCMotor</span></code></a>, <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.ESC" title="prog_models.models.ESC"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.ESC</span></code></a>, and <a class="reference internal" href="api_ref/prog_models/IncludedModels.html#prog_models.models.Powertrain" title="prog_models.models.Powertrain"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.Powertrain</span></code></a> models (See <a class="reference download internal" download="" href="_downloads/379b8420d5a1e67e122db8eacfc78796/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a> example) [Developed by NASA’s SWS Project]</p></li>
@@ -698,8 +473,8 @@ title="Print to PDF"
 <li><p>Various performance improvements and bug fixes</p></li>
 </ul>
 </section>
-<section id="id2">
-<h3>prog_algs<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<section id="id4">
+<h3>prog_algs<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>New State Estimator Added</strong> <a class="reference internal" href="api_ref/prog_algs/StateEstimator.html#prog_algs.state_estimators.KalmanFilter" title="prog_algs.state_estimators.KalmanFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.KalmanFilter</span></code></a>. Works with models derived from <a class="reference internal" href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a>. See <a class="reference download internal" download="" href="_downloads/95185cf727a21ad753717b8332bb063f/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></p></li>
 <li><p><strong>New Predictor Added</strong> <a class="reference internal" href="prog_algs_guide.html#prog_algs.predictors.UnscentedTransformPredictor" title="prog_algs.predictors.UnscentedTransformPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.UnscentedTransformPredictor</span></code></a>.</p></li>
@@ -713,23 +488,23 @@ title="Print to PDF"
 <li><p>Various performance improvements and bugfixes</p></li>
 </ul>
 </section>
-<section id="prog-server">
-<h3>prog_server<a class="headerlink" href="#prog-server" title="Permalink to this headline">#</a></h3>
+<section id="id5">
+<h3>prog_server<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Added ability to set state using pickled prog_algs.uncertain_data.UncertainData type</p></li>
 </ul>
 </section>
 <section id="prog-client">
-<h3>prog_client<a class="headerlink" href="#prog-client" title="Permalink to this headline">#</a></h3>
+<h3>prog_client<a class="headerlink" href="#prog-client" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Added new set_state method</p></li>
 </ul>
 </section>
 </section>
 <section id="updates-in-v1-2">
-<h2>Updates in V1.2<a class="headerlink" href="#updates-in-v1-2" title="Permalink to this headline">#</a></h2>
-<section id="id3">
-<h3>prog_models<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<h2>Updates in V1.2<a class="headerlink" href="#updates-in-v1-2" title="Permalink to this heading">#</a></h2>
+<section id="id6">
+<h3>prog_models<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Vectorized Models</dt><dd><ul>
@@ -757,8 +532,8 @@ title="Print to PDF"
 <li><p>Various bug fixes</p></li>
 </ul>
 </section>
-<section id="id4">
-<h3>prog_algs<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<section id="id7">
+<h3>prog_algs<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>New Feature: Histogram and Scatter Plot of UncertainData.</p></li>
 <li><dl class="simple">
@@ -784,9 +559,9 @@ title="Print to PDF"
 </section>
 </section>
 <section id="updates-in-v1-1">
-<h2>Updates in V1.1<a class="headerlink" href="#updates-in-v1-1" title="Permalink to this headline">#</a></h2>
-<section id="id5">
-<h3>prog_models<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<h2>Updates in V1.1<a class="headerlink" href="#updates-in-v1-1" title="Permalink to this heading">#</a></h2>
+<section id="id8">
+<h3>prog_models<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Derived Parameters</dt><dd><ul>
@@ -843,7 +618,7 @@ title="Print to PDF"
 <li><p>Various bug fixes</p></li>
 </ul>
 <section id="electrochemistry-model-updates">
-<h4>ElectroChemistry Model Updates<a class="headerlink" href="#electrochemistry-model-updates" title="Permalink to this headline">#</a></h4>
+<h4>ElectroChemistry Model Updates<a class="headerlink" href="#electrochemistry-model-updates" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>New Feature: Added thermal effects. Now the model include how the temperature is effected by use. Previous implementation only included effects of temperature on performance.</p></li>
 <li><p>New Feature: Added <cite>degraded_capacity</cite> (i.e., EOL) event to model. There are now three different models: BatteryElectroChemEOL (degraded_capacity only), BatteryElectroChemEOD (discharge only), and BatteryElectroChemEODEOL (combined). BatteryElectroChem is an alias for BatteryElectroChemEODEOL.</p></li>
@@ -851,7 +626,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="centrifugalpump-model-updates">
-<h4>CentrifugalPump Model Updates<a class="headerlink" href="#centrifugalpump-model-updates" title="Permalink to this headline">#</a></h4>
+<h4>CentrifugalPump Model Updates<a class="headerlink" href="#centrifugalpump-model-updates" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Added CentrifugalPumpBase class where wear rates are parameters instead of part of the state vector.</dt><dd><ul>
@@ -867,7 +642,7 @@ title="Print to PDF"
 </ul>
 </section>
 <section id="pneumaticvalve-model-updates">
-<h4>PneumaticValve Model Updates<a class="headerlink" href="#pneumaticvalve-model-updates" title="Permalink to this headline">#</a></h4>
+<h4>PneumaticValve Model Updates<a class="headerlink" href="#pneumaticvalve-model-updates" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Added PneumaticValveBase class where wear rates are parameters instead of part of the state vector.</dt><dd><ul>
@@ -884,50 +659,135 @@ title="Print to PDF"
 </section>
 
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="api_ref/prog_server/prog_server.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">ProgServer</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api_ref/prog_server/prog_server.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ProgServer</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="glossary.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="glossary.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Glossary</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle<br/>
-  
-      &copy; Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-5">Updates in V1.5</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-models">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-algs">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-server">prog_server</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-4">Updates in V1.4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-server-and-prog-client">prog_server and prog_client</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-3">Updates in V1.3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">prog_server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-client">prog_client</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-2">Updates in V1.2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">prog_algs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-1">Updates in V1.1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">prog_models</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#electrochemistry-model-updates">ElectroChemistry Model Updates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#centrifugalpump-model-updates">CentrifugalPump Model Updates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pneumaticvalve-model-updates">PneumaticValve Model Updates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
 
 Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.

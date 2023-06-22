@@ -9,3 +9,5 @@ prog_algs API Reference
    :glob:
 
    prog_algs/* 
+
+.. image:: ../images/prog_algs_UML.png

@@ -7,26 +7,18 @@ Example demonstrating ways to use future loading.
 
 import matplotlib.pyplot as plt
 from numpy.random import normal
+from prog_models.loading import Piecewise, GaussianNoiseLoadWrapper
 from prog_models.models import BatteryCircuit
 from statistics import mean
 
 def run_example(): 
     m = BatteryCircuit()
 
-    ## Example 1: Variable loading 
-    def future_loading(t, x=None):
-        # Variable (piece-wise) future loading scheme 
-        if (t < 600):
-            i = 2
-        elif (t < 900):
-            i = 1
-        elif (t < 1800):
-            i = 4
-        elif (t < 3000):
-            i = 2     
-        else:
-            i = 3
-        return m.InputContainer({'i': i})
+    ## Example 1: Variable (piecewise) loading
+    future_loading = Piecewise(
+        m.InputContainer,
+        [600, 900, 1800, 3000, float('inf')],
+        {'i': [2, 1, 4, 2, 3]})
     
     # Simulate to threshold
     options = {
@@ -68,24 +60,12 @@ def run_example():
 
     ## Example 3: Gaussian Distribution 
     # In this example we will still be doing a variable loading like the first option, but we are going to use a 
-    # gaussian distribution for each input. 
-
-    def future_loading(t, x=None):
-        # Variable (piece-wise) future loading scheme 
-        if (t < 600):
-            i = 2
-        elif (t < 900):
-            i = 1
-        elif (t < 1800):
-            i = 4
-        elif (t < 3000):
-            i = 2     
-        else:
-            i = 3
-        return m.InputContainer({'i': i})
-
-    from prog_models.loading import GuassianNoiseLoadWrapper
-    future_loading_with_noise = GuassianNoiseLoadWrapper(future_loading, 0.2)
+    # gaussian distribution for each input.
+    future_loading = Piecewise(
+        m.InputContainer,
+        [600, 900, 1800, 3000, float('inf')],
+        {'i': [2, 1, 4, 2, 3]})
+    future_loading_with_noise = GaussianNoiseLoadWrapper(future_loading, 0.2)
 
     # Simulate to threshold
     simulated_results = m.simulate_to_threshold(future_loading_with_noise, **options)

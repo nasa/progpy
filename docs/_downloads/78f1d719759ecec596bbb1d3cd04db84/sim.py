@@ -8,28 +8,21 @@ Example of a battery being simulated for a set period of time and then till thre
 import matplotlib.pyplot as plt
 from prog_models.models import BatteryElectroChem
 from prog_models.models import BatteryCircuit as Battery
+from prog_models.loading import Piecewise
 
 # VVV Uncomment this to use Electro Chemistry Model VVV
 # Battery = BatteryElectroChem
 
-def run_example(): 
+def run_example():
     # Step 1: Create a model object
     batt = Battery()
 
-    # Step 2: Define future loading function 
-    def future_loading(t, x=None):
-        # Variable (piece-wise) future loading scheme 
-        if (t < 600):
-            i = 2
-        elif (t < 900):
-            i = 1
-        elif (t < 1800):
-            i = 4
-        elif (t < 3000):
-            i = 2     
-        else:
-            i = 3
-        return batt.InputContainer({'i': i})
+    # Step 2: Define future loading function - here we're using a piecewise scheme
+    future_loading = Piecewise(
+        batt.InputContainer,
+        [600, 900, 1800, 3600, float('inf')],
+        {'i': [2, 1, 4, 2, 3]})
+
     # simulate for 200 seconds
     print('\n\n------------------------------------------------')
     print('Simulating for 200 seconds\n\n')
@@ -49,17 +42,19 @@ def run_example():
     print('\n\n------------------------------------------------')
     print('Simulating to threshold\n\n')
     options = {
-        'save_freq': 100, # Frequency at which results are saved
-        'dt': 2, # Timestep
+        'save_freq': 100,  # Frequency at which results are saved
+        'dt': 2,  # Timestep
         'print': True,
         'progress': True
     }
     simulated_results = batt.simulate_to_threshold(future_loading, **options)
 
     # Alternately, you can set a max step size and allow step size to be adjusted automatically
-    options['dt'] = ('auto', 2)  # set step size automatically, with a max of 2 seconds
+    options['dt'] = ('auto', 2)
+    # set step size automatically, with a max of 2 seconds. Setting max step size automatically will allow the 
+    # save points, stop points, and future loading change points to be met exactly
     options['save_freq'] = 201  # Save every 201 seconds
-    options['save_pts'] = [250, 772, 1023]  # Special points we sould like to see reported
+    options['save_pts'] = [250, 772, 1023]  # Special points we should like to see reported
     simulated_results = batt.simulate_to_threshold(future_loading, **options)
     # Note that even though the step size is 2, the odd points in the save frequency are met perfectly, dt is adjusted automatically to capture the save points
 

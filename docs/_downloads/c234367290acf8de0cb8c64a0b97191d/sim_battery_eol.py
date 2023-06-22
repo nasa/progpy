@@ -12,7 +12,7 @@ def run_example():
     # Step 1: Create a model object
     batt = Battery()
 
-    # Step 2: Define future loading function 
+    # Step 2: Define future loading function
     # Here we're using a function designed to charge until 0.95, 
     # then discharge until 0.05
     load = 1

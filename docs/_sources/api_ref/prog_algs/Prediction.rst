@@ -5,21 +5,16 @@ Predictions store the result of a prediction (i.e., returned by the predict meth
 
 Two types of predictions are distributed with this package: `Prediction` and `UnweightedSamplesPrediction`, described below. `UnweightedSamplesPrediction` extends `Prediction` to allow some operations specific to cases where each prediction is represented by an UnweightedSamples object (e.g., accessing SimResult for a single sample).
 
-Base Prediction 
-----------------------
-.. autoclass:: prog_algs.predictors.Prediction
-   :members:
-   :inherited-members: 
+.. tabs::
+   .. tab:: Prediction
 
-UnweightedSamplesPrediction
--------------------------------
-.. autoclass:: prog_algs.predictors.UnweightedSamplesPrediction
-   :members:
-   :inherited-members:
-   :exclude-members: append, extend, clear, pop, remove, reverse, insert
+      .. autoclass:: prog_algs.predictors.Prediction
+         :members:
+         :inherited-members: 
 
-ToE Prediction Profile
-----------------------
-.. autoclass:: prog_algs.predictors.ToEPredictionProfile
-   :members:
-   :inherited-members:
+   .. tab:: UnweightedSamplesPrediction
+
+      .. autoclass:: prog_algs.predictors.UnweightedSamplesPrediction
+         :members:
+         :inherited-members:
+         :exclude-members: append, extend, clear, pop, remove, reverse, insert

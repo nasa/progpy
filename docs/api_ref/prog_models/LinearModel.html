@@ -1,431 +1,375 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>LinearModel &#8212; ProgPy Python Packages 1.5 documentation</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Loading" href="Loading.html" />
     <link rel="prev" title="Included Models" href="IncludedModels.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../../_static/software_name.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.5 documentation</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../../_static/software_name.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/software_name.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../guide.html">
-   ProgPy Guide
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../prog_models_guide.html">
-     prog_models Guide
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../prog_algs_guide.html">
-     prog_algs Guide
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../prog_server_guide.html">
-     prog_server Guide
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../../api_ref.html">
-   API Reference
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 has-children">
-    <a class="reference internal" href="../prog_algs.html">
-     prog_algs API Reference
-    </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-    <label for="toctree-checkbox-3">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../prog_algs/Prediction.html">
-       Prediction
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../prog_algs/Predictor.html">
-       Predictors
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../prog_algs/StateEstimator.html">
-       State Estimators
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../prog_algs/ToEPredictionProfile.html">
-       ToEPredictionProfile
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../prog_algs/UncertainData.html">
-       Uncertain Data
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toctree-l2 current active has-children">
-    <a class="reference internal" href="../prog_models.html">
-     prog_models API Reference
-    </a>
-    <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-    <label for="toctree-checkbox-4">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul class="current">
-     <li class="toctree-l3">
-      <a class="reference internal" href="CompositeModel.html">
-       CompositeModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="DataModel.html">
-       DataModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="DataSets.html">
-       Datasets
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="EnsembleModel.html">
-       EnsembleModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="IncludedModels.html">
-       Included Models
-      </a>
-     </li>
-     <li class="toctree-l3 current active">
-      <a class="current reference internal" href="#">
-       LinearModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="Loading.html">
-       Loading
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="PrognosticModel.html">
-       PrognosticsModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="SimResult.html">
-       SimResult
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toctree-l2 has-children">
-    <a class="reference internal" href="../prog_server.html">
-     prog_server API Reference
-    </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-    <label for="toctree-checkbox-5">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../prog_server/load_ests.html">
-       Load Estimators
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../prog_server/prog_client.html">
-       prog_client
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="../prog_server/prog_server.html">
-       ProgServer
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">
-       Prog Server API
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../releases.html">
-   Release Notes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../dev_guide.html">
-   Developers Guide &amp; Project Plan
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-  <label for="toctree-checkbox-6">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../npr7150.html">
-     NPR 7150 NASA Software Engineering Requirements
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../guide.html">ProgPy Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../prog_models_guide.html">prog_models Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prog_algs_guide.html">prog_algs Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prog_server_guide.html">prog_server Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../api_ref.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../prog_algs.html">prog_algs API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../prog_algs/Prediction.html">Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prog_algs/Predictor.html">Predictors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prog_algs/StateEstimator.html">State Estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prog_algs/ToEPredictionProfile.html">ToEPredictionProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prog_algs/UncertainData.html">Uncertain Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../prog_models.html">prog_models API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="CompositeModel.html">CompositeModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModel.html">DataModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="EnsembleModel.html">EnsembleModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IncludedModels.html">Included Models</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">LinearModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Loading.html">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PrognosticModel.html">PrognosticsModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SimResult.html">SimResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../prog_server/load_ests.html">Load Estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prog_server/prog_client.html">prog_client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prog_server/prog_server.html">ProgServer</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../npr7150.html">NPR 7150 NASA Software Engineering Requirements</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/api_ref/prog_models/LinearModel.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/api_ref/prog_models/LinearModel.rst.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.rst</span>
-</a>
-
-      </li>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
       
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
+    </div>
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
 </div>
-
-    </div>
 </div>
+              
+              
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>LinearModel</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>LinearModel</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel"><code class="docutils literal notranslate"><span class="pre">LinearModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.apply_limits"><code class="docutils literal notranslate"><span class="pre">LinearModel.apply_limits()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.apply_measurement_noise"><code class="docutils literal notranslate"><span class="pre">LinearModel.apply_measurement_noise()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.apply_process_noise"><code class="docutils literal notranslate"><span class="pre">LinearModel.apply_process_noise()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.calc_error"><code class="docutils literal notranslate"><span class="pre">LinearModel.calc_error()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.dx"><code class="docutils literal notranslate"><span class="pre">LinearModel.dx()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.estimate_params"><code class="docutils literal notranslate"><span class="pre">LinearModel.estimate_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.event_state"><code class="docutils literal notranslate"><span class="pre">LinearModel.event_state()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.from_json"><code class="docutils literal notranslate"><span class="pre">LinearModel.from_json()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.generate_surrogate"><code class="docutils literal notranslate"><span class="pre">LinearModel.generate_surrogate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.initialize"><code class="docutils literal notranslate"><span class="pre">LinearModel.initialize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_continuous"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_continuous</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_direct_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_direct_model</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_discrete"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_discrete</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_state_transition_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_state_transition_model</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.matrixCheck"><code class="docutils literal notranslate"><span class="pre">LinearModel.matrixCheck()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.next_state"><code class="docutils literal notranslate"><span class="pre">LinearModel.next_state()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.output"><code class="docutils literal notranslate"><span class="pre">LinearModel.output()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.performance_metrics"><code class="docutils literal notranslate"><span class="pre">LinearModel.performance_metrics()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.simulate_to"><code class="docutils literal notranslate"><span class="pre">LinearModel.simulate_to()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.simulate_to_threshold"><code class="docutils literal notranslate"><span class="pre">LinearModel.simulate_to_threshold()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.state_at_event"><code class="docutils literal notranslate"><span class="pre">LinearModel.state_at_event()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.threshold_met"><code class="docutils literal notranslate"><span class="pre">LinearModel.threshold_met()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.time_of_event"><code class="docutils literal notranslate"><span class="pre">LinearModel.time_of_event()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.to_json"><code class="docutils literal notranslate"><span class="pre">LinearModel.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section id="linearmodel">
-<h1>LinearModel<a class="headerlink" href="#linearmodel" title="Permalink to this headline">#</a></h1>
+<h1>LinearModel<a class="headerlink" href="#linearmodel" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.LinearModel">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.</span></span><span class="sig-name descname"><span class="pre">LinearModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.prognostics_model.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.prognostics_model.PrognosticsModel</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.prognostics_model.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrognosticsModel</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
 <p>A linear prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a>. Used when behavior can be described using a simple linear time-series model defined by the following equations:
 .. math:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="n">dfrac</span><span class="p">{</span><span class="n">dx</span><span class="p">}{</span><span class="n">dt</span><span class="p">}</span> <span class="o">=</span> <span class="n">Ax</span> <span class="o">+</span> <span class="n">Bu</span> <span class="o">+</span> <span class="n">E</span>
@@ -470,6 +414,14 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 <dd class="field-odd"><p>StateContainer or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="line-block">
+<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
+<div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
+<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
+<div class="line">x = m.initialize(u, z) # Initialize first state</div>
+<div class="line">x = m.apply_limits(x) # Returns bounded state</div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -540,14 +492,14 @@ e.g., x = m.StateContainer({‘abc’: 332.2, ‘def’: 221.043}) given states 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.calc_error">
-<span class="sig-name descname"><span class="pre">calc_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prog_models.LinearModel.calc_error" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate Mean Squared Error (MSE) between simulated and observed</p>
+<span class="sig-name descname"><span class="pre">calc_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">DictLikeMatrixWrapper</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">DictLikeMatrixWrapper</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#prog_models.LinearModel.calc_error" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate Error between simulated and observed data using selected Error Calculation Method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>times</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em>) – array of times for each sample</p></li>
-<li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>]</em>) – array of input dictionaries where input[x] corresponds to time[x]</p></li>
-<li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>]</em>) – array of output dictionaries where output[x] corresponds to time[x]</p></li>
+<li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><em>InputContainer</em><em>]</em>) – array of input dictionaries where input[x] corresponds to time[x]</p></li>
+<li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><em>OutputContainer</em><em>]</em>) – array of output dictionaries where output[x] corresponds to time[x]</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
@@ -557,17 +509,19 @@ e.g., x = m.StateContainer({‘abc’: 332.2, ‘def’: 221.043}) given states 
 * RMSE (Root Mean Squared Error)
 * MAX_E (Maximum Error)
 * MAE (Mean Absolute Error)
-* MAPE (Mean Absolute Percentage Error)</p></li>
+* MAPE (Mean Absolute Percentage Error)
+* DTW (Dynamic Time Warping)</p></li>
 <li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Initial state</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Minimum time step in simulation. Defaults to 1e99.</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum time step in simulation. Time step used in simulation is lower of dt and time between samples. Defaults to time between samples.</p></li>
 <li><p><strong>stability_tol</strong> (<em>double</em><em>, </em><em>optional</em>) – <p>Configurable parameter.
 Configurable cutoff value, between 0 and 1, that determines the fraction of the data points for which the model must be stable.
 In some cases, a prognostics model will become unstable under certain conditions, after which point the model can no longer represent behavior.
 stability_tol represents the fraction of the provided argument <cite>times</cite> that are required to be met in simulation,
 before the model goes unstable in order to produce a valid estimate of mean squared error.</p>
-<p>If the model goes unstable before stability_tol is met, NaN is returned.
+<p>If the model goes unstable before stability_tol is met, a ValueError is raised.
 Else, model goes unstable after stability_tol is met, the mean squared error calculated from data up to the instability is returned.</p>
 </p></li>
+<li><p><strong>aggr_method</strong> (<em>func</em><em>, </em><em>optional</em>) – When multiple runs are provided, users can state how to aggregate the results of the errors. Defaults to taking the mean.</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Returns</dt>
@@ -579,7 +533,12 @@ Else, model goes unstable after stability_tol is met, the mean squared error cal
 </dl>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MSE()</span></code></p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MSE()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.RMSE()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MAX_E()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MAPE()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MAE()</span></code>
+:func:’calc_error.DTW’</p>
 </div>
 </dd></dl>
 
@@ -599,7 +558,7 @@ Else, model goes unstable after stability_tol is met, the mean squared error cal
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p><strong>dx</strong> – First derivitive of state, with keys defined by model.states</p>
+<dd class="field-even"><p><p><strong>dx</strong> – First derivative of state, with keys defined by model.states</p>
 <p>e.g., dx = m.StateContainer({‘abc’: 3.1, ‘def’: -2.003}) given states = [‘abc’, ‘def’]</p>
 </p>
 </dd>
@@ -628,7 +587,7 @@ and <cite>next_state</cite> for discrete, where the behavior cannot be described
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.estimate_params">
-<span class="sig-name descname"><span class="pre">estimate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nelder-mead'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_models.LinearModel.estimate_params" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">estimate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">DictLikeMatrixWrapper</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">DictLikeMatrixWrapper</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'nelder-mead'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_models.LinearModel.estimate_params" title="Permalink to this definition">#</a></dt>
 <dd><p>Estimate the model parameters given data. Overrides model parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Keyword Arguments</dt>
@@ -638,11 +597,18 @@ and <cite>next_state</cite> for discrete, where the behavior cannot be described
 <li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.InputContainer" title="prog_models.PrognosticsModel.InputContainer"><em>InputContainer</em></a><em>]</em>) – Array of input containers where input[x] corresponds to time[x]</p></li>
 <li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.OutputContainer" title="prog_models.PrognosticsModel.OutputContainer"><em>OutputContainer</em></a><em>]</em>) – Array of output containers where output[x] corresponds to time[x]</p></li>
 <li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Optimization method- see scipy.optimize.minimize for options</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Tolerance for termination. Depending on the provided minimization method, specifying tolerance sets solver-specific options to tol</p></li>
 <li><p><strong>error_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Method to use in calculating error. See calc_error for options</p></li>
-<li><p><strong>bounds</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Bounds for optimization in format ((lower1, upper1), (lower2, upper2), …) or {key1: (lower1, upper1), key2: (lower2, upper2), …}</p></li>
-<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Options passed to optimizer. see scipy.optimize.minimize for options</p></li>
+<li><p><strong>bounds</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Bounds for optimization in format ((lower1, upper1), (lower2, upper2), …) or {key1: (lower1, upper1), key2: (lower2, upper2), …}</p></li>
+<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Options passed to optimizer. see scipy.optimize.minimize for options</p></li>
 <li><p><strong>runs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em>]</em><em>, </em><em>depreciated</em>) – data from all runs, where runs[0] is the data from run 0. Each run consists of a tuple of arrays of times, input dicts, and output dicts. Use inputs, outputs, states, times, etc. instead</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Scipy minimize Optimization Result from estimating parameters. See scipy’s scipy.optimize.OptimizeResult documentation for details.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>OptimizeResult</p>
 </dd>
 </dl>
 <p>See: examples.param_est</p>
@@ -687,11 +653,11 @@ and <cite>next_state</cite> for discrete, where the behavior cannot be described
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.from_json">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel.from_json" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel.from_json" title="Permalink to this definition">#</a></dt>
 <dd><p>Create a new prognostics model from a previously generated model that was serialized as a JSON object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> – JSON serialized parameters necessary to build a model
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – JSON serialized parameters necessary to build a model
 See to_json method</p>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -713,23 +679,23 @@ See to_json method</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.generate_surrogate">
-<span class="sig-name descname"><span class="pre">generate_surrogate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_functions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dmd'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel.generate_surrogate" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">generate_surrogate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.11)"><span class="pre">Callable</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'dmd'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel.generate_surrogate" title="Permalink to this definition">#</a></dt>
 <dd><p>Generate a surrogate model to approximate the higher-fidelity model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>load_functions</strong> (<em>list of callable functions</em>) – Each index is a callable loading function of (t, x = None) -&gt; z used to predict future loading (output) at a given time (t) and state (x)</p></li>
+<li><p><strong>load_functions</strong> (<em>List</em><em>[</em><em>abc.Callable</em><em>]</em>) – Each index is a callable loading function of (t, x = None) -&gt; z used to predict future loading (output) at a given time (t) and state (x)</p></li>
 <li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – list[ indicating surrogate modeling method to be used</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em> or </em><em>function</em><em>, </em><em>optional</em>) – Same as in simulate_to_threshold; for DMD, this value is the time step of the training data</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em> or </em><em>abc.Callable</em><em>, </em><em>optional</em>) – Same as in simulate_to_threshold; for DMD, this value is the time step of the training data</p></li>
 <li><p><strong>save_freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Same as in simulate_to_threshold; for DMD, this value is the time step with which the surrogate model is generated</p></li>
-<li><p><strong>state_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>, </em><em>optional</em>) – List of state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
-<li><p><strong>input_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>, </em><em>optional</em>) – List of input keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
-<li><p><strong>output_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>, </em><em>optional</em>) – List of output keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
-<li><p><strong>event_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>, </em><em>optional</em>) – List of event_state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>state_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – List of state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>input_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – List of input keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>output_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – List of output keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>event_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – List of event_state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
 <li><p><strong>...</strong> (<em>optional</em>) – Keyword arguments from simulate_to_threshold (except save_pts)</p></li>
 </ul>
 </dd>
@@ -770,17 +736,18 @@ See to_json method</p>
 </dl>
 <p class="rubric">Example</p>
 <dl class="simple">
-<dt>:</dt><dd><p>m = PrognosticsModel() # Replace with specific model being simulated
-u = {‘u1’: 3.2}
-z = {‘z1’: 2.2}
-x = m.initialize(u, z) # Initialize first state</p>
+<dt>:</dt><dd><p>m = PrognosticsModel()
+# ^ Replace above with specific model being simulated ^
+u = m.InputContainer({‘u1’: 3.2})
+z = m.OutputContainer({‘z1’: 2.2})
+x = m.initialize(u, z)  # Initialize first state</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="prog_models.LinearModel.is_continuous">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_continuous</span></span><a class="headerlink" href="#prog_models.LinearModel.is_continuous" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_continuous</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.LinearModel.is_continuous" title="Permalink to this definition">#</a></dt>
 <dd><p>returns: <strong>is_continuous</strong> – True if model is continuous, False if discrete
 :rtype: bool</p>
 </dd></dl>
@@ -801,7 +768,7 @@ x = m.initialize(u, z) # Initialize first state</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="prog_models.LinearModel.is_discrete">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_discrete</span></span><a class="headerlink" href="#prog_models.LinearModel.is_discrete" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_discrete</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.LinearModel.is_discrete" title="Permalink to this definition">#</a></dt>
 <dd><p>returns: <strong>is_discrete</strong> – True if model is discrete, False if continuous
 :rtype: bool</p>
 </dd></dl>
@@ -809,7 +776,7 @@ x = m.initialize(u, z) # Initialize first state</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="prog_models.LinearModel.is_state_transition_model">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_state_transition_model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.LinearModel.is_state_transition_model" title="Permalink to this definition">#</a></dt>
-<dd><p>If the model is a “state transition model” - i.e., a model that uses state transition differential equations to propogate state forward.</p>
+<dd><p>If the model is a “state transition model” - i.e., a model that uses state transition differential equations to propagate state forward.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>if the model is a state transition model</p>
@@ -930,7 +897,7 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.simulate_to">
-<span class="sig-name descname"><span class="pre">simulate_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn:</span> <span class="pre">typing.Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">collections.namedtuple</span></span></span><a class="headerlink" href="#prog_models.LinearModel.simulate_to" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">simulate_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn:</span> <span class="pre">~collections.abc.Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">namedtuple</span></span></span><a class="headerlink" href="#prog_models.LinearModel.simulate_to" title="Permalink to this definition">#</a></dt>
 <dd><p>Simulate prognostics model for a given number of seconds</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -938,7 +905,7 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 <li><p><strong>time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – <p>Time to which the model will be simulated in seconds (≥ 0.0)</p>
 <p>e.g., time = 200</p>
 </p></li>
-<li><p><strong>future_loading_eqn</strong> (<em>callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p></li>
 <li><p><strong>first_output</strong> (<em>OutputContainer</em><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that don’t use this</p></li>
 </ul>
 </dd>
@@ -978,11 +945,11 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.simulate_to_threshold">
-<span class="sig-name descname"><span class="pre">simulate_to_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><span class="pre">Callable</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">collections.namedtuple</span></span></span><a class="headerlink" href="#prog_models.LinearModel.simulate_to_threshold" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">simulate_to_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.11)"><span class="pre">Callable</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">namedtuple</span></span></span><a class="headerlink" href="#prog_models.LinearModel.simulate_to_threshold" title="Permalink to this definition">#</a></dt>
 <dd><p>Simulate prognostics model until any or specified threshold(s) have been met</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>future_loading_eqn</strong> (<em>callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p>
+<dd class="field-odd"><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
@@ -995,12 +962,13 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 <li><p><strong>integration_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Integration method, e.g. ‘rk4’ or ‘euler’ (default: ‘euler’)</p></li>
 <li><p><strong>save_freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Frequency at which output is saved (s), e.g., save_freq = 10</p></li>
 <li><p><strong>save_pts</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – Additional ordered list of custom times where output is saved (s), e.g., save_pts= [50, 75]</p></li>
+<li><p><strong>eval_pts</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – Additional ordered list of custom times where simulation is guarenteed to be evaluated (though results are not saved, as with save_pts) when dt is auto (s), e.g., eval_pts= [50, 75]</p></li>
 <li><p><strong>horizon</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – maximum time that the model will be simulated forward (s), e.g., horizon = 1000</p></li>
 <li><p><strong>first_output</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.OutputContainer" title="prog_models.PrognosticsModel.OutputContainer"><em>OutputContainer</em></a><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that don’t use this</p></li>
-<li><p><strong>threshold_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Keys for events that will trigger the end of simulation.
+<li><p><strong>threshold_keys</strong> (<em>abc.Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Keys for events that will trigger the end of simulation.
 If blank, simulation will occur if any event will be met ()</p></li>
 <li><p><strong>x</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.StateContainer" title="prog_models.PrognosticsModel.StateContainer"><em>StateContainer</em></a><em>, </em><em>optional</em>) – initial state dict, e.g., x= m.StateContainer({‘x1’: 10, ‘x2’: -5.3})</p></li>
-<li><p><strong>thresholds_met_eqn</strong> (<em>function/lambda</em><em>, </em><em>optional</em>) – custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
+<li><p><strong>thresholds_met_eqn</strong> (<em>abc.Callable</em><em>, </em><em>optional</em>) – custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
 <li><p><strong>print</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>toggle intermediate printing, e.g., print = True</p>
 <p>e.g., m.simulate_to_threshold(eqn, z, dt=0.1, save_pts=[1, 2])</p>
 </p></li>
@@ -1018,7 +986,7 @@ If blank, simulation will occur if any event will be met ()</p></li>
 </p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ProgModelInputException</strong> – </p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.11)"><strong>ValueError</strong></a> – </p>
 </dd>
 </dl>
 <div class="admonition seealso">
@@ -1045,18 +1013,18 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.state_at_event">
 <span class="sig-name descname"><span class="pre">state_at_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn=&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel.state_at_event" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate the <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> at the time that each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). state_at_event can be implemented by a direct model. For a state tranisition model, this returns the state at which threshold_met returns true for each event.</p>
+<dd><p>Calculate the <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> at the time that each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). state_at_event can be implemented by a direct model. For a state transition model, this returns the state at which threshold_met returns true for each event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
 <p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
 </p></li>
-<li><p><strong>future_loading_eqn</strong> (<em>callable</em><em>, </em><em>optional</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t). Defaults to no outputs</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em><em>, </em><em>optional</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t). Defaults to no outputs</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p>state at each events occurance, with keys defined by model.events</p>
+<dd class="field-even"><p><p>state at each events occurrence, with keys defined by model.events</p>
 <p>e.g., state_at_event = {‘impact’: {‘x1’: 10, ‘x2’: 11}, ‘falling’: {‘x1’: 15, ‘x2’: 20}} given events = [‘impact’, ‘falling’] and states = [‘x1’, ‘x2’]</p>
 </p>
 </dd>
@@ -1121,7 +1089,7 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <li><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
 <p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
 </p></li>
-<li><p><strong>future_loading_eqn</strong> (<em>callable</em><em>, </em><em>optional</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t). Defaults to no outputs</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em><em>, </em><em>optional</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t). Defaults to no outputs</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1145,14 +1113,14 @@ If blank, simulation will occur if any event will be met ()</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.to_json">
-<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel.to_json" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#prog_models.LinearModel.to_json" title="Permalink to this definition">#</a></dt>
 <dd><p>Serialize parameters as JSON objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Serialized PrognosticsModel parameters as JSON object</p>
+<dd class="field-odd"><p>Serialized PrognosticsModel parameters as string</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>JSON</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a></p>
 </dd>
 </dl>
 <div class="admonition seealso">
@@ -1170,50 +1138,129 @@ If blank, simulation will occur if any event will be met ()</p></li>
 </section>
 
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="IncludedModels.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Included Models</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="IncludedModels.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Included Models</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="Loading.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="Loading.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Loading</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle<br/>
-  
-      &copy; Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel"><code class="docutils literal notranslate"><span class="pre">LinearModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.apply_limits"><code class="docutils literal notranslate"><span class="pre">LinearModel.apply_limits()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.apply_measurement_noise"><code class="docutils literal notranslate"><span class="pre">LinearModel.apply_measurement_noise()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.apply_process_noise"><code class="docutils literal notranslate"><span class="pre">LinearModel.apply_process_noise()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.calc_error"><code class="docutils literal notranslate"><span class="pre">LinearModel.calc_error()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.dx"><code class="docutils literal notranslate"><span class="pre">LinearModel.dx()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.estimate_params"><code class="docutils literal notranslate"><span class="pre">LinearModel.estimate_params()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.event_state"><code class="docutils literal notranslate"><span class="pre">LinearModel.event_state()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.from_json"><code class="docutils literal notranslate"><span class="pre">LinearModel.from_json()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.generate_surrogate"><code class="docutils literal notranslate"><span class="pre">LinearModel.generate_surrogate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.initialize"><code class="docutils literal notranslate"><span class="pre">LinearModel.initialize()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_continuous"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_continuous</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_direct_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_direct_model</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_discrete"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_discrete</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_state_transition_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_state_transition_model</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.matrixCheck"><code class="docutils literal notranslate"><span class="pre">LinearModel.matrixCheck()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.next_state"><code class="docutils literal notranslate"><span class="pre">LinearModel.next_state()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.output"><code class="docutils literal notranslate"><span class="pre">LinearModel.output()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.performance_metrics"><code class="docutils literal notranslate"><span class="pre">LinearModel.performance_metrics()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.simulate_to"><code class="docutils literal notranslate"><span class="pre">LinearModel.simulate_to()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.simulate_to_threshold"><code class="docutils literal notranslate"><span class="pre">LinearModel.simulate_to_threshold()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.state_at_event"><code class="docutils literal notranslate"><span class="pre">LinearModel.state_at_event()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.threshold_met"><code class="docutils literal notranslate"><span class="pre">LinearModel.threshold_met()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.time_of_event"><code class="docutils literal notranslate"><span class="pre">LinearModel.time_of_event()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.to_json"><code class="docutils literal notranslate"><span class="pre">LinearModel.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
 
 Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.

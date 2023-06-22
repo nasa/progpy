@@ -18,16 +18,17 @@ from prog_models.models import ThrownObject, BatteryElectroChemEOD
 
 def run_example():
     # -----------------------------------------------------
-    # Example 1- set timestep 
+    # Example 1- set timestep
     # Here we will create a model for a specific timestep.
     # The model will only work with that timestep 
     # This is useful if you know the timestep you would like to use
     # -----------------------------------------------------
-    TIMESTEP = 0.01
+    TIMESTEP = 0.1
 
     # Step 1: Generate data
     # We'll use the ThrownObject model to generate data.
-    # For cases where you're generating a model from data (e.g., collected from a testbed or a real-world environment), 
+    # For cases where you're generating a model from data
+    # (e.g., collected from a testbed or a real-world environment),
     # you'll replace that generated data with your own.
     print('Generating data')
     m = ThrownObject()
@@ -38,17 +39,19 @@ def run_example():
     data = m.simulate_to_threshold(future_loading, threshold_keys='impact', save_freq=TIMESTEP, dt=TIMESTEP)
 
     # Step 2: Generate model
-    # We'll use the LSTMStateTransitionModel class to generate a model from the data.
+    # We'll use the LSTMStateTransitionModel class to generate a model
+    # from the data.
     print('Building model...')
     m2 = LSTMStateTransitionModel.from_data(
-        inputs = [data.inputs],
-        outputs = [data.outputs],  
-        window=4, 
+        inputs=[data.inputs],
+        outputs=[data.outputs],
+        window=4,
         epochs=30,  # Maximum number of epochs, may stop earlier if early stopping enabled
-        output_keys = ['x'])
+        output_keys=['x'])
 
     # We can see the training history
-    # Should show the model progressively getting better (i.e., the loss going down).
+    # Should show the model progressively getting better
+    # (i.e., the loss going down).
     # If val_loss starts going up again, then we may be overtraining
     m2.plot_history()
     plt.show()
@@ -58,7 +61,8 @@ def run_example():
 
     t_counter = 0
     x_counter = m.initialize()
-    def future_loading2(t, x = None):
+
+    def future_loading2(t, x=None):
         # Future Loading is a bit complicated here 
         # Loading for the resulting model includes the data inputs, 
         # and the output from the last timestep
@@ -106,28 +110,29 @@ def run_example():
     # Step 3: Generate Model
     print('Building model...')
     m3 = LSTMStateTransitionModel.from_data(
-        inputs = input_data,  
-        outputs = output_data,
-        window=4, 
-        epochs=30, 
-        input_keys = ['dt'],
-        output_keys = ['x']) 
+        inputs=input_data,
+        outputs=output_data,
+        window=4,
+        epochs=30,
+        input_keys=['dt'],
+        output_keys=['x'])
     # Note, since we're generating from a model, we could also have done this:
     # m3 = LSTMStateTransitionModel.from_model(
     #     m,
     #     [future_loading for _ in range(5)],
     #     dt = [TIMESTEP, TIMESTEP/2, TIMESTEP/4, TIMESTEP*2, TIMESTEP*4],
-    #     window=4, 
-    #     epochs=30)  
+    #     window=4,
+    #     epochs=30)
 
     # Take a look at the training history
     m3.plot_history()
-    plt.show() 
+    plt.show()
 
     # Step 4: Simulate with model
     t_counter = 0
     x_counter = m.initialize()
-    def future_loading3(t, x = None):
+
+    def future_loading3(t, x=None):
         nonlocal t_counter, x_counter
         z = m3.InputContainer({'x_t-1': x_counter['x'], 'dt': t - t_counter})
         x_counter = m.next_state(x_counter, future_loading(t), t - t_counter)
@@ -154,7 +159,7 @@ def run_example():
     # -----------------------------------------------------
     print('\n------------------------------------------\nExample 3...')
     print('Generating data...')
-    batt = BatteryElectroChemEOD(process_noise = 0, measurement_noise=0)
+    batt = BatteryElectroChemEOD(process_noise=0, measurement_noise=0)
     future_loading_eqns = [lambda t, x=None, load=load: batt.InputContainer({'i': 1+1.5*load}) for load in range(6)]
     # Generate data with different loading and step sizes
     # Adding the step size as an element of the output
@@ -165,27 +170,27 @@ def run_example():
     for i in range(9):
         dt = i/3+0.25
         for loading_eqn in future_loading_eqns:
-            d = batt.simulate_to_threshold(loading_eqn, save_freq=dt, dt=dt) 
+            d = batt.simulate_to_threshold(loading_eqn, save_freq=dt, dt=dt)
             input_data.append(np.array([np.hstack((u_i.matrix[:][0].T, [dt])) for u_i in d.inputs], dtype=float))
             output_data.append(d.outputs)
             es_data.append(d.event_states)
             t_met = [[False]for _ in d.times]
             t_met[-1][0] = True  # Threshold has been met at the last timestep
             t_met_data.append(t_met)
-  
+
     # Step 2: Generate Model
-    print('Building model...') 
+    print('Building model...')
     m_batt = LSTMStateTransitionModel.from_data(
-        inputs = input_data,
-        outputs = output_data,
-        event_states = es_data,
-        t_met = t_met_data,
-        window=12, 
-        epochs=10, 
+        inputs=input_data,
+        outputs=output_data,
+        event_states=es_data,
+        t_met=t_met_data,
+        window=12,
+        epochs=10,
         units=64,  # Additional units given the increased complexity of the system
-        input_keys = ['i', 'dt'],
-        output_keys = ['t', 'v'],
-        event_keys=['EOD']) 
+        input_keys=['i', 'dt'],
+        output_keys=['t', 'v'],
+        event_keys=['EOD'])
 
     # Take a look at the training history.
     m_batt.plot_history()
@@ -220,8 +225,8 @@ def run_example():
     results.event_states.plot(title='generated model', compact=False)
     plt.show()
 
-    # This last example isn't a perfect fit, but it matches the behavior pretty well
-    # Especially the voltage curve
+    # This last example isn't a perfect fit, but it matches the behavior
+    # well, especially the voltage curve
 
 if __name__ == '__main__':
     run_example()

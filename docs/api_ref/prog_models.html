@@ -1,430 +1,341 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>prog_models API Reference &#8212; ProgPy Python Packages 1.5 documentation</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <link rel="shortcut icon" href="../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="CompositeModel" href="prog_models/CompositeModel.html" />
     <link rel="prev" title="Uncertain Data" href="prog_algs/UncertainData.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/software_name.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">ProgPy Python Packages 1.5 documentation</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/software_name.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/software_name.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../guide.html">
-   ProgPy Guide
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../prog_models_guide.html">
-     prog_models Guide
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../prog_algs_guide.html">
-     prog_algs Guide
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../prog_server_guide.html">
-     prog_server Guide
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../api_ref.html">
-   API Reference
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 has-children">
-    <a class="reference internal" href="prog_algs.html">
-     prog_algs API Reference
-    </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-    <label for="toctree-checkbox-3">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/Prediction.html">
-       Prediction
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/Predictor.html">
-       Predictors
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/StateEstimator.html">
-       State Estimators
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/ToEPredictionProfile.html">
-       ToEPredictionProfile
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_algs/UncertainData.html">
-       Uncertain Data
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toctree-l2 current active has-children">
-    <a class="current reference internal" href="#">
-     prog_models API Reference
-    </a>
-    <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-    <label for="toctree-checkbox-4">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/CompositeModel.html">
-       CompositeModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/DataModel.html">
-       DataModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/DataSets.html">
-       Datasets
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/EnsembleModel.html">
-       EnsembleModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/IncludedModels.html">
-       Included Models
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/LinearModel.html">
-       LinearModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/Loading.html">
-       Loading
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/PrognosticModel.html">
-       PrognosticsModel
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_models/SimResult.html">
-       SimResult
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toctree-l2 has-children">
-    <a class="reference internal" href="prog_server.html">
-     prog_server API Reference
-    </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
-    <label for="toctree-checkbox-5">
-     <i class="fas fa-chevron-down">
-     </i>
-    </label>
-    <ul>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_server/load_ests.html">
-       Load Estimators
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_server/prog_client.html">
-       prog_client
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference internal" href="prog_server/prog_server.html">
-       ProgServer
-      </a>
-     </li>
-     <li class="toctree-l3">
-      <a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">
-       Prog Server API
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../releases.html">
-   Release Notes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../dev_guide.html">
-   Developers Guide &amp; Project Plan
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
-  <label for="toctree-checkbox-6">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../npr7150.html">
-     NPR 7150 NASA Software Engineering Requirements
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../guide.html">ProgPy Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../prog_models_guide.html">prog_models Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prog_algs_guide.html">prog_algs Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../prog_server_guide.html">prog_server Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../api_ref.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="prog_algs.html">prog_algs API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_algs/Prediction.html">Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_algs/Predictor.html">Predictors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_algs/StateEstimator.html">State Estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_algs/ToEPredictionProfile.html">ToEPredictionProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_algs/UncertainData.html">Uncertain Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">prog_models API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/CompositeModel.html">CompositeModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/DataModel.html">DataModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/EnsembleModel.html">EnsembleModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html">Included Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html">LinearModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/Loading.html">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html">PrognosticsModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html">SimResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/Utils.html">Utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_server/load_ests.html">Load Estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html">prog_client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_server.html">ProgServer</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../npr7150.html">NPR 7150 NASA Software Engineering Requirements</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/api_ref/prog_models.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/api_ref/prog_models.rst.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.rst</span>
-</a>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
 
-      </li>
+</div></div>
       
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
+    </div>
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
 </div>
+</div>
+              
+              
 
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>prog_models API Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>prog_models API Reference</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section id="prog-models-api-reference">
-<h1>prog_models API Reference<a class="headerlink" href="#prog-models-api-reference" title="Permalink to this headline">#</a></h1>
+<h1>prog_models API Reference<a class="headerlink" href="#prog-models-api-reference" title="Permalink to this heading">#</a></h1>
 <iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_models&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="prog_models/CompositeModel.html">CompositeModel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prog_models/CompositeModel.html">CompositeModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/CompositeModel.html#prog_models.CompositeModel"><code class="docutils literal notranslate"><span class="pre">CompositeModel</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="prog_models/DataModel.html">DataModel</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="prog_models/DataModel.html#training-datamodels">Training DataModels</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="prog_models/DataModel.html#from-data">From Data</a></li>
@@ -433,89 +344,330 @@ title="Print to PDF"
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="prog_models/DataModel.html#included-datamodels">Included DataModels</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="prog_models/DataModel.html#dmdmodel">DMDModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_models/DataModel.html#lstmstatetransitionmodel">LSTMStateTransitionModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_models/DataModel.html#polynomialchaosexpansion">PolynomialChaosExpansion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/DataModel.html#dmdmodel">DMDModel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DMDModel"><code class="docutils literal notranslate"><span class="pre">DMDModel</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DMDModel.from_data"><code class="docutils literal notranslate"><span class="pre">DMDModel.from_data()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DMDModel.dmd_matrix"><code class="docutils literal notranslate"><span class="pre">DMDModel.dmd_matrix</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DMDModel.dt"><code class="docutils literal notranslate"><span class="pre">DMDModel.dt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DMDModel.from_model"><code class="docutils literal notranslate"><span class="pre">DMDModel.from_model()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/DataModel.html#datamodel-interface">DataModel Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/DataModel.html#lstmstatetransitionmodel">LSTMStateTransitionModel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.LSTMStateTransitionModel"><code class="docutils literal notranslate"><span class="pre">LSTMStateTransitionModel</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.LSTMStateTransitionModel.model"><code class="docutils literal notranslate"><span class="pre">LSTMStateTransitionModel.model</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.LSTMStateTransitionModel.from_data"><code class="docutils literal notranslate"><span class="pre">LSTMStateTransitionModel.from_data()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.LSTMStateTransitionModel.from_model"><code class="docutils literal notranslate"><span class="pre">LSTMStateTransitionModel.from_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/DataModel.html#polynomialchaosexpansion">PolynomialChaosExpansion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.PolynomialChaosExpansion"><code class="docutils literal notranslate"><span class="pre">PolynomialChaosExpansion</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.PolynomialChaosExpansion.from_data"><code class="docutils literal notranslate"><span class="pre">PolynomialChaosExpansion.from_data()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.PolynomialChaosExpansion.from_model"><code class="docutils literal notranslate"><span class="pre">PolynomialChaosExpansion.from_model()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/DataModel.html#datamodel-interface">DataModel Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel"><code class="docutils literal notranslate"><span class="pre">DataModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.calc_error"><code class="docutils literal notranslate"><span class="pre">DataModel.calc_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.estimate_params"><code class="docutils literal notranslate"><span class="pre">DataModel.estimate_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.from_data"><code class="docutils literal notranslate"><span class="pre">DataModel.from_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.from_json"><code class="docutils literal notranslate"><span class="pre">DataModel.from_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.from_model"><code class="docutils literal notranslate"><span class="pre">DataModel.from_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.generate_surrogate"><code class="docutils literal notranslate"><span class="pre">DataModel.generate_surrogate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.is_continuous"><code class="docutils literal notranslate"><span class="pre">DataModel.is_continuous</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.is_direct_model"><code class="docutils literal notranslate"><span class="pre">DataModel.is_direct_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.is_discrete"><code class="docutils literal notranslate"><span class="pre">DataModel.is_discrete</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.is_state_transition_model"><code class="docutils literal notranslate"><span class="pre">DataModel.is_state_transition_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.simulate_to"><code class="docutils literal notranslate"><span class="pre">DataModel.simulate_to()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.simulate_to_threshold"><code class="docutils literal notranslate"><span class="pre">DataModel.simulate_to_threshold()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.state_at_event"><code class="docutils literal notranslate"><span class="pre">DataModel.state_at_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.summary"><code class="docutils literal notranslate"><span class="pre">DataModel.summary()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.time_of_event"><code class="docutils literal notranslate"><span class="pre">DataModel.time_of_event()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/DataModel.html#prog_models.data_models.DataModel.to_json"><code class="docutils literal notranslate"><span class="pre">DataModel.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="prog_models/DataSets.html">Datasets</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/DataSets.html#variable-load-battery-data-nasa-battery">Variable Load Battery Data (nasa_battery)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/DataSets.html#cmapss-jet-engine-data-nasa-cmapss">CMAPSS Jet Engine Data (nasa_cmapss)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/DataSets.html#variable-load-battery-data-nasa-battery">Variable Load Battery Data (nasa_battery)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/DataSets.html#prog_models.datasets.nasa_battery.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="prog_models/EnsembleModel.html">EnsembleModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/DataSets.html#cmapss-jet-engine-data-nasa-cmapss">CMAPSS Jet Engine Data (nasa_cmapss)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/DataSets.html#prog_models.datasets.nasa_cmapss.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="prog_models/EnsembleModel.html">EnsembleModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/EnsembleModel.html#prog_models.EnsembleModel"><code class="docutils literal notranslate"><span class="pre">EnsembleModel</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="prog_models/IncludedModels.html">Included Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#battery-model">Battery Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#pump-model">Pump Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#pneumatic-valve">Pneumatic Valve</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#dc-motor">DC Motor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#esc">ESC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#powertrain">Powertrain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#propellerload">PropellerLoad</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#thrownobject">ThrownObject</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#battery-model">Battery Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.BatteryElectroChemEOD"><code class="docutils literal notranslate"><span class="pre">BatteryElectroChemEOD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.BatteryElectroChemEOL"><code class="docutils literal notranslate"><span class="pre">BatteryElectroChemEOL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.BatteryElectroChem"><code class="docutils literal notranslate"><span class="pre">BatteryElectroChem</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.BatteryElectroChemEODEOL"><code class="docutils literal notranslate"><span class="pre">BatteryElectroChemEODEOL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.BatteryCircuit"><code class="docutils literal notranslate"><span class="pre">BatteryCircuit</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="prog_models/LinearModel.html">LinearModel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#pump-model">Pump Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.CentrifugalPumpBase"><code class="docutils literal notranslate"><span class="pre">CentrifugalPumpBase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.CentrifugalPump"><code class="docutils literal notranslate"><span class="pre">CentrifugalPump</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.CentrifugalPumpWithWear"><code class="docutils literal notranslate"><span class="pre">CentrifugalPumpWithWear</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#pneumatic-valve">Pneumatic Valve</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.PneumaticValveBase"><code class="docutils literal notranslate"><span class="pre">PneumaticValveBase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.PneumaticValve"><code class="docutils literal notranslate"><span class="pre">PneumaticValve</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.PneumaticValveWithWear"><code class="docutils literal notranslate"><span class="pre">PneumaticValveWithWear</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#dc-motor">DC Motor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.DCMotorSP"><code class="docutils literal notranslate"><span class="pre">DCMotorSP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.DCMotor"><code class="docutils literal notranslate"><span class="pre">DCMotor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#esc">ESC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.ESC"><code class="docutils literal notranslate"><span class="pre">ESC</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#powertrain">Powertrain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.Powertrain"><code class="docutils literal notranslate"><span class="pre">Powertrain</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#propellerload">PropellerLoad</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.PropellerLoad"><code class="docutils literal notranslate"><span class="pre">PropellerLoad</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#vehicle-models">Vehicle Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.aircraft_model.SmallRotorcraft"><code class="docutils literal notranslate"><span class="pre">SmallRotorcraft</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/IncludedModels.html#thrownobject">ThrownObject</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/IncludedModels.html#prog_models.models.ThrownObject"><code class="docutils literal notranslate"><span class="pre">ThrownObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="prog_models/LinearModel.html">LinearModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel"><code class="docutils literal notranslate"><span class="pre">LinearModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.apply_limits"><code class="docutils literal notranslate"><span class="pre">LinearModel.apply_limits()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.apply_measurement_noise"><code class="docutils literal notranslate"><span class="pre">LinearModel.apply_measurement_noise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.apply_process_noise"><code class="docutils literal notranslate"><span class="pre">LinearModel.apply_process_noise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.calc_error"><code class="docutils literal notranslate"><span class="pre">LinearModel.calc_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.dx"><code class="docutils literal notranslate"><span class="pre">LinearModel.dx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.estimate_params"><code class="docutils literal notranslate"><span class="pre">LinearModel.estimate_params()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.event_state"><code class="docutils literal notranslate"><span class="pre">LinearModel.event_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.from_json"><code class="docutils literal notranslate"><span class="pre">LinearModel.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.generate_surrogate"><code class="docutils literal notranslate"><span class="pre">LinearModel.generate_surrogate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.initialize"><code class="docutils literal notranslate"><span class="pre">LinearModel.initialize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.is_continuous"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_continuous</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.is_direct_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_direct_model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.is_discrete"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_discrete</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.is_state_transition_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_state_transition_model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.matrixCheck"><code class="docutils literal notranslate"><span class="pre">LinearModel.matrixCheck()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.next_state"><code class="docutils literal notranslate"><span class="pre">LinearModel.next_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.output"><code class="docutils literal notranslate"><span class="pre">LinearModel.output()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.performance_metrics"><code class="docutils literal notranslate"><span class="pre">LinearModel.performance_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.simulate_to"><code class="docutils literal notranslate"><span class="pre">LinearModel.simulate_to()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.simulate_to_threshold"><code class="docutils literal notranslate"><span class="pre">LinearModel.simulate_to_threshold()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.state_at_event"><code class="docutils literal notranslate"><span class="pre">LinearModel.state_at_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.threshold_met"><code class="docutils literal notranslate"><span class="pre">LinearModel.threshold_met()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.time_of_event"><code class="docutils literal notranslate"><span class="pre">LinearModel.time_of_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/LinearModel.html#prog_models.LinearModel.to_json"><code class="docutils literal notranslate"><span class="pre">LinearModel.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="prog_models/Loading.html">Loading</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="prog_models/Loading.html#load-estimator-class-interface">Load Estimator Class interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_models/Loading.html#load-estimator-classes">Load Estimator Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/Loading.html#load-estimator-classes">Load Estimator Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/Loading.html#prog_models.loading.Piecewise"><code class="docutils literal notranslate"><span class="pre">Piecewise</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/Loading.html#prog_models.loading.MovingAverage"><code class="docutils literal notranslate"><span class="pre">MovingAverage</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/Loading.html#prog_models.loading.GaussianNoiseLoadWrapper"><code class="docutils literal notranslate"><span class="pre">GaussianNoiseLoadWrapper</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="prog_models/PrognosticModel.html">PrognosticsModel</a></li>
-<li class="toctree-l1"><a class="reference internal" href="prog_models/SimResult.html">SimResult</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/Loading.html#controllers">Controllers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/Loading.html#prog_models.loading.controllers.LQR"><code class="docutils literal notranslate"><span class="pre">LQR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/Loading.html#prog_models.loading.controllers.LQR_I"><code class="docutils literal notranslate"><span class="pre">LQR_I</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="prog_models/PrognosticModel.html">PrognosticsModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.is_vectorized"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.is_vectorized</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.default_parameters"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.default_parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.parameters"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.parameters</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.state_limits"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.state_limits</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.param_callbacks"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.param_callbacks</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.inputs"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.inputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.states"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.states</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.outputs"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.outputs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.performance_metric_keys"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.performance_metric_keys</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.events"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.events</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.StateContainer"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.StateContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.OutputContainer"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.OutputContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.InputContainer"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.InputContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.apply_limits"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.apply_limits()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.apply_measurement_noise"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.apply_measurement_noise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.apply_process_noise"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.apply_process_noise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.calc_error"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.calc_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.dx"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.dx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.estimate_params"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.estimate_params()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.event_state"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.event_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.from_json"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.from_json()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.generate_surrogate"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.generate_surrogate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.initialize"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.initialize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.is_continuous"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.is_continuous</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.is_direct_model"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.is_direct_model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.is_discrete"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.is_discrete</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.is_state_transition_model"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.is_state_transition_model</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.next_state"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.next_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.output"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.output()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.performance_metrics"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.performance_metrics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.simulate_to()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.simulate_to_threshold()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.state_at_event"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.state_at_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.threshold_met"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.threshold_met()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.time_of_event"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.time_of_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/PrognosticModel.html#prog_models.PrognosticsModel.to_json"><code class="docutils literal notranslate"><span class="pre">PrognosticsModel.to_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="prog_models/SimResult.html">SimResult</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult"><code class="docutils literal notranslate"><span class="pre">SimResult</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.clear"><code class="docutils literal notranslate"><span class="pre">SimResult.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.equals"><code class="docutils literal notranslate"><span class="pre">SimResult.equals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.extend"><code class="docutils literal notranslate"><span class="pre">SimResult.extend()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.frame"><code class="docutils literal notranslate"><span class="pre">SimResult.frame</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.frame_is_empty"><code class="docutils literal notranslate"><span class="pre">SimResult.frame_is_empty()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.iloc"><code class="docutils literal notranslate"><span class="pre">SimResult.iloc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.index"><code class="docutils literal notranslate"><span class="pre">SimResult.index()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.index_of_data"><code class="docutils literal notranslate"><span class="pre">SimResult.index_of_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.iterrows"><code class="docutils literal notranslate"><span class="pre">SimResult.iterrows()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.monotonicity"><code class="docutils literal notranslate"><span class="pre">SimResult.monotonicity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.plot"><code class="docutils literal notranslate"><span class="pre">SimResult.plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.pop"><code class="docutils literal notranslate"><span class="pre">SimResult.pop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.pop_by_index"><code class="docutils literal notranslate"><span class="pre">SimResult.pop_by_index()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.remove"><code class="docutils literal notranslate"><span class="pre">SimResult.remove()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.time"><code class="docutils literal notranslate"><span class="pre">SimResult.time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/SimResult.html#prog_models.sim_result.SimResult.to_numpy"><code class="docutils literal notranslate"><span class="pre">SimResult.to_numpy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="prog_models/Utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="prog_models/Utils.html#trajectory">Trajectory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="prog_models/Utils.html#prog_models.utils.traj_gen.Trajectory"><code class="docutils literal notranslate"><span class="pre">Trajectory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="prog_models/Utils.html#prog_models.utils.traj_gen.Trajectory.generate"><code class="docutils literal notranslate"><span class="pre">Trajectory.generate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 <img alt="../_images/prog_models_UML.png" src="../_images/prog_models_UML.png" />
 </section>
 
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="prog_algs/UncertainData.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Uncertain Data</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="prog_algs/UncertainData.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Uncertain Data</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="prog_models/CompositeModel.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="prog_models/CompositeModel.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">CompositeModel</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle<br/>
-  
-      &copy; Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
 
 Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
