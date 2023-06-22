@@ -320,6 +320,9 @@ State-transition Models
         
         * :download:`examples.full_lstm_model <../../prog_models/examples/full_lstm_model.py>`
             .. automodule:: full_lstm_model
+
+        * :download:`examples.chaos <../../prog_models/examples/chaos.py>`
+            .. automodule:: chaos
         
         * :download:`examples.generate_surrogate <../../prog_models/examples/generate_surrogate.py>`
             .. automodule:: generate_surrogate
@@ -419,6 +422,11 @@ One of the most basic of functions using a model is simulation. Simulation is th
     * *Bounded Automatic Dynamic Step Size*: Step size is adjusted automatically to hit each save_pt and save_freq exactly, with a maximum step size. Example, :pythoncode:`m.simulate_to_threshold(..., dt=('auto', 0.5))`
     * *Functional Dynamic Step Size*: Step size is provided as a function of time and state. This is the most flexible approach. Example, :pythoncode:`m.simulate_to_threshold(..., dt= lambda t, x : max(0.75 - t*0.01, 0.25))`
 
+    For more details on dynamic step sizes, see the following example:
+
+    * :download:`examples.dynamic_step_size <../../prog_models/examples/dynamic_step_size.py>`
+        .. automodule:: dynamic_step_size
+
 .. dropdown:: Integration Methods
 
     Simulation is essentially the process of integrating the model forward with time. By default, simple euler integration is used to propogate the model forward. Advanced users can change the numerical integration method to affect the simulation quality and runtime. This is done using the ``integration_method`` argument in :py:meth:`prog_models.PrognosticsModel.simulate_to_threshold` and :py:meth:`prog_models.PrognosticsModel.simulate_to`.
@@ -461,9 +469,6 @@ Use of simulation is described further in the following examples:
 
 * :download:`examples.future_loading <../../prog_models/examples/future_loading.py>`
     .. automodule:: future_loading
-
-* :download:`examples.dynamic_step_size <../../prog_models/examples/dynamic_step_size.py>`
-    .. automodule:: dynamic_step_size
 
 Parameter Estimation
 ----------------------------
