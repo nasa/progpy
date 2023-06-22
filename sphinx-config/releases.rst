@@ -4,6 +4,40 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in V1.5
+-----------------------
+
+prog_models
+***************
+* **Direct Models**: Added support for new model type: Direct Models. Direct Models directly correlate current state and future load to time of event, rather than state-transition models which simulate forward to calculate time of event. They're created by implementing the :py:meth:`prog_models.PrognosticsModel.time_of_event`. See :download:`examples.direct_model <../../prog_models/examples/direct_model.py>` for example of use.
+* New model types that combine multiple models.
+
+  * **Ensemble Model**: Combinations of multiple models of the same system where results are aggregated. See :download:`examples.ensemble <../../prog_models/examples/ensemble.py>` for example of use.
+  * **Composite Model**: Combinations of models of different systems that are interdependent. See :download:`examples.composite_model <../../prog_models/examples/composite_model.py>` for example of use.
+
+* **New Model**: Aircraft flight model. This is especially important for cases where loading of other systems is a function of flight conditions. See :download:`examples.uav_dynamics_model <../../prog_models/examples/uav_dynamics_model.py>` for example of use.
+* New DataModel: Polynomial Chaos Expansion (PCE) Direct Surrogate Model (:py:class:`prog_models.data_models.PolynomialChaosExpansion`). See :download:`examples.chaos <../../prog_models/examples/chaos.py>` for example of use.
+* Started transition of InputContainers, StateContainers, OutputContainer and SimResult to use Pandas DataFrames. This release will bring the interface more in compliance with DataFrames. v1.6 will fully transition the classes to DataFrames.
+* Implemented new metrics that can be used in :py:meth:`prog_models.PrognosticsModel.calc_error`: Root Mean Square Error (RMSE), Maximum Error (MAX_E), Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE), and Dynamic Time Warping (DTW)
+* Error calculation metric (above) can now be set when calling :py:meth:`prog_models.PrognosticsModel.estimate_params`
+* Reworked integration methods in simulation
+
+  * New integration methods: RK4 and methods from scipy.integrate
+  * Integration can now be set at the model level. For continuous models the specified integration method will apply when calling next_state
+
+* Python3.11 support
+* Various bug fixes and performance improvements
+
+prog_algs
+**********
+* Integration method can now be set for state estimation and prediction
+* Minimum time step can now be set in state estimation. This is useful for models that become unstable with large time steps
+* Python3.11 support
+
+prog_server
+************
+* Python3.11 support
+
 Updates in V1.4
 -----------------------
 
