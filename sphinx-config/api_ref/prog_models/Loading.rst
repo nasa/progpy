@@ -36,4 +36,11 @@ Load Estimator Classes
 
 .. autoclass:: prog_models.loading.MovingAverage
 
-.. autoclass:: prog_models.loading.GuassianNoiseLoadWrapper
+.. autoclass:: prog_models.loading.GaussianNoiseLoadWrapper
+
+Controllers
+------------------
+
+.. autoclass:: prog_models.loading.controllers.LQR
+
+.. autoclass:: prog_models.loading.controllers.LQR_I

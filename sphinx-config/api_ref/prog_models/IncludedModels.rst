@@ -88,6 +88,10 @@ PropellerLoad
 -------------------------------------------------------------
 .. autoclass:: prog_models.models.PropellerLoad
 
+Vehicle Models
+-------------------------------------------------------------
+.. autoclass:: prog_models.models.aircraft_model.SmallRotorcraft
+
 ThrownObject
 -------------------------------------------------------------
 .. autoclass:: prog_models.models.ThrownObject

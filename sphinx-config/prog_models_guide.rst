@@ -374,6 +374,9 @@ For details on the included models see `Included Models <https://nasa.github.io/
 * :download:`examples.sim_dcmotor_singlephase <../../prog_models/examples/sim_dcmotor_singlephase.py>`
     .. automodule:: sim_dcmotor_singlephase
 
+* :download:`examples.uav_dynamics_model <../../prog_models/examples/uav_dynamics_model.py>`
+    .. automodule:: uav_dynamics_model
+
 Simulation
 ----------------------------
 
