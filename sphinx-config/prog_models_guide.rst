@@ -429,6 +429,28 @@ One of the most basic of functions using a model is simulation. Simulation is th
 
         >>> m.simulate_to_threshold(future_loading, integration_method = 'rk4')
 
+.. dropdown:: Eval Points
+
+    Sometimes users would like to ensure that simulation hits a specific point exactly, regardless of the step size (``dt``). This can be done using the ``eval_pts`` argument in :py:meth:`prog_models.PrognosticsModel.simulate_to_threshold` and :py:meth:`prog_models.PrognosticsModel.simulate_to`. This argument takes a list of times at which simulation should include. For example, for simulation to evaluate at 10 and 20 seconds, use the following method call for model m:
+
+    .. code-block:: python
+
+        >>> m.simulate_to_threshold(future_loading, eval_pts = [10, 20])
+
+    This feature is especially important for use cases where loading changes dramatically at a specific time. For example, if loading is 10 for the first 5 seconds and 20 afterwards, and you have a  ``dt`` of 4 seconds, here's loading simulation would see:
+
+        * 0-4 seconds: 10
+        * 4-8 seconds: 10
+        * 8-12 seconds: 20
+
+    That means the load of 10 was applied 3 seconds longer than it was supposed to. Adding a eval point of 5 would apply this load:
+
+        * 0-4 seconds: 10
+        * 4-5 seconds: 10
+        * 5-9 seconds: 20
+
+    Now loading is applied correctly.
+
 Use of simulation is described further in the following examples:
 
 * :download:`examples.sim <../../prog_models/examples/sim.py>`
