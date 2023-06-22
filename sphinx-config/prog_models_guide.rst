@@ -230,7 +230,7 @@ The specific parameters are very specific to the system being modeled. For examp
 Noise
 ^^^^^^^^^^^
 
-In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods [#Goebel2017]_. This model-based prognostic approach incorporates this uncertainty in four forms: initial state uncertainty (:math:`x_0`), :term:`process noise`, :term:`measurement noise`, and :term:`future loading noise`.
+In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods [Goebel2017]_. This model-based prognostic approach incorporates this uncertainty in four forms: initial state uncertainty (:math:`x_0`), :term:`process noise`, :term:`measurement noise`, and :term:`future loading noise`.
 
 .. dropdown:: Process Noise
 
@@ -332,7 +332,7 @@ State-transition Models
 Direct-prediction models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:term:`Direct-prediction models<direct-prediction models>` are models that estimate :term:`time of event` directly from the current state and :term:`future load`, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.
+:term:`Direct-prediction models<direct-prediction model>` are models that estimate :term:`time of event` directly from the current state and :term:`future load`, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.
 
 * :download:`examples.direct_model <../../prog_models/examples/direct_model.py>`
     .. automodule:: direct_model
@@ -541,8 +541,8 @@ Tips
 References
 ----------------------------
 
-.. [#Goebel2017] Kai Goebel, Matthew John Daigle, Abhinav Saxena, Indranil Roychoudhury, Shankar Sankararaman, and José R Celaya. Prognostics: The science of making predictions. 2017
+.. [Goebel2017] Kai Goebel, Matthew John Daigle, Abhinav Saxena, Indranil Roychoudhury, Shankar Sankararaman, and José R Celaya. Prognostics: The science of making predictions. 2017
 
-.. [#Celaya2012] J Celaya, A Saxena, and K Goebel. Uncertainty representation and interpretation in model-based prognostics algorithms based on Kalman filter estimation. Annual Conference of the Prognostics and Health Management Society, 2012.
+.. [Celaya2012] J Celaya, A Saxena, and K Goebel. Uncertainty representation and interpretation in model-based prognostics algorithms based on Kalman filter estimation. Annual Conference of the Prognostics and Health Management Society, 2012.
 
-.. [#Sankararaman2011] S Sankararaman, Y Ling, C Shantz, and S Mahadevan. Uncertainty quantification in fatigue crack growth prognosis. International Journal of Prognostics and Health Management, vol. 2, no. 1, 2011.
+.. [Sankararaman2011] S Sankararaman, Y Ling, C Shantz, and S Mahadevan. Uncertainty quantification in fatigue crack growth prognosis. International Journal of Prognostics and Health Management, vol. 2, no. 1, 2011.

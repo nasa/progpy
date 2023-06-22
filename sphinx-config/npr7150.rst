@@ -460,21 +460,21 @@ Note on SWE084- Configuration Audits: Configuration audits are conducted in part
 
 * To a large degree- configuration audits are performed automatically by GitHub actions and branch restrictions. These check the following:
 
-   * That tests were run (they are automatically run), passed, and results are recorded
-   * That files conform with copyright rules
-   * That required code reviews were performed (Requirement for branch merging)
+  * That tests were run (they are automatically run), passed, and results are recorded
+  * That files conform with copyright rules
+  * That required code reviews were performed (Requirement for branch merging)
 
 * In performing a code review, the reviewing user confirms:
 
-   * That the change is linked to a requirement (i.e., feature issue) and the requirement was met or that it is linked to another issue (e.g., bug report)
-   * That appropriate tests exist
+  * That the change is linked to a requirement (i.e., feature issue) and the requirement was met or that it is linked to another issue (e.g., bug report)
+  * That appropriate tests exist
 
 * In performing a release review, the project manager confirms:
 
-   * That all issues are completed
-   * That all tests pass, have proper documentation
-   * That documentation has been updated and matches the code 
-   * That a schedule exists for the next release and is in the proper place
+  * That all issues are completed
+  * That all tests pass, have proper documentation
+  * That documentation has been updated and matches the code 
+  * That a schedule exists for the next release and is in the proper place
 
 Non-Conformances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -511,81 +511,81 @@ The following dependencies are used in the project:
 
 * `numpy <https://numpy.org/>`__
 
-   * Requirements met: Various mathematical and array functions
-   * Documentation: https://numpy.org
-   * Usage Rights: Released under the BSD 3-Clause License
-   * Future Support: expected- Numpy is a common tool still under development and actively supported
+  * Requirements met: Various mathematical and array functions
+  * Documentation: https://numpy.org
+  * Usage Rights: Released under the BSD 3-Clause License
+  * Future Support: expected- Numpy is a common tool still under development and actively supported
 
 * `scipy <https://www.scipy.org/>`__
 
-   * Requirements met: Various mathematical and array functions
-   * Documentation: https://www.scipy.org
-   * Usage Rights: Released under the BSD 3-Clause License
-   * Future Support: expected- Scipy is a common tool still under development and actively supported
+  * Requirements met: Various mathematical and array functions
+  * Documentation: https://www.scipy.org
+  * Usage Rights: Released under the BSD 3-Clause License
+  * Future Support: expected- Scipy is a common tool still under development and actively supported
 
 * `matplotlib <https://matplotlib.org/>`__
 
-   * Requirements met: Various figure generation methods
-   * Documentation: https://matplotlib.org
-   * Usage Rights: Released under the BSD 3-Clause License
-   * Future Support: expected- Matplotlib is a common tool still under development and actively supported
+  * Requirements met: Various figure generation methods
+  * Documentation: https://matplotlib.org
+  * Usage Rights: Released under the BSD 3-Clause License
+  * Future Support: expected- Matplotlib is a common tool still under development and actively supported
 
 * `pandas <https://pandas.pydata.org/>`__
 
-   * Requirements met: Various data analysis methods (especially for datasets)
-   * Documentation: https://pandas.pydata.org
-   * Usage Rights: Released under the BSD 3-Clause License
-   * Future Support: expected- Pandas is a common tool still under development and actively supported
+  * Requirements met: Various data analysis methods (especially for datasets)
+  * Documentation: https://pandas.pydata.org
+  * Usage Rights: Released under the BSD 3-Clause License
+  * Future Support: expected- Pandas is a common tool still under development and actively supported
 
 * `tensorflow <https://www.tensorflow.org>`__
 
-   * Requirements met: Machine learning algorithms
-   * Documentation: https://www.tensorflow.org
-   * Usage Rights: Released under the Apache License 2.0
-   * Future Support: expected- Tensorflow is a common tool still under development and actively supported
+  * Requirements met: Machine learning algorithms
+  * Documentation: https://www.tensorflow.org
+  * Usage Rights: Released under the Apache License 2.0
+  * Future Support: expected- Tensorflow is a common tool still under development and actively supported
 
 * `chaospy <http://chaospy.readthedocs.io>`__
 
-   * Requirements met: Uncertainty quantification and polynomial chaos expansion logic
-   * Documentation: http://chaospy.readthedocs.io
-   * Usage Rights: Released under the MIT License
-   * Future Support: expected- Chaospy is a common tool still under development and actively supported
+  * Requirements met: Uncertainty quantification and polynomial chaos expansion logic
+  * Documentation: http://chaospy.readthedocs.io
+  * Usage Rights: Released under the MIT License
+  * Future Support: expected- Chaospy is a common tool still under development and actively supported
 
 * `FilterPy <https://filterpy.readthedocs.io>`__ (prog_algs only)
 
-   * Requirements met: Algorithms for state estimators and predictors
-   * Documentation: https://filterpy.readthedocs.io
-   * Usage Rights: Released under the MIT License
-   * Future Support: expected- FilterPy is a common tool still under development and actively supported
+  * Requirements met: Algorithms for state estimators and predictors
+  * Documentation: https://filterpy.readthedocs.io
+  * Usage Rights: Released under the MIT License
+  * Future Support: expected- FilterPy is a common tool still under development and actively supported
 
 * `Requests <https://requests.readthedocs.io>`__ (prog_server only)
 
-   * Requirements met: HTTP requests
-   * Documentation: https://requests.readthedocs.io
-   * Usage Rights: Released under the Apache License
-   * Future Support: expected- Requests is a common tool still under development and actively supported
+  * Requirements met: HTTP requests
+  * Documentation: https://requests.readthedocs.io
+  * Usage Rights: Released under the Apache License
+  * Future Support: expected- Requests is a common tool still under development and actively supported
 
 * `Flask <https://flask.palletsprojects.com/en/1.1.x/>`__ (prog_server only)
 
-   * Requirements met: Web server
-   * Documentation: https://flask.palletsprojects.com/en/1.1.x
-   * Usage Rights: Released under the BSD 3-Clause License
-   * Future Support: expected- Flask is a common tool still under development and actively supported
+  * Requirements met: Web server
+  * Documentation: https://flask.palletsprojects.com/en/1.1.x
+  * Usage Rights: Released under the BSD 3-Clause License
+  * Future Support: expected- Flask is a common tool still under development and actively supported
 
 * `urllib3 <http://urllib3.readthedocs.org>`__ (prog_server only)
 
-   * Requirements met: HTTP requests
-   * Documentation: https://urllib3.readthedocs.org
-   * Usage Rights: Released under the MIT License
-   * Future Support: expected- urllib3 is a common tool still under development and actively supported
+  * Requirements met: HTTP requests
+  * Documentation: https://urllib3.readthedocs.org
+  * Usage Rights: Released under the MIT License
+  * Future Support: expected- urllib3 is a common tool still under development and actively supported
 
 * `fastdtw <https://github.com/slaypni/fastdtw>`__ (prog_models only)
 
-   * Requirements met: Dynamic time warping (for dtw metric used in calc_error)
-   * Documentation: https://github.com/slaypni/fastdtw
-   * Usage Rights: Released under the MIT License
-   * Future Support: Unknown- at the time of investigation, the last release was in 3.5 years ago and the last branch was updated 2 years ago. However, the code is simple and the tool is still used by many projects.
-   * Other notes: validated by comparing the output of fastdtw to dtaidistance and the algorithm from the 'Towards Data Science' page (https://towardsdatascience.com/dynamic-time-warping-3933f25fcdd). Additionally, the team inspected the output of the package and it seemed reasonable. 
+  * Requirements met: Dynamic time warping (for dtw metric used in calc_error)
+  * Documentation: https://github.com/slaypni/fastdtw
+  * Usage Rights: Released under the MIT License
+  * Future Support: Unknown- at the time of investigation, the last release was in 3.5 years ago and the last branch was updated 2 years ago. However, the code is simple and the tool is still used by many projects.
+  * Other notes: validated by comparing the output of fastdtw to dtaidistance and the algorithm from the 'Towards Data Science' page (https://towardsdatascience.com/dynamic-time-warping-3933f25fcdd). Additionally, the team inspected the output of the package and it seemed reasonable. Finally, a review of open issues on their github repository and a search for known vulnerabilities yielded no concerns. It's only dependency is numpy, which is a trusted package.
 
 * 
 

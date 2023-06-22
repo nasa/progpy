@@ -80,7 +80,7 @@ Glossary
       The time at which an :term:`event` is predicted to occur (i.e., when :term:`threshold` is reached). Sometimes abbreviated as ToE. When the event of interest is failure, this is frequently referred to as End of Life (EOL).
 
     time to event
-      The time remaining until :term:`time of event`. Sometimes abbreviated as TtE. When the :term:`event`` of interest is failure, this is frequently referred to as Remaining Useful Life (RUL). :math:`TtE = ToE - t` where :math:`t` is the current time. Sometimes abbreviated as TtE.
+      The time remaining until :term:`time of event`. Sometimes abbreviated as TtE. When the :term:`event` of interest is failure, this is frequently referred to as Remaining Useful Life (RUL). :math:`TtE = ToE - t` where :math:`t` is the current time. Sometimes abbreviated as TtE.
 
     time of prediction
       The time at which a prediction is performed. Sometimes abbreviated as ToP or :math:`t_p`.

@@ -85,9 +85,8 @@ A release is the merging of a PR where the target is the master branch.
 * Check that each new feature has corresponding tests
 * [Complete - checked automatically in PRs to dev] Confirm that every page has the copyright notice
 * Confirm added dependencies are at the following:
-   * requirements.txt, 
    * setup.py,
-   * the bottom of dev_guide.rst (this document)
+   * the bottom of npr7150.rst
 * Confirm that all issues associated with the release have been closed (i.e., requirements have been met) or assigned to another release
 * Run unit tests `python -m tests` on the following computer types:
    * Apple Silicon Mac
@@ -148,14 +147,15 @@ Notes for Developers
 * When supplied by or to the user, values with names (e.g., inputs, states, outputs, event_states, event occurance, etc.) should be supplied as dictionaries (or dict-like objects) where they can be referred to by name. 
 * subpackages shall be independent (i.e., not have any dependencies with the wider package or other subpackages) when possible
 * Whenever possible Models, UncertainData types, State Estimators, and Predictors should be interchangable with any other class of the same type (e.g., any model should be interchangable with any other model)
-* Demonstrate common use cases as an example. 
+* Demonstrate common use cases as an example.
+* Use collections.abc instead of typing
 * Python code should comply with `PEP 8: Python Style Guide <https://peps.python.org/pep-0008/>`__, where appropriate
   * See also: `Writing Clean and Pythonic Code (JPL) <https://trs.jpl.nasa.gov/bitstream/handle/2014/51618/CL%2319-5039.pdf?sequence=1>`__
 * Code should be complient with the recommendations of `LGTM <lgtm.com>`__, whenever appropriate
 * Every feature should be demonstrated in an example
   * The most commonly used features should be demonstrated in the tutorial
 * Except in the most extreme cases, maintain backwards compatibility for the convenience of existing users
-  * If a feature is to be removed, mark it as depreciated for at least 2 releases before removing
+  * If a feature is to be removed, mark it as depreciated (using DeprecationWarning) for at least 1 release before removing unless marked experimental
 * Examples are included in the examples/ directory. 
    * Examples should cover the major use cases and features. If a major new feature is added, make sure there's an example demonstrating the feature.
    * For new examples- add to examples __all__ and example tests (tests/test_examples).
