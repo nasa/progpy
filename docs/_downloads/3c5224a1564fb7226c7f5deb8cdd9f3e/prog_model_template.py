@@ -104,7 +104,7 @@ class ProgModelTemplate(PrognosticsModel):
     #     """
     #     Constructor for model
 
-    #     Note 
+    #     Note
     #     ----
     #     To use the JSON serialization capabilities in to_json and from_json, model.parameters must include everything necessary for initialize, including any keyword arguments.
     #     """
@@ -131,16 +131,16 @@ class ProgModelTemplate(PrognosticsModel):
     #
     #     Parameters
     #     ----------
-    #     u : dict
+    #     u : InputContainer
     #         Inputs, with keys defined by model.inputs.
     #         e.g., u = {'i':3.2} given inputs = ['i']
-    #     z : dict
+    #     z : OutputContainer
     #         Outputs, with keys defined by model.outputs.
     #         e.g., z = {'t':12.4, 'v':3.3} given inputs = ['t', 'v']
     #
     #     Returns
     #     -------
-    #     x : dict
+    #     x : StateContainer
     #         First state, with keys defined by model.states
     #         e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
     #     """
@@ -164,16 +164,16 @@ class ProgModelTemplate(PrognosticsModel):
     #
     #     Parameters
     #     ----------
-    #     x : dict
+    #     x : StateContainer
     #         state, with keys defined by model.states
     #         e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
-    #     u : dict
+    #     u : InputContainer
     #         Inputs, with keys defined by model.inputs.
     #         e.g., u = {'i':3.2} given inputs = ['i']
     #
     #     Returns
     #     -------
-    #     dx : dict
+    #     dx : StateContainer
     #         First derivitive of state, with keys defined by model.states
     #         e.g., dx = {'abc': 3.1, 'def': -2.003} given states = ['abc', 'def']
     # 
@@ -202,10 +202,10 @@ class ProgModelTemplate(PrognosticsModel):
     #
     #     Parameters
     #     ----------
-    #     x : dict
+    #     x : StateContainer
     #         state, with keys defined by model.states
     #         e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
-    #     u : dict
+    #     u : InputContainer
     #         Inputs, with keys defined by model.inputs.
     #         e.g., u = {'i':3.2} given inputs = ['i']
     #     dt : number
@@ -214,7 +214,7 @@ class ProgModelTemplate(PrognosticsModel):
     #
     #     Returns
     #     -------
-    #     x : dict
+    #     x : StateContainer
     #         Next state, with keys defined by model.states
     #         e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
     #     """
@@ -226,17 +226,17 @@ class ProgModelTemplate(PrognosticsModel):
 
     def output(self, x):
         """
-        Calculate next statem, forward one timestep
+        Calculate output, z (i.e., measurable values) given the state x
 
         Parameters
         ----------
-        x : dict
+        x : StateContainer
             state, with keys defined by model.states
             e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
         
         Returns
         -------
-        z : dict
+        z : OutputContainer
             Outputs, with keys defined by model.outputs.
             e.g., z = {'t':12.4, 'v':3.3} given inputs = ['t', 'v']
         """
@@ -256,7 +256,7 @@ class ProgModelTemplate(PrognosticsModel):
 
         Parameters
         ----------
-        x : dict
+        x : StateContainer
             state, with keys defined by model.states
             e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
         
@@ -283,7 +283,7 @@ class ProgModelTemplate(PrognosticsModel):
 
         Parameters
         ----------
-        x : dict
+        x : StateContainer
             state, with keys defined by model.states
             e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
         

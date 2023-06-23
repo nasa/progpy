@@ -79,6 +79,6 @@ def run_example():
 
     plt.show()
 
-# This allows the module to be executed directly 
+# This allows the module to be executed directly
 if __name__ == '__main__':
     run_example()

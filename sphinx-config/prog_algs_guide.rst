@@ -44,7 +44,7 @@ The structure of the packages is illustrated below:
 
 .. image:: images/package_structure.png
 
-Prognostics is performed using `State Estimators <state_estimators.html>`__ and `Predictors <predictors.html>`__. State Estimators are resposible for estimating the current state of the modeled system using sensor data and a prognostics model (see: `prog_models package <https://github.com/nasa/prog_models>`__). The state estimator then produces an estimate of the system state with uncertainty in the form of an `uncertain data object <uncertain_data.html>`__. This state estimate is used by the predictor to predict when events will occur (Time of Event, ToE - returned as an `uncertain data object <uncertain_data.html>`__), and future system states (returned as a `Prediction object <prediction.html#id1>`__).
+Prognostics is performed using :ref:`State Estimators <State Estimators>` and :ref:`Predictors <Predictors>`. State Estimators are resposible for estimating the current state of the modeled system using sensor data and a prognostics model (see: :ref:`prog_models package <prog_models Guide>`). The state estimator then produces an estimate of the system state with uncertainty in the form of an :ref:`uncertain data object <Uncertain Data>`. This state estimate is used by the predictor to predict when events will occur (Time of Event, ToE - returned as an :ref:`uncertain data object <Uncertain Data>`), and future system states (returned as a :ref:`Prediction object <Prediction>`).
 
 Data Structures
 ***************
