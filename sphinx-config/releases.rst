@@ -31,8 +31,8 @@ prog_models
 
 prog_algs
 **********
-* Integration method can now be set for state estimation and prediction
-* Minimum time step can now be set in state estimation. This is useful for models that become unstable with large time steps
+* Integration method can now be set for state estimation and prediction by setting model.parameters[‘integration_method’].
+* Minimum time step can now be set in state estimation, using the argument 'dt'. This is useful for models that become unstable with large time steps.
 * Python3.11 support
 
 prog_server
