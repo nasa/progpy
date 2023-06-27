@@ -366,7 +366,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.models.PropellerLoad"><code class="docutils literal notranslate"><span class="pre">PropellerLoad</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vehicle-models">Vehicle Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aircraft-models">Aircraft Models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.models.aircraft_model.SmallRotorcraft"><code class="docutils literal notranslate"><span class="pre">SmallRotorcraft</span></code></a></li>
 </ul>
 </li>
@@ -618,7 +618,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <li><p><strong>ha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Heat transfer coefficient, ambient</p></li>
 <li><p><strong>hcp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Heat transfer coefficient parameter</p></li>
 <li><p><strong>hcs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Heat transfer coefficient - surface</p></li>
-<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em>) – Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p></li>
+<li><p><strong>x0</strong> (<em>StateContianer</em>) – Initial <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -1204,8 +1204,9 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 </dd></dl>
 
 </section>
-<section id="vehicle-models">
-<h2>Vehicle Models<a class="headerlink" href="#vehicle-models" title="Permalink to this heading">#</a></h2>
+<section id="aircraft-models">
+<h2>Aircraft Models<a class="headerlink" href="#aircraft-models" title="Permalink to this heading">#</a></h2>
+<p>Aircraft model simulate the flight of an aircraft. All aircraft models inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.aircraft_model.AricraftModel</span></code>. Included models are listed below:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.aircraft_model.SmallRotorcraft">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.aircraft_model.</span></span><span class="sig-name descname"><span class="pre">SmallRotorcraft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.aircraft_model.SmallRotorcraft" title="Permalink to this definition">#</a></dt>
@@ -1434,7 +1435,7 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.models.PropellerLoad"><code class="docutils literal notranslate"><span class="pre">PropellerLoad</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vehicle-models">Vehicle Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aircraft-models">Aircraft Models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.models.aircraft_model.SmallRotorcraft"><code class="docutils literal notranslate"><span class="pre">SmallRotorcraft</span></code></a></li>
 </ul>
 </li>

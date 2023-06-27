@@ -507,10 +507,10 @@ Results of a simulation can be visualized using the plot method. For example:
 
 See :py:meth:`prog_models.sim_result.SimResult.plot` for more details on plotting capabilities
 
-Multiple Models
+Combination Models
 ----------------------------
 
-There are two methods in prog_models through which multiple models can be used together: composite models and ensemble models, described below.
+There are two methods in prog_models through which multiple models can be combined and used together: composite models and ensemble models, described below.
 
 .. tabs::
 

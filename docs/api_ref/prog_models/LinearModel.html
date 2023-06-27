@@ -504,14 +504,17 @@ e.g., x = m.StateContainer({‘abc’: 332.2, ‘def’: 221.043}) given states 
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Error method to use. Supported methods include:
-* MSE (Mean Squared Error)
-* RMSE (Root Mean Squared Error)
-* MAX_E (Maximum Error)
-* MAE (Mean Absolute Error)
-* MAPE (Mean Absolute Percentage Error)
-* DTW (Dynamic Time Warping)</p></li>
-<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Initial state</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Error method to use when calculating error. Supported methods include:</p>
+<ul>
+<li><p>MSE (Mean Squared Error) - DEFAULT</p></li>
+<li><p>RMSE (Root Mean Squared Error)</p></li>
+<li><p>MAX_E (Maximum Error)</p></li>
+<li><p>MAE (Mean Absolute Error)</p></li>
+<li><p>MAPE (Mean Absolute Percentage Error)</p></li>
+<li><p>DTW (Dynamic Time Warping)</p></li>
+</ul>
+</p></li>
+<li><p><strong>x0</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.StateContainer" title="prog_models.PrognosticsModel.StateContainer"><em>StateContainer</em></a><em>, </em><em>optional</em>) – Initial state</p></li>
 <li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum time step in simulation. Time step used in simulation is lower of dt and time between samples. Defaults to time between samples.</p></li>
 <li><p><strong>stability_tol</strong> (<em>double</em><em>, </em><em>optional</em>) – <p>Configurable parameter.
 Configurable cutoff value, between 0 and 1, that determines the fraction of the data points for which the model must be stable.
@@ -967,7 +970,7 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 <li><p><strong>first_output</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.OutputContainer" title="prog_models.PrognosticsModel.OutputContainer"><em>OutputContainer</em></a><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that don’t use this</p></li>
 <li><p><strong>threshold_keys</strong> (<em>abc.Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Keys for events that will trigger the end of simulation.
 If blank, simulation will occur if any event will be met ()</p></li>
-<li><p><strong>x</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.StateContainer" title="prog_models.PrognosticsModel.StateContainer"><em>StateContainer</em></a><em>, </em><em>optional</em>) – initial state dict, e.g., x= m.StateContainer({‘x1’: 10, ‘x2’: -5.3})</p></li>
+<li><p><strong>x</strong> (<a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel.StateContainer" title="prog_models.PrognosticsModel.StateContainer"><em>StateContainer</em></a><em>, </em><em>optional</em>) – initial state, e.g., x= m.StateContainer({‘x1’: 10, ‘x2’: -5.3})</p></li>
 <li><p><strong>thresholds_met_eqn</strong> (<em>abc.Callable</em><em>, </em><em>optional</em>) – custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
 <li><p><strong>print</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>toggle intermediate printing, e.g., print = True</p>
 <p>e.g., m.simulate_to_threshold(eqn, z, dt=0.1, save_pts=[1, 2])</p>

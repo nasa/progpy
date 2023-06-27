@@ -88,8 +88,10 @@ PropellerLoad
 -------------------------------------------------------------
 .. autoclass:: prog_models.models.PropellerLoad
 
-Vehicle Models
+Aircraft Models
 -------------------------------------------------------------
+Aircraft model simulate the flight of an aircraft. All aircraft models inherit from :py:class:`prog_models.models.aircraft_model.AricraftModel`. Included models are listed below:
+
 .. autoclass:: prog_models.models.aircraft_model.SmallRotorcraft
 
 ThrownObject
