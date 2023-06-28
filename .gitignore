@@ -109,3 +109,7 @@ dataset_1.pkl
 ex.pickle
 
 .VSCodeCounter/
+
+model_save_json.txt
+
+model_save_pkl.pkl
