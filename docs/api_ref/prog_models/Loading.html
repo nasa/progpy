@@ -351,7 +351,7 @@ document.write(`
                   
   <section id="loading">
 <h1>Loading<a class="headerlink" href="#loading" title="Permalink to this heading">#</a></h1>
-<p>The loading subpackage includes some classes for complex load estimation algorithms. See <code class="xref download docutils literal notranslate"><span class="pre">examples.future_load</span></code> for more details.</p>
+<p>The loading subpackage includes some classes for complex load estimation algorithms. See <a class="reference download internal" download="" href="../../_downloads/f18535a152570e60fa41f5fba932422a/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a> for more details.</p>
 <section id="load-estimator-class-interface">
 <h2>Load Estimator Class interface<a class="headerlink" href="#load-estimator-class-interface" title="Permalink to this heading">#</a></h2>
 <p>The key aspect of a load estimator is that it needs to be able to be called with either time or time and state. The most common way of accomplishing this is with a function, described in the dropdown below.</p>
@@ -392,7 +392,10 @@ Class Load Estimator<div class="summary-down docutils">
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.loading.Piecewise">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.loading.</span></span><span class="sig-name descname"><span class="pre">Piecewise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InputContainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.loading.Piecewise" title="Permalink to this definition">#</a></dt>
-<dd><p>This is a simple piecewise future loading class. It takes a list of times and values and returns the value that corresponds to the current time. The object replaces the future_loading_eqn for simulate_to and simulate_to_threshold.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>This is a simple piecewise future loading class. It takes a list of times and values and returns the value that corresponds to the current time. The object replaces the future_loading_eqn for simulate_to and simulate_to_threshold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -414,7 +417,10 @@ Class Load Estimator<div class="summary-down docutils">
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.loading.MovingAverage">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.loading.</span></span><span class="sig-name descname"><span class="pre">MovingAverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InputContainer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.loading.MovingAverage" title="Permalink to this definition">#</a></dt>
-<dd><p>This is a simple moving average future loading class. It takes input values and stores them in a window. When called, it returns the average of the values in the window. The object replaces the future_loading_eqn for simulate_to and simulate_to_threshold.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>This is a simple moving average future loading class. It takes input values and stores them in a window. When called, it returns the average of the values in the window. The object replaces the future_loading_eqn for simulate_to and simulate_to_threshold.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -438,7 +444,10 @@ Class Load Estimator<div class="summary-down docutils">
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.loading.GaussianNoiseLoadWrapper">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.loading.</span></span><span class="sig-name descname"><span class="pre">GaussianNoiseLoadWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.11)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.loading.GaussianNoiseLoadWrapper" title="Permalink to this definition">#</a></dt>
-<dd><p>This is a simple wrapper for future loading functions that adds gaussian noise to the inputs. It takes a future loading function and a standard deviation and returns a new future loading function that adds gaussian noise to the inputs.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>This is a simple wrapper for future loading functions that adds gaussian noise to the inputs. It takes a future loading function and a standard deviation and returns a new future loading function that adds gaussian noise to the inputs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

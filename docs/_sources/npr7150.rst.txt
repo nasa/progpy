@@ -229,7 +229,7 @@ Notes on SWE-147: Reusability requirements
 * The software will be released open-source, helping reduce the barriers to reuse.
 * Design decisions will support ease-of-use
 * Exceptions and warning will be implemented whenever appropriate to help users use the software properly
-* When depricating a feature, notice is provided at least one version of the software prior, in the form of a warning. 
+* When deprecating a feature, notice is provided at least one version of the software prior, in the form of a warning. 
 
 Cybersecurity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

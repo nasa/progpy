@@ -45,7 +45,7 @@ def run_example():
     # Set wear parameter for spring to 1
     valv.parameters['x0']['wk'] = 1
 
-    # Define first measured output. This is needed by the simulat_to_threshold method to initialize state
+    # Define first measured output. This is needed by the simulate_to_threshold method to initialize state
     first_output = valv.output(valv.initialize(future_loading(0)))
     # Simulate
     simulated_results = valv.simulate_to_threshold(future_loading, first_output, **config)
@@ -65,7 +65,7 @@ def run_example():
     valv.parameters['x0']['wk'] = 0
     valv.parameters['x0']['wr'] = 1
 
-    # Define first measured output. This is needed by the simulat_to_threshold method to initialize state
+    # Define first measured output. This is needed by the simulate_to_threshold method to initialize state
     first_output = valv.output(valv.initialize(future_loading(0)))
     # Simulate
     simulated_results = valv.simulate_to_threshold(future_loading, first_output, **config)

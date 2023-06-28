@@ -371,7 +371,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.from_model"><code class="docutils literal notranslate"><span class="pre">DataModel.from_model()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.generate_surrogate"><code class="docutils literal notranslate"><span class="pre">DataModel.generate_surrogate()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_continuous"><code class="docutils literal notranslate"><span class="pre">DataModel.is_continuous</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_direct_model"><code class="docutils literal notranslate"><span class="pre">DataModel.is_direct_model</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_direct"><code class="docutils literal notranslate"><span class="pre">DataModel.is_direct</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_discrete"><code class="docutils literal notranslate"><span class="pre">DataModel.is_discrete</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_state_transition_model"><code class="docutils literal notranslate"><span class="pre">DataModel.is_state_transition_model</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.simulate_to"><code class="docutils literal notranslate"><span class="pre">DataModel.simulate_to()</span></code></a></li>
@@ -713,7 +713,7 @@ Additional configuration parameters from <cite>from_data</cite></p>
 <p><span class="versionmodified added">New in version 1.5.0.</span></p>
 </div>
 <p>Polynomial Chaos Expansion direct data model. Uses chaospy to generate a polynomial chaos expansion from data or a model to learn the relationship between future inputs and time of event.</p>
-<p>Generally this is used as a <span class="xref std std-term">surrogate model</span> for a <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> that is too expensive to simulate. This is done using the <a class="reference internal" href="#prog_models.data_models.PolynomialChaosExpansion.from_model" title="prog_models.data_models.PolynomialChaosExpansion.from_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PolynomialChaosExpansion.from_model()</span></code></a> method. The model is used to generate data, which is then used to train the polynomial chaos expansion. The polynomial chaos expansion can then be used to predict the time of event for future inputs.</p>
+<p>Generally this is used as a <a class="reference internal" href="../../glossary.html#term-surrogate"><span class="xref std std-term">surrogate</span></a> for a <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> that is too expensive to simulate. This is done using the <a class="reference internal" href="#prog_models.data_models.PolynomialChaosExpansion.from_model" title="prog_models.data_models.PolynomialChaosExpansion.from_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PolynomialChaosExpansion.from_model()</span></code></a> method. The model is used to generate data, which is then used to train the polynomial chaos expansion. The polynomial chaos expansion can then be used to predict the time of event for future inputs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -916,10 +916,8 @@ Else, model goes unstable after stability_tol is met, the mean squared error cal
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Replace DataModel with specific classname below</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">DataModel</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</pre></div>
-</div>
+<p>Replace DataModel with specific classname :
+m = DataModel.from_data(data)</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1016,9 +1014,12 @@ Additional configuration parameters from <cite>from_data</cite></p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="prog_models.data_models.DataModel.is_direct_model">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_direct_model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.data_models.DataModel.is_direct_model" title="Permalink to this definition">#</a></dt>
-<dd><p>If the model is a “direct model” - i.e., a model that directly estimates time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
+<dt class="sig sig-object py" id="prog_models.data_models.DataModel.is_direct">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_direct</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.data_models.DataModel.is_direct" title="Permalink to this definition">#</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>If the model is a “direct model” - i.e., a model that directly estimates time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>if the model is a direct model</p>
@@ -1039,7 +1040,10 @@ Additional configuration parameters from <cite>from_data</cite></p>
 <dl class="py property">
 <dt class="sig sig-object py" id="prog_models.data_models.DataModel.is_state_transition_model">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_state_transition_model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.data_models.DataModel.is_state_transition_model" title="Permalink to this definition">#</a></dt>
-<dd><p>If the model is a “state transition model” - i.e., a model that uses state transition differential equations to propagate state forward.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>If the model is a “state transition model” - i.e., a model that uses state transition differential equations to propagate state forward.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>if the model is a state transition model</p>
@@ -1086,14 +1090,15 @@ Additional configuration parameters from <cite>from_data</cite></p>
 <p><a class="reference internal" href="#prog_models.data_models.DataModel.simulate_to_threshold" title="prog_models.data_models.DataModel.simulate_to_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to_threshold</span></code></a></p>
 </div>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 3.0 for first 5 seconds</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="mf">3.0</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="k">else</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="mf">5.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;o1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;o2&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">event_states</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 2.0 for first 5 seconds</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1149,14 +1154,15 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <p><a class="reference internal" href="#prog_models.data_models.DataModel.simulate_to" title="prog_models.data_models.DataModel.simulate_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to</span></code></a></p>
 </div>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 3.0 for first 5 seconds</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;load&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="k">else</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;load&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;o1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;o2&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">event_states</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 3.0 for first 5 seconds</span>
+<span class="gp">... </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">... </span>   <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1168,7 +1174,10 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.data_models.DataModel.state_at_event">
 <span class="sig-name descname"><span class="pre">state_at_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn=&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.data_models.DataModel.state_at_event" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate the <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> at the time that each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). state_at_event can be implemented by a direct model. For a state transition model, this returns the state at which threshold_met returns true for each event.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>Calculate the <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> at the time that each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). state_at_event can be implemented by a direct model. For a state transition model, this returns the state at which threshold_met returns true for each event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1206,7 +1215,10 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.data_models.DataModel.time_of_event">
 <span class="sig-name descname"><span class="pre">time_of_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn=&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_models.data_models.DataModel.time_of_event" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate the time at which each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). time_of_event must be implemented by any direct model. For a state transition model, this returns the time at which threshold_met returns true for each event. A model that implements this is called a “direct model”.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>Calculate the time at which each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). time_of_event must be implemented by any direct model. For a state transition model, this returns the time at which threshold_met returns true for each event. A model that implements this is called a “direct model”.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1355,7 +1367,7 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.from_model"><code class="docutils literal notranslate"><span class="pre">DataModel.from_model()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.generate_surrogate"><code class="docutils literal notranslate"><span class="pre">DataModel.generate_surrogate()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_continuous"><code class="docutils literal notranslate"><span class="pre">DataModel.is_continuous</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_direct_model"><code class="docutils literal notranslate"><span class="pre">DataModel.is_direct_model</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_direct"><code class="docutils literal notranslate"><span class="pre">DataModel.is_direct</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_discrete"><code class="docutils literal notranslate"><span class="pre">DataModel.is_discrete</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.is_state_transition_model"><code class="docutils literal notranslate"><span class="pre">DataModel.is_state_transition_model</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.data_models.DataModel.simulate_to"><code class="docutils literal notranslate"><span class="pre">DataModel.simulate_to()</span></code></a></li>

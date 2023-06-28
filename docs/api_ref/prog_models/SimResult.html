@@ -379,7 +379,10 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.sim_result.SimResult.equals">
 <span class="sig-name descname"><span class="pre">equals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#prog_models.sim_result.SimResult" title="prog_models.sim_result.SimResult"><span class="pre">SimResult</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#prog_models.sim_result.SimResult.equals" title="Permalink to this definition">#</a></dt>
-<dd><p>Compare 2 SimResults</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>Compare 2 SimResults</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#prog_models.sim_result.SimResult" title="prog_models.sim_result.SimResult"><em>SimResult</em></a>) – </p>
@@ -407,18 +410,19 @@ document.write(`
 <dl class="py property">
 <dt class="sig sig-object py" id="prog_models.sim_result.SimResult.frame">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frame</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DataFrame</span></em><a class="headerlink" href="#prog_models.sim_result.SimResult.frame" title="Permalink to this definition">#</a></dt>
-<dd><p>A pandas DataFrame representing the SimResult data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>pd.DataFrame: A pandas DataFrame representing the SimResult data</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.sim_result.SimResult.frame_is_empty">
 <span class="sig-name descname"><span class="pre">frame_is_empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#prog_models.sim_result.SimResult.frame_is_empty" title="Permalink to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>If the value has been calculated</p>
 </dd>
@@ -431,7 +435,10 @@ document.write(`
 <dl class="py property">
 <dt class="sig sig-object py" id="prog_models.sim_result.SimResult.iloc">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iloc</span></span><a class="headerlink" href="#prog_models.sim_result.SimResult.iloc" title="Permalink to this definition">#</a></dt>
-<dd><p>returns the iloc indexer</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>returns the iloc indexer</p>
 </dd></dl>
 
 <dl class="py method">
@@ -471,7 +478,9 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.sim_result.SimResult.iterrows">
 <span class="sig-name descname"><span class="pre">iterrows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.sim_result.SimResult.iterrows" title="Permalink to this definition">#</a></dt>
-<dd><p>Iterates – through keys</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0: </span>Iterates – through keys</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -483,7 +492,7 @@ Calculates monotonicity for each event key using its associated mean value in Un
 <p>Where N is number of measurements and sign indicates sign of calculation.</p>
 <p>Coble, J., et. al. (2021). Identifying Optimal Prognostic Parameters from Data: A Genetic Algorithms Approach. Annual Conference of the PHM Society.
 <a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a>
-Baptistia, M., et. al. (2022). Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306.
+Baptistia, M., et. al. (2022). Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Artificial Intelligence, Volume 306.
 <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

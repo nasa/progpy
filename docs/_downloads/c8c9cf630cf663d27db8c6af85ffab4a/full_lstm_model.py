@@ -55,7 +55,7 @@ def run_example():
     print('Creating model...')
 
     # Create a subclass of LSTMStateTransitionModel, 
-    # overridding event-related methods and members
+    # overriding event-related methods and members
     class LSTMThrownObject(LSTMStateTransitionModel):
         events = [
             'falling', # Event- object is falling

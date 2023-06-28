@@ -321,8 +321,8 @@ State-transition Models
         * :download:`examples.full_lstm_model <../../prog_models/examples/full_lstm_model.py>`
             .. automodule:: full_lstm_model
 
-        * :download:`examples.chaos <../../prog_models/examples/chaos.py>`
-            .. automodule:: chaos
+        * :download:`examples.pce <../../prog_models/examples/pce.py>`
+            .. automodule:: pce
         
         * :download:`examples.generate_surrogate <../../prog_models/examples/generate_surrogate.py>`
             .. automodule:: generate_surrogate

@@ -123,7 +123,7 @@ class ProgModelTemplate(PrognosticsModel):
     # If following method 2, uncomment the initialize function, below.
     # Sometimes initial input (u) and initial output (z) are needed to initialize the model
     # In that case remove the '= None' for the appropriate argument
-    # Note: If they are needed, that requirement propogated through to the simulate_to* functions
+    # Note: If they are needed, that requirement propagated through to the simulate_to* functions
     # UNCOMMENT THIS FUNCTION FOR COMPLEX INITIALIZATION
     # def initialize(self, u=None, z=None):
     #     """
@@ -174,7 +174,7 @@ class ProgModelTemplate(PrognosticsModel):
     #     Returns
     #     -------
     #     dx : StateContainer
-    #         First derivitive of state, with keys defined by model.states
+    #         First derivative of state, with keys defined by model.states
     #         e.g., dx = {'abc': 3.1, 'def': -2.003} given states = ['abc', 'def']
     # 
     #     Example
@@ -186,7 +186,7 @@ class ProgModelTemplate(PrognosticsModel):
     #     | dx = m.dx(x, u) # Returns first derivative of state given input u
     #     """
     #
-    #     # REPLACE THE FOLLOWING WITH SOMETHING SPECIFC TO YOUR MODEL
+    #     # REPLACE THE FOLLOWING WITH SOMETHING SPECIFIC TO YOUR MODEL
     #     dxdt = {
     #         'Examples State 1': 0.1,
     #         'Examples State 2': -2.3,
@@ -276,7 +276,7 @@ class ProgModelTemplate(PrognosticsModel):
         return event_x
         
     # Note: Thresholds met equation below is not strictly necessary.
-    # By default threshold_met will check if event_state is ≤ 0 for each event
+    # By default, threshold_met will check if event_state is ≤ 0 for each event
     def threshold_met(self, x):
         """
         For each event threshold, calculate if it has been met
@@ -290,7 +290,7 @@ class ProgModelTemplate(PrognosticsModel):
         Returns
         -------
         thresholds_met : dict
-            If each threshold has been met (bool), with deys defined by prognostics_model.events
+            If each threshold has been met (bool), with keys defined by prognostics_model.events
             e.g., thresholds_met = {'EOL': False} given events = ['EOL']
         """
 

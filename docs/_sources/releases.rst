@@ -17,7 +17,7 @@ prog_models
 
 * **New Model Type**: Aircraft flight model interface, :py:class:`prog_models.models.aircraft_model.AircraftModel`. Anticipated prognostics applications with the aircraft flight model include estimating and predicting loading of other aircraft systems (e.g., powertrain) and safety metrics.
 * New Model: Small Rotorcraft AircraftModel. See `example <https://github.com/nasa/prog_models/blob/master/examples/uav_dynamics_model.py>`__.
-* New DataModel: Polynomial Chaos Expansion (PCE) Direct Surrogate Model (:py:class:`prog_models.data_models.PolynomialChaosExpansion`). See `chaos example <https://github.com/nasa/prog_models/blob/master/examples/chaos.py>`__ for example of use.
+* New DataModel: Polynomial Chaos Expansion (PCE) Direct Surrogate Model (:py:class:`prog_models.data_models.PolynomialChaosExpansion`). See `chaos example <https://github.com/nasa/prog_models/blob/master/examples/pce.py>`__ for example of use.
 * Started transition of InputContainers, StateContainers, OutputContainer and SimResult to use Pandas DataFrames. This release will bring the interface more in compliance with DataFrames. v1.6 will fully transition the classes to DataFrames.
 * Implemented new metrics that can be used in :py:meth:`prog_models.PrognosticsModel.calc_error`: Root Mean Square Error (RMSE), Maximum Error (MAX_E), Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE), and Dynamic Time Warping (DTW)
 * Error calculation metric (above) can now be set when calling :py:meth:`prog_models.PrognosticsModel.estimate_params`

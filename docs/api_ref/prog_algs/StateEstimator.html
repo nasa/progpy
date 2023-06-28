@@ -396,7 +396,7 @@ See: Prognostics Model Package</p></li>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default is the difference between new and last t. Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt]
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
 <li><p><strong>num_particles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of particles in particle filter</p></li>
 <li><p><strong>resample_fcn</strong> (<em>function</em><em>, </em><em>optional</em>) – Resampling function ([weights]) -&gt; [indexes] e.g., filterpy.monte_carlo.residual_resample</p></li>
@@ -427,7 +427,7 @@ See: Prognostics Model Package</p></li>
 <li><p><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
 <li><p><strong>kappa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
 <li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default is the difference between new and last t. Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt]
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
 <li><p><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Process Noise Matrix</p></li>
 <li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Measurement Noise Matrix</p></li>
@@ -455,9 +455,9 @@ See: Prognostics Model Package</p></li>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – KF Scaling parameter. An alpha &gt; 1 turns this into a fading memory filter.</p></li>
-<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default is the difference between new and last t. Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt]
+<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – time step (s)</p></li>
 <li><p><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Process Noise Matrix</p></li>
 <li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Measurement Noise Matrix</p></li>
 </ul>
@@ -473,7 +473,7 @@ e.g., dt = 1e-2</p></li>
 <dt class="sig sig-object py" id="prog_algs.state_estimators.StateEstimator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_algs.state_estimators.</span></span><span class="sig-name descname"><span class="pre">StateEstimator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_algs.state_estimators.StateEstimator" title="Permalink to this definition">#</a></dt>
 <dd><p>Interface class for state estimators</p>
-<p>Abstract base class for creating state estimators that perform state estimation. Subclasses must implement this interface. Equivilant to “Observers” in NASA’s Matlab Prognostics Algorithm Library</p>
+<p>Abstract base class for creating state estimators that perform state estimation. Subclasses must implement this interface. Equivalent to “Observers” in NASA’s Matlab Prognostics Algorithm Library</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -484,17 +484,13 @@ See: Prognostics Model Package</p></li>
 </p></li>
 </ul>
 </dd>
-</dl>
-<dl class="simple">
-<dt>Keywork Args:</dt><dd><dl class="simple">
-<dt>t0 (float):</dt><dd><p>Initial time at which prediction begins, e.g., 0</p>
-</dd>
-<dt>dt (float):</dt><dd><p>Maximum timestep for prediction in seconds. By default is the difference between new and last t. Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt]
-e.g., dt = 1e-2</p>
-</dd>
-<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs:</dt><dd><p>See state-estimator specific documentation for speicfic keyword arguments.</p>
-</dd>
-</dl>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Initial time at which prediction begins, e.g., 0</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
+e.g., dt = 1e-2</p></li>
+<li><p><strong>**kwargs</strong> – See state-estimator specific documentation for specific keyword arguments.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
@@ -514,9 +510,9 @@ e.g., z = m.OutputContainer({‘t’:12.4, ‘v’:3.3}) given outputs = [‘t�
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default is the difference between new and last t. Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt]
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
-<li><p><strong>**kwargs</strong> – See state-estimator specific documentation for speicfic keyword arguments.</p></li>
+<li><p><strong>**kwargs</strong> – See state-estimator specific documentation for specific keyword arguments.</p></li>
 </ul>
 </dd>
 </dl>

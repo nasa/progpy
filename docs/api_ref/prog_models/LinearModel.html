@@ -338,7 +338,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.generate_surrogate"><code class="docutils literal notranslate"><span class="pre">LinearModel.generate_surrogate()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.initialize"><code class="docutils literal notranslate"><span class="pre">LinearModel.initialize()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_continuous"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_continuous</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_direct_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_direct_model</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_direct"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_direct</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_discrete"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_discrete</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_state_transition_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_state_transition_model</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.matrixCheck"><code class="docutils literal notranslate"><span class="pre">LinearModel.matrixCheck()</span></code></a></li>
@@ -415,12 +415,13 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
-<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
-<div class="line">x = m.initialize(u, z) # Initialize first state</div>
-<div class="line">x = m.apply_limits(x) # Returns bounded state</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">apply_limits</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Returns bounded state</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -444,10 +445,11 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
-<div class="line">z = m.apply_measurement_noise(z)</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">apply_measurement_noise</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -477,12 +479,13 @@ e.g., x = m.StateContainer({‘abc’: 332.2, ‘def’: 221.043}) given states 
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
-<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
-<div class="line">x = m.initialize(u, z) # Initialize first state</div>
-<div class="line">x = m.apply_process_noise(x)</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">apply_process_noise</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -570,12 +573,13 @@ Else, model goes unstable after stability_tol is met, the mean squared error cal
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = DerivProgModel() # Replace with specific model being simulated</div>
-<div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
-<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
-<div class="line">x = m.initialize(u, z) # Initialize first state</div>
-<div class="line">dx = m.dx(x, u) # Returns first derivative of state given input u</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span>  <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dx</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="c1"># Returns first derivative of state given input u</span>
+</pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -637,12 +641,13 @@ and <cite>next_state</cite> for discrete, where the behavior cannot be described
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
-<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
-<div class="line">x = m.initialize(u, z) # Initialize first state</div>
-<div class="line">event_state = m.event_state(x) # Returns {‘EOD’: 1.0}, when m = BatteryCircuit()</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">event_state</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">event_state</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># {&#39;EOD&#39;: 1.0}</span>
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -738,14 +743,13 @@ See to_json method</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<dl class="simple">
-<dt>:</dt><dd><p>m = PrognosticsModel()
-# ^ Replace above with specific model being simulated ^
-u = m.InputContainer({‘u1’: 3.2})
-z = m.OutputContainer({‘z1’: 2.2})
-x = m.initialize(u, z)  # Initialize first state</p>
-</dd>
-</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span>    <span class="c1"># Replace above with specific model being simulated ^</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py property">
@@ -756,9 +760,12 @@ x = m.initialize(u, z)  # Initialize first state</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="prog_models.LinearModel.is_direct_model">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_direct_model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.LinearModel.is_direct_model" title="Permalink to this definition">#</a></dt>
-<dd><p>If the model is a “direct model” - i.e., a model that directly estimates time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
+<dt class="sig sig-object py" id="prog_models.LinearModel.is_direct">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_direct</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.LinearModel.is_direct" title="Permalink to this definition">#</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>If the model is a “direct model” - i.e., a model that directly estimates time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>if the model is a direct model</p>
@@ -779,7 +786,10 @@ x = m.initialize(u, z)  # Initialize first state</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="prog_models.LinearModel.is_state_transition_model">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_state_transition_model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></em><a class="headerlink" href="#prog_models.LinearModel.is_state_transition_model" title="Permalink to this definition">#</a></dt>
-<dd><p>If the model is a “state transition model” - i.e., a model that uses state transition differential equations to propagate state forward.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>If the model is a “state transition model” - i.e., a model that uses state transition differential equations to propagate state forward.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>if the model is a state transition model</p>
@@ -823,12 +833,13 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
-<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
-<div class="line">x = m.initialize(u, z) # Initialize first state</div>
-<div class="line">x = m.next_state(x, u, 0.1) # Returns state at 3.1 seconds given input u</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">next_state</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="c1"># Returns state at 3.1 seconds given input u</span>
+</pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -860,12 +871,13 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
-<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
-<div class="line">x = m.initialize(u, z) # Initialize first state</div>
-<div class="line">z = m.output(x) # Returns m.OutputContainer({‘z1’: 2.2})</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># {&#39;t&#39;: 292.1, &#39;v&#39;: 4.182999999010731}</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -889,12 +901,13 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="line-block">
-<div class="line">m = PrognosticsModel() # Replace with specific model being simulated</div>
-<div class="line">u = m.InputContainer({‘u1’: 3.2})</div>
-<div class="line">z = m.OutputContainer({‘z1’: 2.2})</div>
-<div class="line">x = m.initialize(u, z) # Initialize first state</div>
-<div class="line">pm = m.performance_metrics(x) # Returns {‘tMax’:33, ‘iMax’:19}</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryElectroChemEOD</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryElectroChemEOD</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pm</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">performance_metrics</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="c1"># {&#39;max_i&#39;: array([8.83810109])}</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -934,14 +947,15 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 <p><a class="reference internal" href="#prog_models.LinearModel.simulate_to_threshold" title="prog_models.LinearModel.simulate_to_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to_threshold</span></code></a></p>
 </div>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 3.0 for first 5 seconds</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="mf">3.0</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="k">else</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="mf">5.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;o1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;o2&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">event_states</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 2.0 for first 5 seconds</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -997,14 +1011,15 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <p><a class="reference internal" href="#prog_models.LinearModel.simulate_to" title="prog_models.LinearModel.simulate_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to</span></code></a></p>
 </div>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 3.0 for first 5 seconds</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;load&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span>   <span class="k">else</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;load&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;o1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;o2&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">event_states</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 3.0 for first 5 seconds</span>
+<span class="gp">... </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">... </span>   <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1016,7 +1031,10 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.state_at_event">
 <span class="sig-name descname"><span class="pre">state_at_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn=&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.LinearModel.state_at_event" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate the <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> at the time that each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). state_at_event can be implemented by a direct model. For a state transition model, this returns the state at which threshold_met returns true for each event.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>Calculate the <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> at the time that each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). state_at_event can be implemented by a direct model. For a state transition model, this returns the state at which threshold_met returns true for each event.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1065,11 +1083,12 @@ If blank, simulation will occur if any event will be met ()</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prog_models.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">threshold_met</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">threshold_met</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># returns {&#39;e1&#39;: False, &#39;e2&#39;: False}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">threshold_met</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">threshold_met</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># {&#39;EOD&#39;: False}</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1085,7 +1104,10 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_models.LinearModel.time_of_event">
 <span class="sig-name descname"><span class="pre">time_of_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn=&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#prog_models.LinearModel.time_of_event" title="Permalink to this definition">#</a></dt>
-<dd><p>Calculate the time at which each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). time_of_event must be implemented by any direct model. For a state transition model, this returns the time at which threshold_met returns true for each event. A model that implements this is called a “direct model”.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>Calculate the time at which each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). time_of_event must be implemented by any direct model. For a state transition model, this returns the time at which threshold_met returns true for each event. A model that implements this is called a “direct model”.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1200,7 +1222,7 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.generate_surrogate"><code class="docutils literal notranslate"><span class="pre">LinearModel.generate_surrogate()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.initialize"><code class="docutils literal notranslate"><span class="pre">LinearModel.initialize()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_continuous"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_continuous</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_direct_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_direct_model</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_direct"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_direct</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_discrete"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_discrete</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.is_state_transition_model"><code class="docutils literal notranslate"><span class="pre">LinearModel.is_state_transition_model</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.LinearModel.matrixCheck"><code class="docutils literal notranslate"><span class="pre">LinearModel.matrixCheck()</span></code></a></li>

@@ -1199,7 +1199,10 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.PropellerLoad">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.</span></span><span class="sig-name descname"><span class="pre">PropellerLoad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.PropellerLoad" title="Permalink to this definition">#</a></dt>
-<dd><p>This is a simple model of a propeller load. This model estimates load torque as a function of the rotational velocity. When the propeller is spinning faster, drag increases, and the propeller load on the torque increases.</p>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>This is a simple model of a propeller load. This model estimates load torque as a function of the rotational velocity. When the propeller is spinning faster, drag increases, and the propeller load on the torque increases.</p>
 <p>This model is typically used with the esc and dcmotor models to simulate a motor and propeller system.</p>
 </dd></dl>
 
@@ -1210,7 +1213,10 @@ output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.models.aircraft_model.SmallRotorcraft">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.models.aircraft_model.</span></span><span class="sig-name descname"><span class="pre">SmallRotorcraft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.models.aircraft_model.SmallRotorcraft" title="Permalink to this definition">#</a></dt>
-<dd><p>Vectorized prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> to generate a predicted trajectory for a small rotorcraft using a n=6 degrees-of-freedom dynamic model
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>Vectorized prognostics <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> to generate a predicted trajectory for a small rotorcraft using a n=6 degrees-of-freedom dynamic model
 with feedback control loop. The model follows the form:</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}u     = h(x, x_{ref})\\dx/dt = f(x, \theta, u)\end{aligned}\end{align} \]</div>

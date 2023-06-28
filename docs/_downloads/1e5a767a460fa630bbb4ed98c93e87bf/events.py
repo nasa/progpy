@@ -50,7 +50,7 @@ def run_example():
 
         def threshold_met(self, x):
             # Get threshold met from parent
-            t_met =  super().threshold_met(x)
+            t_met = super().threshold_met(x)
 
             # Add yell and red states from event_state
             event_state = self.event_state(x)
