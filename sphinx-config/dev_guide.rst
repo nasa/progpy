@@ -137,7 +137,8 @@ Post-Release Checklist
 * For prog_server: Update openapi specs on `SwaggerHub <https://app.swaggerhub.com/apis/teubert/prog_server/1.0.0-oas3>`__
 * Send notes to Software Release Office (SRO) of updated version number
 * Publish to PyPi
-* Send Highlight
+* Tag release with DOI
+* Send Highlights
 
 Notes for Developers
 --------------------
