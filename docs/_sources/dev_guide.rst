@@ -138,7 +138,11 @@ Post-Release Checklist
 * Send notes to Software Release Office (SRO) of updated version number
 * Publish to PyPi
 * Tag release with DOI
-* Send Highlights
+* Setup release in GitHub
+* Post release in GitHub Discussions
+* Merge doc changes
+* Merge back into dev to get post-release changes
+* Send Highlights - Division, Known Users, LinkedIn, etc.
 
 Notes for Developers
 --------------------
