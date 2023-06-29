@@ -1,0 +1,37 @@
+name: Release
+
+on: 
+  push:
+    branches:
+      - 'release/**'
+      - 'master'
+
+jobs:
+  analysis:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9']
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -e .
+    - name: Lint with flake8
+      run: |
+        python -m pip install flake8
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 src/prog_models --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 src/prog_models --count --benchmark --exit-zero --show-source --max-complexity=10 --max-line-length=127 --statistics --tee --output-file=lint_results_${{ matrix.python-version }}.txt
+    - name: Upload Lint Results
+      uses: actions/upload-artifact@v3
+      with: 
+        name: lint_results_${{matrix.python-version}}
+        path: lint_results_${{matrix.python-version}}.txt
