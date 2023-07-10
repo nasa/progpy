@@ -82,6 +82,24 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
       run: python -m tests.test_centrifugal_pump
+  test_composite:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.7'
+    - name: Install dependencies cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: pip-cache
+    - name: Update
+      run: pip install --upgrade --upgrade-strategy eager -e .
+    - name: Run tests
+      run: python -m tests.test_composites
   test_data_model:
     timeout-minutes: 15
     runs-on: ubuntu-latest
@@ -193,7 +211,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_estimate_params
   test_examples:
-    timeout-minutes: 20
+    timeout-minutes: 25
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -264,6 +282,24 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
       run: python -m tests.test_powertrain
+  test_predictors:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.7'
+    - name: Install dependencies cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: pip-cache
+    - name: Update
+      run: pip install --upgrade --upgrade-strategy eager -e .
+    - name: Run tests
+      run: python -m tests.test_predictors
   test_serialization:
     timeout-minutes: 5
     runs-on: ubuntu-latest
@@ -300,6 +336,24 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
       run: python -m tests.test_sim_result
+  test_state_estimators:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.7'
+    - name: Install dependencies cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: pip-cache
+    - name: Update
+      run: pip install --upgrade --upgrade-strategy eager -e .
+    - name: Run tests
+      run: python -m tests.test_state_estimators
   test_surrogates:
     timeout-minutes: 5
     runs-on: ubuntu-latest
@@ -357,72 +411,24 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
       run: python -m tests.test_uav_model
-  # test_prog_algs_released:
-  #   timeout-minutes: 30
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       python-version: ['3.9']
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Set up Python ${{ matrix.python-version }}
-  #     uses: actions/setup-python@v2
-  #     with:
-  #       python-version: ${{ matrix.python-version }}
-  #   - name: Install dependencies
-  #     run: |
-  #       python -m pip install --upgrade pip
-  #       python -m pip install -e .
-  #       python -m pip install notebook
-  #       python -m pip install testbook
-  #       python -m pip install requests
-  #   - name: Clone prog_algs
-  #     uses: actions/checkout@v2
-  #     with:
-  #       repository: nasa/prog_algs 
-  #       ref: refs/heads/master
-  #       path: prog_algs
-  #   - name: Install prog_algs
-  #     run: |
-  #       python -m pip install -e ./prog_algs
-  #   - name: Run tests
-  #     run: |
-  #       cd prog_algs 
-  #       python -m tests
-  test_prog_algs_dev:
-    timeout-minutes: 30
+  test_uncertain_data:
+    timeout-minutes: 5
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [ '3.9']
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.7'
     - name: Install dependencies cache
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
         key: pip-cache
     - name: Update
-      run: |
-        pip install --upgrade --upgrade-strategy eager -e .
-        pip install notebook
-        pip install testbook
-    - name: Clone prog_algs
-      uses: actions/checkout@v3
-      with:
-        repository: nasa/prog_algs 
-        ref: refs/heads/dev
-        path: prog_algs
-    - name: Install prog_algs
-      run: pip install -e ./prog_algs
+      run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
-      run: |
-        cd prog_algs 
-        python -m tests
+      run: python -m tests.test_uncertain_data
   copyright:
     timeout-minutes: 5
     runs-on: ubuntu-latest

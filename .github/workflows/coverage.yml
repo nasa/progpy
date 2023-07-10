@@ -45,8 +45,11 @@ jobs:
         coverage run -a -m tests.test_linear_model
         coverage run -a -m tests.test_pneumatic_valve
         coverage run -a -m tests.test_powertrain
+        coverage run -a -m tests.test_predictors
         coverage run -a -m tests.test_serialization
         coverage run -a -m tests.test_sim_result
+        coverage run -a -m tests.test_state_estimators
+        coverage run -a -m tests.test_uav_model
         coverage run -a -m tests.test_uav_model
         coverage xml -i
     - name: "Upload coverage to Codecov"
