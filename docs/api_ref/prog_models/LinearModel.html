@@ -921,7 +921,7 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 <li><p><strong>time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – <p>Time to which the model will be simulated in seconds (≥ 0.0)</p>
 <p>e.g., time = 200</p>
 </p></li>
-<li><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em>) – Function of (t, x) -&gt; u used to predict <a class="reference internal" href="../../glossary.html#term-future-load"><span class="xref std std-term">future loading</span></a> (<a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a>) at a given time (t) and state (x)</p></li>
 <li><p><strong>first_output</strong> (<em>OutputContainer</em><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that don’t use this</p></li>
 </ul>
 </dd>
@@ -966,7 +966,7 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 <dd><p>Simulate prognostics model until any or specified threshold(s) have been met</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p>
+<dd class="field-odd"><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em>) – Function of (t, x) -&gt; u used to predict <a class="reference internal" href="../../glossary.html#term-future-load"><span class="xref std std-term">future loading</span></a> (<a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a>) at a given time (t) and state (x)</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
