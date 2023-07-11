@@ -99,7 +99,7 @@ jobs:
     - name: Update
       run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
-      run: python -m tests.test_composites
+      run: python -m tests.test_composite
   test_data_model:
     timeout-minutes: 15
     runs-on: ubuntu-latest
