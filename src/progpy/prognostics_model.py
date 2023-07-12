@@ -1054,11 +1054,11 @@ class PrognosticsModel(ABC):
        
         while t < horizon:
             dt_i = next_time(t, x)
-            t = t + dt_i/2
+            t_load = t + dt_i/2  # Saving as separate variable reduces likelihood of floating point error
             # Use state at midpoint of step to best represent the load during the duration of the step
             # This is sometimes referred to as 'leapfrog integration'
-            u = load_eqn(t, x)
-            t = t + dt_i/2
+            u = load_eqn(t_load, x)
+            t += dt_i
             x = next_state(x, u, dt_i)
             x = apply_noise(x, dt_i)
             x = apply_limits(x)
