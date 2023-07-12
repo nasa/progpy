@@ -49,7 +49,7 @@ for _ in range(N_TRAIN):
     dt = np.random.uniform(*DT)
 
     # Simulate
-    results = m.simulate_to_threshold(future_load, dt=5, save_freq=SAVE_FREQ)
+    results = m.simulate_to_threshold(future_load, dt=('auto', dt), save_freq=SAVE_FREQ)
 
     # Save results
     times.append(results.times)
@@ -68,9 +68,9 @@ m_lstm = LSTMStateTransitionModel.from_data(
     event_states=event_states,
     t_met=t_met,
     window=WINDOW,
+    epochs=10,
     layers=LAYERS,
     units=UNITS,
-    epochs=1,
     input_keys=['i', 'dt'],
     output_keys=['t', 'v'],
     event_keys=['EOD'])
@@ -94,7 +94,7 @@ for _ in range(N_TEST):
     dt = np.random.uniform(*DT)
 
     # Simulate
-    results = m.simulate_to_threshold(future_load, dt=5, save_freq=SAVE_FREQ)
+    results = m.simulate_to_threshold(future_load, dt=('auto', dt), save_freq=SAVE_FREQ)
 
     # Save results
     times.append(results.times)
@@ -144,28 +144,16 @@ class FutureLoad:
 
 # Plot
 # Dashed is lstm model, solid is test data, dashed is lstm
-
-        # UNCOMMENT LATER 
-
-# fig = plt.figure()
-# plt.ylabel('Voltage')
-# plt.xlabel('Time (s)')
-
-# TESTING CALC_ERROR FUNCTION #
-z_error = m_lstm.calc_error(
-    times=times,
-    inputs=inputs,
-    outputs=outputs
-)
-
-#############         PLOTTING         #############
+fig = plt.figure()
+plt.ylabel('Voltage')
+plt.xlabel('Time (s)')
 
 sim_time = 0
 toe_error = 0
 lstm_inputs = []
 for i, z in enumerate(outputs):
-    plt.plot(times[i], [z_i['v'] for z_i in z], COLORS[i]+'-', label=f'Test {i+1}')
-    
+    plt.plot(times[i], [z_i['v'] for z_i in z], COLORS[i]+'-')
+
     future_load = FutureLoad(inputs[i], m_lstm, z)
     
     # Record lstm input profile - needed for output profile
@@ -173,9 +161,9 @@ for i, z in enumerate(outputs):
 
     # Simulate and plot
     sim_time_i = time.perf_counter()
-    results = m_lstm.simulate_to_threshold(future_load, dt=5, save_freq=future_load.dt*10, horizon=times[i][-1]+1000)
+    results = m_lstm.simulate_to_threshold(future_load, dt=('auto', future_load.dt), save_freq=future_load.dt*10, horizon=times[i][-1]+1000)
     sim_time += (time.perf_counter() - sim_time_i)/len(results.times)
-    plt.plot(results.times, [z['v'] for z in results.outputs], COLORS[i]+'--', label=f'LSTM {i+1}')
+    plt.plot(results.times, [z['v'] for z in results.outputs], COLORS[i]+'--')
 
     # Record error in time of event for later metric
     if results.times[-1] >= times[i][-1]+1000:
@@ -184,7 +172,6 @@ for i, z in enumerate(outputs):
     else:
         toe_error += (times[i][-1] - results.times[-1]['EOD'])**2
 
-plt.legend()
 plt.show()
 print(f"Average Simulation Rate: {sim_time/(N_TEST*SAVE_FREQ)} (seconds clock / seconds sim)")
 
