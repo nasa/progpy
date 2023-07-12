@@ -153,10 +153,19 @@ def MSE(m, times: List[float], inputs: List[dict], outputs: List[dict], **kwargs
         x = m.StateContainer(x)
 
     if not isinstance(inputs[0], m.InputContainer):
+        # new_inputs = []
+        # for u_i in inputs:
+        #     new_inputs.append(m.InputContainer(u_i))
+        # inputs = new_inputs
         inputs = [m.InputContainer(u_i) for u_i in inputs]
 
     if not isinstance(outputs[0], m.OutputContainer):
         outputs = [m.OutputContainer(z_i) for z_i in outputs]
+
+    for input_dict in inputs:
+        for key, value in input_dict.items():
+            if isinstance(value, float) and np.isnan(value):
+                print('')
 
     counter = 0  # Needed to account for skipped (i.e., none) values
     t_last = times[0]

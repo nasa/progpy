@@ -8,7 +8,7 @@ from progpy.loading import Piecewise
 from progpy.models import BatteryElectroChemEOD
 import time
 
-N_TRAIN = 25
+N_TRAIN = 5
 N_TEST = 3
 DT = (0.2, 2) # min, max
 LOAD = (0.5, 4) # min, max
@@ -70,7 +70,7 @@ m_lstm = LSTMStateTransitionModel.from_data(
     window=WINDOW,
     layers=LAYERS,
     units=UNITS,
-    epochs=10,
+    epochs=1,
     input_keys=['i', 'dt'],
     output_keys=['t', 'v'],
     event_keys=['EOD'])
@@ -144,9 +144,12 @@ class FutureLoad:
 
 # Plot
 # Dashed is lstm model, solid is test data, dashed is lstm
-fig = plt.figure()
-plt.ylabel('Voltage')
-plt.xlabel('Time (s)')
+
+        # UNCOMMENT LATER 
+
+# fig = plt.figure()
+# plt.ylabel('Voltage')
+# plt.xlabel('Time (s)')
 
 # TESTING CALC_ERROR FUNCTION #
 z_error = m_lstm.calc_error(
