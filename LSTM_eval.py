@@ -148,6 +148,15 @@ fig = plt.figure()
 plt.ylabel('Voltage')
 plt.xlabel('Time (s)')
 
+# TESTING CALC_ERROR FUNCTION #
+z_error = m_lstm.calc_error(
+    times=times,
+    inputs=inputs,
+    outputs=outputs
+)
+
+#############         PLOTTING         #############
+
 sim_time = 0
 toe_error = 0
 lstm_inputs = []
