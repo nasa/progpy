@@ -787,7 +787,7 @@ class PrognosticsModel(ABC):
         integration_method: str, optional
             Integration method, e.g. 'rk4' or 'euler' (default: 'euler')
         save_freq : float, optional
-            Frequency at which output is saved (s), e.g., save_freq = 10 \n
+            Frequency at which output is saved (s), e.g., save_freq = 10. A save_freq of 0 will save every step. \n
         save_pts : list[float], optional
             Additional ordered list of custom times where output is saved (s), e.g., save_pts= [50, 75] \n
         eval_pts : list[float], optional
