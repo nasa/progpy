@@ -918,6 +918,10 @@ class TestModels(unittest.TestCase):
         result = m.simulate_to_threshold(load, dt=2, save_freq=0.75, save_pts=[1.5, 2.5])
         self.assertListEqual(result.times, [0, 2, 4])  
 
+        # With save_freq==0
+        result = m.simulate_to_threshold(load, dt=2, save_freq=0)
+        self.assertListEqual(result.times, [0, 2, 4])  
+
         result = m.simulate_to_threshold(load, dt=2, save_pts=[2.5])
         self.assertListEqual(result.times, [0, 4])  
 
