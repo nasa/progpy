@@ -20,6 +20,24 @@ UNITS = 64 # LSTM Units in each layer
 WINDOW = 16 # LSTM WINDOW SIZE
 COLORS = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w']
 
+def generate_data(m, N):
+    times, inputs, outputs, event_states, t_met = [], [], [], [], []
+    for _ in range(N):
+        f_load_times = [np.random.uniform(0, 3500) for _ in range(N_FUTURE_LOAD_STEPS)]
+        f_load_times.sort()
+        f_load_times.append(np.inf)
+        f_loads = {'i': [np.random.uniform(*LOAD) for _ in range(N_FUTURE_LOAD_STEPS)]}
+        f_loads['i'].append(4)
+        future_load = Piecewise(m.InputContainer, f_load_times, f_loads)
+        dt = np.random.uniform(*DT)
+        results = m.simulate_to_threshold(future_load, dt=('auto', dt), save_freq=SAVE_FREQ)
+        times.append(results.times)
+        inputs.append(np.array([np.hstack((u_i.matrix[:][0].T, [dt])) for u_i in results.inputs], dtype=float))
+        outputs.append(results.outputs)
+        event_states.append(results.event_states)
+        t_met.append([m.threshold_met(x)['EOD'] for x in results.states])
+    return times, inputs, outputs, event_states, t_met
+
 print("Configuration")
 print("--------------------")
 print(f"Training runs: {N_TRAIN}")
@@ -30,45 +48,19 @@ print(f"Window size: {WINDOW}")
 print(f"LSTM Layers {LAYERS}")
 print(f"LSTM Units {UNITS}\n")
 
-# Step 1: Generate data (with noise) from Battery Model
 print('generating training data')
 m = BatteryElectroChemEOD(process_noise=PROCESS_NOISE)
+times_train, inputs_train, outputs_train, event_states_train, t_met_train = generate_data(m, N_TRAIN)
 
-times, inputs, outputs, event_states, t_met = [], [], [], [], []
-for _ in range(N_TRAIN):
-    # Randomly Generate future loading profile
-    f_load_times = [np.random.uniform(0, 3500) for _ in range(N_FUTURE_LOAD_STEPS)]
-    f_load_times.sort()
-    f_load_times.append(np.inf)
-    f_loads = {'i': [np.random.uniform(*LOAD) for _ in range(N_FUTURE_LOAD_STEPS)]}
-    f_loads['i'].append(4) # final load to ensure simulation doesn't run too long
-    future_load = Piecewise(m.InputContainer, f_load_times, f_loads)
-
-    # Randomly assign dt
-    # Note: Different dt's are important for a dt-independent model
-    dt = np.random.uniform(*DT)
-
-    # Simulate
-    results = m.simulate_to_threshold(future_load, dt=('auto', dt), save_freq=SAVE_FREQ)
-
-    # Save results
-    times.append(results.times)
-    # Add dt to inputs
-    inputs.append(np.array([np.hstack((u_i.matrix[:][0].T, [dt])) for u_i in results.inputs], dtype=float))
-    outputs.append(results.outputs)
-    event_states.append(results.event_states)
-    t_met.append([m.threshold_met(x)['EOD'] for x in results.states])
-
-# Step 2: Train Model
 print('training model')
 train_time = time.perf_counter()
 m_lstm = LSTMStateTransitionModel.from_data(
-    inputs=inputs,
-    outputs=outputs,
-    event_states=event_states,
-    t_met=t_met,
+    inputs=inputs_train,
+    outputs=outputs_train,
+    event_states=event_states_train,
+    t_met=t_met_train,
     window=WINDOW,
-    epochs=10,
+    epochs=50,
     layers=LAYERS,
     units=UNITS,
     input_keys=['i', 'dt'],
@@ -76,114 +68,70 @@ m_lstm = LSTMStateTransitionModel.from_data(
     event_keys=['EOD'])
 train_time = time.perf_counter() - train_time
 
-# Step 3: Generate test data
 print('generating test data')
-times, inputs, outputs, event_states, t_met = [], [], [], [], []
 m.parameters['process_noise'] = 0
-for _ in range(N_TEST):
-    # Randomly Generate future loading profile
-    f_load_times = [np.random.uniform(0, 3500) for _ in range(N_FUTURE_LOAD_STEPS)]
-    f_load_times.sort()
-    f_load_times.append(np.inf)
-    f_loads = {'i': [np.random.uniform(*LOAD) for _ in range(N_FUTURE_LOAD_STEPS)]}
-    f_loads['i'].append(4) # final load to ensure simulation doesn't run too long
-    future_load = Piecewise(m.InputContainer, f_load_times, f_loads)
+times_test, inputs_test, outputs_test, event_states_test, t_met_test = generate_data(m, N_TEST)
 
-    # Randomly assign dt
-    # Note: Different dt's are important for a dt-independent model
-    dt = np.random.uniform(*DT)
-
-    # Simulate
-    results = m.simulate_to_threshold(future_load, dt=('auto', dt), save_freq=SAVE_FREQ)
-
-    # Save results
-    times.append(results.times)
-    inputs.append(results.inputs)
-    outputs.append(results.outputs)
-    event_states.append(results.event_states)
-    t_met.append([m.threshold_met(x)['EOD'] for x in results.states])
-
-# Step 4: Evaluate performance
 print("\nProfiling results")
 print("--------------------")
 print(f"Training time: {train_time} s")
 
-# Future load function for model
 class FutureLoad:
-    def __init__(self, inputs, m, outputs):
+    def __init__(self, times, inputs, m, outputs):
         self.Container = m.InputContainer
-        self.times = inputs.times
+        self.times = times
         self.dt = self.times[1]-self.times[0]
-        self.inputs = [u['i'] for u in inputs]
+        self.inputs = [u[0] for u in inputs]
         self.m = m
         self.outputs = outputs
 
     def __call__(self, t, x=None):
         if x is None:
             x = self.m.initialize()
-
         if t > self.times[-1]:
             index = -1
         else:
-            index = next(i for i, time in enumerate(self.times) if time >= t-self.dt/10) # About equal
-
+            index = next(i for i, time in enumerate(self.times) if time >= t-self.dt/10)
         u = self.inputs[index]
         if x.matrix[0, 0] is None:
-            # Nominally use index-1, unless first spot
             index_z = index if index==0 else index-1
             z = self.outputs[index_z].matrix
         else:
             z = self.m.output(x).matrix
-
         return self.Container({
             'i': u,
-            'dt': dt,
+            'dt': self.dt,
             't_t-1': z[0, 0],
             'v_t-1': z[1, 0]
         })
 
-# Plot
-# Dashed is lstm model, solid is test data, dashed is lstm
 fig = plt.figure()
 plt.ylabel('Voltage')
 plt.xlabel('Time (s)')
-
 sim_time = 0
 toe_error = 0
-lstm_inputs = []
-for i, z in enumerate(outputs):
-    plt.plot(times[i], [z_i['v'] for z_i in z], COLORS[i]+'-')
-
-    future_load = FutureLoad(inputs[i], m_lstm, z)
-    
-    # Record lstm input profile - needed for output profile
-    lstm_inputs.append([future_load(t_i) for t_i in times[i]])
-
-    # Simulate and plot
+for i, z in enumerate(outputs_test):
+    plt.plot(times_test[i], [z_i['v'] for z_i in z], COLORS[i]+'-')
+    future_load = FutureLoad(times_test[i], inputs_test[i], m_lstm, z)
     sim_time_i = time.perf_counter()
-    results = m_lstm.simulate_to_threshold(future_load, dt=('auto', future_load.dt), save_freq=future_load.dt*10, horizon=times[i][-1]+1000)
+    results = m_lstm.simulate_to_threshold(future_load, dt=('auto', future_load.dt), save_freq=future_load.dt*10, horizon=times_test[i][-1]+1000)
     sim_time += (time.perf_counter() - sim_time_i)/len(results.times)
     plt.plot(results.times, [z['v'] for z in results.outputs], COLORS[i]+'--')
-
-    # Record error in time of event for later metric
-    if results.times[-1] >= times[i][-1]+1000:
-        # Past horizon, didn't reach EOD with 1000 over real value
+    if results.times[-1] >= times_test[i][-1]+1000:
         toe_error = np.inf
     else:
-        toe_error += (times[i][-1] - results.times[-1]['EOD'])**2
+        toe_error += (times_test[i][-1] - results.times[-1]['EOD'])**2
 
 plt.show()
 print(f"Average Simulation Rate: {sim_time/(N_TEST*SAVE_FREQ)} (seconds clock / seconds sim)")
 
-# Error in time of event
 toe_error /= N_TEST
 print(f"MSE in time of event: {toe_error} ")
 
-# Error in output profile
 z_error = m_lstm.calc_error(
-    times=times,
-    inputs=inputs,
-    outputs=outputs
+    times=times_test,
+    inputs=inputs_test,
+    outputs=outputs_test
 )
 print(f"MSE error in Output: {z_error}")
 
