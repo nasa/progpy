@@ -238,7 +238,7 @@ class TestUAVGen(unittest.TestCase):
         x_sim_interp = interp1d(sim.times, x_temp)(ref_traj['t'])
         y_sim_interp = interp1d(sim.times, y_temp)(ref_traj['t'])
         z_sim_interp = interp1d(sim.times, z_temp)(ref_traj['t'])
-        for iter in range(min(len(sim.times), len(ref_traj['t']))):
+        for iter in range(len(ref_traj['t'])):
             self.assertAlmostEqual(ref_traj['x'][iter], x_sim_interp[iter], delta=5)
             self.assertAlmostEqual(ref_traj['y'][iter], y_sim_interp[iter], delta=5)
             self.assertAlmostEqual(ref_traj['z'][iter], z_sim_interp[iter], delta=5)
@@ -268,7 +268,7 @@ class TestUAVGen(unittest.TestCase):
         x_speeds_sim_interp = interp1d(sim_speeds.times, x_speeds_temp)(ref_traj_speeds['t'])
         y_speeds_sim_interp = interp1d(sim_speeds.times, y_speeds_temp)(ref_traj_speeds['t'])
         z_speeds_sim_interp = interp1d(sim_speeds.times, z_speeds_temp)(ref_traj_speeds['t'])
-        for iter in range(len(sim_speeds.times)):
+        for iter in range(len(ref_traj_speeds['t'])):
             self.assertAlmostEqual(ref_traj_speeds['x'][iter], x_speeds_sim_interp[iter], delta=8)
             self.assertAlmostEqual(ref_traj_speeds['y'][iter], y_speeds_sim_interp[iter], delta=8)
             self.assertAlmostEqual(ref_traj_speeds['z'][iter], z_speeds_sim_interp[iter], delta=8)
