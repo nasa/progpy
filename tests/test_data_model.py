@@ -184,6 +184,7 @@ class TestDataModel(unittest.TestCase):
             [future_loading for _ in range(5)],
             dt=[TIMESTEP, TIMESTEP/2, TIMESTEP/4, TIMESTEP*2, TIMESTEP*4],
             window=2,
+            units=(16, ),  # Units as tuple
             epochs=20)
 
         # Should get keys from original model
