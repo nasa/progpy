@@ -787,7 +787,7 @@ class PrognosticsModel(ABC):
         integration_method: str, optional
             Integration method, e.g. 'rk4' or 'euler' (default: 'euler')
         save_freq : float, optional
-            Frequency at which output is saved (s), e.g., save_freq = 10 \n
+            Frequency at which output is saved (s), e.g., save_freq = 10. A save_freq of 0 will save every step. \n
         save_pts : list[float], optional
             Additional ordered list of custom times where output is saved (s), e.g., save_pts= [50, 75] \n
         eval_pts : list[float], optional
@@ -883,8 +883,8 @@ class PrognosticsModel(ABC):
             raise ValueError("'dt' must be positive, was {}".format(config['dt']))
         if not isinstance(config['save_freq'], Number) and not isinstance(config['save_freq'], tuple):
             raise TypeError("'save_freq' must be a number, was a {}".format(type(config['save_freq'])))
-        if (isinstance(config['save_freq'], Number) and config['save_freq'] <= 0) or \
-            (isinstance(config['save_freq'], tuple) and config['save_freq'][1] <= 0):
+        if (isinstance(config['save_freq'], Number) and config['save_freq'] < 0) or \
+            (isinstance(config['save_freq'], tuple) and config['save_freq'][1] < 0):
             raise ValueError("'save_freq' must be positive, was {}".format(config['save_freq']))
         if not isinstance(config['save_pts'], abc.Iterable):
             raise TypeError("'save_pts' must be list or array, was a {}".format(type(config['save_pts'])))
@@ -1013,7 +1013,8 @@ class PrognosticsModel(ABC):
             def next_time(t, x=None):
                 next_save_pt = save_pts[save_pt_index] if save_pt_index < len(save_pts) else float('inf')
                 next_eval_pt = eval_pts[eval_pt_index] if eval_pt_index < len(eval_pts) else float('inf')
-                return min(dt, next_save-t, next_save_pt-t, next_eval_pt-t)
+                opts = (item for item in (dt, next_save-t, next_save_pt-t, next_eval_pt-t) if item > 0)
+                return min(*opts)
         elif dt_mode != 'function':
             raise ValueError(f"'dt' mode {dt_mode} not supported. Must be 'constant', 'auto', or a function")
         
