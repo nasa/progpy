@@ -476,7 +476,7 @@ class LSTMStateTransitionModel(DataModel):
             raise ValueError(f"layers must be greater than 0, got {params['layers']}")
         if np.isscalar(params['units']):
             params['units'] = [params['units'] for _ in range(params['layers'])]
-        if not isinstance(params['units'], (list, np.ndarray)):
+        if not isinstance(params['units'], (list, np.ndarray, tuple)):
             raise TypeError(f"units must be a list of integers, not {type(params['units'])}")
         if len(params['units']) != params['layers']:
             raise ValueError(f"units must be a list of integers of length {params['layers']}, got {params['units']}")
