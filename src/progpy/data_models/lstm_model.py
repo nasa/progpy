@@ -538,9 +538,7 @@ class LSTMStateTransitionModel(DataModel):
         from tensorflow import keras
 
         # Build model
-        callbacks = [
-            keras.callbacks.ModelCheckpoint("best_model.keras", save_best_only=True)
-        ]
+        callbacks = [ ]
 
         if params['early_stop']:
             callbacks.append(keras.callbacks.EarlyStopping(**params['early_stop.cfg']))
@@ -592,8 +590,6 @@ class LSTMStateTransitionModel(DataModel):
             validation_split=params['validation_split'],
             workers=params['workers'],
             use_multiprocessing=(params['workers'] > 1))
-
-        model = keras.models.load_model("best_model.keras")
 
         # Split model into separate models
         n_state_layers = params['layers'] + 1 + (params['dropout'] > 0) + (params['normalize'])
