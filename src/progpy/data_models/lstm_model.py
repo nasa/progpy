@@ -488,7 +488,7 @@ class LSTMStateTransitionModel(DataModel):
             raise TypeError(f"dropout must be an float greater than or equal to 0, not {type(params['dropout'])}")
         if params['dropout'] < 0:
             raise ValueError(f"dropout must be greater than or equal to 0, got {params['dropout']}")
-        if not isinstance(params['activation'], (abc.Sequence, np.ndarray)):
+        if not isinstance(params['activation'], (list, tuple, np.ndarray)):
             params['activation'] = [params['activation'] for _ in range(params['layers'])]
         if not np.isscalar(params['validation_split']):
             raise TypeError(f"validation_split must be an float between 0 and 1, not {type(params['validation_split'])}")
