@@ -138,7 +138,8 @@ class LSTMStateTransitionModel(DataModel):
             m_input = states.reshape(1, self.parameters['window'], len(self.inputs))
             m_input = np.array(m_input, dtype=np.float64)
             internal_states = self.parameters['state_model'](m_input).numpy().T
-        return self.StateContainer(np.vstack((states, internal_states)))
+        result = np.array(np.vstack((states, internal_states)), dtype=np.float64)
+        return self.StateContainer(result)
 
     def output(self, x):
         if x.matrix[0, 0] is None:
