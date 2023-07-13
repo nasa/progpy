@@ -1,6 +1,7 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
+from collections import abc
 from itertools import chain
 import matplotlib.pyplot as plt
 from numbers import Number
@@ -476,8 +477,8 @@ class LSTMStateTransitionModel(DataModel):
             raise ValueError(f"layers must be greater than 0, got {params['layers']}")
         if np.isscalar(params['units']):
             params['units'] = [params['units'] for _ in range(params['layers'])]
-        if not isinstance(params['units'], (list, np.ndarray)):
-            raise TypeError(f"units must be a list of integers, not {type(params['units'])}")
+        if not isinstance(params['units'], (abc.Sequence, np.ndarray)):
+            raise TypeError(f"units must be a Sequence (e.g., list or tuple) of integers, not {type(params['units'])}")
         if len(params['units']) != params['layers']:
             raise ValueError(f"units must be a list of integers of length {params['layers']}, got {params['units']}")
         for i in range(params['layers']):
@@ -487,7 +488,7 @@ class LSTMStateTransitionModel(DataModel):
             raise TypeError(f"dropout must be an float greater than or equal to 0, not {type(params['dropout'])}")
         if params['dropout'] < 0:
             raise ValueError(f"dropout must be greater than or equal to 0, got {params['dropout']}")
-        if not isinstance(params['activation'], (list, np.ndarray)):
+        if not isinstance(params['activation'], (list, tuple, np.ndarray)):
             params['activation'] = [params['activation'] for _ in range(params['layers'])]
         if not np.isscalar(params['validation_split']):
             raise TypeError(f"validation_split must be an float between 0 and 1, not {type(params['validation_split'])}")
