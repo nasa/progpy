@@ -34,7 +34,7 @@ class PolynomialChaosExpansion(DataModel):
         PolynomialChaosExpansion.from_model
 
     Note:
-        The generated model is only valid for the intial state at which the data was generated. If the initial state is different, the model will not be valid.
+        The generated model is only valid for the initial state at which the data was generated. If the initial state is different, the model will not be valid.
     """
     def __init__(self, models, times, input_keys, **kwargs):
         self.inputs = input_keys
