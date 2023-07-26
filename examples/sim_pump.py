@@ -52,8 +52,6 @@ def run_example():
     thresholds_met = [pump.threshold_met(x) for x in simulated_results.states]
     thresholds_met = SimResult(simulated_results.times, thresholds_met)
     thresholds_met.plot(compact = False, title = 'Threshold Met', xlabel = 'time', ylabel = '')
-    
-
 
     plt.show()
 

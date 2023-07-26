@@ -50,7 +50,7 @@ def run_example():
         print('State ', i, ': ', state)
     print()
 
-    # Let's see what happens when the objects speed aproaches its limit
+    # Let's see what happens when the objects speed approaches its limit
     x0 = m.initialize(u = {}, z = {})
     x0['x'] = 1000000000
     x0['v'] = 0

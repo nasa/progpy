@@ -41,7 +41,7 @@ class PneumaticValveBase(PrognosticsModel):
         | pL: Fluid pressure at the left side of the plug (Pa)
         | pR: Fluid pressure at the right side of the plug (Pa)
         | uBot: input pressure at the bottom pneumatic port (Pa)
-        | uTop: input pressure at the botton pneumatic port (Pa)
+        | uTop: input pressure at the bottom pneumatic port (Pa)
 
     :term:`States<state>`: (10)
         | Aeb: Area of the leak at the bottom pneumatic port
