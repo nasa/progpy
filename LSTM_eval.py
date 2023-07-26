@@ -8,6 +8,25 @@ from progpy.loading import Piecewise
 from progpy.models import BatteryElectroChemEOD
 import time
 
+
+class MyBatt(BatteryElectroChemEOD):
+    events = BatteryElectroChemEOD.events + ['NewEOD']
+
+    def event_states(self, state):
+        event_state = super().event_state(state)
+
+        event_state['NewEOD'] = (event_state['EOD']+ 0.1)/(1+0.1)
+
+        return event_state
+    
+    def threshold_met(self, x):
+        t_met = super().threshold_met(x)
+
+        event_state = self.event_state(x)
+        t_met['NewEOD'] = event_state['NewEOD'] <= 0
+
+        return t_met
+
 N_TRAIN = 5
 N_TEST = 3
 DT = (0.2, 2) # min, max
@@ -30,7 +49,7 @@ def generate_data(m, N):
         f_loads['i'].append(4)
         future_load = Piecewise(m.InputContainer, f_load_times, f_loads)
         dt = np.random.uniform(*DT)
-        results = m.simulate_to_threshold(future_load, dt=('auto', dt), save_freq=SAVE_FREQ)
+        results = m.simulate_to_threshold(future_load, dt=('auto', dt), save_freq=SAVE_FREQ, threshold_keys = ['NewEOD'])
         times.append(results.times)
         inputs.append(np.array([np.hstack((u_i.matrix[:][0].T, [dt])) for u_i in results.inputs], dtype=float))
         outputs.append(results.outputs)
@@ -49,32 +68,28 @@ print(f"LSTM Layers {LAYERS}")
 print(f"LSTM Units {UNITS}\n")
 
 print('generating training data')
-m = BatteryElectroChemEOD(process_noise=PROCESS_NOISE)
+m = MyBatt(process_noise=PROCESS_NOISE)
 times_train, inputs_train, outputs_train, event_states_train, t_met_train = generate_data(m, N_TRAIN)
 
-print('training model')
-train_time = time.perf_counter()
-m_lstm = LSTMStateTransitionModel.from_data(
-    inputs=inputs_train,
-    outputs=outputs_train,
-    event_states=event_states_train,
-    t_met=t_met_train,
-    window=WINDOW,
-    epochs=50,
-    layers=LAYERS,
-    units=UNITS,
-    input_keys=['i', 'dt'],
-    output_keys=['t', 'v'],
-    event_keys=['EOD'])
-train_time = time.perf_counter() - train_time
-
-print('generating test data')
-m.parameters['process_noise'] = 0
 times_test, inputs_test, outputs_test, event_states_test, t_met_test = generate_data(m, N_TEST)
 
-print("\nProfiling results")
-print("--------------------")
-print(f"Training time: {train_time} s")
+print('training model')
+# train_time = time.perf_counter()
+# m_lstm = LSTMStateTransitionModel.from_data(
+#     inputs=inputs_train,
+#     outputs=outputs_train,
+#     event_states=event_states_train,
+#     t_met=t_met_train,
+#     window=WINDOW,
+#     epochs=10,
+#     layers=LAYERS,
+#     units=UNITS,
+#     input_keys=['i', 'dt'],
+#     output_keys=['t', 'v'],
+#     event_keys=['EOD'])
+# train_time = time.perf_counter() - train_time
+
+import optuna
 
 class FutureLoad:
     def __init__(self, times, inputs, m, outputs):
@@ -105,35 +120,92 @@ class FutureLoad:
             'v_t-1': z[1, 0]
         })
 
-fig = plt.figure()
-plt.ylabel('Voltage')
-plt.xlabel('Time (s)')
-sim_time = 0
-toe_error = 0
-for i, z in enumerate(outputs_test):
-    plt.plot(times_test[i], [z_i['v'] for z_i in z], COLORS[i]+'-')
-    future_load = FutureLoad(times_test[i], inputs_test[i], m_lstm, z)
-    sim_time_i = time.perf_counter()
-    results = m_lstm.simulate_to_threshold(future_load, dt=('auto', future_load.dt), save_freq=future_load.dt*10, horizon=times_test[i][-1]+1000)
-    sim_time += (time.perf_counter() - sim_time_i)/len(results.times)
-    plt.plot(results.times, [z['v'] for z in results.outputs], COLORS[i]+'--')
-    if results.times[-1] >= times_test[i][-1]+1000:
-        toe_error = np.inf
-    else:
-        toe_error += (times_test[i][-1] - results.times[-1]['EOD'])**2
+def objective(trial):
+    window = trial.suggest_int('window', 1, 20)
+    layers = trial.suggest_int('layers', 1, 5)
+    units = trial.suggest_int('units', 10, 50)
+    dropout = trial.suggest_uniform('dropout', 0, 0.5)
+    workers = trial.suggest_int('workers', 1, 100)
+    epochs = trial.suggest_int('epochs', 10, 30)
+    validation_split = trial.suggest_uniform('validation_split', 0.1, 0.5)
+    score = eval_model(window, layers, units, dropout, workers, epochs, validation_split)
+
+    return score
+
+def eval_model(window, layers, units, dropout, workers, epochs, validation_split):
+    model = LSTMStateTransitionModel.from_data(
+        inputs=inputs_train,
+        outputs=outputs_train,
+        event_states=event_states_train,
+        t_met=t_met_train,
+        window=window,
+        layers=layers,
+        units=units,
+        dropout=dropout,
+        workers=workers,
+        epochs=epochs,
+        validation_split=validation_split,
+        event_keys=['EOD'],
+        input_keys=['i', 'dt'],
+        output_keys=['t', 'v']
+    )
+
+    sim_time = 0
+    toe_error = 0
+    for i, z in enumerate(outputs_train):
+        future_load = FutureLoad(times_train[i], inputs_train[i], model, z)
+        sim_time_i = time.perf_counter()
+        results = model.simulate_to_threshold(future_load, dt=1, horizon=times_train[i][-1]+1000)
+        sim_time += (time.perf_counter() - sim_time_i)/len(results.times)
+        toe_error += abs(times_train[i][-1]+1000 - results.times[-1])**2
+
+    toe_error /= N_TRAIN
+    print(f"\nMSE in time of event: {toe_error} \n")
+    return toe_error
+
+study = optuna.create_study(direction='minimize')  
+study.optimize(objective, n_trials=2)
+best_hyperparams = study.best_params
+print('\nBest hyperparameters:\n')
+print(best_hyperparams)
+
+print('generating test data')
+m.parameters['process_noise'] = 0
+times_test, inputs_test, outputs_test, event_states_test, t_met_test = generate_data(m, N_TEST)
+
+print("\nProfiling results")
+print("--------------------")
+# print(f"Training time: {train_time} s")
+
+# fig = plt.figure()
+# plt.ylabel('Voltage')
+# plt.xlabel('Time (s)')
+# sim_time = 0
+# toe_error = 0
+# for i, z in enumerate(outputs_test):
+#     plt.plot(times_test[i], [z_i['v'] for z_i in z], COLORS[i]+'-')
+#     future_load = FutureLoad(times_test[i], inputs_test[i], m_lstm, z)
+#     sim_time_i = time.perf_counter()
+#     results = m_lstm.simulate_to_threshold(future_load, dt=('auto', future_load.dt), save_freq=future_load.dt*10, horizon=times_test[i][-1]+1000)
+#     sim_time += (time.perf_counter() - sim_time_i)/len(results.times)
+#     plt.plot(results.times, [z['v'] for z in results.outputs], COLORS[i]+'--')
+#     if results.times[-1] >= times_test[i][-1]+1000:
+#         toe_error = np.inf
+#     else:
+#         toe_error += (times_test[i][-1] - results.times[-1]['EOD'])**2
 
 plt.show()
-print(f"Average Simulation Rate: {sim_time/(N_TEST*SAVE_FREQ)} (seconds clock / seconds sim)")
+# print(f"Average Simulation Rate: {sim_time/(N_TEST*SAVE_FREQ)} (seconds clock / seconds sim)")
 
-toe_error /= N_TEST
-print(f"MSE in time of event: {toe_error} ")
+# toe_error /= N_TEST
+# print(f"MSE in time of event: {toe_error} ")
 
-z_error = m_lstm.calc_error(
-    times=times_test,
-    inputs=inputs_test,
-    outputs=outputs_test
-)
-print(f"MSE error in Output: {z_error}")
+# z_error = m_lstm.calc_error(
+#     times=times_test,
+#     inputs=inputs_test,
+#     outputs=outputs_test
+# )
+# print(f"MSE error in Output: {z_error}")
 
 # GOAL OF WORK
 # 0. Verify approach

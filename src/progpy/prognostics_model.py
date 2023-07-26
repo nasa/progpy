@@ -791,7 +791,7 @@ class PrognosticsModel(ABC):
         save_pts : list[float], optional
             Additional ordered list of custom times where output is saved (s), e.g., save_pts= [50, 75] \n
         eval_pts : list[float], optional
-            Additional ordered list of custom times where simulation is guarenteed to be evaluated (though results are not saved, as with save_pts) when dt is auto (s), e.g., eval_pts= [50, 75] \n
+            Additional ordered list of custom times where simulation is guaranteed to be evaluated (though results are not saved, as with save_pts) when dt is auto (s), e.g., eval_pts= [50, 75] \n
         horizon : float, optional
             maximum time that the model will be simulated forward (s), e.g., horizon = 1000 \n
         first_output : OutputContainer, optional
