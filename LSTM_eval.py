@@ -8,17 +8,16 @@ from progpy.loading import Piecewise
 from progpy.models import BatteryElectroChemEOD
 import time
 
-
 class MyBatt(BatteryElectroChemEOD):
     events = BatteryElectroChemEOD.events + ['NewEOD']
 
     def event_states(self, state):
         event_state = super().event_state(state)
 
-        event_state['NewEOD'] = (event_state['EOD']+ 0.1)/(1+0.1)
+        event_state['NewEOD'] = (event_state['EOD'] + 0.1) / (1 + 0.1)
 
         return event_state
-    
+
     def threshold_met(self, x):
         t_met = super().threshold_met(x)
 
