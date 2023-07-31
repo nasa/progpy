@@ -11,10 +11,11 @@ import time
 class MyBatt(BatteryElectroChemEOD):
     events = BatteryElectroChemEOD.events + ['NewEOD']
 
-    def event_states(self, state):
+    def event_state(self, state):
         event_state = super().event_state(state)
+        # event_state['NewEOD'] = event_state['EOD'] + 0.1
 
-        event_state['NewEOD'] = (event_state['EOD'] + 0.1) / (1 + 0.1)
+        event_state['NewEOD'] = (event_state['EOD'] - 0.1) / (1 - 0.1)
 
         return event_state
 
@@ -48,12 +49,22 @@ def generate_data(m, N):
         f_loads['i'].append(4)
         future_load = Piecewise(m.InputContainer, f_load_times, f_loads)
         dt = np.random.uniform(*DT)
-        results = m.simulate_to_threshold(future_load, dt=('auto', dt), save_freq=SAVE_FREQ, threshold_keys = ['NewEOD'])
+        results = m.simulate_to_threshold(future_load, dt=('auto', dt), threshold_keys=['EOD'])
         times.append(results.times)
         inputs.append(np.array([np.hstack((u_i.matrix[:][0].T, [dt])) for u_i in results.inputs], dtype=float))
         outputs.append(results.outputs)
         event_states.append(results.event_states)
-        t_met.append([m.threshold_met(x)['EOD'] for x in results.states])
+        eod_states = [m.threshold_met(x)['EOD'] for x in results.states]
+        new_eod_states = [m.threshold_met(x)['NewEOD'] for x in results.states]
+
+        # Combine the 'EOD' and 'NewEOD' states for each result
+        combined_states = list(zip(eod_states, new_eod_states))
+
+        # Flatten the list of tuples into a single list
+        combined_states = [item for sublist in combined_states for item in sublist]
+
+        # Append this list to 't_met'
+        t_met.append(combined_states)
     return times, inputs, outputs, event_states, t_met
 
 print("Configuration")

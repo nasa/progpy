@@ -1,6 +1,7 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
+from collections import abc
 from itertools import chain
 import matplotlib.pyplot as plt
 from numbers import Number
@@ -11,7 +12,6 @@ from warnings import warn
 from progpy.exceptions import warn_once
 from progpy.data_models import DataModel
 from progpy.sim_result import SimResult
-from scipy.stats import boxcox
 
 
 class LSTMStateTransitionModel(DataModel):
@@ -290,7 +290,7 @@ class LSTMStateTransitionModel(DataModel):
 
             if isinstance(z, (list, np.ndarray)):
                 if len(z) != len(u) and len(u) != 0 and len(z) != 0:
-                    # Checked here to avoid SimResults from accidentially
+                    # Checked here to avoid SimResults from accidentally
                     # triggering this check
                     raise IndexError(f"Number of outputs ({len(z)}) does not match number of inputs ({len(u)})")
 
@@ -395,19 +395,6 @@ class LSTMStateTransitionModel(DataModel):
         z_all = np.array(z_all, dtype=np.float64)
         es_all = np.array(es_all, dtype=np.float64)
         t_all = np.array(t_all, dtype=np.float64)
-
-        # boxcox_lambda=None
-
-        # if boxcox_lambda is not None:
-        #     if isinstance(boxcox_lambda, (float, int)):
-        #         # Apply Box-Cox transformation to inputs
-        #         if len(u_all) > 0:
-        #             u_all = boxcox(u_all + 1, boxcox_lambda)
-
-        #         # Apply Box-Cox transformation to outputs
-        #         if len(z_all) > 0:
-        #             z_all = boxcox(z_all + 1, boxcox_lambda)
-                    
         return (u_all, z_all, es_all, t_all)
 
     @classmethod
@@ -429,9 +416,9 @@ class LSTMStateTransitionModel(DataModel):
             window (int): 
                 Number of historical points used in the model. I.e, if window is 3, the model will map from [t-3, t-2, t-1] to t
             input_keys (list[str]): 
-                List of keys to use to identify :term:`input`. If not supplied u[#] will be used to identify inputs
+                List of keys to use to identify :term:`input`. If not supplied u[#] will be used to idenfiy inputs
             output_keys (list[str]): 
-                List of keys to use to identify :term:`output`. If not supplied z[#] will be used to identify outputs
+                List of keys to use to identify :term:`output`. If not supplied z[#] will be used to idenfiy outputs
             event_keys (list[str]):
                 List of keys to use to identify events for :term:`event state` and :term:`threshold` met. If not supplied event[#] will be used to identify events
             validation_percentage (float): 
@@ -441,7 +428,7 @@ class LSTMStateTransitionModel(DataModel):
             layers (int): 
                 Number of LSTM layers to use. More layers can represent more complex systems, but are less efficient. Note: 2 layers is typically enough for most complex systems. Default: 1
             units (int or list[int]): 
-                number of units (i.e., dimensionality of output state) used in each LSTM layer. Using a scalar value will use the same number of units for each layer.
+                number of units (i.e., dimensionality of output state) used in each lstm layer. Using a scalar value will use the same number of units for each layer.
             activation (str or list[str]): 
                 Activation function to use for each layer
             dropout (float): 
@@ -464,7 +451,7 @@ class LSTMStateTransitionModel(DataModel):
         params = { # default_params
             'window': 128,
             'validation_split': 0.25,
-            'epochs': 100,
+            'epochs': 10,
             'prediction_steps': 1,
             'layers': 1,
             'units': 16,
@@ -490,8 +477,8 @@ class LSTMStateTransitionModel(DataModel):
             raise ValueError(f"layers must be greater than 0, got {params['layers']}")
         if np.isscalar(params['units']):
             params['units'] = [params['units'] for _ in range(params['layers'])]
-        if not isinstance(params['units'], (list, np.ndarray)):
-            raise TypeError(f"units must be a list of integers, not {type(params['units'])}")
+        if not isinstance(params['units'], (abc.Sequence, np.ndarray)):
+            raise TypeError(f"units must be a Sequence (e.g., list or tuple) of integers, not {type(params['units'])}")
         if len(params['units']) != params['layers']:
             raise ValueError(f"units must be a list of integers of length {params['layers']}, got {params['units']}")
         for i in range(params['layers']):
@@ -501,7 +488,7 @@ class LSTMStateTransitionModel(DataModel):
             raise TypeError(f"dropout must be an float greater than or equal to 0, not {type(params['dropout'])}")
         if params['dropout'] < 0:
             raise ValueError(f"dropout must be greater than or equal to 0, got {params['dropout']}")
-        if not isinstance(params['activation'], (list, np.ndarray)):
+        if not isinstance(params['activation'], (list, tuple, np.ndarray)):
             params['activation'] = [params['activation'] for _ in range(params['layers'])]
         if not np.isscalar(params['validation_split']):
             raise TypeError(f"validation_split must be an float between 0 and 1, not {type(params['validation_split'])}")
@@ -525,15 +512,33 @@ class LSTMStateTransitionModel(DataModel):
         # Prepare datasets
         (u_all, z_all, es_all, t_all) = LSTMStateTransitionModel.pre_process_data(inputs, outputs, event_states=event_states, t_met=t_met, **params)
 
-        u_all, z_all, u_all_shifted, z_all_shifted, u_all_lambdas, z_all_lambdas, u_mean, u_std, z_mean, z_std, u_all_min_val, z_all_min_val = LSTMStateTransitionModel.apply_transformations(u_all, z_all, inputs)
+        # Normalize
+        if params['normalize']:
+            n_inputs = len(inputs[0][0])
+            u_mean = np.mean(u_all[:, 0, :n_inputs], axis=0)
+            u_std = np.std(u_all[:, 0, :n_inputs], axis=0)
+            # If there's no variation- don't normalize 
+            u_std[u_std == 0] = 1
+            z_mean = np.mean(z_all, axis=0)
+            z_std = np.std(z_all, axis=0)
+            # If there's no variation- don't normalize 
+            z_std[z_std == 0] = 1
+
+            # Add output (since z_t-1 is last input)
+            u_mean = np.hstack((u_mean, z_mean))
+            u_std = np.hstack((u_std, z_std))
+
+            z_all = (z_all - z_mean)/z_std
+
+            # u_mean and u_std act on the column vector form (from inputcontainer)
+            # so we need to transpose them to a column vector
+            params['normalization'] = (z_mean, z_std)
 
         # Tensorflow is imported here to avoid importing it if not needed
         from tensorflow import keras
 
         # Build model
-        callbacks = [
-            keras.callbacks.ModelCheckpoint("best_model.keras", save_best_only=True)
-        ]
+        callbacks = [ ]
 
         if params['early_stop']:
             callbacks.append(keras.callbacks.EarlyStopping(**params['early_stop.cfg']))
@@ -586,8 +591,6 @@ class LSTMStateTransitionModel(DataModel):
             workers=params['workers'],
             use_multiprocessing=(params['workers'] > 1))
 
-        model = keras.models.load_model("best_model.keras")
-
         # Split model into separate models
         n_state_layers = params['layers'] + 1 + (params['dropout'] > 0) + (params['normalize'])
         output_layer_input = keras.layers.Input(model.layers[n_state_layers-1].output.shape[1:])
@@ -608,108 +611,10 @@ class LSTMStateTransitionModel(DataModel):
                 t_met_layer = t_met_layers[0]
             else:  # Concat layer exists
                 t_met_layer = model.get_layer('t_met')(t_met_layers)
-            t_met_model = keras.Model(output_layer_input, t_met_layer)
-        
-        instance = cls(output_model, state_model, event_state_model, t_met_model, history=history, **params)
-        
-        instance.u_all_min_val = u_all_min_val
-        instance.z_all_min_val = z_all_min_val
-        instance.u_all_shifted = u_all_shifted
-        instance.z_all_shifted = z_all_shifted
-        instance.u_all_lambdas = u_all_lambdas
-        instance.z_all_lambdas = z_all_lambdas
-        instance.u_mean = u_mean
-        instance.u_std = u_std
-        instance.z_mean = z_mean
-        instance.z_std = z_std
+            t_met_model = keras.Model(output_layer_input, t_met_layer)  
 
         return cls(output_model, state_model, event_state_model, t_met_model, history = history, **params)
-    
-    def apply_transformations(u_all, z_all, inputs):
-        n_inputs = len(inputs[0][0])
-        u_mean = np.mean(u_all[:, 0, :n_inputs], axis=0)
-        u_std = np.std(u_all[:, 0, :n_inputs], axis=0)
-        u_std[u_std == 0] = 1
-        z_mean = np.mean(z_all, axis=0)
-        z_std = np.std(z_all, axis=0)
-        z_std[z_std == 0] = 1
-
-        u_mean = np.hstack((u_mean, z_mean))
-        u_std = np.hstack((u_std, z_std))
-
-        z_all = (z_all - z_mean) / z_std
-        u_all = (u_all - u_mean) / u_std
-
-        u_all_min_val = u_all.min()
-        u_all_shifted = False
-        if u_all_min_val <= 0:
-            u_all = u_all - u_all_min_val + 1 
-            u_all_shifted = True
-
-        z_all_min_val = z_all.min()
-        z_all_shifted = False
-        if z_all_min_val <= 0:
-            z_all = z_all - z_all_min_val + 1 
-            z_all_shifted = True
-
-        u_all_lambdas = []
-        if len(u_all) > 0:
-            n_features = u_all.shape[-1]
-            for feature_idx in range(n_features):
-                flattened_feature = u_all[:, :, feature_idx].flatten()
-                transformed_feature, lambda_ = boxcox(flattened_feature + 1)
-                u_all[:, :, feature_idx] = transformed_feature.reshape(u_all.shape[:-1])
-                u_all_lambdas.append(lambda_)
-
-        z_all_lambdas = []
-        if len(z_all) > 0:
-            n_outputs = z_all.shape[-1]
-            for output_idx in range(n_outputs):
-                flattened_output = z_all[:, output_idx].flatten()
-                transformed_output, lambda_ = boxcox(flattened_output + 1)
-                z_all[:, output_idx] = transformed_output.reshape(z_all.shape[:-1])
-                z_all_lambdas.append(lambda_)
-
-        return u_all, z_all, u_all_shifted, z_all_shifted, u_all_lambdas, z_all_lambdas, u_mean, u_std, z_mean, z_std, u_all_min_val, z_all_min_val
-
-    def apply_inverse_transformations(u_all, z_all, u_all_shifted, z_all_shifted, u_all_min_val, z_all_min_val, u_all_lambdas, z_all_lambdas, u_mean, u_std, z_mean, z_std, n_inputs, n_outputs):
-        def inv_boxcox(y, lambda_):
-            if lambda_ == 0:
-                return np.exp(y)
-            else:
-                return np.exp(np.log(lambda_ * y + 1) / lambda_)
-
-        for feature_idx, lambda_ in enumerate(u_all_lambdas):
-            flattened_feature = u_all[:, :, feature_idx].flatten()
-            inv_transformed_feature = inv_boxcox(flattened_feature, lambda_)
-            u_all[:, :, feature_idx] = inv_transformed_feature.reshape(u_all.shape[:-1])
-
-        for output_idx, lambda_ in enumerate(z_all_lambdas):
-            flattened_output = z_all[:, output_idx].flatten()
-            inv_transformed_output = inv_boxcox(flattened_output, lambda_)
-            z_all[:, output_idx] = inv_transformed_output.reshape(z_all.shape[:-1])
-
-        if u_all_shifted:
-            u_all = u_all + u_all_min_val - 1
-
-        if z_all_shifted:
-            z_all = z_all + z_all_min_val - 1
-
-        u_mean_inputs = u_mean[:-n_outputs]
-        u_std_inputs = u_std[:-n_outputs]
-        u_mean_output = u_mean[-n_outputs:]
-        u_std_output = u_std[-n_outputs:]
-
-        for feature_idx in range(n_inputs):
-            u_all[:, :, feature_idx] = (u_all[:, :, feature_idx] * u_std_inputs[feature_idx]) + u_mean_inputs[feature_idx]
-        for feature_idx in range(n_outputs):
-            u_all[:, :, feature_idx+n_inputs] = (u_all[:, :, feature_idx+n_inputs] * u_std_output[feature_idx]) + u_mean_output[feature_idx]
-
-        for output_idx in range(z_all.shape[-1]):
-            z_all[:, output_idx] = (z_all[:, output_idx] * z_std[output_idx]) + z_mean[output_idx]
-
-        return u_all, z_all
-
+        
     def simulate_to_threshold(self, future_loading_eqn, first_output=None, threshold_keys=None, **kwargs):
         t = kwargs.get('t0', 0)
         dt = kwargs.get('dt', 0.1)
@@ -793,3 +698,4 @@ class LSTMStateTransitionModel(DataModel):
             plt.legend()
         
         return plts
+    

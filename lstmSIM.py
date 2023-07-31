@@ -8,6 +8,27 @@ from progpy.loading import Piecewise
 from progpy.models import BatteryElectroChemEOD
 import time
 
+
+
+class MyBatt(BatteryElectroChemEOD):
+    events = BatteryElectroChemEOD.events + ['NewEOD']
+
+    def event_state(self, state):
+        event_state = super().event_state(state)
+        # event_state['NewEOD'] = event_state['EOD'] + 0.1
+
+        event_state['NewEOD'] = (event_state['EOD'] - 0.1) / (1 - 0.1)
+
+        return event_state
+
+    def threshold_met(self, x):
+        t_met = super().threshold_met(x)
+
+        event_state = self.event_state(x)
+        t_met['NewEOD'] = event_state['NewEOD'] <= 0
+
+        return t_met
+
 N_TRAIN = 5
 N_TEST = 3
 DT = (0.2, 2) # min, max
@@ -30,7 +51,7 @@ def generate_data(m, N):
         f_loads['i'].append(4)
         future_load = Piecewise(m.InputContainer, f_load_times, f_loads)
         dt = np.random.uniform(*DT)
-        results = m.simulate_to_threshold(future_load, dt=1, save_freq=SAVE_FREQ)
+        results = m.simulate_to_threshold(future_load, dt=1, save_freq=SAVE_FREQ, threshold_keys=['EOD'])
         times.append(results.times)
         inputs.append(np.array([np.hstack((u_i.matrix[:][0].T, [dt])) for u_i in results.inputs], dtype=float))
         outputs.append(results.outputs)
@@ -49,7 +70,7 @@ print(f"LSTM Layers {LAYERS}")
 print(f"LSTM Units {UNITS}\n")
 
 print('generating training data')
-m = BatteryElectroChemEOD(process_noise=PROCESS_NOISE)
+m = MyBatt(process_noise=PROCESS_NOISE)
 times_train, inputs_train, outputs_train, event_states_train, t_met_train = generate_data(m, N_TRAIN)
 
 print('training model')
@@ -60,12 +81,12 @@ m_lstm = LSTMStateTransitionModel.from_data(
     event_states=event_states_train,
     t_met=t_met_train,
     window=WINDOW,
-    epochs=25,
+    epochs=10,
     layers=LAYERS,
     units=UNITS,
     input_keys=['i', 'dt'],
     output_keys=['t', 'v'],
-    event_keys=['EOD'])
+    event_keys=['EOD', 'NewEOD'])
 train_time = time.perf_counter() - train_time
 
 print('generating test data')
