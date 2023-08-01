@@ -14,7 +14,7 @@ from progpy.state_estimators import KalmanFilter
 # Linear Model for an object thrown into the air
 class ThrownObject(LinearModel):
     """
-    Model that similates an object thrown into the air without air resistance
+    Model that simulates an object thrown into the air without air resistance
 
     Events (2)
         | falling: The object is falling

@@ -12,7 +12,7 @@ def run_example():
     ## Step 1: Create a model object
     batt = Battery()
 
-    # Set process nosie to 0 to illustrate match between original and serialized versions
+    # Set process noise to 0 to illustrate match between original and serialized versions
     batt.parameters['process_noise'] = 0 
 
     ### Step 2: serialize model for future use
@@ -27,7 +27,7 @@ def run_example():
     # Serialized result can also be saved to a text file and uploaded later using the following code:
     txtFile = open("model_save_json.txt", "w")
     txtFile.write(save_json)
-    txtFile.close() 
+    txtFile.close()
 
     with open('model_save_json.txt') as infile: 
         load_json = infile.read()

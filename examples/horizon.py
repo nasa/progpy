@@ -50,7 +50,7 @@ def run_example():
     # THIS IS WHERE WE DIVERGE FROM THE THROWN_OBJECT_EXAMPLE
     # Here we set a prediction horizon
     # We're saying we are not interested in any events that occur after this time
-    PREDICTION_HORIZON = 7.75
+    PREDICTION_HORIZON = 5
     samples = filt.x  # Since we're using a particle filter, which is also sample-based, we can directly use the samples, without changes
     STEP_SIZE = 0.01
     mc_results = mc.predict(samples, future_loading, dt=STEP_SIZE, horizon = PREDICTION_HORIZON)
@@ -60,7 +60,7 @@ def run_example():
     mc_results.time_of_event.plot_hist(keys = 'impact')
     mc_results.time_of_event.plot_hist(keys = 'falling')
 
-    print("\nSamples where impact occurs before horizon: {:.2f}%".format(metrics['impact']['number of samples']/NUM_SAMPLES*100))
+    print("\nSamples where impact occurs before horizon: {:.2f}%".format(metrics['impact']['number of samples']/100 * 100))
     
     # Step 4: Show all plots
     import matplotlib.pyplot as plt  # For plotting

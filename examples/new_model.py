@@ -81,7 +81,7 @@ def run_example():
     print('The object hit the ground in {} seconds'.format(round(simulated_results.times[-1],2)))
 
     # OK, now lets compare performance on different heavenly bodies. 
-    # This requires that we update the cofiguration
+    # This requires that we update the configuration
     grav_moon = -1.62
 
     # The first way to change the configuration is to pass in your desired config into construction of the model
