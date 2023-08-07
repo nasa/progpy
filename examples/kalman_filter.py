@@ -7,6 +7,7 @@ First, a linear model is defined. Then the KF State estimator is used with fake 
 """
 
 import numpy as np
+import matplotlib.pyplot as plt
 from progpy import LinearModel
 from progpy.state_estimators import KalmanFilter
 
@@ -117,6 +118,14 @@ def run_example():
     print_freq = 50  # Print every print_freq'th iteration
     x = m.initialize()
     u = m.InputContainer({})  # No input for this model
+
+    estimates_x = []
+    truths_x = []
+    diffs_x = []
+
+    estimates_v = []
+    truths_v = []
+    diffs_v = []
     
     for i in range(500):
         # Get simulated output (would be measured in a real application)
@@ -127,13 +136,48 @@ def run_example():
         x_est = kf.x.mean
 
         # Print Results
-        if i%print_freq == 0:  # Print every print_freq'th iteration
+        if i % print_freq == 0:
             print(f"t: {i*dt:.2f}\n\tEstimate: {x_est}\n\tTruth: {x}")
             diff = {key: x_est[key] - x[key] for key in x.keys()}
             print(f"\t Diff: {diff}")
 
+            # Append values for plotting
+            estimates_x.append(x_est['x'])
+            truths_x.append(x['x'])
+            diffs_x.append(diff['x'])
+
+            estimates_v.append(x_est['v'])
+            truths_v.append(x['v'])
+            diffs_v.append(diff['v'])
+
         # Update Real state for next step
         x = m.next_state(x, u, dt)
+
+    times = [i*dt for i in range(0, 500, print_freq)]  # Assuming print_freq is constant
+
+    # Plotting for 'x'
+    plt.figure(figsize=(10, 5))
+    plt.plot(times, estimates_x, label="Estimate x", color='blue')
+    plt.plot(times, truths_x, label="Truth x", color='green')
+    plt.plot(times, diffs_x, label="Difference x", color='red', linestyle='--')
+    plt.xlabel("Time")
+    plt.ylabel("x Value")
+    plt.legend()
+    plt.title("Comparison of Estimate, Truth, and Difference for x")
+    plt.grid(True)
+    plt.show()
+
+    # Plotting for 'v'
+    plt.figure(figsize=(10, 5))
+    plt.plot(times, estimates_v, label="Estimate v", color='blue')
+    plt.plot(times, truths_v, label="Truth v", color='green')
+    plt.plot(times, diffs_v, label="Difference v", color='red', linestyle='--')
+    plt.xlabel("Time")
+    plt.ylabel("v Value")
+    plt.legend()
+    plt.title("Comparison of Estimate, Truth, and Difference for v")
+    plt.grid(True)
+    plt.show()
 
 if __name__ == '__main__':
     run_example()
