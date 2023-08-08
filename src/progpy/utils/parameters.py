@@ -122,7 +122,7 @@ class PrognosticsModelParameters(UserDict):
             else:  # Not a function
                 # Process noise is single number - convert to dict
                 if isinstance(self['process_noise'], Number):
-                    self['process_noise'] = self._m.StateContainer({key: self['process_noise'] for key in self._m.states})
+                    self['process_noise'] = self._m.StateContainer([{key: self['process_noise'] for key in self._m.states}])
                 elif isinstance(self['process_noise'], dict):
                     noise = self['process_noise']
                     for key in self._m.states:

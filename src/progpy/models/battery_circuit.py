@@ -88,11 +88,11 @@ class BatteryCircuit(PrognosticsModel):
     
     Note
     ----
-        This is quicker but also less accurate than the electrochemistry :term:`model` (:py:class:`progpy.models.BatteryElectroChemEOD`). We recommend using the electrochemistry model, when possible.
+        This is quicker but also less accurate than the electrochemistry :term:`model` (:py:class:`prog_models.models.BatteryElectroChemEOD`). We recommend using the electrochemistry model, when possible.
 
     References
     -----------
-    .. [DaigleSankararaman2013] M. Daigle and S. Sankararaman, "Advanced Methods for Determining Prediction Uncertainty in Model-Based Prognostics with Application to Planetary Rovers," Annual Conference of the Prognostics and Health Management Society 2013, pp. 262-274, New Orleans, LA, October 2013. https://papers.phmsociety.org/index.php/phmconf/article/view/2253
+    .. [Daigle Sankararaman 2013] M. Daigle and S. Sankararaman, "Advanced Methods for Determining Prediction Uncertainty in Model-Based Prognostics with Application to Planetary Rovers," Annual Conference of the Prognostics and Health Management Society 2013, pp. 262-274, New Orleans, LA, October 2013. https://papers.phmsociety.org/index.php/phmconf/article/view/2253
     """
     events = ['EOD']
     inputs = ['i']
@@ -145,29 +145,37 @@ class BatteryCircuit(PrognosticsModel):
         # this optimization reduces runtime by almost half!
         parameters = self.parameters
         Rs = parameters['Rs']
-        Vcs = x['qcs']/parameters['Cs']
-        Vcp = x['qcp']/parameters['Ccp']
-        SOC = (parameters['CMax'] - parameters['qMax'] +
-               x['qb'])/parameters['CMax']
+        Vcs = (x['qcs'][0]/parameters['Cs'])
+        Vcp = (x['qcp'][0]/parameters['Ccp'])
+        SOC = ((parameters['CMax'] - parameters['qMax'] +
+               x['qb'][0])/parameters['CMax'])
         Cb = parameters['Cbp0']*SOC**3 + parameters['Cbp1'] * \
             SOC**2 + parameters['Cbp2']*SOC + parameters['Cbp3']
         Rcp = parameters['Rcp0'] + parameters['Rcp1'] * \
             np.exp(parameters['Rcp2']*(-SOC + 1))
-        Vb = x['qb']/Cb
-        Tbdot = (Rcp*Rs*parameters['ha']*(parameters['Ta'] - x['tb']) + Rcp*Vcs**2*parameters['hcs'] + Rs*Vcp**2*parameters['hcp']) \
+        Vb = (x['qb'][0]/Cb)
+        Tbdot = (Rcp*Rs*parameters['ha']*(parameters['Ta'] - x['tb'][0]) + Rcp*Vcs**2*parameters['hcs'] + Rs*Vcp**2*parameters['hcp']) \
             / (parameters['Jt']*Rcp*Rs)
         Vp = Vb - Vcp - Vcs
         ip = Vp/parameters['Rp']
-        ib = u['i'] + ip
+        ib = (u['i'][0] + ip)
         icp = ib - Vcp/Rcp
         ics = ib - Vcs/Rs
-
-        return self.StateContainer(np.array([
-            np.atleast_1d(Tbdot),  # tb
-            np.atleast_1d(-ib),  # qb
-            np.atleast_1d(icp),  # qcp
-            np.atleast_1d(ics)  # qcs
-        ]))
+        templist = ['tb', 'qb', 'qcp', 'qcs']
+        values = np.array([
+                    np.atleast_1d(Tbdot),  # tb
+                    np.atleast_1d(-ib),  # qb
+                    np.atleast_1d(icp),  # qcp
+                    np.atleast_1d(ics)  # qcs
+                ])
+        state_dict = dict(zip(templist, values))
+        # return self.StateContainer(np.array([
+        #     np.atleast_1d(Tbdot),  # tb
+        #     np.atleast_1d(-ib),  # qb
+        #     np.atleast_1d(icp),  # qcp
+        #     np.atleast_1d(ics)  # qcs
+        # ]))
+        return self.StateContainer(state_dict)
     
     def event_state(self, x) -> dict:
         parameters = self.parameters
@@ -187,15 +195,15 @@ class BatteryCircuit(PrognosticsModel):
 
     def output(self, x):
         parameters = self.parameters
-        Vcs = x['qcs']/parameters['Cs']
-        Vcp = x['qcp']/parameters['Ccp']
-        SOC = (parameters['CMax'] - parameters['qMax'] + x['qb'])/parameters['CMax']
+        Vcs = x['qcs'][0]/parameters['Cs']
+        Vcp = x['qcp'][0]/parameters['Ccp']
+        SOC = (parameters['CMax'] - parameters['qMax'] + x['qb'][0])/parameters['CMax']
         Cb = parameters['Cbp0']*SOC**3 + parameters['Cbp1']*SOC**2 + parameters['Cbp2']*SOC + parameters['Cbp3']
-        Vb = x['qb']/Cb
+        Vb = x['qb'][0]/Cb
 
-        return self.OutputContainer(np.array([
-            np.atleast_1d(x['tb']),            # t
-            np.atleast_1d(Vb - Vcp - Vcs)]))   # v
+        return self.OutputContainer(columns=['t', 'v'], data=np.array([
+            np.atleast_1d(x['tb'][0]),            # t
+            np.atleast_1d(Vb - Vcp - Vcs)]).T)   # v
 
     def threshold_met(self, x) -> dict:
         parameters = self.parameters

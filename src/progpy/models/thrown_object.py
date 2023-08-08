@@ -83,34 +83,34 @@ class ThrownObject(PrognosticsModel):
     }
 
     def initialize(self, u=None, z=None):
-        return self.StateContainer({
+        return self.StateContainer([{
             'x': self.parameters['thrower_height'],  # Thrown, so initial altitude is height of thrower
             'v': self.parameters['throwing_speed']   # Velocity at which the ball is thrown - this guy is a professional baseball pitcher
-            })
+            }])
     
     def next_state(self, x, u, dt: float):
-        next_x = x['x'] + x['v']*dt
-        drag_acc = self.parameters['lumped_param'] * x['v'] * x['v']
-        next_v = x['v'] + (self.parameters['g'] - drag_acc*np.sign(x['v']))*dt
-        return self.StateContainer(np.array([
+        next_x = x['x'][0] + x['v'][0]*dt
+        drag_acc = self.parameters['lumped_param'] * x['v'][0] * x['v'][0]
+        next_v = x['v'][0] + (self.parameters['g'] - drag_acc*np.sign(x['v'][0]))*dt
+        return self.StateContainer(columns=['x', 'v'], data=np.array([
                 np.atleast_1d(next_x),
                 np.atleast_1d(next_v)  # Acceleration of gravity
-            ]))
+            ]).T)
 
     def output(self, x):
-        return self.OutputContainer(np.array([[x['x']]]))
+        return self.OutputContainer(columns=['x'], data=[x['x'][0]])
 
     def threshold_met(self, x) -> dict:
         return {
-            'falling': x['v'] < 0,
-            'impact': x['x'] <= 0
+            'falling': x['v'][0] < 0,
+            'impact': x['x'][0] <= 0
         }
 
     def event_state(self, x) -> dict:
         # Use speed and position to estimate maximum height
-        x_max = x['x'] + np.square(x['v'])/(-self.parameters['g']*2)
+        x_max = x['x'][0] + np.square(x['v'][0])/(-self.parameters['g']*2)
         # 1 until falling begins
-        x_max = np.where(x['v'] > 0, x['x'], x_max)
+        x_max = np.where(x['v'][0] > 0, x['x'], x_max)
         return {
             'falling': np.maximum(x['v']/self.parameters['throwing_speed'], 0),  # Throwing speed is max speed
             'impact': np.maximum(x['x']/x_max, 0)  # then it's fraction of height
@@ -137,20 +137,20 @@ class LinearThrownObject(LinearModel):
     }
 
     def initialize(self, u=None, z=None):
-        return self.StateContainer({
+        return self.StateContainer([{
             'x': self.parameters['thrower_height'],  # Thrown, so initial altitude is height of thrower
             'v': self.parameters['throwing_speed']  # Velocity at which the ball is thrown - this guy is a professional baseball pitcher
-            })
+            }])
     
     def threshold_met(self, x):
         return {
-            'falling': x['v'] < 0,
-            'impact': x['x'] <= 0
+            'falling': x['v'][0] < 0,
+            'impact': x['x'][0] <= 0
         }
 
     def event_state(self, x):
-        x_max = x['x'] + np.square(x['v'])/(-self.parameters['g']*2)  # Use speed and position to estimate maximum height
+        x_max = x['x'][0] + np.square(x['v'][0])/(-self.parameters['g']*2)  # Use speed and position to estimate maximum height
         return {
-            'falling': np.maximum(x['v']/self.parameters['throwing_speed'], 0),  # Throwing speed is max speed
-            'impact': np.maximum(x['x']/x_max, 0) if x['v'] < 0 else 1  # 1 until falling begins, then it's fraction of height
+            'falling': np.maximum(x['v'][0]/self.parameters['throwing_speed'], 0),  # Throwing speed is max speed
+            'impact': np.maximum(x['x'][0]/x_max, 0) if x['v'][0] < 0 else 1  # 1 until falling begins, then it's fraction of height
         }

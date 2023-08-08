@@ -11,11 +11,13 @@ import numpy as np
 from typing import List  # Still needed until v3.9
 from warnings import warn
 
+import pandas as pd
+
 from progpy.exceptions import ProgModelStateLimitWarning, warn_once
 from progpy.loading import Piecewise
+from progpy.ProgPyDataFrame import ProgPyDataFrame, InputContainer, OutputContainer
 from progpy.sim_result import SimResult, LazySimResult
 from progpy.utils import ProgressBar, calc_error, input_validation
-from progpy.utils.containers import DictLikeMatrixWrapper, InputContainer, OutputContainer
 from progpy.utils.next_state import next_state_functions
 from progpy.utils.parameters import PrognosticsModelParameters
 from progpy.utils.serialization import CustomEncoder, custom_decoder
@@ -55,18 +57,11 @@ class PrognosticsModel(ABC):
 
     Example
     -------
-        >>> m = PrognosticsModel(process_noise=3.2)
-        Traceback (most recent call last):
-            ...
-        TypeError: Must have `states` attribute
-        >>> m2 = PrognosticsModel(integration_method='rk4')
-        Traceback (most recent call last):
-            ...
-        TypeError: Must have `states` attribute
-        >>> m3 = PrognosticsModel(integration_method=sp.integrate.RK45)
-        Traceback (most recent call last):
-            ...
-        NameError: name 'sp' is not defined
+        >>> from progpy.models import BatteryCircuit
+        >>> import scipy as sp
+        >>> m = BatteryCircuit(process_noise=3.2)
+        >>> m2 = BatteryCircuit(integration_method='rk4')
+        >>> m3 = BatteryCircuit(integration_method=sp.integrate.RK45)
 
     Attributes
     ----------
@@ -90,11 +85,11 @@ class PrognosticsModel(ABC):
             Identifiers for each performance metric
         events: list[str], optional
             Identifiers for each :term:`event` predicted
-        StateContainer : DictLikeMatrixWrapper
+        StateContainer : ProgPyDataFrame
             Class for state container - used for representing :term:`state`
-        OutputContainer : DictLikeMatrixWrapper
+        OutputContainer : ProgPyDataFrame
             Class for output container - used for representing :term:`output`
-        InputContainer : DictLikeMatrixWrapper
+        InputContainer : ProgPyDataFrame
             Class for input container - used for representing :term:`input`
     """
     is_vectorized = False
@@ -181,23 +176,26 @@ class PrognosticsModel(ABC):
 
         states = self.states
 
-        class StateContainer(DictLikeMatrixWrapper):
-            def __init__(self, data):
-                super().__init__(states, data)
+        class StateContainer(ProgPyDataFrame):
+            @property
+            def _constructor(self):
+                return StateContainer
         self.StateContainer = StateContainer
 
         inputs = self.inputs
 
-        class InputContainer(DictLikeMatrixWrapper):
-            def __init__(self, data):
-                super().__init__(inputs, data)
+        class InputContainer(ProgPyDataFrame):
+            @property
+            def _constructor(self):
+                return InputContainer
         self.InputContainer = InputContainer
 
         outputs = self.outputs
 
-        class OutputContainer(DictLikeMatrixWrapper):
-            def __init__(self, data):
-                super().__init__(outputs, data)
+        class OutputContainer(ProgPyDataFrame):
+            @property
+            def _constructor(self):
+                return OutputContainer
         self.OutputContainer = OutputContainer
 
         self.parameters = PrognosticsModelParameters(self, params, self.param_callbacks)
@@ -223,14 +221,14 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-            :
-            >>> from progpy.models import BatteryCircuit
+            
+            >>> from prog_models.models import BatteryCircuit
             >>> m = BatteryCircuit()    # Replace above with specific model being simulated ^
-            >>> u = m.InputContainer({'u1': 3.2})
-            >>> z = m.OutputContainer({'z1': 2.2})
-            >>> x = m.initialize(u, z)  # Initialize first state
+            >>> u = m.InputContainer([{'i': 2.0}])
+            >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
+            >>> x = m.initialize(u, z) # Initialize first state
         """
-        return self.StateContainer(self.parameters['x0'])
+        return self.StateContainer([self.parameters['x0']])
 
     def apply_measurement_noise(self, z):
         """
@@ -250,9 +248,9 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryCircuit
+        >>> from prog_models.models import BatteryCircuit
         >>> m = BatteryCircuit()
-        >>> z = m.OutputContainer({'z1': 2.2})
+        >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> z = m.apply_measurement_noise(z)
 
         Note
@@ -282,12 +280,12 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryCircuit
+        >>> from prog_models.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
-        >>> u = m.InputContainer({'u1': 3.2})
-        >>> z = m.OutputContainer({'z1': 2.2})
+        >>> u = m.InputContainer([{'i': 2.0}])
+        >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> x = m.initialize(u, z) # Initialize first state
-        >>> x = m.apply_process_noise(x)    # {'tb': 292.04728504765023, 'qb': 7856.398056966799, 'qcp': 0.1736435913459429, 'qcs': 0.053705829558158086}
+        >>> x = m.apply_process_noise(x)
 
         Note
         ----
@@ -317,10 +315,10 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryCircuit
+        >>> from prog_models.models import BatteryCircuit
         >>> m = BatteryCircuit()  # Replace with specific model being simulated
-        >>> u = m.InputContainer({'i': 2.0})
-        >>> z = m.OutputContainer({'v': 3.2, 't': 295})
+        >>> u = m.InputContainer([{'i': 2.0}])
+        >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> x = m.initialize(u, z) # Initialize first state
         >>> dx = m.dx(x, u) # Returns first derivative of state given input u
 
@@ -359,14 +357,13 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryCircuit
+        >>> from prog_models.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
-        >>> u = m.InputContainer({'u1': 3.2})
-        >>> z = m.OutputContainer({'z1': 2.2})
+        >>> u = m.InputContainer([{'i': 2.0}])
+        >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> x = m.initialize(u, z) # Initialize first state
         >>> x = m.next_state(x, u, 0.1) # Returns state at 3.1 seconds given input u
 
-        ???{'tb': 292.1, 'qb': nan, 'qcp': nan, 'qcs': nan}
 
         See Also
         --------
@@ -377,7 +374,7 @@ class PrognosticsModel(ABC):
         A model should overwrite either `next_state` or `dx`. Override `dx` for continuous models, and `next_state` for discrete, where the behavior cannot be described by the first derivative
         """
         dx = self.dx(x, u)
-        return self.StateContainer({key: x[key] + dx[key]*dt for key in dx.keys()})
+        return self.StateContainer([{key: x[key][0] + dx[key][0]*dt for key in dx.keys()}])
 
     @property
     def is_continuous(self) -> bool:
@@ -417,10 +414,10 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryCircuit
+        >>> from prog_models.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
-        >>> u = m.InputContainer({'u1': 3.2})
-        >>> z = m.OutputContainer({'z1': 2.2})
+        >>> u = m.InputContainer([{'i': 2.0}])
+        >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> x = m.initialize(u, z) # Initialize first state
         >>> x = m.apply_limits(x) # Returns bounded state
         """
@@ -451,10 +448,10 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryElectroChemEOD
+        >>> from prog_models.models import BatteryElectroChemEOD
         >>> m = BatteryElectroChemEOD() # Replace with specific model being simulated
-        >>> u = m.InputContainer({'u1': 3.2})
-        >>> z = m.OutputContainer({'z1': 2.2})
+        >>> u = m.InputContainer([{'i': 2.0}])
+        >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> x = m.initialize(u, z) # Initialize first state
         >>> pm = m.performance_metrics(x)   # {'max_i': array([8.83810109])}
         """
@@ -470,7 +467,7 @@ class PrognosticsModel(ABC):
         ----------
         x : StateContainer
             state, with keys defined by model.states \n
-            e.g., x = m.StateContainer({'abc': 332.1, 'def': 221.003}) given states = ['abc', 'def']
+            e.g., x = m.StateContainer([{'abc': 332.1, 'def': 221.003}]) given states = ['abc', 'def']
 
         Returns
         -------
@@ -480,20 +477,19 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryCircuit
+        >>> from prog_models.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
-        >>> u = m.InputContainer({'u1': 3.2})
-        >>> z = m.OutputContainer({'z1': 2.2})
+        >>> u = m.InputContainer([{'i': 2.0}])
+        >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> x = m.initialize(u, z) # Initialize first state
-        >>> z = m.output(x)
-        {'t': 292.1, 'v': 4.182999999010731}
+        >>> z = m.output(x) # {'t': 292.1, 'v': 4.182999999010731}
 
         """
         if self.is_direct:
             warn_once('This Direct Model does not support output estimation. Did you mean to call time_of_event?')
         else:
             warn_once('This model does not support output estimation.')
-        return self.OutputContainer({})
+        return self.OutputContainer([{}])
 
     def __output(self, x):
         """
@@ -503,13 +499,13 @@ class PrognosticsModel(ABC):
         ----------
         x : StateContainer
             state, with keys defined by model.states \n
-            e.g., x = m.StateContainer({'abc': 332.1, 'def': 221.003}) given states = ['abc', 'def']
+            e.g., x = m.StateContainer([{'abc': 332.1, 'def': 221.003}]) given states = ['abc', 'def']
 
         Returns
         -------
         z : OutputContainer
             Outputs, with keys defined by model.outputs. \n
-            e.g., z = m.OutputContainer({'t':12.4, 'v':3.3} )given outputs = ['t', 'v']
+            e.g., z = m.OutputContainer([{'t':12.4, 'v':3.3}] )given outputs = ['t', 'v']
 
         """
 
@@ -537,10 +533,10 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryCircuit
+        >>> from prog_models.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
-        >>> u = m.InputContainer({'u1': 3.2})
-        >>> z = m.OutputContainer({'z1': 2.2})
+        >>> u = m.InputContainer([{'i': 2.0}])
+        >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> x = m.initialize(u, z) # Initialize first state
         >>> event_state = m.event_state(x)  # {'EOD': 1.0}
 
@@ -552,12 +548,12 @@ class PrognosticsModel(ABC):
         --------
         threshold_met
         """
+
         if type(self).threshold_met == PrognosticsModel.threshold_met:
             # Neither Threshold Met nor Event States are overridden
             return {}
 
-        return {key: 1.0-float(t_met)
-            for (key, t_met) in self.threshold_met(x).items()} 
+        return {key: 1.0-float(t_met) for (key, t_met) in self.threshold_met(x).items()}
     
     def threshold_met(self, x) -> dict:
         """
@@ -574,10 +570,10 @@ class PrognosticsModel(ABC):
                 e.g., thresholds_met = {'EOL': False} given events = ['EOL']
 
         Example:
-            >>> from progpy.models import BatteryCircuit
+            >>> from prog_models.models import BatteryCircuit
             >>> m = BatteryCircuit() # Replace with specific model being simulated
-            >>> u = m.InputContainer({'u1': 3.2})
-            >>> z = m.OutputContainer({'z1': 2.2})
+            >>> u = m.InputContainer([{'i': 2.0}])
+            >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
             >>> x = m.initialize(u, z) # Initialize first state
             >>> threshold_met = m.threshold_met(x)  # {'EOD': False}
 
@@ -587,12 +583,13 @@ class PrognosticsModel(ABC):
         See Also:
             event_state
         """
+
         if type(self).event_state == PrognosticsModel.event_state:
             # Neither Threshold Met nor Event States are overridden
             return {}
 
         return {key: event_state <= 0
-            for (key, event_state) in self.event_state(x).items()} 
+            for (key, event_state) in self.event_state(x).items()}
 
     @property
     def is_state_transition_model(self) -> bool:
@@ -705,7 +702,7 @@ class PrognosticsModel(ABC):
             t = result.times[-1]
         return time_of_event
 
-    def simulate_to(self, time : float, future_loading_eqn: abc.Callable = lambda t,x=None: {}, first_output=None, **kwargs) -> namedtuple:
+    def simulate_to(self, time : float, future_loading_eqn: abc.Callable = lambda t,x=None: {}, first_output=pd.DataFrame(), **kwargs) -> namedtuple:
         """
         Simulate prognostics model for a given number of seconds
 
@@ -745,14 +742,14 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryCircuit
+        >>> from prog_models.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
         >>> def future_load_eqn(t, x = None):
         ...     if t < 5.0: # Load is 2.0 for first 5 seconds
-        ...         return m.InputContainer({'i': 2.0})
+        ...         return m.InputContainer([{'i': 2.0}])
         ...     else:
-        ...         return m.InputContainer({'i': 2.2})
-        >>> first_output = m.OutputContainer({'v': 3.2, 't': 295})
+        ...         return m.InputContainer([{'i': 2.2}])
+        >>> first_output = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> (results) = m.simulate_to(200, future_load_eqn, first_output)
 
         """
@@ -766,7 +763,7 @@ class PrognosticsModel(ABC):
 
         return self.simulate_to_threshold(future_loading_eqn, first_output, **kwargs)
  
-    def simulate_to_threshold(self, future_loading_eqn: abc.Callable = None, first_output = None, threshold_keys: list = None, **kwargs) -> namedtuple:
+    def simulate_to_threshold(self, future_loading_eqn: abc.Callable = None, first_output = ProgPyDataFrame(), threshold_keys: list = None, **kwargs) -> namedtuple:
         """
         Simulate prognostics model until any or specified threshold(s) have been met
 
@@ -787,7 +784,7 @@ class PrognosticsModel(ABC):
         integration_method: str, optional
             Integration method, e.g. 'rk4' or 'euler' (default: 'euler')
         save_freq : float, optional
-            Frequency at which output is saved (s), e.g., save_freq = 10. A save_freq of 0 will save every step. \n
+            Frequency at which output is saved (s), e.g., save_freq = 10 \n
         save_pts : list[float], optional
             Additional ordered list of custom times where output is saved (s), e.g., save_pts= [50, 75] \n
         eval_pts : list[float], optional
@@ -832,14 +829,14 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from progpy.models import BatteryCircuit
+        >>> from prog_models.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
         >>> def future_load_eqn(t, x = None):
         ...    if t< 5.0: # Load is 3.0 for first 5 seconds
-        ...        return m.InputContainer({'i': 2.0})
+        ...        return m.InputContainer([{'i': 2.0}])
         ...    else:
-        ...        return m.InputContainer({'i': 2.2})
-        >>> first_output = m.OutputContainer({'v': 3.2, 't': 295})
+        ...        return m.InputContainer([{'i': 2.2}])
+        >>> first_output = m.OutputContainer([{'v': 3.2, 't': 295}])
         >>> (results) = m.simulate_to_threshold(future_load_eqn, first_output)
 
         Note
@@ -847,7 +844,7 @@ class PrognosticsModel(ABC):
         configuration of the model is set through model.parameters.\n
         """
         # Input Validation
-        if first_output and not all(key in first_output for key in self.outputs):
+        if not first_output.empty and not all(key in first_output.columns for key in self.outputs):
             raise ValueError("Missing key in 'first_output', must have every key in model.outputs")
 
         if future_loading_eqn is None:
@@ -883,8 +880,8 @@ class PrognosticsModel(ABC):
             raise ValueError("'dt' must be positive, was {}".format(config['dt']))
         if not isinstance(config['save_freq'], Number) and not isinstance(config['save_freq'], tuple):
             raise TypeError("'save_freq' must be a number, was a {}".format(type(config['save_freq'])))
-        if (isinstance(config['save_freq'], Number) and config['save_freq'] < 0) or \
-            (isinstance(config['save_freq'], tuple) and config['save_freq'][1] < 0):
+        if (isinstance(config['save_freq'], Number) and config['save_freq'] <= 0) or \
+            (isinstance(config['save_freq'], tuple) and config['save_freq'][1] <= 0):
             raise ValueError("'save_freq' must be positive, was {}".format(config['save_freq']))
         if not isinstance(config['save_pts'], abc.Iterable):
             raise TypeError("'save_pts' must be list or array, was a {}".format(type(config['save_pts'])))
@@ -942,9 +939,9 @@ class PrognosticsModel(ABC):
 
         # Initialization of save arrays
         saved_times = []
-        saved_inputs = []
-        saved_states = []  
-        saved_outputs = []
+        saved_inputs = ProgPyDataFrame()
+        saved_states = ProgPyDataFrame()
+        saved_outputs = ProgPyDataFrame()
         saved_event_states = []
         horizon = t+config['horizon']
         if isinstance(config['save_freq'], tuple):
@@ -969,10 +966,10 @@ class PrognosticsModel(ABC):
         if config['print']:
             def update_all():
                 saved_times.append(t)
-                saved_inputs.append(u)
-                saved_states.append(deepcopy(x))  # Avoid optimization where x is not copied
-                saved_outputs.append(output(x))
-                saved_event_states.append(event_state(x))
+                saved_inputs.add_row(u)
+                saved_states.add_row(deepcopy(x))  # Avoid optimization where x is not copied
+                saved_outputs.add_row(output(x))
+                saved_event_states.add_row(event_state(x))
                 print("Time: {}\n\tInput: {}\n\tState: {}\n\tOutput: {}\n\tEvent State: {}\n"
                     .format(
                         saved_times[-1],
@@ -983,8 +980,8 @@ class PrognosticsModel(ABC):
         else:
             def update_all():
                 saved_times.append(t)
-                saved_inputs.append(u)
-                saved_states.append(deepcopy(x))  # Avoid optimization where x is not copied
+                saved_inputs.add_row(u)
+                saved_states.add_row(deepcopy(x))  # Avoid optimization where x is not copied
 
         # configuring next_time function to define prediction time step, default is constant dt
         if callable(config['dt']):
@@ -1013,26 +1010,25 @@ class PrognosticsModel(ABC):
             def next_time(t, x=None):
                 next_save_pt = save_pts[save_pt_index] if save_pt_index < len(save_pts) else float('inf')
                 next_eval_pt = eval_pts[eval_pt_index] if eval_pt_index < len(eval_pts) else float('inf')
-                opts = (item for item in (dt, next_save-t, next_save_pt-t, next_eval_pt-t) if item > 0)
-                return min(*opts)
+                return min(dt, next_save-t, next_save_pt-t, next_eval_pt-t)
         elif dt_mode != 'function':
             raise ValueError(f"'dt' mode {dt_mode} not supported. Must be 'constant', 'auto', or a function")
         
         # Auto Container wrapping
         dt0 = next_time(t, x) - t
-        if not isinstance(u, DictLikeMatrixWrapper):
+        if not isinstance(u, ProgPyDataFrame):
             # Wrapper around the future loading equation
             def load_eqn(t, x):
                 u = future_loading_eqn(t, x)
                 return self.InputContainer(u)
 
-        if not isinstance(next_state(x.copy(), u, dt0), DictLikeMatrixWrapper):
+        if not isinstance(next_state(x.copy(), u, dt0), ProgPyDataFrame):
             # Wrapper around the next state equation
             def next_state(x, u, dt):
                 x = self.next_state(x, u, dt)
-                return self.StateContainer(x)
+                return self.StateContainer([x])
 
-        if not isinstance(self.output(x), DictLikeMatrixWrapper):
+        if not isinstance(self.output(x), ProgPyDataFrame):
             # Wrapper around the output equation
             def output(x):
                 # Calculate output, convert to output container
@@ -1055,11 +1051,11 @@ class PrognosticsModel(ABC):
        
         while t < horizon:
             dt_i = next_time(t, x)
-            t_load = t + dt_i/2  # Saving as separate variable reduces likelihood of floating point error
+            t = t + dt_i/2
             # Use state at midpoint of step to best represent the load during the duration of the step
             # This is sometimes referred to as 'leapfrog integration'
-            u = load_eqn(t_load, x)
-            t += dt_i
+            u = load_eqn(t, x)
+            t = t + dt_i/2
             x = next_state(x, u, dt_i)
             x = apply_noise(x, dt_i)
             x = apply_limits(x)
@@ -1083,7 +1079,7 @@ class PrognosticsModel(ABC):
 
             # Update progress bar
             if config['progress']:
-                percentages = [1-val for val in event_state(x).values()]
+                percentages = [1-val for val in event_state(x.get_progpy_dict()).values()]
                 percentages.append((t/horizon))
                 converted_iteration = int(max(min(100, max(percentages)*100), 0))
                 if converted_iteration - last_percentage > 1:
@@ -1430,7 +1426,7 @@ class PrognosticsModel(ABC):
         -------
         See examples/generate_surrogate
         """
-        from progpy.data_models import SURROGATE_METHOD_LOOKUP
+        from prog_models.data_models import SURROGATE_METHOD_LOOKUP
 
         if method not in SURROGATE_METHOD_LOOKUP.keys():
             raise ValueError("Method {} not supported. Supported methods: {}".format(method, SURROGATE_METHOD_LOOKUP.keys()))
@@ -1444,6 +1440,23 @@ class PrognosticsModel(ABC):
             'event_keys': self.events.copy(),
         }
         config.update(kwargs)
+
+        if 'inputs' in config:
+            warn_once("Use 'input_keys' instead of 'inputs'. 'inputs' was deprecated and will be removed in v1.6", DeprecationWarning)
+            config['input_keys'] = config['inputs']
+            del config['inputs']
+        if 'states' in config:
+            warn_once("Use 'state_keys' instead of 'states'. 'states' was deprecated and will be removed in v1.6", DeprecationWarning)
+            config['state_keys'] = config['states']
+            del config['states']
+        if 'outputs' in config:
+            warn_once("Use 'output_keys' instead of 'outputs'. 'outputs' was deprecated and will be removed in v1.6", DeprecationWarning)
+            config['output_keys'] = config['outputs']
+            del config['outputs']
+        if 'events' in config:
+            warn_once("Use 'event_keys' instead of 'events'. 'events' was deprecated and will be deprecated in v1.6")
+            config['event_keys'] = config['events']
+            del config['events']
 
         # Validate user inputs
         if not isinstance(load_functions, abc.Iterable):
