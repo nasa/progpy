@@ -27,8 +27,8 @@ class TestEnsemble(unittest.TestCase):
 
         m = OneInputOneOutputOneEventLM()
         
-        with self.assertRaises(ValueError):
-            EnsembleModel([m])
+
+        EnsembleModel([m])
 
     def test_wrong_type(self):
         # An ensemble model with a non-model should raise an exception
@@ -42,6 +42,48 @@ class TestEnsemble(unittest.TestCase):
             EnsembleModel(77)
         with self.assertRaises(TypeError):
             EnsembleModel([m, m, m, 77])
+
+    def test_single_model(self):
+        """
+        This tests that the ensemble model works with a single model, ensuring that inputs, states, outputs, and events are correctly handled.
+        """
+        m = OneInputOneOutputOneEventLM()
+        em = EnsembleModel([m])
+
+        # inputs, states, outputs, and events should be the same as the single model
+        self.assertSetEqual(set(em.inputs), {'u1'})
+        self.assertSetEqual(set(em.states), {'x1'})
+        self.assertSetEqual(set(em.outputs), {'z1'})
+        self.assertSetEqual(set(em.events), {'x1 == 10'})
+
+        # Initialize
+        x_t0 = em.initialize()
+        self.assertEqual(x_t0['x1'], 0)
+
+        # State transition
+        u = em.InputContainer({'u1': 1})
+        x_t1 = em.next_state(x_t0, u, 1)
+        self.assertEqual(x_t1['x1'], 1)
+
+        # Output
+        z = em.output(x_t1)
+        self.assertEqual(z['z1'], 1)
+
+        # Event state
+        es = em.event_state(x_t1)
+        self.assertEqual(es['x1 == 10'], 0.9)
+
+        # Threshold met
+        self.assertFalse(em.threshold_met(x_t1)['x1 == 10'])
+
+        # Transition again
+        x_t2 = em.next_state(x_t1, u, 2)
+
+        # Threshold met
+        # x1 == 3
+        self.assertFalse(em.threshold_met(x_t2)['x1 == 10'])
+
+        
 
     def test_two_models_identical(self):
         """
