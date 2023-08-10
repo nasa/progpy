@@ -6,7 +6,7 @@ from numpy import array, empty, take, exp, max, take, float64
 from scipy.stats import norm
 from warnings import warn
 
-from progpy.utils.containers import DictLikeMatrixWrapper
+from progpy.ProgPyDataFrame import ProgPyDataFrame
 
 from . import state_estimator
 from ..uncertain_data import UnweightedSamples, ScalarData, UncertainData
@@ -51,7 +51,7 @@ class ParticleFilter(state_estimator.StateEstimator):
         self._measure = model.output
 
         # Build array inplace
-        if isinstance(x0, DictLikeMatrixWrapper) or isinstance(x0, dict):
+        if isinstance(x0, ProgPyDataFrame) or isinstance(x0, dict):
             x0 = ScalarData(x0)
         elif not isinstance(x0, UncertainData):
             raise TypeError(f"x0 must be of type UncertainData or StateContainer, was {type(x0)}.")
@@ -190,6 +190,7 @@ class ParticleFilter(state_estimator.StateEstimator):
                    for state in self.particles.keys()]
 
         # Particles as a dictionary
+        # Miryam BookMark
         self.particles = self.model.StateContainer(array(samples))
 
     @property

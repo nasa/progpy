@@ -136,7 +136,7 @@ class PrognosticsModelParameters(UserDict):
                 if 'process_noise_dist' in self and self['process_noise_dist'].lower() not in process_noise_functions:
                     raise ValueError(f"Unsupported process noise distribution {self['process_noise_dist']}")
                 
-                if all(value == 0 for value in self['process_noise'].values()):
+                if all(value == 0 for value in self['process_noise'].values[0]):
                     # No noise, use none function
                     fcn = process_noise_functions['none']
                     self._m.apply_process_noise = types.MethodType(fcn, self._m)
@@ -159,7 +159,7 @@ class PrognosticsModelParameters(UserDict):
             else:
                 # Process noise is single number - convert to dict
                 if isinstance(self['measurement_noise'], Number):
-                    self['measurement_noise'] = self._m.OutputContainer({key: self['measurement_noise'] for key in self._m.outputs})
+                    self['measurement_noise'] = self._m.OutputContainer([{key: self['measurement_noise'] for key in self._m.outputs}])
                 elif isinstance(self['measurement_noise'], dict):
                     noise = self['measurement_noise']
                     for key in self._m.outputs:
@@ -172,7 +172,7 @@ class PrognosticsModelParameters(UserDict):
                 if 'measurement_noise_dist' in self and self['measurement_noise_dist'].lower() not in measurement_noise_functions:
                     raise ValueError(f"Unsupported measurement noise distribution {self['measurement_noise_dist']}")
 
-                if all(value == 0 for value in self['measurement_noise'].values()):
+                if all(value == 0 for value in self['measurement_noise'].values[0]):
                     # No noise, use none function
                     fcn = measurement_noise_functions['none']
                     self._m.apply_measurement_noise = types.MethodType(fcn, self._m)

@@ -4,7 +4,7 @@
 import json
 import numpy as np
 
-from progpy.utils.containers import DictLikeMatrixWrapper
+from progpy.ProgPyDataFrame import ProgPyDataFrame
 
 __all__ = ['CustomEncoder', 'custom_decoder']
 
@@ -16,9 +16,9 @@ class CustomEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, np.ndarray):
             return {'_original_type': 'ndarray', '_data': o.tolist()}
-        elif isinstance(o, DictLikeMatrixWrapper):
+        elif isinstance(o, ProgPyDataFrame):
             dict_temp = {k: v for k, v in o.items()}
-            dict_temp['_original_type'] = 'DictLikeMatrixWrapper'
+            dict_temp['_original_type'] = 'ProgPyDataFrame'
             return dict_temp
         elif isinstance(o, np.bool_):
             return bool(o)
@@ -39,9 +39,9 @@ def custom_decoder(o):
     if isinstance(o, dict) and '_original_type' in o.keys():
         if o['_original_type'] == 'ndarray':
             return np.array(o['_data'])
-        elif o['_original_type'] == 'DictLikeMatrixWrapper':
+        elif o['_original_type'] == 'ProgPyDataFrame':
             del o['_original_type']
-            return DictLikeMatrixWrapper(list(o.keys()), o)
+            return ProgPyDataFrame(list(o.keys()), o)
         elif o['_original_type'] == 'pickled':
             import pickle
             from base64 import b64decode

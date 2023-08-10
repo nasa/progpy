@@ -5,7 +5,7 @@ from itertools import chain
 import numpy as np
 
 from progpy.sim_result import SimResult
-from progpy.utils.containers import DictLikeMatrixWrapper
+from progpy.ProgPyDataFrame import ProgPyDataFrame
 
 
 def dict_handler(d):
@@ -20,13 +20,14 @@ def object_handler(o):
 
 # Set of handlers that describe how to estimate the size of the payload of an
 # object of a given type in format {type: handler}
+# Miryam Bookmark
 all_handlers = {tuple: iter,
                 list: iter,
                 np.ndarray: lambda a: iter(list(a.flat)),
                 dict: dict_handler,
                 set: iter,
                 frozenset: iter,
-                DictLikeMatrixWrapper: dict_handler,
+                ProgPyDataFrame: dict_handler,
                 SimResult: iter
                 }
 

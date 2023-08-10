@@ -1095,10 +1095,11 @@ class PrognosticsModel(ABC):
             # This check prevents double recording when the last state was a savepoint
             update_all()
         
-        if not saved_outputs:
+        if not saved_outputs.empty:
             # saved_outputs is empty, so it wasn't calculated in simulation - used cached result
-            saved_outputs = LazySimResult(self.__output, saved_times, saved_states) 
-            saved_event_states = LazySimResult(self.event_state, saved_times, saved_states)
+            # Miryam Bookmark
+            saved_outputs = LazySimResult(self.__output, saved_times, saved_states.get_progpy_dict())
+            saved_event_states = LazySimResult(self.event_state, saved_times, saved_states.get_progpy_dict())
         else:
             saved_outputs = SimResult(saved_times, saved_outputs, _copy=False)
             saved_event_states = SimResult(saved_times, saved_event_states, _copy=False)

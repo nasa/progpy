@@ -17,15 +17,19 @@ class ProgPyDataFrame(pd.DataFrame):
     # def add_row
 
     def get_progpy_dict(self):
-        return self.to_dict('records')[0]
+        if self.empty:
+            return []
+        else:
+            return self.to_dict('records')[0]
 
     def add_row(self, row):
-        if isinstance(row, ProgPyDataFrame):
-            row = row.get_progpy_dict()
-        if self.empty and not row.empty:
-            self.loc[0] = row
-        elif not self.empty and not row.empty:
-            self.loc[len(self)] = row
+        if not row.empty:
+            if isinstance(row, ProgPyDataFrame):
+                row = row.get_progpy_dict()
+            elif self.empty:
+                self.loc[0] = row
+            elif not self.empty:
+                self.loc[len(self)] = row
 
     # def __repr__(self) -> str:
     #     """
