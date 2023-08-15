@@ -35,8 +35,8 @@ class EnsembleModel(PrognosticsModel):
     def __init__(self, models: list, **kwargs):
         if not isinstance(models, Sequence):
             raise TypeError(f'EnsembleModel must be initialized with a list of models, got {type(models)}')
-        if len(models) < 2:
-            raise ValueError('EnsembleModel requires at least two models')
+        if len(models) < 1:
+            raise ValueError('EnsembleModel requires at least one model')
         for i, m in enumerate(models):
             if not isinstance(m, PrognosticsModel):
                 raise TypeError(f'EnsembleModel requires all models to be PrognosticsModel instances. models[{i}] was {type(m)}')
