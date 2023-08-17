@@ -385,6 +385,48 @@ class TestPredictors(unittest.TestCase):
 
     def test_mc_surrogate(self):
         self._test_surrogate_pred(MonteCarlo)
+    
+    def test_mc_num_samples(self):
+        """
+        This test confirms that monte carlos sampling logic works as expected
+        """
+        m = ThrownObject()
+        def future_load(t, x=None):
+            return m.InputContainer({})
+
+        pred = MonteCarlo(m)
+
+        # First test- scalar input
+        x_scalar = ScalarData({'x': 10, 'v': 0})
+        # Should default to 100 samples
+        result = pred.predict(x_scalar, future_load)
+        self.assertEqual(len(result.time_of_event), 100)
+        # Repeat with less samples
+        result = pred.predict(x_scalar, future_load, n_samples=10)
+        self.assertEqual(len(result.time_of_event), 10)
+        
+        # Second test- Same, but with multivariate normal input
+        # Behavior should be the same
+        x_mvnormal = MultivariateNormalDist(['x', 'v'], [10, 0], [[0.1, 0], [0, 0.1]])
+        # Should default to 100 samples
+        result = pred.predict(x_mvnormal, future_load)
+        self.assertEqual(len(result.time_of_event), 100)
+        # Repeat with less samples
+        result = pred.predict(x_mvnormal, future_load, n_samples=10)
+        self.assertEqual(len(result.time_of_event), 10)
+
+        # Third test- UnweightedSamples input
+        x_uwsamples = UnweightedSamples([{'x': 10, 'v': 0}, {'x': 9.9, 'v': 0.1}, {'x': 10.1, 'v': -0.1}])
+        # Should default to same as x_uwsamples - HERE IS THE DIFFERENCE FROM OTHER TYPES
+        result = pred.predict(x_uwsamples, future_load)
+        self.assertEqual(len(result.time_of_event), 3)
+        # Should be exact same data, in the same order
+        for i in range(3):
+            self.assertEqual(result.states[i][0]['x'], x_uwsamples[i]['x'])
+            self.assertEqual(result.states[i][0]['v'], x_uwsamples[i]['v'])
+        # Repeat with more samples
+        result = pred.predict(x_uwsamples, future_load, n_samples=10)
+        self.assertEqual(len(result.time_of_event), 10)
 
 # This allows the module to be executed directly    
 def main():
