@@ -74,6 +74,7 @@ class MonteCarlo(Predictor):
 
         # Perform prediction
         t0 = params.get('t0', 0)
+        HORIZON = params.get('horizon', float('inf'))  # Save the horizon to be used later
         for x in state:
             first_output = self.model.output(x)
             
@@ -82,6 +83,7 @@ class MonteCarlo(Predictor):
 
             params['t0'] = t0
             params['x'] = x
+            params['horizon'] = HORIZON  # reset to initial horizon
 
             if 'save_freq' in params and not isinstance(params['save_freq'], tuple):
                 params['save_freq'] = (params['t0'], params['save_freq'])
@@ -103,6 +105,10 @@ class MonteCarlo(Predictor):
 
                 # Non-vectorized prediction
                 while len(events_remaining) > 0:  # Still events to predict
+                    # Since horizon is relative to t0 (the simulation starting point),
+                    # we must subtract the difference in current t0 from the initial (i.e., prediction t0)
+                    # each subsequent simulation
+                    params['horizon'] = HORIZON - (params['t0'] - t0)
                     (t, u, xi, z, es) = simulate_to_threshold(future_loading_eqn,       
                         first_output, 
                         threshold_keys = events_remaining,

@@ -12,48 +12,35 @@ Results:
     ii) Time event is predicted to occur (with uncertainty)
 """
 
+import numpy as np
 from progpy.models.thrown_object import ThrownObject
-from progpy import *
+from progpy.predictors import MonteCarlo
+from progpy.uncertain_data import MultivariateNormalDist
 from pprint import pprint
 
 def run_example():
-    # Step 1: Setup model & future loading
+    # Step 1: Setup model, future loading, and state
     def future_loading(t, x = None):
         return {}
-    m = ThrownObject(process_noise = 0.25, measurement_noise = 0.2)
+    m = ThrownObject(process_noise = 0.5, measurement_noise = 0.15)
     initial_state = m.initialize()
 
-    # Step 2: Demonstrating state estimator
-    print("\nPerforming State Estimation Step...")
-
-    # Step 2a: Setup
     NUM_SAMPLES = 1000
-    filt = state_estimators.ParticleFilter(m, initial_state, num_particles = NUM_SAMPLES)
-    # VVV Uncomment this to use UKF State Estimator VVV
-    # filt = state_estimators.UnscentedKalmanFilter(batt, initial_state)
+    x = MultivariateNormalDist(initial_state.keys(), initial_state.values(), np.diag([x_i*0.01 for x_i in initial_state.values()]))
 
-    # Step 2b: One step of state estimator
-    u = m.InputContainer({})  # No input for ThrownObject
-    filt.estimate(0.1, u, m.output(initial_state))
-
-    # Note: in a prognostic application the above state estimation 
-    # step would be repeated each time there is new data. 
-    # Here we're doing one step to demonstrate how the state estimator is used
-
-    # Step 3: Demonstrating Predictor
+    # Step 2: Demonstrating Predictor
     print("\nPerforming Prediction Step...")
 
-    # Step 3a: Setup Predictor
-    mc = predictors.MonteCarlo(m)
+    # Step 2a: Setup Predictor
+    mc = MonteCarlo(m)
 
-    # Step 3b: Perform a prediction
+    # Step 2b: Perform a prediction
     # THIS IS WHERE WE DIVERGE FROM THE THROWN_OBJECT_EXAMPLE
     # Here we set a prediction horizon
     # We're saying we are not interested in any events that occur after this time
-    PREDICTION_HORIZON = 7.75
-    samples = filt.x  # Since we're using a particle filter, which is also sample-based, we can directly use the samples, without changes
+    PREDICTION_HORIZON = 7.7
     STEP_SIZE = 0.01
-    mc_results = mc.predict(samples, future_loading, dt=STEP_SIZE, horizon = PREDICTION_HORIZON)
+    mc_results = mc.predict(x, future_loading, n_samples=NUM_SAMPLES,dt=STEP_SIZE, horizon = PREDICTION_HORIZON)
     print("\nPredicted Time of Event:")
     metrics = mc_results.time_of_event.metrics()
     pprint(metrics)  # Note this takes some time
