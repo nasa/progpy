@@ -35,8 +35,10 @@ class MonteCarlo(Predictor):
         Any additional savepoints (s) e.g., [10.1, 22.5]
     """
 
+    __DEFAULT_N_SAMPLES = 100 # Default number of samples to use, if none specified and not UncertainData
+
     default_parameters = { 
-        'n_samples': 100  # Default number of samples to use, if none specified
+        'n_samples': None
     }
 
     def predict(self, state: UncertainData, future_loading_eqn: Callable, **kwargs) -> PredictionResults:
@@ -53,11 +55,20 @@ class MonteCarlo(Predictor):
         params['print'] = False
         params['progress'] = False
 
+        if not isinstance(state, UnweightedSamples) and params['n_samples'] is None:
+            # if not unweighted samples, some sample number is required, so set to default.
+            params['n_samples'] = MonteCarlo.__DEFAULT_N_SAMPLES
+        elif isinstance(state, UnweightedSamples) and params['n_samples'] is None:
+            params['n_samples'] = len(state)  # number of samples is from provided state
+
         if len(params['events']) == 0 and 'horizon' not in params:
             raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
 
-        # Sample from state if n_samples specified or state is not UnweightedSamples
-        if not isinstance(state, UnweightedSamples) or len(state) != params['n_samples']:
+        # Sample from state if n_samples specified or state is not UnweightedSamples (Case 2)
+        # Or if is Unweighted samples, but there are the wrong number of samples (Case 1)
+        if (
+            (isinstance(state, UnweightedSamples) and len(state) != params['n_samples'])  # Case 1
+            or not isinstance(state, UnweightedSamples)):  # Case 2
             state = state.sample(params['n_samples'])
 
         es_eqn = self.model.event_state
