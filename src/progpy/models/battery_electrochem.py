@@ -506,7 +506,7 @@ class BatteryElectroChemEOD(PrognosticsModel):
         params = self.parameters
         An = params['An']
         # Negative Surface
-        xnS = x['qnS']/params['qSMax']
+        xnS = x['qnS'][0] /params['qSMax']
         xnS2 = xnS+xnS  # Note: in python x+x is more efficient than 2*x
 
         one_minus_xnS = 1 - xnS
@@ -526,7 +526,7 @@ class BatteryElectroChemEOD(PrognosticsModel):
             An[11]*(xnS2_minus_1**12 - (22*xnS*one_minus_xnS)*xnS2_minus_1**10)/F,  #Ven11
             An[12]*(xnS2_minus_1**13 - (24*xnS*one_minus_xnS)*xnS2_minus_1**11)/F   #Ven12
         ]
-        Ven = params['U0n'] + R*x['tb']/F*np.log(one_minus_xnS/xnS) + sum(VenParts)
+        Ven = params['U0n'] + R*x['tb'][0]/F*np.log(one_minus_xnS/xnS) + sum(VenParts)
 
         # Positive Surface
         Ap = params['Ap']
@@ -549,12 +549,14 @@ class BatteryElectroChemEOD(PrognosticsModel):
             Ap[11]*((xpS2_minus_1)**12 - (22*xpS*one_minus_xpS)*(xpS2_minus_1)**(10))/F,  #Vep11
             Ap[12]*((xpS2_minus_1)**13 - (24*xpS*one_minus_xpS)*(xpS2_minus_1)**(11))/F   #Vep12
         ]
-        Vep = params['U0p'] + R*x['tb']/F*np.log(one_minus_xpS/xpS) + sum(VepParts)
-
-        return self.OutputContainer(np.array([
-            np.atleast_1d(x['tb'] - 273.15),
-            np.atleast_1d(Vep - Ven - x['Vo'] - x['Vsn'] - x['Vsp'])
-        ]))
+        Vep = params['U0p'] + R*x['tb'][0]/F*np.log(one_minus_xpS/xpS) + sum(VepParts)
+        columns = ['t', 'v']
+        data = np.array([
+            np.atleast_1d(x['tb'][0] - 273.15),
+            np.atleast_1d(Vep - Ven - x['Vo'][0] - x['Vsn'][0] - x['Vsp'][0])
+        ])
+        batt_elec_dict = dict(zip(columns, data))
+        return self.OutputContainer(batt_elec_dict)
 
     def threshold_met(self, x) -> dict:
         z = self.output(x)

@@ -23,12 +23,18 @@ class ProgPyDataFrame(pd.DataFrame):
             return self.to_dict('records')[0]
 
     def add_row(self, row):
-        if not row.empty:
-            if isinstance(row, ProgPyDataFrame):
-                row = row.get_progpy_dict()
-            elif self.empty:
-                self.loc[0] = row
-            elif not self.empty:
+        if isinstance(row, ProgPyDataFrame):
+            row_check = row.empty
+        else:
+            row_check = row
+        if not row_check:
+            if self.empty:
+                for col in row.columns:
+                    self[col] = row[col]
+                    self.reset_index(drop=True)
+            else:
+                if isinstance(row, ProgPyDataFrame):
+                    row = row.get_progpy_dict()
                 self.loc[len(self)] = row
 
     # def __repr__(self) -> str:

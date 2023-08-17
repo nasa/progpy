@@ -68,8 +68,7 @@ class ParticleFilter(state_estimator.StateEstimator):
                 self.parameters['num_particles'] = int(self.parameters['num_particles'])
             sample_gen = x0.sample(self.parameters['num_particles'])
         samples = [array(sample_gen.key(k), dtype=float64) for k in x0.keys()]
-        
-        self.particles = model.StateContainer(array(samples, dtype=float64))
+        self.particles = model.StateContainer(columns=x0.keys(), data=array(samples, dtype=float64).T)
 
         if 'R' in self.parameters:
             # For backwards compatibility
@@ -113,9 +112,9 @@ class ParticleFilter(state_estimator.StateEstimator):
 
         # Check Types
         if isinstance(u, dict):
-            u = self.model.InputContainer(u)
+            u = self.model.InputContainer([u])
         if isinstance(z, dict):
-            z = self.model.OutputContainer(z)
+            z = self.model.OutputContainer([z])
 
         # Optimization
         particles = self.particles
@@ -127,7 +126,7 @@ class ParticleFilter(state_estimator.StateEstimator):
         noise_params = self.parameters['measurement_noise']
         num_particles = self.parameters['num_particles']
         # Check which output keys are present (i.e., output of measurement function)
-        measurement_keys = output(self.model.StateContainer({key: particles[key][0] for key in particles.keys()})).keys()
+        measurement_keys = output(self.model.StateContainer([particles.iloc[0]])).columns
         zPredicted = {key: empty(num_particles) for key in measurement_keys}
 
         if self.model.is_vectorized:
@@ -144,10 +143,10 @@ class ParticleFilter(state_estimator.StateEstimator):
             # Propagate and calculate weights
             for i in range(num_particles):
                 t_i = self.t  # Used to mark time for each particle
-                x = self.model.StateContainer({key: particles[key][i] for key in particles.keys()})
+                x = self.model.StateContainer([particles])
                 while t_i < t:
                     dt_i = min(dt, t-t_i)
-                    x = next_state(x, u, dt_i) 
+                    x = next_state(x, u, dt_i)
                     x = apply_process_noise(x, dt_i)
                     x = apply_limits(x)
                     t_i += dt_i

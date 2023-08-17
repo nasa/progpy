@@ -280,7 +280,7 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from prog_models.models import BatteryCircuit
+        >>> from progpy.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
         >>> u = m.InputContainer([{'i': 2.0}])
         >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
@@ -357,7 +357,7 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from prog_models.models import BatteryCircuit
+        >>> from progpy.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
         >>> u = m.InputContainer([{'i': 2.0}])
         >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
@@ -553,7 +553,7 @@ class PrognosticsModel(ABC):
             # Neither Threshold Met nor Event States are overridden
             return {}
 
-        return {key: 1.0-float(t_met) for (key, t_met) in self.threshold_met(x).items()}
+        return {key: 1.0-float(t_met) for (key, t_met) in self.threshold_met(x).items()}    # BookMark!
     
     def threshold_met(self, x) -> dict:
         """
@@ -570,7 +570,7 @@ class PrognosticsModel(ABC):
                 e.g., thresholds_met = {'EOL': False} given events = ['EOL']
 
         Example:
-            >>> from prog_models.models import BatteryCircuit
+            >>> from progpy.models import BatteryCircuit
             >>> m = BatteryCircuit() # Replace with specific model being simulated
             >>> u = m.InputContainer([{'i': 2.0}])
             >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
@@ -942,7 +942,7 @@ class PrognosticsModel(ABC):
         saved_inputs = ProgPyDataFrame()
         saved_states = ProgPyDataFrame()
         saved_outputs = ProgPyDataFrame()
-        saved_event_states = []
+        saved_event_states = ProgPyDataFrame()
         horizon = t+config['horizon']
         if isinstance(config['save_freq'], tuple):
             # Tuple used to specify start and frequency

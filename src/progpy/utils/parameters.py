@@ -11,6 +11,7 @@ import types
 
 from progpy.utils.next_state import next_state_functions, SciPyIntegrateNextState
 from progpy.utils.noise_functions import measurement_noise_functions, process_noise_functions
+from progpy.ProgPyDataFrame import ProgPyDataFrame
 from progpy.utils.serialization import CustomEncoder, custom_decoder
 from progpy.utils.size import getsizeof
 
@@ -123,14 +124,16 @@ class PrognosticsModelParameters(UserDict):
                 # Process noise is single number - convert to dict
                 if isinstance(self['process_noise'], Number):
                     self['process_noise'] = self._m.StateContainer([{key: self['process_noise'] for key in self._m.states}])
-                elif isinstance(self['process_noise'], dict):
+                if isinstance(self['process_noise'], dict):
                     noise = self['process_noise']
                     for key in self._m.states:
                         # Set any missing keys to 0
                         if key not in noise.keys():
                             noise[key] = 0
-                            
-                    self['process_noise'] = self._m.StateContainer(noise)
+                    self['process_noise'] = self._m.StateContainer([noise])
+                # elif isinstance(self['process_noise'], ProgPyDataFrame):
+                #     noise = self['process_noise']
+                #     self['process_noise'] = self._m.StateContainer(noise)
                 
                 # Process distribution type
                 if 'process_noise_dist' in self and self['process_noise_dist'].lower() not in process_noise_functions:
@@ -166,7 +169,7 @@ class PrognosticsModelParameters(UserDict):
                         # Set any missing keys to 0
                         if key not in noise.keys():
                             noise[key] = 0
-                    self['measurement_noise'] = self._m.OutputContainer(noise)
+                    self['measurement_noise'] = self._m.OutputContainer([noise])
                 
                 # Process distribution type
                 if 'measurement_noise_dist' in self and self['measurement_noise_dist'].lower() not in measurement_noise_functions:
