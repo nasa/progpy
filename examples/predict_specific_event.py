@@ -12,8 +12,6 @@ def run_example():
     m = ThrownObject()
     initial_state = m.initialize()
     load = m.InputContainer({}) # Optimization - create once
-    def future_loading(t, x = None):
-        return load
 
     ## State Estimation - perform a single ukf state estimate step
     filt = state_estimators.UnscentedKalmanFilter(m, initial_state)
@@ -24,7 +22,7 @@ def run_example():
     pred = predictors.UnscentedTransformPredictor(m)
 
     # Predict with a step size of 0.1
-    mc_results = pred.predict(filt.x, future_loading, dt=0.1, save_freq= 1, events=['impact'])
+    mc_results = pred.predict(filt.x, dt=0.1, save_freq= 1, events=['impact'])
 
     # Print Results
     for i, time in enumerate(mc_results.times):

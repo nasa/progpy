@@ -66,10 +66,9 @@ class TestPredictors(unittest.TestCase):
         m = ThrownObject()
         pred = UnscentedTransformPredictor(m)
         samples = MultivariateNormalDist(['x', 'v'], [1.83, 40], [[0.1, 0.01], [0.01, 0.1]])
-        def future_loading(t, x={}):
-            return {}
 
-        mc_results = pred.predict(samples, future_loading, dt=0.01, save_freq=1)
+        # No future loading (i.e., no load)
+        mc_results = pred.predict(samples, dt=0.01, save_freq=1)
         self.assertAlmostEqual(mc_results.time_of_event.mean['impact'], 8.21, 0)
         self.assertAlmostEqual(mc_results.time_of_event.mean['falling'], 4.15, 0)
         # self.assertAlmostEqual(mc_results.times[-1], 9, 1)  # Saving every second, last time should be around the 1s after impact event (because one of the sigma points fails afterwards)
@@ -126,10 +125,9 @@ class TestPredictors(unittest.TestCase):
     def test_MC(self):
         m = ThrownObject()
         mc = MonteCarlo(m)
-        def future_loading(t=None, x=None):
-            return {}
-            
-        mc.predict(m.initialize(), future_loading, dt=0.2, num_samples=3, save_freq=1)
+        
+        # Test with empty future loading (i.e., no load)
+        mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1)
 
     def test_prediction_mvnormaldist(self):
         times = list(range(10))
