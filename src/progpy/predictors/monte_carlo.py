@@ -31,7 +31,7 @@ class MonteCarlo(Predictor):
         'n_samples': None
     }
 
-    def predict(self, state: UncertainData, future_loading_eqn: Callable, **kwargs) -> PredictionResults:
+    def predict(self, state: UncertainData, future_loading_eqn: Callable = None, **kwargs) -> PredictionResults:
         """
         Perform a single prediction
 
@@ -39,7 +39,7 @@ class MonteCarlo(Predictor):
         ----------
         state : UncertainData 
             Distribution representing current state of the system
-        future_loading_eqn : function (t, x) -> z
+        future_loading_eqn : function (t, x=None) -> z, optional
             Function to generate an estimate of loading at future time t, and state x
 
         Keyword Arguments
@@ -76,6 +76,9 @@ class MonteCarlo(Predictor):
             state._type = self.model.StateContainer
         else:
             raise TypeError("state must be UncertainData, dict, or StateContainer")
+
+        if future_loading_eqn is None:
+            future_loading_eqn = lambda t, x=None: self.model.InputContainer({})
 
         params = deepcopy(self.parameters) # copy parameters
         params.update(kwargs) # update for specific run
