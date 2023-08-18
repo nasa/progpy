@@ -19,27 +19,56 @@ class MonteCarlo(Predictor):
     
     Configuration Parameters
     ------------------------------
-    t0 : float
-        Initial time at which prediction begins, e.g., 0
-    dt : float
-        Simulation step size (s), e.g., 0.1
-    events : list[str]
-        Events to predict (subset of model.events) e.g., ['event1', 'event2']
-    horizon : float
-        Prediction horizon (s)
-    n_samples : int
-        Number of samples to use. If not specified, a default value is used. If state is type UnweightedSamples and n_samples is not provided, the provided unweighted samples will be used directly.
-    save_freq : float
-        Frequency at which results are saved (s)
-    save_pts : list[float]
-        Any additional savepoints (s) e.g., [10.1, 22.5]
+    n_samples : int, optional
+        Default number of samples to use. If not specified, a default value is used. If state is type UnweightedSamples and n_samples is not provided, the provided unweighted samples will be used directly.
+    save_freq : float, optional
+        Default frequency at which results are saved (s).
     """
 
+    __DEFAULT_N_SAMPLES = 100 # Default number of samples to use, if none specified and not UncertainData
+
     default_parameters = { 
-        'n_samples': 100  # Default number of samples to use, if none specified
+        'n_samples': None
     }
 
     def predict(self, state: UncertainData, future_loading_eqn: Callable, **kwargs) -> PredictionResults:
+        """
+        Perform a single prediction
+
+        Parameters
+        ----------
+        state : UncertainData 
+            Distribution representing current state of the system
+        future_loading_eqn : function (t, x) -> z
+            Function to generate an estimate of loading at future time t, and state x
+
+        Keyword Arguments
+        ------------------
+        t0 : float, optional
+            Initial time at which prediction begins, e.g., 0
+        dt : float, optional
+            Simulation step size (s), e.g., 0.1
+        events : list[str], optional
+            Events to predict (subset of model.events) e.g., ['event1', 'event2']
+        horizon : float, optional
+            Prediction horizon (s)
+        n_samples : int, optional
+            Number of samples to use. If not specified, a default value is used. If state is type UnweightedSamples and n_samples is not provided, the provided unweighted samples will be used directly.
+        save_freq : float, optional
+            Frequency at which results are saved (s)
+        save_pts : list[float], optional
+            Any additional savepoints (s) e.g., [10.1, 22.5]
+
+        Return
+        ----------
+        result from prediction, including: NameTuple
+            * times (List[float]): Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]            
+            * inputs (Prediction): Inputs at each savepoint such that inputs.snapshot(i) is the input distribution (type UncertainData) at times[i]
+            * states (Prediction): States at each savepoint such that states.snapshot(i) is the state distribution (type UncertainData) at times[i]
+            * outputs (Prediction): Outputs at each savepoint such that outputs.snapshot(i) is the output distribution (type UncertainData) at times[i]
+            * event_states (Prediction): Event states at each savepoint such that event_states.snapshot(i) is the event state distribution (type UncertainData) at times[i]
+            * time_of_event (UncertainData): Distribution of predicted Time of Event (ToE) for each predicted event, represented by some subclass of UncertaintData (e.g., MultivariateNormalDist)
+        """
         if isinstance(state, dict) or isinstance(state, self.model.StateContainer):
             from progpy.uncertain_data import ScalarData
             state = ScalarData(state, _type = self.model.StateContainer)
@@ -53,11 +82,20 @@ class MonteCarlo(Predictor):
         params['print'] = False
         params['progress'] = False
 
+        if not isinstance(state, UnweightedSamples) and params['n_samples'] is None:
+            # if not unweighted samples, some sample number is required, so set to default.
+            params['n_samples'] = MonteCarlo.__DEFAULT_N_SAMPLES
+        elif isinstance(state, UnweightedSamples) and params['n_samples'] is None:
+            params['n_samples'] = len(state)  # number of samples is from provided state
+
         if len(params['events']) == 0 and 'horizon' not in params:
             raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
 
-        # Sample from state if n_samples specified or state is not UnweightedSamples
-        if not isinstance(state, UnweightedSamples) or len(state) != params['n_samples']:
+        # Sample from state if n_samples specified or state is not UnweightedSamples (Case 2)
+        # Or if is Unweighted samples, but there are the wrong number of samples (Case 1)
+        if (
+            (isinstance(state, UnweightedSamples) and len(state) != params['n_samples'])  # Case 1
+            or not isinstance(state, UnweightedSamples)):  # Case 2
             state = state.sample(params['n_samples'])
 
         es_eqn = self.model.event_state
