@@ -18,9 +18,7 @@ from pprint import pprint
 
 def run_example():
     # Step 1: Setup model & future loading
-    def future_loading(t, x = None):
-        return {}
-    m = ThrownObject(process_noise = 0.25, measurement_noise = 0.2)
+    m = ThrownObject(process_noise=0.25, measurement_noise=0.2)
     initial_state = m.initialize()
 
     # Step 2: Demonstrating state estimator
@@ -53,7 +51,7 @@ def run_example():
     PREDICTION_HORIZON = 7.75
     samples = filt.x  # Since we're using a particle filter, which is also sample-based, we can directly use the samples, without changes
     STEP_SIZE = 0.01
-    mc_results = mc.predict(samples, future_loading, dt=STEP_SIZE, horizon = PREDICTION_HORIZON)
+    mc_results = mc.predict(samples, dt=STEP_SIZE, horizon=PREDICTION_HORIZON)
     print("\nPredicted Time of Event:")
     metrics = mc_results.time_of_event.metrics()
     pprint(metrics)  # Note this takes some time

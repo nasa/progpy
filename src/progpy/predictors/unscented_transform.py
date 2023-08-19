@@ -123,14 +123,14 @@ class UnscentedTransformPredictor(Predictor):
         self.filter = kalman.UnscentedKalmanFilter(num_states, num_measurements, self.parameters['dt'], measure, state_transition, self.sigma_points)
         self.filter.Q = self.parameters['Q']
 
-    def predict(self, state, future_loading_eqn: Callable, **kwargs) -> PredictionResults:
+    def predict(self, state, future_loading_eqn: Callable = None, **kwargs) -> PredictionResults:
         """
         Perform a single prediction
 
         Parameters
         ----------
         state (UncertaintData): Distribution of states
-        future_loading_eqn : function (t, x={}) -> z
+        future_loading_eqn: function (t, x=None) -> z, optional
             Function to generate an estimate of loading at future time t
         options (optional, kwargs): configuration options\n
         Any additional configuration values. Note: These parameters can also be specified in the predictor constructor. The following configuration parameters are supported: \n
@@ -168,6 +168,9 @@ class UnscentedTransformPredictor(Predictor):
             state._type = self.model.StateContainer
         else:
             raise TypeError("state must be UncertainData, dict, or StateContainer")
+
+        if future_loading_eqn is None:
+            future_loading_eqn = lambda t, x=None: self.model.InputContainer({})
 
         params = deepcopy(self.parameters) # copy parameters
         params.update(kwargs) # update for specific run

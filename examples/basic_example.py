@@ -20,9 +20,6 @@ from progpy import *
 def run_example():
     # Step 1: Setup model & future loading
     m = ThrownObject(process_noise = 1)
-    def future_loading(t, x = None):
-        # No load for a thrown object
-        return m.InputContainer({})
     initial_state = m.initialize()
 
     # Step 2: Demonstrating state estimator
@@ -42,7 +39,7 @@ def run_example():
     # Step 2c: Perform state estimation step, given some measurement, above what's expected
     example_measurements = m.OutputContainer({'x': 7.5})
     t = 0.1
-    u = future_loading(t)
+    u = m.InputContainer({})
     filt.estimate(t, u, example_measurements)  # Update state, given (example) sensor data
 
     # Step 2d: Print & Plot Resulting Posterior State
@@ -65,7 +62,7 @@ def run_example():
     # Step 3b: Perform a prediction
     NUM_SAMPLES = 50
     STEP_SIZE = 0.01
-    mc_results = mc.predict(filt.x, future_loading, n_samples = NUM_SAMPLES, dt=STEP_SIZE, save_freq=STEP_SIZE)
+    mc_results = mc.predict(filt.x, n_samples = NUM_SAMPLES, dt=STEP_SIZE, save_freq=STEP_SIZE)
     print('Predicted time of event (ToE): ', mc_results.time_of_event.mean)
     # Here there are 2 events predicted, when the object starts falling, and when it impacts the ground.
 
