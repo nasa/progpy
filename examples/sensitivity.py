@@ -14,22 +14,18 @@ def run_example():
     # Step 1: Create instance of model
     m = ThrownObject()
 
-    # Step 2: Setup for simulation 
-    def future_load(t, x=None):
-        return m.InputContainer({})
-
-    # Step 3: Setup range on parameters considered
+    # Step 2: Setup range on parameters considered
     thrower_height_range = np.arange(1.2, 2.1, 0.1)
 
-    # Step 4: Sim for each 
+    # Step 3: Sim for each 
     event = 'impact'
     eods = np.empty(len(thrower_height_range))
     for (i, thrower_height) in zip(range(len(thrower_height_range)), thrower_height_range):
         m.parameters['thrower_height'] = thrower_height
-        simulated_results = m.simulate_to_threshold(future_load, threshold_keys=[event], dt =1e-3, save_freq =10)
+        simulated_results = m.simulate_to_threshold(threshold_keys=[event], dt =1e-3, save_freq =10)
         eods[i] = simulated_results.times[-1]
 
-    # Step 5: Analysis
+    # Step 4: Analysis
     print('For a reasonable range of heights, impact time is between {} and {}'.format(round(eods[0],3), round(eods[-1],3)))
     sensitivity = (eods[-1]-eods[0])/(thrower_height_range[-1] - thrower_height_range[0])
     print('  - Average sensitivity: {} s per cm height'.format(round(sensitivity/100, 6)))
@@ -40,7 +36,7 @@ def run_example():
     eods = np.empty(len(throw_speed_range))
     for (i, throw_speed) in zip(range(len(throw_speed_range)), throw_speed_range):
         m.parameters['throwing_speed'] = throw_speed
-        simulated_results = m.simulate_to_threshold(future_load, threshold_keys=[event], options={'dt':1e-3, 'save_freq':10})
+        simulated_results = m.simulate_to_threshold(threshold_keys=[event], options={'dt':1e-3, 'save_freq':10})
         eods[i] = simulated_results.times[-1]
 
     print('\nFor a reasonable range of throwing speeds, impact time is between {} and {}'.format(round(eods[0],3), round(eods[-1],3)))

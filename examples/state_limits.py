@@ -15,11 +15,7 @@ def run_example():
     # Step 1: Create instance of model (without drag)
     m = ThrownObject( cd = 0 )
 
-    # Step 2: Setup for simulation 
-    def future_load(t, x=None):
-        return {}
-
-    # add state limits
+    # Step 2: add state limits
     m.state_limits = {
         # object may not go below ground height
         'x': (0, inf),
@@ -30,7 +26,7 @@ def run_example():
 
     # Step 3: Simulate to impact
     event = 'impact'
-    simulated_results = m.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+    simulated_results = m.simulate_to_threshold(threshold_keys=[event], dt=0.005, save_freq=1)
     
     # Print states
     print('Example 1')
@@ -42,7 +38,7 @@ def run_example():
     x0 = m.initialize(u = {}, z = {})
     x0['x'] = -1
 
-    simulated_results = m.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1, x = x0)
+    simulated_results = m.simulate_to_threshold(threshold_keys=[event], dt=0.005, save_freq=1, x=x0)
 
     # Print states
     print('Example 2')
@@ -57,7 +53,7 @@ def run_example():
     m.parameters['g'] = -50000000
     
     print('Example 3')
-    simulated_results = m.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=0.3, x = x0, print = True, progress = False)
+    simulated_results = m.simulate_to_threshold(threshold_keys=[event], dt=0.005, save_freq=0.3, x=x0, print=True, progress=False)
 
     # Note that the limits can also be applied manually using the apply_limits function
     print('limiting states')

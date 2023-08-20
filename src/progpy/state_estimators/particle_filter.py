@@ -67,9 +67,8 @@ class ParticleFilter(state_estimator.StateEstimator):
                 # Added to avoid float/int issues
                 self.parameters['num_particles'] = int(self.parameters['num_particles'])
             sample_gen = x0.sample(self.parameters['num_particles'])
-        samples = [array(sample_gen.key(k), dtype=float64) for k in x0.keys()]
-        
-        self.particles = model.StateContainer(array(samples, dtype=float64))
+        samples = {k: array(sample_gen.key(k), dtype=float64) for k in x0.keys()}
+        self.particles = model.StateContainer(samples)
 
         if 'R' in self.parameters:
             # For backwards compatibility

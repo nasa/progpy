@@ -66,10 +66,9 @@ class TestPredictors(unittest.TestCase):
         m = ThrownObject()
         pred = UnscentedTransformPredictor(m)
         samples = MultivariateNormalDist(['x', 'v'], [1.83, 40], [[0.1, 0.01], [0.01, 0.1]])
-        def future_loading(t, x={}):
-            return {}
 
-        mc_results = pred.predict(samples, future_loading, dt=0.01, save_freq=1)
+        # No future loading (i.e., no load)
+        mc_results = pred.predict(samples, dt=0.01, save_freq=1)
         self.assertAlmostEqual(mc_results.time_of_event.mean['impact'], 8.21, 0)
         self.assertAlmostEqual(mc_results.time_of_event.mean['falling'], 4.15, 0)
         # self.assertAlmostEqual(mc_results.times[-1], 9, 1)  # Saving every second, last time should be around the 1s after impact event (because one of the sigma points fails afterwards)
@@ -126,10 +125,9 @@ class TestPredictors(unittest.TestCase):
     def test_MC(self):
         m = ThrownObject()
         mc = MonteCarlo(m)
-        def future_loading(t=None, x=None):
-            return {}
-            
-        mc.predict(m.initialize(), future_loading, dt=0.2, num_samples=3, save_freq=1)
+        
+        # Test with empty future loading (i.e., no load)
+        mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1)
 
     def test_prediction_mvnormaldist(self):
         times = list(range(10))
@@ -385,6 +383,48 @@ class TestPredictors(unittest.TestCase):
 
     def test_mc_surrogate(self):
         self._test_surrogate_pred(MonteCarlo)
+    
+    def test_mc_num_samples(self):
+        """
+        This test confirms that monte carlos sampling logic works as expected
+        """
+        m = ThrownObject()
+        def future_load(t, x=None):
+            return m.InputContainer({})
+
+        pred = MonteCarlo(m)
+
+        # First test- scalar input
+        x_scalar = ScalarData({'x': 10, 'v': 0})
+        # Should default to 100 samples
+        result = pred.predict(x_scalar, future_load)
+        self.assertEqual(len(result.time_of_event), 100)
+        # Repeat with less samples
+        result = pred.predict(x_scalar, future_load, n_samples=10)
+        self.assertEqual(len(result.time_of_event), 10)
+        
+        # Second test- Same, but with multivariate normal input
+        # Behavior should be the same
+        x_mvnormal = MultivariateNormalDist(['x', 'v'], [10, 0], [[0.1, 0], [0, 0.1]])
+        # Should default to 100 samples
+        result = pred.predict(x_mvnormal, future_load)
+        self.assertEqual(len(result.time_of_event), 100)
+        # Repeat with less samples
+        result = pred.predict(x_mvnormal, future_load, n_samples=10)
+        self.assertEqual(len(result.time_of_event), 10)
+
+        # Third test- UnweightedSamples input
+        x_uwsamples = UnweightedSamples([{'x': 10, 'v': 0}, {'x': 9.9, 'v': 0.1}, {'x': 10.1, 'v': -0.1}])
+        # Should default to same as x_uwsamples - HERE IS THE DIFFERENCE FROM OTHER TYPES
+        result = pred.predict(x_uwsamples, future_load)
+        self.assertEqual(len(result.time_of_event), 3)
+        # Should be exact same data, in the same order
+        for i in range(3):
+            self.assertEqual(result.states[i][0]['x'], x_uwsamples[i]['x'])
+            self.assertEqual(result.states[i][0]['v'], x_uwsamples[i]['v'])
+        # Repeat with more samples
+        result = pred.predict(x_uwsamples, future_load, n_samples=10)
+        self.assertEqual(len(result.time_of_event), 10)
 
 # This allows the module to be executed directly    
 def main():

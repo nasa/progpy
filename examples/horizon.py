@@ -19,10 +19,8 @@ from progpy.uncertain_data import MultivariateNormalDist
 from pprint import pprint
 
 def run_example():
-    # Step 1: Setup model, future loading, and state
-    def future_loading(t, x = None):
-        return {}
-    m = ThrownObject(process_noise = 0.5, measurement_noise = 0.15)
+    # Step 1: Setup model & future loading
+    m = ThrownObject(process_noise=0.5, measurement_noise=0.15)
     initial_state = m.initialize()
 
     NUM_SAMPLES = 1000
@@ -40,7 +38,8 @@ def run_example():
     # We're saying we are not interested in any events that occur after this time
     PREDICTION_HORIZON = 7.7
     STEP_SIZE = 0.01
-    mc_results = mc.predict(x, future_loading, n_samples=NUM_SAMPLES,dt=STEP_SIZE, horizon = PREDICTION_HORIZON)
+    mc_results = mc.predict(x, n_samples=NUM_SAMPLES,dt=STEP_SIZE, horizon = PREDICTION_HORIZON)
+    
     print("\nPredicted Time of Event:")
     metrics = mc_results.time_of_event.metrics()
     pprint(metrics)  # Note this takes some time
