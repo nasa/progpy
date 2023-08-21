@@ -228,6 +228,24 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
       run: python -m tests.test_examples
+  test_horizon:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.7'
+    - name: Install dependencies cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: pip-cache
+    - name: Update
+      run: pip install --upgrade --upgrade-strategy eager -e .
+    - name: Run tests
+      run: python -m tests.test_horizon
   test_linear_model:
     timeout-minutes: 5
     runs-on: ubuntu-latest
