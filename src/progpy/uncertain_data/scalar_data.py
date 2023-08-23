@@ -2,6 +2,7 @@
 
 from typing import Union
 from numpy import array
+from progpy.ProgPyDataFrame import ProgPyDataFrame
 
 from . import UncertainData, UnweightedSamples
 
@@ -11,10 +12,13 @@ class ScalarData(UncertainData):
     Data without uncertainty- single value
 
     Args:
-        state (dict or Container): Single state in the form of dict or model.*Container (InputContainer, OutputContainer, Statecontainer) representing states and respective values.
+        state (dict or ProgPyDataFrame): Single state in the form of dict or model.*ProgPyDataFrame (InputContainer, OutputContainer, Statecontainer) representing states and respective values.
     """
-    def __init__(self, state, _type=dict): 
-        self.__state = state
+    def __init__(self, state, _type=dict):
+        if isinstance(state, ProgPyDataFrame):
+            self.__state = state.get_progpy_dict()
+        else:
+            self.__state = state
         super().__init__(_type)
     
     def __reduce__(self):

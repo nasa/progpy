@@ -12,6 +12,7 @@ import unittest
 sys.path.append(join(dirname(__file__), ".."))
 
 from progpy import PrognosticsModel, CompositeModel
+from progpy.ProgPyDataFrame import ProgPyDataFrame
 from progpy.models import ThrownObject, BatteryElectroChemEOD
 from progpy.models.test_models.linear_models import (OneInputNoOutputNoEventLM, OneInputOneOutputNoEventLM, OneInputNoOutputOneEventLM, OneInputOneOutputNoEventLMPM)
 from progpy.models.test_models.linear_thrown_object import (LinearThrownObject, LinearThrownDiffThrowingSpeed, LinearThrownObjectUpdatedInitializedMethod, LinearThrownObjectDiffDefaultParams)
@@ -27,18 +28,18 @@ class MockModel():
     }
 
     def initialize(self, u={}, z={}):
-        return self.StateContainer(self.parameters['x0'])
+        return self.StateContainer([self.parameters['x0']])
 
     def next_state(self, x, u, dt):
-        return self.StateContainer({
+        return self.StateContainer([{
                     'a': x['a'] + u['i1']*dt,
                     'b': x['b'],
                     'c': x['c'] - u['i2'],
                     't': x['t'] + dt
-                })
+                }])
 
     def output(self, x):
-        return self.OutputContainer({'o1': x['a'] + x['b'] + x['c']})
+        return self.OutputContainer([{'o1': x['a'] + x['b'] + x['c']}])
 
 
 class MockProgModel(MockModel, PrognosticsModel):
@@ -103,7 +104,8 @@ class TestModels(unittest.TestCase):
             return {'i1': 1, 'i2': 2.1}
 
         # Any event, default
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0)
+        first_output = ProgPyDataFrame([{'o1': 0.8}])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, first_output, dt=0.5, save_freq=1.0)
         self.assertAlmostEqual(times[-1], 5.0, 5)
         self.assertAlmostEqual(outputs[-1]['o1'], -13.2)
         self.assertIsInstance(outputs[-1], m.OutputContainer)

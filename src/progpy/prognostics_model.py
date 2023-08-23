@@ -222,7 +222,7 @@ class PrognosticsModel(ABC):
         Example
         -------
             
-            >>> from prog_models.models import BatteryCircuit
+            >>> from progpy.models import BatteryCircuit
             >>> m = BatteryCircuit()    # Replace above with specific model being simulated ^
             >>> u = m.InputContainer([{'i': 2.0}])
             >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
@@ -414,7 +414,7 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from prog_models.models import BatteryCircuit
+        >>> from progpy.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
         >>> u = m.InputContainer([{'i': 2.0}])
         >>> z = m.OutputContainer([{'v': 3.2, 't': 295}])
@@ -829,7 +829,7 @@ class PrognosticsModel(ABC):
 
         Example
         -------
-        >>> from prog_models.models import BatteryCircuit
+        >>> from progpy.models import BatteryCircuit
         >>> m = BatteryCircuit() # Replace with specific model being simulated
         >>> def future_load_eqn(t, x = None):
         ...    if t< 5.0: # Load is 3.0 for first 5 seconds
@@ -907,7 +907,7 @@ class PrognosticsModel(ABC):
             x = self.initialize(u, first_output)
 
         if not isinstance(x, self.StateContainer):
-            x = self.StateContainer(x)
+            x = self.StateContainer([x])
         
         # Optimization
         output = self.__output
@@ -1020,7 +1020,7 @@ class PrognosticsModel(ABC):
             # Wrapper around the future loading equation
             def load_eqn(t, x):
                 u = future_loading_eqn(t, x)
-                return self.InputContainer(u)
+                return self.InputContainer([u])
 
         if not isinstance(next_state(x.copy(), u, dt0), ProgPyDataFrame):
             # Wrapper around the next state equation

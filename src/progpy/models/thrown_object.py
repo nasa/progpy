@@ -108,12 +108,12 @@ class ThrownObject(PrognosticsModel):
 
     def event_state(self, x) -> dict:
         # Use speed and position to estimate maximum height
-        x_max = x['x'][0] + np.square(x['v'][0])/(-self.parameters['g']*2)
+        x_max = (x.loc['x'] + np.square(x.loc['v'])/(-self.parameters['g']*2))[0]
         # 1 until falling begins
-        x_max = np.where(x['v'][0] > 0, x['x'], x_max)
+        x_max = np.where(x.loc['v'] > 0, x.loc['x'], x_max)[0]
         return {
-            'falling': np.maximum(x['v']/self.parameters['throwing_speed'], 0),  # Throwing speed is max speed
-            'impact': np.maximum(x['x']/x_max, 0)  # then it's fraction of height
+            'falling': np.maximum(x.loc['v'].values[0]/self.parameters['throwing_speed'], 0),  # Throwing speed is max speed
+            'impact': np.maximum(x.loc['x'].values[0]/x_max, 0)  # then it's fraction of height
         }
 
 

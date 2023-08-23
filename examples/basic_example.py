@@ -37,9 +37,9 @@ def run_example():
     fig = filt.x.plot_scatter(label='prior')
 
     # Step 2c: Perform state estimation step, given some measurement, above what's expected
-    example_measurements = m.OutputContainer({'x': 7.5})
+    example_measurements = m.OutputContainer([{'x': 7.5}])
     t = 0.1
-    u = m.InputContainer({})
+    u = m.InputContainer([{}])
     filt.estimate(t, u, example_measurements)  # Update state, given (example) sensor data
 
     # Step 2d: Print & Plot Resulting Posterior State

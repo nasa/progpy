@@ -26,13 +26,15 @@ class UnweightedSamples(UncertainData, UserList):
             # Is in form of {key: [value, ...], ...}
             # Convert to array of samples
             if len(samples.keys()) == 0:
-                self.data = []  # is empty
+                self.data = ProgPyDataFrame()  # is empty
                 return
-            n_samples = len(list(samples.values())[0])  # Number of samples
-            self.data = [{key: value[i] for key, value in samples.items()} for i in range(n_samples)]
+            if isinstance(samples, ProgPyDataFrame):
+                self.data = samples
+            else:
+                self.data = ProgPyDataFrame([samples])
         elif isinstance(samples, Iterable):
             # is in form of [{key: value, ...}, ...]
-            self.data = samples
+            self.data = ProgPyDataFrame(samples)
         else:
             raise ValueError('Invalid input. Must be list or dict, was {}'.format(type(samples)))
 
@@ -40,8 +42,9 @@ class UnweightedSamples(UncertainData, UserList):
         return isinstance(other, UnweightedSamples) and self.data == other.data
 
     def __getitem__(self, n):
-        datem = self.data[n]
-        return self._type(datem) if datem is not None else None
+        datem = self.data.iloc[n].to_dict()
+        print(n)
+        return self._type([datem]) if datem is not None else None
 
     def __add__(self, other: int) -> "UncertainData":
         if other == 0:
@@ -134,13 +137,10 @@ class UnweightedSamples(UncertainData, UserList):
 
     @property
     def mean(self) -> dict:
-        mean = {}
-        for key in self.keys():
-            values = array([x[key] for x in self.data if x is not None and x[key] is not None])
-            if len(values) < len(self.data):
-                warn("Some samples were None, resulting mean is of all non-None samples. Note: in some cases, this will bias the mean result.")
-            mean[key] = values.mean()
-        return self._type(mean)
+        if self.data.__contains__('None' or 'nan'):
+            warn("Some samples were None, resulting mean is of all non-None samples. Note: in some cases, this will bias the mean result.")
+            return self.data.mean(skipna = True)
+        return self._type([self.data.mean()])
 
     @property
     def cov(self) -> dict:
