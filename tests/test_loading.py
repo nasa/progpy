@@ -12,17 +12,24 @@ class Testloading(unittest.TestCase):
 
         # One too many loads
         with self.assertRaises(ValueError):
-            Piecewise({}, [1, 2], {'a': [1, 2, 3, 4]})
+            Piecewise(dict, [1, 2], {'a': [1, 2, 3, 4]})
 
         # One too many loads
         with self.assertRaises(ValueError):
-            Piecewise({}, [1, 2], {'a': [1]})
+            Piecewise(dict, [1, 2], {'a': [1]})
 
         # Should work with same number of loads
-        Piecewise({}, [1, 2], {'a': [1, 2]})
+        l = Piecewise(dict, [1, 2], {'a': [1, 2]})
+        fig = l.plot([0, 1, 1.9])
+        # Plot shouldn't work if provided a time after the end
+        with self.assertRaises(StopIteration):
+            l.plot([0, 1, 2])
 
         # Should work with one more load
-        Piecewise({}, [1, 2], {'a': [1, 2, 3]})
+        l = Piecewise(dict, [1, 2], {'a': [1.1, 2.1, 1.6]})
+        # Plot (using same plot (to test that feature))
+        # This time with a time after the last time, now it should work
+        l.plot([0, 1, 1.9, 3], fig=fig)
 
 # This allows the module to be executed directly    
 def main():

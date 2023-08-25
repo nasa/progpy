@@ -3,9 +3,10 @@
 
 from collections.abc import Callable
 import numpy as np
+from progpy.loading import LoadProfile
 
 
-class GaussianNoiseLoadWrapper():
+class GaussianNoiseLoadWrapper(LoadProfile):
     """
     .. versionadded:: 1.5.0
     

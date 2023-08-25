@@ -2,9 +2,10 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 import numpy as np
+from progpy.loading import LoadProfile
 
 
-class MovingAverage():
+class MovingAverage(LoadProfile):
     """
     .. versionadded:: 1.5.0
     
