@@ -301,8 +301,6 @@ class BatteryElectroChemEOD(PrognosticsModel):
             'tb': 292.1  # in K, about 18.95 C
         },
 
-        'process_noise': 1e-3,
-
         # End of discharge voltage threshold
         'VEOD': 3.0, 
         'VDropoff': 0.1 # Voltage above EOD after which voltage will be considered in SOC calculation
