@@ -127,7 +127,6 @@ class ParticleFilter(state_estimator.StateEstimator):
         num_particles = self.parameters['num_particles']
         # Check which output keys are present (i.e., output of measurement function)
         measurement_keys = output(self.model.StateContainer({key: particles[key][0] for key in particles.keys()})).keys()
-        zPredicted = {key: empty(num_particles) for key in measurement_keys}
 
         if self.model.is_vectorized:
             # Propagate particles state
@@ -140,6 +139,8 @@ class ParticleFilter(state_estimator.StateEstimator):
             # Get particle measurements
             zPredicted = output(self.particles)
         else:
+            # Reserve space (for efficiency)
+            zPredicted = {key: empty(num_particles) for key in measurement_keys}
             # Propagate and calculate weights
             for i in range(num_particles):
                 t_i = self.t  # Used to mark time for each particle
