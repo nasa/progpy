@@ -12,17 +12,17 @@ class ScalarData(UncertainData):
     Data without uncertainty- single value
 
     Args:
-        state (dict or ProgPyDataFrame): Single state in the form of dict or model.*ProgPyDataFrame (InputContainer, OutputContainer, Statecontainer) representing states and respective values.
+        state (dict or Container): Single state in the form of dict or model.*Container (InputContainer, OutputContainer, Statecontainer) representing states and respective values.
     """
+
     def __init__(self, state, _type=dict):
         if isinstance(state, ProgPyDataFrame):
             self.__state = state.get_progpy_dict()
-        else:
-            self.__state = state
+        self.__state = state
         super().__init__(_type)
-    
+
     def __reduce__(self):
-        return (ScalarData, (self.__state, ))
+        return (ScalarData, (self.__state,))
 
     def __eq__(self, other: "ScalarData") -> bool:
         return isinstance(other, ScalarData) and other.mean == self.__state
@@ -31,7 +31,7 @@ class ScalarData(UncertainData):
         if other == 0:
             return self
         new_state = dict()
-        for k,v in self.__state.items():
+        for k, v in self.__state.items():
             new_state[k] = v + other
         return ScalarData(new_state)
 
@@ -46,7 +46,7 @@ class ScalarData(UncertainData):
 
     def __sub__(self, other: int) -> "UncertainData":
         new_state = dict()
-        for k,v in self.__state.items():
+        for k, v in self.__state.items():
             new_state[k] = v - other
         return ScalarData(new_state)
 
@@ -62,7 +62,7 @@ class ScalarData(UncertainData):
     @property
     def median(self) -> dict:
         return self.mean
-        
+
     @property
     def mean(self) -> dict:
         return self._type(self.__state)
@@ -73,9 +73,9 @@ class ScalarData(UncertainData):
 
     def keys(self):
         return self.__state.keys()
-        
-    def sample(self, num_samples : int = 1) -> UnweightedSamples:
-        return UnweightedSamples([self.__state] * num_samples, _type = self._type)
+
+    def sample(self, num_samples: int = 1) -> UnweightedSamples:
+        return UnweightedSamples([self.__state] * num_samples, _type=self._type)
 
     def __str__(self) -> str:
         return 'ScalarData({})'.format(self.__state)
@@ -84,5 +84,6 @@ class ScalarData(UncertainData):
         if isinstance(bounds, list):
             bounds = {key: bounds for key in self.keys()}
         if not isinstance(bounds, dict) and all([isinstance(b, list) for b in bounds]):
-            raise TypeError("Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {}".format(type(bounds)))
+            raise TypeError(
+                "Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {}".format(type(bounds)))
         return {key: (1 if bounds[key][0] < x and bounds[key][1] > x else 0) for (key, x) in self.__state.items()}

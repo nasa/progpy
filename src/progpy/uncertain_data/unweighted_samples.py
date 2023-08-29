@@ -12,7 +12,7 @@ from . import UncertainData
 
 class UnweightedSamples(UncertainData, UserList):
     """
-    Uncertain Data represented by a set of samples. Objects of this class can be treated like a list where samples[n] returns the nth sample (Dict). 
+    Uncertain Data represented by a set of samples. Objects of this class can be treated like a list where samples[n] returns the nth sample (Dict).
 
     Args:
         samples (array, dict, or model.*Container, optional): array of samples. Defaults to empty array.\n
@@ -26,15 +26,13 @@ class UnweightedSamples(UncertainData, UserList):
             # Is in form of {key: [value, ...], ...}
             # Convert to array of samples
             if len(samples.keys()) == 0:
-                self.data = ProgPyDataFrame()  # is empty
+                self.data = []  # is empty
                 return
-            if isinstance(samples, ProgPyDataFrame):
-                self.data = samples
-            else:
-                self.data = ProgPyDataFrame([samples])
+            n_samples = len(list(samples.values())[0])  # Number of samples
+            self.data = [{key: value[i] for key, value in samples.items()} for i in range(n_samples)]
         elif isinstance(samples, Iterable):
             # is in form of [{key: value, ...}, ...]
-            self.data = ProgPyDataFrame(samples)
+            self.data = samples
         else:
             raise ValueError('Invalid input. Must be list or dict, was {}'.format(type(samples)))
 
@@ -42,9 +40,8 @@ class UnweightedSamples(UncertainData, UserList):
         return isinstance(other, UnweightedSamples) and self.data == other.data
 
     def __getitem__(self, n):
-        datem = self.data.iloc[n].to_dict()
-        print(n)
-        return self._type([datem]) if datem is not None else None
+        datem = self.data[n]
+        return self._type(datem) if datem is not None else None
 
     def __add__(self, other: int) -> "UncertainData":
         if other == 0:
@@ -137,10 +134,13 @@ class UnweightedSamples(UncertainData, UserList):
 
     @property
     def mean(self) -> dict:
-        if self.data.__contains__('None' or 'nan'):
-            warn("Some samples were None, resulting mean is of all non-None samples. Note: in some cases, this will bias the mean result.")
-            return self.data.mean(skipna = True)
-        return self._type([self.data.mean()])
+        mean = {}
+        for key in self.keys():
+            values = array([x[key] for x in self.data if x is not None and x[key] is not None])
+            if len(values) < len(self.data):
+                warn("Some samples were None, resulting mean is of all non-None samples. Note: in some cases, this will bias the mean result.")
+            mean[key] = values.mean()
+        return self._type(mean)
 
     @property
     def cov(self) -> dict:

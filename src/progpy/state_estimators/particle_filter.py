@@ -6,10 +6,10 @@ from numpy import array, empty, take, exp, max, take, float64
 from scipy.stats import norm
 from warnings import warn
 
-from progpy.ProgPyDataFrame import ProgPyDataFrame
+from progpy.ProgPyDataFrame import ProgPyDataFrame, StateContainer
+from progpy.uncertain_data import ScalarData, UncertainData, UnweightedSamples
 
 from . import state_estimator
-from ..uncertain_data import UnweightedSamples, ScalarData, UncertainData
 
 
 class ParticleFilter(state_estimator.StateEstimator):
@@ -51,9 +51,10 @@ class ParticleFilter(state_estimator.StateEstimator):
         self._measure = model.output
 
         # Build array inplace
-        if isinstance(x0, ProgPyDataFrame) or isinstance(x0, dict):
+        if isinstance(x0, dict):
             x0 = ScalarData(x0)
-        elif not isinstance(x0, UncertainData):
+
+        elif not (isinstance(x0, UncertainData) or isinstance(x0, StateContainer)):
             raise TypeError(f"x0 must be of type UncertainData or StateContainer, was {type(x0)}.")
 
         if self.parameters['num_particles'] is None and isinstance(x0, UnweightedSamples):
@@ -67,9 +68,9 @@ class ParticleFilter(state_estimator.StateEstimator):
                 # Added to avoid float/int issues
                 self.parameters['num_particles'] = int(self.parameters['num_particles'])
             sample_gen = x0.sample(self.parameters['num_particles'])
-        samp_arr = {k: array(sample_gen.key(k), dtype=float64) for k in x0.keys()}
-        #samples = dict(zip(x0.keys(), samp_arr))
-        self.particles = model.StateContainer([sample_gen])
+        samp_arr = [array(sample_gen.key(k), dtype=float64) for k in x0.keys()]
+        samples = dict(zip(x0.keys(), samp_arr))
+        self.particles = model.StateContainer([samples])
 
         if 'R' in self.parameters:
             # For backwards compatibility
@@ -201,4 +202,4 @@ class ParticleFilter(state_estimator.StateEstimator):
         -------
         state = observer.x
         """
-        return UnweightedSamples(self.particles, _type = self.model.StateContainer)
+        return UnweightedSamples(self.particles)

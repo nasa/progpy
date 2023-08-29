@@ -362,6 +362,7 @@ class BatteryElectroChemEOD(PrognosticsModel):
         Vspdot = (VspNominal-x['Vsp'])/params['tsp']
 
         # Combined
+        #BOOKMARK MIRYAM
         VoNominal = u['i']*params['Ro']
         Vodot = (VoNominal-x['Vo'])/params['to']
 

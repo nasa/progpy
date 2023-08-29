@@ -7,7 +7,7 @@ from numpy import array
 
 from ..utils.table import print_table_recursive
 from ..visualize import plot_scatter, plot_hist
-from progpy.ProgPyDataFrame import ProgPyDataFrame
+from progpy.utils.containers import DictLikeMatrixWrapper
 
 
 class UncertainData(ABC):
@@ -17,7 +17,7 @@ class UncertainData(ABC):
 
     def __init__(self, _type=dict):
         self._type = _type
-    
+
     @abstractmethod
     def sample(self, nSamples: int = 1):
         """Generate samples from data
@@ -30,35 +30,35 @@ class UncertainData(ABC):
 
         Example:
             ::
-            
+
                 samples = data.samples(100)
         """
 
     @property
     @abstractproperty
     def median(self) -> dict:
-        """The median of the UncertainData distribution or samples 
+        """The median of the UncertainData distribution or samples
 
         Returns:
             dict[str, float]: Median value. e.g., {'key1': 23.2, ...}
 
         Example:
             ::
-            
+
                 median_value = data.median
         """
 
     @property
     @abstractproperty
     def mean(self) -> dict:
-        """The mean of the UncertainData distribution or samples 
+        """The mean of the UncertainData distribution or samples
 
         Returns:
             dict[str, float]: Mean value. e.g., {'key1': 23.2, ...}
 
         Example:
             ::
-                
+
                 mean_value = data.mean
         """
 
@@ -78,7 +78,7 @@ class UncertainData(ABC):
 
     def relative_accuracy(self, ground_truth: dict) -> dict:
         """The relative accuracy is how close the mean of the distribution is to the ground truth, on relative terms
-        
+
         :math:`RA = 1 - \dfrac{\| r-p \|}{r}`
 
         Where r is ground truth and p is mean of predicted distribution [0]_
@@ -95,11 +95,11 @@ class UncertainData(ABC):
             .. [0] Prognostics: The Science of Making Predictions (Goebel et al, 239)
         """
         # if this check isn't here, goes to divide by zero check and raises AttributeError instead of TypeError. Keep? There are unittests checking for type
-        if not (isinstance(ground_truth, dict) or isinstance(ground_truth, ProgPyDataFrame)):
+        if not (isinstance(ground_truth, dict) or isinstance(ground_truth, DictLikeMatrixWrapper)):
             raise TypeError("Ground truth must be passed as a dictionary or *.container argument.")
         if not all(ground_truth.values()):
             raise ZeroDivisionError("Ground truth values must be non-zero in calculating relative accuracy.")
-        return {k:1 - (abs(ground_truth[k] - v)/ground_truth[k]) for k,v in self.mean.items()}
+        return {k: 1 - (abs(ground_truth[k] - v) / ground_truth[k]) for k, v in self.mean.items()}
 
     @abstractmethod
     def keys(self):
@@ -110,7 +110,7 @@ class UncertainData(ABC):
 
         Example:
             ::
-                
+
                 keys = data.keys()
         """
 
@@ -132,7 +132,7 @@ class UncertainData(ABC):
 
         Example:
             ::
-            
+
                 data.percentage_in_bounds((1025, 1075))
                 data.percentage_in_bounds({'key1': (1025, 1075), 'key2': (2520, 2675)})
                 data.percentage_in_bounds((1025, 1075), keys=['key1', 'key3'])
@@ -160,7 +160,7 @@ class UncertainData(ABC):
         from ..metrics import calc_metrics
         return calc_metrics(self, **kwargs)
 
-    def plot_scatter(self, fig : Figure = None, keys : list = None, num_samples : int = 100, **kwargs) -> Figure:
+    def plot_scatter(self, fig: Figure = None, keys: list = None, num_samples: int = 100, **kwargs) -> Figure:
         """
         Produce a scatter plot
 
@@ -188,7 +188,7 @@ class UncertainData(ABC):
         samples = self.sample(num_samples)
         return plot_scatter(samples, fig=fig, keys=keys, **kwargs)
 
-    def plot_hist(self, fig = None, keys = None, num_samples = 100, **kwargs):
+    def plot_hist(self, fig=None, keys=None, num_samples=100, **kwargs):
         """
         Create a histogram
 
@@ -199,7 +199,7 @@ class UncertainData(ABC):
 
         Example:
             ::
-                
+
                 m = [5, 7, 3]
                 c = [[0.3, 0.5, 0.1], [0.6, 0.7, 1e-9], [1e-9, 1e-10, 1]]
                 d = MultivariateNormalDist(['a', 'b', 'c'], m, c)
@@ -212,20 +212,20 @@ class UncertainData(ABC):
         samples = self.sample(num_samples)
         return plot_hist(samples, fig=fig, keys=keys, **kwargs)
 
-    def describe(self, title : str = "UncertainData Metrics", print : bool = True) -> defaultdict:
+    def describe(self, title: str = "UncertainData Metrics", print: bool = True) -> defaultdict:
         """
         Print and view basic statistical information about this UncertainData object in a text-based printed table.
 
         Args:
             title : str
                 Title of the table, printed before data rows.
-            print : bool = True 
+            print : bool = True
                 Optional argument specifying whether to print or not; default true.
 
         Returns:
             defaultdict
                 Dictionary of lists used to print metrics.
-        
+
         Example:
             ::
 
@@ -235,48 +235,48 @@ class UncertainData(ABC):
         return recursive_metrics_table
 
     @abstractmethod
-    def __add__(self, other : int) -> "UncertainData":
-        """Overriding __add__ (+ operator) for UncertainData. 
+    def __add__(self, other: int) -> "UncertainData":
+        """Overriding __add__ (+ operator) for UncertainData.
 
         Args:
             other (int): Integer value to be applied to class where appropriate.
         """
 
     @abstractmethod
-    def __radd__(self, other : int) -> "UncertainData":
-        """Overriding __radd__ (+ operator right) for UncertainData. 
+    def __radd__(self, other: int) -> "UncertainData":
+        """Overriding __radd__ (+ operator right) for UncertainData.
 
         Args:
             other (int): Integer value to be applied to class where appropriate.
         """
 
     @abstractmethod
-    def __iadd__(self, other : int) -> "UncertainData":
-        """Overriding __iadd__ (+= operator) for UncertainData. 
+    def __iadd__(self, other: int) -> "UncertainData":
+        """Overriding __iadd__ (+= operator) for UncertainData.
 
         Args:
             other (int): Integer value to be applied to class where appropriate.
         """
 
     @abstractmethod
-    def __sub__(self, other : int) -> "UncertainData":
-        """Overriding __sub__ (- operator) for UncertainData. 
+    def __sub__(self, other: int) -> "UncertainData":
+        """Overriding __sub__ (- operator) for UncertainData.
 
         Args:
             other (int): Integer value to be applied to class where appropriate.
         """
 
     @abstractmethod
-    def __rsub__(self, other : int) -> "UncertainData":
-        """Overriding __rsub__ (- operator right) for UncertainData. 
+    def __rsub__(self, other: int) -> "UncertainData":
+        """Overriding __rsub__ (- operator right) for UncertainData.
 
         Args:
             other (int): Integer value to be applied to class where appropriate.
         """
 
     @abstractmethod
-    def __isub__(self, other : int) -> "UncertainData":
-        """Overriding __isub__ (-= operator) for UncertainData. 
+    def __isub__(self, other: int) -> "UncertainData":
+        """Overriding __isub__ (-= operator) for UncertainData.
 
         Args:
             other (int): Integer value to be applied to class where appropriate.
