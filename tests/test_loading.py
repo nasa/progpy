@@ -2,7 +2,8 @@
 
 import unittest
 
-from progpy.loading import Piecewise
+from progpy.loading import Piecewise, GaussianNoiseLoadWrapper
+
 
 class Testloading(unittest.TestCase):
     def test_piecewise_construction(self):
@@ -23,6 +24,27 @@ class Testloading(unittest.TestCase):
 
         # Should work with one more load
         Piecewise({}, [1, 2], {'a': [1, 2, 3]})
+    
+    def test_gaussian_seed(self):
+        def loading(t, x=None):
+            return {'a': 10}
+        
+        # Default: two values should be different (because of randomness)
+        loading_with_noise = GaussianNoiseLoadWrapper(loading, 10)
+        load1 = loading_with_noise(10)
+
+        loading_with_noise = GaussianNoiseLoadWrapper(loading, 10)
+        load2 = loading_with_noise(10)
+
+        self.assertNotEqual(load1['a'], load2['a'])
+
+        # Setting seed, two values should be the same now
+        loading_with_noise = GaussianNoiseLoadWrapper(loading, 10, seed=550)
+        load1 = loading_with_noise(10)
+
+        loading_with_noise = GaussianNoiseLoadWrapper(loading, 10, seed=550)
+        load2 = loading_with_noise(10)
+        self.assertEqual(load1['a'], load2['a'])
 
 # This allows the module to be executed directly    
 def main():

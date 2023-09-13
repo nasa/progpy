@@ -11,12 +11,17 @@ class GaussianNoiseLoadWrapper():
     
     This is a simple wrapper for future loading functions that adds gaussian noise to the inputs. It takes a future loading function and a standard deviation and returns a new future loading function that adds gaussian noise to the inputs.
 
-    Parameters
+    Arguments
     ----------
-    fcn : Callable
+    fcn: Callable
         The future loading function to wrap
-    std : float
+    std: float
         The standard deviation of the gaussian noise to add
+
+    Keyword Arguments
+    -------------------
+    seed: {int, SeedSequence, BitGenerator, Generator}, optional
+        The seed for random number generator. This can be set to make results repeatable.
 
     Example
     -------
@@ -25,9 +30,10 @@ class GaussianNoiseLoadWrapper():
     >>> future_load = GaussianNoiseLoadWrapper(future_load, STANDARD_DEV)
     >>> m.simulate_to_threshold(future_load)
     """
-    def __init__(self, fcn: Callable, std: float):
+    def __init__(self, fcn: Callable, std: float, seed: int = None):
         self.fcn = fcn
         self.std = std
+        self.gen = np.random.default_rng(seed)
 
     def __call__(self, t: float, x=None):
         """
@@ -42,5 +48,5 @@ class GaussianNoiseLoadWrapper():
         """
         input = self.fcn(t, x)
         for key, value in input.items():
-            input[key] = np.random.normal(value, self.std)
+            input[key] = self.gen.normal(value, self.std)
         return input
