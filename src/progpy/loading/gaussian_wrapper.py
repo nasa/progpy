@@ -5,7 +5,7 @@ from collections.abc import Callable
 import numpy as np
 
 
-class GaussianNoiseLoadWrapper():
+class GaussianNoiseWrapper():
     """
     .. versionadded:: 1.5.0
     
@@ -22,6 +22,8 @@ class GaussianNoiseLoadWrapper():
     -------------------
     seed: {int, SeedSequence, BitGenerator, Generator}, optional
         The seed for random number generator. This can be set to make results repeatable.
+    std_slope: float, optional
+        The increase in standard deviation per second of time. Std is the standard deviation at t=0.    
 
     Example
     -------
@@ -30,23 +32,31 @@ class GaussianNoiseLoadWrapper():
     >>> future_load = GaussianNoiseLoadWrapper(future_load, STANDARD_DEV)
     >>> m.simulate_to_threshold(future_load)
     """
-    def __init__(self, fcn: Callable, std: float, seed: int = None):
+    def __init__(self, fcn: Callable, std: float, seed: int = None, std_slope: float = 0):
         self.fcn = fcn
         self.std = std
+        self.std_slope = std_slope
         self.gen = np.random.default_rng(seed)
 
     def __call__(self, t: float, x=None):
         """
         Return the load with noise added
 
-        Args:
-            t (float): Time (s)
-            x (StateContainer, optional): Current state. Defaults to None.
+        Arguments
+        ------------
+            t: float
+                Time (s)
+            x: StateContainer, optional
+                Current state. Defaults to None.
 
         Returns:
             InputContainer: The load with noise added
         """
         input = self.fcn(t, x)
+        std = self.std + self.std_slope*t
         for key, value in input.items():
-            input[key] = self.gen.normal(value, self.std)
+            input[key] = self.gen.normal(value, std)
         return input
+
+# Old name kept for backwards compatability
+GaussianNoiseLoadWrapper = GaussianNoiseWrapper
