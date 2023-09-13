@@ -71,6 +71,18 @@ class Testloading(unittest.TestCase):
         std2 = np.std(values)
         self.assertGreater(std2, std)
 
+        # Check t0 functionality
+        loading_with_noise.t0 = 10
+        self.assertEqual(  # Case t<t0
+            loading_with_noise(5),
+            loading_with_noise(5))
+        self.assertEqual(  # Case t==t0
+            loading_with_noise(10),
+            loading_with_noise(10))
+        self.assertNotEqual(  # Case t > t0
+            loading_with_noise(11),
+            loading_with_noise(11))
+
 # This allows the module to be executed directly    
 def main():
     l = unittest.TestLoader()
