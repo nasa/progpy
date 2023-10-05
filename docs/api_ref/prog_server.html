@@ -47,7 +47,6 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <link rel="shortcut icon" href="../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -332,38 +331,9 @@ document.write(`
 <h1>prog_server API Reference<a class="headerlink" href="#prog-server-api-reference" title="Permalink to this heading">#</a></h1>
 <iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_server&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="prog_server/load_ests.html">Load Estimators</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="prog_server/load_ests.html#prog_server.models.load_ests.Const"><code class="docutils literal notranslate"><span class="pre">Const()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_server/load_ests.html#prog_server.models.load_ests.Variable"><code class="docutils literal notranslate"><span class="pre">Variable()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_server/load_ests.html#prog_server.models.load_ests.MovingAverage"><code class="docutils literal notranslate"><span class="pre">MovingAverage()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="prog_server/prog_client.html">prog_client</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session"><code class="docutils literal notranslate"><span class="pre">Session</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.get_event_state"><code class="docutils literal notranslate"><span class="pre">Session.get_event_state()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.get_model"><code class="docutils literal notranslate"><span class="pre">Session.get_model()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.get_performance_metrics"><code class="docutils literal notranslate"><span class="pre">Session.get_performance_metrics()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.get_predicted_event_state"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_event_state()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.get_predicted_performance_metrics"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_performance_metrics()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.get_predicted_state"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_state()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.get_predicted_toe"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_toe()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.get_prediction_status"><code class="docutils literal notranslate"><span class="pre">Session.get_prediction_status()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.get_state"><code class="docutils literal notranslate"><span class="pre">Session.get_state()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.is_init"><code class="docutils literal notranslate"><span class="pre">Session.is_init()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.send_data"><code class="docutils literal notranslate"><span class="pre">Session.send_data()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.send_loading"><code class="docutils literal notranslate"><span class="pre">Session.send_loading()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="prog_server/prog_client.html#prog_client.Session.set_state"><code class="docutils literal notranslate"><span class="pre">Session.set_state()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="prog_server/prog_server.html">ProgServer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="prog_server/prog_server.html#prog_server.is_running"><code class="docutils literal notranslate"><span class="pre">is_running()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_server/prog_server.html#prog_server.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_server/prog_server.html#prog_server.start"><code class="docutils literal notranslate"><span class="pre">start()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_server/prog_server.html#prog_server.stop"><code class="docutils literal notranslate"><span class="pre">stop()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="prog_server/load_ests.html">Load Estimators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prog_server/prog_client.html">prog_client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prog_server/prog_server.html">ProgServer</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
 </ul>
 </div>

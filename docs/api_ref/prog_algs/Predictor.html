@@ -47,7 +47,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/tabs.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_ref/prog_algs/Predictor';</script>
@@ -328,18 +327,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-predictors">Included Predictors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.predictors.MonteCarlo"><code class="docutils literal notranslate"><span class="pre">MonteCarlo</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.predictors.UnscentedTransformPredictor"><code class="docutils literal notranslate"><span class="pre">UnscentedTransformPredictor</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predictor-interface">Predictor Interface</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.predictors.Predictor"><code class="docutils literal notranslate"><span class="pre">Predictor</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.predictors.Predictor.predict"><code class="docutils literal notranslate"><span class="pre">Predictor.predict()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-predictors">Included Predictors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predictor-interface">Predictor Interface</a></li>
 </ul>
             </nav>
         </div>
@@ -380,8 +369,6 @@ document.write(`
 <dd><p>Class for performing a monte-carlo model-based prediction.</p>
 <p>A Predictor using the monte carlo algorithm. The provided initial states are simulated until either a specified time horizon is met, or the threshold for all simulated events is reached for all samples. A provided future loading equation is used to compute the inputs to the system at any given time point.</p>
 <p>The following configuration parameters are supported (as kwargs in constructor or as parameters in predict method):</p>
-<section id="configuration-parameters">
-<h3>Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt>t0<span class="classifier">float</span></dt><dd><p>Initial time at which prediction begins, e.g., 0</p>
 </dd>
@@ -398,7 +385,6 @@ document.write(`
 <dt>save_pts<span class="classifier">list[float]</span></dt><dd><p>Any additional savepoints (s) e.g., [10.1, 22.5]</p>
 </dd>
 </dl>
-</section>
 </dd></dl>
 
 </div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><dl class="py class">
@@ -407,8 +393,6 @@ document.write(`
 <dd><p>Class for performing model-based prediction using an unscented transform.</p>
 <p>This class defines logic for performing model-based state prediction using sigma points and an unscented transform. The Unscented Transform Predictor propagates the sigma-points in the state-space in time domain until the event threshold is met. The step at which the i-th sigma point reaches the threshold is the step at which the i-th sigma point will be placed along the time dimension. By repeating the procedure for all sigma-points, we obtain the sigma-points defining the distribution of the time of event (ToE); for example, the End Of Life (EOL) event. The provided future loading equation is used to compute the inputs to the system at any given time point.</p>
 <p>The following configuration parameters are supported (as kwargs in constructor or as parameters in predict method):</p>
-<section id="id1">
-<h3>Configuration Parameters<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt>alpha, beta, kappa: float</dt><dd><p>UKF Scaling parameters. See: <a class="reference external" href="https://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter">https://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</a></p>
 </dd>
@@ -431,7 +415,6 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>The resulting sigma-points along the time dimension are used to compute mean and covariance of the event time (ToE), under the hypothesis that the ToE distribution would also be well represented by a Gaussian. This is a strong assumption that likely cannot be satisfied for real systems with strong non-linear state propagation or nonlinear ToE curves. Therefore, the user should be cautious and verify that modeling the event time using a Gaussian distribution is satisfactory.</p>
 </div>
-</section>
 </dd></dl>
 
 </div></div>
@@ -455,7 +438,7 @@ document.write(`
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.predictors.Predictor.predict">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.uncertain_data.UncertainData"><span class="pre">UncertainData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PredictionResults</span></span></span><a class="headerlink" href="#prog_algs.predictors.Predictor.predict" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.uncertain_data.UncertainData"><span class="pre">UncertainData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.12)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PredictionResults</span></span></span><a class="headerlink" href="#prog_algs.predictors.Predictor.predict" title="Permalink to this definition">#</a></dt>
 <dd><p>Perform a single prediction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -535,18 +518,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-predictors">Included Predictors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.predictors.MonteCarlo"><code class="docutils literal notranslate"><span class="pre">MonteCarlo</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.predictors.UnscentedTransformPredictor"><code class="docutils literal notranslate"><span class="pre">UnscentedTransformPredictor</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predictor-interface">Predictor Interface</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.predictors.Predictor"><code class="docutils literal notranslate"><span class="pre">Predictor</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.predictors.Predictor.predict"><code class="docutils literal notranslate"><span class="pre">Predictor.predict()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-predictors">Included Predictors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predictor-interface">Predictor Interface</a></li>
 </ul>
   </nav></div>
 

@@ -47,7 +47,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -326,13 +325,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory">Trajectory</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.utils.traj_gen.Trajectory"><code class="docutils literal notranslate"><span class="pre">Trajectory</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.utils.traj_gen.Trajectory.generate"><code class="docutils literal notranslate"><span class="pre">Trajectory.generate()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory">Trajectory</a></li>
 </ul>
             </nav>
         </div>
@@ -362,8 +355,8 @@ The profiles are used to generate the desired state of a vehicle that needs to b
 <li><p><strong>lat</strong> (<em>np.ndarray</em>) – rad, n x 1 array, doubles, latitude coordinates of waypoints</p></li>
 <li><p><strong>lon</strong> (<em>np.ndarray</em>) – rad, n x 1 array, doubles, longitude coordinates of waypoints</p></li>
 <li><p><strong>alt</strong> (<em>np.ndarray</em>) – m, n x 1 array, doubles, altitude coordinates of waypoints</p></li>
-<li><p><strong>takeoff_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – take off time of the trajectory. Default is None (starting at current time).</p></li>
-<li><p><strong>etas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – ETAs of each waypoints. Default is None. In that case, the ETAs are calculated based on the desired speed between waypoints.</p></li>
+<li><p><strong>takeoff_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – take off time of the trajectory. Default is None (starting at current time).</p></li>
+<li><p><strong>etas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – ETAs of each waypoints. Default is None. In that case, the ETAs are calculated based on the desired speed between waypoints.</p></li>
 </ul>
 </dd>
 </dl>
@@ -468,13 +461,7 @@ The function requires the time step size dt, in seconds, used to interpolate the
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory">Trajectory</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.utils.traj_gen.Trajectory"><code class="docutils literal notranslate"><span class="pre">Trajectory</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.utils.traj_gen.Trajectory.generate"><code class="docutils literal notranslate"><span class="pre">Trajectory.generate()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory">Trajectory</a></li>
 </ul>
   </nav></div>
 

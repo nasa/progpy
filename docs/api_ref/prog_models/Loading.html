@@ -47,7 +47,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -327,17 +326,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-estimator-class-interface">Load Estimator Class interface</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-estimator-classes">Load Estimator Classes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.Piecewise"><code class="docutils literal notranslate"><span class="pre">Piecewise</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.MovingAverage"><code class="docutils literal notranslate"><span class="pre">MovingAverage</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.GaussianNoiseLoadWrapper"><code class="docutils literal notranslate"><span class="pre">GaussianNoiseLoadWrapper</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controllers">Controllers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.controllers.LQR"><code class="docutils literal notranslate"><span class="pre">LQR</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.controllers.LQR_I"><code class="docutils literal notranslate"><span class="pre">LQR_I</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-estimator-classes">Load Estimator Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controllers">Controllers</a></li>
 </ul>
             </nav>
         </div>
@@ -400,8 +390,8 @@ Class Load Estimator<div class="summary-down docutils">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>InputContainer</strong> (<em>class</em>) – The InputContainer class for the model (model.InputContainer)</p></li>
-<li><p><strong>times</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em>) – A list of times (s)</p></li>
-<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em>) – A dictionary with keys matching model inputs. Dictionary contains list of value for that input at until time in times (i.e., index 0 is the load until time[0], then it’s index 1)</p></li>
+<li><p><strong>times</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em>) – A list of times (s)</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em>) – A dictionary with keys matching model inputs. Dictionary contains list of value for that input at until time in times (i.e., index 0 is the load until time[0], then it’s index 1)</p></li>
 </ul>
 </dd>
 </dl>
@@ -416,7 +406,7 @@ Class Load Estimator<div class="summary-down docutils">
 
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.loading.MovingAverage">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.loading.</span></span><span class="sig-name descname"><span class="pre">MovingAverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InputContainer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.loading.MovingAverage" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.loading.</span></span><span class="sig-name descname"><span class="pre">MovingAverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InputContainer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><span class="pre">type</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.loading.MovingAverage" title="Permalink to this definition">#</a></dt>
 <dd><div class="versionadded">
 <p><span class="versionmodified added">New in version 1.5.0.</span></p>
 </div>
@@ -425,7 +415,7 @@ Class Load Estimator<div class="summary-down docutils">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>InputContainer</strong> (<em>class</em>) – The InputContainer class for the model (model.InputContainer)</p></li>
-<li><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – The size of the window to use for the moving average, by default 10</p></li>
+<li><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – The size of the window to use for the moving average, by default 10</p></li>
 </ul>
 </dd>
 </dl>
@@ -443,7 +433,7 @@ Class Load Estimator<div class="summary-down docutils">
 
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.loading.GaussianNoiseLoadWrapper">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.loading.</span></span><span class="sig-name descname"><span class="pre">GaussianNoiseLoadWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.11)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.loading.GaussianNoiseLoadWrapper" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.loading.</span></span><span class="sig-name descname"><span class="pre">GaussianNoiseLoadWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.loading.GaussianNoiseLoadWrapper" title="Permalink to this definition">#</a></dt>
 <dd><div class="versionadded">
 <p><span class="versionmodified added">New in version 1.5.0.</span></p>
 </div>
@@ -452,7 +442,7 @@ Class Load Estimator<div class="summary-down docutils">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fcn</strong> (<em>Callable</em>) – The future loading function to wrap</p></li>
-<li><p><strong>std</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The standard deviation of the gaussian noise to add</p></li>
+<li><p><strong>std</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The standard deviation of the gaussian noise to add</p></li>
 </ul>
 </dd>
 </dl>
@@ -476,7 +466,7 @@ Class Load Estimator<div class="summary-down docutils">
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>np.ndarray</em><em>]</em>) – dictionary of reference trajectories for each state variable (x, y, z, phi, theta, psi, …)</p></li>
+<li><p><strong>x_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>np.ndarray</em><em>]</em>) – dictionary of reference trajectories for each state variable (x, y, z, phi, theta, psi, …)</p></li>
 <li><p><strong>vehicle</strong> – UAV model object</p></li>
 </ul>
 </dd>
@@ -486,8 +476,8 @@ Class Load Estimator<div class="summary-down docutils">
 Represents how ‘bad’ an error is in the state vector w.r.t. the reference state vector</p></li>
 <li><p><strong>R</strong> (<em>np.ndarray</em>) – Input penalty matrix, size num_inputs x num_inputs (where num_inputs only includes inputs that inform the system dynamics)
 Represents how ‘hard’ it is to produce the desired input (thrust and three moments along three axes)</p></li>
-<li><p><strong>scheduled_var</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Variable used to create the scheduled controller gains; must correspond to a state key</p></li>
-<li><p><strong>index_scheduled_var</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Index corresponding to the scheduled_var in the state vector</p></li>
+<li><p><strong>scheduled_var</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Variable used to create the scheduled controller gains; must correspond to a state key</p></li>
+<li><p><strong>index_scheduled_var</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Index corresponding to the scheduled_var in the state vector</p></li>
 </ul>
 </dd>
 </dl>
@@ -500,7 +490,7 @@ Represents how ‘hard’ it is to produce the desired input (thrust and three m
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>np.ndarray</em><em>]</em>) – dictionary of reference trajectories for each state variable (x, y, z, phi, theta, psi, …)</p></li>
+<li><p><strong>x_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>np.ndarray</em><em>]</em>) – dictionary of reference trajectories for each state variable (x, y, z, phi, theta, psi, …)</p></li>
 <li><p><strong>vehicle</strong> – UAV model object</p></li>
 </ul>
 </dd>
@@ -510,12 +500,12 @@ Represents how ‘hard’ it is to produce the desired input (thrust and three m
 Represents how ‘bad’ an error is in the state vector w.r.t. the reference state vector</p></li>
 <li><p><strong>R</strong> (<em>np.ndarray</em>) – Input penalty matrix, size num_inputs x num_inputs (where num_inputs only includes inputs that inform the system dynamics)
 Represents how ‘hard’ it is to produce the desired input (thrust and three moments along three axes)</p></li>
-<li><p><strong>int_lag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Length of the time window, in number of simulation steps, to integrate the state position error. The time window is defined
+<li><p><strong>int_lag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Length of the time window, in number of simulation steps, to integrate the state position error. The time window is defined
 as the last int_lag discrete steps up until the current discrete time step. The integral of the state position error adds to
 the overall state error to compute the gain matrix, and helps compensate for constant offsets between the reference (desired)
 position and the actual position of the vehicle.</p></li>
-<li><p><strong>scheduled_var</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Variable used to create the scheduled controller gains; must correspond to a state key</p></li>
-<li><p><strong>index_scheduled_var</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Index corresponding to the scheduled_var in the state vector</p></li>
+<li><p><strong>scheduled_var</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Variable used to create the scheduled controller gains; must correspond to a state key</p></li>
+<li><p><strong>index_scheduled_var</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Index corresponding to the scheduled_var in the state vector</p></li>
 </ul>
 </dd>
 </dl>
@@ -573,17 +563,8 @@ position and the actual position of the vehicle.</p></li>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-estimator-class-interface">Load Estimator Class interface</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-estimator-classes">Load Estimator Classes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.Piecewise"><code class="docutils literal notranslate"><span class="pre">Piecewise</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.MovingAverage"><code class="docutils literal notranslate"><span class="pre">MovingAverage</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.GaussianNoiseLoadWrapper"><code class="docutils literal notranslate"><span class="pre">GaussianNoiseLoadWrapper</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controllers">Controllers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.controllers.LQR"><code class="docutils literal notranslate"><span class="pre">LQR</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.loading.controllers.LQR_I"><code class="docutils literal notranslate"><span class="pre">LQR_I</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-estimator-classes">Load Estimator Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controllers">Controllers</a></li>
 </ul>
   </nav></div>
 
