@@ -154,14 +154,23 @@ class MixtureOfExpertsModel(CompositeModel):
                     for j, (key_i, _) in enumerate(self.parameters['models']):
                         score_key_i = key_i + DIVIDER + "_score"
                         x[score_key_i] *= 0.8
-                        # Also scale the 
-                        score_delta[j] *= 0.8 # Also needs to be scaled
+                        # Also scale the score deltas
+                        score_delta[j] *= 0.8
 
                     x[score_key] += score_delta[i] # Redo application
 
         return x
 
-    def output(self, x):
+    def best_model(self, x):
+        """
+        Get the best-performing model according to the scores
+
+        Args:
+            x (StateContainer): System state
+
+        Returns:
+            tuple[str, PrognosticsModel]: The name and model for the model with the highest score. If two models are tied, the first one will be returned in the order they were passed to the constructor.
+        """
         # Identify best model
         best_value = -1
         for i, (key, _) in enumerate(self.parameters['models']):
@@ -169,47 +178,26 @@ class MixtureOfExpertsModel(CompositeModel):
             if x[score_key] > best_value:
                 best_value = x[score_key]
                 best_index = i
+        return self.parameters['models'][best_index]
+
+    def output(self, x):
+        name, m = self.best_model(x)
 
         # Prepare state
-        name, m = self.parameters['models'][best_index]
         x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
         return m.output(x_i)
 
     def event_state(self, x):
-        # Identify best model
-        best_value = -1
-        for i, (key, _) in enumerate(self.parameters['models']):
-            score_key = key + DIVIDER + "_score"
-            if x[score_key] > best_value:
-                best_value = x[score_key]
-                best_index = i
-
-        name, m = self.parameters['models'][best_index]
+        name, m = self.best_model(x)
         x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
         return m.event_state(x_i)
 
     def threshold_met(self, x):
-        # Identify best model
-        best_value = -1
-        for i, (key, _) in enumerate(self.parameters['models']):
-            score_key = key + DIVIDER + "_score"
-            if x[score_key] > best_value:
-                best_value = x[score_key]
-                best_index = i
-
-        name, m = self.parameters['models'][best_index]
+        name, m = self.best_model(x)
         x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
         return m.threshold_met(x_i)
 
     def performance_metrics(self, x):
-        # Identify best model
-        best_value = -1
-        for i, (key, _) in enumerate(self.parameters['models']):
-            score_key = key + DIVIDER + "_score"
-            if x[score_key] > best_value:
-                best_value = x[score_key]
-                best_index = i
-
-        name, m = self.parameters['models'][best_index]
+        name, m = self.best_model(x)
         x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
         return m.performance_metrics(x_i)
