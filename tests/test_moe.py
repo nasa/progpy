@@ -6,7 +6,7 @@ import sys
 import unittest
 
 from progpy import MixtureOfExpertsModel
-from progpy.models.test_models.other_models import OneInputTwoOutputsOneEvent
+from progpy.models.test_models.other_models import OneInputTwoOutputsOneEvent, OneInputTwoOutputsOneEvent_alt
 
 
 class TestMoE(unittest.TestCase):
@@ -18,10 +18,6 @@ class TestMoE(unittest.TestCase):
         sys.stdout = sys.__stdout__
 
     def testSameModel(self):
-        DT = 0.25
-
-        m_gt = OneInputTwoOutputsOneEvent(a=1.2)
-
         m1 = OneInputTwoOutputsOneEvent(a=2.3, b=0.75, c=0.75)
         m2 = OneInputTwoOutputsOneEvent(a=1.19) # best option
         m3 = OneInputTwoOutputsOneEvent(a=0.95, b=0.85, c=0.85)
@@ -87,6 +83,41 @@ class TestMoE(unittest.TestCase):
         self.assertEqual(x['OneInputTwoOutputsOneEvent_2._score'], (0.999+0.01)*0.8)
         self.assertGreater(x['OneInputTwoOutputsOneEvent_3._score'], 0.48*0.8)
         self.assertLess(x['OneInputTwoOutputsOneEvent_3._score'], 0.52*0.8)
+
+    def test_heterogeneous_models(self):
+        m1 = OneInputTwoOutputsOneEvent(a=2.3, b=0.75, c=0.75)
+        m2 = OneInputTwoOutputsOneEvent(a=1.19) # best option
+        m3 = OneInputTwoOutputsOneEvent_alt(a=1.17, d=0.85, c=0.85)  # different class
+
+        m_moe = MixtureOfExpertsModel((m1, m2, m3))
+        self.assertSetEqual(set(m_moe.inputs), set(OneInputTwoOutputsOneEvent.inputs + OneInputTwoOutputsOneEvent.outputs + OneInputTwoOutputsOneEvent_alt.outputs))
+        self.assertSetEqual(set(m_moe.outputs), set(OneInputTwoOutputsOneEvent.outputs + OneInputTwoOutputsOneEvent_alt.outputs))
+        self.assertSetEqual(set(m_moe.events), set(OneInputTwoOutputsOneEvent.events + OneInputTwoOutputsOneEvent_alt.events))
+        self.assertSetEqual(set(m_moe.states), {'OneInputTwoOutputsOneEvent.x0', 'OneInputTwoOutputsOneEvent_2.x0', 'OneInputTwoOutputsOneEvent_alt.x0', 'OneInputTwoOutputsOneEvent._score', 'OneInputTwoOutputsOneEvent_2._score', 'OneInputTwoOutputsOneEvent_alt._score'})
+
+        x0 = m_moe.initialize()
+
+        # Next_state uses first model (since scores are equal)
+        x = m_moe.next_state(x0, m_moe.InputContainer({'u0': 2}), 1)
+        z = m_moe.output(x)  # This is where it "chooses one"
+        # Since scores are equal it should choose the first one
+        # Which meanes x0 is 4.6 and b, c are 0.75, and d is 0.85 (and x0 for that one is 2.34)
+        self.assertEqual(z['x0+b'], 5.35)
+        self.assertEqual(z['x0+c'], 5.35)
+        self.assertEqual(z['x0+d'], 3.19)
+
+        es = m_moe.event_state(x)
+        self.assertEqual(es['x0==10'], 0.54) # 1 - 0.46/10 (uses x0 for model 1)
+        self.assertEqual(es['x0==7'], 1-2.34/7) # (uses x0 for model 3)
+
+        tm = m_moe.threshold_met(x)
+        self.assertFalse(tm['x0==10'])
+        self.assertFalse(tm['x0==7'])
+
+        x['OneInputTwoOutputsOneEvent_alt.x0'] = 20 # Will only effect the state for model 3
+        tm = m_moe.threshold_met(x)
+        self.assertFalse(tm['x0==10'])
+        self.assertTrue(tm['x0==7'])
 
 # This allows the module to be executed directly
 def main():
