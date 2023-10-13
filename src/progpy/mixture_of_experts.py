@@ -12,11 +12,13 @@ class MixtureOfExpertsModel(CompositeModel):
     """
     .. versionadded:: 1.6.0
 
-    Mixture of Experts (MoE) models combine multiple models of the same system, similar to Ensemble models. Unlike Ensemble Models, the aggregation is done by selecting the "best" model. That is the model that has performed the best over the past.
+    Mixture of Experts (MoE) models combine multiple models of the same system, similar to Ensemble models. Unlike Ensemble Models, the aggregation is done by selecting the "best" model. That is the model that has performed the best over the past. Each model will have a 'score' that is tracked in the state, and this determines which model is best. 
 
-    The MoE model's inputs include the inputs and outputs of the individual models making up the model. If the output values are provided as an input to the model then the model will update the score during state tranisition. If not, state transition will continue as normal. Typically, outputs are provided in the MoE model input when performing a state estimation step but not when predicting forward.
+    The MoE model's inputs include the inputs and outputs of the individual models making up the model. If the output values are provided as an input to the model then the model will update the score during state transition. The outputs are required to update the score, since this allows for the calculation of how "good" the model is. If outputs are not provided, state transition will continue as normal, without updating model scores. 
 
-    Scores for the individual models is tracked in the state. At a state transition when outputs are provided, the score for the best model will increase by max_score_step for the best fitting model (i.e., lowest error in output) and decrease by max_score_step for the worst. All other models will be scaled between these, based on the error.
+    At a state transition when outputs are provided, the score for the best model will increase by max_score_step for the best fitting model (i.e., lowest error in output) and decrease by max_score_step for the worst. All other models will be scaled between these, based on the error.
+    
+    Typically, outputs are provided in the MoE model input when performing a state estimation step (i.e. when there is measured data) but not when predicting forward (i.e. when the output is unknown).
 
     When calling output, event_state, threshold_met, or performance_metrics, only the model with the best score will be called, and those results returned. In case of a tie, the first model (in the order provided by the constructor) of the tied models will be used.
 
@@ -45,7 +47,7 @@ class MixtureOfExpertsModel(CompositeModel):
     }
 
     def __init__(self, models: list, **kwargs):
-        # Run initializer in ComositeModel
+        # Run initializer in CompositeModel
         # Note: Input validation is done there
         super().__init__(models, **kwargs)
 
@@ -133,7 +135,7 @@ class MixtureOfExpertsModel(CompositeModel):
             max_mse = max(mses)
             diff_mse = max_mse-min_mse
 
-            # Score delta - +self.parameters['max_score_step'] for best, -self.parameters['max_score_step'] for worse
+            # Score delta: +self.parameters['max_score_step'] for best, -self.parameters['max_score_step'] for worse
             score_delta = [(min_mse-mse)/diff_mse*(2*self.parameters['max_score_step'])+self.parameters['max_score_step'] for mse in mses]
             for i, (key, _) in enumerate(self.parameters['models']):
                 score_key = key + DIVIDER + "_score"
