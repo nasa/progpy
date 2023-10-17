@@ -20,7 +20,7 @@ class MixtureOfExpertsModel(CompositeModel):
     
     Typically, outputs are provided in the MoE model input when performing a state estimation step (i.e. when there is measured data) but not when predicting forward (i.e. when the output is unknown).
 
-    When calling output, event_state, threshold_met, or performance_metrics, only the model with the best score will be called, and those results returned. In case of a tie, the first model (in the order provided by the constructor) of the tied models will be used.
+    When calling output, event_state, threshold_met, or performance_metrics, only the model with the best score will be called, and those results returned. In case of a tie, the first model (in the order provided by the constructor) of the tied models will be used. If not every outputs, event, or performance metric has been identified, the next best model will be used to fill in the blanks, and so on.
 
     Args:
         models (list[PrognosticsModel]): List of at least 2 models that form the ensemble
@@ -162,7 +162,7 @@ class MixtureOfExpertsModel(CompositeModel):
 
         return x
 
-    def best_model(self, x):
+    def best_model(self, x, _excepting=[]):
         """
         Get the best-performing model according to the scores
 
@@ -175,6 +175,8 @@ class MixtureOfExpertsModel(CompositeModel):
         # Identify best model
         best_value = -1
         for i, (key, _) in enumerate(self.parameters['models']):
+            if key in _excepting:
+                continue # Skip excepting
             score_key = key + DIVIDER + "_score"
             if x[score_key] > best_value:
                 best_value = x[score_key]
@@ -182,23 +184,109 @@ class MixtureOfExpertsModel(CompositeModel):
         return self.parameters['models'][best_index]
 
     def output(self, x):
-        name, m = self.best_model(x)
+        excepting = []
+        outputs_seen = set()
+        z = {}
+        while outputs_seen != set(self.outputs):
+            # Not all outputs have been calculated
+            name, m = self.best_model(x, _excepting=excepting)
+            excepting.append(name)
 
-        # Prepare state
-        x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
-        return m.output(x_i)
+            new_outputs = set(m.outputs) - outputs_seen
+            if len(new_outputs) > 0:
+                # Has an output that hasn't been seen
+
+                # Prepare state
+                x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
+                z_i = m.output(x_i)
+                
+                # Merge in new outputs
+                for key in new_outputs:
+                    z[key] = z_i[key]
+
+                # Add new outputs
+                outputs_seen |= new_outputs
+
+        return self.OutputContainer(z)
 
     def event_state(self, x):
-        name, m = self.best_model(x)
-        x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
-        return m.event_state(x_i)
+        excepting = []
+        events_seen = set()
+        es = {}
+        while events_seen != set(self.events):
+            # Not all outputs have been calculated
+            name, m = self.best_model(x, _excepting=excepting)
+            excepting.append(name)
+
+            new_events = set(m.events) - events_seen
+            if len(new_events) > 0:
+                # Has an event that hasn't been seen
+
+                # Prepare state
+                x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
+                es_i = m.event_state(x_i)
+                
+                # Merge in new events
+                for key in new_events:
+                    es[key] = es_i[key]
+
+                # Add new events
+                events_seen |= new_events
+
+        return es
 
     def threshold_met(self, x):
-        name, m = self.best_model(x)
-        x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
-        return m.threshold_met(x_i)
+        excepting = []
+        events_seen = set()
+        tm = {}
+        while events_seen != set(self.events):
+            # Not all outputs have been calculated
+            name, m = self.best_model(x, _excepting=excepting)
+            excepting.append(name)
+
+            new_events = set(m.events) - events_seen
+            if len(new_events) > 0:
+                # Has an event that hasn't been seen
+
+                # Prepare state
+                x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
+                tm_i = m.threshold_met(x_i)
+                
+                # Merge in new events
+                for key in new_events:
+                    tm[key] = tm_i[key]
+
+                # Add new events
+                events_seen |= new_events
+
+        return tm
 
     def performance_metrics(self, x):
+        excepting = []
+        performance_metrics_seen = set()
+        pm = {}
+        while performance_metrics_seen != set(self.performance_metric_keys):
+            # Not all outputs have been calculated
+            name, m = self.best_model(x, _excepting=excepting)
+            excepting.append(name)
+
+            new_performance_metrics = set(m.performance_metric_keys) - performance_metrics_seen
+            if len(new_performance_metrics) > 0:
+                # Has an performance metrics that hasn't been seen
+
+                # Prepare state
+                x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
+                pm_i = m.performance_metrics(x_i)
+                
+                # Merge in new events
+                for key in new_performance_metrics:
+                    pm[key] = pm_i[key]
+
+                # Add new events
+                performance_metrics_seen |= new_performance_metrics
+
+        return pm
+
         name, m = self.best_model(x)
         x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
         return m.performance_metrics(x_i)
