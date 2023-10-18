@@ -1,7 +1,7 @@
 Loading
 =========
 
-The loading subpackage includes some classes for complex load estimation algorithms. See :download:`examples.future_loading <../../../../prog_models/examples/future_loading.py>` for more details.
+The loading subpackage includes some classes for complex load estimation algorithms. See :download:`examples.future_loading <../../../../progpy/examples/future_loading.py>` for more details.
 
 Load Estimator Class interface
 ------------------------------
@@ -32,15 +32,15 @@ The second approach for load estimators is a load estimation class. This is used
 Load Estimator Classes
 ----------------------
 
-.. autoclass:: prog_models.loading.Piecewise
+.. autoclass:: progpy.loading.Piecewise
 
-.. autoclass:: prog_models.loading.MovingAverage
+.. autoclass:: progpy.loading.MovingAverage
 
-.. autoclass:: prog_models.loading.GaussianNoiseLoadWrapper
+.. autoclass:: progpy.loading.GaussianNoiseLoadWrapper
 
 Controllers
 ------------------
 
-.. autoclass:: prog_models.loading.controllers.LQR
+.. autoclass:: progpy.loading.controllers.LQR
 
-.. autoclass:: prog_models.loading.controllers.LQR_I
+.. autoclass:: progpy.loading.controllers.LQR_I

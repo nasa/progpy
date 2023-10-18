@@ -4,6 +4,25 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in V1.6
+----------------------
+
+progpy
+**************
+* Combined previous prog_models and prog_algs packages into a single package, progpy.
+* Added new MixtureOfExperts model, which combines multiple models of the same system into a single model, where only the best of the comprised models will be used at each timestep.
+* Improvements to future load estimation:
+
+  * Added ability to set random seed in GaussianLoadWrapper, allowing for repeatable experiments
+  * Added wedge noise to GaussianLoadWrapper, this was a frequently requested feature that will increase noise levels as time goes on, representing the increased uncertainty further into the future.
+
+* Various bug fixes and performance improvements
+
+prog_server
+************
+
+
+
 Updates in V1.5
 -----------------------
 

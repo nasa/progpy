@@ -8,9 +8,9 @@ The :py:class:`DataModel` class is the base class for all data-based models. It 
 
 Examples:
 
-* :download:`examples.lstm_model <../../../../prog_models/examples/lstm_model.py>`
-* :download:`examples.full_lstm_model <../../../../prog_models/examples/full_lstm_model.py>`
-* :download:`examples.custom_model <../../../../prog_models/examples/custom_model.py>`
+* :download:`examples.lstm_model <../../../../progpy/examples/lstm_model.py>`
+* :download:`examples.full_lstm_model <../../../../progpy/examples/full_lstm_model.py>`
+* :download:`examples.custom_model <../../../../progpy/examples/custom_model.py>`
 
 Training DataModels
 -----------------------
@@ -24,7 +24,7 @@ This is the most common way to construct a :py:class:`DataModel` object, using t
 
    .. code-block:: python
 
-      >>> from prog_models.models import LSTMStateTransitionModel
+      >>> from progpy.models import LSTMStateTransitionModel
       >>> input_data = [run1.inputs, run2.inputs, run3.inputs]
       >>> output_data = [run1.outputs, run2.outputs, run3.outputs]
       >>> m = LSTMStateTransitionModel.from_data(input_data, output_data)
@@ -37,8 +37,8 @@ Surrogate models are constructed using the :py:func:`DataModel.from_model` Class
 
    .. code-block:: python
 
-      >>> from prog_models.models import ThrownObject
-      >>> from prog_models.models import LSTMStateTransitionModel
+      >>> from progpy.models import ThrownObject
+      >>> from progpy.models import LSTMStateTransitionModel
       >>> m = ThrownObject()
       >>> def future_loading(t, x=None):
       >>>    return m.InputContainer({})  # No input for thrown object 
@@ -56,7 +56,7 @@ Using Constructor
 **********************
 This method is the least frequently used, and it is very specific to the :py:class:`DataModel` class being constructed. For example: :py:class:`DMDModel` classes are constructed using the DMD Matrix, and :py:class:`LSTMStateTransitionModel` classes are constructed using a trained Keras Model.
 
-See example :download:`examples.custom_model <../../../../prog_models/examples/custom_model.py>`
+See example :download:`examples.custom_model <../../../../progpy/examples/custom_model.py>`
 
 Included DataModels
 -------------------------
@@ -64,22 +64,22 @@ The following DataModels are included in the package. A new DataModel can be cre
 
 DMDModel
 **************************
-.. autoclass:: prog_models.data_models.DMDModel
+.. autoclass:: progpy.data_models.DMDModel
    :members: from_data, from_model
 
 LSTMStateTransitionModel
 **************************
-.. autoclass:: prog_models.data_models.LSTMStateTransitionModel
+.. autoclass:: progpy.data_models.LSTMStateTransitionModel
    :members: from_data, from_model
 
 PolynomialChaosExpansion
 **************************
-.. autoclass:: prog_models.data_models.PolynomialChaosExpansion
+.. autoclass:: progpy.data_models.PolynomialChaosExpansion
    :members: from_data, from_model
 
 DataModel Interface
 ---------------------------
-.. autoclass:: prog_models.data_models.DataModel
+.. autoclass:: progpy.data_models.DataModel
    :members:
    :show-inheritance:
    :inherited-members:

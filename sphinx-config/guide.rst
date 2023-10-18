@@ -10,7 +10,7 @@ ProgPy Guide
    prog_algs_guide
    prog_server_guide
 
-This page is a general guide for ProgPy. ProgPy consists of three packages: prog_models, prog_algs, prog_server. To access a guide specific to the package you're using, select it in the menu below.
+This page is a general guide for ProgPy. To access a guide specific to the features you're using, select it in the menu below.
 
 .. panels::
     :img-top-cls: pt-2, pb-2
@@ -23,7 +23,7 @@ This page is a general guide for ProgPy. ProgPy consists of three packages: prog
 
     .. link-button:: prog_models Guide
         :type: ref
-        :text: prog_models
+        :text: Modeling and Simulation
         :classes: stretched-link btn-outline-primary btn-block
 
     ---
@@ -31,7 +31,7 @@ This page is a general guide for ProgPy. ProgPy consists of three packages: prog
 
     .. link-button:: prog_algs Guide
         :type: ref
-        :text: prog_algs
+        :text: State Estimation and Prediction
         :classes: stretched-link btn-outline-primary btn-block
 
     ---
@@ -59,13 +59,13 @@ In general, the ProgPy prognostic approach is illustrated below.
 
 The foundation of prognostics is a :term:`model`. Models describe the behavior of a system or system of systems. A prognostics model specifically describes how the state of the system evolves with time. Prognostic models typically come in one of 4 categories: knowledge-based, :term:`physics-based<physics-based model>`, :term:`data-driven<data-driven model>`, or some combination of those three (i.e., hybrid).
 
-Functionality for creation, simulation, and analysis of models can be found in the :ref:`prog_models<prog_models Guide>` package. That package also includes some example models and tools to access relevant data for model creation. For more information see the :ref:`prog_models Guide`.
+Details on functionality for creation, simulation, and analysis of models can be found in the :ref:`Modeling and Simulation Guide <prog_models Guide>` package. That package also includes some example models and tools to access relevant data for model creation. 
 
 ProgPy divides the prognostic process into two steps: :term:`state estimation<state estimator>` and :term:`prediction<predictor>`. State estimation is the process of determining the current system state (x), with some uncertainty, given the system parameters (:math:`\Theta`), system loading (u) and measurements (z). There are various methods used for this, such as Kalman Filters and Particle Filters. These methods utilize a prognostics model, comparing measurements (z) with those predicted from the system output equation.
 
 In the prediction step, the state estimate at the prediction time and system model are used together to estimate system degradation with time. This is most commonly done using a variant of the Monte Carlo method with the model state transition equation. Prediction is often computationally expensive, especially for sample-based approaches with strict precision requirements (which therefore require large number of samples). ProgPy provides some potential solutions to combat this, such as :term:`surrogate` models, vectorization, and model configuration options.
 
-Algorithms for :term:`state estimation<state estimator>` and :term:`prediction<predictor>` along with tools analyzing and visualizing results of state estimation and prediction, managing uncertainty, and creating new state estimators or predictors can be found in the :ref:`prog_algs<prog_algs Guide>` package. For more information see the :ref:`prog_algs Guide`.
+Algorithms for :term:`state estimation<state estimator>` and :term:`prediction<predictor>` along with tools analyzing and visualizing results of state estimation and prediction, managing uncertainty, and creating new state estimators or predictors, see the :ref:`State Estimation and Prediction Guide<prog_algs Guide>`.
 
 More information
 ------------------------------
@@ -81,7 +81,7 @@ For more information, see the inidividual pages for each of the three ProgPy Pac
     ---
     :img-top: images/cube.png
 
-    .. link-button:: prog_models Guide
+    .. link-button:: Modeling and Simulation Guide
         :type: ref
         :text: prog_models
         :classes: stretched-link btn-outline-primary btn-block
@@ -89,7 +89,7 @@ For more information, see the inidividual pages for each of the three ProgPy Pac
     ---
     :img-top: images/Gear-icon.png
 
-    .. link-button:: prog_algs Guide
+    .. link-button:: State Estimation and Prediction
         :type: ref
         :text: prog_algs
         :classes: stretched-link btn-outline-primary btn-block

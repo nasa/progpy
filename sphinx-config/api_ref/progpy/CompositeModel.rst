@@ -1,5 +1,5 @@
 CompositeModel
 ================
 
-.. autoclass:: prog_models.CompositeModel
+.. autoclass:: progpy.CompositeModel
     :show-inheritance:

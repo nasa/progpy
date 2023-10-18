@@ -1,15 +1,15 @@
 Predictors
 ===========================
 
-The :py:class:`Predictor` uses a state estimate (type :py:class:`UncertainData` subclass, output of a :py:class:`StateEstimator`), information about expected future loading, and a :py:class:`PrognosticsModel` (see: `prog_models package <https://github.com/nasa/prog_models>`__) to predict both future states (also outputs, performance metrics, event_states) at predefined points and the time that an event will occur (Time of Event, ToE) with uncertainty.
+The :py:class:`Predictor` uses a state estimate (type :py:class:`UncertainData` subclass, output of a :py:class:`StateEstimator`), information about expected future loading, and a :py:class:`PrognosticsModel` to predict both future states (also outputs, performance metrics, event_states) at predefined points and the time that an event will occur (Time of Event, ToE) with uncertainty.
 
 Here's an example of its use. In this example we use the :py:class:`ThrownObject` model and the :py:class:`MonteCarlo` predictor, and we save the state every 1s. We also use a scalar first state (i.e., no uncertainty).
 
 .. code-block:: python
 
    >>> from prog_models.models import ThrownObject
-   >>> from prog_algs.predictors import MonteCarlo
-   >>> from prog_algs.uncertain_data import ScalarData
+   >>> from progpy.predictors import MonteCarlo
+   >>> from progpy.uncertain_data import ScalarData
    >>>
    >>> m = ThrownObject()
    >>> pred = MonteCarlo(m)
@@ -30,14 +30,14 @@ The following predictors are included with this package. A new predictor can be 
 
    .. tab:: Monte Carlo Predictor
 
-      .. autoclass:: prog_algs.predictors.MonteCarlo
+      .. autoclass:: progpy.predictors.MonteCarlo
 
    .. tab:: Unscented Transform Predictor
       
-      .. autoclass:: prog_algs.predictors.UnscentedTransformPredictor
+      .. autoclass:: progpy.predictors.UnscentedTransformPredictor
 
 Predictor Interface
 -----------------------
-.. autoclass:: prog_algs.predictors.Predictor
+.. autoclass:: progpy.predictors.Predictor
    :members:
    :inherited-members:

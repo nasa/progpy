@@ -1,4 +1,4 @@
-prog_algs API Reference
+ProgPy API Reference
 ==================================
 
 .. raw:: html
@@ -8,6 +8,8 @@ prog_algs API Reference
 .. toctree::
    :glob:
 
-   prog_algs/* 
+   progpy/* 
 
 .. image:: ../images/prog_algs_UML.png
+
+.. image:: ../images/prog_models_UML.png

@@ -8,13 +8,13 @@ Two types of predictions are distributed with this package: `Prediction` and `Un
 .. tabs::
    .. tab:: Prediction
 
-      .. autoclass:: prog_algs.predictors.Prediction
+      .. autoclass:: progpy.predictors.Prediction
          :members:
          :inherited-members: 
 
    .. tab:: UnweightedSamplesPrediction
 
-      .. autoclass:: prog_algs.predictors.UnweightedSamplesPrediction
+      .. autoclass:: progpy.predictors.UnweightedSamplesPrediction
          :members:
          :inherited-members:
          :exclude-members: append, extend, clear, pop, remove, reverse, insert

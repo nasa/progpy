@@ -1,5 +1,5 @@
 EnsembleModel
 ================
 
-.. autoclass:: prog_models.EnsembleModel
+.. autoclass:: progpy.EnsembleModel
     :show-inheritance:
