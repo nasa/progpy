@@ -150,8 +150,9 @@ class PrognosticsModelParameters(UserDict):
                 
                 # Make sure every key is present
                 # (single value already handled above)
-                if not all([key in self['process_noise'] for key in self._m.states]):
-                    raise ValueError("Process noise must have every key in model.states")
+                for key in self._m.states:
+                    if key not in self['process_noise']:
+                        self['process_noise'][key] = 0
 
         elif key == 'measurement_noise' or key == 'measurement_noise_dist':
             if callable(self['measurement_noise']):

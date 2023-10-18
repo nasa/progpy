@@ -1,79 +1,79 @@
-name: Print Benchmarking
+# name: Print Benchmarking
 
-on: pull_request
+# on: pull_request
 
-jobs:
-  benchmark_branch: 
-    timeout-minutes: 20
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.9']
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -e .
-      - name: benchmark
-        id: bench
-        shell: bash
-        run: |
-          bench=$(python -m tests.benchmarking)
-          # V To support multiline strings V
-          bench="${bench//'%'/'%25'}"
-          bench="${bench//$'\n'/'%0A'}"
-          bench="${bench//$'\r'/'%0D'}"
-          echo "::set-output name=bench::$bench"
-      - name: Clone prog_models
-        uses: actions/checkout@v2
-        with:
-          repository: nasa/prog_models
-          ref: ${{ github.event.pull_request.base.ref }}
-          path: prog_models_target
-      - name: Downgrade
-        run: |
-          python -m pip uninstall -y prog_models
-          python -m pip install -e ./prog_models_target
-          cd prog_models_target
-      - name: benchmark-pre
-        id: bench-pre
-        shell: bash
-        run: |
-          bench=$(python -m tests.benchmarking)
-          # V To support multiline strings V
-          bench="${bench//'%'/'%25'}"
-          bench="${bench//$'\n'/'%0A'}"
-          bench="${bench//$'\r'/'%0D'}"
-          echo "::set-output name=bench::$bench"
-      - name: Auto Comment
-        uses: wow-actions/auto-comment@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          pullRequestOpened: >
-            Benchmarking Results
+# jobs:
+#   benchmark_branch: 
+#     timeout-minutes: 20
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         python-version: ['3.9']
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Set up Python ${{ matrix.python-version }}
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: ${{ matrix.python-version }}
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           python -m pip install -e .
+#       - name: benchmark
+#         id: bench
+#         shell: bash
+#         run: |
+#           bench=$(python -m tests.benchmarking)
+#           # V To support multiline strings V
+#           bench="${bench//'%'/'%25'}"
+#           bench="${bench//$'\n'/'%0A'}"
+#           bench="${bench//$'\r'/'%0D'}"
+#           echo "::set-output name=bench::$bench"
+#       - name: Clone prog_models
+#         uses: actions/checkout@v2
+#         with:
+#           repository: nasa/prog_models
+#           ref: ${{ github.event.pull_request.base.ref }}
+#           path: prog_models_target
+#       - name: Downgrade
+#         run: |
+#           python -m pip uninstall -y prog_models
+#           python -m pip install -e ./prog_models_target
+#           cd prog_models_target
+#       - name: benchmark-pre
+#         id: bench-pre
+#         shell: bash
+#         run: |
+#           bench=$(python -m tests.benchmarking)
+#           # V To support multiline strings V
+#           bench="${bench//'%'/'%25'}"
+#           bench="${bench//$'\n'/'%0A'}"
+#           bench="${bench//$'\r'/'%0D'}"
+#           echo "::set-output name=bench::$bench"
+#       - name: Auto Comment
+#         uses: wow-actions/auto-comment@v1
+#         with:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           pullRequestOpened: >
+#             Benchmarking Results
 
-            From:
+#             From:
 
-            ${{steps.bench-pre.outputs.bench}}
+#             ${{steps.bench-pre.outputs.bench}}
             
-            To:
+#             To:
 
-            ${{steps.bench.outputs.bench}}
+#             ${{steps.bench.outputs.bench}}
 
-          pullRequestSynchronize: > 
-            Benchmarking Results [Update]
+#           pullRequestSynchronize: > 
+#             Benchmarking Results [Update]
 
-            From:
+#             From:
 
-            ${{steps.bench-pre.outputs.bench}}
+#             ${{steps.bench-pre.outputs.bench}}
 
             
-            To:
+#             To:
 
 
-            ${{steps.bench.outputs.bench}}
+#             ${{steps.bench.outputs.bench}}

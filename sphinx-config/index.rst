@@ -6,7 +6,7 @@ ProgPy Prognostics Python Packages
     <iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_models&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
     <br />
 
-The NASA Prognostics Python Packages (ProgPy) are a set of open-sourced python packages supporting research and development of prognostics and health management and predictive maintenance tools. They implement architectures and common functionality of prognostics, supporting researchers and practitioners.
+NASA's ProgPy is an open-sourced python packages supporting research and development of prognostics and health management and predictive maintenance tools. It implements architectures and common functionality of prognostics, supporting researchers and practitioners. The ProgPy package is a combination of the original prog_models and prog_algs packages.
 
 ProgPy consists of a set of packages, described below. See the documentation specific to each package for more information.  
 

@@ -11,8 +11,11 @@ from tests.test_direct import main as direct_main
 from tests.test_ensemble import main as ensemble_main
 from tests.test_estimate_params import main as estimate_params_main
 from tests.test_examples import main as examples_main
+from tests.test_horizon import main as horizon_main
 from tests.test_linear_model import main as linear_main
+from tests.test_loading import main as loading_main
 from tests.test_metrics import main as metrics_main
+from tests.test_moe import main as moe_main
 from tests.test_pneumatic_valve import main as pneumatic_valve_main
 from tests.test_powertrain import main as powertrain_main
 from tests.test_predictors import main as pred_main
@@ -78,7 +81,17 @@ if __name__ == '__main__':
         was_successful = False
 
     try:
+        horizon_main()
+    except Exception:
+        was_successful = False
+
+    try:
         linear_main()
+    except Exception:
+        was_successful = False
+
+    try:
+        loading_main()
     except Exception:
         was_successful = False
 
@@ -89,6 +102,11 @@ if __name__ == '__main__':
 
     try:
         metrics_main()
+    except Exception:
+        was_successful = False
+
+    try:
+        moe_main()
     except Exception:
         was_successful = False
 
