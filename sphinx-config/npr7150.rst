@@ -310,7 +310,7 @@ Implementation
 +-------+----------------------------------+------------+--------------------------------------------------------------------------------+
 | 186   | Unit Test Repeatability          | FC         | Unit tests are created with each enhancement, run automatically with each PR.  |
 +-------+----------------------------------+------------+--------------------------------------------------------------------------------+
-| 063M  | Software Version Description     | FC         | `See here <https://github.com/nasa/progpy/releases>`__                    |
+| 063M  | Software Version Description     | FC         | `See here <https://github.com/nasa/progpy/releases>`__                         |
 +-------+----------------------------------+------------+--------------------------------------------------------------------------------+
 | 063S  | Software Version Description     | FC         | `See here <https://github.com/nasa/prog_server/releases>`__                    |
 +-------+----------------------------------+------------+--------------------------------------------------------------------------------+

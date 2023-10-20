@@ -25,7 +25,7 @@ Example of a centrifugal pump being simulated until threshold is met.
 .. code-block:: default
 
 
-    from prog_models.models import CentrifugalPump
+    from progpy.models import CentrifugalPump
 
     def run_example(): 
         # Step 1: Setup Pump
@@ -63,7 +63,7 @@ Example of a centrifugal pump being simulated until threshold is met.
         simulated_results = pump.simulate_to_threshold(future_loading, first_output, **config)
 
         # Step 4: Plot Results
-        from prog_models.visualize import plot_timeseries
+        from progpy.visualize import plot_timeseries
         plot_timeseries(simulated_results.times, simulated_results.inputs, options={'compact': False, 'title': 'Inputs',
                                                         'xlabel': 'time', 'ylabel':{lbl: lbl for lbl in pump.inputs}})
         plot_timeseries(simulated_results.times, simulated_results.states, options={'compact': False, 'title': 'States', 'xlabel': 'time', 'ylabel': ''})

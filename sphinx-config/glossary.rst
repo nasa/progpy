@@ -8,7 +8,7 @@ Glossary
       A closed loop future loading method. Calculates future loading as a function of state, like the :py:class:`progpy.loading.controllers.LQR` controller used by the :py:class:`progpy.models.aircraft_model.SmallRotorcraft` model.
 
     trajectory
-      Path a vehicle takes through space, represented by a set of 4-dimensional points (position + time), represented by the `prog_modals.utils.traj_gen.Trajectory` class.
+      Path a vehicle takes through space, represented by a set of 4-dimensional points (position + time), represented by the :py:class:`progpy.utils.traj_gen.Trajectory` class.
 
     event
       Something that can be predicted (e.g., system failure). An event has either occurred or not. See also: :term:`threshold`

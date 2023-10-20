@@ -649,7 +649,7 @@ def OverwrittenWarning(params):
 
 class BatteryElectroChemEODEOL(BatteryElectroChemEOL, BatteryElectroChemEOD):
     """
-    Prognostics :term:`model` for a battery degredation and discharge, represented by an electrochemical model as described in [Dailge2013]_ and [Daigle2016]_
+    Prognostics :term:`model` for a battery degredation and discharge, represented by an electrochemical model as described in [Daigle2013]_ and [Daigle2016]_
 
     The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the Prognostics Center of Excellence Data Repository [DataRepo]_.
 

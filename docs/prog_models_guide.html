@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>prog_models Guide &#8212; ProgPy Python Packages 1.5 documentation</title>
+    <title>Modeling and Sim Guide &#8212; ProgPy Python Packages 1.5 documentation</title>
   
   
   
@@ -45,7 +45,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/tabs.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -54,10 +53,10 @@
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="prog_algs Guide" href="prog_algs_guide.html" />
+    <link rel="next" title="State Estimation and Prediction Guide" href="prog_algs_guide.html" />
     <link rel="prev" title="ProgPy Guide" href="guide.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -140,45 +139,42 @@
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="guide.html">ProgPy Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">prog_models Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="prog_algs_guide.html">prog_algs Guide</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Modeling and Sim Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prog_algs_guide.html">State Estimation and Prediction Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="prog_server_guide.html">prog_server Guide</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api_ref.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_algs.html">prog_algs API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/Prediction.html">Prediction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/Predictor.html">Predictors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/StateEstimator.html">State Estimators</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/ToEPredictionProfile.html">ToEPredictionProfile</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_algs/UncertainData.html">Uncertain Data</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_models.html">prog_models API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/CompositeModel.html">CompositeModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/DataModel.html">DataModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/DataSets.html">Datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/EnsembleModel.html">EnsembleModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/IncludedModels.html">Included Models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/LinearModel.html">LinearModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/Loading.html">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/PrognosticModel.html">PrognosticsModel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/SimResult.html">SimResult</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_ref/prog_models/Utils.html">Utils</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/load_ests.html">Load Estimators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_client.html">prog_client</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_server.html">ProgServer</a></li>
 <li class="toctree-l3"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
 </ul>
 </li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/progpy.html">ProgPy API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/EnsembleModel.html">EnsembleModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Loading.html">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Prediction.html">Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Predictor.html">Predictors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/PrognosticModel.html">PrognosticsModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/SimResult.html">SimResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/StateEstimator.html">State Estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/ToEPredictionProfile.html">ToEPredictionProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/UncertainData.html">Uncertain Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Utils.html">Utils</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="npr7150.html">NPR 7150 NASA Software Engineering Requirements</a></li>
 </ul>
 </li>
@@ -318,7 +314,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>prog_models Guide</h1>
+    <h1>Modeling and Sim Guide</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -328,7 +324,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-prog-models">Installing prog_models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing progpy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy-prognostic-model-format">ProgPy Prognostic Model Format</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs">Inputs</a></li>
@@ -336,7 +332,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-measurements">Output (Measurements)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise"><span class="xref std std-term">Noise</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise">Noise</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading"><span class="xref std std-term">Future Loading</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-notes">General Notes</a></li>
 </ul>
@@ -366,19 +362,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="prog-models-guide">
-<h1>prog_models Guide<a class="headerlink" href="#prog-models-guide" title="Permalink to this heading">#</a></h1>
-<iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_models&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><p>The Prognostics Models Package (prog_models) is a Python framework for defining, building, using, and testing models for <a class="reference internal" href="glossary.html#term-prognostics"><span class="xref std std-term">prognostics</span></a> of engineering systems. It also provides a set of prognostics models for select components developed within this framework, suitable for use in prognostics applications for these components and can be used in conjunction with the Prognostics Algorithms Package (<a class="reference internal" href="prog_algs_guide.html#prog-algs-guide"><span class="std std-ref">prog_algs</span></a>) to perform research in prognostics methods.</p>
-<section id="installing-prog-models">
-<h2>Installing prog_models<a class="headerlink" href="#installing-prog-models" title="Permalink to this heading">#</a></h2>
+  <section id="modeling-and-sim-guide">
+<h1>Modeling and Sim Guide<a class="headerlink" href="#modeling-and-sim-guide" title="Permalink to this headline">#</a></h1>
+<iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=progpy&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><p>The Prognostics Python Package (ProgPy) includes tools for defining, building, using, and testing models for <a class="reference internal" href="glossary.html#term-prognostics"><span class="xref std std-term">prognostics</span></a> of engineering systems. It also provides a set of prognostics models for select components developed within this framework, suitable for use in prognostics applications for these components and can be used in conjunction with the state estimation and prediction features (see <a class="reference internal" href="prog_algs_guide.html#state-estimation-and-prediction-guide"><span class="std std-ref">State Estimation and Prediction Guide</span></a>) to perform research in prognostics methods.</p>
+<section id="installing-progpy">
+<h2>Installing progpy<a class="headerlink" href="#installing-progpy" title="Permalink to this headline">#</a></h2>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Stable Version (Recommended)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Pre-Release</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>The latest stable release of prog_models is hosted on PyPi. For most users (unless you want to contribute to the development of prog_models), the version on PyPi will be adequate. To install from the command line, use the following command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>prog_models
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Stable Version (Recommended)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Pre-Release</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>progpy
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Users who would like to contribute to prog_models or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/prog_models">prog_models GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nasa/prog_models
-<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>prog_models
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Users who would like to contribute to progpy or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/progpy">progpy GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nasa/progpy
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>progpy
 <span class="gp">$ </span>git<span class="w"> </span>checkout<span class="w"> </span>dev
 <span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
 </pre></div>
@@ -386,28 +382,28 @@ document.write(`
 </div></div>
 </section>
 <section id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h2>
-<a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/prog_models/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
-<p>The best way to learn how to use prog_models is through the <a class="reference external" href="https://mybinder.org/v2/gh/nasa/prog_models/master?labpath=tutorial.ipynb">tutorial</a>. There are also a number of examples that show different aspects of the package, summarized and linked in the below sections</p>
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
+<p>The best way to learn how to use progpy is through the <a class="reference external" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb">tutorial</a>. There are also a number of examples that show different aspects of the package, summarized and linked in the below sections</p>
 </section>
 <section id="progpy-prognostic-model-format">
-<h2>ProgPy Prognostic Model Format<a class="headerlink" href="#progpy-prognostic-model-format" title="Permalink to this heading">#</a></h2>
+<h2>ProgPy Prognostic Model Format<a class="headerlink" href="#progpy-prognostic-model-format" title="Permalink to this headline">#</a></h2>
 <p>Prognostics models are the foundation of the prognostics process. They describe how a system or system-of-systems is expected to behave based on how it is used/loaded (i.e., <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a>). Prognostic models typically come in one of 4 categories: knowledge-based, <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based</span></a>, <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven</span></a>, or some combination of those three (i.e., hybrid).</p>
 <section id="inputs">
-<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading">#</a></h3>
+<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">#</a></h3>
 <p>Prognostic model <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">inputs</span></a> are how a system is loaded. These are things that can be controlled, and affect how the system state evolves. The expected inputs for a model are defined by its <em>inputs</em> property. For example, a battery is loaded by applying a current, so the only input is <em>i</em>, the applied current. Inputs are also sometimes environmental conditions, such as ambient temperature or pressure.</p>
-<p>Inputs are one of the inputs to the state transition model, described in <a class="reference internal" href="#states"><span class="std std-ref">States</span></a></p>
+<p>Inputs are one of the inputs to the state transition model, described in <a class="reference internal" href="#states"><span class="std std-ref">States</span></a> .</p>
 </section>
 <section id="states">
-<h3>States<a class="headerlink" href="#states" title="Permalink to this heading">#</a></h3>
+<h3>States<a class="headerlink" href="#states" title="Permalink to this headline">#</a></h3>
 <p>ProgPy prognostic models are state-transition models. The internal <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> of the system at any time is represented by one or more (frequently <a class="reference internal" href="glossary.html#term-hidden-state"><span class="xref std std-term">hidden</span></a>) state variables, represented by the custom type StateContainer. Each model has a discrete set of states, the keys of which are defined by the <em>states</em> property.</p>
 <p>For example, the example ThrownObject model has two states, position (x) and velocity (v).</p>
 <p>States are transitioned forward in time using the state transition equation.</p>
 <div style="text-align: center;"><p><span class="math notranslate nohighlight">\(x(t+dt) = f(t, x(t), u(t), dt, \Theta)\)</span></p>
-</div><p>where <span class="math notranslate nohighlight">\(x(t)\)</span> is <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a>, at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(u(t)\)</span> is <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a> at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(dt\)</span> is the stepsize, and <span class="math notranslate nohighlight">\(\Theta\)</span> are the model <a class="reference internal" href="glossary.html#term-parameters"><span class="xref std std-term">parameters</span></a>.</p>
-<p>In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of continuous models, state transition behavior is defined by defining the first derivative, using the <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.dx" title="prog_models.PrognosticsModel.dx"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.dx()</span></code></a> method. For discrete models, state transition behavior is defined using the <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.next_state" title="prog_models.PrognosticsModel.next_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.next_state()</span></code></a> method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.</p>
-<img alt="_images/next_state.png" src="_images/next_state.png" />
-<img alt="_images/dx.png" src="_images/dx.png" />
+</div><p>where <span class="math notranslate nohighlight">\(x(t)\)</span> is <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(u(t)\)</span> is <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a> at time <span class="math notranslate nohighlight">\(t\)</span> , <span class="math notranslate nohighlight">\(dt\)</span> is the stepsize, and <span class="math notranslate nohighlight">\(\Theta\)</span> are the model <a class="reference internal" href="glossary.html#term-parameters"><span class="xref std std-term">parameters</span></a> .</p>
+<p>In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of continuous models, state transition behavior is defined by defining the first derivative, using the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.dx" title="progpy.PrognosticsModel.dx"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.dx()</span></code></a> method. For discrete models, state transition behavior is defined using the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.next_state" title="progpy.PrognosticsModel.next_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.next_state()</span></code></a> method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.</p>
+<a class="reference internal image-reference" href="_images/next_state.png"><img alt="_images/next_state.png" class="align-center" src="_images/next_state.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="_images/dx.png"><img alt="_images/dx.png" class="align-center" src="_images/dx.png" style="width: 70%;" /></a>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 State transition equation example<div class="summary-down docutils">
@@ -434,10 +430,10 @@ State transition equation example<div class="summary-down docutils">
 </div>
 </details></section>
 <section id="output-measurements">
-<h3>Output (Measurements)<a class="headerlink" href="#output-measurements" title="Permalink to this heading">#</a></h3>
+<h3>Output (Measurements)<a class="headerlink" href="#output-measurements" title="Permalink to this headline">#</a></h3>
 <p>The next important part of a prognostic model is the outputs. Outputs are measurable quantities of a system that are a function of system state. When applied in prognostics, generally the outputs are what is being measured or observed in some way. State estimators use the different between predicted and measured values of these outputs to estimate the system state.</p>
-<p>Outputs are a function of only the system state (x) and <a class="reference internal" href="glossary.html#term-parameters"><span class="xref std std-term">parameters</span></a> (<span class="math notranslate nohighlight">\(\Theta\)</span>), as described below. The expected outputs for a model are defined by its <em>outputs</em> property. The logic of calculating outputs from system state is provided by the user in the model <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.output" title="prog_models.PrognosticsModel.output"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.output()</span></code></a> method.</p>
-<img alt="_images/output.png" src="_images/output.png" />
+<p>Outputs are a function of only the system state (x) and <a class="reference internal" href="glossary.html#term-parameters"><span class="xref std std-term">parameters</span></a> (<span class="math notranslate nohighlight">\(\Theta\)</span>), as described below. The expected outputs for a model are defined by its <em>outputs</em> property. The logic of calculating outputs from system state is provided by the user in the model <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.output" title="progpy.PrognosticsModel.output"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.output()</span></code></a> method.</p>
+<a class="reference internal image-reference" href="_images/output.png"><img alt="_images/output.png" class="align-center" src="_images/output.png" style="width: 70%;" /></a>
 <div style="text-align: center;"><p><span class="math notranslate nohighlight">\(z(t) = f(x(t), \Theta)\)</span></p>
 </div><details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -456,15 +452,15 @@ Output equation example<div class="summary-down docutils">
 </div>
 </details></section>
 <section id="events">
-<h3>Events<a class="headerlink" href="#events" title="Permalink to this heading">#</a></h3>
+<h3>Events<a class="headerlink" href="#events" title="Permalink to this headline">#</a></h3>
 <p>Traditionally users may have heard the prognostic problem as estimating the Remaining Useful Life (RUL) of a system. ProgPy generalizes this concept with the concept of <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">events</span></a>. ProgPy Prognostic Models contain one or more events which can be predicted. Systems frequently have more than one failure mode, each of these modes can be represented by a separate event. For example, a valve model might have separate events for an internal leak and a leak at the input. Or a battery model might have events for insufficient capacity, thermal runaway, and low-voltage.</p>
 <p>Additionally, events can be used to predict other events of interest beyond failure, such as special system states or warning thresholds. For example, the above battery model might also have an warning event for when battery capacity reaches 50% of the original capacity because of battery aging with use.</p>
-<p>The expected events for a model are defined by its <em>events</em> property. The logic of events can be defined in two methods: <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.threshold_met" title="prog_models.PrognosticsModel.threshold_met"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.threshold_met()</span></code></a> and <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.event_state" title="prog_models.PrognosticsModel.event_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.event_state()</span></code></a>.</p>
-<p><a class="reference internal" href="glossary.html#term-threshold"><span class="xref std std-term">Thresholds</span></a> are the conditions under which an event occurs. The logic of the threshold is defined in the <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.threshold_met" title="prog_models.PrognosticsModel.threshold_met"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.threshold_met()</span></code></a> method. This method returns boolean for each event specifying if the event has occured.</p>
-<img alt="_images/threshold_met.png" src="_images/threshold_met.png" />
+<p>The expected events for a model are defined by its <em>events</em> property. The logic of events can be defined in two methods: <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.threshold_met" title="progpy.PrognosticsModel.threshold_met"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.threshold_met()</span></code></a> and <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.event_state" title="progpy.PrognosticsModel.event_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.event_state()</span></code></a>.</p>
+<p><a class="reference internal" href="glossary.html#term-threshold"><span class="xref std std-term">Thresholds</span></a> are the conditions under which an event occurs. The logic of the threshold is defined in the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.threshold_met" title="progpy.PrognosticsModel.threshold_met"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.threshold_met()</span></code></a> method. This method returns boolean for each event specifying if the event has occured.</p>
+<a class="reference internal image-reference" href="_images/threshold_met.png"><img alt="_images/threshold_met.png" class="align-center" src="_images/threshold_met.png" style="width: 70%;" /></a>
 <div style="text-align: center;"><p><span class="math notranslate nohighlight">\(tm(t) = f(x(t), \Theta)\)</span></p>
-</div><p><a class="reference internal" href="glossary.html#term-event-state"><span class="xref std std-term">Event states</span></a> are an estimate of the progress towards a threshold. Where thresholds are boolean, event states are a number between 0 and 1, where 0 means the event has occured, 1 means no progress towards an event. Event states are a generalization of State of Health (SOH) for systems with multiple events and non-failure events. The logic of the event states is defined in the <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.event_state" title="prog_models.PrognosticsModel.event_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.event_state()</span></code></a> method.</p>
-<img alt="_images/event_state.png" src="_images/event_state.png" />
+</div><p><a class="reference internal" href="glossary.html#term-event-state"><span class="xref std std-term">Event states</span></a> are an estimate of the progress towards a threshold. Where thresholds are boolean, event states are a number between 0 and 1, where 0 means the event has occured, 1 means no progress towards the event. Event states are a generalization of State of Health (SOH) for systems with multiple events and non-failure events. The logic of the event states is defined in <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.event_state" title="progpy.PrognosticsModel.event_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.event_state()</span></code></a>.</p>
+<a class="reference internal image-reference" href="_images/event_state.png"><img alt="_images/event_state.png" class="align-center" src="_images/event_state.png" style="width: 70%;" /></a>
 <div style="text-align: center;"><p><span class="math notranslate nohighlight">\(es(t) = f(x(t), \Theta)\)</span></p>
 </div><p>If threshold_met is not specified, threshold_met is defined as when event_state is 0. Alternately, if event_state is not defined, it will be 0 when threshold_met is True, otherwise 1. If a model has events, at least one of these methods must be defined</p>
 <details class="sphinx-bs dropdown card mb-3">
@@ -501,14 +497,14 @@ Event Examples<div class="summary-down docutils">
 </div>
 </details></section>
 <section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
 <p>Parameters are used to configure the behavior of a model. For parameterized <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based</span></a> models, parameters are used to configure the general system to match the behavior of the specific system. For example, parameters of the general battery model can be used to configure the model to describe the behavior of a specific battery.</p>
-<p>Models define a <code class="docutils literal notranslate"><span class="pre">default_parameters</span></code> property, that are the default parameters for that model. After construction, the parameters for a specific model can be accessed using the <em>parameters</em> property. For example, for a model <cite>m</cite></p>
+<p>Models define a <code class="docutils literal notranslate"><span class="pre">default_parameters</span></code> property- the default parameters for that model. After construction, the parameters for a specific model can be accessed using the <em>parameters</em> property. For example, for a model <cite>m</cite></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Parameters can be set one of three ways: in model construction, using the <em>parameters</em> property after construction, or using Parameter Estimation feature (See <a class="reference internal" href="#parameter-estimation"><span class="std std-ref">Parameter Estimation</span></a>). The first two are illustrated below:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">SomeModel</span><span class="p">(</span><span class="n">some_parameter</span> <span class="o">=</span> <span class="mf">10.2</span><span class="p">,</span> <span class="n">some_other_parameter</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">)</span>
+<p>Parameters can be set in model construction, using the <em>parameters</em> property after construction, or using Parameter Estimation feature (See <a class="reference internal" href="#parameter-estimation"><span class="std std-ref">Parameter Estimation</span></a>). The first two are illustrated below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">SomeModel</span><span class="p">(</span><span class="n">some_parameter</span><span class="o">=</span><span class="mf">10.2</span><span class="p">,</span> <span class="n">some_other_parameter</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;some_parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">11.2</span>  <span class="c1"># Overriding parameter</span>
 </pre></div>
 </div>
@@ -523,7 +519,7 @@ Derived parameters<div class="summary-down docutils">
 <p class="card-text">Sometimes users would like to specify parameters as a function of other parameters. This feature is called “derived parameters”. See example below for more details on this feature.</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/124917318b8aeda76cd308154fd2eaf9/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd><span class="target" id="module-derived_params"></span><p class="card-text">Example demonstrating ways to use the derived parameters feature for model building.</p>
+<dt><a class="reference download internal" download="" href="_downloads/a2f67c14d1e4f8cf993ce8b884f782d6/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd><span class="target" id="module-derived_params"></span><p class="card-text">Example demonstrating ways to use the derived parameters feature for model building.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 More details<div class="summary-down docutils">
@@ -540,7 +536,7 @@ More details<div class="summary-down docutils">
 </div>
 </details></section>
 <section id="noise">
-<h3><span class="xref std std-term">Noise</span><a class="headerlink" href="#noise" title="Permalink to this heading">#</a></h3>
+<h3>Noise<a class="headerlink" href="#noise" title="Permalink to this headline">#</a></h3>
 <p>In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods <a class="reference internal" href="#goebel2017" id="id1"><span>[Goebel2017]</span></a>. This model-based prognostic approach incorporates this uncertainty in four forms: initial state uncertainty (<span class="math notranslate nohighlight">\(x_0\)</span>), <a class="reference internal" href="glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a>, <a class="reference internal" href="glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a>, and <a class="reference internal" href="glossary.html#term-future-loading-noise"><span class="xref std std-term">future loading noise</span></a>.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -574,15 +570,15 @@ Future Loading Noise<div class="summary-down docutils">
 </details><p>See example below for details on how to configure proccess and measurement noise in ProgPy</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/b9f89cfe4825dfd3e1ac080af9dcf54e/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd><span class="target" id="module-noise"></span><p>Example demonstrating approaches for adding and handling model noise</p>
+<dt><a class="reference download internal" download="" href="_downloads/a53af2a664a02d85e1a95ed94e2629b1/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd><span class="target" id="module-noise"></span><p>Example demonstrating approaches for adding and handling model noise</p>
 </dd>
 </dl>
 </li>
 </ul>
 </section>
 <section id="future-loading">
-<h3><a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">Future Loading</span></a><a class="headerlink" href="#future-loading" title="Permalink to this heading">#</a></h3>
-<p>Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">inputs</span></a> (see <a class="reference internal" href="#inputs"><span class="std std-ref">Inputs</span></a>) at future times.</p>
+<h3><a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">Future Loading</span></a><a class="headerlink" href="#future-loading" title="Permalink to this headline">#</a></h3>
+<p>Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected <a class="reference internal" href="#inputs"><span class="std std-ref">Inputs</span></a> at future times.</p>
 <p>Future loading is provided to the user as a function of time and optional state. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">future_load</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># Calculate inputs</span>
@@ -592,38 +588,33 @@ Future Loading Noise<div class="summary-down docutils">
 <p>See example below for details on how to provide future loading information in ProgPy.</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/f18535a152570e60fa41f5fba932422a/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd><span class="target" id="module-future_loading"></span><p>Example demonstrating ways to use future loading.</p>
+<dt><a class="reference download internal" download="" href="_downloads/e2095f421d8ca12b927634f3fbbba6c4/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd><span class="target" id="module-future_loading"></span><p>Example demonstrating ways to use future loading.</p>
 </dd>
 </dl>
 </li>
 </ul>
 </section>
 <section id="general-notes">
-<h3>General Notes<a class="headerlink" href="#general-notes" title="Permalink to this heading">#</a></h3>
-<p>Users of ProgPy will need a model describing the behavior of the system of interest. Users will likely either use one of the models distribued with ProgPy (see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/prog_models/IncludedModels.html">Included Models</a>), configuring it to their own system using parameter estimation (see <a class="reference download internal" download="" href="_downloads/51fcca34e00ecb68f3c3fcbb6a7c6f66/param_est.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.param_est</span></code></a>), use a <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven model</span></a> class to learn system behavior from data, or build their own model (see <a class="reference internal" href="#building-new-models">Building New Models</a> section, below).</p>
+<h3>General Notes<a class="headerlink" href="#general-notes" title="Permalink to this headline">#</a></h3>
+<p>Users of ProgPy will need a model describing the behavior of the system of interest. Users will likely either use one of the models distribued with ProgPy (see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html">Included Models</a>), configuring it to their own system using parameter estimation (see <a class="reference download internal" download="" href="_downloads/4665ebe5ec48228f3eb06ed7cb37fbac/param_est.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">examples.param_est</span></code></a>), use a <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven model</span></a> class to learn system behavior from data, or build their own model (see <a class="reference internal" href="#building-new-models">Building New Models</a> section, below).</p>
 </section>
 </section>
 <section id="building-new-models">
-<h2>Building New Models<a class="headerlink" href="#building-new-models" title="Permalink to this heading">#</a></h2>
+<h2>Building New Models<a class="headerlink" href="#building-new-models" title="Permalink to this headline">#</a></h2>
 <p>ProgPy provides a framework for building new models. Generally, models can be divided into three basis categories: <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a>, <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven models</span></a>, and hybrid models. Additionally, models can rely on state-transition for prediction, or they can use what is called direct-prediction. These two categories are described below.</p>
 <section id="state-transition-models">
-<h3>State-transition Models<a class="headerlink" href="#state-transition-models" title="Permalink to this heading">#</a></h3>
+<h3>State-transition Models<a class="headerlink" href="#state-transition-models" title="Permalink to this headline">#</a></h3>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">physics-based</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">data-driven</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a> are constructed by subclassing <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a> as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template <a class="reference download internal" download="" href="_downloads/3c5224a1564fb7226c7f5deb8cdd9f3e/prog_model_template.py"><code class="xref download docutils literal notranslate"><span class="pre">prog_model_template.ProgModelTemplate</span></code></a>, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code></a> will then work with your new model.</p>
-<p>For simple linear models, users can choose to subclass the simpler <a class="reference internal" href="api_ref/prog_models/LinearModel.html#prog_models.LinearModel" title="prog_models.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code></a> class, as illustrated in the second example. Some methods and algorithms only function on linear models.</p>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">physics-based</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">data-driven</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a> are constructed by subclassing <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template <a class="reference download internal" download="" href="_downloads/0f7c5af7c0ba09c1be3bd3db3e6458c9/prog_model_template.py"><code class="xref download docutils literal notranslate"><span class="pre">prog_model_template.ProgModelTemplate</span></code></a>, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> will then work with your new model.</p>
+<p>For simple linear models, users can choose to subclass the simpler <a class="reference internal" href="api_ref/progpy/LinearModel.html#progpy.LinearModel" title="progpy.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.LinearModel</span></code></a> class, as illustrated in the second example. Some methods and algorithms only function on linear models.</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/ce3587166811ef0cd28f4edcf195c60e/new_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_model</span></code></a></dt><dd><span class="target" id="module-new_model"></span><p>Example defining and using a new prognostics model.</p>
+<dt><a class="reference download internal" download="" href="_downloads/c416c00aa2e02950fa0b0b4547cf49f9/new_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_model</span></code></a></dt><dd><span class="target" id="module-new_model"></span><p>Example defining and using a new prognostics model.</p>
 <p>In this example a simple state-transition model of an object thrown upward into the air is defined. That model is then used in simulation under different conditions and the results are displayed in different formats.</p>
 </dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/863933ac0f3e7d454c420a01034525b3/linear_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.linear_model</span></code></a></dt><dd><span class="target" id="module-linear_model"></span><p>This example shows the use of the LinearModel class, a subclass of PrognosticsModel for models that can be described as a linear time series.</p>
-<p>The model is used in a simulation, and the state is printed every second</p>
-</dd>
-</dl>
-</li>
+<li><p><a class="reference download internal" download="" href="_downloads/08ee9859b313ce1d928f863d2d51af12/linear_model.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">examples.linear_model</span></code></a></p></li>
 </ul>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -634,7 +625,7 @@ Advanced features in model building<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/124917318b8aeda76cd308154fd2eaf9/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd><span class="target" id="module-0"></span><p class="card-text">Example demonstrating ways to use the derived parameters feature for model building.</p>
+<dt><a class="reference download internal" download="" href="_downloads/a2f67c14d1e4f8cf993ce8b884f782d6/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd><span class="target" id="module-0"></span><p class="card-text">Example demonstrating ways to use the derived parameters feature for model building.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 More details<div class="summary-down docutils">
@@ -648,13 +639,13 @@ More details<div class="summary-down docutils">
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/31b6deef1d3aace088df741bfddb10f9/state_limits.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.state_limits</span></code></a></dt><dd><span class="target" id="module-state_limits"></span><p class="card-text">Example demonstrating when and how to identify model state limits.</p>
+<dt><a class="reference download internal" download="" href="_downloads/b261b8e8a2bb840eed75010c0929ce5a/state_limits.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.state_limits</span></code></a></dt><dd><span class="target" id="module-state_limits"></span><p class="card-text">Example demonstrating when and how to identify model state limits.</p>
 <p class="card-text">In this example, state limits are defined for the ThrownObject Model. These are limits on the range of each state for a state-transition model. The use of this feature is then demonstrated.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/1e5a767a460fa630bbb4ed98c93e87bf/events.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.events</span></code></a></dt><dd><span class="target" id="module-events"></span><p class="card-text">Example further illustrating the concept of ‘events’ which generalizes EOL.</p>
+<dt><a class="reference download internal" download="" href="_downloads/b547422d9b3ae9d9e32d7bee6c092275/events.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.events</span></code></a></dt><dd><span class="target" id="module-events"></span><p class="card-text">Example further illustrating the concept of ‘events’ which generalizes EOL.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 More details<div class="summary-down docutils">
@@ -671,11 +662,11 @@ More details<div class="summary-down docutils">
 </li>
 </ul>
 </div>
-</details></div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven models</span></a>, such as those using neural networks, are created by subclassing the <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel" title="prog_models.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel</span></code></a> class, overriding the <code class="docutils literal notranslate"><span class="pre">from_data</span></code> method.</p>
-<p>The <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.from_data" title="prog_models.data_models.DataModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel.from_data()</span></code></a> and <a class="reference internal" href="api_ref/prog_models/DataModel.html#prog_models.data_models.DataModel.from_model" title="prog_models.data_models.DataModel.from_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">prog_models.data_models.DataModel.from_model()</span></code></a> methods are used to construct new models from data or an existing model (i.e., <a class="reference internal" href="glossary.html#term-surrogate"><span class="xref std std-term">surrogate</span></a>), respectively. The use of these is demonstrated in the following examples.</p>
+</details></div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven models</span></a>, such as those using neural networks, are created by subclassing the <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel" title="progpy.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.data_models.DataModel</span></code></a> class, overriding the <code class="docutils literal notranslate"><span class="pre">from_data</span></code> method.</p>
+<p>The <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel.from_data" title="progpy.data_models.DataModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.data_models.DataModel.from_data()</span></code></a> and <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel.from_model" title="progpy.data_models.DataModel.from_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.data_models.DataModel.from_model()</span></code></a> methods are used to construct new models from data or an existing model (i.e., <a class="reference internal" href="glossary.html#term-surrogate"><span class="xref std std-term">surrogate</span></a>), respectively. The use of these is demonstrated in the following examples.</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/5325e8e93d0aa3df393b9d77f56c9160/lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.lstm_model</span></code></a></dt><dd><span class="target" id="module-lstm_model"></span><p>Example building a LSTMStateTransitionModel from data. This is a simple example of how to use the LSTMStateTransitionModel class.</p>
+<dt><a class="reference download internal" download="" href="_downloads/e7ee62f41f59a26f3cd93b4b0497cc90/lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.lstm_model</span></code></a></dt><dd><span class="target" id="module-lstm_model"></span><p>Example building a LSTMStateTransitionModel from data. This is a simple example of how to use the LSTMStateTransitionModel class.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 More details<div class="summary-down docutils">
@@ -690,7 +681,7 @@ More details<div class="summary-down docutils">
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/c8c9cf630cf663d27db8c6af85ffab4a/full_lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.full_lstm_model</span></code></a></dt><dd><span class="target" id="module-full_lstm_model"></span><p>Example building a full model with events and thresholds using LSTMStateTransitionModel.</p>
+<dt><a class="reference download internal" download="" href="_downloads/dc9f2bf22220701a3b515335cb4d8038/full_lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.full_lstm_model</span></code></a></dt><dd><span class="target" id="module-full_lstm_model"></span><p>Example building a full model with events and thresholds using LSTMStateTransitionModel.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 More details<div class="summary-down docutils">
@@ -705,14 +696,14 @@ More details<div class="summary-down docutils">
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/70522e06688c5fddf4cc38239ec439e7/pce.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.pce</span></code></a></dt><dd><span class="target" id="module-pce"></span><p>This example demonstrates the Polynomial Chaos Expansion (PCE) Surrogate Direct Model functionality. PCE is a method by which the behavior of a model can be approximated by a polynomial. In this case the relationship between future loading and time of event. The result is a direct surrogate model that can be used to estimate time of event given a loading profile, without requiring the original model to be simulated. The resulting estimation is MUCH faster than simulating the model.</p>
+<dt><a class="reference download internal" download="" href="_downloads/d3b015984c77675d160e6a55a07625b8/pce.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.pce</span></code></a></dt><dd><span class="target" id="module-pce"></span><p>This example demonstrates the Polynomial Chaos Expansion (PCE) Surrogate Direct Model functionality. PCE is a method by which the behavior of a model can be approximated by a polynomial. In this case the relationship between future loading and time of event. The result is a direct surrogate model that can be used to estimate time of event given a loading profile, without requiring the original model to be simulated. The resulting estimation is MUCH faster than simulating the model.</p>
 <p>This functionality is especially useful in cases where you need to evaluate a large number of loading profiles in a short amount of time or with limited computational resources. For example, when you would like to optimize a loading profile. In that case, it would not make sense to have a state-transition model in the inner loop of the optimization, since the state transition model would be called many times. Instead, you can use a direct surrogate model to estimate time of event directly from the loading profile.</p>
 <p>In this example, a PCE surrogate model is generated for the BatteryElectroChemEOD model. The surrogate is used to estimate time of event for a number of loading profiles. The result is compared to the actual time of event for the same loading profiles, which were generated by simulating the model.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/3e4a5d9b856c25c6b0bf84730581c560/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a></dt><dd><span class="target" id="module-generate_surrogate"></span><p>Example of generating a Dynamic Mode Decomposition surrogate model from a battery model.</p>
+<dt><a class="reference download internal" download="" href="_downloads/cd66a5990681e5b4bc3e40976451b926/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a></dt><dd><span class="target" id="module-generate_surrogate"></span><p>Example of generating a Dynamic Mode Decomposition surrogate model from a battery model.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 More details<div class="summary-down docutils">
@@ -735,7 +726,7 @@ Advanced features in data models<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/bec0de5b758ecc33efbc94e5d3fb8d01/custom_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.custom_model</span></code></a></dt><dd><span class="target" id="module-custom_model"></span><p class="card-text">Example building a custom model with LSTMStateTransitionModel.</p>
+<dt><a class="reference download internal" download="" href="_downloads/70520a32b5407f76734c16a1ffe189b9/custom_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.custom_model</span></code></a></dt><dd><span class="target" id="module-custom_model"></span><p class="card-text">Example building a custom model with LSTMStateTransitionModel.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 More details<div class="summary-down docutils">
@@ -755,11 +746,11 @@ More details<div class="summary-down docutils">
 </details></div></div>
 </section>
 <section id="direct-prediction-models">
-<h3>Direct-prediction models<a class="headerlink" href="#direct-prediction-models" title="Permalink to this heading">#</a></h3>
+<h3>Direct-prediction models<a class="headerlink" href="#direct-prediction-models" title="Permalink to this headline">#</a></h3>
 <p><a class="reference internal" href="glossary.html#term-direct-prediction-model"><span class="xref std std-term">Direct-prediction models</span></a> are models that estimate <a class="reference internal" href="glossary.html#term-time-of-event"><span class="xref std std-term">time of event</span></a> directly from the current state and <a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">future load</span></a>, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/e544b7b61c508397101940603daddf04/direct_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.direct_model</span></code></a></dt><dd><span class="target" id="module-direct_model"></span><p>This example demonstrates the Direct Models functionality. Direct models are models that directly estimate time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
+<dt><a class="reference download internal" download="" href="_downloads/beb178906ed56d1dc980686684fd5359/direct_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.direct_model</span></code></a></dt><dd><span class="target" id="module-direct_model"></span><p>This example demonstrates the Direct Models functionality. Direct models are models that directly estimate time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
 <p>Here a DirectThrownObject model is defined, extending the ThrownObject state transition model from the new_model example. This model is then initialized and used to estimate the time of event from the initial state.</p>
 </dd>
 </dl>
@@ -767,12 +758,12 @@ More details<div class="summary-down docutils">
 </ul>
 </section>
 <section id="using-data">
-<h3>Using Data<a class="headerlink" href="#using-data" title="Permalink to this heading">#</a></h3>
+<h3>Using Data<a class="headerlink" href="#using-data" title="Permalink to this headline">#</a></h3>
 <p>Wether you’re using <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven</span></a>, <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based</span></a>, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see <cite>Parameter Estimation</cite>) and validate the model.</p>
-<p>ProgPy includes some example datasets. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/prog_models/DataSets.html">ProgPy Datasets</a> and the example below for details.</p>
+<p>ProgPy includes some example datasets. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/DataSets.html">ProgPy Datasets</a> and the example below for details.</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/a9f5f00132a2ac6b21c976835cdb0e04/dataset.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dataset</span></code></a></dt><dd><span class="target" id="module-dataset"></span><p>Example downloading and using a NASA prognostics dataset.</p>
+<dt><a class="reference download internal" download="" href="_downloads/5417b738f8b76e269e7bf2b5de661e87/dataset.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dataset</span></code></a></dt><dd><span class="target" id="module-dataset"></span><p>Example downloading and using a NASA prognostics dataset.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 More details<div class="summary-down docutils">
@@ -793,50 +784,50 @@ More details<div class="summary-down docutils">
 </section>
 </section>
 <section id="using-provided-models">
-<h2>Using provided models<a class="headerlink" href="#using-provided-models" title="Permalink to this heading">#</a></h2>
-<p>ProgPy includes a number of predefined models in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models.models</span></code> module. These models are parameterized, so they can be configured to represent specific systems (see <a class="reference internal" href="#parameter-estimation"><span class="std std-ref">Parameter Estimation</span></a>).</p>
-<p>For details on the included models see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/prog_models/IncludedModels.html">Included Models</a>. The examples below illustrate use of some of the models provided in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">prog_models.models</span></code> module.</p>
+<h2>Using provided models<a class="headerlink" href="#using-provided-models" title="Permalink to this headline">#</a></h2>
+<p>ProgPy includes a number of predefined models in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">progpy.models</span></code> module. These models are parameterized, so they can be configured to represent specific systems (see <a class="reference internal" href="#parameter-estimation"><span class="std std-ref">Parameter Estimation</span></a>).</p>
+<p>For details on the included models see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html">Included Models</a>. The examples below illustrate use of some of the models provided in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">progpy.models</span></code> module.</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/78f1d719759ecec596bbb1d3cd04db84/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd><span class="target" id="module-sim"></span><p>Example of a battery being simulated for a set period of time and then till threshold is met.</p>
+<dt><a class="reference download internal" download="" href="_downloads/160687b265770e7120266d22a6015f55/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd><span class="target" id="module-sim"></span><p>Example of a battery being simulated for a set period of time and then till threshold is met.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/c234367290acf8de0cb8c64a0b97191d/sim_battery_eol.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_battery_eol</span></code></a></dt><dd><span class="target" id="module-sim_battery_eol"></span><p>Example of a battery being simulated until End of Life (EOL). Battery capacity decreases with use. In this case, EOL is defined as when the battery capacity falls below some acceptable threshold (i.e., what we define as useful capacity).</p>
+<dt><a class="reference download internal" download="" href="_downloads/b0f882b08ad06c468dcd7cc5ad370a58/sim_battery_eol.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_battery_eol</span></code></a></dt><dd><span class="target" id="module-sim_battery_eol"></span><p>Example of a battery being simulated until End of Life (EOL). Battery capacity decreases with use. In this case, EOL is defined as when the battery capacity falls below some acceptable threshold (i.e., what we define as useful capacity).</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/daafe64ff08a2ab2ed2ab052cf9985bf/sim_pump.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_pump</span></code></a></dt><dd><span class="target" id="module-sim_pump"></span><p>Example of a centrifugal pump being simulated until threshold is met.</p>
+<dt><a class="reference download internal" download="" href="_downloads/e2fe425b405c324c9ddabb88b4675b84/sim_pump.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_pump</span></code></a></dt><dd><span class="target" id="module-sim_pump"></span><p>Example of a centrifugal pump being simulated until threshold is met.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/2176a8ad664aae49752084c44b205627/sim_valve.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_valve</span></code></a></dt><dd><span class="target" id="module-sim_valve"></span><p>Example of a pneumatic valve being simulated until threshold is met.</p>
+<dt><a class="reference download internal" download="" href="_downloads/7f2f8df9098381336a6c1a5199ddd597/sim_valve.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_valve</span></code></a></dt><dd><span class="target" id="module-sim_valve"></span><p>Example of a pneumatic valve being simulated until threshold is met.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/379b8420d5a1e67e122db8eacfc78796/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a></dt><dd><span class="target" id="module-sim_powertrain"></span><p>Example of a powertrain being simulated for a set amount of time.</p>
+<dt><a class="reference download internal" download="" href="_downloads/c17e158cee55f8895ef5d6988a1c24ec/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a></dt><dd><span class="target" id="module-sim_powertrain"></span><p>Example of a powertrain being simulated for a set amount of time.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/d693501cc396088cca1fcc5921e9a3ff/sim_dcmotor_singlephase.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_dcmotor_singlephase</span></code></a></dt><dd><span class="target" id="module-sim_dcmotor_singlephase"></span><p>Example of a DC motor being simulated for a set amount of time, using the single-phase dcmotor model.</p>
+<dt><a class="reference download internal" download="" href="_downloads/50b678fa73c3d10dd1d1ce03a5f7643f/sim_dcmotor_singlephase.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_dcmotor_singlephase</span></code></a></dt><dd><span class="target" id="module-sim_dcmotor_singlephase"></span><p>Example of a DC motor being simulated for a set amount of time, using the single-phase dcmotor model.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/912ba6f560fc796ecfebae899799fbca/uav_dynamics_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.uav_dynamics_model</span></code></a></dt><dd><span class="target" id="module-uav_dynamics_model"></span><p>Example of generating a trajectory for a small rotorcraft through a set of coarse waypoints, and simulate the rotorcraft flight using a 6-dof model.</p>
+<dt><a class="reference download internal" download="" href="_downloads/cadc512c2baefeca720f0906f97221af/uav_dynamics_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.uav_dynamics_model</span></code></a></dt><dd><span class="target" id="module-uav_dynamics_model"></span><p>Example of generating a trajectory for a small rotorcraft through a set of coarse waypoints, and simulate the rotorcraft flight using a 6-dof model.</p>
 </dd>
 </dl>
 </li>
 </ul>
 </section>
 <section id="simulation">
-<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this heading">#</a></h2>
-<p>One of the most basic of functions using a model is simulation. Simulation is the process of predicting the evolution of system <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> with time, given a specific <a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">future load</span></a> profile. Unlike full prognostics, simulation does not include uncertainty in the state and other product (e.g., <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a>) representation. For a prognostics model, simulation is done using the <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to" title="prog_models.PrognosticsModel.simulate_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to()</span></code></a> and <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a> methods.</p>
+<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">#</a></h2>
+<p>One of the most basic of functions using a model is simulation. Simulation is the process of predicting the evolution of system <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> with time, given a specific <a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">future load</span></a> profile. Unlike full prognostics, simulation does not include uncertainty in the state and other product (e.g., <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a>) representation. For a prognostics model, simulation is done using the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to" title="progpy.PrognosticsModel.simulate_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to()</span></code></a> and <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to_threshold" title="progpy.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to_threshold()</span></code></a> methods.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 Saving results<div class="summary-down docutils">
@@ -844,7 +835,7 @@ Saving results<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text"><a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to" title="prog_models.PrognosticsModel.simulate_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to()</span></code></a> and <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a> return the inputs, states, outputs, and event states at various points in the simulation. Returning these values for every timestep would require a lot of memory, and is not necessary for most use cases, so ProgPy provides an ability for users to specify what data to save.</p>
+<p class="card-text"><a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to" title="progpy.PrognosticsModel.simulate_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to()</span></code></a> and <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to_threshold" title="progpy.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to_threshold()</span></code></a> return the inputs, states, outputs, and event states at various points in the simulation. Returning these values for every timestep would require a lot of memory, and is not necessary for most use cases, so ProgPy provides an ability for users to specify what data to save.</p>
 <p class="card-text">There are two formats to specify what data to save: the <code class="docutils literal notranslate"><span class="pre">save_freq</span></code> and <code class="docutils literal notranslate"><span class="pre">save_pts</span></code> arguments, described below</p>
 <table class="table">
 <colgroup>
@@ -861,11 +852,11 @@ Saving results<div class="summary-down docutils">
 <tbody>
 <tr class="row-even"><td><p class="card-text"><code class="docutils literal notranslate"><span class="pre">save_freq</span></code></p></td>
 <td><p class="card-text">The frequency at which data is saved</p></td>
-<td><p class="card-text"><code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">save_freq</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></code></p></td>
+<td><p class="card-text"><code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">m</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">simulate_to_threshold</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">save_freq</span></span><span class="operator"><span class="pre">=</span></span><span class="literal number integer"><span class="pre">10</span></span><span class="punctuation"><span class="pre">)</span></span></code></p></td>
 </tr>
 <tr class="row-odd"><td><p class="card-text"><code class="docutils literal notranslate"><span class="pre">save_pts</span></code></p></td>
 <td><p class="card-text">Specific times at which data is saved</p></td>
-<td><p class="card-text"><code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">save_pts</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">33</span><span class="p">])</span></code></p></td>
+<td><p class="card-text"><code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">m</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">simulate_to_threshold</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">save_pts</span></span><span class="operator"><span class="pre">=</span></span><span class="punctuation"><span class="pre">[</span></span><span class="literal number integer"><span class="pre">15</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="literal number integer"><span class="pre">25</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="literal number integer"><span class="pre">33</span></span><span class="punctuation"><span class="pre">])</span></span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -883,15 +874,15 @@ Step size<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <p class="card-text">Step size is the size of the step taken in integration. It is specified by the <code class="docutils literal notranslate"><span class="pre">dt</span></code> argument. It is an important consideration when simulating. Too large of a step size could result in wildly incorrect results, and two small of a step size can be computationally expensive. Step size can be provided in a few different ways, described below:</p>
 <ul class="simple">
-<li><p class="card-text"><em>Static Step Size</em>: Provide a single number. Simulation will move forward at this rate. Example, <code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span></code></p></li>
-<li><p class="card-text"><em>Automatic Dynamic Step Size</em>: Step size is adjusted automatically to hit each save_pt and save_freq exactly. Example, <code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span></code></p></li>
-<li><p class="card-text"><em>Bounded Automatic Dynamic Step Size</em>: Step size is adjusted automatically to hit each save_pt and save_freq exactly, with a maximum step size. Example, <code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span></code></p></li>
-<li><p class="card-text"><em>Functional Dynamic Step Size</em>: Step size is provided as a function of time and state. This is the most flexible approach. Example, <code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.75</span> <span class="o">-</span> <span class="n">t</span><span class="o">*</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">))</span></code></p></li>
+<li><p class="card-text"><em>Static Step Size</em>: Provide a single number. Simulation will move forward at this rate. Example, <code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">m</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">simulate_to_threshold</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">dt</span></span><span class="operator"><span class="pre">=</span></span><span class="literal number float"><span class="pre">0.1</span></span><span class="punctuation"><span class="pre">)</span></span></code></p></li>
+<li><p class="card-text"><em>Automatic Dynamic Step Size</em>: Step size is adjusted automatically to hit each save_pt and save_freq exactly. Example, <code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">m</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">simulate_to_threshold</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">dt</span></span><span class="operator"><span class="pre">=</span></span><span class="literal string single"><span class="pre">'auto'</span></span><span class="punctuation"><span class="pre">)</span></span></code></p></li>
+<li><p class="card-text"><em>Bounded Automatic Dynamic Step Size</em>: Step size is adjusted automatically to hit each save_pt and save_freq exactly, with a maximum step size. Example, <code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">m</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">simulate_to_threshold</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">dt</span></span><span class="operator"><span class="pre">=</span></span><span class="punctuation"><span class="pre">(</span></span><span class="literal string single"><span class="pre">'auto'</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="literal number float"><span class="pre">0.5</span></span><span class="punctuation"><span class="pre">))</span></span></code></p></li>
+<li><p class="card-text"><em>Functional Dynamic Step Size</em>: Step size is provided as a function of time and state. This is the most flexible approach. Example, <code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">m</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">simulate_to_threshold</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">dt</span></span><span class="operator"><span class="pre">=</span></span> <span class="keyword"><span class="pre">lambda</span></span> <span class="name"><span class="pre">t</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">x</span></span> <span class="punctuation"><span class="pre">:</span></span> <span class="name builtin"><span class="pre">max</span></span><span class="punctuation"><span class="pre">(</span></span><span class="literal number float"><span class="pre">0.75</span></span> <span class="operator"><span class="pre">-</span></span> <span class="name"><span class="pre">t</span></span><span class="operator"><span class="pre">*</span></span><span class="literal number float"><span class="pre">0.01</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="literal number float"><span class="pre">0.25</span></span><span class="punctuation"><span class="pre">))</span></span></code></p></li>
 </ul>
 <p class="card-text">For more details on dynamic step sizes, see the following example:</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/5b3ab2dda487fa3d828b6cadf3955046/dynamic_step_size.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dynamic_step_size</span></code></a></dt><dd><span class="target" id="module-dynamic_step_size"></span><p class="card-text">Example demonstrating ways to use the dynamic step size feature. This feature allows users to define a time-step that changes with time or state.</p>
+<dt><a class="reference download internal" download="" href="_downloads/290f3878724971806588517e4f7917c9/dynamic_step_size.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dynamic_step_size</span></code></a></dt><dd><span class="target" id="module-dynamic_step_size"></span><p class="card-text">Example demonstrating ways to use the dynamic step size feature. This feature allows users to define a time-step that changes with time or state.</p>
 </dd>
 </dl>
 </li>
@@ -904,7 +895,7 @@ Integration Methods<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">Simulation is essentially the process of integrating the model forward with time. By default, simple euler integration is used to propogate the model forward. Advanced users can change the numerical integration method to affect the simulation quality and runtime. This is done using the <code class="docutils literal notranslate"><span class="pre">integration_method</span></code> argument in <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a> and <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to" title="prog_models.PrognosticsModel.simulate_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to()</span></code></a>.</p>
+<p class="card-text">Simulation is essentially the process of integrating the model forward with time. By default, simple euler integration is used to propogate the model forward. Advanced users can change the numerical integration method to affect the simulation quality and runtime. This is done using the <code class="docutils literal notranslate"><span class="pre">integration_method</span></code> argument in <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to_threshold" title="progpy.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to_threshold()</span></code></a> and <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to" title="progpy.PrognosticsModel.simulate_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to()</span></code></a>.</p>
 <p class="card-text">For example, users can use the commonly-used Runge Kutta 4 numerical integration method using the following method call for model m:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">future_loading</span><span class="p">,</span> <span class="n">integration_method</span> <span class="o">=</span> <span class="s1">&#39;rk4&#39;</span><span class="p">)</span>
 </pre></div>
@@ -917,7 +908,7 @@ Eval Points<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">Sometimes users would like to ensure that simulation hits a specific point exactly, regardless of the step size (<code class="docutils literal notranslate"><span class="pre">dt</span></code>). This can be done using the <code class="docutils literal notranslate"><span class="pre">eval_pts</span></code> argument in <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to_threshold" title="prog_models.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to_threshold()</span></code></a> and <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.simulate_to" title="prog_models.PrognosticsModel.simulate_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.simulate_to()</span></code></a>. This argument takes a list of times at which simulation should include. For example, for simulation to evaluate at 10 and 20 seconds, use the following method call for model m:</p>
+<p class="card-text">Sometimes users would like to ensure that simulation hits a specific point exactly, regardless of the step size (<code class="docutils literal notranslate"><span class="pre">dt</span></code>). This can be done using the <code class="docutils literal notranslate"><span class="pre">eval_pts</span></code> argument in <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to_threshold" title="progpy.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to_threshold()</span></code></a> and <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to" title="progpy.PrognosticsModel.simulate_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to()</span></code></a>. This argument takes a list of times at which simulation should include. For example, for simulation to evaluate at 10 and 20 seconds, use the following method call for model m:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">future_loading</span><span class="p">,</span> <span class="n">eval_pts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -942,38 +933,34 @@ Eval Points<div class="summary-down docutils">
 </details><p>Use of simulation is described further in the following examples:</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/78f1d719759ecec596bbb1d3cd04db84/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd><span class="target" id="module-1"></span><p>Example of a battery being simulated for a set period of time and then till threshold is met.</p>
+<dt><a class="reference download internal" download="" href="_downloads/160687b265770e7120266d22a6015f55/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd><span class="target" id="module-1"></span><p>Example of a battery being simulated for a set period of time and then till threshold is met.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/b9f89cfe4825dfd3e1ac080af9dcf54e/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd><span class="target" id="module-2"></span><p>Example demonstrating approaches for adding and handling model noise</p>
+<dt><a class="reference download internal" download="" href="_downloads/a53af2a664a02d85e1a95ed94e2629b1/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd><span class="target" id="module-2"></span><p>Example demonstrating approaches for adding and handling model noise</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/f18535a152570e60fa41f5fba932422a/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd><span class="target" id="module-3"></span><p>Example demonstrating ways to use future loading.</p>
+<dt><a class="reference download internal" download="" href="_downloads/e2095f421d8ca12b927634f3fbbba6c4/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd><span class="target" id="module-3"></span><p>Example demonstrating ways to use future loading.</p>
 </dd>
 </dl>
 </li>
 </ul>
 </section>
 <section id="parameter-estimation">
-<h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this heading">#</a></h2>
+<h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
 <p>Parameter estimation is an important step in prognostics. Parameter estimation is used to tune a general model to match the behavior of a specific system. For example, parameters of the general battery model can be used to configure the model to describe the behavior of a specific battery.</p>
 <p>Sometimes model parameters are directly measurable (e.g., dimensions of blades on rotor). For these parameters, estimating them is a simple act of direct measurement. For parameters that cannot be directly measured, they’re typically estimated using observed data.</p>
-<p>Generally, parameter estimation is done by tuning the parameters of the model so that simulation best matches the behavior observed in some available data. In ProgPy, this is done using the <a class="reference internal" href="api_ref/prog_models/PrognosticModel.html#prog_models.PrognosticsModel.estimate_params" title="prog_models.PrognosticsModel.estimate_params"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel.estimate_params()</span></code></a> method. This method takes <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a> and <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a> data from one or more runs, and uses scipy.optimize.minimize function to estimate the parameters of the model.</p>
+<p>Generally, parameter estimation is done by tuning the parameters of the model so that simulation best matches the behavior observed in some available data. In ProgPy, this is done using the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.estimate_params" title="progpy.PrognosticsModel.estimate_params"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.estimate_params()</span></code></a> method. This method takes <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a> and <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a> data from one or more runs, and uses scipy.optimize.minimize function to estimate the parameters of the model.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">params_to_estimate</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;param1&#39;</span><span class="p">,</span> <span class="s1">&#39;param2&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">estimate_params</span><span class="p">([</span><span class="n">run1_data</span><span class="p">,</span> <span class="n">run2_data</span><span class="p">],</span> <span class="n">params_to_estimate</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>See the example below for more details</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/51fcca34e00ecb68f3c3fcbb6a7c6f66/param_est.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.param_est</span></code></a></dt><dd><span class="target" id="module-param_est"></span><p>Example demonstrating the model parameter estimation feature.</p>
-</dd>
-</dl>
-</li>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/4665ebe5ec48228f3eb06ed7cb37fbac/param_est.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">examples.param_est</span></code></a></p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Note</p>
@@ -981,18 +968,18 @@ Eval Points<div class="summary-down docutils">
 </div>
 </section>
 <section id="visualizing-results">
-<h2>Visualizing Results<a class="headerlink" href="#visualizing-results" title="Permalink to this heading">#</a></h2>
+<h2>Visualizing Results<a class="headerlink" href="#visualizing-results" title="Permalink to this headline">#</a></h2>
 <p>Results of a simulation can be visualized using the plot method. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">results</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">results</span><span class="o">.</span><span class="n">states</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="api_ref/prog_models/SimResult.html#prog_models.sim_result.SimResult.plot" title="prog_models.sim_result.SimResult.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prog_models.sim_result.SimResult.plot()</span></code></a> for more details on plotting capabilities</p>
+<p>See <a class="reference internal" href="api_ref/progpy/SimResult.html#progpy.sim_result.SimResult.plot" title="progpy.sim_result.SimResult.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.sim_result.SimResult.plot()</span></code></a> for more details on plotting capabilities</p>
 </section>
 <section id="combination-models">
-<h2>Combination Models<a class="headerlink" href="#combination-models" title="Permalink to this heading">#</a></h2>
-<p>There are two methods in prog_models through which multiple models can be combined and used together: composite models and ensemble models, described below.</p>
+<h2>Combination Models<a class="headerlink" href="#combination-models" title="Permalink to this headline">#</a></h2>
+<p>There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Composite models</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Ensemble models</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><p>Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example,</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">CompositeModel</span><span class="p">(</span>
@@ -1006,7 +993,7 @@ Eval Points<div class="summary-down docutils">
 </div>
 <p>For more information, see the example below:</p>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/40eed4cd02f1dee80e6faaa22f99843b/composite_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.composite_model</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/f138ed85c70cb3f7616eb0b5ba690cff/composite_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.composite_model</span></code></a></p></li>
 </ul>
 </div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><p>Unlike composite models which model a system of systems, ensemble models are used when to combine the logic of multiple models which describe the same system. This is used when there are multiple models representing different system behaviors or conditions. The results of each model are aggregated in a way that can be defined by the user. For example,</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">EnsembleModel</span><span class="p">(</span>
@@ -1017,32 +1004,32 @@ Eval Points<div class="summary-down docutils">
 </div>
 <p>For more information, see the example below:</p>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/46d1f3f0ff1be63e0a4a42caa85a65f5/ensemble.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.ensemble</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/e38d3e121ad5b2b31d88a0fdb681fd3b/ensemble.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.ensemble</span></code></a></p></li>
 </ul>
 </div></div>
 </section>
 <section id="other-examples">
-<h2>Other Examples<a class="headerlink" href="#other-examples" title="Permalink to this heading">#</a></h2>
+<h2>Other Examples<a class="headerlink" href="#other-examples" title="Permalink to this headline">#</a></h2>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/7e3375e02d53d89020ab722466e41449/benchmarking.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.benchmarking</span></code></a></dt><dd><span class="target" id="module-benchmarking"></span><p>Simple example benchmarking the computational efficiency of models.</p>
+<dt><a class="reference download internal" download="" href="_downloads/e94f95102fd9281aa7355e7b9ceeb60a/benchmarking.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.benchmarking</span></code></a></dt><dd><span class="target" id="module-benchmarking"></span><p>Simple example benchmarking the computational efficiency of models.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/caaed269579b6156f6d8d9d68d3cb5bb/sensitivity.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sensitivity</span></code></a></dt><dd><span class="target" id="module-sensitivity"></span><p>Example performing a sensitivity analysis on a new model.</p>
+<dt><a class="reference download internal" download="" href="_downloads/98e318f1c85976fc33e5b193dd2922a1/sensitivity.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sensitivity</span></code></a></dt><dd><span class="target" id="module-sensitivity"></span><p>Example performing a sensitivity analysis on a new model.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/0f1106d2e6e9fdf810b85394e9e69aed/serialization.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.serialization</span></code></a></dt><dd><span class="target" id="module-serialization"></span><p>Example of serializing and de-serializing a battery model using JSON and pickling methods</p>
+<dt><a class="reference download internal" download="" href="_downloads/6c00d1b4a87a04ca552d41096eeda216/serialization.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.serialization</span></code></a></dt><dd><span class="target" id="module-serialization"></span><p>Example of serializing and de-serializing a battery model using JSON and pickling methods</p>
 </dd>
 </dl>
 </li>
 </ul>
 </section>
 <section id="tips">
-<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this heading">#</a></h2>
+<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>If you’re only doing diagnostics without prognostics- just define a next_state equation with no change of <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> and don’t perform prediction. The <a class="reference internal" href="glossary.html#term-state-estimator"><span class="xref std std-term">state estimator</span></a> can still be used to estimate if any of the <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">events</span></a> have occured.</p></li>
 <li><p>Sudden <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">event’s</span></a> use a binary <a class="reference internal" href="glossary.html#term-event-state"><span class="xref std std-term">event state</span></a> (1=healthy, 0=failed).</p></li>
@@ -1050,7 +1037,7 @@ Eval Points<div class="summary-down docutils">
 </ul>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <dl class="citation">
 <dt class="label" id="goebel2017"><span class="brackets"><a class="fn-backref" href="#id1">Goebel2017</a></span></dt>
 <dd><p>Kai Goebel, Matthew John Daigle, Abhinav Saxena, Indranil Roychoudhury, Shankar Sankararaman, and José R Celaya. Prognostics: The science of making predictions. 2017</p>
@@ -1091,7 +1078,7 @@ Eval Points<div class="summary-down docutils">
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">prog_algs Guide</p>
+        <p class="prev-next-title">State Estimation and Prediction Guide</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1113,7 +1100,7 @@ Eval Points<div class="summary-down docutils">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-prog-models">Installing prog_models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing progpy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy-prognostic-model-format">ProgPy Prognostic Model Format</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs">Inputs</a></li>
@@ -1121,7 +1108,7 @@ Eval Points<div class="summary-down docutils">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-measurements">Output (Measurements)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise"><span class="xref std std-term">Noise</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise">Noise</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading"><span class="xref std std-term">Future Loading</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-notes">General Notes</a></li>
 </ul>

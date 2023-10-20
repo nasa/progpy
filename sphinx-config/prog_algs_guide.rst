@@ -11,7 +11,7 @@ State Estimation and Prediction Guide
 .. image:: https://mybinder.org/badge_logo.svg
  :target: https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb
 
-The Prognostic Python Package (progpy) is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from :ref:`Modeling and Simulation Guide<prog_models Guide>`) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.
+The Prognostic Python Package (progpy) is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from :ref:`Modeling and Simulation Guide<Modeling and Sim Guide>`) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.
 
 Installing progpy
 -----------------------
@@ -20,7 +20,7 @@ Installing progpy
 
     .. tab:: Stable Version (Recommended)
 
-        The latest stable release of progpy is hosted on PyPi. For most users (unless you want to contribute to the development of `progpy`), this version will be adequate. To install from the command line, use the following command:
+        The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:
 
         .. code-block:: console
 
@@ -44,7 +44,7 @@ The structure of the packages is illustrated below:
 
 .. image:: images/package_structure.png
 
-Prognostics is performed using :ref:`State Estimators <State Estimators>` and :ref:`Predictors <Predictors>`. State Estimators are resposible for estimating the current state of the modeled system using sensor data and a prognostics model (see: :ref:`Modeling and Simulation Guide <prog_models Guide>`). The state estimator then produces an estimate of the system state with uncertainty in the form of an :ref:`uncertain data object <Uncertain Data>`. This state estimate is used by the predictor to predict when events will occur (Time of Event, ToE - returned as an :ref:`uncertain data object <Uncertain Data>`), and future system states (returned as a :ref:`Prediction object <Prediction>`).
+Prognostics is performed using :ref:`State Estimators <State Estimators>` and :ref:`Predictors <Predictors>`. State Estimators are resposible for estimating the current state of the modeled system using sensor data and a prognostics model (see: :ref:`Modeling and Simulation Guide <Modeling and Sim Guide>`). The state estimator then produces an estimate of the system state with uncertainty in the form of an :ref:`uncertain data object <Uncertain Data>`. This state estimate is used by the predictor to predict when events will occur (Time of Event, ToE - returned as an :ref:`uncertain data object <Uncertain Data>`), and future system states (returned as a :ref:`Prediction object <Prediction>`).
 
 Data Structures
 ***************
@@ -233,6 +233,8 @@ There are also a number of figures available to describe a state estimate, descr
         <div style="text-align: center;">
 
     .. image:: images/histogram.png
+        :width: 70 %
+        :align: center
 
     .. raw:: html
 

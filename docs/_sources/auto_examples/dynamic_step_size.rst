@@ -26,7 +26,7 @@ Example demonstrating ways to use the dynamic step size feature. This feature al
 
 
     import prog_models
-    from prog_models.models.thrown_object import ThrownObject
+    from progpy.models.thrown_object import ThrownObject
 
     def run_example():
         print("EXAMPLE 1: dt of 1 until 8 sec, then 0.5\n\nSetting up...\n")

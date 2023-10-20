@@ -12,8 +12,8 @@ We then create a subclass of the LSTMStateTransitionModel, defining the event_st
 import matplotlib.pyplot as plt
 import numpy as np
 
-from prog_models.data_models import LSTMStateTransitionModel
-from prog_models.models import ThrownObject
+from progpy.data_models import LSTMStateTransitionModel
+from progpy.models import ThrownObject
 
 def run_example():
     # -----------------------------------------------------

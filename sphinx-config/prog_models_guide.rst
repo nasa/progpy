@@ -5,7 +5,7 @@ Modeling and Sim Guide
 
     <iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=progpy&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
 
-The Prognostics Python Package (progpy) includes tools for defining, building, using, and testing models for :term:`prognostics` of engineering systems. It also provides a set of prognostics models for select components developed within this framework, suitable for use in prognostics applications for these components and can be used in conjunction with the state estimation and prediction features (:ref:`prog_algs<prog_algs Guide>`) to perform research in prognostics methods. 
+The Prognostics Python Package (ProgPy) includes tools for defining, building, using, and testing models for :term:`prognostics` of engineering systems. It also provides a set of prognostics models for select components developed within this framework, suitable for use in prognostics applications for these components and can be used in conjunction with the state estimation and prediction features (see :ref:`State Estimation and Prediction Guide<State Estimation and Prediction Guide>`) to perform research in prognostics methods. 
 
 Installing progpy
 -----------------------
@@ -14,7 +14,7 @@ Installing progpy
 
     .. tab:: Stable Version (Recommended)
 
-        The latest stable release of progpy is hosted on PyPi. For most users (unless you want to contribute to the development of progpy), the version on PyPi will be adequate. To install from the command line, use the following command:
+        The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:
 
         .. code-block:: console
 
@@ -49,7 +49,7 @@ Inputs
 
 Prognostic model :term:`inputs<input>` are how a system is loaded. These are things that can be controlled, and affect how the system state evolves. The expected inputs for a model are defined by its *inputs* property. For example, a battery is loaded by applying a current, so the only input is *i*, the applied current. Inputs are also sometimes environmental conditions, such as ambient temperature or pressure. 
 
-Inputs are one of the inputs to the state transition model, described in :ref:`States`
+Inputs are one of the inputs to the state transition model, described in :ref:`States` .
 
 States
 ^^^^^^^^^^^^^^^^^^^^
@@ -69,13 +69,17 @@ States are transitioned forward in time using the state transition equation.
 
     </div>
 
-where :math:`x(t)` is :term:`state`, at time :math:`t`, :math:`u(t)` is :term:`input` at time :math:`t`, :math:`dt` is the stepsize, and :math:`\Theta` are the model :term:`parameters`.
+where :math:`x(t)` is :term:`state` at time :math:`t`, :math:`u(t)` is :term:`input` at time :math:`t` , :math:`dt` is the stepsize, and :math:`\Theta` are the model :term:`parameters` .
 
 In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of continuous models, state transition behavior is defined by defining the first derivative, using the :py:func:`progpy.PrognosticsModel.dx` method. For discrete models, state transition behavior is defined using the :py:func:`progpy.PrognosticsModel.next_state` method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.
 
 .. image:: images/next_state.png
+    :width: 70 %
+    :align: center
 
 .. image:: images/dx.png
+    :width: 70 %
+    :align: center
 
 
 .. dropdown::  State transition equation example
@@ -109,6 +113,8 @@ The next important part of a prognostic model is the outputs. Outputs are measur
 Outputs are a function of only the system state (x) and :term:`parameters` (:math:`\Theta`), as described below. The expected outputs for a model are defined by its *outputs* property. The logic of calculating outputs from system state is provided by the user in the model :py:func:`progpy.PrognosticsModel.output` method.
 
 .. image:: images/output.png
+    :width: 70 %
+    :align: center
 
 .. raw:: html
 
@@ -142,7 +148,8 @@ The expected events for a model are defined by its *events* property. The logic 
 :term:`Thresholds<threshold>` are the conditions under which an event occurs. The logic of the threshold is defined in the :py:func:`progpy.PrognosticsModel.threshold_met` method. This method returns boolean for each event specifying if the event has occured. 
 
 .. image:: images/threshold_met.png
-
+    :width: 70 %
+    :align: center
 
 .. raw:: html
 
@@ -154,9 +161,11 @@ The expected events for a model are defined by its *events* property. The logic 
     
     </div>
 
-:term:`Event states<event state>` are an estimate of the progress towards a threshold. Where thresholds are boolean, event states are a number between 0 and 1, where 0 means the event has occured, 1 means no progress towards an event. Event states are a generalization of State of Health (SOH) for systems with multiple events and non-failure events. The logic of the event states is defined in the :py:func:`progpy.PrognosticsModel.event_state` method.
+:term:`Event states<event state>` are an estimate of the progress towards a threshold. Where thresholds are boolean, event states are a number between 0 and 1, where 0 means the event has occured, 1 means no progress towards the event. Event states are a generalization of State of Health (SOH) for systems with multiple events and non-failure events. The logic of the event states is defined in :py:func:`progpy.PrognosticsModel.event_state`.
 
 .. image:: images/event_state.png
+    :width: 70 %
+    :align: center
 
 .. raw:: html
 
@@ -205,17 +214,17 @@ Parameters
 
 Parameters are used to configure the behavior of a model. For parameterized :term:`physics-based<physics-based model>` models, parameters are used to configure the general system to match the behavior of the specific system. For example, parameters of the general battery model can be used to configure the model to describe the behavior of a specific battery.
 
-Models define a ``default_parameters`` property, that are the default parameters for that model. After construction, the parameters for a specific model can be accessed using the *parameters* property. For example, for a model `m`
+Models define a ``default_parameters`` property- the default parameters for that model. After construction, the parameters for a specific model can be accessed using the *parameters* property. For example, for a model `m`
 
 .. code-block:: python
 
     >>> print(m.parameters)
 
-Parameters can be set one of three ways: in model construction, using the *parameters* property after construction, or using Parameter Estimation feature (See :ref:`Parameter Estimation`). The first two are illustrated below:
+Parameters can be set in model construction, using the *parameters* property after construction, or using Parameter Estimation feature (See :ref:`Parameter Estimation`). The first two are illustrated below:
 
 .. code-block:: python
 
-    >>> m = SomeModel(some_parameter = 10.2, some_other_parameter = 2.5)
+    >>> m = SomeModel(some_parameter=10.2, some_other_parameter=2.5)
     >>> m.parameters['some_parameter'] = 11.2  # Overriding parameter
 
 The specific parameters are very specific to the system being modeled. For example, a battery might have parameters for the capacity and internal resistance. When using provided models, see the documentation for that model for details on parameters supported.
@@ -225,9 +234,9 @@ The specific parameters are very specific to the system being modeled. For examp
     Sometimes users would like to specify parameters as a function of other parameters. This feature is called "derived parameters". See example below for more details on this feature. 
 
     * :download:`examples.derived_params <../../progpy/examples/derived_params.py>`
-                .. automodule:: derived_params
+        .. automodule:: derived_params
 
-:term:`Noise <noise>`
+Noise
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods [Goebel2017]_. This model-based prognostic approach incorporates this uncertainty in four forms: initial state uncertainty (:math:`x_0`), :term:`process noise`, :term:`measurement noise`, and :term:`future loading noise`.
@@ -256,7 +265,7 @@ See example below for details on how to configure proccess and measurement noise
 :term:`Future Loading <future load>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected :term:`inputs<input>` (see :ref:`Inputs`) at future times.
+Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected :ref:`Inputs` at future times.
 
 Future loading is provided to the user as a function of time and optional state. For example:
 
@@ -274,7 +283,7 @@ See example below for details on how to provide future loading information in Pr
 General Notes
 ^^^^^^^^^^^^^^^^
 
-Users of ProgPy will need a model describing the behavior of the system of interest. Users will likely either use one of the models distribued with ProgPy (see `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__), configuring it to their own system using parameter estimation (see :download:`examples.param_est <../../progpy/examples/param_est.py>`), use a :term:`data-driven model` class to learn system behavior from data, or build their own model (see `Building New Models`_ section, below). 
+Users of ProgPy will need a model describing the behavior of the system of interest. Users will likely either use one of the models distribued with ProgPy (see `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__), configuring it to their own system using parameter estimation (see :download:`examples.param_est <../../progpy/examples/param_est.ipynb>`), use a :term:`data-driven model` class to learn system behavior from data, or build their own model (see `Building New Models`_ section, below). 
 
 Building New Models
 ----------------------
@@ -295,8 +304,7 @@ State-transition Models
         * :download:`examples.new_model <../../progpy/examples/new_model.py>`
             .. automodule:: new_model
 
-        * :download:`examples.linear_model <../../progpy/examples/linear_model.py>`
-            .. automodule:: linear_model
+        * :download:`examples.linear_model <../../progpy/examples/linear_model.ipynb>`
 
         .. dropdown:: Advanced features in model building
 
@@ -447,15 +455,15 @@ One of the most basic of functions using a model is simulation. Simulation is th
 
     This feature is especially important for use cases where loading changes dramatically at a specific time. For example, if loading is 10 for the first 5 seconds and 20 afterwards, and you have a  ``dt`` of 4 seconds, here's loading simulation would see:
 
-        * 0-4 seconds: 10
-        * 4-8 seconds: 10
-        * 8-12 seconds: 20
+     * 0-4 seconds: 10
+     * 4-8 seconds: 10
+     * 8-12 seconds: 20
 
     That means the load of 10 was applied 3 seconds longer than it was supposed to. Adding a eval point of 5 would apply this load:
 
-        * 0-4 seconds: 10
-        * 4-5 seconds: 10
-        * 5-9 seconds: 20
+     * 0-4 seconds: 10
+     * 4-5 seconds: 10
+     * 5-9 seconds: 20
 
     Now loading is applied correctly.
 
@@ -486,8 +494,7 @@ Generally, parameter estimation is done by tuning the parameters of the model so
 
 See the example below for more details
 
-* :download:`examples.param_est <../../progpy/examples/param_est.py>`
-    .. automodule:: param_est
+* :download:`examples.param_est <../../progpy/examples/param_est.ipynb>`
 
 .. admonition:: Note
     :class: tip

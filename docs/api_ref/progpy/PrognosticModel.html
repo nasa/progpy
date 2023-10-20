@@ -1,0 +1,1363 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>PrognosticsModel &#8212; ProgPy Python Packages 1.5 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SimResult" href="SimResult.html" />
+    <link rel="prev" title="Predictors" href="Predictor.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/software_name.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/software_name.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../guide.html">ProgPy Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../prog_models_guide.html">Modeling and Sim Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prog_algs_guide.html">State Estimation and Prediction Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prog_server_guide.html">prog_server Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../api_ref.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../prog_server/load_ests.html">Load Estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prog_server/prog_client.html">prog_client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prog_server/prog_server.html">ProgServer</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../progpy.html">ProgPy API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="CompositeModel.html">CompositeModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataModel.html">DataModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="EnsembleModel.html">EnsembleModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="IncludedModels.html">Included Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LinearModel.html">LinearModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Loading.html">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Prediction.html">Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Predictor.html">Predictors</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">PrognosticsModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SimResult.html">SimResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StateEstimator.html">State Estimators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ToEPredictionProfile.html">ToEPredictionProfile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="UncertainData.html">Uncertain Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html">Utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../npr7150.html">NPR 7150 NASA Software Engineering Requirements</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/api_ref/progpy/PrognosticModel.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PrognosticsModel</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="prognosticsmodel">
+<h1>PrognosticsModel<a class="headerlink" href="#prognosticsmodel" title="Permalink to this headline">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.</span></span><span class="sig-name descname"><span class="pre">PrognosticsModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel" title="Permalink to this definition">#</a></dt>
+<dd><p>A general time-variant state space <a class="reference internal" href="../../glossary.html#term-model"><span class="xref std std-term">model</span></a> of system degradation behavior.</p>
+<p>The PrognosticsModel class is a wrapper around a mathematical model of a system as represented by a state, output, input, event_state and threshold equation.</p>
+<p>A Model also has a parameters structure, which contains fields for various model parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">Process noise</span></a> (applied at dx/next_state).
+Can be number (e.g., .2) applied to every state, a dictionary of values for each
+state (e.g., {‘x1’: 0.2, ‘x2’: 0.3}), or a function (x) -&gt; x</p></li>
+<li><p><strong>process_noise_dist</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – distribution for <a class="reference internal" href="../../glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>measurement_noise</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em>) – <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">Measurement noise</span></a> (applied in output eqn).
+Can be number (e.g., .2) applied to every output, a dictionary of values for each
+output (e.g., {‘z1’: 0.2, ‘z2’: 0.3}), or a function (z) -&gt; z</p></li>
+<li><p><strong>measurement_noise_dist</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – distribution for <a class="reference internal" href="../../glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a> (e.g., normal, uniform, triangular)</p></li>
+<li><p><strong>integration_method</strong> (<em>Optional</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> or </em><em>OdeSolver</em>) – Integration method used by next_state in continuous models, e.g. ‘rk4’ or ‘euler’ (default: ‘euler’). Could also be a SciPy integrator (e.g., scipy.integrate.RK45). If the model is discrete, this parameter will raise an exception.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Additional parameters specific to the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.12)"><strong>TypeError</strong></a> – </p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">(</span><span class="n">process_noise</span><span class="o">=</span><span class="mf">3.2</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="gr">TypeError</span>: <span class="n">Must have `states` attribute</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">(</span><span class="n">integration_method</span><span class="o">=</span><span class="s1">&#39;rk4&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="gr">TypeError</span>: <span class="n">Must have `states` attribute</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m3</span> <span class="o">=</span> <span class="n">PrognosticsModel</span><span class="p">(</span><span class="n">integration_method</span><span class="o">=</span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">RK45</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;sp&#39; is not defined</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.is_vectorized">
+<span class="sig-name descname"><span class="pre">is_vectorized</span></span><a class="headerlink" href="#progpy.PrognosticsModel.is_vectorized" title="Permalink to this definition">#</a></dt>
+<dd><p>True if the model is vectorized, False otherwise. Default is False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.default_parameters">
+<span class="sig-name descname"><span class="pre">default_parameters</span></span><a class="headerlink" href="#progpy.PrognosticsModel.default_parameters" title="Permalink to this definition">#</a></dt>
+<dd><p>Default parameters for the model class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a>], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#progpy.PrognosticsModel.parameters" title="Permalink to this definition">#</a></dt>
+<dd><p>Parameters for the specific model object. This is created automatically from the default_parameters and kwargs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.state_limits">
+<span class="sig-name descname"><span class="pre">state_limits</span></span><a class="headerlink" href="#progpy.PrognosticsModel.state_limits" title="Permalink to this definition">#</a></dt>
+<dd><p>Limits on the state variables format {‘state_name’: (lower_limit, upper_limit)}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a>]], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.param_callbacks">
+<span class="sig-name descname"><span class="pre">param_callbacks</span></span><a class="headerlink" href="#progpy.PrognosticsModel.param_callbacks" title="Permalink to this definition">#</a></dt>
+<dd><p>Callbacks for derived parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[function]], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><a class="headerlink" href="#progpy.PrognosticsModel.inputs" title="Permalink to this definition">#</a></dt>
+<dd><p>Identifiers for each <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.states">
+<span class="sig-name descname"><span class="pre">states</span></span><a class="headerlink" href="#progpy.PrognosticsModel.states" title="Permalink to this definition">#</a></dt>
+<dd><p>Identifiers for each <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><a class="headerlink" href="#progpy.PrognosticsModel.outputs" title="Permalink to this definition">#</a></dt>
+<dd><p>Identifiers for each <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.performance_metric_keys">
+<span class="sig-name descname"><span class="pre">performance_metric_keys</span></span><a class="headerlink" href="#progpy.PrognosticsModel.performance_metric_keys" title="Permalink to this definition">#</a></dt>
+<dd><p>Identifiers for each performance metric</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.events">
+<span class="sig-name descname"><span class="pre">events</span></span><a class="headerlink" href="#progpy.PrognosticsModel.events" title="Permalink to this definition">#</a></dt>
+<dd><p>Identifiers for each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> predicted</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.StateContainer">
+<span class="sig-name descname"><span class="pre">StateContainer</span></span><a class="headerlink" href="#progpy.PrognosticsModel.StateContainer" title="Permalink to this definition">#</a></dt>
+<dd><p>Class for state container - used for representing <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DictLikeMatrixWrapper</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.OutputContainer">
+<span class="sig-name descname"><span class="pre">OutputContainer</span></span><a class="headerlink" href="#progpy.PrognosticsModel.OutputContainer" title="Permalink to this definition">#</a></dt>
+<dd><p>Class for output container - used for representing <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DictLikeMatrixWrapper</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.InputContainer">
+<span class="sig-name descname"><span class="pre">InputContainer</span></span><a class="headerlink" href="#progpy.PrognosticsModel.InputContainer" title="Permalink to this definition">#</a></dt>
+<dd><p>Class for input container - used for representing <a class="reference internal" href="../../glossary.html#term-input"><span class="xref std std-term">input</span></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DictLikeMatrixWrapper</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.apply_limits">
+<span class="sig-name descname"><span class="pre">apply_limits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.apply_limits" title="Permalink to this definition">#</a></dt>
+<dd><p>Apply state bound limits. Any state outside of limits will be set to the closest limit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>StateContainer</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>x</strong> – Bounded state, with keys defined by model.states
+e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>StateContainer or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">apply_limits</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Returns bounded state</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.apply_measurement_noise">
+<span class="sig-name descname"><span class="pre">apply_measurement_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.apply_measurement_noise" title="Permalink to this definition">#</a></dt>
+<dd><p>Apply measurement noise to the measurement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>z</strong> (<em>OutputContainer</em>) – <p>output, with keys defined by model.outputs</p>
+<p>e.g., z = m.OutputContainer({‘abc’: 332.1, ‘def’: 221.003}) given outputs = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>z</strong> – output, with applied noise, with keys defined by model.outputs</p>
+<p>e.g., z = m.OutputContainer({‘abc’: 332.2, ‘def’: 221.043}) given outputs = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>OutputContainer</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">apply_measurement_noise</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Configured using parameters <cite>measurement_noise</cite> and <cite>measurement_noise_dist</cite></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.apply_process_noise">
+<span class="sig-name descname"><span class="pre">apply_process_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.apply_process_noise" title="Permalink to this definition">#</a></dt>
+<dd><p>Apply process noise to the state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Time step (e.g., dt = 0.1)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>x</strong> – state, with applied noise, with keys defined by model.states
+e.g., x = m.StateContainer({‘abc’: 332.2, ‘def’: 221.043}) given states = [‘abc’, ‘def’]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>StateContainer</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">apply_process_noise</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    <span class="c1"># {&#39;tb&#39;: 292.04728504765023, &#39;qb&#39;: 7856.398056966799, &#39;qcp&#39;: 0.1736435913459429, &#39;qcs&#39;: 0.053705829558158086}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Configured using parameters <cite>process_noise</cite> and <cite>process_noise_dist</cite></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.calc_error">
+<span class="sig-name descname"><span class="pre">calc_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">progpy.utils.containers.DictLikeMatrixWrapper</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">progpy.utils.containers.DictLikeMatrixWrapper</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#progpy.PrognosticsModel.calc_error" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate Error between simulated and observed data using selected Error Calculation Method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>times</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em>) – array of times for each sample</p></li>
+<li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><em>InputContainer</em><em>]</em>) – array of input dictionaries where input[x] corresponds to time[x]</p></li>
+<li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><em>OutputContainer</em><em>]</em>) – array of output dictionaries where output[x] corresponds to time[x]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Error method to use when calculating error. Supported methods include:</p>
+<ul>
+<li><p>MSE (Mean Squared Error) - DEFAULT</p></li>
+<li><p>RMSE (Root Mean Squared Error)</p></li>
+<li><p>MAX_E (Maximum Error)</p></li>
+<li><p>MAE (Mean Absolute Error)</p></li>
+<li><p>MAPE (Mean Absolute Percentage Error)</p></li>
+<li><p>DTW (Dynamic Time Warping)</p></li>
+</ul>
+</p></li>
+<li><p><strong>x0</strong> (<a class="reference internal" href="#progpy.PrognosticsModel.StateContainer" title="progpy.PrognosticsModel.StateContainer"><em>StateContainer</em></a><em>, </em><em>optional</em>) – Initial state</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum time step in simulation. Time step used in simulation is lower of dt and time between samples. Defaults to time between samples.</p></li>
+<li><p><strong>stability_tol</strong> (<em>double</em><em>, </em><em>optional</em>) – <p>Configurable parameter.
+Configurable cutoff value, between 0 and 1, that determines the fraction of the data points for which the model must be stable.
+In some cases, a prognostics model will become unstable under certain conditions, after which point the model can no longer represent behavior.
+stability_tol represents the fraction of the provided argument <cite>times</cite> that are required to be met in simulation,
+before the model goes unstable in order to produce a valid estimate of mean squared error.</p>
+<p>If the model goes unstable before stability_tol is met, a ValueError is raised.
+Else, model goes unstable after stability_tol is met, the mean squared error calculated from data up to the instability is returned.</p>
+</p></li>
+<li><p><strong>aggr_method</strong> (<em>func</em><em>, </em><em>optional</em>) – When multiple runs are provided, users can state how to aggregate the results of the errors. Defaults to taking the mean.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>error</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MSE()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.RMSE()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MAX_E()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MAPE()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">calc_error.MAE()</span></code>
+:func:’calc_error.DTW’</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.dx">
+<span class="sig-name descname"><span class="pre">dx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.dx" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate the first derivative of state <cite>x</cite> at a specific time <cite>t</cite>, given state and input</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p></li>
+<li><p><strong>u</strong> (<em>InputContainer</em>) – <p>Inputs, with keys defined by model.inputs</p>
+<p>e.g., u = m.InputContainer({‘i’:3.2}) given inputs = [‘i’]</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>dx</strong> – First derivative of state, with keys defined by model.states</p>
+<p>e.g., dx = m.StateContainer({‘abc’: 3.1, ‘def’: -2.003}) given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>StateContainer</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span>  <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dx</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">dx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="c1"># Returns first derivative of state given input u</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#progpy.PrognosticsModel.next_state" title="progpy.PrognosticsModel.next_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_state</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A model should overwrite either <cite>next_state</cite> or <cite>dx</cite>. Override <cite>dx</cite> for continuous models,
+and <cite>next_state</cite> for discrete, where the behavior cannot be described by the first derivative</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.estimate_params">
+<span class="sig-name descname"><span class="pre">estimate_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">progpy.utils.containers.DictLikeMatrixWrapper</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">progpy.utils.containers.DictLikeMatrixWrapper</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'nelder-mead'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#progpy.PrognosticsModel.estimate_params" title="Permalink to this definition">#</a></dt>
+<dd><p>Estimate the model parameters given data. Overrides model parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Parameter keys to optimize</p></li>
+<li><p><strong>times</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em>) – Array of times for each sample</p></li>
+<li><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference internal" href="#progpy.PrognosticsModel.InputContainer" title="progpy.PrognosticsModel.InputContainer"><em>InputContainer</em></a><em>]</em>) – Array of input containers where input[x] corresponds to time[x]</p></li>
+<li><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference internal" href="#progpy.PrognosticsModel.OutputContainer" title="progpy.PrognosticsModel.OutputContainer"><em>OutputContainer</em></a><em>]</em>) – Array of output containers where output[x] corresponds to time[x]</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Optimization method- see scipy.optimize.minimize for options</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Tolerance for termination. Depending on the provided minimization method, specifying tolerance sets solver-specific options to tol</p></li>
+<li><p><strong>error_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Method to use in calculating error. See calc_error for options</p></li>
+<li><p><strong>bounds</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Bounds for optimization in format ((lower1, upper1), (lower2, upper2), …) or {key1: (lower1, upper1), key2: (lower2, upper2), …}</p></li>
+<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Options passed to optimizer. see scipy.optimize.minimize for options</p></li>
+<li><p><strong>runs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>]</em><em>, </em><em>depreciated</em>) – data from all runs, where runs[0] is the data from run 0. Each run consists of a tuple of arrays of times, input dicts, and output dicts. Use inputs, outputs, states, times, etc. instead</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Scipy minimize Optimization Result from estimating parameters. See scipy’s scipy.optimize.OptimizeResult documentation for details.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>OptimizeResult</p>
+</dd>
+</dl>
+<p>See: examples.param_est</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.event_state">
+<span class="sig-name descname"><span class="pre">event_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#progpy.PrognosticsModel.event_state" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate event states (i.e., measures of progress towards event (0-1, where 0 means event has occurred))</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>event_state</strong> – Event States, with keys defined by prognostics_model.events.</p>
+<p>e.g., event_state = {‘EOL’:0.32} given events = [‘EOL’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">event_state</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">event_state</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># {&#39;EOD&#39;: 1.0}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If not overridden, will return 0.0 if threshold_met returns True, otherwise 1.0. If neither threshold_met or event_state is overridden, will return an empty dictionary (i.e., no events)</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#progpy.PrognosticsModel.threshold_met" title="progpy.PrognosticsModel.threshold_met"><code class="xref py py-obj docutils literal notranslate"><span class="pre">threshold_met</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.from_json">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.from_json" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a new prognostics model from a previously generated model that was serialized as a JSON object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – JSON serialized parameters necessary to build a model
+See to_json method</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Model generated from serialized parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#progpy.PrognosticsModel" title="progpy.PrognosticsModel">PrognosticsModel</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#progpy.PrognosticsModel.to_json" title="progpy.PrognosticsModel.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This serialization only works for models that include all parameters necessary to generate the model in model.parameters.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.generate_surrogate">
+<span class="sig-name descname"><span class="pre">generate_surrogate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><span class="pre">collections.abc.Callable</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'dmd'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.generate_surrogate" title="Permalink to this definition">#</a></dt>
+<dd><p>Generate a surrogate model to approximate the higher-fidelity model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>load_functions</strong> (<em>List</em><em>[</em><em>abc.Callable</em><em>]</em>) – Each index is a callable loading function of (t, x = None) -&gt; z used to predict future loading (output) at a given time (t) and state (x)</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – list[ indicating surrogate modeling method to be used</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em> or </em><em>abc.Callable</em><em>, </em><em>optional</em>) – Same as in simulate_to_threshold; for DMD, this value is the time step of the training data</p></li>
+<li><p><strong>save_freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Same as in simulate_to_threshold; for DMD, this value is the time step with which the surrogate model is generated</p></li>
+<li><p><strong>state_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – List of state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>input_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – List of input keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>output_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – List of output keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>event_keys</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – List of event_state keys to be included in the surrogate model generation. keys must be a subset of those defined in the PrognosticsModel</p></li>
+<li><p><strong>...</strong> (<em>optional</em>) – Keyword arguments from simulate_to_threshold (except save_pts)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>SurrogateModel()</strong> – Instance of SurrogateModel class</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>class</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>See examples/generate_surrogate</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.initialize">
+<span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.initialize" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate initial state given inputs and outputs. If not defined for a model, it will return parameters[‘x0’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> (<em>InputContainer</em>) – <p>Inputs, with keys defined by model.inputs</p>
+<p>e.g., u = m.InputContainer({‘i’:3.2}) given inputs = [‘i’]</p>
+</p></li>
+<li><p><strong>z</strong> (<em>OutputContainer</em>) – <p>Outputs, with keys defined by model.outputs</p>
+<p>e.g., z = m.OutputContainer({‘t’:12.4, ‘v’:3.3}) given outputs = [‘t’, ‘v’]</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>x</strong> – First state, with keys defined by model.states</p>
+<p>e.g., x = StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>StateContainer</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>:
+&gt;&gt;&gt; from progpy.models import BatteryCircuit
+&gt;&gt;&gt; m = BatteryCircuit()    # Replace above with specific model being simulated ^
+&gt;&gt;&gt; u = m.InputContainer({‘u1’: 3.2})
+&gt;&gt;&gt; z = m.OutputContainer({‘z1’: 2.2})
+&gt;&gt;&gt; x = m.initialize(u, z)  # Initialize first state</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.is_continuous">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_continuous</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><a class="headerlink" href="#progpy.PrognosticsModel.is_continuous" title="Permalink to this definition">#</a></dt>
+<dd><p>returns: <strong>is_continuous</strong> – True if model is continuous, False if discrete
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.is_direct">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_direct</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><a class="headerlink" href="#progpy.PrognosticsModel.is_direct" title="Permalink to this definition">#</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>If the model is a “direct model” - i.e., a model that directly estimates time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if the model is a direct model</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.is_discrete">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_discrete</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><a class="headerlink" href="#progpy.PrognosticsModel.is_discrete" title="Permalink to this definition">#</a></dt>
+<dd><p>returns: <strong>is_discrete</strong> – True if model is discrete, False if continuous
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.is_state_transition_model">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_state_transition_model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><a class="headerlink" href="#progpy.PrognosticsModel.is_state_transition_model" title="Permalink to this definition">#</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>If the model is a “state transition model” - i.e., a model that uses state transition differential equations to propagate state forward.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>if the model is a state transition model</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.next_state">
+<span class="sig-name descname"><span class="pre">next_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.next_state" title="Permalink to this definition">#</a></dt>
+<dd><p>State transition equation: Calculate next state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p></li>
+<li><p><strong>u</strong> (<em>InputContainer</em>) – <p>Inputs, with keys defined by model.inputs</p>
+<p>e.g., u = m.InputContainer({‘i’:3.2}) given inputs = [‘i’]</p>
+</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – <p>Timestep size in seconds (≥ 0)</p>
+<p>e.g., dt = 0.1</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>x</strong> – Next state, with keys defined by model.states
+e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>StateContainer</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">next_state</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="c1"># Returns state at 3.1 seconds given input u</span>
+</pre></div>
+</div>
+<p>???{‘tb’: 292.1, ‘qb’: nan, ‘qcp’: nan, ‘qcs’: nan}</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#progpy.PrognosticsModel.dx" title="progpy.PrognosticsModel.dx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dx</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A model should overwrite either <cite>next_state</cite> or <cite>dx</cite>. Override <cite>dx</cite> for continuous models, and <cite>next_state</cite> for discrete, where the behavior cannot be described by the first derivative</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.output">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.output" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate <a class="reference internal" href="../../glossary.html#term-output"><span class="xref std std-term">output</span></a> given state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>z</strong> – Outputs, with keys defined by model.outputs.</p>
+<p>e.g., z = m.OutputContainer({‘t’:12.4, ‘v’:3.3}) given outputs = [‘t’, ‘v’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>OutputContainer</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">{&#39;t&#39;: 292.1, &#39;v&#39;: 4.182999999010731}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.performance_metrics">
+<span class="sig-name descname"><span class="pre">performance_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#progpy.PrognosticsModel.performance_metrics" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate performance metrics where</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>pm</strong> – Performance Metrics, with keys defined by model.performance_metric_keys.</p>
+<p>e.g., pm = {‘tMax’:33, ‘iMax’:19} given performance_metric_keys = [‘tMax’, ‘iMax’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryElectroChemEOD</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryElectroChemEOD</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pm</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">performance_metrics</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="c1"># {&#39;max_i&#39;: array([8.83810109])}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.simulate_to">
+<span class="sig-name descname"><span class="pre">simulate_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time:</span> <span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn:</span> <span class="pre">collections.abc.Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">collections.namedtuple</span></span></span><a class="headerlink" href="#progpy.PrognosticsModel.simulate_to" title="Permalink to this definition">#</a></dt>
+<dd><p>Simulate prognostics model for a given number of seconds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – <p>Time to which the model will be simulated in seconds (≥ 0.0)</p>
+<p>e.g., time = 200</p>
+</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p></li>
+<li><p><strong>first_output</strong> (<em>OutputContainer</em><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that don’t use this</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>list[float]</em>) – Times for each simulated point</p></li>
+<li><p><strong>inputs</strong> (<em>SimResult</em>) – Future input (from future_loading_eqn) for each time in times</p></li>
+<li><p><strong>states</strong> (<em>SimResult</em>) – Estimated states for each time in times</p></li>
+<li><p><strong>outputs</strong> (<em>SimResult</em>) – Estimated outputs for each time in times</p></li>
+<li><p><strong>event_states</strong> (<em>SimResult</em>) – Estimated event state (e.g., SOH), between 1-0 where 0 is event occurrence, for each time in times</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ProgModelInputException</strong> – </p></li>
+<li><p><strong>Note:</strong> – See simulate_to_threshold for supported keyword arguments</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#progpy.PrognosticsModel.simulate_to_threshold" title="progpy.PrognosticsModel.simulate_to_threshold"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to_threshold</span></code></a></p>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 2.0 for first 5 seconds</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.simulate_to_threshold">
+<span class="sig-name descname"><span class="pre">simulate_to_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.12)"><span class="pre">collections.abc.Callable</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">collections.namedtuple</span></span></span><a class="headerlink" href="#progpy.PrognosticsModel.simulate_to_threshold" title="Permalink to this definition">#</a></dt>
+<dd><p>Simulate prognostics model until any or specified threshold(s) have been met</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t)</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time for simulation in seconds (default: 0.0)</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, or </em><em>function</em><em>, </em><em>optional</em>) – <p>float: constant time step (s), e.g. dt = 0.1</p>
+<p>function (t, x) -&gt; dt</p>
+<p>tuple: (mode, dt), where modes could be constant or auto. If auto, dt is maximum step size</p>
+<p>str: mode - ‘auto’ or ‘constant’</p>
+</p></li>
+<li><p><strong>integration_method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Integration method, e.g. ‘rk4’ or ‘euler’ (default: ‘euler’)</p></li>
+<li><p><strong>save_freq</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Frequency at which output is saved (s), e.g., save_freq = 10. A save_freq of 0 will save every step.</p></li>
+<li><p><strong>save_pts</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – Additional ordered list of custom times where output is saved (s), e.g., save_pts= [50, 75]</p></li>
+<li><p><strong>eval_pts</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – Additional ordered list of custom times where simulation is guarenteed to be evaluated (though results are not saved, as with save_pts) when dt is auto (s), e.g., eval_pts= [50, 75]</p></li>
+<li><p><strong>horizon</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – maximum time that the model will be simulated forward (s), e.g., horizon = 1000</p></li>
+<li><p><strong>first_output</strong> (<a class="reference internal" href="#progpy.PrognosticsModel.OutputContainer" title="progpy.PrognosticsModel.OutputContainer"><em>OutputContainer</em></a><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that don’t use this</p></li>
+<li><p><strong>threshold_keys</strong> (<em>abc.Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Keys for events that will trigger the end of simulation.
+If blank, simulation will occur if any event will be met ()</p></li>
+<li><p><strong>x</strong> (<a class="reference internal" href="#progpy.PrognosticsModel.StateContainer" title="progpy.PrognosticsModel.StateContainer"><em>StateContainer</em></a><em>, </em><em>optional</em>) – initial state, e.g., x= m.StateContainer({‘x1’: 10, ‘x2’: -5.3})</p></li>
+<li><p><strong>thresholds_met_eqn</strong> (<em>abc.Callable</em><em>, </em><em>optional</em>) – custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
+<li><p><strong>print</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>toggle intermediate printing, e.g., print = True</p>
+<p>e.g., m.simulate_to_threshold(eqn, z, dt=0.1, save_pts=[1, 2])</p>
+</p></li>
+<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a><em>, </em><em>optional</em>) – toggle progress bar printing, e.g., progress = True</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>list[float]</em>) – Times for each simulated point</p></li>
+<li><p><strong>inputs</strong> (<em>SimResult</em>) – Future input (from future_loading_eqn) for each time in times</p></li>
+<li><p><strong>states</strong> (<em>SimResult</em>) – Estimated states for each time in times</p></li>
+<li><p><strong>outputs</strong> (<em>SimResult</em>) – Estimated outputs for each time in times</p></li>
+<li><p><strong>event_states</strong> (<em>SimResult</em>) – Estimated event state (e.g., SOH), between 1-0 where 0 is event occurrence, for each time in times</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.12)"><strong>ValueError</strong></a> – </p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#progpy.PrognosticsModel.simulate_to" title="progpy.PrognosticsModel.simulate_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulate_to</span></code></a></p>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">future_load_eqn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span> <span class="mf">5.0</span><span class="p">:</span> <span class="c1"># Load is 3.0 for first 5 seconds</span>
+<span class="gp">... </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">})</span>
+<span class="gp">... </span>   <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>       <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;i&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_output</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;v&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span> <span class="mi">295</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate_to_threshold</span><span class="p">(</span><span class="n">future_load_eqn</span><span class="p">,</span> <span class="n">first_output</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>configuration of the model is set through model.parameters.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.state_at_event">
+<span class="sig-name descname"><span class="pre">state_at_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn=&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.PrognosticsModel.state_at_event" title="Permalink to this definition">#</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>Calculate the <a class="reference internal" href="../../glossary.html#term-state"><span class="xref std std-term">state</span></a> at the time that each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). state_at_event can be implemented by a direct model. For a state transition model, this returns the state at which threshold_met returns true for each event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em><em>, </em><em>optional</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t). Defaults to no outputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>state at each events occurrence, with keys defined by model.events</p>
+<p>e.g., state_at_event = {‘impact’: {‘x1’: 10, ‘x2’: 11}, ‘falling’: {‘x1’: 15, ‘x2’: 20}} given events = [‘impact’, ‘falling’] and states = [‘x1’, ‘x2’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>state_at_event (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, StateContainer])</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Also supports arguments from <a class="reference internal" href="#progpy.PrognosticsModel.simulate_to_threshold" title="progpy.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simulate_to_threshold()</span></code></a></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>threshold_met</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.threshold_met">
+<span class="sig-name descname"><span class="pre">threshold_met</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#progpy.PrognosticsModel.threshold_met" title="Permalink to this definition">#</a></dt>
+<dd><p>For each event threshold, calculate if it has been met</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>If each threshold has been met (bool), with keys defined by prognostics_model.events</p>
+<p>e.g., thresholds_met = {‘EOL’: False} given events = [‘EOL’]</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>thresholds_met (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>)</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">BatteryCircuit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">BatteryCircuit</span><span class="p">()</span> <span class="c1"># Replace with specific model being simulated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;u1&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">OutputContainer</span><span class="p">({</span><span class="s1">&#39;z1&#39;</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># Initialize first state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">threshold_met</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">threshold_met</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># {&#39;EOD&#39;: False}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If not overridden, will return True if event_state is &lt;= 0, otherwise False. If neither threshold_met or event_state is overridden, will return an empty dictionary (i.e., no events)</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>event_state</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.time_of_event">
+<span class="sig-name descname"><span class="pre">time_of_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn=&lt;function</span> <span class="pre">PrognosticsModel.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></span><a class="headerlink" href="#progpy.PrognosticsModel.time_of_event" title="Permalink to this definition">#</a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.5.0.</span></p>
+</div>
+<p>Calculate the time at which each <a class="reference internal" href="../../glossary.html#term-event"><span class="xref std std-term">event</span></a> occurs (i.e., the event <a class="reference internal" href="../../glossary.html#term-threshold"><span class="xref std std-term">threshold</span></a> is met). time_of_event must be implemented by any direct model. For a state transition model, this returns the time at which threshold_met returns true for each event. A model that implements this is called a “direct model”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>StateContainer</em>) – <p>state, with keys defined by model.states</p>
+<p>e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
+</p></li>
+<li><p><strong>future_loading_eqn</strong> (<em>abc.Callable</em><em>, </em><em>optional</em>) – Function of (t) -&gt; z used to predict future loading (output) at a given time (t). Defaults to no outputs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl>
+<dt>time_of_event (dict)</dt><dd><p>time of each event, with keys defined by model.events</p>
+<p>e.g., time_of_event = {‘impact’: 8.2, ‘falling’: 4.077} given events = [‘impact’, ‘falling’]</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Also supports arguments from <a class="reference internal" href="#progpy.PrognosticsModel.simulate_to_threshold" title="progpy.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">simulate_to_threshold()</span></code></a></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>threshold_met</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="progpy.PrognosticsModel.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#progpy.PrognosticsModel.to_json" title="Permalink to this definition">#</a></dt>
+<dd><p>Serialize parameters as JSON objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Serialized PrognosticsModel parameters as string</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#progpy.PrognosticsModel.from_json" title="progpy.PrognosticsModel.from_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_json</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method only serializes the values of the prognostics model parameters (model.parameters)</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Predictor.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Predictors</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="SimResult.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SimResult</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+
+Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
+
+  </body>
+</html>

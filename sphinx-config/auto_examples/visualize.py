@@ -6,8 +6,8 @@ Example demonstrating the Visualization Module.
 """
 
 import matplotlib.pyplot as plt
-from prog_models.visualize import plot_timeseries
-from prog_models.models.thrown_object import ThrownObject
+from progpy.visualize import plot_timeseries
+from progpy.models.thrown_object import ThrownObject
 
 def run_example():
     print('Visualize Module Example')
