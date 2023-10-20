@@ -45,7 +45,7 @@ def run_example():
         batt.InputContainer({'i': 2}),
         batt.InputContainer({'i': 3})
     ]
-    def future_loading(t, x = None):
+    def future_loading(t, x=None):
         # Variable (piece-wise) future loading scheme 
         if (t < 600):
             return loads[0]
@@ -94,7 +94,7 @@ def run_example():
     NUM_SAMPLES = 25
     STEP_SIZE = 0.1
     SAVE_FREQ = 100  # How often to save results
-    mc_results = mc.predict(filt.x, future_loading, n_samples = NUM_SAMPLES, dt=STEP_SIZE, save_freq = SAVE_FREQ)
+    mc_results = mc.predict(filt.x, future_loading, n_samples=NUM_SAMPLES, dt=STEP_SIZE, save_freq=SAVE_FREQ)
     print('ToE', mc_results.time_of_event.mean)
 
     # Step 3c: Analyze the results

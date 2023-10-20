@@ -18,10 +18,13 @@ progpy
 
 * Various bug fixes and performance improvements
 
+Upgrading from v1.5
+^^^^^^^^^^^^^^^^^^^^^^
+v1.6 combined prog_models and prog_algs into a single package progpy. To upgrade to 1.6, you will need to download the new progpy package (pip install progpy) and update all imports to use progpy. For example `from prog_models import PrognosticsModel` becomes `from progpy import PrognosticsModel`, and `from prog_algs import predictors` becomes `from progpy import predictors`.
+
 prog_server
 ************
-
-
+* Updated to work with progpy v1.6
 
 Updates in V1.5
 -----------------------
