@@ -23,7 +23,7 @@ Glossary
       Measured sensor values from a system (e.g., voltage and temperature of a battery). Output is frequently denoted by z.
 
     future load
-      :term:`input` (i.e., loading) expected to be applied to a system at future times
+      :term:`input` (i.e., loading) expected to be applied to a system at future times. In ProgPy, future load is typically provided as a function of time and state, f(time, state) -> load
 
     performance metric
       Performance characteristics of a system that are a function of system state, but are not directly measured.

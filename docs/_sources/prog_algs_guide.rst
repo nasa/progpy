@@ -86,7 +86,7 @@ The internal state is stored in the estimators x property as a UncertainData sub
 
     .. dropdown:: KF Details
 
-        .. autoclass:: prog_algs.state_estimators.ParticleFilter
+        .. autoclass:: prog_algs.state_estimators.KalmanFilter
 
 .. dropdown:: Example
 

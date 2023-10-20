@@ -227,8 +227,8 @@ The specific parameters are very specific to the system being modeled. For examp
     * :download:`examples.derived_params <../../prog_models/examples/derived_params.py>`
                 .. automodule:: derived_params
 
-Noise
-^^^^^^^^^^^
+:term:`Noise <noise>`
+^^^^^^^^^^^^^^^^^^^^^^^
 
 In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods [Goebel2017]_. This model-based prognostic approach incorporates this uncertainty in four forms: initial state uncertainty (:math:`x_0`), :term:`process noise`, :term:`measurement noise`, and :term:`future loading noise`.
 
@@ -253,8 +253,8 @@ See example below for details on how to configure proccess and measurement noise
 * :download:`examples.noise <../../prog_models/examples/noise.py>`
     .. automodule:: noise
 
-Future Loading
-^^^^^^^^^^^^^^^^^^
+:term:`Future Loading <future load>`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected :term:`inputs<input>` (see :ref:`Inputs`) at future times.
 

@@ -47,7 +47,6 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/tabs.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -337,8 +336,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-measurements">Output (Measurements)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise">Noise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading">Future Loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise"><span class="xref std std-term">Noise</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading"><span class="xref std std-term">Future Loading</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-notes">General Notes</a></li>
 </ul>
 </li>
@@ -541,7 +540,7 @@ More details<div class="summary-down docutils">
 </div>
 </details></section>
 <section id="noise">
-<h3>Noise<a class="headerlink" href="#noise" title="Permalink to this heading">#</a></h3>
+<h3><span class="xref std std-term">Noise</span><a class="headerlink" href="#noise" title="Permalink to this heading">#</a></h3>
 <p>In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods <a class="reference internal" href="#goebel2017" id="id1"><span>[Goebel2017]</span></a>. This model-based prognostic approach incorporates this uncertainty in four forms: initial state uncertainty (<span class="math notranslate nohighlight">\(x_0\)</span>), <a class="reference internal" href="glossary.html#term-process-noise"><span class="xref std std-term">process noise</span></a>, <a class="reference internal" href="glossary.html#term-measurement-noise"><span class="xref std std-term">measurement noise</span></a>, and <a class="reference internal" href="glossary.html#term-future-loading-noise"><span class="xref std std-term">future loading noise</span></a>.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
@@ -570,7 +569,7 @@ Future Loading Noise<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">Future loading noise is used to represent uncertainty in knowledge of how the system will be loaded in the future (See <a class="reference internal" href="#future-loading"><span class="std std-ref">Future Loading</span></a>). Future loading noise is applied by the user in their provided future loading method by adding random noise to the estimated future load.</p>
+<p class="card-text">Future loading noise is used to represent uncertainty in knowledge of how the system will be loaded in the future (See <span class="xref std std-ref">Future Loading</span>). Future loading noise is applied by the user in their provided future loading method by adding random noise to the estimated future load.</p>
 </div>
 </details><p>See example below for details on how to configure proccess and measurement noise in ProgPy</p>
 <ul>
@@ -582,7 +581,7 @@ Future Loading Noise<div class="summary-down docutils">
 </ul>
 </section>
 <section id="future-loading">
-<h3>Future Loading<a class="headerlink" href="#future-loading" title="Permalink to this heading">#</a></h3>
+<h3><a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">Future Loading</span></a><a class="headerlink" href="#future-loading" title="Permalink to this heading">#</a></h3>
 <p>Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">inputs</span></a> (see <a class="reference internal" href="#inputs"><span class="std std-ref">Inputs</span></a>) at future times.</p>
 <p>Future loading is provided to the user as a function of time and optional state. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">future_load</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1122,8 +1121,8 @@ Eval Points<div class="summary-down docutils">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-measurements">Output (Measurements)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise">Noise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading">Future Loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise"><span class="xref std std-term">Noise</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading"><span class="xref std std-term">Future Loading</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-notes">General Notes</a></li>
 </ul>
 </li>

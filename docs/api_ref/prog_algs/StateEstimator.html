@@ -47,7 +47,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/tabs.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_ref/prog_algs/StateEstimator';</script>
@@ -328,20 +327,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-state-estimators">Included State Estimators</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.ParticleFilter"><code class="docutils literal notranslate"><span class="pre">ParticleFilter</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.UnscentedKalmanFilter"><code class="docutils literal notranslate"><span class="pre">UnscentedKalmanFilter</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.KalmanFilter"><code class="docutils literal notranslate"><span class="pre">KalmanFilter</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimator-interface">State Estimator Interface</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.StateEstimator"><code class="docutils literal notranslate"><span class="pre">StateEstimator</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.StateEstimator.estimate"><code class="docutils literal notranslate"><span class="pre">StateEstimator.estimate()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.StateEstimator.x"><code class="docutils literal notranslate"><span class="pre">StateEstimator.x</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-state-estimators">Included State Estimators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimator-interface">State Estimator Interface</a></li>
 </ul>
             </nav>
         </div>
@@ -388,17 +375,17 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>model</strong> (<a class="reference internal" href="../prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
-<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
+<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
 <p>e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
+<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
-<li><p><strong>num_particles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Number of particles in particle filter</p></li>
+<li><p><strong>num_particles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of particles in particle filter</p></li>
 <li><p><strong>resample_fcn</strong> (<em>function</em><em>, </em><em>optional</em>) – Resampling function ([weights]) -&gt; [indexes] e.g., filterpy.monte_carlo.residual_resample</p></li>
 </ul>
 </dd>
@@ -416,21 +403,21 @@ e.g., dt = 1e-2</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>model</strong> (<a class="reference internal" href="../prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
-<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
+<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
 <p>e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p><strong>kappa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
+<li><p><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
+<li><p><strong>kappa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
+<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
-<li><p><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Process Noise Matrix</p></li>
-<li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Measurement Noise Matrix</p></li>
+<li><p><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Process Noise Matrix</p></li>
+<li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Measurement Noise Matrix</p></li>
 </ul>
 </dd>
 </dl>
@@ -447,19 +434,19 @@ e.g., dt = 1e-2</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>model</strong> (<a class="reference internal" href="../prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
-<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
+<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
 <p>e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – KF Scaling parameter. An alpha &gt; 1 turns this into a fading memory filter.</p></li>
-<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – KF Scaling parameter. An alpha &gt; 1 turns this into a fading memory filter.</p></li>
+<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
-<li><p><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Process Noise Matrix</p></li>
-<li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Measurement Noise Matrix</p></li>
+<li><p><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Process Noise Matrix</p></li>
+<li><p><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Measurement Noise Matrix</p></li>
 </ul>
 </dd>
 </dl>
@@ -479,15 +466,15 @@ e.g., dt = 1e-2</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>model</strong> (<a class="reference internal" href="../prog_models/PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
-<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
+<li><p><strong>x0</strong> (<a class="reference internal" href="UncertainData.html#prog_algs.uncertain_data.UncertainData" title="prog_algs.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – <p>Initial (starting) state, with keys defined by model.states</p>
 <p>e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Initial time at which prediction begins, e.g., 0</p></li>
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
+<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Initial time at which prediction begins, e.g., 0</p></li>
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
 <li><p><strong>**kwargs</strong> – See state-estimator specific documentation for specific keyword arguments.</p></li>
 </ul>
@@ -495,12 +482,12 @@ e.g., dt = 1e-2</p></li>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_algs.state_estimators.StateEstimator.estimate">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_algs.state_estimators.StateEstimator.estimate" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#prog_algs.state_estimators.StateEstimator.estimate" title="Permalink to this definition">#</a></dt>
 <dd><p>Perform one state estimation step (i.e., update the state estimate, filt.x)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Current timestamp in seconds (≥ 0.0)
+<li><p><strong>t</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Current timestamp in seconds (≥ 0.0)
 e.g., t = 3.4</p></li>
 <li><p><strong>u</strong> (<em>InputContainer</em>) – Measured inputs, with keys defined by model.inputs.
 e.g., u = m.InputContainer({‘i’:3.2}) given inputs = [‘i’]</p></li>
@@ -510,7 +497,7 @@ e.g., z = m.OutputContainer({‘t’:12.4, ‘v’:3.3}) given outputs = [‘t�
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
+<li><p><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
 <li><p><strong>**kwargs</strong> – See state-estimator specific documentation for specific keyword arguments.</p></li>
 </ul>
@@ -583,20 +570,8 @@ e.g., dt = 1e-2</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-state-estimators">Included State Estimators</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.ParticleFilter"><code class="docutils literal notranslate"><span class="pre">ParticleFilter</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.UnscentedKalmanFilter"><code class="docutils literal notranslate"><span class="pre">UnscentedKalmanFilter</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.KalmanFilter"><code class="docutils literal notranslate"><span class="pre">KalmanFilter</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimator-interface">State Estimator Interface</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.StateEstimator"><code class="docutils literal notranslate"><span class="pre">StateEstimator</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.StateEstimator.estimate"><code class="docutils literal notranslate"><span class="pre">StateEstimator.estimate()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_algs.state_estimators.StateEstimator.x"><code class="docutils literal notranslate"><span class="pre">StateEstimator.x</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#included-state-estimators">Included State Estimators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimator-interface">State Estimator Interface</a></li>
 </ul>
   </nav></div>
 

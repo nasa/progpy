@@ -47,7 +47,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -303,9 +302,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -321,29 +318,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session"><code class="docutils literal notranslate"><span class="pre">Session</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_event_state"><code class="docutils literal notranslate"><span class="pre">Session.get_event_state()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_model"><code class="docutils literal notranslate"><span class="pre">Session.get_model()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_performance_metrics"><code class="docutils literal notranslate"><span class="pre">Session.get_performance_metrics()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_predicted_event_state"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_event_state()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_predicted_performance_metrics"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_performance_metrics()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_predicted_state"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_state()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_predicted_toe"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_toe()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_prediction_status"><code class="docutils literal notranslate"><span class="pre">Session.get_prediction_status()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_state"><code class="docutils literal notranslate"><span class="pre">Session.get_state()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.is_init"><code class="docutils literal notranslate"><span class="pre">Session.is_init()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.send_data"><code class="docutils literal notranslate"><span class="pre">Session.send_data()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.send_loading"><code class="docutils literal notranslate"><span class="pre">Session.send_loading()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.set_state"><code class="docutils literal notranslate"><span class="pre">Session.set_state()</span></code></a></li>
-</ul>
-</li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -363,17 +337,17 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The model to use for this session (e.g., batt)</p></li>
-<li><p><strong>host</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Host address for PaaS Service. Defaults to ‘127.0.0.1’.</p></li>
-<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em>, </em><em>optional</em>) – Port for PaaS Service. Defaults to 5000.</p></li>
-<li><p><strong>model_cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Configuration for ProgModel.</p></li>
-<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Initial state for ProgModel.</p></li>
-<li><p><strong>load_est</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Load estimator to use.</p></li>
-<li><p><strong>load_est_cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Configuration for load estimator.</p></li>
-<li><p><strong>state_est</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – State Estimator to use (e.g., ParticleFilter). Class name for state estimator in <cite>prog_algs.state_estimators</cite></p></li>
-<li><p><strong>state_est_cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Configuration for state estimator.</p></li>
-<li><p><strong>pred</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – Prediction algorithm to use (e.g., MonteCarlo). Class name for prediction algorithm in <cite>prog_algs.predictors</cite></p></li>
-<li><p><strong>pred_cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – Configuration for prediction algorithm.</p></li>
+<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The model to use for this session (e.g., batt)</p></li>
+<li><p><strong>host</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Host address for PaaS Service. Defaults to ‘127.0.0.1’.</p></li>
+<li><p><strong>port</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Port for PaaS Service. Defaults to 5000.</p></li>
+<li><p><strong>model_cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Configuration for ProgModel.</p></li>
+<li><p><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Initial state for ProgModel.</p></li>
+<li><p><strong>load_est</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Load estimator to use.</p></li>
+<li><p><strong>load_est_cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Configuration for load estimator.</p></li>
+<li><p><strong>state_est</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – State Estimator to use (e.g., ParticleFilter). Class name for state estimator in <cite>prog_algs.state_estimators</cite></p></li>
+<li><p><strong>state_est_cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Configuration for state estimator.</p></li>
+<li><p><strong>pred</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>optional</em>) – Prediction algorithm to use (e.g., MonteCarlo). Class name for prediction algorithm in <cite>prog_algs.predictors</cite></p></li>
+<li><p><strong>pred_cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a><em>, </em><em>optional</em>) – Configuration for prediction algorithm.</p></li>
 </ul>
 </dd>
 </dl>
@@ -397,7 +371,7 @@ document.write(`
 </p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -434,7 +408,7 @@ document.write(`
 </p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -455,7 +429,7 @@ document.write(`
 </p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -476,7 +450,7 @@ document.write(`
 </p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -497,7 +471,7 @@ document.write(`
 </p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -518,7 +492,7 @@ document.write(`
 </p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a></p>
 </dd>
 </dl>
 <p>See also: get_prediction_status</p>
@@ -533,7 +507,7 @@ document.write(`
 <dd class="field-odd"><p>Status of prediction</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -554,7 +528,7 @@ document.write(`
 </p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -568,7 +542,7 @@ document.write(`
 <dd class="field-odd"><p>If the session has been initialized</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -580,7 +554,7 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – Time for data point</p></li>
+<li><p><strong>time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – Time for data point</p></li>
 <li><p><strong>keywords</strong> (<em>...</em><em> Other arguments as</em>) – </p></li>
 </ul>
 </dd>
@@ -591,13 +565,13 @@ document.write(`
 
 <dl class="py method">
 <dt class="sig sig-object py" id="prog_client.Session.send_loading">
-<span class="sig-name descname"><span class="pre">send_loading</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_client.Session.send_loading" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">send_loading</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_client.Session.send_loading" title="Permalink to this definition">#</a></dt>
 <dd><p>Set the future loading profile profile.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Type of loading profile</p></li>
-<li><p><strong>cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a>) – Configuration of loading profile</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Type of loading profile</p></li>
+<li><p><strong>cfg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – Configuration of loading profile</p></li>
 </ul>
 </dd>
 </dl>
@@ -657,35 +631,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session"><code class="docutils literal notranslate"><span class="pre">Session</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_event_state"><code class="docutils literal notranslate"><span class="pre">Session.get_event_state()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_model"><code class="docutils literal notranslate"><span class="pre">Session.get_model()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_performance_metrics"><code class="docutils literal notranslate"><span class="pre">Session.get_performance_metrics()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_predicted_event_state"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_event_state()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_predicted_performance_metrics"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_performance_metrics()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_predicted_state"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_state()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_predicted_toe"><code class="docutils literal notranslate"><span class="pre">Session.get_predicted_toe()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_prediction_status"><code class="docutils literal notranslate"><span class="pre">Session.get_prediction_status()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.get_state"><code class="docutils literal notranslate"><span class="pre">Session.get_state()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.is_init"><code class="docutils literal notranslate"><span class="pre">Session.is_init()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.send_data"><code class="docutils literal notranslate"><span class="pre">Session.send_data()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.send_loading"><code class="docutils literal notranslate"><span class="pre">Session.send_loading()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_client.Session.set_state"><code class="docutils literal notranslate"><span class="pre">Session.set_state()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

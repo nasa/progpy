@@ -29,13 +29,14 @@ Citing This Repository
 -----------------------
 Use the following to cite this repository:
 
-@misc{2022_nasa_progpy,
-  | author    = {Christopher Teubert and Katelyn Jarvis and Matteo Corbetta and Chetan Kulkarni and Matthew Daigle},
+@misc{2023_nasa_progpy,
+  | author    = {Christopher Teubert and Katelyn Jarvis and Matteo Corbetta and Chetan Kulkarni and Portia Banerjee and Matthew Daigle},
   | title     = {{ProgPy Python Prognostics Packages}},
   | month     = Oct,
   | year      = 2023,
   | version   = {1.6},
   | url       = {https://nasa.github.io/progpy}
+  | doi       = {10.5281/ZENODO.8097013}
   | }
 
 The corresponding reference should look like this:

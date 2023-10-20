@@ -47,7 +47,6 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
@@ -344,7 +343,7 @@ document.write(`
 </dd>
 <dt id="term-event-state">event state<a class="headerlink" href="#term-event-state" title="Permalink to this term">#</a></dt><dd><p>Progress towards <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> occurring. Defined as a number where an event state of 0 indicates the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> has occurred and 1 indicates no progress towards the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> (i.e., fully healthy operation for a failure event). For a gradually occurring <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> (e.g., discharge) the number will progress from 1 to 0 as the <a class="reference internal" href="#term-event"><span class="xref std std-term">event</span></a> nears. In prognostics, event state is frequently called “State of Health”.</p>
 </dd>
-<dt id="term-future-load">future load<a class="headerlink" href="#term-future-load" title="Permalink to this term">#</a></dt><dd><p><a class="reference internal" href="#term-input"><span class="xref std std-term">input</span></a> (i.e., loading) expected to be applied to a system at future times</p>
+<dt id="term-future-load">future load<a class="headerlink" href="#term-future-load" title="Permalink to this term">#</a></dt><dd><p><a class="reference internal" href="#term-input"><span class="xref std std-term">input</span></a> (i.e., loading) expected to be applied to a system at future times. In ProgPy, future load is typically provided as a function of time and state, f(time, state) -&gt; load</p>
 </dd>
 <dt id="term-future-loading-noise">future loading noise<a class="headerlink" href="#term-future-loading-noise" title="Permalink to this term">#</a></dt><dd><p>Noise applied in the user provided <a class="reference internal" href="#term-future-load"><span class="xref std std-term">future load</span></a> function. This is used to represent uncertainty in how the system is loaded in the future.</p>
 </dd>

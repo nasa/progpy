@@ -47,7 +47,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -303,9 +302,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -321,14 +318,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.CompositeModel"><code class="docutils literal notranslate"><span class="pre">CompositeModel</span></code></a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -342,7 +331,7 @@ document.write(`
 <h1>CompositeModel<a class="headerlink" href="#compositemodel" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="prog_models.CompositeModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.</span></span><span class="sig-name descname"><span class="pre">CompositeModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">connections</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.CompositeModel" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">prog_models.</span></span><span class="sig-name descname"><span class="pre">CompositeModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">connections</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_models.CompositeModel" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.prognostics_model.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PrognosticsModel</span></code></a></p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 1.5.0.</span></p>
@@ -351,7 +340,7 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a><em>]</em><em>]</em>) – <p>A list of PrognosticsModels to be combined into a single model.
+<li><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference internal" href="PrognosticModel.html#prog_models.PrognosticsModel" title="prog_models.PrognosticsModel"><em>PrognosticsModel</em></a><em>]</em><em>]</em>) – <p>A list of PrognosticsModels to be combined into a single model.
 Provided in one of two forms:</p>
 <ol class="arabic simple">
 <li><p>A list of PrognosticsModels. The name of each model will be the class name. A number will be added for duplicates</p></li>
@@ -359,14 +348,14 @@ Provided in one of two forms:</p>
 </ol>
 <p>Note: Order provided will be the order that models are executed</p>
 </p></li>
-<li><p><strong>connections</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – A list of tuples where the first element is the name of the output, state, or performance metrics of one model and the second element is the name of the input of another model.
+<li><p><strong>connections</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – A list of tuples where the first element is the name of the output, state, or performance metrics of one model and the second element is the name of the input of another model.
 The first element of the tuple must be of the form “model_name.output_name”, “model_name.state_name”, or “model_name.performance_metric_key”.
 The second element of the tuple must be of the form “model_name.input_name”.
 For example, if you have two models, “Batt1” and “Batt2”, and you want to connect the output of “Batt1” to the input of “Batt2”, you would use the following connection: (“Batt1.output”, “Batt2.input”)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – Model outputs in format “model_name.output_name”. Must be subset of all outputs from models. If not provided, all outputs will be included.</p>
+<dd class="field-even"><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Model outputs in format “model_name.output_name”. Must be subset of all outputs from models. If not provided, all outputs will be included.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -412,20 +401,6 @@ For example, if you have two models, “Batt1” and “Batt2”, and you want t
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prog_models.CompositeModel"><code class="docutils literal notranslate"><span class="pre">CompositeModel</span></code></a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
