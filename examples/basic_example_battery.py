@@ -27,6 +27,7 @@ from progpy.predictors import MonteCarlo as Predictor
 # VVV Uncomment this to use UnscentedTransform Predictor VVV
 # from progpy.predictors import UnscentedTransformPredictor as Predictor
 
+from progpy.loading import Piecewise
 from progpy.metrics import prob_success
 
 def run_example():
@@ -38,24 +39,10 @@ def run_example():
     }
     batt = Battery(process_noise = 0.25, measurement_noise = R_vars)
     # Creating the input containers outside of the function accelerates prediction
-    loads = [
-        batt.InputContainer({'i': 2}),
-        batt.InputContainer({'i': 1}),
-        batt.InputContainer({'i': 4}),
-        batt.InputContainer({'i': 2}),
-        batt.InputContainer({'i': 3})
-    ]
-    def future_loading(t, x=None):
-        # Variable (piece-wise) future loading scheme 
-        if (t < 600):
-            return loads[0]
-        elif (t < 900):
-            return loads[1]
-        elif (t < 1800):
-            return loads[2]
-        elif (t < 3000):
-            return loads[3]
-        return loads[-1]
+    future_loading = Piecewise(
+        batt.InputContainer,
+        [600, 900, 1800, 3000, float('inf')],
+        {'i': [2, 1, 4, 2, 3]})
 
     initial_state = batt.initialize()
 
