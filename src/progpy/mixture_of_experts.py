@@ -173,7 +173,7 @@ class MixtureOfExpertsModel(CompositeModel):
             tuple[str, PrognosticsModel]: The name and model for the model with the highest score. If two models are tied, the first one will be returned in the order they were passed to the constructor.
         """
         # Identify best model
-        best_value = -1
+        best_value: float = -1
         for i, (key, _) in enumerate(self.parameters['models']):
             if key in _excepting:
                 continue # Skip excepting
@@ -286,7 +286,3 @@ class MixtureOfExpertsModel(CompositeModel):
                 performance_metrics_seen |= new_performance_metrics
 
         return pm
-
-        name, m = self.best_model(x)
-        x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
-        return m.performance_metrics(x_i)
