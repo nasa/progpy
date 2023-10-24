@@ -3,8 +3,7 @@
 
 """
 This example shows how to use the PaaS Client and Server for online prognostics. Prior to running the example start the server in a terminal window with the command:
-
-$ python -m prog_server
+    python -m prog_server
 
 This example creates a session with the server to run prognostics for a Thrown Object, a simplified model of an object thrown into the air. Data is then sent to the server and a prediction is requested. The prediction is then displayed.
 """

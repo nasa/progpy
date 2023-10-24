@@ -159,6 +159,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Loading.html">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/MixtureOfExperts.html">MixtureOfExperts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Prediction.html">Prediction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Predictor.html">Predictors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/PrognosticModel.html">PrognosticsModel</a></li>
@@ -402,15 +403,19 @@ document.write(`
 <p>The best way to learn how to use prog_server is to look at examples. There are a number of examples included with prog_server, listed below:</p>
 <ul>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/0e5fd1a6bf0ee8b3ff6785357ecebade/online_prog.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.online_prog</span></code></a></dt><dd><span class="target" id="module-online_prog"></span><p>This example shows how to use the PaaS Client and Server for online prognostics. Prior to running the example start the server in a terminal window with the command:</p>
-<p>$ python -m prog_server</p>
+<dt><a class="reference download internal" download="" href="_downloads/0e5fd1a6bf0ee8b3ff6785357ecebade/online_prog.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.online_prog</span></code></a></dt><dd><span class="target" id="module-online_prog"></span><dl class="simple">
+<dt>This example shows how to use the PaaS Client and Server for online prognostics. Prior to running the example start the server in a terminal window with the command:</dt><dd><p>python -m prog_server</p>
+</dd>
+</dl>
 <p>This example creates a session with the server to run prognostics for a Thrown Object, a simplified model of an object thrown into the air. Data is then sent to the server and a prediction is requested. The prediction is then displayed.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/7053e047a245b5db57b0d7dd870c51ce/option_scoring.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.option_scoring</span></code></a></dt><dd><span class="target" id="module-option_scoring"></span><p>This example demonstrates how to score multiple considered options using the PaaS Sandbox. Prior to running the example start the server in a terminal window with the command:</p>
-<p>$ python -m prog_server</p>
+<dt><a class="reference download internal" download="" href="_downloads/7053e047a245b5db57b0d7dd870c51ce/option_scoring.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.option_scoring</span></code></a></dt><dd><span class="target" id="module-option_scoring"></span><dl class="simple">
+<dt>This example demonstrates how to score multiple considered options using the PaaS Sandbox. Prior to running the example start the server in a terminal window with the command:</dt><dd><p>python -m prog_server</p>
+</dd>
+</dl>
 <p>This example creates a session with the server to run prognostics for a BatteryCircuit. Three options with different loading profiles are compared by creating a session for each option and comparing the resulting prediction metrics</p>
 </dd>
 </dl>

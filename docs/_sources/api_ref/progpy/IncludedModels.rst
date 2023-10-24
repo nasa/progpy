@@ -90,7 +90,7 @@ PropellerLoad
 
 Aircraft Models
 -------------------------------------------------------------
-Aircraft model simulate the flight of an aircraft. All aircraft models inherit from :py:class:`progpy.models.aircraft_model.AricraftModel`. Included models are listed below:
+Aircraft model simulate the flight of an aircraft. All aircraft models inherit from :py:class:`progpy.models.aircraft_model.AircraftModel`. Included models are listed below:
 
 .. autoclass:: progpy.models.aircraft_model.SmallRotorcraft
 

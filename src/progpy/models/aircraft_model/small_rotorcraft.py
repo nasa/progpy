@@ -159,12 +159,12 @@ class SmallRotorcraft(AircraftModel):
             self.parameters['steadystate_input'] = self.mass['total'] * self.parameters['gravity']
         
         # Introduction of Aerodynamic effects:
-        self.aero = dict(
-          drag=aero.DragModel(
+        self.aero = {
+          'drag': aero.DragModel(
             bodyarea=self.dynamics['aero']['ad'],
             Cd=self.dynamics['aero']['cd'],
             air_density=self.parameters['air_density']),
-          lift=None)
+          'lift': None}
 
     def dx(self, x, u):
         # Extract useful values
@@ -178,15 +178,9 @@ class SmallRotorcraft(AircraftModel):
         tr = u['mz']  # Moment along body z
 
         # Extract state variables from current state vector
-        phi = x['phi']
-        theta = x['theta']
-        psi = x['psi']
-        vx_a = x['vx']
-        vy_a = x['vy']
-        vz_a = x['vz']
-        p = x['p']
-        q = x['q']
-        r = x['r']
+        phi, theta, psi = x['phi'], x['theta'], x['psi']
+        vx_a, vy_a, vz_a = x['vx'], x['vy'], x['vz']
+        p, q, r = x['p'], x['q'], x['r']
 
         # Pre-compute Trigonometric values
         sin_phi = np.sin(phi)
@@ -288,9 +282,7 @@ class SmallRotorcraft(AircraftModel):
         :return:          Linearized state transition matrix A, n_states x n_states, and linearized input matrix B, n_states x n_inputs
         """
         m = self.mass['total']
-        Ixx = self.mass['Ixx']
-        Iyy = self.mass['Iyy']
-        Izz = self.mass['Izz']
+        Ixx, Iyy, Izz = self.mass['Ixx'], self.mass['Iyy'], self.mass['Izz']
         length = self.geom['arm_length'] 
         sin_phi = np.sin(phi)
         cos_phi = np.cos(phi)

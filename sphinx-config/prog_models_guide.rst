@@ -267,7 +267,7 @@ See example below for details on how to configure proccess and measurement noise
 
 Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected :ref:`Inputs` at future times.
 
-Future loading is provided to the user as a function of time and optional state. For example:
+Future loading is provided by the user either using the predifined loading classes in `progpy.loading`, or as a function of time and optional state. For example:
 
 .. code-block:: python
 
@@ -553,6 +553,18 @@ There are two methods in progpy through which multiple models can be combined an
         For more information, see the example below:
 
         * :download:`examples.ensemble <../../progpy/examples/ensemble.py>`
+
+    .. tab:: MixtureOfExperts models
+        
+        Mixture of Experts (MoE) models combine multiple models of the same system, similar to Ensemble models. Unlike Ensemble Models, the aggregation is done by selecting the "best" model. That is the model that has performed the best over the past. Each model will have a 'score' that is tracked in the state, and this determines which model is best.
+
+        .. code-block:: python
+
+             >> m = MixtureOfExpertsModel([model1, model2])
+
+        For more information, see the example below:
+
+        * :download:`examples.mixture_of_experts <../../progpy/examples/mixture_of_experts.py>`
 
 Other Examples
 ----------------------------

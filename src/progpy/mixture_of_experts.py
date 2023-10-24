@@ -40,6 +40,10 @@ class MixtureOfExpertsModel(CompositeModel):
           distribution for :term:`measurement noise` (e.g., normal, uniform, triangular)
         max_score_step : Optional, float
           The maximum step in the score. This is the value by which the score of the best model increases, and the worst model decreases.
+
+    Example:
+    
+        >> m = MixtureOfExpertsModel([model1, model2])
     """
 
     default_parameters = {

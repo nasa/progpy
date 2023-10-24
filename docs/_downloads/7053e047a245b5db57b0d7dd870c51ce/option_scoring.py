@@ -3,8 +3,7 @@
 
 """
 This example demonstrates how to score multiple considered options using the PaaS Sandbox. Prior to running the example start the server in a terminal window with the command:
-
-$ python -m prog_server
+    python -m prog_server
 
 This example creates a session with the server to run prognostics for a BatteryCircuit. Three options with different loading profiles are compared by creating a session for each option and comparing the resulting prediction metrics
 """

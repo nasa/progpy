@@ -160,6 +160,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Loading.html">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/MixtureOfExperts.html">MixtureOfExperts</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Prediction.html">Prediction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Predictor.html">Predictors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/PrognosticModel.html">PrognosticsModel</a></li>
@@ -579,7 +580,7 @@ Future Loading Noise<div class="summary-down docutils">
 <section id="future-loading">
 <h3><a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">Future Loading</span></a><a class="headerlink" href="#future-loading" title="Permalink to this headline">#</a></h3>
 <p>Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected <a class="reference internal" href="#inputs"><span class="std std-ref">Inputs</span></a> at future times.</p>
-<p>Future loading is provided to the user as a function of time and optional state. For example:</p>
+<p>Future loading is provided by the user either using the predifined loading classes in <cite>progpy.loading</cite>, or as a function of time and optional state. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">future_load</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># Calculate inputs</span>
     <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;input1&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">})</span>
@@ -981,7 +982,7 @@ Eval Points<div class="summary-down docutils">
 <h2>Combination Models<a class="headerlink" href="#combination-models" title="Permalink to this headline">#</a></h2>
 <p>There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below.</p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Composite models</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Ensemble models</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><p>Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example,</p>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Composite models</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Ensemble models</button><button aria-controls="panel-2-2-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-2" name="2-2" role="tab" tabindex="-1">MixtureOfExperts models</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><p>Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example,</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">CompositeModel</span><span class="p">(</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">connections</span> <span class="o">=</span> <span class="p">[</span>
@@ -1005,6 +1006,14 @@ Eval Points<div class="summary-down docutils">
 <p>For more information, see the example below:</p>
 <ul class="simple">
 <li><p><a class="reference download internal" download="" href="_downloads/e38d3e121ad5b2b31d88a0fdb681fd3b/ensemble.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.ensemble</span></code></a></p></li>
+</ul>
+</div><div aria-labelledby="tab-2-2-2" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-2" name="2-2" role="tabpanel" tabindex="0"><p>Mixture of Experts (MoE) models combine multiple models of the same system, similar to Ensemble models. Unlike Ensemble Models, the aggregation is done by selecting the “best” model. That is the model that has performed the best over the past. Each model will have a ‘score’ that is tracked in the state, and this determines which model is best.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">MixtureOfExpertsModel</span><span class="p">([</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>For more information, see the example below:</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/c586316595cdbd6c17fcb9d03d91ca65/mixture_of_experts.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.mixture_of_experts</span></code></a></p></li>
 </ul>
 </div></div>
 </section>
