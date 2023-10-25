@@ -561,8 +561,6 @@ The following dependencies are used in the project:
   * Future Support: Unknown- at the time of investigation, the last release was in 3.5 years ago and the last branch was updated 2 years ago. However, the code is simple and the tool is still used by many projects.
   * Other notes: validated by comparing the output of fastdtw to dtaidistance and the algorithm from the 'Towards Data Science' page (https://towardsdatascience.com/dynamic-time-warping-3933f25fcdd). Additionally, the team inspected the output of the package and it seemed reasonable. Finally, a review of open issues on their github repository and a search for known vulnerabilities yielded no concerns. It's only dependency is numpy, which is a trusted package.
 
-* 
-
 Notes for all: 
 
 * The function and performance of these tools are verified and validated as part of the automated tests and examples. [SWE-027 3.1.14.e]

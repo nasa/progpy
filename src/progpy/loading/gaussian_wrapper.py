@@ -22,10 +22,6 @@ class GaussianNoiseWrapper():
     -------------------
     seed: {int, SeedSequence, BitGenerator, Generator}, optional
         The seed for random number generator. This can be set to make results repeatable.
-    std_slope: float, optional
-        The increase in standard deviation per second of time. Std is the standard deviation at t<=t0.
-    t0: float, optional
-        Initial time (at which standard deviation is std). After t0, the standard deviation increases at a rate of std_slope.
 
     Example
     -------
@@ -39,6 +35,7 @@ class GaussianNoiseWrapper():
         self.std = std
         self.std_slope = std_slope
         self.t0 = t0
+        # Note: std_slope and t0 is an undocumented feature until we can resolve discussion on if it should be sqrt(dt) or not.
         self.gen = np.random.default_rng(seed)
 
     def __call__(self, t: float, x=None):

@@ -36,7 +36,7 @@ Load Estimator Classes
 
 .. autoclass:: progpy.loading.MovingAverage
 
-.. autoclass:: progpy.loading.GaussianNoiseLoadWrapper
+.. autoclass:: progpy.loading.GaussianNoiseWrapper
 
 Controllers
 ------------------
