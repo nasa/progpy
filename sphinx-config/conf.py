@@ -35,10 +35,10 @@ sys.path.insert(0, os.path.abspath('.'))
 
 project = 'ProgPy Python Packages'
 copyright = '2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.'
-author = 'Chris Teubert, Matteo Corbetta, Chetan Kulkarni, Katelyn Jarvis, and Matthew Daigle'
+author = 'Chris Teubert, Katelyn Jarvis, Matteo Corbetta, Chetan Kulkarni, Portia Banerjee, Jason Watkins, and Matthew Daigle'
 
 # The full version, including alpha/beta/rc tags
-release = "1.5"
+release = "1.6"
 
 # -- General configuration ---------------------------------------------------
 

@@ -10,6 +10,7 @@ import numpy as np
 from progpy import LinearModel
 from progpy.state_estimators import KalmanFilter
 
+
 # Linear Model for an object thrown into the air
 class ThrownObject(LinearModel):
     """
