@@ -7,7 +7,7 @@ Example illustrating how to use the CompositeModel class to create a composite m
 This example creates a composite model of a DC motor with an Electronic Speed Controller and a propeller load. The three composite models are interrelated. The created composite model describes the nature of these interconnections. The resulting powertrain model is then simulated forward with time and the results are plotted. 
 """
 
-from prog_models.models import DCMotor, ESC, PropellerLoad
+from progpy.models import DCMotor, ESC, PropellerLoad
 from prog_models import CompositeModel
 
 def run_example():

@@ -6,8 +6,8 @@ Here's an example of its use. In this example we use the unscented kalman filter
 
 .. code-block:: python
 
-   >>> from prog_models.models import ThrownObject
-   >>> from prog_algs.state_estimators import UnscentedKalmanFilter
+   >>> from progpy.models import ThrownObject
+   >>> from progpy.state_estimators import UnscentedKalmanFilter
    >>>
    >>> m = ThrownObject()
    >>> initial_state = m.initialize()

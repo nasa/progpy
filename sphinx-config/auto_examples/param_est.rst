@@ -25,7 +25,7 @@ Example demonstrating the model parameter estimation feature.
 .. code-block:: default
 
 
-    from prog_models.models.thrown_object import ThrownObject
+    from progpy.models.thrown_object import ThrownObject
 
     def run_example():
         # Step 1: Build the model with your best guess in parameters

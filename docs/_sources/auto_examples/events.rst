@@ -33,7 +33,7 @@ This example demonstrates how events can be used in your applications.
 
 .. code-block:: default
 
-    from prog_models.models import BatteryElectroChemEOD
+    from progpy.models import BatteryElectroChemEOD
 
     def run_example():
         # Example: Warning thresholds

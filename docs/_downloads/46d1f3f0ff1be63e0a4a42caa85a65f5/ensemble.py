@@ -18,8 +18,8 @@ Example using the Ensemble Model feature
 from matplotlib import pyplot as plt
 import numpy as np
 from prog_models import EnsembleModel
-from prog_models.datasets import nasa_battery
-from prog_models.models import BatteryElectroChemEOD, BatteryCircuit
+from progpy.datasets import nasa_battery
+from progpy.models import BatteryElectroChemEOD, BatteryCircuit
 
 def run_example():
     # Example 1: Different model configurations

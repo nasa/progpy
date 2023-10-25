@@ -25,7 +25,7 @@ Example of a pneumatic valve being simulated until threshold is met.
 .. code-block:: default
 
 
-    from prog_models.models.pneumatic_valve import PneumaticValve
+    from progpy.models.pneumatic_valve import PneumaticValve
 
     def run_example(): 
         # Create a model object

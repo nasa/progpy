@@ -5,7 +5,7 @@
  Example demonstrating the Paris Law Crack Growth Equation
 """
 
-from prog_models.models.paris_law import ParisLawCrackGrowth 
+from progpy.models.paris_law import ParisLawCrackGrowth 
 import matplotlib.pyplot as plt
 import csv
 import os

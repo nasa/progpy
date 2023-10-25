@@ -3,15 +3,15 @@ ProgPy Prognostics Python Packages
 
 .. raw:: html
 
-    <iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=prog_models&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
+    <iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=progpy&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
     <br />
 
-NASA's ProgPy is an open-sourced python packages supporting research and development of prognostics and health management and predictive maintenance tools. It implements architectures and common functionality of prognostics, supporting researchers and practitioners. The ProgPy package is a combination of the original prog_models and prog_algs packages.
+NASA's ProgPy is an open-sourced python package supporting research and development of prognostics and health management and predictive maintenance tools. It implements architectures and common functionality of prognostics, supporting researchers and practitioners. The ProgPy package is a combination of the original prog_models and prog_algs packages.
 
-ProgPy consists of a set of packages, described below. See the documentation specific to each package for more information.  
+ProgPy documentation is split into three senctions described below.
 
-* :ref:`prog_models<prog_models Guide>` : Tools for defining, building, using, and testing models for prognostics
-* :ref:`prog_algs<prog_algs Guide>` : Tools for performing and benchmarking prognostics and state estimation
+* :ref:`Modeling and Simulation<Modeling and Sim Guide>` : defining, building, using, and testing models for prognostics
+* :ref:`State Estimation and Prediction<State Estimation and Prediction Guide>` : performing and benchmarking prognostics and state estimation
 * :ref:`prog_server<prog_server Guide>` and :ref:`prog_client<prog_server Guide>` : A simplified implementation of a Service-Oriented Architecture (SOA) for performing prognostics and associated client
 
 .. toctree::
@@ -25,23 +25,47 @@ ProgPy consists of a set of packages, described below. See the documentation spe
    glossary
    dev_guide
 
+Installing progpy
+-----------------------
+
+.. tabs::
+
+    .. tab:: Stable Version (Recommended)
+
+        The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:
+
+        .. code-block:: console
+
+            $ pip install progpy
+
+    .. tab:: Pre-Release
+
+        Users who would like to contribute to ProgPy or would like to use pre-release features can do so using the `ProgPy GitHub repo <https://github.com/nasa/progpy>`__. This isn't recommended for most users as this version may be unstable. To do this, use the following commands:
+
+        .. code-block:: console
+
+            $ git clone https://github.com/nasa/progpy
+            $ cd progpy
+            $ git checkout dev 
+            $ pip install -e .
 
 Citing This Repository
 -----------------------
 Use the following to cite this repository:
 
-@misc{2022_nasa_progpy,
-  | author    = {Christopher Teubert and Katelyn Jarvis and Matteo Corbetta and Chetan Kulkarni and Matthew Daigle},
+@misc{2023_nasa_progpy,
+  | author    = {Christopher Teubert and Katelyn Jarvis Griffith and Matteo Corbetta and Chetan Kulkarni and Portia Banerjee and Jason Watkins and Matthew Daigle},
   | title     = {{ProgPy Python Prognostics Packages}},
-  | month     = May,
+  | month     = Oct,
   | year      = 2023,
-  | version   = {1.5},
+  | version   = {1.6},
   | url       = {https://nasa.github.io/progpy}
+  | doi       = {10.5281/ZENODO.8097013}
   | }
 
 The corresponding reference should look like this:
 
-C. Teubert, K. Jarvis, M. Corbetta, C. Kulkarni, M. Daigle, ProgPy Python Prognostics Packages, v1.5, May 2022. URL https://github.com/nasa/progpy.
+C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, J. Watkins, M. Daigle, ProgPy Python Prognostics Packages, v1.6, Oct 2023. URL https://github.com/nasa/progpy.
 
 Contributing and Partnering
 -----------------------------

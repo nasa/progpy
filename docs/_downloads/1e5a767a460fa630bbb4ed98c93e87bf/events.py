@@ -13,8 +13,8 @@ Example further illustrating the concept of 'events' which generalizes EOL.
     This example demonstrates how events can be used in your applications. 
 """
 import matplotlib.pyplot as plt
-from prog_models.loading import Piecewise
-from prog_models.models import BatteryElectroChemEOD
+from progpy.loading import Piecewise
+from progpy.models import BatteryElectroChemEOD
 
 def run_example():
     # Example: Warning thresholds

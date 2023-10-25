@@ -25,7 +25,7 @@ Example of a powertrain being simulated for a set amount of time.
 .. code-block:: default
 
 
-    from prog_models.models import Powertrain, ESC, DCMotor
+    from progpy.models import Powertrain, ESC, DCMotor
 
     def run_example():
         # Create a model object

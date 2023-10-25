@@ -94,8 +94,8 @@ The internal state is stored in the estimators x property as a UncertainData sub
 
     .. code-block:: python
 
-        >>> from prog_models.models import ThrownObject
-        >>> from prog_algs.state_estimators import UnscentedKalmanFilter
+        >>> from progpy.models import ThrownObject
+        >>> from progpy.state_estimators import UnscentedKalmanFilter
         >>>
         >>> m = ThrownObject()
         >>> initial_state = m.initialize()
@@ -261,7 +261,7 @@ Below is an example calculating probability of success:
 
 .. code-block:: python
 
-    >>> from prog_algs.metrics import prob_success
+    >>> from progpy.metrics import prob_success
     >>> ps = prob_success(some_distribution, end_of_mission)
 
 ToE Prediction Profile

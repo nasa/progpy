@@ -25,7 +25,7 @@ Example using simulate_to_threshold with vectorized states. In this example we a
 .. code-block:: default
 
 
-    from prog_models.models.thrown_object import ThrownObject
+    from progpy.models.thrown_object import ThrownObject
     from numpy import array, all
 
     def run_example():

@@ -7,9 +7,9 @@ Here's an example of its use. In this example we use the :py:class:`ThrownObject
 
 .. code-block:: python
 
-   >>> from prog_models.models import ThrownObject
-   >>> from prog_algs.predictors import MonteCarlo
-   >>> from prog_algs.uncertain_data import ScalarData
+   >>> from progpy.models import ThrownObject
+   >>> from progpy.predictors import MonteCarlo
+   >>> from progpy.uncertain_data import ScalarData
    >>>
    >>> m = ThrownObject()
    >>> pred = MonteCarlo(m)
