@@ -6,7 +6,7 @@ Example benchmarking the computational efficiency of models.
 """
 
 from timeit import timeit
-from prog_models.models import BatteryCircuit
+from progpy.models import BatteryCircuit
 
 def run_example():
     # Step 1: Create a model object

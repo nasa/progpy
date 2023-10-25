@@ -1,0 +1,56 @@
+name: Coverage
+
+on:
+  push:
+  pull_request:
+    paths:
+      - progpy
+
+jobs:
+  coverage:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10']
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: pip-cache
+    - name: Install additional dependencies
+      run: |
+        pip install coverage
+        pip install importlib_metadata
+    - name: Update
+      run: pip install --upgrade --upgrade-strategy eager -e .
+    - name: Run coverage
+      run: |
+        coverage run -m tests.test_base_models
+        coverage run -a -m tests.test_battery
+        coverage run -a -m tests.test_calc_error
+        coverage run -a -m tests.test_centrifugal_pump
+        coverage run -a -m tests.test_composite
+        coverage run -a -m tests.test_datasets
+        coverage run -a -m tests.test_dict_like_matrix_wrapper
+        coverage run -a -m tests.test_direct
+        coverage run -a -m tests.test_estimate_params
+        coverage run -a -m tests.test_ensemble
+        coverage run -a -m tests.test_linear_model
+        coverage run -a -m tests.test_pneumatic_valve
+        coverage run -a -m tests.test_powertrain
+        coverage run -a -m tests.test_predictors
+        coverage run -a -m tests.test_serialization
+        coverage run -a -m tests.test_sim_result
+        coverage run -a -m tests.test_state_estimators
+        coverage run -a -m tests.test_uav_model
+        coverage run -a -m tests.test_uav_model
+        coverage xml -i
+    - name: "Upload coverage to Codecov"
+      uses: codecov/codecov-action@v3

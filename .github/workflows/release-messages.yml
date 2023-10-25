@@ -1,0 +1,65 @@
+name: Print PR Message - Release
+
+on: 
+  pull_request:
+    branches:
+      - 'release/**'
+    types: [opened]
+
+jobs:
+  release_msg: 
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto Comment
+        uses: wow-actions/auto-comment@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pullRequestOpened: >
+            Thank you for opening this PR. Since this is a release branch, the PR must complete the release checklist, below:
+
+            - [ ] Check that each new feature has corresponding tests
+
+            - [ ] Confirm all dependencies are in the following: requirements.txt, setup.py, the bottom of dev_guide.rst
+
+            - [ ] Confirm that all issues associated with the release have been closed (i.e., requirements have been met) or assigned to another release
+
+            - [ ] Run unit tests `python -m tests`, on 
+          
+              - [ ] Windows
+
+              - [ ] Linux
+
+              - [ ] Apple Silicon Mac
+
+              - [ ] Intel Mac
+
+            - [ ] If present, run manual tests `python -m tests.test_manual`
+
+            - [ ] Review the template(s)
+
+            - [ ] Review static-analysis/linter results
+
+            - [ ] Review the tutorial
+
+            - [ ] Run and review the examples
+
+            - [ ] Check that all examples are tested
+
+            - [ ] Check new files in PR for any accidentally added
+
+            - [ ] Check documents
+
+              - [ ] Check that all desired examples are in docs
+
+              - [ ] General review: see if any updates are required
+
+            - [ ] Rebuild sphinx documents: `sphinx-build sphinx_config/ docs/`
+
+            - [ ] Write release notes
+
+            - [ ] Update version number in src/\*/__init__.py and setup.py
+
+            - [ ] For releases adding new features- ensure that NASA release process has been followed.
+            
+            - [ ] Confirm that on GitHub Releases page, the next release has been started and that a schedule is present including at least Release Date, Release Review Date, and Release Branch Opening Date.`

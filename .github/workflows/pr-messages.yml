@@ -1,0 +1,33 @@
+name: Print PR Message - Non Release
+
+on: 
+  pull_request:
+    branches:
+      - 'dev'
+    types: [opened]
+
+jobs:
+  pr_msg: 
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto Comment
+        uses: wow-actions/auto-comment@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pullRequestOpened: >
+            Thank you for opening this PR. Each PR into dev requires a code review. For the code review, look at the following:
+
+            - [ ] Reviewer (someone other than author) should look for bugs, efficiency, readability, testing, and coverage in examples (if relevant).
+
+            - [ ] Ensure that each PR adding a new feature should include a test verifying that feature.
+
+            - [ ] All errors from static analysis must be resolved.
+            
+            - [ ] Review the test coverage reports (if there is a change) - will be added as comment on PR if there is a change
+
+            - [ ] Review the software benchmarking results (if there is a change) - will be added as comment on PR
+
+            - [ ] Any added dependencies are included in requirements.txt, setup.py, and dev_guide.rst (this document)
+
+            - [ ] All warnings from static analysis must be reviewed and resolved - if deemed appropriate.

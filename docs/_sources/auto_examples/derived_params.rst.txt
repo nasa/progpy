@@ -25,7 +25,7 @@ Example demonstrating ways to use the derived parameters feature for model build
 .. code-block:: default
 
 
-    from prog_models.models.thrown_object import ThrownObject
+    from progpy.models.thrown_object import ThrownObject
 
     def run_example():
         # For this example we will use the ThrownObject model from the new_model example.

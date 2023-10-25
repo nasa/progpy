@@ -36,8 +36,8 @@ We build and fit a custom model using keras.layers. Finally, we compare performa
     from tensorflow import keras
     from tensorflow.keras import layers
 
-    from prog_models.data_models import LSTMStateTransitionModel
-    from prog_models.models import BatteryElectroChemEOD
+    from progpy.data_models import LSTMStateTransitionModel
+    from progpy.models import BatteryElectroChemEOD
 
     def run_example():
         print('Generating data...')

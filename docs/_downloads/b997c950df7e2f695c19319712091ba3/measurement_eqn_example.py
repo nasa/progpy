@@ -11,9 +11,9 @@ Results:
     ii) Display of results, such as prior and posterior state estimate values and SOC
 """
 
-from prog_models.models import BatteryCircuit as Battery
+from progpy.models import BatteryCircuit as Battery
 # VVV Uncomment this to use Electro Chemistry Model VVV
-# from prog_models.models import BatteryElectroChem as Battery
+# from progpy.models import BatteryElectroChem as Battery
 
 from prog_algs import *
 

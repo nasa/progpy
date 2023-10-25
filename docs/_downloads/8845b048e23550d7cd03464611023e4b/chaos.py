@@ -12,8 +12,8 @@ In this example, a PCE surrogate model is generated for the BatteryElectroChemEO
 import chaospy as cp
 import matplotlib.pyplot as plt
 import numpy as np
-from prog_models.models import BatteryElectroChemEOD
-from prog_models.data_models import PCE
+from progpy.models import BatteryElectroChemEOD
+from progpy.data_models import PCE
 import scipy as sp
 
 def run_example():

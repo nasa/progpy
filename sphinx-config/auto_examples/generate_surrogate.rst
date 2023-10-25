@@ -25,7 +25,7 @@ Example of generating a Dynamic Mode Decomposition surrogate model using the bat
 .. code-block:: default
 
 
-    from prog_models.models import BatteryElectroChemEOD as Battery
+    from progpy.models import BatteryElectroChemEOD as Battery
 
     import matplotlib.pyplot as plt
 

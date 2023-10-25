@@ -12,9 +12,9 @@ Results:
 """
 
 import matplotlib.pyplot as plt
-from prog_models.models import ThrownObject
-from prog_algs.predictors import MonteCarlo
-from prog_algs.uncertain_data import ScalarData
+from progpy.models import ThrownObject
+from progpy.predictors import MonteCarlo
+from progpy.uncertain_data import ScalarData
 
 def run_example():
     # Step 1: Define subclass with EOL event 

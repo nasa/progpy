@@ -7,7 +7,7 @@ In this example the BatteryElectroChemEOD model is used with a particle filter t
 import matplotlib.pyplot as plt
 import numpy as np
 from prog_algs import *
-from prog_models.models import BatteryElectroChemEOD
+from progpy.models import BatteryElectroChemEOD
 
 def run_example():
     ## Setup

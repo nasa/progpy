@@ -35,12 +35,14 @@ def check_copyright(directory: str, invalid_files: list) -> bool:
 def main():
     print("\n\nTesting Files for Copyright Information")
 
-    root = '../prog_models'
+    root = '../progpy'
     invalid_files = []
     copyright_confirmed = check_copyright(root, invalid_files)
 
     if not copyright_confirmed:
         raise Exception(f"Failed test\nFiles missing copyright information: {invalid_files}")
+    else:
+        print('No missing copyright statements')
 
 if __name__ == '__main__':
     main()

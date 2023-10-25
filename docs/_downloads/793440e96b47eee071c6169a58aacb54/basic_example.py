@@ -14,7 +14,7 @@ Results:
     iv) Figures illustrating results
 """
 
-from prog_models.models import ThrownObject
+from progpy.models import ThrownObject
 from prog_algs import *
 
 def run_example():
@@ -87,7 +87,7 @@ def run_example():
     # You can also use the metrics package to generate some useful metrics on the result of a prediction
     print("\nEOD Prediction Metrics")
 
-    from prog_algs.metrics import prob_success
+    from progpy.metrics import prob_success
     print('\tPortion between 3.65 and 3.8: ', mc_results.time_of_event.percentage_in_bounds([3.65, 3.8], keys='falling'))
     print('\tAssuming ground truth 3.7: ', mc_results.time_of_event.metrics(ground_truth=3.7, keys='falling'))
     print('\tP(Success) if mission ends at 7.6: ', prob_success(mc_results.time_of_event, 7.6, keys='impact'))

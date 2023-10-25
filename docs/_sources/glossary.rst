@@ -5,10 +5,10 @@ Glossary
     :sorted:
 
     controller
-      A closed loop future loading method. Calculates future loading as a function of state, like the :py:class:`prog_models.loading.controllers.LQR` controller used by the :py:class:`prog_models.models.aircraft_model.SmallRotorcraft` model.
+      A closed loop future loading method. Calculates future loading as a function of state, like the :py:class:`progpy.loading.controllers.LQR` controller used by the :py:class:`progpy.models.aircraft_model.SmallRotorcraft` model.
 
     trajectory
-      Path a vehicle takes through space, represented by a set of 4-dimensional points (position + time), represented by the `prog_modals.utils.traj_gen.Trajectory` class.
+      Path a vehicle takes through space, represented by a set of 4-dimensional points (position + time), represented by the :py:class:`progpy.utils.traj_gen.Trajectory` class.
 
     event
       Something that can be predicted (e.g., system failure). An event has either occurred or not. See also: :term:`threshold`
@@ -35,19 +35,19 @@ Glossary
       :term:`state` that is not directly measurable
 
     state estimator
-      An algorithm that is used to estimate the :term:`state` of the system, given measurements and a model, defined in the :py:mod:`prog_algs.state_estimators` subpackage (e.g., :py:class:`prog_algs.state_estimators.UnscentedKalmanFilter`).
+      An algorithm that is used to estimate the :term:`state` of the system, given measurements and a model, defined in the :py:mod:`progpy.state_estimators` subpackage (e.g., :py:class:`progpy.state_estimators.UnscentedKalmanFilter`).
 
     predictor
-      An algorithm that is used to predict future states, given the initial state, a model, and an estimate of :term:`future load`. E.g., :py:class:`prog_algs.predictors.MonteCarlo`.
+      An algorithm that is used to predict future states, given the initial state, a model, and an estimate of :term:`future load`. E.g., :py:class:`progpy.predictors.MonteCarlo`.
 
     prediction
-      A prediction of something (e.g., :term:`input`, :term:`state`, :term:`output`, :term:`event state`, etc.), with uncertainty, at one or more future times, as a result of a :term:`predictor` prediction step (:py:func:`prog_algs.predictors.Predictor.predict`). For example- a prediction of the future :term:`state` of a system at certain specified savepoints, returned from prediction using a :py:class:`prog_algs.predictors.MonteCarlo` predictor. 
+      A prediction of something (e.g., :term:`input`, :term:`state`, :term:`output`, :term:`event state`, etc.), with uncertainty, at one or more future times, as a result of a :term:`predictor` prediction step (:py:func:`progpy.predictors.Predictor.predict`). For example- a prediction of the future :term:`state` of a system at certain specified savepoints, returned from prediction using a :py:class:`progpy.predictors.MonteCarlo` predictor. 
 
     surrogate
-      A model that approximates the behavior of another model. Often used to generate a faster version of a model (e.g., for resource-constrained applications or to be used in optimization) or to test a data model. Generated using :py:func:`prog_models.PrognosticsModel.generate_surrogate` method.
+      A model that approximates the behavior of another model. Often used to generate a faster version of a model (e.g., for resource-constrained applications or to be used in optimization) or to test a data model. Generated using :py:func:`progpy.PrognosticsModel.generate_surrogate` method.
 
     model
-      A subclass of :py:class:`prog_models.PrognosticsModel` the describes the behavior of a system. Models are typically physics-based, data-driven (i.e., subclasses of :py:class:`prog_models.data_models.DataModel`), or some hybrid approach (e.g., physics informed machine learning).
+      A subclass of :py:class:`progpy.PrognosticsModel` the describes the behavior of a system. Models are typically physics-based, data-driven (i.e., subclasses of :py:class:`progpy.data_models.DataModel`), or some hybrid approach (e.g., physics informed machine learning).
 
     threshold
       The conditions under which an :term:`event` is considered to have occurred.
@@ -56,7 +56,7 @@ Glossary
       Prediction of (a) future performance and/or (b) the time at which one or more events of interest occur, for a system or a system of systems
 
     data-driven model
-      A model where the behavior is learned from data. In ProgPy, data-driven models derive from the parent class :py:class:`prog_models.data_models.DataModel`. A common example of data-driven models is models using neural networks (e.g., :py:class:`prog_models.data_models.LSTMStateTransitionModel`).
+      A model where the behavior is learned from data. In ProgPy, data-driven models derive from the parent class :py:class:`progpy.data_models.DataModel`. A common example of data-driven models is models using neural networks (e.g., :py:class:`progpy.data_models.LSTMStateTransitionModel`).
 
     physics-based model
       A model where behavior is described by the physics of the system. Physics-based models are typically :term:`parameterized<parameters>`, so that exact behavior of the system can be configured or learned (through parameter estimation).
@@ -74,7 +74,7 @@ Glossary
       Noise applied in the user provided :term:`future load` function. This is used to represent uncertainty in how the system is loaded in the future. 
       
     state estimation
-      State estimation is the process from which the internal model :term:`state` (x) is estimated using :term:`input` (i.e., loading) and :term:`output` (i.e., sensor data). State estimation is necessary for cases where model state isn't directly measurable (i.e., `hidden state`) or where there is sensor noise. Most state estimators estimate the state with some representation of uncertainty. An algorithm that performs state estimation is called a :term:`state estimator` and is included in the prog_algs.state_estimators package
+      State estimation is the process from which the internal model :term:`state` (x) is estimated using :term:`input` (i.e., loading) and :term:`output` (i.e., sensor data). State estimation is necessary for cases where model state isn't directly measurable (i.e., `hidden state`) or where there is sensor noise. Most state estimators estimate the state with some representation of uncertainty. An algorithm that performs state estimation is called a :term:`state estimator` and is included in the progpy.state_estimators package
 
     time of event
       The time at which an :term:`event` is predicted to occur (i.e., when :term:`threshold` is reached). Sometimes abbreviated as ToE. When the event of interest is failure, this is frequently referred to as End of Life (EOL).
@@ -89,13 +89,13 @@ Glossary
       The time at which the last measurement was performed that was used for state estimation. Sometimes abbreviated as ToM or :math:`t_m`.
 
     direct-prediction model
-      A model where the :term:`time of event` is directly estimated from the current state and/or :term:`future load`, instead of predicted through simulation to threshold. These are implemented using the :py:meth:`prog_models.PrognosticsModel.time_to_event` method.
+      A model where the :term:`time of event` is directly estimated from the current state and/or :term:`future load`, instead of predicted through simulation to threshold. These are implemented using the :py:meth:`progpy.PrognosticsModel.time_to_event` method.
 
     state-transition model
       A model where the :term:`time of event` is predicted through simulation to threshold. Most prognostic models are state-transition models.
 
     composite model
-      A model consisting of multiple inter-related Prognostics Models, where the :term:`input` of one :term:`model` is a function of the :term:`output` or :term:`state` of another. This is a tool for representing system-of-systems. Composite models are implemented using the :py:class:`prog_models.CompositeModel` class.
+      A model consisting of multiple inter-related Prognostics Models, where the :term:`input` of one :term:`model` is a function of the :term:`output` or :term:`state` of another. This is a tool for representing system-of-systems. Composite models are implemented using the :py:class:`progpy.CompositeModel` class.
 
     system-of-systems
-      A system consisting of multiple inter-related systems, where one system affects the others. In ProgPy, system-of-systems are reporsented using :term:`composite models <composite model>`. Composite models are implemented using the :py:class:`prog_models.CompositeModel` class.
+      A system consisting of multiple inter-related systems, where one system affects the others. In ProgPy, system-of-systems are reporsented using :term:`composite models <composite model>`. Composite models are implemented using the :py:class:`progpy.CompositeModel` class.

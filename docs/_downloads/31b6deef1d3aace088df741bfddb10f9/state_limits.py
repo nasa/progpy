@@ -8,7 +8,7 @@ In this example, state limits are defined for the ThrownObject Model. These are 
 """
 
 from math import inf
-from prog_models.models.thrown_object import ThrownObject
+from progpy.models.thrown_object import ThrownObject
 
 def run_example():
     # Demo model
