@@ -83,4 +83,4 @@ html_theme_options = {
 }
 
 github_username = "nasa"
-github_repository = "prog_models"
+github_repository = "progpy"

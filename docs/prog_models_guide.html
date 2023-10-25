@@ -518,19 +518,9 @@ Derived parameters<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
 <p class="card-text">Sometimes users would like to specify parameters as a function of other parameters. This feature is called “derived parameters”. See example below for more details on this feature.</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/a2f67c14d1e4f8cf993ce8b884f782d6/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd><span class="target" id="module-derived_params"></span><p class="card-text">Example demonstrating ways to use the derived parameters feature for model building.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-More details<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<p class="card-text">In this example, a derived parameter (i.e., a parameter that is a function of another parameter) are defined for the simple ThrownObject model. These parameters are then calculated whenever their dependency parameters are updated, eliminating the need to calculate each timestep in simulation. The functionality of this feature is then demonstrated.</p>
-</div>
-</details></dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/a2f67c14d1e4f8cf993ce8b884f782d6/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -569,10 +559,9 @@ Future Loading Noise<div class="summary-down docutils">
 <p class="card-text">Future loading noise is used to represent uncertainty in knowledge of how the system will be loaded in the future (See <span class="xref std std-ref">Future Loading</span>). Future loading noise is applied by the user in their provided future loading method by adding random noise to the estimated future load.</p>
 </div>
 </details><p>See example below for details on how to configure proccess and measurement noise in ProgPy</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/a53af2a664a02d85e1a95ed94e2629b1/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd><span class="target" id="module-noise"></span><p>Example demonstrating approaches for adding and handling model noise</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/a53af2a664a02d85e1a95ed94e2629b1/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -587,10 +576,9 @@ Future Loading Noise<div class="summary-down docutils">
 </pre></div>
 </div>
 <p>See example below for details on how to provide future loading information in ProgPy.</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/e2095f421d8ca12b927634f3fbbba6c4/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd><span class="target" id="module-future_loading"></span><p>Example demonstrating ways to use future loading.</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/e2095f421d8ca12b927634f3fbbba6c4/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -608,11 +596,9 @@ Future Loading Noise<div class="summary-down docutils">
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">physics-based</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">data-driven</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a> are constructed by subclassing <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template <a class="reference download internal" download="" href="_downloads/0f7c5af7c0ba09c1be3bd3db3e6458c9/prog_model_template.py"><code class="xref download docutils literal notranslate"><span class="pre">prog_model_template.ProgModelTemplate</span></code></a>, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> will then work with your new model.</p>
 <p>For simple linear models, users can choose to subclass the simpler <a class="reference internal" href="api_ref/progpy/LinearModel.html#progpy.LinearModel" title="progpy.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.LinearModel</span></code></a> class, as illustrated in the second example. Some methods and algorithms only function on linear models.</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/c416c00aa2e02950fa0b0b4547cf49f9/new_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_model</span></code></a></dt><dd><span class="target" id="module-new_model"></span><p>Example defining and using a new prognostics model.</p>
-<p>In this example a simple state-transition model of an object thrown upward into the air is defined. That model is then used in simulation under different conditions and the results are displayed in different formats.</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/c416c00aa2e02950fa0b0b4547cf49f9/new_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_model</span></code></a></dt><dd></dd>
 </dl>
 </li>
 <li><p><a class="reference download internal" download="" href="_downloads/08ee9859b313ce1d928f863d2d51af12/linear_model.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">examples.linear_model</span></code></a></p></li>
@@ -624,97 +610,38 @@ Advanced features in model building<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/a2f67c14d1e4f8cf993ce8b884f782d6/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd><span class="target" id="module-0"></span><p class="card-text">Example demonstrating ways to use the derived parameters feature for model building.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-More details<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<p class="card-text">In this example, a derived parameter (i.e., a parameter that is a function of another parameter) are defined for the simple ThrownObject model. These parameters are then calculated whenever their dependency parameters are updated, eliminating the need to calculate each timestep in simulation. The functionality of this feature is then demonstrated.</p>
-</div>
-</details></dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/a2f67c14d1e4f8cf993ce8b884f782d6/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/b261b8e8a2bb840eed75010c0929ce5a/state_limits.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.state_limits</span></code></a></dt><dd><span class="target" id="module-state_limits"></span><p class="card-text">Example demonstrating when and how to identify model state limits.</p>
-<p class="card-text">In this example, state limits are defined for the ThrownObject Model. These are limits on the range of each state for a state-transition model. The use of this feature is then demonstrated.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/b261b8e8a2bb840eed75010c0929ce5a/state_limits.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.state_limits</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/b547422d9b3ae9d9e32d7bee6c092275/events.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.events</span></code></a></dt><dd><span class="target" id="module-events"></span><p class="card-text">Example further illustrating the concept of ‘events’ which generalizes EOL.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-More details<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<p class="card-text"><a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">Events</span></a> is the term used to describe something to be predicted. Generally in the PHM community these are referred to as End of Life (EOL). However, they can be much more.</p>
-<p class="card-text">In prog_models, events can be anything that needs to be predicted. Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds, or any Event of Interest (EOI).</p>
-<p class="card-text">This example demonstrates how events can be used in your applications.</p>
-</div>
-</details></dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/b547422d9b3ae9d9e32d7bee6c092275/events.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.events</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
 </div>
 </details></div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven models</span></a>, such as those using neural networks, are created by subclassing the <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel" title="progpy.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.data_models.DataModel</span></code></a> class, overriding the <code class="docutils literal notranslate"><span class="pre">from_data</span></code> method.</p>
 <p>The <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel.from_data" title="progpy.data_models.DataModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.data_models.DataModel.from_data()</span></code></a> and <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel.from_model" title="progpy.data_models.DataModel.from_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.data_models.DataModel.from_model()</span></code></a> methods are used to construct new models from data or an existing model (i.e., <a class="reference internal" href="glossary.html#term-surrogate"><span class="xref std std-term">surrogate</span></a>), respectively. The use of these is demonstrated in the following examples.</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/e7ee62f41f59a26f3cd93b4b0497cc90/lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.lstm_model</span></code></a></dt><dd><span class="target" id="module-lstm_model"></span><p>Example building a LSTMStateTransitionModel from data. This is a simple example of how to use the LSTMStateTransitionModel class.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-More details<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<p class="card-text">In this example, we generate fake data using the ThrownObject model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own. We then use the generated model and compare to the original model.</p>
-<p class="card-text">Finally, we repeat the exercise with data from the more complex BatteryElectroChemEOD model.</p>
-</div>
-</details></dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/e7ee62f41f59a26f3cd93b4b0497cc90/lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.lstm_model</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/dc9f2bf22220701a3b515335cb4d8038/full_lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.full_lstm_model</span></code></a></dt><dd><span class="target" id="module-full_lstm_model"></span><p>Example building a full model with events and thresholds using LSTMStateTransitionModel.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-More details<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<p class="card-text">In this example, we generate fake data using the ThrownObject model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own.</p>
-<p class="card-text">We then create a subclass of the LSTMStateTransitionModel, defining the event_state and threshold equations as a function of output. We use the generated model and compare to the original model.</p>
-</div>
-</details></dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/dc9f2bf22220701a3b515335cb4d8038/full_lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.full_lstm_model</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/d3b015984c77675d160e6a55a07625b8/pce.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.pce</span></code></a></dt><dd><span class="target" id="module-pce"></span><p>This example demonstrates the Polynomial Chaos Expansion (PCE) Surrogate Direct Model functionality. PCE is a method by which the behavior of a model can be approximated by a polynomial. In this case the relationship between future loading and time of event. The result is a direct surrogate model that can be used to estimate time of event given a loading profile, without requiring the original model to be simulated. The resulting estimation is MUCH faster than simulating the model.</p>
-<p>This functionality is especially useful in cases where you need to evaluate a large number of loading profiles in a short amount of time or with limited computational resources. For example, when you would like to optimize a loading profile. In that case, it would not make sense to have a state-transition model in the inner loop of the optimization, since the state transition model would be called many times. Instead, you can use a direct surrogate model to estimate time of event directly from the loading profile.</p>
-<p>In this example, a PCE surrogate model is generated for the BatteryElectroChemEOD model. The surrogate is used to estimate time of event for a number of loading profiles. The result is compared to the actual time of event for the same loading profiles, which were generated by simulating the model.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/d3b015984c77675d160e6a55a07625b8/pce.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.pce</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/cd66a5990681e5b4bc3e40976451b926/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a></dt><dd><span class="target" id="module-generate_surrogate"></span><p>Example of generating a Dynamic Mode Decomposition surrogate model from a battery model.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-More details<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<p class="card-text">In this example, an instance of a battery model is created. The DMD DataModel is used to generate a surrogate of this battery model for specific loading schemes. This surrogate can be used in place of the original model, approximating it’s behavior. Frequently, surrogate models run faster than the original, at the cost of some accuracy. The performance of the two models are then compared.</p>
-</div>
-</details></dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/cd66a5990681e5b4bc3e40976451b926/generate_surrogate.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.generate_surrogate</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -725,21 +652,9 @@ Advanced features in data models<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/70520a32b5407f76734c16a1ffe189b9/custom_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.custom_model</span></code></a></dt><dd><span class="target" id="module-custom_model"></span><p class="card-text">Example building a custom model with LSTMStateTransitionModel.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-More details<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<p class="card-text">For most cases, you will be able to use the standard LSTMStateTransitionModel.from_data class with configuration (see the LSTMStateTransitionModel class for more details). However, sometimes you might want to add custom layers, or other complex components. In that case, you will build a custom model and pass it into LSTMStateTransitionModel.</p>
-<p class="card-text">In this example, we generate fake data using the BatteryElectroChemEOD model. This is a case where we’re generating a surrogate model from the physics-based model. For cases where you’re generating a model from data (e.g., collected from a testbed or a real-world environment), you’ll replace that generated data with your own.</p>
-<p class="card-text">We build and fit a custom model using keras.layers. Finally, we compare performance to the standard format and the original model.</p>
-</div>
-</details></dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/70520a32b5407f76734c16a1ffe189b9/custom_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.custom_model</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -749,11 +664,9 @@ More details<div class="summary-down docutils">
 <section id="direct-prediction-models">
 <h3>Direct-prediction models<a class="headerlink" href="#direct-prediction-models" title="Permalink to this headline">#</a></h3>
 <p><a class="reference internal" href="glossary.html#term-direct-prediction-model"><span class="xref std std-term">Direct-prediction models</span></a> are models that estimate <a class="reference internal" href="glossary.html#term-time-of-event"><span class="xref std std-term">time of event</span></a> directly from the current state and <a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">future load</span></a>, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/beb178906ed56d1dc980686684fd5359/direct_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.direct_model</span></code></a></dt><dd><span class="target" id="module-direct_model"></span><p>This example demonstrates the Direct Models functionality. Direct models are models that directly estimate time of event from system state, rather than using state transition. This is useful for data-driven models that map from sensor data to time of event, and for physics-based models where state transition differential equations can be solved.</p>
-<p>Here a DirectThrownObject model is defined, extending the ThrownObject state transition model from the new_model example. This model is then initialized and used to estimate the time of event from the initial state.</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/beb178906ed56d1dc980686684fd5359/direct_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.direct_model</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -762,19 +675,9 @@ More details<div class="summary-down docutils">
 <h3>Using Data<a class="headerlink" href="#using-data" title="Permalink to this headline">#</a></h3>
 <p>Wether you’re using <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven</span></a>, <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based</span></a>, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see <cite>Parameter Estimation</cite>) and validate the model.</p>
 <p>ProgPy includes some example datasets. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/DataSets.html">ProgPy Datasets</a> and the example below for details.</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/5417b738f8b76e269e7bf2b5de661e87/dataset.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dataset</span></code></a></dt><dd><span class="target" id="module-dataset"></span><p>Example downloading and using a NASA prognostics dataset.</p>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-More details<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<p class="card-text">In this example, a battery dataset is downloaded from the NASA PCoE data repository. This dataset is then accessed and plotted.</p>
-</div>
-</details></dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/5417b738f8b76e269e7bf2b5de661e87/dataset.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dataset</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -788,40 +691,33 @@ More details<div class="summary-down docutils">
 <h2>Using provided models<a class="headerlink" href="#using-provided-models" title="Permalink to this headline">#</a></h2>
 <p>ProgPy includes a number of predefined models in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">progpy.models</span></code> module. These models are parameterized, so they can be configured to represent specific systems (see <a class="reference internal" href="#parameter-estimation"><span class="std std-ref">Parameter Estimation</span></a>).</p>
 <p>For details on the included models see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html">Included Models</a>. The examples below illustrate use of some of the models provided in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">progpy.models</span></code> module.</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/160687b265770e7120266d22a6015f55/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd><span class="target" id="module-sim"></span><p>Example of a battery being simulated for a set period of time and then till threshold is met.</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/160687b265770e7120266d22a6015f55/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/b0f882b08ad06c468dcd7cc5ad370a58/sim_battery_eol.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_battery_eol</span></code></a></dt><dd><span class="target" id="module-sim_battery_eol"></span><p>Example of a battery being simulated until End of Life (EOL). Battery capacity decreases with use. In this case, EOL is defined as when the battery capacity falls below some acceptable threshold (i.e., what we define as useful capacity).</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/b0f882b08ad06c468dcd7cc5ad370a58/sim_battery_eol.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_battery_eol</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/e2fe425b405c324c9ddabb88b4675b84/sim_pump.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_pump</span></code></a></dt><dd><span class="target" id="module-sim_pump"></span><p>Example of a centrifugal pump being simulated until threshold is met.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/e2fe425b405c324c9ddabb88b4675b84/sim_pump.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_pump</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/7f2f8df9098381336a6c1a5199ddd597/sim_valve.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_valve</span></code></a></dt><dd><span class="target" id="module-sim_valve"></span><p>Example of a pneumatic valve being simulated until threshold is met.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/7f2f8df9098381336a6c1a5199ddd597/sim_valve.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_valve</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/c17e158cee55f8895ef5d6988a1c24ec/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a></dt><dd><span class="target" id="module-sim_powertrain"></span><p>Example of a powertrain being simulated for a set amount of time.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/c17e158cee55f8895ef5d6988a1c24ec/sim_powertrain.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_powertrain</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/50b678fa73c3d10dd1d1ce03a5f7643f/sim_dcmotor_singlephase.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_dcmotor_singlephase</span></code></a></dt><dd><span class="target" id="module-sim_dcmotor_singlephase"></span><p>Example of a DC motor being simulated for a set amount of time, using the single-phase dcmotor model.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/50b678fa73c3d10dd1d1ce03a5f7643f/sim_dcmotor_singlephase.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_dcmotor_singlephase</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/cadc512c2baefeca720f0906f97221af/uav_dynamics_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.uav_dynamics_model</span></code></a></dt><dd><span class="target" id="module-uav_dynamics_model"></span><p>Example of generating a trajectory for a small rotorcraft through a set of coarse waypoints, and simulate the rotorcraft flight using a 6-dof model.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/cadc512c2baefeca720f0906f97221af/uav_dynamics_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.uav_dynamics_model</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -881,10 +777,9 @@ Step size<div class="summary-down docutils">
 <li><p class="card-text"><em>Functional Dynamic Step Size</em>: Step size is provided as a function of time and state. This is the most flexible approach. Example, <code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">m</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">simulate_to_threshold</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">dt</span></span><span class="operator"><span class="pre">=</span></span> <span class="keyword"><span class="pre">lambda</span></span> <span class="name"><span class="pre">t</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="name"><span class="pre">x</span></span> <span class="punctuation"><span class="pre">:</span></span> <span class="name builtin"><span class="pre">max</span></span><span class="punctuation"><span class="pre">(</span></span><span class="literal number float"><span class="pre">0.75</span></span> <span class="operator"><span class="pre">-</span></span> <span class="name"><span class="pre">t</span></span><span class="operator"><span class="pre">*</span></span><span class="literal number float"><span class="pre">0.01</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="literal number float"><span class="pre">0.25</span></span><span class="punctuation"><span class="pre">))</span></span></code></p></li>
 </ul>
 <p class="card-text">For more details on dynamic step sizes, see the following example:</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/290f3878724971806588517e4f7917c9/dynamic_step_size.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dynamic_step_size</span></code></a></dt><dd><span class="target" id="module-dynamic_step_size"></span><p class="card-text">Example demonstrating ways to use the dynamic step size feature. This feature allows users to define a time-step that changes with time or state.</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/290f3878724971806588517e4f7917c9/dynamic_step_size.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dynamic_step_size</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -932,20 +827,17 @@ Eval Points<div class="summary-down docutils">
 <p class="card-text">Now loading is applied correctly.</p>
 </div>
 </details><p>Use of simulation is described further in the following examples:</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/160687b265770e7120266d22a6015f55/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd><span class="target" id="module-1"></span><p>Example of a battery being simulated for a set period of time and then till threshold is met.</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/160687b265770e7120266d22a6015f55/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/a53af2a664a02d85e1a95ed94e2629b1/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd><span class="target" id="module-2"></span><p>Example demonstrating approaches for adding and handling model noise</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/a53af2a664a02d85e1a95ed94e2629b1/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/e2095f421d8ca12b927634f3fbbba6c4/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd><span class="target" id="module-3"></span><p>Example demonstrating ways to use future loading.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/e2095f421d8ca12b927634f3fbbba6c4/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -1019,20 +911,17 @@ Eval Points<div class="summary-down docutils">
 </section>
 <section id="other-examples">
 <h2>Other Examples<a class="headerlink" href="#other-examples" title="Permalink to this headline">#</a></h2>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/e94f95102fd9281aa7355e7b9ceeb60a/benchmarking.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.benchmarking</span></code></a></dt><dd><span class="target" id="module-benchmarking"></span><p>Simple example benchmarking the computational efficiency of models.</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/e94f95102fd9281aa7355e7b9ceeb60a/benchmarking.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.benchmarking</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/98e318f1c85976fc33e5b193dd2922a1/sensitivity.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sensitivity</span></code></a></dt><dd><span class="target" id="module-sensitivity"></span><p>Example performing a sensitivity analysis on a new model.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/98e318f1c85976fc33e5b193dd2922a1/sensitivity.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sensitivity</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/6c00d1b4a87a04ca552d41096eeda216/serialization.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.serialization</span></code></a></dt><dd><span class="target" id="module-serialization"></span><p>Example of serializing and de-serializing a battery model using JSON and pickling methods</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/6c00d1b4a87a04ca552d41096eeda216/serialization.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.serialization</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>

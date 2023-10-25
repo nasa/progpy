@@ -562,11 +562,9 @@ Example<div class="summary-down docutils">
 <p>See <a class="reference download internal" download="" href="_downloads/07c9eb121dbb5de8d48ddffc704c521d/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a> for an example of this approach.</p>
 <section id="example">
 <h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h4>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/07c9eb121dbb5de8d48ddffc704c521d/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd><span class="target" id="module-new_state_estimator_example"></span><p>An example illustrating the creation of a new state estimator.</p>
-<p>In this example a basic state estimator is constructed by subclassing the StateEstimator class. This StateEstimator is then demonstrated with a ThrownObject model</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/07c9eb121dbb5de8d48ddffc704c521d/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -764,133 +762,47 @@ Histogram<div class="summary-down docutils">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
 <a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
 <p>The best way to learn how to use <cite>progpy</cite> is through the <a class="reference external" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb">tutorial</a>. There are also a number of examples which show different aspects of the package, summarized and linked below:</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/638751a90485d06ba802c6a90154e62b/basic_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example</span></code></a></dt><dd><span class="target" id="module-basic_example"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model.</p>
-<dl class="simple">
-<dt>Method: An instance of the ThrownObject model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
-<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
-<li><p>Prediction of future states (with uncertainty) and the times at which the event threshold will be reached</p></li>
-<li><p>Metrics tools are used to further investigate the results of prediction</p></li>
-</ol>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time event is predicted to occur (with uncertainty)</p></li>
-<li><p>Various prediction metrics</p></li>
-<li><p>Figures illustrating results</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/638751a90485d06ba802c6a90154e62b/basic_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/9af9bdc48da233bdafa07c9ecb46568e/basic_example_battery.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example_battery</span></code></a></dt><dd><span class="target" id="module-basic_example_battery"></span><p>This example extends the “basic example” to perform a state estimation and prediction with uncertainty given a more complicated model. Models, state estimators, and predictors can be switched out. See documentation nasa.github.io/progpy for description of options</p>
-<dl class="simple">
-<dt>Method: An instance of the BatteryCircuit model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
-<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
-<li><p>Prediction of future states (with uncertainty) and the times at which the event threshold will be reached</p></li>
-<li><p>Metrics tools are used to further investigate the results of prediction</p></li>
-</ol>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time event is predicted to occur (with uncertainty)</p></li>
-<li><p>Various prediction metrics</p></li>
-<li><p>Figures illustrating results</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/9af9bdc48da233bdafa07c9ecb46568e/basic_example_battery.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example_battery</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/f39895005dabcb4262926b776151bd9a/eol_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.eol_event</span></code></a></dt><dd><span class="target" id="module-eol_event"></span><p>This example demonstrates a use case where someone wants to predict the first event (i.e., End Of Life (EOL)) of a system. Many system models have multiple events that can occur. In some prognostics applications, users are not interested in predicting a specific event, and are instead interested in when the first event occurs, regardless of the event. This example demonstrates how to predict the first event of a system.</p>
-<p>Method: An instance of ThrownObject is used for this example. In this case it is trivial because the event ‘falling’ will always occur before ‘impact’, but for some other models that might not be true. The ThrownObject class is subclassed to add a new event ‘EOL’ which occurs if any other event occurs. The new model is then instantiated and used for prognostics like in basic_example. Prediction specifically specifies EOL as the event to be predicted.</p>
-<p>Results:</p>
-<blockquote>
-<div><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time the event ‘EOL’ is predicted to occur (with uncertainty)</p></li>
-<li><p>Histogram of the event ‘EOL’</p></li>
-</ol>
-</div></blockquote>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/f39895005dabcb4262926b776151bd9a/eol_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.eol_event</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/07c9eb121dbb5de8d48ddffc704c521d/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd><span class="target" id="module-0"></span><p>An example illustrating the creation of a new state estimator.</p>
-<p>In this example a basic state estimator is constructed by subclassing the StateEstimator class. This StateEstimator is then demonstrated with a ThrownObject model</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/07c9eb121dbb5de8d48ddffc704c521d/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/00d36657bdd9c3fc811494e7586f6a86/horizon.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.horizon</span></code></a></dt><dd><span class="target" id="module-horizon"></span><p>This example performs a state estimation and prediction with uncertainty given a Prognostics Model with a specific prediction horizon. This prediction horizon marks the end of the “time of interest” for the prediction. Often this represents the end of a mission or sufficiently in the future where the user is unconcerned with the events</p>
-<dl class="simple">
-<dt>Method: An instance of the Thrown Object model in prog_models is created, and the prediction process is achieved in three steps:</dt><dd><ol class="arabic simple">
-<li><p>State estimation of the current state is performed using a chosen state_estimator, and samples are drawn from this estimate</p></li>
-<li><p>Prediction of future states (with uncertainty) and the times at which the event thresholds will be reached, within the prediction horizon. All events outside the horizon come back as None and are ignored in metrics</p></li>
-</ol>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time event is predicted to occur (with uncertainty)</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/00d36657bdd9c3fc811494e7586f6a86/horizon.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.horizon</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/dde96c6cfd6ff506f5048a5c797653e4/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></dt><dd><span class="target" id="module-kalman_filter"></span><p>This example demonstrates use of the Kalman Filter State Estimator with a LinearModel.</p>
-<p>First, a linear model is defined. Then the KF State estimator is used with fake data to estimate state.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/dde96c6cfd6ff506f5048a5c797653e4/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/7c5976947f77971a5ed9939937b15116/measurement_eqn_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.measurement_eqn_example</span></code></a></dt><dd><span class="target" id="module-measurement_eqn_example"></span><p>This example performs a state estimation with uncertainty given a Prognostics Model for a system in which not all output values are measured.</p>
-<dl class="simple">
-<dt>Method: An instance of the BatteryCircuit model in prog_models is created. We assume that we are only measuring one of the output values, and we define a subclass to remove the other output value.</dt><dd><p>Estimation of the current state is performed at various time steps, using the defined state_estimator.</p>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Estimate of the current state given various times</p></li>
-<li><p>Display of results, such as prior and posterior state estimate values and SOC</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/7c5976947f77971a5ed9939937b15116/measurement_eqn_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.measurement_eqn_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/8b8068cadf898f26bec76d85c19e7d58/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></dt><dd><span class="target" id="module-playback"></span><p>This example performs state estimation and prediction using playback data.</p>
-<dl class="simple">
-<dt>Method: An instance of the BatteryCircuit model in prog_models is created, the state estimation is set up by defining a state_estimator, and the prediction method is set up by defining a predictor.</dt><dd><p>Prediction is then performed using playback data. For each data point:
-1) The necessary data is extracted (time, current load, output values) and corresponding values defined (t, i, and z)
-2) The current state estimate is performed and samples are drawn from this distribution
-3) Prediction performed to get future states (with uncertainty) and the times at which the event threshold will be reached</p>
-</dd>
-<dt>Results:</dt><dd><ol class="lowerroman simple">
-<li><p>Predicted future values (inputs, states, outputs, event_states) with uncertainty from prediction</p></li>
-<li><p>Time event is predicted to occur (with uncertainty)</p></li>
-<li><p>Various prediction metrics</p></li>
-<li><p>Figures illustrating results</p></li>
-</ol>
-</dd>
-</dl>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/8b8068cadf898f26bec76d85c19e7d58/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/5fadba24f260d034499545c9e4baa297/predict_specific_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.predict_specific_event</span></code></a></dt><dd><span class="target" id="module-predict_specific_event"></span><p>In this example we are using the UTPredictor to predict a specific event, in this case impact. This will then ignore the other events which are not of interest.</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/5fadba24f260d034499545c9e4baa297/predict_specific_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.predict_specific_event</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/744aa18ff0c29f655326d5633e2946ab/particle_filter_battery_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.particle_filter_battery_example</span></code></a></dt><dd><span class="target" id="module-particle_filter_battery_example"></span><p>In this example the BatteryElectroChemEOD model is used with a particle filter to estimate the state of the battery</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/744aa18ff0c29f655326d5633e2946ab/particle_filter_battery_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.particle_filter_battery_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
