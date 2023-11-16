@@ -16,17 +16,17 @@ class CompositeModel(PrognosticsModel):
     A CompositeModel is a PrognosticsModel that is composed of multiple PrognosticsModels. This is a tool for modeling system-of-systems. I.e., interconnected systems, where the behavior and state of one system effects the state of another system. The composite prognostics models are connected using defined connections between the output or state of one model, and the input of another model. The resulting CompositeModel behaves as a single model.
 
     Args:
-        models (list[PrognosticsModel] or list[tuple[str, PrognosticsModel]]):
+        models ({list[{PrognosticsModel, function}], list[tuple[str, {PrognosticsModel, function}]]):
             A list of PrognosticsModels to be combined into a single model.
             Provided in one of two forms:
 
-            1. A list of PrognosticsModels. The name of each model will be the class name. A number will be added for duplicates
+            1. A list of PrognosticsModels or functions. The name of each model will be the class name for models or 'function' for functions. A number will be added for duplicates
 
-            2. A list of tuples where the first element is the model name and the second element is the model
+            2. A list of tuples where the first element is the model/function name and the second element is the model/function
 
             Note: Order provided will be the order that models are executed
         connections (list[tuple[str, str]], optional):
-            A list of tuples where the first element is the name of the output, state, or performance metrics of one model and the second element is the name of the input of another model.
+            A list of tuples where the first element is the name of the output, state, or performance metrics of one model or function return and the second element is the name of the input of another model or argument of a function.
             The first element of the tuple must be of the form "model_name.output_name", "model_name.state_name", or "model_name.performance_metric_key".
             The second element of the tuple must be of the form "model_name.input_name".
             For example, if you have two models, "Batt1" and "Batt2", and you want to connect the output of "Batt1" to the input of "Batt2", you would use the following connection: ("Batt1.output", "Batt2.input")
