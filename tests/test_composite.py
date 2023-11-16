@@ -71,6 +71,184 @@ class TestCompositeModel(unittest.TestCase):
             # extra
             CompositeModel([m1, m1], outputs=['OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1', 'z1'])
 
+    def test_composite_function(self):
+        m1 = OneInputOneOutputNoEventLM()
+        m2 = OneInputNoOutputOneEventLM()
+        m1_withpm = OneInputOneOutputNoEventLMPM()
+
+        def fcn(u0, u1):
+            return u0+u1
+
+        # Test with no connections
+        m_composite = CompositeModel([m1, m1, fcn])
+        self.assertSetEqual(m_composite.states, {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'function.return'})
+        self.assertSetEqual(m_composite.inputs, {'OneInputOneOutputNoEventLM.u1', 'OneInputOneOutputNoEventLM_2.u1', 'function.u0', 'function.u1'})
+        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1'})
+        self.assertSetEqual(m_composite.events, set())
+        self.assertSetEqual(m_composite.performance_metric_keys, set(), "Shouldn't have any performance metrics")
+
+        with self.assertRaises(TypeError):
+            # Missing connection to fill input of function
+            m_composite.initialize()
+
+        # But it should work if you provide inputs manually
+        x0 = m_composite.initialize({'function.u0': 2, 'function.u1': 8})
+        self.assertSetEqual(
+            set(x0.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'function.return'})
+        self.assertEqual(x0['OneInputOneOutputNoEventLM_2.x1'], 0)
+        self.assertEqual(x0['OneInputOneOutputNoEventLM.x1'], 0)
+        self.assertEqual(x0['function.return'], 10)
+        # Only provide non-zero input for the first model
+        u = m_composite.InputContainer({'OneInputOneOutputNoEventLM.u1': 1, 'OneInputOneOutputNoEventLM_2.u1': 0, 'function.u0': 3, 'function.u1': 8})
+        x = m_composite.next_state(x0, u, 1)
+        self.assertSetEqual(
+            set(x.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'function.return'})
+        self.assertEqual(x['OneInputOneOutputNoEventLM_2.x1'], 0)
+        self.assertEqual(x['OneInputOneOutputNoEventLM.x1'], 1)
+        self.assertEqual(x['function.return'], 11)
+
+        # Test with connections - 1/2 input to fcn only (only u0, not u1)
+        m_composite = CompositeModel(
+            [m1, m1, fcn],
+            connections=[
+                ('OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.u1'),
+                ('OneInputOneOutputNoEventLM.z1', 'function.u0')])
+        # Additional state to store output
+        self.assertSetEqual(m_composite.states, {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        # One less input - since it's internally connected
+        self.assertSetEqual(m_composite.inputs, {'OneInputOneOutputNoEventLM.u1', 'function.u1'})
+        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1'})
+        self.assertSetEqual(m_composite.events, set())
+
+        with self.assertRaises(TypeError):
+            # Missing connection to u1 to fill input of function
+            x0 = m_composite.initialize()
+        x0 = m_composite.initialize({'function.u1': 7})
+        self.assertSetEqual(
+            set(x0.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        self.assertEqual(x0['OneInputOneOutputNoEventLM_2.x1'], 0)
+        self.assertEqual(x0['OneInputOneOutputNoEventLM.x1'], 0)
+        self.assertEqual(x0['OneInputOneOutputNoEventLM.z1'], 0)
+        self.assertEqual(x0['function.return'], 7)
+        # Only provide non-zero input for first model
+        u = m_composite.InputContainer(
+            {'OneInputOneOutputNoEventLM.u1': 1, 'function.u1': 7})
+        x = m_composite.next_state(x0, u, 1)
+        self.assertSetEqual(
+            set(x.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        self.assertEqual(x['OneInputOneOutputNoEventLM_2.x1'], 1)
+        # Propagates through, because of the order.
+        # If the connection were the other way it wouldn't
+        self.assertEqual(x['OneInputOneOutputNoEventLM.x1'], 1)
+        self.assertEqual(x['function.return'], 8)
+
+        # Propagate again
+        x = m_composite.next_state(x, u, 1)
+        self.assertSetEqual(
+            set(x.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        self.assertEqual(x['OneInputOneOutputNoEventLM_2.x1'], 3)  # 1 + 2
+        self.assertEqual(x['OneInputOneOutputNoEventLM.x1'], 2)
+        self.assertEqual(x['function.return'], 9)
+
+        # Test with full connections in
+        m_composite = CompositeModel(
+            [m1, m1, fcn],
+            connections=[
+                ('OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.u1'),
+                ('OneInputOneOutputNoEventLM.z1', 'function.u0'),
+                ('OneInputOneOutputNoEventLM.z1', 'function.u1')])
+        # Additional state to store output
+        self.assertSetEqual(m_composite.states, {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        # One less input - since it's internally connected
+        self.assertSetEqual(m_composite.inputs, {'OneInputOneOutputNoEventLM.u1'})
+        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1'})
+        self.assertSetEqual(m_composite.events, set())
+
+        # Empty initialization should work now
+        x0 = m_composite.initialize()
+        self.assertSetEqual(
+            set(x0.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        self.assertEqual(x0['OneInputOneOutputNoEventLM_2.x1'], 0)
+        self.assertEqual(x0['OneInputOneOutputNoEventLM.x1'], 0)
+        self.assertEqual(x0['OneInputOneOutputNoEventLM.z1'], 0)
+        self.assertEqual(x0['function.return'], 0)
+        # Only provide non-zero input for first model
+        u = m_composite.InputContainer(
+            {'OneInputOneOutputNoEventLM.u1': 1})
+        x = m_composite.next_state(x0, u, 1)
+        self.assertSetEqual(
+            set(x.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        self.assertEqual(x['OneInputOneOutputNoEventLM_2.x1'], 1)
+        # Propagates through, because of the order.
+        # If the connection were the other way it wouldn't
+        self.assertEqual(x['OneInputOneOutputNoEventLM.x1'], 1)
+        self.assertEqual(x['function.return'], 2)
+
+        # Propagate again
+        x = m_composite.next_state(x, u, 1)
+        self.assertSetEqual(
+            set(x.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        self.assertEqual(x['OneInputOneOutputNoEventLM_2.x1'], 3)  # 1 + 2
+        self.assertEqual(x['OneInputOneOutputNoEventLM.x1'], 2)
+        self.assertEqual(x['function.return'], 4)
+
+        # Test with full connections in and out
+        # Update function to add one each timestep
+        def fcn(u0, u1) -> float:
+            return u0 + u1 + 1
+        m_composite = CompositeModel(
+            [m1, m1, fcn],
+            connections=[
+                ('OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.u1'),
+                ('OneInputOneOutputNoEventLM.z1', 'function.u0'),
+                ('OneInputOneOutputNoEventLM.z1', 'function.u1'),
+                ('function.return', 'OneInputOneOutputNoEventLM.u1')])
+        # Additional state to store output
+        self.assertSetEqual(m_composite.states, {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        # Two less input - since it's fully internally connected
+        self.assertSetEqual(m_composite.inputs, set())
+        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1'})
+        self.assertSetEqual(m_composite.events, set())
+
+        # Empty initialization should work
+        x0 = m_composite.initialize()
+        self.assertSetEqual(
+            set(x0.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        self.assertEqual(x0['OneInputOneOutputNoEventLM_2.x1'], 0)
+        self.assertEqual(x0['OneInputOneOutputNoEventLM.x1'], 0)
+        self.assertEqual(x0['OneInputOneOutputNoEventLM.z1'], 0)
+        self.assertEqual(x0['function.return'], 1)
+        # Only provide non-zero input for first model
+        u = m_composite.InputContainer(
+            {})
+        x = m_composite.next_state(x0, u, 1)
+        self.assertSetEqual(
+            set(x.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        self.assertEqual(x['OneInputOneOutputNoEventLM_2.x1'], 1)
+        # Propagates through, because of the order.
+        # If the connection were the other way it wouldn't
+        self.assertEqual(x['OneInputOneOutputNoEventLM.x1'], 1)
+        self.assertEqual(x['function.return'], 3)  # 1 + 1 + 1
+
+        # Propagate again
+        x = m_composite.next_state(x, u, 1)
+        self.assertSetEqual(
+            set(x.keys()),
+            {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
+        self.assertEqual(x['OneInputOneOutputNoEventLM_2.x1'], 5)  # 1 + 2
+        self.assertEqual(x['OneInputOneOutputNoEventLM.x1'], 4)
+        self.assertEqual(x['function.return'], 9)  # 4 + 4 + 1
+
     def test_composite(self):
         m1 = OneInputOneOutputNoEventLM()
         m2 = OneInputNoOutputOneEventLM()
