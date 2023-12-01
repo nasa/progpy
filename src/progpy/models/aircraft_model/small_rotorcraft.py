@@ -321,53 +321,59 @@ class SmallRotorcraft(AircraftModel):
 
         return A, B
 
-    def visualize_traj(self, pred, ref):
+    def visualize_traj(self, pred, ref=None, prefix=''):
         """
         This method provides functionality to visualize a predicted trajectory generated, plotted with the reference trajectory. 
 
         Calling this returns a figure with two subplots: 1) x vs y, and 2) z vs time.
 
-        Parameters
+        Args
         ----------
-        pred : Vehicle model simulation 
-               SimulationResults from simulate_to or simulate_to_threshold for a defined SmallRotorcraft class
+        pred : SimulationResults
+              Results from vehicle model simulation from simulate_to or simulate_to_threshold for a defined SmallRotorcraft class
 
-        ref  : Reference trajectory 
-                dict with keys for each state in the vehicle model and corresponding values as numpy arrays 
+        Keyword Args
+        -------------
+        ref : dict[str, np.ndarray], optional
+              Reference trajectory - dict with keys for each state in the vehicle model and corresponding values as numpy arrays
+        prefix : str, optional
+              Prefix added to keys in predicted values. This is used to plot the trajectory using the results from a composite model
 
         Returns 
         -------
         fig : Visualization of trajectory generation results 
         """
 
-        # Extract reference trajectory information
-        time        = ref['t'].tolist() 
-        ref_x       = ref['x'].tolist() 
-        ref_y       = ref['y'].tolist() 
-        ref_z       = ref['z'].tolist()
-
         # Extract predicted trajectory information
         pred_time = pred.times
-        pred_x = [pred.outputs[iter]['x'] for iter in range(len(pred_time))]
-        pred_y = [pred.outputs[iter]['y'] for iter in range(len(pred_time))]
-        pred_z = [pred.outputs[iter]['z'] for iter in range(len(pred_time))]
+        pred_x = [pred.outputs[iter][prefix+'x'] for iter in range(len(pred_time))]
+        pred_y = [pred.outputs[iter][prefix+'y'] for iter in range(len(pred_time))]
+        pred_z = [pred.outputs[iter][prefix+'z'] for iter in range(len(pred_time))]
 
         # Initialize Figure
         params = dict(figsize=(13, 9), fontsize=14, linewidth=2.0, alpha_preds=0.6)
         fig, (ax1, ax2) = plt.subplots(2)
 
-        # Plot trajectory predictions
-        ax1.plot(ref_x, ref_y, '--', linewidth=params['linewidth'], color='tab:orange', alpha=0.5, label='reference trajectory')
-        ax1.plot(pred_x, pred_y,'-', color='tab:blue', alpha=params['alpha_preds'], linewidth=params['linewidth'], label='prediction')
+        # Handle reference information
+        if ref is not None:
+          # Extract reference trajectory information
+          time        = ref['t'].tolist() 
+          ref_x       = ref['x'].tolist() 
+          ref_y       = ref['y'].tolist() 
+          ref_z       = ref['z'].tolist()
 
+          # Plot reference trajectories
+          ax1.plot(ref_x, ref_y, '--', linewidth=params['linewidth'], color='tab:orange', alpha=0.5, label='reference trajectory')
+          ax2.plot(time, ref_z, '-', color='tab:orange', alpha=params['alpha_preds'], linewidth=params['linewidth'], label='reference trajectory')
+        
+        # Plot predictions
+        ax1.plot(pred_x, pred_y,'-', color='tab:blue', alpha=params['alpha_preds'], linewidth=params['linewidth'], label='prediction')
+        ax2.plot(pred_time, pred_z,'-', color='tab:blue',alpha=params['alpha_preds'], linewidth=params['linewidth'], label='prediction')
+
+        # Add labels
         ax1.set_xlabel('x', fontsize=params['fontsize'])
         ax1.set_ylabel('y', fontsize=params['fontsize'])
         ax1.legend(fontsize=params['fontsize'])
-
-        # Add altitude plot
-        ax2.plot(time, ref_z, '-', color='tab:orange', alpha=params['alpha_preds'], linewidth=params['linewidth'], label='reference trajectory')
-        ax2.plot(pred_time, pred_z,'-', color='tab:blue',alpha=params['alpha_preds'], linewidth=params['linewidth'], label='prediction')
-        
         ax2.set_xlabel('time stamp, -', fontsize=params['fontsize'])
         ax2.set_ylabel('z', fontsize=params['fontsize'])
 

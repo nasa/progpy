@@ -95,7 +95,7 @@ class LQR():
         self.n_inputs = len(self.inputs) - 1   # number of inputs (minus one to remove mission_complete)
         self.ref_traj = x_ref                  # reference state to follow during simulation (x_ref, y_ref, z_ref, phi_ref, theta_ref, psi_ref, ...)
         self.ss_input = vehicle.parameters['steadystate_input']
-        self.vehicle_max_thrust = vehicle.dynamics['max_thrust']
+        self.vehicle_max_thrust = vehicle.parameters['dynamics']['max_thrust']
         
         # Default control parameters
         # --------------------------------
@@ -122,7 +122,7 @@ class LQR():
         if x is None:
             x_k = np.zeros((self.n_states, 1))
         else:
-            x_k = np.array([x.matrix[ii][0] for ii in range(len(x.matrix)-2)])
+            x_k = np.array([x.matrix[ii][0] for ii in range(self.n_states)])
 
         # Identify reference state (desired state) at t
         t_k = np.round(t + self.dt/2.0, 1)  # current time step
@@ -221,7 +221,7 @@ class LQR_I(LQR):
         self.n_inputs = len(self.inputs) - 1  # number of inputs (minus one to remove mission_complete)
         self.ref_traj = x_ref                 # reference state to follow during simulation (x_ref, y_ref, z_ref, phi_ref, theta_ref, psi_ref, ...)
         self.ss_input = vehicle.parameters['steadystate_input']
-        self.vehicle_max_thrust = vehicle.dynamics['max_thrust']
+        self.vehicle_max_thrust = vehicle.parameters['dynamics']['max_thrust']
 
         self.outputs = vehicle.outputs[:3]    # output variables of the system to be controlled (x, y, z only)
         self.n_outputs = 3                    # number of outputs
