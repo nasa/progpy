@@ -148,28 +148,28 @@ class SmallRotorcraft(AircraftModel):
         if not isinstance(self.parameters['vehicle_model'], str):
             raise TypeError("Vehicle model must be defined as a string.")
         if self.parameters['vehicle_model'].lower() == 'djis1000':
-            self.mass, self.geom, self.dynamics = vehicles.DJIS1000(self.parameters['vehicle_payload'], self.parameters['gravity'])
+            self.parameters['mass'], self.parameters['geom'], self.parameters['dynamics'] = vehicles.DJIS1000(self.parameters['vehicle_payload'], self.parameters['gravity'])
         elif self.parameters['vehicle_model'].lower() == 'tarot18':
-            self.mass, self.geom, self.dynamics = vehicles.TAROT18(self.parameters['vehicle_payload'], self.parameters['gravity'])
+            self.parameters['mass'], self.parameters['geom'], self.parameters['dynamics'] = vehicles.TAROT18(self.parameters['vehicle_payload'], self.parameters['gravity'])
         else:
             raise ValueError("Specified vehicle type is not supported. Only 'tarot18' and 'djis1000' are currently supported.")
         
         # Steady-state input value: hover, [weight, 0, 0, 0]
         if self.parameters['steadystate_input'] is None:
-            self.parameters['steadystate_input'] = self.mass['total'] * self.parameters['gravity']
+            self.parameters['steadystate_input'] = self.parameters['mass']['total'] * self.parameters['gravity']
         
         # Introduction of Aerodynamic effects:
-        self.aero = {
+        self.parameters['aero'] = {
           'drag': aero.DragModel(
-            bodyarea=self.dynamics['aero']['ad'],
-            Cd=self.dynamics['aero']['cd'],
+            bodyarea=self.parameters['dynamics']['aero']['ad'],
+            Cd=self.parameters['dynamics']['aero']['cd'],
             air_density=self.parameters['air_density']),
           'lift': None}
 
     def dx(self, x, u):
         # Extract useful values
-        m = self.mass['total']  # vehicle mass
-        Ixx, Iyy, Izz = self.mass['Ixx'], self.mass['Iyy'], self.mass['Izz']  # vehicle inertia
+        m = self.parameters['mass']['total']  # vehicle mass
+        Ixx, Iyy, Izz = self.parameters['mass']['Ixx'], self.parameters['mass']['Iyy'], self.parameters['mass']['Izz']  # vehicle inertia
 
         # Input vector
         T = u['T']  # Thrust (along body z)
@@ -202,7 +202,7 @@ class SmallRotorcraft(AircraftModel):
             sin_psi,
             cos_psi),
           v_earth)  # Velocity in body-axis
-        fb_drag = self.aero['drag'](v_body)   # drag force in body axis
+        fb_drag = self.parameters['aero']['drag'](v_body)   # drag force in body axis
         fe_drag = np.dot(
           geom.rot_body2earth_fast(
             sin_phi,
@@ -230,9 +230,9 @@ class SmallRotorcraft(AircraftModel):
         dxdt[7] = ((sin_theta * sin_psi * cos_phi - sin_phi * cos_psi) * T - fe_drag[1]) / m   # Acceleration along y-axis
         dxdt[8] = -self.parameters['gravity'] + (cos_phi * cos_theta * T - fe_drag[2]) / m   # Acceleration along z-axis
 
-        dxdt[9] = ((Iyy - Izz) * q * r + tp * self.geom['arm_length']) / Ixx     # Angular acceleration along body x-axis: roll rate
-        dxdt[10] = ((Izz - Ixx) * p * r + tq * self.geom['arm_length']) / Iyy     # Angular acceleration along body y-axis: pitch rate
-        dxdt[11] = ((Ixx - Iyy) * p * q + tr * 1) / Izz     # Angular acceleration along body z-axis: yaw rate
+        dxdt[9] = ((Iyy - Izz) * q * r + tp * self.parameters['geom']['arm_length']) / Ixx  # Angular acceleration along body x-axis: roll rate
+        dxdt[10] = ((Izz - Ixx) * p * r + tq * self.parameters['geom']['arm_length']) / Iyy  # Angular acceleration along body y-axis: pitch rate
+        dxdt[11] = ((Ixx - Iyy) * p * q + tr * 1) / Izz  # Angular acceleration along body z-axis: yaw rate
         dxdt[12] = 1     # Auxiliary time variable
         dxdt[13] = (u['mission_complete'] - x['mission_complete']) / self.parameters['dt']    # Value to keep track of percentage of mission completed
 
@@ -281,9 +281,9 @@ class SmallRotorcraft(AircraftModel):
         :param T:         N, scalar, double, thrust
         :return:          Linearized state transition matrix A, n_states x n_states, and linearized input matrix B, n_states x n_inputs
         """
-        m = self.mass['total']
-        Ixx, Iyy, Izz = self.mass['Ixx'], self.mass['Iyy'], self.mass['Izz']
-        length = self.geom['arm_length'] 
+        m = self.parameters['mass']['total']
+        Ixx, Iyy, Izz = self.parameters['mass']['Ixx'], self.parameters['mass']['Iyy'], self.parameters['mass']['Izz']
+        length = self.parameters['geom']['arm_length']
         sin_phi = np.sin(phi)
         cos_phi = np.cos(phi)
         sin_theta = np.sin(theta)
