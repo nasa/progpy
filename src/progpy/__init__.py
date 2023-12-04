@@ -5,12 +5,13 @@ __all__ = ['predictors', 'uncertain_data', 'state_estimators', 'run_prog_playbac
 from progpy.prognostics_model import PrognosticsModel
 from progpy.ensemble_model import EnsembleModel
 from progpy.composite_model import CompositeModel
+from progpy.mixture_of_experts import MixtureOfExpertsModel
 from progpy.linear_model import LinearModel
 from progpy import predictors, state_estimators, uncertain_data
 
 import warnings
 
-__version__ = '1.6.0.pre'
+__version__ = '1.7.0-pre'
 
 def run_prog_playback(obs, pred, future_loading, output_measurements, **kwargs):
     warnings.warn("Depreciated in 1.2.0, will be removed in a future release.", DeprecationWarning)

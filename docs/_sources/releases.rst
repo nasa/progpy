@@ -4,6 +4,24 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in V1.6
+----------------------
+
+progpy
+**************
+* Combined previous prog_models and prog_algs packages into a single package, progpy.
+* Added new :py:class:`progpy.MixtureOfExpertsModel`, which combines multiple models of the same system into a single model, where only the best of the comprised models will be used at each timestep.
+* Added ability to set random seed in :py:class:`progpy.loading.GaussianNoiseWrapper`, allowing for repeatable experiments
+* Various bug fixes and performance improvements
+
+Upgrading from v1.5
+^^^^^^^^^^^^^^^^^^^^^^
+v1.6 combined prog_models and prog_algs into a single package progpy. To upgrade to 1.6, you will need to download the new progpy package (pip install progpy) and update all imports to use progpy. For example `from prog_models import PrognosticsModel` becomes `from progpy import PrognosticsModel`, and `from prog_algs import predictors` becomes `from progpy import predictors`.
+
+prog_server
+************
+* Updated to work with progpy v1.6
+
 Updates in V1.5
 -----------------------
 

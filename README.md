@@ -31,18 +31,19 @@ Use the following to cite this repository:
 
 ```
 @misc{2023_nasa_progpy,
-    author    = {Christopher Teubert and Matteo Corbetta and Chetan Kulkarni and Katelyn Jarvis and Matthew Daigle},
-    title     = {Prognostics Python Package (ProgPy)},
-    month     = October,
-    year      = 2023,
-    version   = {1.6},
-    url       = {https://github.com/nasa/progpy}
-    }
+  | author    = {Christopher Teubert and Katelyn Jarvis Griffith and Matteo Corbetta and Chetan Kulkarni and Portia Banerjee and Matthew Daigle},
+  | title     = {{ProgPy Python Prognostics Packages}},
+  | month     = May,
+  | year      = 2024,
+  | version   = {1.7},
+  | url       = {https://nasa.github.io/progpy}
+  | doi       = {10.5281/ZENODO.8097013}
+  | }
 ```
 
 The corresponding reference should look like this:
 
-C. Teubert, C. Kulkarni, M. Corbetta, K. Jarvis, M. Daigle, ProgPy Prognostics Python Packages, v1.6, October 2023. URL https://nasa.github.io/progpy.
+C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, M. Daigle, ProgPy Python Prognostics Packages, v1.7, May 2024. URL https://github.com/nasa/progpy.
 
 ## Contributing Organizations
 ProgPy was created by a partnership of multiple organizations, working together to build a set of high-quality prognostic tools for the wider PHM Community. We would like to give a big thank you for the ProgPy community, especially the following contributing organizations:
@@ -53,7 +54,7 @@ ProgPy was created by a partnership of multiple organizations, working together 
 * Vanderbilt University
 
 ## Acknowledgements
-The structure and algorithms of this package are strongly inspired by the [MATLAB Prognostics Model Library](https://github.com/nasa/PrognosticsModelLibrary), [MATLAB Prognostics Algorithm Library](https://github.com/nasa/PrognosticsAlgorithmLibrary), and the [MATLAB Prognostics Metrics Library](https://github.com/nasa/PrognosticsMetricsLibrary). We would like to recognize Matthew Daigle and the rest of the team that contributed to the Prognostics Model Library for the contributions their work on the MATLAB library made to the design of prog_models.
+The structure and algorithms of this package are strongly inspired by the [MATLAB Prognostics Model Library](https://github.com/nasa/PrognosticsModelLibrary), [MATLAB Prognostics Algorithm Library](https://github.com/nasa/PrognosticsAlgorithmLibrary), and the [MATLAB Prognostics Metrics Library](https://github.com/nasa/PrognosticsMetricsLibrary). We would like to recognize Matthew Daigle and the rest of the team that contributed to the Prognostics Models, Algorithms, and Metrics Libraries for the contributions their work on the MATLAB library made to the design of progpy.
 
 ## Notices
 Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.

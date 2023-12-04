@@ -31,35 +31,21 @@ def update_vols(params: dict) -> dict:
     }
 
 # set up charges (Li ions)
-def update_qpmin(params: dict) -> dict:
-    # min charge at pos electrode
-    return {
-        'qpMin': params['qMax']*params['xpMin'] 
-    }
-
-def update_qpmax(params: dict) -> dict:
-    # max charge at pos electrode
-    return {
-        'qpMax': params['qMax']*params['xpMax'] 
-    }
-
 def update_qnmin(params: dict) -> dict:
     # min charge at negative electrode
     return {
-        'qnMin': params['qMax']*params['xnMin'] 
+        'qnMin': params['qMax']*params['xnMin']
     }
 
 def update_qnmax(params: dict) -> dict:
     # max charge at negative electrode
     return {
-        'qnMax': params['qMax']*params['xnMax'] 
+        'qnMax': params['qMax']*params['xnMax']
     }
 
 def update_qpSBmin(params: dict) -> dict:
     # min charge at surface and bulk pos electrode
     return {
-        'qpSMin': params['qMax']*params['xpMin']*params['VolSFraction'],
-        'qpBMin': params['qMax']*params['xpMin']*(1.0-params['VolSFraction']),
         'x0': {
             **params['x0'],
             'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
@@ -67,25 +53,19 @@ def update_qpSBmin(params: dict) -> dict:
         }
     }
 
-def update_qpSBmax(params: dict) -> dict:
-    # max charge at surface and pos electrode
+def update_xpMin(params: dict) -> dict:
     return {
-        'qpSMax': params['qMax']*params['xpMax']*params['VolSFraction'],
-        'qpBMax': params['qMax']*params['xpMax']*(1.0-params['VolSFraction'])
+        'xpMin': 1.0-params['xnMax']
     }
 
-def update_qnSBmin(params: dict) -> dict:
-    # min charge at surface and bulk pos electrode
+def update_xnMin(params: dict) -> dict:
     return {
-        'qnSMin': params['qMax']*params['xnMin']*params['VolSFraction'],
-        'qnBMin': params['qMax']*params['xnMin']*(1.0-params['VolSFraction'])
+        'xnMin': 1.0-params['xpMax']
     }
 
 def update_qnSBmax(params: dict) -> dict:
     # max charge at surface and pos electrode
     return {
-        'qnSMax': params['qMax']*params['xnMax']*params['VolSFraction'],
-        'qnBMax': params['qMax']*params['xnMax']*(1.0-params['VolSFraction']),
         'x0': {
             **params['x0'],
             'qnS': params['qMax']*params['xnMax']*params['VolSFraction'],
@@ -204,12 +184,8 @@ class BatteryElectroChemEOD(PrognosticsModel):
         qMobile : float
         xnMax : float
             Maximum mole fraction (neg electrode)
-        xnMin : float
-            Minimum mole fraction (neg electrode)
         xpMax : float
-            Maximum mole fraction (pos electrode)
-        xpMin : float
-            Minimum mole fraction (pos electrode) - note xn + xp = 1
+            Maximum mole fraction (pos electrode). Typically 1.
         Ro : float
             for Ohmic drop (current collector resistances plus electrolyte resistance plus solid phase resistances at anode and cathode)
         alpha : float
@@ -266,7 +242,7 @@ class BatteryElectroChemEOD(PrognosticsModel):
     default_parameters = {  # Set to defaults
         'qMobile': 7600,
         'xnMax': 0.6,
-        'xnMin': 0,
+        'xnMin': 0.0,
         'xpMax': 1.0,
         'xpMin': 0.4,
         'Ro': 0.117215,
@@ -301,8 +277,6 @@ class BatteryElectroChemEOD(PrognosticsModel):
             'tb': 292.1  # in K, about 18.95 C
         },
 
-        'process_noise': 1e-3,
-
         # End of discharge voltage threshold
         'VEOD': 3.0, 
         'VDropoff': 0.1 # Voltage above EOD after which voltage will be considered in SOC calculation
@@ -318,13 +292,13 @@ class BatteryElectroChemEOD(PrognosticsModel):
 
     param_callbacks = {  # Callbacks for derived parameters
         'qMobile': [update_qmax],
-        'VolSFraction': [update_vols, update_qpSBmin, update_qpSBmax, update_qSBmax],
+        'VolSFraction': [update_vols, update_qpSBmin, update_qSBmax],
         'Vol': [update_vols],
-        'qMax': [update_qpmin, update_qpmax, update_qpSBmin, update_qpSBmax, update_qnmin, update_qnmax, update_qpSBmin, update_qpSBmax, update_qSBmax],
-        'xpMin': [update_qpmin, update_qpSBmin],
-        'xpMax': [update_qpmax, update_qpSBmax],
-        'xnMin': [update_qmax, update_qnmin, update_qnSBmin],
-        'xnMax': [update_qmax, update_qnmax, update_qnSBmax]
+        'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+        'xpMin': [update_qpSBmin],
+        'xpMax': [update_xnMin],
+        'xnMin': [update_qmax, update_qnmin],
+        'xnMax': [update_xpMin, update_qmax, update_qnmax, update_qnSBmax]
     }
 
     def dx(self, x, u):
@@ -675,7 +649,7 @@ def OverwrittenWarning(params):
 
 class BatteryElectroChemEODEOL(BatteryElectroChemEOL, BatteryElectroChemEOD):
     """
-    Prognostics :term:`model` for a battery degredation and discharge, represented by an electrochemical model as described in [Dailge2013]_ and [Daigle2016]_
+    Prognostics :term:`model` for a battery degredation and discharge, represented by an electrochemical model as described in [Daigle2013]_ and [Daigle2016]_
 
     The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the Prognostics Center of Excellence Data Repository [DataRepo]_.
 

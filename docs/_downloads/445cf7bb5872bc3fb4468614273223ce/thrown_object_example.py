@@ -11,9 +11,9 @@ Results:
     ii) Time event is predicted to occur (with uncertainty)
 """
 
-from prog_models.models.thrown_object import ThrownObject
+from progpy.models.thrown_object import ThrownObject
 # VVV Uncomment this to use Electro Chemistry Model VVV
-# from prog_models.models import BatteryElectroChem as Battery
+# from progpy.models import BatteryElectroChem as Battery
 
 from prog_algs import *
 

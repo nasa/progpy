@@ -13,9 +13,9 @@ Results:
     iii) Various prediction metrics, including alpha-lambda metric 
 """
 
-from prog_models.models import BatteryCircuit as Battery
+from progpy.models import BatteryCircuit as Battery
 # VVV Uncomment this to use Electro Chemistry Model VVV
-# from prog_models.models import BatteryElectroChem as Battery
+# from progpy.models import BatteryElectroChem as Battery
 
 from prog_algs import *
 
@@ -52,7 +52,7 @@ def run_example():
     # Here we're comparing the results given different numbers of samples
     print('Benchmarking...')
     import time  # For timing prediction
-    from prog_algs.metrics import samples as metrics 
+    from progpy.metrics import samples as metrics 
 
     # Perform benchmarking for each number of samples
     sample_counts = [1, 2, 5, 10]

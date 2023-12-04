@@ -24,7 +24,7 @@ This is the most common way to construct a :py:class:`DataModel` object, using t
 
    .. code-block:: python
 
-      >>> from prog_models.models import LSTMStateTransitionModel
+      >>> from progpy.models import LSTMStateTransitionModel
       >>> input_data = [run1.inputs, run2.inputs, run3.inputs]
       >>> output_data = [run1.outputs, run2.outputs, run3.outputs]
       >>> m = LSTMStateTransitionModel.from_data(input_data, output_data)
@@ -37,8 +37,8 @@ Surrogate models are constructed using the :py:func:`DataModel.from_model` Class
 
    .. code-block:: python
 
-      >>> from prog_models.models import ThrownObject
-      >>> from prog_models.models import LSTMStateTransitionModel
+      >>> from progpy.models import ThrownObject
+      >>> from progpy.models import LSTMStateTransitionModel
       >>> m = ThrownObject()
       >>> def future_loading(t, x=None):
       >>>    return m.InputContainer({})  # No input for thrown object 

@@ -25,7 +25,7 @@ Example demonstrating when and how to identify model state limits.
 .. code-block:: default
 
 
-    from prog_models.models.thrown_object import ThrownObject
+    from progpy.models.thrown_object import ThrownObject
     from math import inf
 
     def run_example():

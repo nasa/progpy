@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
     paths:
-      - prog_models
+      - progpy
 
 jobs:
   coverage:

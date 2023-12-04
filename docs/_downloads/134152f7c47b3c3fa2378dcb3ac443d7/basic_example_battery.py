@@ -15,17 +15,17 @@ Results:
     iv) Figures illustrating results
 """
 
-from prog_models.models import BatteryCircuit as Battery
+from progpy.models import BatteryCircuit as Battery
 # VVV Uncomment this to use Electro Chemistry Model VVV
-# from prog_models.models import BatteryElectroChemEOD as Battery
+# from progpy.models import BatteryElectroChemEOD as Battery
 
-from prog_algs.state_estimators import ParticleFilter as StateEstimator
+from progpy.state_estimators import ParticleFilter as StateEstimator
 # VVV Uncomment this to use UKF State Estimator VVV
-# from prog_algs.state_estimators import UnscentedKalmanFilter as StateEstimator
+# from progpy.state_estimators import UnscentedKalmanFilter as StateEstimator
 
-from prog_algs.predictors import MonteCarlo as Predictor
+from progpy.predictors import MonteCarlo as Predictor
 # VVV Uncomment this to use UnscentedTransform Predictor VVV
-# from prog_algs.predictors import UnscentedTransformPredictor as Predictor
+# from progpy.predictors import UnscentedTransformPredictor as Predictor
 
 def run_example():
     # Step 1: Setup model & future loading
@@ -98,7 +98,7 @@ def run_example():
     # Step 3c: Analyze the results
 
     # Note: The results of a sample-based prediction can be accessed by sample, e.g.,
-    from prog_algs.predictors import UnweightedSamplesPrediction
+    from progpy.predictors import UnweightedSamplesPrediction
     if isinstance(mc_results, UnweightedSamplesPrediction):
         states_sample_1 = mc_results.states[1]
     # now states_sample_1[n] corresponds to times[n] for the first sample
@@ -123,7 +123,7 @@ def run_example():
     # You can also use the metrics package to generate some useful metrics on the result of a prediction
     print("\nEOD Prediction Metrics")
 
-    from prog_algs.metrics import prob_success
+    from progpy.metrics import prob_success
     print('\tPortion between 3005.2 and 3005.6: ', mc_results.time_of_event.percentage_in_bounds([3005.2, 3005.6]))
     print('\tAssuming ground truth 3002.25: ', mc_results.time_of_event.metrics(ground_truth=3005.25))
     print('\tP(Success) if mission ends at 3002.25: ', prob_success(mc_results.time_of_event, 3005.25))

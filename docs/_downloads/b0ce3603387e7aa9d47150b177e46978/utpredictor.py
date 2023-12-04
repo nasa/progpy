@@ -4,9 +4,9 @@
 An example using the UnscentedTransformPredictor class to predict the degredation of a battery. 
 """
 
-from prog_models.models import BatteryCircuit
+from progpy.models import BatteryCircuit
 from prog_algs import *
-# from prog_algs.visualize import plot_hist
+# from progpy.visualize import plot_hist
 # import matplotlib.pyplot as plt
 
 def run_example():

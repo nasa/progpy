@@ -12,7 +12,7 @@ Results:
     ii) Time event is predicted to occur (with uncertainty)
 """
 
-from prog_models.models.thrown_object import ThrownObject
+from progpy.models.thrown_object import ThrownObject
 from prog_algs import *
 from pprint import pprint
 
@@ -20,7 +20,7 @@ def run_example():
     # Step 1: Setup model & future loading
     def future_loading(t, x = None):
         return {}
-    m = ThrownObject(process_noise = 0.25, measurement_noise = 0.2)
+    m = ThrownObject(process_noise = 0.2, measurement_noise = 0.1)
     initial_state = m.initialize()
 
     # Step 2: Demonstrating state estimator
@@ -50,9 +50,9 @@ def run_example():
     # THIS IS WHERE WE DIVERGE FROM THE THROWN_OBJECT_EXAMPLE
     # Here we set a prediction horizon
     # We're saying we are not interested in any events that occur after this time
-    PREDICTION_HORIZON = 7.75
+    PREDICTION_HORIZON = 7.67
     samples = filt.x  # Since we're using a particle filter, which is also sample-based, we can directly use the samples, without changes
-    STEP_SIZE = 0.01
+    STEP_SIZE = 0.001
     mc_results = mc.predict(samples, future_loading, dt=STEP_SIZE, horizon = PREDICTION_HORIZON)
     print("\nPredicted Time of Event:")
     metrics = mc_results.time_of_event.metrics()
@@ -60,7 +60,7 @@ def run_example():
     mc_results.time_of_event.plot_hist(keys = 'impact')
     mc_results.time_of_event.plot_hist(keys = 'falling')
 
-    print("\nSamples where impact occurs before horizon: {:.2f}%".format(metrics['impact']['number of samples']/NUM_SAMPLES*100))
+    print("\nSamples where impact occurs before horizon: {:.2f}%".format(metrics['impact']['number of samples']/mc.parameters['n_samples']*100))
     
     # Step 4: Show all plots
     import matplotlib.pyplot as plt  # For plotting

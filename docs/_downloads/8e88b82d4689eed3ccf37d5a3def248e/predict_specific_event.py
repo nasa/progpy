@@ -5,7 +5,7 @@ In this example we are using the UTPredictor to predict a specific event, in thi
 """
 
 from prog_algs import state_estimators, predictors
-from prog_models.models.thrown_object import ThrownObject
+from progpy.models.thrown_object import ThrownObject
 
 def run_example():
     ## Setup

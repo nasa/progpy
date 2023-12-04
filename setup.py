@@ -23,8 +23,8 @@ INSTALL_REQS = [
 
 setup(
     name='progpy',
-    version='1.6.0-pre',
-    description='The NASA Prognostic Package (ProgPy) is a python prognostics framework focused on building, using, and evaluating models and algorithms for prognostics (computation of remaining useful life) and health management of engineering systems, and provides a set of prognostics models for select components and prognostics algorithms developed within this framework, suitable for use in prognostics for these components. It also includes algorithms for state estimation and prediction, including uncertainty propagation.',
+    version='1.7.0-pre',
+    description='The NASA Prognostic Package (ProgPy) is a python prognostics framework focused on building, using, and evaluating models and algorithms for prognostics (computation of remaining useful life) and health management of engineering systems, and provides a set of prognostics models for select components and prognostics algorithms developed within this framework, including uncertainty propagation.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://nasa.github.io/progpy/',

@@ -12,7 +12,7 @@ DATASET_ID = 1
 def run_example():
     # Step 1: Download and import the dataset for a single battery
     # Note: This may take some time
-    from prog_models.datasets import nasa_battery
+    from progpy.datasets import nasa_battery
     print('Downloading... ', end='')
     (desc, data) = nasa_battery.load_data(DATASET_ID)
     print('done')

@@ -60,17 +60,17 @@ e.g. if trim_data_to = 0.7 and the simulated data spans from t=0 to t=100, the s
 <p class="rubric">Example</p>
 <div class="line-block">
 <div class="line">Method 1: from data
-&gt;&gt;&gt; from prog_models.data_models import DMDModel
+&gt;&gt;&gt; from progpy.data_models import DMDModel
 &gt;&gt;&gt; m = DMDModel.from_data(inputs= input_data, outputs = output_data)  # Generating from data</div>
 </div>
 <div class="line-block">
 <div class="line">Method 2: from a model
-&gt;&gt;&gt; from prog_models.data_models import DMDModel
+&gt;&gt;&gt; from progpy.data_models import DMDModel
 &gt;&gt;&gt; m = DMDModel.from_model(other_model, loading_equations)</div>
 </div>
 <div class="line-block">
 <div class="line">Method 3: from DMD Matrix
-&gt;&gt;&gt; from prog_models.data_models import DMDModel
+&gt;&gt;&gt; from progpy.data_models import DMDModel
 &gt;&gt;&gt; m = DMDModel(DMD_Matrix, input_keys = [‘i’], output_keys = [‘t’, ‘v’])</div>
 </div>
 <div class="admonition note">

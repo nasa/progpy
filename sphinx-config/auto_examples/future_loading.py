@@ -5,7 +5,7 @@
 Example demonstrating ways to use future loading. 
 """
 
-from prog_models.models import BatteryCircuit
+from progpy.models import BatteryCircuit
 from statistics import mean
 from numpy.random import normal
 
