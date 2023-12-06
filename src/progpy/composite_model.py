@@ -47,15 +47,11 @@ class CompositeModel(PrognosticsModel):
             raise ValueError('The connections argument must be a list')
 
         # Initialize
-        self.inputs = set()
-        self.states = set()
-        self.outputs = set()
-        self.events = set()
-        self.performance_metric_keys = set()
-        self.model_names = set()
-        duplicate_names = {}
+        kwargs['model_names'] = set()
         kwargs['models'] = []
         kwargs['functions'] = []
+        kwargs['connections'] = connections
+        duplicate_names = {}
 
         # Handle models
         for m in models:
@@ -78,10 +74,10 @@ class CompositeModel(PrognosticsModel):
                 raise ValueError(f'Each model must be a PrognosticsModel or tuple (name: str, PrognosticsModel), was {type(m)}')
 
             # Check for duplicate names
-            if m[0] in self.model_names:
+            if m[0] in kwargs['model_names']:
                 duplicate_names[m[0]] = duplicate_names.get(m[0], 1) + 1
                 m = (m[0] + '_' + str(duplicate_names[m[0]]), m[1])
-            self.model_names.add(m[0])
+            kwargs['model_names'].add(m[0])
 
             # Handle model/function
             if isinstance(m[1], PrognosticsModel):
@@ -93,40 +89,57 @@ class CompositeModel(PrognosticsModel):
                     'The second element of each model tuple must be a'
                     ' PrognosticsModel')
 
+        self.__setstate__(kwargs)
+
+        # Finish initialization
+        super().__init__(**kwargs)
+
+    def __setstate__(self, params: dict) -> None:
+        """
+        Setup inputs, outputs, connections from models, functions. Needed to fix copying/pickling
+
+        Args:
+            params (dict): kwargs (either parameters or kwargs into constructor)
+        """
+        self.inputs = set()
+        self.states = set()
+        self.outputs = set()
+        self.events = set()
+        self.performance_metric_keys = set()
+
         # update inputs, states, outputs, etc.
-        for (name, m) in kwargs['models']:
+        for (name, m) in params['models']:
             self.inputs |= set([name + DIVIDER + u for u in m.inputs])
             self.states |= set([name + DIVIDER + x for x in m.states])
             self.outputs |= set([name + DIVIDER + z for z in m.outputs])
             self.events |= set([name + DIVIDER + e for e in m.events])
             self.performance_metric_keys |= set([name + DIVIDER + p for p in m.performance_metric_keys])
 
-        for (name, fcn) in kwargs['functions']:
+        for (name, fcn) in params['functions']:
             self.inputs |= set([name + DIVIDER + u for u in signature(fcn).parameters.keys()])
             self.states.add(name + DIVIDER + 'return')
 
         # Handle outputs
-        if 'outputs' in kwargs:
-            if isinstance(kwargs['outputs'], str):
-                kwargs['outputs'] = [kwargs['outputs']]
-            if not isinstance(kwargs['outputs'], Iterable):
+        if 'outputs' in params:
+            if isinstance(params['outputs'], str):
+                params['outputs'] = [params['outputs']]
+            if not isinstance(params['outputs'], Iterable):
                 raise ValueError('The outputs argument must be a list[str]')
-            if not set(kwargs['outputs']).issubset(self.outputs):
+            if not set(params['outputs']).issubset(self.outputs):
                 raise ValueError(
                     'The outputs of the composite model must be a '
                     'subset of the outputs of the models')
-            self.outputs = kwargs['outputs']
+            self.outputs = params['outputs']
 
         # Handle Connections
-        kwargs['connections'] = []
         self.__to_input_connections = {
-            m_name: [] for m_name in self.model_names}
+            m_name: [] for m_name in params['model_names']}
         self.__to_state_connections = {
-            m_name: [] for m_name in self.model_names}
+            m_name: [] for m_name in params['model_names']}
         self.__to_state_from_pm_connections = {
-            m_name: [] for m_name in self.model_names}
+            m_name: [] for m_name in params['model_names']}
 
-        for connection in connections:
+        for connection in params['connections']:
             # Input validation
             if not isinstance(connection, Iterable) or len(connection) != 2:
                 raise ValueError(
@@ -158,11 +171,11 @@ class CompositeModel(PrognosticsModel):
             if in_model == out_model:
                 raise ValueError(
                     'The input and output models must be different')
-            if in_model not in self.model_names:
+            if in_model not in params['model_names']:
                 raise ValueError(
                     'The input model must be one of the models'
                     ' in the composite model')
-            if out_model not in self.model_names:
+            if out_model not in params['model_names']:
                 raise ValueError(
                     'The output model must be one of the models'
                     ' in the composite model')
@@ -187,9 +200,8 @@ class CompositeModel(PrognosticsModel):
             else:
                 raise ValueError(
                     f'The input key {in_key} must be an output or state')
-
-        # Finish initialization
-        super().__init__(**kwargs)
+        
+        return super().__setstate__(params)
 
     def initialize(self, u=None, z=None):
         if u is None:
