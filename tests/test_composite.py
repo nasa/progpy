@@ -1,5 +1,6 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
 
+from copy import deepcopy
 import unittest
 
 from progpy import CompositeModel
@@ -408,6 +409,45 @@ class TestCompositeModel(unittest.TestCase):
         x = m_composite.next_state(x0, u, 1)
         self.assertAlmostEqual(x['OneInputOneOutputOneEventLM.x1'], 3)  # extra 1 from pm
         self.assertAlmostEqual(x['OneInputOneOutputOneEventLM_2.x1'], 2)
+
+    def test_composite_copy(self):
+        m = OneInputOneOutputOneEventLM()
+        m_composite = CompositeModel([m, m], connections=[('OneInputOneOutputOneEventLM_2.pm1', 'OneInputOneOutputOneEventLM.u1')])
+        m_composite_copy = deepcopy(m_composite)
+        self.assertSetEqual(m_composite.states, m_composite_copy.states)
+        self.assertSetEqual(m_composite.inputs, m_composite_copy.inputs)
+        self.assertSetEqual(m_composite.outputs, m_composite_copy.outputs)
+        self.assertSetEqual(m_composite.events, m_composite_copy.events)
+        self.assertSetEqual(m_composite.performance_metric_keys, m_composite_copy.performance_metric_keys)
+        
+        # Initial State
+        x0 = m_composite.initialize()
+        x0_copy = m_composite_copy.initialize()
+        self.assertSetEqual(set(x0.keys()), set(x0_copy.keys()))
+        for key in x0.keys():
+            self.assertEqual(x0[key], x0_copy[key])
+
+        # State transition
+        u = m_composite.InputContainer({'OneInputOneOutputOneEventLM_2.u1': 1})
+        x = m_composite.next_state(x0, u, 1)
+        x_copy = m_composite_copy.next_state(x0_copy, u, 1)
+        self.assertSetEqual(set(x.keys()), set(x_copy.keys()))
+        for key in x.keys():
+            self.assertEqual(x[key], x_copy[key])
+
+        # Outputs
+        z = m_composite.output(x)
+        z_copy = m_composite_copy.output(x_copy)
+        self.assertSetEqual(set(z.keys()), set(z_copy.keys()))
+        for key in z.keys():
+            self.assertEqual(z[key], z_copy[key])
+
+        # Event states
+        es = m_composite.event_state(x)
+        es_copy = m_composite_copy.event_state(x_copy)
+        self.assertSetEqual(set(es.keys()), set(es_copy.keys()))
+        for key in es.keys():
+            self.assertEqual(es[key], es_copy[key])
 
 def main():
     load_test = unittest.TestLoader()
