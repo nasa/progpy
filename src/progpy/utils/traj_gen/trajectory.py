@@ -195,12 +195,7 @@ class Trajectory():
         if takeoff_time is not None and not isinstance(takeoff_time, (float, int)):
             raise TypeError("Takeoff time must be provided as a float.")
 
-        # Trajectory dictionary to store output
-        # -----------------------------------
         self.trajectory = {}
-
-        # Route properties
-        # =================
         self.waypoints = {
             'lat': lat,
             'lon': lon,
@@ -219,7 +214,6 @@ class Trajectory():
             else:
                 self.waypoints['takeoff_time'] = 0
 
-        # Generate Heading
         self.waypoints['heading'] = geom.gen_heading_angle(
             self.waypoints['lat'],
             self.waypoints['lon'],
@@ -227,14 +221,12 @@ class Trajectory():
 
         # Set up coordinate system conversion between Geodetic,
         # Earth-Centric Earth-Fixed (ECF), and Cartesian (East-North-Up, ENU)
-        # ------------------------------------------------------
         self.coordinate_system = geom.Coord(
             self.waypoints['lat'][0],
             self.waypoints['lon'][0],
             self.waypoints['alt'][0])
 
         # Define speed parameters - only necessary if ETAs are not defined
-        # ------------------------------------------------------
         if etas is not None and ('cruise_speed' in kwargs or 'ascent_speed' in kwargs or 'descent_speed' in kwargs or 'landing_speed' in kwargs):
             warn("Speed values are ignored since ETAs were specified. To define speeds (cruise, ascent, descent, landing) instead, do not specify ETAs.")
         if etas is None and ('cruise_speed' not in kwargs or 'ascent_speed' not in kwargs or 'descent_speed' not in kwargs or 'landing_speed' not in kwargs):
@@ -253,9 +245,6 @@ class Trajectory():
         # Set ETAs for waypoints
         self.set_eta(idx_land_pos=idx_land_pos)
 
-        # Get waypoints in cartesian frame, unix time,
-        # and calculate heading angle for yaw
-        # ----------------------------------------------
         # Covert to cartesian coordinates
         self.waypoints['x'], \
             self.waypoints['y'], \
@@ -265,7 +254,6 @@ class Trajectory():
                 self.waypoints['alt'])
                 
         # Interpolation properties
-        # ========================
         self.parameters = {'gravity': 9.81,
                            'max_phi': 45/180.0*np.pi,
                            'max_theta': 45/180.0*np.pi,
@@ -299,7 +287,7 @@ class Trajectory():
             'r': self.trajectory['angVel'][:, 2],
             
             't': self.trajectory['time']}
-    
+
     def compute_attitude(self, heading_profile, acceleration_profile, timestep_size):
         """
         Compute attitude defined by Euler's angles as a function of time given heading and acceleration profiles.
@@ -333,36 +321,44 @@ class Trajectory():
             'attitude': np.array([phi, theta, psi]).T,
             'angVel': np.array([p, q, r]).T}
 
-    def compute_trajectory_nurbs(self, dt):
-        # Compute position and yaw profiles with NURBS
-        # --------------------------------------------
+    def compute_trajectory_nurbs(self, dt) -> None:
+        """
+        Compute position and yaw profiles with NURBS
+
+        Args:
+            dt (float): time step
+        """
         # Instantiate NURBS class to generate trajectory
         points = {
             'x': self.waypoints['x'],
             'y': self.waypoints['y'],
             'z': self.waypoints['z']}
-        nurbs_alg = NURBS(points=points,
-                          weights=self.parameters['weight_vector'],
-                          times=self.waypoints['eta'] - self.waypoints['eta'][0],
-                          yaw=self.waypoints['heading'],
-                          order=self.parameters['nurbs_order'],
-                          basis_length=self.parameters['nurbs_basis_length'])
+        nurbs_alg = NURBS(
+            points=points,
+            weights=self.parameters['weight_vector'],
+            times=self.waypoints['eta'] - self.waypoints['eta'][0],
+            yaw=self.waypoints['heading'],
+            order=self.parameters['nurbs_order'],
+            basis_length=self.parameters['nurbs_basis_length'])
         
-        # Generate position and yaw interpolated given the timestep size
+        # Generate position and yaw interpolated given the timestep
         pos_interp, yaw_interp, time_interp = nurbs_alg.generate(timestep_size=dt)
         
-        # Generate velocity, acceleration, and jerk (optional) profile from position profile
+        # Generate velocity, acceleration, and jerk (optional) profile
+        # from position profile
         linear_profiles = compute_derivatives(pos_interp, time_interp)
         
-        # Generate angular profiles: attitude and angular velocities from heading and acceleration
-        angular_profiles = self.compute_attitude(heading_profile=yaw_interp,
-                                                 acceleration_profile=linear_profiles['acceleration'],
-                                                 timestep_size=dt)
-        # Store in trajectory dictionary
-        # ----------------------------
+        # Generate angular profiles:
+        # attitude and angular velocities from heading and acceleration
+        angular_profiles = self.compute_attitude(
+            heading_profile=yaw_interp,
+            acceleration_profile=linear_profiles['acceleration'],
+            timestep_size=dt)
+        
+        # Store as attribute
         self.trajectory = {**{'position': np.vstack(list(pos_interp.values())).T},
-                           **{'velocity': np.vstack(list(linear_profiles['velocity'].values())).T}, 
-                           **{'acceleration': np.vstack(list(linear_profiles['acceleration'].values())).T}, 
+                           **{'velocity': np.vstack(list(linear_profiles['velocity'].values())).T},
+                           **{'acceleration': np.vstack(list(linear_profiles['acceleration'].values())).T},
                            **angular_profiles,
                            **{'time': time_interp}}
 
@@ -374,11 +370,11 @@ class Trajectory():
         :param dt:          s, scalar, time step size used to interpolate the waypoints and generate the trajectory
         :return:            dictionary of state variables describing the trajectory as a function of time
         """
-        self.parameters.update(**kwargs)    # Override NURBS parameters
+        self.parameters.update(**kwargs)  # Override NURBS parameters
         assert len(self.parameters['weight_vector']) == len(self.waypoints['x']), "Length of waypoint weight vector and number of waypoints must coincide."
 
-        self.compute_trajectory_nurbs(dt)     # GENERATE NURBS-BASED TRAJECTORY
-        self.__adjust_eta_given_max_acceleration(dt)    # Adjust profile according to max accelerations
+        self.compute_trajectory_nurbs(dt)
+        self.__adjust_eta_given_max_acceleration(dt)
 
         # Convert trajectory into geodetic coordinates
         # --------------------------------------------
@@ -391,7 +387,7 @@ class Trajectory():
                     self.trajectory['position'][:, 2])
         return self.ref_traj
 
-    def __adjust_eta_given_max_acceleration(self, dt):
+    def __adjust_eta_given_max_acceleration(self, dt) -> None:
         """
         Adjusting the trajectory computed by the NURBS algorithm according to whether the maximum 
         jerk exceeds the limit allowed. This prevents the vehicle to crash because of high accelerations during the flight
@@ -526,7 +522,7 @@ class Trajectory():
         
         return idx_land_pos
     
-    def set_eta(self, idx_land_pos, hovering=0):
+    def set_eta(self, idx_land_pos, hovering=0) -> None:
         """
         Assign ETAs to waypoints
         If ETAS are provided (i.e., eta is not None), assign them.
