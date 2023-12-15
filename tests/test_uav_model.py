@@ -14,7 +14,6 @@ from progpy.loading.controllers import LQR_I, LQR
 from progpy.utils.traj_gen import geometry as geom
 
 class TestUAVGen(unittest.TestCase):
-    
     def setUp(self):
         # set stdout (so it wont print)
         sys.stdout = StringIO()

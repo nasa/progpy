@@ -188,7 +188,7 @@ class UnscentedTransformPredictor(Predictor):
         threshold_met = model.threshold_met
         StateContainer = model.StateContainer
 
-        # Update State 
+        # Update State
         self.__state_keys = state_keys = state.mean.keys()  # Used to maintain ordering as we strip keys and return
         filt.x = [x for x in state.mean.values()]
         filt.P = state.cov

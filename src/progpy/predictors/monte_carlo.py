@@ -31,7 +31,7 @@ class MonteCarlo(Predictor):
         'n_samples': None
     }
 
-    def predict(self, state: UncertainData, future_loading_eqn: Callable = None, **kwargs) -> PredictionResults:
+    def predict(self, state: UncertainData, future_loading_eqn: Callable=None, **kwargs) -> PredictionResults:
         """
         Perform a single prediction
 
@@ -71,7 +71,7 @@ class MonteCarlo(Predictor):
         """
         if isinstance(state, dict) or isinstance(state, self.model.StateContainer):
             from progpy.uncertain_data import ScalarData
-            state = ScalarData(state, _type = self.model.StateContainer)
+            state = ScalarData(state, _type=self.model.StateContainer)
         elif isinstance(state, UncertainData):
             state._type = self.model.StateContainer
         else:
@@ -80,8 +80,8 @@ class MonteCarlo(Predictor):
         if future_loading_eqn is None:
             future_loading_eqn = lambda t, x=None: self.model.InputContainer({})
 
-        params = deepcopy(self.parameters) # copy parameters
-        params.update(kwargs) # update for specific run
+        params = deepcopy(self.parameters)  # copy parameters
+        params.update(kwargs)  # update for specific run
         params['print'] = False
         params['progress'] = False
 
@@ -130,19 +130,20 @@ class MonteCarlo(Predictor):
                 params['save_freq'] = (params['t0'], params['save_freq'])
             
             if len(params['events']) == 0:  # Predict to time
-                (times, inputs, states, outputs, event_states) = simulate_to_threshold(future_loading_eqn,       
-                    first_output, 
-                    threshold_keys = [],
+                (times, inputs, states, outputs, event_states) = simulate_to_threshold(
+                    future_loading_eqn,
+                    first_output,
+                    threshold_keys=[],
                     **params
                 )
             else:
                 events_remaining = params['events'].copy()
 
                 times = []
-                inputs = SimResult(_copy = False)
-                states = SimResult(_copy = False)
-                outputs = LazySimResult(fcn = self.model.output, _copy = False)
-                event_states = LazySimResult(fcn = es_eqn, _copy = False)
+                inputs = SimResult(_copy=False)
+                states = SimResult(_copy=False)
+                outputs = LazySimResult(fcn=self.model.output, _copy=False)
+                event_states = LazySimResult(fcn=es_eqn, _copy=False)
 
                 # Non-vectorized prediction
                 while len(events_remaining) > 0:  # Still events to predict
@@ -150,9 +151,10 @@ class MonteCarlo(Predictor):
                     # we must subtract the difference in current t0 from the initial (i.e., prediction t0)
                     # each subsequent simulation
                     params['horizon'] = HORIZON - (params['t0'] - t0)
-                    (t, u, xi, z, es) = simulate_to_threshold(future_loading_eqn,       
-                        first_output, 
-                        threshold_keys = events_remaining,
+                    (t, u, xi, z, es) = simulate_to_threshold(
+                        future_loading_eqn,
+                        first_output,
+                        threshold_keys=events_remaining,
                         **params
                     )
 
@@ -160,8 +162,8 @@ class MonteCarlo(Predictor):
                     times.extend(t)
                     inputs.extend(u)
                     states.extend(xi)
-                    outputs.extend(z, _copy = False)
-                    event_states.extend(es, _copy = False)
+                    outputs.extend(z, _copy=False)
+                    event_states.extend(es, _copy=False)
 
                     # Get which event occurs
                     t_met = tm_eqn(states[-1])
@@ -178,7 +180,7 @@ class MonteCarlo(Predictor):
 
                     # An event has occured
                     time_of_event[event] = times[-1]
-                    events_remaining.remove(event)  # No longer an event to predect to
+                    events_remaining.remove(event)  # No longer an event to predict to
 
                     # Remove last state (event)
                     params['t0'] = times.pop()
@@ -189,7 +191,7 @@ class MonteCarlo(Predictor):
                     event_states.pop()
             
             # Add to "all" structures
-            if len(times) > len(times_all): # Keep longest
+            if len(times) > len(times_all):  # Keep longest
                 times_all = times
             inputs_all.append(inputs)
             states_all.append(states)
@@ -206,14 +208,17 @@ class MonteCarlo(Predictor):
 
         # Transform final states:
         time_of_event.final_state = {
-            key: UnweightedSamples([sample[key] for sample in last_states], _type = self.model.StateContainer) for key in time_of_event.keys()
+            key: UnweightedSamples(
+                    [sample[key] for sample in last_states],
+                    _type=self.model.StateContainer
+                ) for key in time_of_event.keys()
         }
 
         return PredictionResults(
-            times_all, 
-            inputs_all, 
-            states_all, 
-            outputs_all, 
-            event_states_all, 
+            times_all,
+            inputs_all,
+            states_all,
+            outputs_all,
+            event_states_all,
             time_of_event
         )

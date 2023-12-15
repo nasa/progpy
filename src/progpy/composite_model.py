@@ -298,7 +298,8 @@ class CompositeModel(PrognosticsModel):
         z = {}
         for (name, m) in self.parameters['models']:
             # Prepare state
-            x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
+            x_i = m.StateContainer({
+                key: x[name + '.' + key] for key in m.states})
 
             # Get outputs
             z_i = m.output(x_i)
@@ -312,7 +313,8 @@ class CompositeModel(PrognosticsModel):
         metrics = {}
         for (name, m) in self.parameters['models']:
             # Prepare state
-            x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
+            x_i = m.StateContainer({
+                key: x[name + '.' + key] for key in m.states})
 
             # Get outputs
             metrics_i = m.performance_metrics(x_i)
@@ -326,7 +328,8 @@ class CompositeModel(PrognosticsModel):
         e = {}
         for (name, m) in self.parameters['models']:
             # Prepare state
-            x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
+            x_i = m.StateContainer({
+                key: x[name + '.' + key] for key in m.states})
 
             # Get outputs
             e_i = m.event_state(x_i)
@@ -340,7 +343,8 @@ class CompositeModel(PrognosticsModel):
         tm = {}
         for (name, m) in self.parameters['models']:
             # Prepare state
-            x_i = m.StateContainer({key: x[name + '.' + key] for key in m.states})
+            x_i = m.StateContainer({
+                key: x[name + '.' + key] for key in m.states})
 
             # Get outputs
             tm_i = m.threshold_met(x_i)
