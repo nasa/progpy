@@ -7,6 +7,8 @@ Geometric functions
 
 import numpy as np
 
+RAD2DEG = (180.0/np.pi)
+
 # EARTH-RELATED DISTANCE FUNCTIONS
 def greatcircle_distance(lat1, lat2, lon1, lon2, R=6371e3):
     """
@@ -362,7 +364,7 @@ class Coord():
         self.N0 = self.a / np.sqrt(1 - self.e**2.0 * np.sin(self.lat0)**2.0)  # [m], Radius of curvature on the Earth
     
     def __str__(self):
-        return f'coordinate at {np.abs(self.lat0)}{"°N" if (np.sign(self.lat0) >= 0) else "°S"} {np.abs(self.lon0)}{"°E" if (np.sign(self.lon0) >= 0) else "°W"} and {self.alt0}m elevation'
+        return f'coordinate at {round(np.abs(self.lat0*RAD2DEG), 4)}{"°N" if (np.sign(self.lat0) >= 0) else "°S"} {round(np.abs(self.lon0*RAD2DEG), 4)}{"°E" if (np.sign(self.lon0) >= 0) else "°W"} and {self.alt0}m elevation'
 
     def ecef2enu(self, xecef, yecef, zecef):
         """
