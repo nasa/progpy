@@ -9,6 +9,7 @@ from progpy.models.aircraft_model import AircraftModel
 from progpy.models.aircraft_model.vehicles.aero import aerodynamics as aero
 from progpy.models.aircraft_model.vehicles import vehicles
 from progpy.utils.traj_gen import geometry as geom
+from progpy.utils.traj_gen.trajectory import TrajectoryFigure
 
 
 class SmallRotorcraft(AircraftModel):
@@ -321,7 +322,7 @@ class SmallRotorcraft(AircraftModel):
 
         return A, B
 
-    def visualize_traj(self, pred, ref=None, prefix=''):
+    def visualize_traj(self, pred, ref=None, prefix='', fig=None, pred_cfg={'linewidth': 2.0, 'alpha': 0.6, 'color': 'tab:blue', 'linestyle':'-', 'label':'predicted'}, ref_cfg={'linewidth': 2.0, 'alpha': 0.6, 'color': 'tab:orange', 'linestyle':'--', 'label':'reference'}):
         """
         This method provides functionality to visualize a predicted trajectory generated, plotted with the reference trajectory. 
 
@@ -338,21 +339,22 @@ class SmallRotorcraft(AircraftModel):
               Reference trajectory - dict with keys for each state in the vehicle model and corresponding values as numpy arrays
         prefix : str, optional
               Prefix added to keys in predicted values. This is used to plot the trajectory using the results from a composite model
+        pred_cfg : dict, optional
+              Configuration for the prediction line on the graphs. See matplotlib.pyplot.plot documentation for more details
+        ref_cfg : dict, optional
+              Configuration for the reference line (if provided) on the graphs. See matplotlib.pyplot.plot documentation for more details
+        fig : TrajectoryFigure, optional
+              Figure where the additional diagrams are to be added. Creates a new figure if not provided
 
-        Returns 
+        Returns
         -------
-        fig : Visualization of trajectory generation results 
+        TrajectoryFigure : Visualization of trajectory generation results 
         """
 
-        # Extract predicted trajectory information
-        pred_time = pred.times
-        pred_x = [pred.outputs[iter][prefix+'x'] for iter in range(len(pred_time))]
-        pred_y = [pred.outputs[iter][prefix+'y'] for iter in range(len(pred_time))]
-        pred_z = [pred.outputs[iter][prefix+'z'] for iter in range(len(pred_time))]
-
-        # Initialize Figure
-        params = dict(figsize=(13, 9), fontsize=14, linewidth=2.0, alpha_preds=0.6)
-        fig, (ax1, ax2) = plt.subplots(2)
+        if fig is None:
+            fig = plt.figure(FigureClass=TrajectoryFigure)
+        elif not isinstance(fig, TrajectoryFigure):
+            raise TypeError(f"fig must be a TrajectorFigure, was {type(fig)}")
 
         # Handle reference information
         if ref is not None:
@@ -363,19 +365,20 @@ class SmallRotorcraft(AircraftModel):
           ref_z       = ref['z'].tolist()
 
           # Plot reference trajectories
-          ax1.plot(ref_x, ref_y, '--', linewidth=params['linewidth'], color='tab:orange', alpha=0.5, label='reference trajectory')
-          ax2.plot(time, ref_z, '-', color='tab:orange', alpha=params['alpha_preds'], linewidth=params['linewidth'], label='reference trajectory')
+          fig.plot_traj(ref_x, ref_y, **ref_cfg)
+          fig.plot_alt(time, ref_z, **ref_cfg)
+
+        # Extract predicted trajectory information
+        pred_x = [pred.outputs[iter][prefix+'x'] for iter in range(len(pred.times))]
+        pred_y = [pred.outputs[iter][prefix+'y'] for iter in range(len(pred.times))]
+        pred_z = [pred.outputs[iter][prefix+'z'] for iter in range(len(pred.times))]
         
         # Plot predictions
-        ax1.plot(pred_x, pred_y,'-', color='tab:blue', alpha=params['alpha_preds'], linewidth=params['linewidth'], label='prediction')
-        ax2.plot(pred_time, pred_z,'-', color='tab:blue',alpha=params['alpha_preds'], linewidth=params['linewidth'], label='prediction')
+        fig.plot_traj(pred_x, pred_y, **pred_cfg)
+        fig.plot_alt(pred.times, pred_z, **pred_cfg)
 
-        # Add labels
-        ax1.set_xlabel('x', fontsize=params['fontsize'])
-        ax1.set_ylabel('y', fontsize=params['fontsize'])
-        ax1.legend(fontsize=params['fontsize'])
-        ax2.set_xlabel('time stamp, -', fontsize=params['fontsize'])
-        ax2.set_ylabel('z', fontsize=params['fontsize'])
+        # Final formatting
+        fig.get_axes()[0].legend(fontsize=14)
 
         return fig
         

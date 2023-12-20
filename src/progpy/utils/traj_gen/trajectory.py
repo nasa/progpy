@@ -5,12 +5,49 @@
 Auxiliary functions for trajectories and aircraft routes
 """
 
+from matplotlib import pyplot as plt
+from matplotlib.figure import Figure
 import numpy as np
 from warnings import warn
 
 from progpy.utils.traj_gen import geometry as geom
 from progpy.utils.traj_gen.nurbs import NURBS
 
+
+class TrajectoryFigure(Figure):
+    """
+    Figure visualizing a trajectory
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        (ax_traj, ax_alt) = self.subplots(2)
+        ax_traj.set_xlabel('x', fontsize=14)
+        ax_traj.set_ylabel('y', fontsize=14)
+        
+        ax_alt.set_xlabel('time stamp, -', fontsize=14)
+        ax_alt.set_ylabel('z', fontsize=14)
+        
+    def plot_traj(self, x, y, **kwargs) -> None:
+        """
+        Plot the trajectory in 2d space (upper graph)
+
+        Args:
+            x (list[float]): x location
+            y (list[float]): y location
+        """
+        ax_traj = self.axes[0]
+        ax_traj.plot(x, y, **kwargs)
+
+    def plot_alt(self, t, z, **kwargs) -> None:
+        """
+        Plot the altitude vs time (lower graph)
+
+        Args:
+            t (list[float]): Times
+            z (list[float]): z location
+        """
+        ax_alt = self.axes[1]
+        ax_alt.plot(t, z, **kwargs)
 
 def compute_derivatives(position_profile, timevec):
     # Compute derivatives of position: velocity and acceleration
@@ -288,6 +325,34 @@ class Trajectory():
             
             't': self.trajectory['time']}
 
+    def plot(self, fig=None, **kwargs) -> TrajectoryFigure:
+        """
+        Plot the reference trajectory
+
+        Args:
+            fig (TrajectoryFigure, optional): Figure where the additional diagrams are to be added. Creates a new figure if not provided
+
+        Raises:
+            TypeError: if Figure is not a TrajectoryFigure
+
+        Returns:
+            TrajectoryFigure
+        """
+        params = {'figsize': (13, 9), 'linewidth': 2.0, 'alpha_preds': 0.6}
+        params.update(kwargs)
+        if fig is None:
+            fig = plt.figure(FigureClass=TrajectoryFigure)
+        elif not isinstance(fig, TrajectoryFigure):
+            raise TypeError(f"fig must be a TrajectorFigure, was {type(fig)}")
+
+        x = self.trajectory['position'][:, 0].tolist()
+        y = self.trajectory['position'][:, 1].tolist()
+        z = self.trajectory['position'][:, 2].tolist()
+        t = self.trajectory['time'].tolist()
+
+        fig.plot_traj(x, y, **params)
+        fig.plot_alt(t, z, **params)
+    
     def compute_attitude(self, heading_profile, acceleration_profile, timestep_size):
         """
         Compute attitude defined by Euler's angles as a function of time given heading and acceleration profiles.
