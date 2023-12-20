@@ -118,6 +118,7 @@ class CompositeModel(PrognosticsModel):
         for (name, fcn) in params['functions']:
             self.inputs |= set([name + DIVIDER + u for u in signature(fcn).parameters.keys()])
             self.states.add(name + DIVIDER + 'return')
+            self.outputs.add(name + DIVIDER + 'return')
 
         # Handle outputs
         if 'outputs' in params:
@@ -307,6 +308,9 @@ class CompositeModel(PrognosticsModel):
             # Save to super outputs
             for key, value in z_i.items():
                 z[name + '.' + key] = value
+
+        for (name, _) in self.parameters['functions']:
+            z[name + DIVIDER + 'return'] = x[name + DIVIDER + 'return']
         return self.OutputContainer(z)
 
     def performance_metrics(self, x) -> dict:
