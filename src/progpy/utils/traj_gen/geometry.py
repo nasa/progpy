@@ -7,7 +7,8 @@ Geometric functions
 
 import numpy as np
 
-RAD2DEG = (180.0/np.pi)
+RAD2DEG: float = (180.0/np.pi)
+DEG2RAD: float = (np.pi/180.0)
 
 # EARTH-RELATED DISTANCE FUNCTIONS
 def greatcircle_distance(lat1, lat2, lon1, lon2, R=6371e3):
@@ -350,16 +351,16 @@ class Coord():
         """
         Initialize Coordinate frame class.
 
-        :param lat0:            Latitude of origin of reference frame
-        :param lon0:            Longitude of origin of reference frame
-        :param alt0:            Altitude of origin of reference frame
+        :param lat0:            Latitude of origin of reference frame, deg
+        :param lon0:            Longitude of origin of reference frame, deg
+        :param alt0:            Altitude of origin of reference frame, m 
         """
         self.a = 6378137.0  # [m], equatorial radius
         self.f = 1.0 / 298.257223563  # [-], ellipsoid flatness
         self.b = self.a * (1.0 - self.f)  # [m], polar radius
         self.e = np.sqrt(self.f * (2 - self.f))  # [-], eccentricity
-        self.lat0 = lat0
-        self.lon0 = lon0
+        self.lat0 = lat0 * DEG2RAD
+        self.lon0 = lon0 * DEG2RAD
         self.alt0 = alt0
         self.N0 = self.a / np.sqrt(1 - self.e**2.0 * np.sin(self.lat0)**2.0)  # [m], Radius of curvature on the Earth
     

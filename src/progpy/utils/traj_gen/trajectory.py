@@ -13,6 +13,8 @@ from warnings import warn
 from progpy.utils.traj_gen import geometry as geom
 from progpy.utils.traj_gen.nurbs import NURBS
 
+DEG2RAD: float = (np.pi/180.0)
+
 
 class TrajectoryFigure(Figure):
     """
@@ -234,8 +236,8 @@ class Trajectory():
 
         self.trajectory = {}
         self.waypoints = {
-            'lat': lat,
-            'lon': lon,
+            'lat': [elem*DEG2RAD for elem in lat],
+            'lon': [elem*DEG2RAD for elem in lon],
             'alt': alt,
             'takeoff_time': takeoff_time,
             'eta': etas,
@@ -259,9 +261,9 @@ class Trajectory():
         # Set up coordinate system conversion between Geodetic,
         # Earth-Centric Earth-Fixed (ECF), and Cartesian (East-North-Up, ENU)
         self.coordinate_system = geom.Coord(
-            self.waypoints['lat'][0],
-            self.waypoints['lon'][0],
-            self.waypoints['alt'][0])
+            lat[0],
+            lon[0],
+            alt[0])
 
         # Define speed parameters - only necessary if ETAs are not defined
         if etas is not None and ('cruise_speed' in kwargs or 'ascent_speed' in kwargs or 'descent_speed' in kwargs or 'landing_speed' in kwargs):
@@ -292,8 +294,8 @@ class Trajectory():
                 
         # Interpolation properties
         self.parameters = {'gravity': 9.81,
-                           'max_phi': 45/180.0*np.pi,
-                           'max_theta': 45/180.0*np.pi,
+                           'max_phi': 0.25*np.pi,
+                           'max_theta': 0.25*np.pi,
                            'max_iter': 10,
                            'max_avgjerk': 20.0,
                            'nurbs_order': 4,
