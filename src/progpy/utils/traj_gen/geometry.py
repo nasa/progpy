@@ -360,6 +360,9 @@ class Coord():
         self.lon0 = lon0
         self.alt0 = alt0
         self.N0 = self.a / np.sqrt(1 - self.e**2.0 * np.sin(self.lat0)**2.0)  # [m], Radius of curvature on the Earth
+    
+    def __str__(self):
+        return f'coordinate at {np.abs(self.lat0)}{"°N" if (np.sign(self.lat0) >= 0) else "°S"} {np.abs(self.lon0)}{"°E" if (np.sign(self.lon0) >= 0) else "°W"} and {self.alt0}m elevation'
 
     def ecef2enu(self, xecef, yecef, zecef):
         """
