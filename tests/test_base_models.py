@@ -164,8 +164,8 @@ class TestModels(unittest.TestCase):
         """
         This is testing a very specific case where a state container from one model is used to define the noise from another.
         """
-        m0 = OneInputTwoStatesNoOutputNoEventLM()
-        m1 = OneInputNoOutputNoEventLM(process_noise=m0.parameters['process_noise'])
+        m0 = OneInputNoOutputNoEventLM()
+        m1 = OneInputTwoStatesNoOutputNoEventLM(process_noise=m0.parameters['process_noise'])
         self.assertSetEqual(set(m1.parameters['process_noise'].keys()), set(m1.states))
 
     def test_integration_type_scipy(self):
