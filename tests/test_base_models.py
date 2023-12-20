@@ -13,7 +13,7 @@ sys.path.append(join(dirname(__file__), ".."))
 
 from progpy import PrognosticsModel, CompositeModel
 from progpy.models import ThrownObject, BatteryElectroChemEOD
-from progpy.models.test_models.linear_models import (OneInputNoOutputNoEventLM, OneInputOneOutputNoEventLM, OneInputNoOutputOneEventLM, OneInputOneOutputNoEventLMPM)
+from progpy.models.test_models.linear_models import (OneInputNoOutputNoEventLM, OneInputOneOutputNoEventLM, OneInputTwoStatesNoOutputNoEventLM, OneInputNoOutputOneEventLM, OneInputOneOutputNoEventLMPM)
 from progpy.models.test_models.linear_thrown_object import (LinearThrownObject, LinearThrownDiffThrowingSpeed, LinearThrownObjectUpdatedInitializedMethod, LinearThrownObjectDiffDefaultParams)
 
 
@@ -159,6 +159,14 @@ class TestModels(unittest.TestCase):
         # This is because we changed the integration method to rk4 for the default model
         self.assertEqual(x_default['v'], x_rk4['v'])
         self.assertEqual(x_default['x'], x_rk4['x'])
+
+    def test_parameters_statelikematrixwrapper(self):
+        """
+        This is testing a very specific case where a state container from one model is used to define the noise from another.
+        """
+        m0 = OneInputTwoStatesNoOutputNoEventLM()
+        m1 = OneInputNoOutputNoEventLM(process_noise=m0.parameters['process_noise'])
+        self.assertSetEqual(set(m1.parameters['process_noise'].keys()), set(m1.states))
 
     def test_integration_type_scipy(self):
         # SciPy Integrator test.

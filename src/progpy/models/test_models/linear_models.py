@@ -43,6 +43,26 @@ class OneInputNoOutputNoEventLM(LinearModel):
         }
     }
 
+class OneInputTwoStatesNoOutputNoEventLM(LinearModel):
+    """
+    Simple model that increases state by u1 every step. 
+    """
+    inputs = ['u1']
+    states = ['x1', 'x2']
+
+    A = np.array([[0, 0], [0, 0]])
+    B = np.array([[1], [0]])
+    C = np.empty((0,2))
+    F = np.empty((0,2))
+
+    default_parameters = {
+        'process_noise': 0,
+        'x0': {
+            'x1': 0,
+            'x2': 0
+        }
+    }
+
 
 class OneInputOneOutputNoEventLM(LinearModel):
     """
