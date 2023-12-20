@@ -167,11 +167,11 @@ class Trajectory():
     
     args:
             lat (np.ndarray):
-                rad, n x 1 array, doubles, latitude coordinates of waypoints
+                rad, n x 1 array, doubles, latitude coordinates of waypoints, deg
             lon (np.ndarray):
-                rad, n x 1 array, doubles, longitude coordinates of waypoints
+                rad, n x 1 array, doubles, longitude coordinates of waypoints, deg
             alt (np.ndarray):
-                m, n x 1 array, doubles, altitude coordinates of waypoints
+                m, n x 1 array, doubles, altitude coordinates of waypoints, m
             takeoff_time (float, optional):
                 take off time of the trajectory. Default is None (starting at current time).
             etas (list[float], optional):
