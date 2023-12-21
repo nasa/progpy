@@ -84,7 +84,7 @@ class TestCompositeModel(unittest.TestCase):
         m_composite = CompositeModel([m1, m1, fcn])
         self.assertSetEqual(m_composite.states, {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'function.return'})
         self.assertSetEqual(m_composite.inputs, {'OneInputOneOutputNoEventLM.u1', 'OneInputOneOutputNoEventLM_2.u1', 'function.u0', 'function.u1'})
-        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1'})
+        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1', 'function.return'})
         self.assertSetEqual(m_composite.events, set())
         self.assertSetEqual(m_composite.performance_metric_keys, set(), "Shouldn't have any performance metrics")
 
@@ -120,7 +120,7 @@ class TestCompositeModel(unittest.TestCase):
         self.assertSetEqual(m_composite.states, {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
         # One less input - since it's internally connected
         self.assertSetEqual(m_composite.inputs, {'OneInputOneOutputNoEventLM.u1', 'function.u1'})
-        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1'})
+        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1', 'function.return'})
         self.assertSetEqual(m_composite.events, set())
 
         with self.assertRaises(TypeError):
@@ -167,7 +167,7 @@ class TestCompositeModel(unittest.TestCase):
         self.assertSetEqual(m_composite.states, {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
         # One less input - since it's internally connected
         self.assertSetEqual(m_composite.inputs, {'OneInputOneOutputNoEventLM.u1'})
-        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1'})
+        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1', 'function.return'})
         self.assertSetEqual(m_composite.events, set())
 
         # Empty initialization should work now
@@ -216,7 +216,7 @@ class TestCompositeModel(unittest.TestCase):
         self.assertSetEqual(m_composite.states, {'OneInputOneOutputNoEventLM_2.x1', 'OneInputOneOutputNoEventLM.x1', 'OneInputOneOutputNoEventLM.z1', 'function.return'})
         # Two less input - since it's fully internally connected
         self.assertSetEqual(m_composite.inputs, set())
-        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1'})
+        self.assertSetEqual(m_composite.outputs, {'OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.z1', 'function.return'})
         self.assertSetEqual(m_composite.events, set())
 
         # Empty initialization should work
@@ -249,6 +249,10 @@ class TestCompositeModel(unittest.TestCase):
         self.assertEqual(x['OneInputOneOutputNoEventLM_2.x1'], 5)  # 1 + 2
         self.assertEqual(x['OneInputOneOutputNoEventLM.x1'], 4)
         self.assertEqual(x['function.return'], 9)  # 4 + 4 + 1
+
+        # Function return in outputs
+        z = m_composite.output(x)
+        self.assertEqual(x['function.return'], z['function.return'])
 
     def test_composite(self):
         m1 = OneInputOneOutputNoEventLM()
