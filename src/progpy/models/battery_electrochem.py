@@ -63,6 +63,11 @@ def update_xnMin(params: dict) -> dict:
         'xnMin': 1.0-params['xpMax']
     }
 
+def update_epsi_conv(params: dict) -> dict:
+    return {
+        'epsi_conv': params['A']/(2.0*params['Vol'])*params['hconv']/params['Cp']/params['rho_cell']
+    }
+
 def update_qnSBmax(params: dict) -> dict:
     # max charge at surface and pos electrode
     return {
@@ -218,6 +223,16 @@ class BatteryElectroChemEOD(PrognosticsModel):
             Redlich-Kister parameter (- electrode)
         An : float
             Redlich-Kister parameter (- electrode)
+        Cp : float
+            Volume Averaged Heat Capacity (J*kg*K), default for 18650
+        hconv : float,
+            Heat transfer coefficient due to convection (W/(m^2*K))
+        A : float,
+            Total surface area explosed to ambient (or A/C) (m^2)
+        dUdt : float,
+            rate (mV/K)
+        rho_cell : float,
+            Density of the cell (kg/m^3)
         VEOD : float
             End of Discharge Voltage Threshold
         x0 : dict[str, float]
@@ -270,6 +285,12 @@ class BatteryElectroChemEOD(PrognosticsModel):
         'U0n': 0.01,
         'An': [86.19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
+        # Thermal parameters
+        'Cp': 918,
+        'hcov': 23.7,
+        'A': 0.00393,
+        'rho_cell': 2761.7,
+
         'x0': {
             'Vo': 0,
             'Vsn': 0,
@@ -293,12 +314,16 @@ class BatteryElectroChemEOD(PrognosticsModel):
     param_callbacks = {  # Callbacks for derived parameters
         'qMobile': [update_qmax],
         'VolSFraction': [update_vols, update_qpSBmin, update_qSBmax],
-        'Vol': [update_vols],
+        'Vol': [update_vols, update_epsi_conv],
         'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
         'xpMin': [update_qpSBmin],
         'xpMax': [update_xnMin],
         'xnMin': [update_qmax, update_qnmin],
-        'xnMax': [update_xpMin, update_qmax, update_qnmax, update_qnSBmax]
+        'xnMax': [update_xpMin, update_qmax, update_qnmax, update_qnSBmax],
+        'A': [update_epsi_conv],
+        'hconv': [update_epsi_conv],
+        'Cp': [update_epsi_conv],
+        'rho_cell': [update_epsi_conv]
     }
 
     def dx(self, x, u):
@@ -342,7 +367,7 @@ class BatteryElectroChemEOD(PrognosticsModel):
         # Thermal Effects
         voltage_eta = x['Vo'] + x['Vsn'] + x['Vsp'] # (Vep - Ven) - V;
 
-        Tbdot = voltage_eta*u['i']/mC + (params['x0']['tb'] - x['tb'])/tau # Newman
+        Tbdot = ((voltage_eta - x['tb']*params['dUdT'])*u['i']/mC) + (params['epsi_conv']*(params['x0']['tb'] - x['tb']))  # Newman with thermal effects
 
         return self.StateContainer(np.array([
             np.atleast_1d(Tbdot),
