@@ -88,7 +88,7 @@ def run_example():
     class MyBattery(Battery):
         outputs = ['tv']  # output is temperature * voltage (for some reason)
 
-        def output(self, x):
+        def output(self, x, u=None):
             parent.parameters = self.parameters  # only needed if you expect to change parameters
             z = parent.output(x)
             return self.OutputContainer({'tv': z['v'] * z['t']})

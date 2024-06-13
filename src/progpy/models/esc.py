@@ -108,5 +108,5 @@ class ESC(PrognosticsModel):
             np.atleast_1d(VP[2]),
             np.atleast_1d(x['t'] + dt)]))
 
-    def output(self, x):
+    def output(self, x, u=None):
         return self.OutputContainer(x)

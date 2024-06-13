@@ -476,7 +476,7 @@ class BatteryElectroChemEOD(PrognosticsModel):
             'EOD': np.clip(min(charge_EOD, voltage_EOD), 0, 1)
         }
 
-    def output(self, x):
+    def output(self, x, u=None):
         params = self.parameters
         An = params['An']
         # Negative Surface
@@ -628,7 +628,7 @@ class BatteryElectroChemEOL(PrognosticsModel):
     def threshold_met(self, x) -> dict:
         return {'InsufficientCapacity': x['qMax'] < self.parameters['qMaxThreshold']}
 
-    def output(self, _):
+    def output(self, x, u=None):
         return self.OutputContainer(np.array([]))
 
 def merge_dicts(a: dict, b: dict) -> None:
@@ -709,7 +709,7 @@ class BatteryElectroChemEODEOL(BatteryElectroChemEOL, BatteryElectroChemEOD):
         x_dot.matrix = np.vstack((x_dot.matrix, x_dot2.matrix))
         return x_dot
 
-    def output(self, x):
+    def output(self, x, u=None):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             self.parameters['qMobile'] = x['qMax']

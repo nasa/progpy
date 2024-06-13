@@ -79,7 +79,7 @@ class ParisLawCrackGrowth(PrognosticsModel):
         dxdt = {'c_l': r}
         return self.StateContainer(dxdt)
 
-    def output(self, x):
+    def output(self, x, u=None):
         return self.OutputContainer(x)
 
     def event_state(self, x) -> dict:

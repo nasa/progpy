@@ -223,7 +223,7 @@ class ProgModelTemplate(PrognosticsModel):
     #
     #     return self.StateContainer(next_x)
 
-    def output(self, x):
+    def output(self, x, u=None):
         """
         Calculate output, z (i.e., measurable values) given the state x
 
@@ -238,6 +238,7 @@ class ProgModelTemplate(PrognosticsModel):
         z : OutputContainer
             Outputs, with keys defined by model.outputs.
             e.g., z = {'t':12.4, 'v':3.3} given inputs = ['t', 'v']
+            :param u:
         """
 
         # REPLACE BELOW WITH LOGIC TO CALCULATE OUTPUTS

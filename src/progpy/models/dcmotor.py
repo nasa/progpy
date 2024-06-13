@@ -196,5 +196,5 @@ class DCMotor(PrognosticsModel):
         x.matrix[4] %= PI2  # Wrap angle
         return x
 
-    def output(self, x):
+    def output(self, x, u=None):
         return self.OutputContainer(x.matrix[3:])

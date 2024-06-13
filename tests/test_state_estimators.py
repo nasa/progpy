@@ -47,7 +47,7 @@ class MockProgModel(PrognosticsModel):
         x['t']+= dt
         return x
 
-    def output(self, x):
+    def output(self, x, u=None):
         return {'o1': x['a'] + x['b'] + x['c']}
     
     def event_state(self, x):
@@ -63,7 +63,7 @@ class MockProgModel(PrognosticsModel):
 
 class MockProgModel2(MockProgModel):
     outputs = ['o1', 'o2']
-    def output(self, x):
+    def output(self, x, u=None):
         return self.OutputContainer({
             'o1': x['a'] + x['b'] + x['c'], 
             'o2': 7

@@ -246,7 +246,7 @@ class CentrifugalPumpBase(PrognosticsModel):
 
         return self.StateContainer(state_array)
 
-    def output(self, x):
+    def output(self, x, u=None):
         Qout = np.maximum(0, x['Q']-x['QLeak'])
 
         return self.OutputContainer({

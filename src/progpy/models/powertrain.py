@@ -140,7 +140,7 @@ class Powertrain(PrognosticsModel):
 
         return self.StateContainer(x_esc)
 
-    def output(self, x):
+    def output(self, x, u=None):
         return self.OutputContainer(
             {
                 'v_rot': x['v_rot'], 

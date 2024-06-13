@@ -27,7 +27,7 @@ class OneInputTwoOutputsOneEvent(PrognosticsModel):
             'x0': self.parameters['a'] * u['u0']
         })
 
-    def output(self, x):
+    def output(self, x, u=None):
         return self.OutputContainer({
             'x0+b': x['x0'] + self.parameters['b'],
             'x0+c': x['x0'] + self.parameters['c']
@@ -64,7 +64,7 @@ class OneInputTwoOutputsOneEvent_alt(PrognosticsModel):
             'x0': self.parameters['a'] * u['u0']
         })
 
-    def output(self, x):
+    def output(self, x, u=None):
         return self.OutputContainer({
             'x0+d': x['x0'] + self.parameters['d'],
             'x0+c': x['x0'] + self.parameters['c']

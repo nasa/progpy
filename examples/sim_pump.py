@@ -35,7 +35,7 @@ def run_example():
         })
 
     # Step 3: Sim
-    first_output = pump.output(pump.initialize(future_loading(0),{}))
+    first_output = pump.output(pump.initialize(future_loading(0), {}))
     config = {
         'horizon': 1e5,
         'save_freq': 1e3,

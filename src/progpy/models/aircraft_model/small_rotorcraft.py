@@ -242,7 +242,7 @@ class SmallRotorcraft(AircraftModel):
         # Based on percentage of reference trajectory completed
         return {'TrajectoryComplete': x['mission_complete']}
  
-    def output(self, x):
+    def output(self, x, u=None):
         # Output is the same as the state vector, without time and mission_complete
         return self.OutputContainer(x.matrix[0:-2])
 

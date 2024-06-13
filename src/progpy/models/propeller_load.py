@@ -60,5 +60,5 @@ class PropellerLoad(PrognosticsModel):
         return self.StateContainer({
             't_l': self.parameters['C_q']*u['v_rot']**2})
     
-    def output(self, x):
+    def output(self, x, u=None):
         return x

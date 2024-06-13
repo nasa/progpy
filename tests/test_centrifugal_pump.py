@@ -85,8 +85,7 @@ class TestCentrifugalPump(unittest.TestCase):
         # Wear rates are parameters instead of states
         pump.parameters['wA'] = 1e-2
         pump.parameters['wThrust'] = 1e-10
-        (times, inputs, states, outputs, event_states) = pump.simulate_to_threshold(future_loading, pump.output(
-            pump.initialize(future_loading(0), {})))
+        (times, inputs, states, outputs, event_states) = pump.simulate_to_threshold(future_loading, pump.output(pump.initialize(future_loading(0), {})))
         self.assertAlmostEqual(times[-1], 23892)
 
     def test_centrifugal_pump_with_wear(self):
@@ -162,8 +161,7 @@ class TestCentrifugalPump(unittest.TestCase):
 
         pump.parameters['x0']['wA'] = 1e-2
         pump.parameters['x0']['wThrust'] = 1e-10
-        (times, inputs, states, outputs, event_states) = pump.simulate_to_threshold(future_loading, pump.output(
-            pump.initialize(future_loading(0), {})))
+        (times, inputs, states, outputs, event_states) = pump.simulate_to_threshold(future_loading, pump.output(pump.initialize(future_loading(0), {})))
         self.assertAlmostEqual(times[-1], 23892)
 
         # Check warning when changing overwritten Parameters

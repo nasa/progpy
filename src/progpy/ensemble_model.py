@@ -89,7 +89,7 @@ class EnsembleModel(PrognosticsModel):
 
         return self.StateContainer(xs_final)
         
-    def output(self, x):
+    def output(self, x, u=None):
         zs = [m.output(m.StateContainer(x)) for m in self.parameters['models']]
         zs_final = {}
         for z in zs:

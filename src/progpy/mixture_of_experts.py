@@ -187,7 +187,7 @@ class MixtureOfExpertsModel(CompositeModel):
                 best_index = i
         return self.parameters['models'][best_index]
 
-    def output(self, x):
+    def output(self, x, u=None):
         excepting = []
         outputs_seen = set()
         z = {}

@@ -462,7 +462,7 @@ class PrognosticsModel(ABC):
 
     observables = performance_metrics  # For backwards compatibility
 
-    def output(self, x):
+    def output(self, x, u=None):
         """
         Calculate :term:`output` given state
 
@@ -471,6 +471,9 @@ class PrognosticsModel(ABC):
         x : StateContainer
             state, with keys defined by model.states \n
             e.g., x = m.StateContainer({'abc': 332.1, 'def': 221.003}) given states = ['abc', 'def']
+        u : InputContainer
+            Inputs, with keys defined by model.inputs \n
+            e.g., u = m.InputContainer({'i':3.2}) given inputs = ['i']
 
         Returns
         -------

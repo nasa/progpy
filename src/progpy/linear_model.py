@@ -222,7 +222,7 @@ class LinearModel(PrognosticsModel, ABC):
             dx_array += np.matmul(self.B, u.matrix)
         return self.StateContainer(dx_array)
 
-    def output(self, x):
+    def output(self, x, u=None):
         z_array = np.matmul(self.C, x.matrix) + self.D
         return self.OutputContainer(z_array)
 

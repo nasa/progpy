@@ -350,7 +350,7 @@ class TestModels(unittest.TestCase):
                 pass
             def next_state(self, x, u, dt):
                 pass
-            def output(self, x):
+            def output(self, x, u=None):
                 pass
         
 
@@ -363,7 +363,7 @@ class TestModels(unittest.TestCase):
                 pass
             def next_state(self, x, u, dt):
                 pass
-            def output(self, x):
+            def output(self, x, u=None):
                 pass
         
 
@@ -375,7 +375,7 @@ class TestModels(unittest.TestCase):
                 pass
             def next_state(self, x, u, dt):
                 pass
-            def output(self, x):
+            def output(self, x, u=None):
                 pass
         
 
@@ -387,7 +387,7 @@ class TestModels(unittest.TestCase):
                 pass
             def next_state(self, x, u, dt):
                 pass
-            def output(self, x):
+            def output(self, x, u=None):
                 pass
         
 
@@ -398,7 +398,7 @@ class TestModels(unittest.TestCase):
             parameters = {'process_noise': 0.1}
             def next_state(self, x, u, dt):
                 pass
-            def output(self, x):
+            def output(self, x, u=None):
                 pass
         
 

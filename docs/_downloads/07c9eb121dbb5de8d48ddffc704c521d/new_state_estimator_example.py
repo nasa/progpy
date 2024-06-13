@@ -43,8 +43,8 @@ class BlindlyStumbleEstimator(StateEstimator):
         x2 = {key : float(value) + 10*(random.random()-0.5) for (key,value) in self.state.items()}
 
         # Calculate outputs
-        z_est = self.m.output(t, self.state)
-        z_est2 = self.m.output(t, x2)
+        z_est = self.m.output(t)
+        z_est2 = self.m.output(t)
 
         # Now score them each by how close they are to the measured z
         z_est_score = sum([abs(z_est[key] - z[key]) for key in self.m.outputs])

@@ -326,7 +326,7 @@ class PneumaticValveBase(PrognosticsModel):
             np.atleast_1d(dp)                                # pL - pR
         ]))
     
-    def output(self, x):
+    def output(self, x, u=None):
         params = self.parameters  # Optimization
         indicatorTopm = (x['x'] >= params['Ls']-params['indicatorTol'])
         indicatorBotm = (x['x'] <= params['indicatorTol'])

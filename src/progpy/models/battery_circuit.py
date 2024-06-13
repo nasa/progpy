@@ -185,7 +185,7 @@ class BatteryCircuit(PrognosticsModel):
             'EOD': np.minimum(charge_EOD, voltage_EOD)
         }
 
-    def output(self, x):
+    def output(self, x, u=None):
         parameters = self.parameters
         Vcs = x['qcs']/parameters['Cs']
         Vcp = x['qcp']/parameters['Ccp']

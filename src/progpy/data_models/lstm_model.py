@@ -142,7 +142,7 @@ class LSTMStateTransitionModel(DataModel):
         result = np.array(np.vstack((states, internal_states)), dtype=np.float64)
         return self.StateContainer(result)
 
-    def output(self, x):
+    def output(self, x, u=None):
         if x.matrix[0, 0] is None:
             warn(f"Output estimation is not available until at least {1+self.parameters['window']} timesteps have passed.")
             return self.OutputContainer(np.array([[None] for _ in self.outputs]))

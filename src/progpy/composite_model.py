@@ -221,7 +221,7 @@ class CompositeModel(PrognosticsModel):
 
         return x
 
-    def output(self, x):
+    def output(self, x, u=None):
         z = {}
         for (name, m) in self.parameters['models']:
             # Prepare state

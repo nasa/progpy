@@ -165,7 +165,7 @@ class DCMotorSP(PrognosticsModel):
             np.atleast_1d(dvrotdt)          # rotor speed
         ]))
 
-    def output(self, x):
+    def output(self, x, u=None):
         rotor_speed = x['v_rot']
         return self.OutputContainer(np.array([
             np.atleast_1d(rotor_speed),

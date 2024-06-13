@@ -97,7 +97,7 @@ class ThrownObject(PrognosticsModel):
                 np.atleast_1d(next_v)  # Acceleration of gravity
             ]))
 
-    def output(self, x):
+    def output(self, x, u=None):
         return self.OutputContainer(np.array([[x['x']]]))
 
     def threshold_met(self, x) -> dict:
