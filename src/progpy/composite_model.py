@@ -201,7 +201,36 @@ class CompositeModel(PrognosticsModel):
             else:
                 raise ValueError(
                     f'The input key {in_key} must be an output or state')
+
+        # Setup callbacks
+        # These callbacks will enable setting of parameters in composed models.
+        # E.g., composite.parameters['abc.def'] will set paraemter 'def' for composed model 'abc'
+        class PassthroughParams():
+            def __init__(self, models, model_name, key):
+                self.models = models
+                self.model_name = model_name
+                self.key = key
+                i = 0
+                for (name, m) in models:
+                    if name == model_name:
+                        break
+                    i+= 1
+                self.model_index = i
+                self.combined_key = self.model_name + '.' + self.key
+
+            def __call__(self, params: dict) -> dict:
+                params['models'][self.model_index][1].parameters[self.key] = params[self.combined_key]
+                return {}
         
+        for (name, m) in params['models']:
+            # TODO(CT): TRY JUST SAVING NAME
+            for key in m.parameters.keys():
+                combined_key = name + '.' + key
+                if combined_key in self.param_callbacks:
+                    self.param_callbacks[combined_key].append(PassthroughParams(params['models'], name, key))
+                else:
+                    self.param_callbacks[combined_key] = [PassthroughParams(params['models'], name, key)]
+
         return super().__setstate__(params)
 
     def initialize(self, u=None, z=None):
