@@ -204,7 +204,7 @@ class CompositeModel(PrognosticsModel):
 
         # Setup callbacks
         # These callbacks will enable setting of parameters in composed models.
-        # E.g., composite.parameters['abc.def'] will set paraemter 'def' for composed model 'abc'
+        # E.g., composite.parameters['abc.def'] will set parameter 'def' for composed model 'abc'
         class PassthroughParams():
             def __init__(self, models, model_name, key):
                 self.models = models
