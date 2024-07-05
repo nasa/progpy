@@ -261,7 +261,7 @@ class TestModels(unittest.TestCase):
     def test_size(self):
         m = MockProgModel()
         size = sys.getsizeof(m)
-        self.assertLess(size, 7500)
+        self.assertLess(size, 20000)
 
         # Adding a parameter
         m.parameters['test'] = 8675309

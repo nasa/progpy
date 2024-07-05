@@ -254,6 +254,17 @@ class TestCompositeModel(unittest.TestCase):
         z = m_composite.output(x)
         self.assertEqual(x['function.return'], z['function.return'])
 
+    def test_parameter_passthrough(self):
+        # This tests a feature where parameters of the composed models are settable in the composite model.
+        m1 = OneInputOneOutputNoEventLM()
+        m2 = OneInputNoOutputOneEventLM()
+        m_composite = CompositeModel([m1, m1], connections=[('OneInputOneOutputNoEventLM.z1', 'OneInputOneOutputNoEventLM_2.u1')])
+
+        # At the beginning process noise is 0, lets set it to something else. 
+        model_name = m_composite.parameters['models'][0][0]
+        m_composite.parameters[model_name + "." + "process_noise"] = 2.5
+        self.assertEqual(m_composite.parameters['models'][0][1].parameters['process_noise']['x1'], 2.5)
+
     def test_composite(self):
         m1 = OneInputOneOutputNoEventLM()
         m2 = OneInputNoOutputOneEventLM()
