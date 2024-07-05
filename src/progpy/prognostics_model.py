@@ -202,6 +202,12 @@ class PrognosticsModel(ABC):
 
         self.parameters = PrognosticsModelParameters(self, params, self.param_callbacks)
 
+    def __getitem__(self, arg):
+        return self.parameters[arg]
+
+    def __setitem__(self, key, value):
+        self.parameters[key] = value
+
     def initialize(self, u=None, z=None):
         """
         Calculate initial state given inputs and outputs. If not defined for a model, it will return parameters['x0']
