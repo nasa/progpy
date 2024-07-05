@@ -1343,6 +1343,21 @@ class TestModels(unittest.TestCase):
         self.assertTrue(m1.parameters == m2.parameters) # Checking to see previous equal statements stay the same
         self.assertTrue(m2.parameters == m1.parameters) 
 
+    def test_direct_params(self):
+        m1 = LinearThrownObject()
+        print('test')
+
+        # Accessing parameters directly
+        self.assertEqual(m1.parameters['g'], m1['g'])
+
+        # Setting parameters
+        m1['g'] *= 2  # Doubling 
+        self.assertEqual(m1.parameters['g'], m1['g'])
+
+        # Updating from parameters
+        m1.parameters['g'] *= 2
+        self.assertEqual(m1.parameters['g'], m1['g'])
+
 # This allows the module to be executed directly
 def main():
     load_test = unittest.TestLoader()
