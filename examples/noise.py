@@ -17,7 +17,7 @@ def run_example():
 
     # Define configuration for simulation
     config = {
-        'threshold_keys': 'impact', # Simulate until the thrown object has impacted the ground
+        'events': 'impact', # Simulate until the thrown object has impacted the ground
         'dt': 0.005, # Time step (s)
         'save_freq': 0.5, # Frequency at which results are saved (s)
     }

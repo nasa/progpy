@@ -416,14 +416,14 @@ class DMDModel(LinearModel, DataModel):
         
         return x   
 
-    def simulate_to_threshold(self, future_loading_eqn, first_output=None, threshold_keys=None, **kwargs):
+    def simulate_to_threshold(self, future_loading_eqn, first_output=None, events=None, **kwargs):
         # Save keyword arguments same as DMD training for approximation
         kwargs_sim = kwargs.copy()
         kwargs_sim['save_freq'] = self.dt
         kwargs_sim['dt'] = self.dt
 
         # Simulate to threshold at DMD time step
-        results = super().simulate_to_threshold(future_loading_eqn, first_output, threshold_keys, **kwargs_sim)
+        results = super().simulate_to_threshold(future_loading_eqn, first_output, events, **kwargs_sim)
         
         # Interpolate results to be at user-desired time step
         if 'dt' in kwargs:

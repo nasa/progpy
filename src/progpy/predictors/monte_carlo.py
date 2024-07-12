@@ -133,7 +133,7 @@ class MonteCarlo(Predictor):
                 (times, inputs, states, outputs, event_states) = simulate_to_threshold(
                     future_loading_eqn,
                     first_output,
-                    threshold_keys=[],
+                    events=[],
                     **params
                 )
             else:
@@ -154,7 +154,7 @@ class MonteCarlo(Predictor):
                     (t, u, xi, z, es) = simulate_to_threshold(
                         future_loading_eqn,
                         first_output,
-                        threshold_keys=events_remaining,
+                        events=events_remaining,
                         **params
                     )
 

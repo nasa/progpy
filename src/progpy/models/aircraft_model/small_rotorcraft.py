@@ -251,7 +251,7 @@ class SmallRotorcraft(AircraftModel):
         # Progress through the reference trajectory is saved in the state 'mission_complete'
         return {'TrajectoryComplete': x['mission_complete'] >= 1}
 
-    def simulate_to_threshold(self, future_loading_eqn, first_output=None, threshold_keys=None, **kwargs):
+    def simulate_to_threshold(self, future_loading_eqn, first_output=None, events=None, **kwargs):
         # Check for appropriately defined dt - must be same as vehicle model
         if 'dt' in kwargs and kwargs['dt'] != self.parameters['dt']:
           kwargs['dt'] = self.parameters['dt']
@@ -260,7 +260,7 @@ class SmallRotorcraft(AircraftModel):
           kwargs['dt'] = self.parameters['dt']
 
         # Simulate to threshold
-        sim_res = super().simulate_to_threshold(future_loading_eqn, first_output, threshold_keys, **kwargs)
+        sim_res = super().simulate_to_threshold(future_loading_eqn, first_output, events, **kwargs)
 
         return sim_res
 
