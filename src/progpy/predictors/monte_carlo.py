@@ -31,7 +31,7 @@ class MonteCarlo(Predictor):
         'n_samples': None
     }
 
-    def predict(self, state: UncertainData, future_loading_eqn: Callable=None, **kwargs) -> PredictionResults:
+    def predict(self, state: UncertainData, future_loading_eqn: Callable=None, events=None, **kwargs) -> PredictionResults:
         """
         Perform a single prediction
 
@@ -91,7 +91,11 @@ class MonteCarlo(Predictor):
         elif isinstance(state, UnweightedSamples) and params['n_samples'] is None:
             params['n_samples'] = len(state)  # number of samples is from provided state
 
-        if len(params['events']) == 0 and 'horizon' not in params:
+        if events is None:
+            # Predict to all events
+            # change to list because of limits of jsonify
+            events = list(self.model.events)
+        if len(events) == 0 and 'horizon' not in params:
             raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
 
         # Sample from state if n_samples specified or state is not UnweightedSamples (Case 2)
@@ -129,15 +133,15 @@ class MonteCarlo(Predictor):
             if 'save_freq' in params and not isinstance(params['save_freq'], tuple):
                 params['save_freq'] = (params['t0'], params['save_freq'])
             
-            if len(params['events']) == 0:  # Predict to time
+            if len(events) == 0:  # Predict to time
                 (times, inputs, states, outputs, event_states) = simulate_to_threshold(
                     future_loading_eqn,
                     first_output,
-                    threshold_keys=[],
+                    events=[],
                     **params
                 )
             else:
-                events_remaining = params['events'].copy()
+                events_remaining = events.copy()
 
                 times = []
                 inputs = SimResult(_copy=False)
@@ -154,7 +158,7 @@ class MonteCarlo(Predictor):
                     (t, u, xi, z, es) = simulate_to_threshold(
                         future_loading_eqn,
                         first_output,
-                        threshold_keys=events_remaining,
+                        events=events_remaining,
                         **params
                     )
 

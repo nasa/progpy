@@ -545,7 +545,7 @@ class TestStateEstimators(unittest.TestCase):
         config = {
             'dt': 0.01,
             'save_freq': 0.01,
-            'threshold_keys': 'zero'
+            'events': 'zero'
         }
         simulation_result = m.simulate_to_threshold(future_loading, **config)
 

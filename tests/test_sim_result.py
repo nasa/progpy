@@ -402,7 +402,7 @@ class TestSimResult(unittest.TestCase):
             return {'i': i}
 
         m = MyBatt()
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(future_loading, threshold_keys=['EOD'],
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(future_loading, events='EOD',
                                                                                  print=False)
         plot_test = event_states.plot()  # Plot doesn't raise error
 
@@ -442,7 +442,7 @@ class TestSimResult(unittest.TestCase):
             return {'i': i}
 
         m = MyBatt()
-        named_results = m.simulate_to_threshold(future_loading, threshold_keys=['EOD'], print=False)
+        named_results = m.simulate_to_threshold(future_loading, events=['EOD'], print=False)
         times = named_results.times
         inputs = named_results.inputs
         states = named_results.states

@@ -55,7 +55,7 @@ class TestPredictors(unittest.TestCase):
         cls._m = ThrownObject(process_noise=0, measurement_noise=0)
         def future_loading(t, x=None):
             return cls._m.InputContainer({})
-        cls._s = cls._m.generate_surrogate([future_loading], state_keys=['v'], dt=0.1, save_freq=0.1, threshold_keys='impact')
+        cls._s = cls._m.generate_surrogate([future_loading], state_keys=['v'], dt=0.1, save_freq=0.1, events='impact')
 
     def test_pred_template(self):
         from predictor_template import TemplatePredictor

@@ -39,9 +39,6 @@ class Predictor(ABC):
         self.model = model
 
         self.parameters = deepcopy(self.default_parameters)
-        # Events to predict to - must be a list
-        # This is because of limitations with jsonify for sets
-        self.parameters['events'] = list(self.model.events.copy())
         self.parameters.update(kwargs)
 
     @abstractmethod

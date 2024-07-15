@@ -615,7 +615,7 @@ class LSTMStateTransitionModel(DataModel):
 
         return cls(output_model, state_model, event_state_model, t_met_model, history = history, **params)
         
-    def simulate_to_threshold(self, future_loading_eqn, first_output=None, threshold_keys=None, **kwargs):
+    def simulate_to_threshold(self, future_loading_eqn, first_output=None, events=None, **kwargs):
         t = kwargs.get('t0', 0)
         dt = kwargs.get('dt', 0.1)
         x = kwargs.get('x', self.initialize(future_loading_eqn(t), first_output))
@@ -665,7 +665,7 @@ class LSTMStateTransitionModel(DataModel):
             if kwargs['horizon'] < t:
                 raise ValueError('Prediction horizon does not allow enough steps to fully initialize model')
             kwargs['horizon'] = kwargs['horizon'] - t
-        return super().simulate_to_threshold(future_loading_eqn, first_output, threshold_keys, **kwargs)
+        return super().simulate_to_threshold(future_loading_eqn, first_output, events, **kwargs)
     
     def plot_history(self, metrics=None):
         """

@@ -123,7 +123,7 @@ class UnscentedTransformPredictor(Predictor):
         self.filter = kalman.UnscentedKalmanFilter(num_states, num_measurements, self.parameters['dt'], measure, state_transition, self.sigma_points)
         self.filter.Q = self.parameters['Q']
 
-    def predict(self, state, future_loading_eqn: Callable = None, **kwargs) -> PredictionResults:
+    def predict(self, state, future_loading_eqn: Callable = None, events=None, **kwargs) -> PredictionResults:
         """
         Perform a single prediction
 
@@ -175,11 +175,14 @@ class UnscentedTransformPredictor(Predictor):
         params = deepcopy(self.parameters) # copy parameters
         params.update(kwargs) # update for specific run
 
-        if len(params['events']) == 0 and 'horizon' not in params:
+        if events is None:
+            # Predict to all events
+            # change to list because of limits of jsonify
+            events = list(self.model.events)
+        if len(events) == 0 and 'horizon' not in params:
             raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
 
         # Optimizations 
-        events_to_predict = params['events']
         dt = params['dt']
         model = self.model
         filt = self.filter
@@ -196,8 +199,8 @@ class UnscentedTransformPredictor(Predictor):
         # Setup first states
         t = params['t0']
         save_pt_index = 0
-        ToE = {key: [float('nan') for i in range(n_points)] for key in events_to_predict}  # Keep track of final ToE values
-        last_state = {key: [None for i in range(n_points)] for key in events_to_predict}  # Keep track of final state values
+        ToE = {key: [float('nan') for i in range(n_points)] for key in events}  # Keep track of final ToE values
+        last_state = {key: [None for i in range(n_points)] for key in events}  # Keep track of final state values
 
         times = []
         inputs = []
@@ -239,7 +242,7 @@ class UnscentedTransformPredictor(Predictor):
                 t_met = threshold_met(x)
 
                 # Check Thresholds
-                for key in events_to_predict:
+                for key in events:
                     if t_met[key]:
                         if isnan(ToE[key][i]):
                             # First time event has been reached

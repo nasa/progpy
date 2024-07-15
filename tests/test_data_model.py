@@ -36,7 +36,7 @@ class TestDataModel(unittest.TestCase):
         def future_loading(t, x=None):
             return m.InputContainer({})  # No input for thrown object
 
-        data = m.simulate_to_threshold(future_loading, threshold_keys='impact', save_freq=TIMESTEP, dt=TIMESTEP)
+        data = m.simulate_to_threshold(future_loading, events='impact', save_freq=TIMESTEP, dt=TIMESTEP)
 
         if WITH_STATES:
             kwargs['states'] = [data.states, data.states]

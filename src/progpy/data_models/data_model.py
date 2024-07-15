@@ -120,7 +120,7 @@ class DataModel(PrognosticsModel, ABC):
             # Only one function
             load_functions = [load_functions]
 
-        sim_cfg_params = ['dt', 't0', 'integration_method', 'save_freq', 'save_pts', 'horizon', 'first_output', 'threshold_keys', 'x', 'thresholds_met_eqn']
+        sim_cfg_params = ['dt', 't0', 'integration_method', 'save_freq', 'save_pts', 'horizon', 'first_output', 'events', 'x', 'thresholds_met_eqn']
 
         # Check format of cfg item and split into cfg for each sim if scalar
         for cfg in sim_cfg_params:

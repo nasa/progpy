@@ -601,28 +601,33 @@ class TestModels(unittest.TestCase):
         self.assertAlmostEqual(states[0]['t'], -1.0, 5)
 
         # Any event, manual
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, threshold_keys=['e1', 'e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'])
         self.assertAlmostEqual(times[-1], 5.0, 5)
 
         # Only event 2
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, threshold_keys=['e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e2'])
+        self.assertAlmostEqual(times[-1], 15.0, 5)
+
+        # Only event 2 - threshold keys
+        with self.assertWarns(Warning):
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, threshold_keys=['e2'])
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
         # Threshold before event
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=5.0, threshold_keys=['e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=5.0, events='e2')
         self.assertAlmostEqual(times[-1], 5.0, 5)
 
         # Threshold after event
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=20.0, threshold_keys=['e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=20.0, events=['e2'])
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
         # No thresholds
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=20.0, threshold_keys=[])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=20.0, events=[])
         self.assertAlmostEqual(times[-1], 20.0, 5)
 
         # No thresholds and no horizon
         with self.assertRaises(ValueError):
-            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, threshold_keys=[])
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=[])
 
         # No events and no horizon
         m_noevents = OneInputNoOutputNoEventLM()
@@ -633,7 +638,7 @@ class TestModels(unittest.TestCase):
         def thresh_met(thresholds):
             return all(thresholds.values())
         config = {'dt': 0.5, 'save_freq': 1.0, 'horizon': 20.0, 'thresholds_met_eqn': thresh_met}
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, **config, threshold_keys=['e1', 'e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, **config, events=['e1', 'e2'])
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
         # With no events and no horizon, but a threshold met eqn
@@ -645,7 +650,7 @@ class TestModels(unittest.TestCase):
         self.assertListEqual(times, [0, 0.5])  # Only one step
 
         with self.assertRaises(ValueError):
-            result = m.simulate_to_threshold(load, {'o1': 0.8}, threshold_keys=['e1', 'e2', 'e3'], dt=0.5, save_freq=1.0)
+            result = m.simulate_to_threshold(load, {'o1': 0.8}, events=['e1', 'e2', 'e3'], dt=0.5, save_freq=1.0)
 
     def test_sim_past_thresh(self):
         m = MockProgModel(process_noise=0.0)
@@ -1087,14 +1092,14 @@ class TestModels(unittest.TestCase):
         
         # Create no drag model ('cd' = 0)
         m_nd.parameters['cd'] = 0
-        simulated_results_nd = m_nd.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+        simulated_results_nd = m_nd.simulate_to_threshold(future_load, events=[event], dt=0.005, save_freq=1)
         # Create default drag model ('cd' = 0.007)
         m_df = ThrownObject(process_noise_dist='none')
-        simulated_results_df = m_df.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+        simulated_results_df = m_df.simulate_to_threshold(future_load, events=[event], dt=0.005, save_freq=1)
         # Create high drag model ('cd' = 1.0)
         m_hi = ThrownObject(process_noise_dist='none')
         m_hi.parameters['cd'] = 1
-        simulated_results_hi = m_hi.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+        simulated_results_hi = m_hi.simulate_to_threshold(future_load, events=[event], dt=0.005, save_freq=1)
 
         # Test no drag simulated results different from default
         self.assertNotEqual(simulated_results_nd.times, simulated_results_df.times)

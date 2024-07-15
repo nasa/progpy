@@ -656,14 +656,14 @@ class PrognosticsModel(ABC):
         }
         params.update(kwargs)
 
-        threshold_keys = self.events.copy()
+        events_remaining = self.events.copy()
         t = 0
         state_at_event = {}
-        while len(threshold_keys) > 0:
+        while len(events_remaining) > 0:
             result = self.simulate_to_threshold(x = x, t0 = t, **params)
             for key, value in result.event_states[-1].items():
                 if value <= 0 and key not in state_at_event:
-                    threshold_keys.remove(key)
+                    events_remaining.remove(key)
                     state_at_event[key] = result.states[-1]
             x = result.states[-1]
             t = result.times[-1]
@@ -698,14 +698,14 @@ class PrognosticsModel(ABC):
         }
         params.update(kwargs)
 
-        threshold_keys = self.events.copy()
+        events_remaining = self.events.copy()
         t = 0
         time_of_event = {}
-        while len(threshold_keys) > 0:
+        while len(events_remaining) > 0:
             result = self.simulate_to_threshold(x = x, t0 = t, **params)
             for key, value in result.event_states[-1].items():
                 if value <= 0 and key not in time_of_event:
-                    threshold_keys.remove(key)
+                    events_remaining.remove(key)
                     time_of_event[key] = result.times[-1]
             x = result.states[-1]
             t = result.times[-1]
@@ -772,7 +772,7 @@ class PrognosticsModel(ABC):
 
         return self.simulate_to_threshold(future_loading_eqn, first_output, **kwargs)
  
-    def simulate_to_threshold(self, future_loading_eqn: abc.Callable = None, first_output = None, threshold_keys: list = None, **kwargs) -> namedtuple:
+    def simulate_to_threshold(self, future_loading_eqn: abc.Callable = None, first_output = None, events: list = None, **kwargs) -> namedtuple:
         """
         Simulate prognostics model until any or specified threshold(s) have been met
 
@@ -802,7 +802,7 @@ class PrognosticsModel(ABC):
             maximum time that the model will be simulated forward (s), e.g., horizon = 1000 \n
         first_output : OutputContainer, optional
             First measured output, needed to initialize state for some classes. Can be omitted for classes that don't use this
-        threshold_keys: abc.Sequence[str] or str, optional
+        events: abc.Sequence[str] or str, optional
             Keys for events that will trigger the end of simulation.
             If blank, simulation will occur if any event will be met ()
         x : StateContainer, optional
@@ -860,13 +860,20 @@ class PrognosticsModel(ABC):
             future_loading_eqn = lambda t,x=None: self.InputContainer({})
         elif not (callable(future_loading_eqn)):
             raise ValueError("'future_loading_eqn' must be callable f(t)")
-        
-        if isinstance(threshold_keys, str):
-            # A single threshold key
-            threshold_keys = [threshold_keys]
 
-        if threshold_keys and not all([key in self.events for key in threshold_keys]):
-            raise ValueError("threshold_keys must be event names")
+        if 'threshold_keys' in kwargs:
+            warn('Please use the keyword argument `events` instead of `threshold_keys`')
+            if events is None:
+                events = kwargs['threshold_keys']
+            else:
+                warn('Both `events` and `threshold_keys` were set. `events` will be used.')
+        
+        if isinstance(events, str):
+            # A single threshold key
+            events = [events]
+
+        if (events is not None) and not all([key in self.events for key in events]):
+            raise ValueError("`events` must be event names")
 
         # Configure
         config = {  # Defaults
@@ -930,20 +937,20 @@ class PrognosticsModel(ABC):
 
         # Threshold Met Equations
         def check_thresholds(thresholds_met):
-            t_met = [thresholds_met[key] for key in threshold_keys]
+            t_met = [thresholds_met[key] for key in events]
             if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
                 return np.any(t_met)
             return any(t_met)
         if 'thresholds_met_eqn' in config:
             check_thresholds = config['thresholds_met_eqn']
-            threshold_keys = []
-        elif threshold_keys is None: 
-            # Note: Setting threshold_keys to be all events if it is None
-            threshold_keys = self.events
-        elif len(threshold_keys) == 0:
+            events = []
+        elif events is None: 
+            # Note: Setting events to be all events if it is None
+            events = self.events
+        elif len(events) == 0:
             check_thresholds = lambda _: False
 
-        if len(threshold_keys) == 0 and config.get('thresholds_met_eqn', None) is None and 'horizon' not in kwargs:
+        if len(events) == 0 and config.get('thresholds_met_eqn', None) is None and 'horizon' not in kwargs:
             raise ValueError("Running simulate to threshold for a model with no events requires a horizon to be set. Otherwise simulation would never end.")
 
         # Initialization of save arrays
