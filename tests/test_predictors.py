@@ -62,6 +62,15 @@ class TestPredictors(unittest.TestCase):
         m = MockProgModel()
         pred = TemplatePredictor(m)
 
+    def test_UTP_Broken(self):
+        m = ThrownObject()
+        pred = UnscentedTransformPredictor(m)
+        samples = MultivariateNormalDist(['x', 'v'], [1.83, 40], [[0.1, 0.01], [0.01, 0.1]])
+        
+        with self.assertRaises(ValueError):
+            # Invalid event strategy - first (not supported)
+            pred.predict(samples, dt=0.2, num_samples=3, save_freq=1, event_strategy='first')
+
     def test_UTP_ThrownObject(self):
         m = ThrownObject()
         pred = UnscentedTransformPredictor(m)
@@ -122,7 +131,15 @@ class TestPredictors(unittest.TestCase):
         s = results.time_of_event.sample(100).key('EOD')
         samples.eol_metrics(s)  # Kept for backwards compatibility
 
-    def test_MC(self):
+    def test_MC_Broken(self):
+        m = ThrownObject()
+        mc = MonteCarlo(m)
+
+        with self.assertRaises(ValueError):
+            # Invalid event strategy
+            mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, event_strategy='fdksl')
+
+    def test_MC_ThrownObject(self):
         m = ThrownObject()
         mc = MonteCarlo(m)
         
@@ -130,6 +147,22 @@ class TestPredictors(unittest.TestCase):
         results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1)
         self.assertAlmostEqual(results.time_of_event.mean['impact'], 8.0, 5)
         self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)
+
+        # event_strategy='all' should act the same
+        results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, event_strategy='all')
+        self.assertAlmostEqual(results.time_of_event.mean['impact'], 8.0, 5)
+        self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)
+    
+    def test_MC_ThrownObject_First(self):
+        # Test thrown object, similar to test_UKP_ThrownObject, but with only the first event (i.e., 'falling')
+
+        m = ThrownObject()
+        mc = MonteCarlo(m)
+        mc_results = mc.predict(m.initialize(), dt=0.2, event_strategy='first', num_samples=3, save_freq=1)
+
+        self.assertAlmostEqual(mc_results.time_of_event.mean['falling'], 3.8, 10)
+        self.assertTrue('impact' not in mc_results.time_of_event.mean)
+        self.assertAlmostEqual(mc_results.times[-1], 3, 1)  # Saving every second, last time should be around the nearest 1s before falling event
 
     def test_prediction_mvnormaldist(self):
         times = list(range(10))

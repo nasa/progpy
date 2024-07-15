@@ -89,6 +89,7 @@ class UnscentedTransformPredictor(Predictor):
         'kappa': -1,
         't0': 0,
         'dt': 0.5,
+        'event_strategy': 'all',
         'horizon': 1e99,
         'save_pts': [],
         'save_freq': 1e99
@@ -175,6 +176,9 @@ class UnscentedTransformPredictor(Predictor):
         params = deepcopy(self.parameters) # copy parameters
         params.update(kwargs) # update for specific run
 
+        if params['event_strategy'] != 'all':
+            raise ValueError(f"`event_strategy` {params['event_strategy']} not supported. Currently, only 'all' event strategy is supported")
+
         if events is None:
             # Predict to all events
             # change to list because of limits of jsonify
@@ -252,7 +256,7 @@ class UnscentedTransformPredictor(Predictor):
                         all_failed = False  # This event for this sigma point hasn't been met yet
             if all_failed:
                 # If all events have been reched for every sigma point
-                break 
+                break
         
         # Prepare Results
         pts = array([[e for e in ToE[key]] for key in ToE.keys()])
