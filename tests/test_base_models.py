@@ -604,6 +604,18 @@ class TestModels(unittest.TestCase):
         (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'])
         self.assertAlmostEqual(times[-1], 5.0, 5)
 
+        # Any event, manual - specified strategy
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='first')
+        self.assertAlmostEqual(times[-1], 5.0, 5)
+
+        # both e1, e2
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='all')
+        self.assertAlmostEqual(times[-1], 15.0, 5)
+
+        # Any event, manual - unexpected strategy
+        with self.assertRaises(ValueError):
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='fljsdk')
+
         # Only event 2
         (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e2'])
         self.assertAlmostEqual(times[-1], 15.0, 5)
