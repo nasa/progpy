@@ -101,9 +101,19 @@ class MonteCarlo(Predictor):
         if events is None:
             # Predict to all events
             # change to list because of limits of jsonify
-            events = list(self.model.events)
+            if 'events' in params and params['events'] is not None:
+                # Set at a model level
+                events = list(params['events'])
+            else:
+                # Otherwise, all events
+                events = list(self.model.events)
         if len(events) == 0 and 'horizon' not in params:
             raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
+
+        if 'events' in params: 
+            # Params is provided as a argument in construction
+            # Remove it so it's not passed to simulate_to*
+            def params['events']
 
         # Sample from state if n_samples specified or state is not UnweightedSamples (Case 2)
         # Or if is Unweighted samples, but there are the wrong number of samples (Case 1)
