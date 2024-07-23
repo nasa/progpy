@@ -113,7 +113,7 @@ class MonteCarlo(Predictor):
         if 'events' in params: 
             # Params is provided as a argument in construction
             # Remove it so it's not passed to simulate_to*
-            def params['events']
+            del params['events']
 
         # Sample from state if n_samples specified or state is not UnweightedSamples (Case 2)
         # Or if is Unweighted samples, but there are the wrong number of samples (Case 1)
