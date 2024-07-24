@@ -783,6 +783,13 @@ class PrognosticsModel(ABC):
 
         Keyword Arguments
         -----------------
+        events: abc.Sequence[str] or str, optional
+            Keys for events that will trigger the end of simulation.
+            If blank, simulation will occur if any event will be met ()
+        event_strategy: str, optional
+            Strategy for stopping evaluation. Default is 'first'. One of:\n
+            'first': Will stop when first event in `events` list is reached.
+            'all': Will stop when all events in `events` list have been reached
         t0 : float, optional
             Starting time for simulation in seconds (default: 0.0) \n
         dt : float, tuple, str, or function, optional
@@ -802,9 +809,6 @@ class PrognosticsModel(ABC):
             maximum time that the model will be simulated forward (s), e.g., horizon = 1000 \n
         first_output : OutputContainer, optional
             First measured output, needed to initialize state for some classes. Can be omitted for classes that don't use this
-        events: abc.Sequence[str] or str, optional
-            Keys for events that will trigger the end of simulation.
-            If blank, simulation will occur if any event will be met ()
         x : StateContainer, optional
             initial state, e.g., x= m.StateContainer({'x1': 10, 'x2': -5.3})\n
         thresholds_met_eqn : abc.Callable, optional
@@ -880,6 +884,7 @@ class PrognosticsModel(ABC):
             't0': 0.0,
             'dt': ('auto', 1.0),
             'eval_pts': [],
+            'event_strategy': 'first',
             'save_pts': [],
             'save_freq': 10.0,
             'horizon': 1e100,  # Default horizon (in s), essentially inf
@@ -936,11 +941,21 @@ class PrognosticsModel(ABC):
         progress = config['progress']
 
         # Threshold Met Equations
-        def check_thresholds(thresholds_met):
-            t_met = [thresholds_met[key] for key in events]
-            if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
-                return np.any(t_met)
-            return any(t_met)
+        if config['event_strategy'] in ('first', 'any'):
+            def check_thresholds(thresholds_met):
+                t_met = [thresholds_met[key] for key in events]
+                if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
+                    return np.any(t_met)
+                return any(t_met)
+        elif config['event_strategy'] == 'all':
+            def check_thresholds(thresholds_met):
+                t_met = [thresholds_met[key] for key in events]
+                if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
+                    return np.all(t_met)
+                return all(t_met)
+        else:
+            raise ValueError(f"Invalid value for `event_strategy`: {config['event_strategy']}. Should be either 'all' or 'first'")
+
         if 'thresholds_met_eqn' in config:
             check_thresholds = config['thresholds_met_eqn']
             events = []

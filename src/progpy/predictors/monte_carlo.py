@@ -28,7 +28,8 @@ class MonteCarlo(Predictor):
     __DEFAULT_N_SAMPLES = 100 # Default number of samples to use, if none specified and not UncertainData
 
     default_parameters = { 
-        'n_samples': None
+        'n_samples': None,
+        'event_strategy': 'all'
     }
 
     def predict(self, state: UncertainData, future_loading_eqn: Callable=None, events=None, **kwargs) -> PredictionResults:
@@ -50,6 +51,10 @@ class MonteCarlo(Predictor):
             Simulation step size (s), e.g., 0.1
         events : list[str], optional
             Events to predict (subset of model.events) e.g., ['event1', 'event2']
+        event_strategy: str, optional
+            Strategy for stopping evaluation. Default is 'all'. One of:\n
+            'first': Will stop when first event in `events` list is reached.
+            'all': Will stop when all events in `events` list have been reached
         horizon : float, optional
             Prediction horizon (s)
         n_samples : int, optional
@@ -84,6 +89,8 @@ class MonteCarlo(Predictor):
         params.update(kwargs)  # update for specific run
         params['print'] = False
         params['progress'] = False
+        # Remove event_strategy from params to not confuse simulate_to method call
+        event_strategy = params.pop('event_strategy')
 
         if not isinstance(state, UnweightedSamples) and params['n_samples'] is None:
             # if not unweighted samples, some sample number is required, so set to default.
@@ -94,9 +101,19 @@ class MonteCarlo(Predictor):
         if events is None:
             # Predict to all events
             # change to list because of limits of jsonify
-            events = list(self.model.events)
+            if 'events' in params and params['events'] is not None:
+                # Set at a model level
+                events = list(params['events'])
+            else:
+                # Otherwise, all events
+                events = list(self.model.events)
         if len(events) == 0 and 'horizon' not in params:
             raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
+
+        if 'events' in params: 
+            # Params is provided as a argument in construction
+            # Remove it so it's not passed to simulate_to*
+            del params['events']
 
         # Sample from state if n_samples specified or state is not UnweightedSamples (Case 2)
         # Or if is Unweighted samples, but there are the wrong number of samples (Case 1)
@@ -184,7 +201,12 @@ class MonteCarlo(Predictor):
 
                     # An event has occured
                     time_of_event[event] = times[-1]
-                    events_remaining.remove(event)  # No longer an event to predict to
+                    if event_strategy == 'all':
+                        events_remaining.remove(event)  # No longer an event to predict to
+                    elif event_strategy in ('first', 'any'):
+                        events_remaining = []
+                    else:
+                        raise ValueError(f"Invalid value for `event_strategy`: {event_strategy}. Should be either 'all' or 'first'")
 
                     # Remove last state (event)
                     params['t0'] = times.pop()
