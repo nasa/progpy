@@ -152,6 +152,22 @@ class TestPredictors(unittest.TestCase):
         results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, event_strategy='all')
         self.assertAlmostEqual(results.time_of_event.mean['impact'], 8.0, 5)
         self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)
+
+        # Setting event manually
+        results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, events=['falling'])
+        self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)
+        self.assertNotIn('impact', results.time_of_event.mean)
+
+        # Setting event in construction
+        mc = MonteCarlo(m, events=['falling'])
+        results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1)
+        self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)
+        self.assertNotIn('impact', results.time_of_event.mean)
+
+        # Override event set in construction
+        results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, events=['falling', 'impact'])
+        self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)
+        self.assertAlmostEqual(results.time_of_event.mean['impact'], 8.0, 5)
     
     def test_MC_ThrownObject_First(self):
         # Test thrown object, similar to test_UKP_ThrownObject, but with only the first event (i.e., 'falling')
