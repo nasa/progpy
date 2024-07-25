@@ -871,13 +871,20 @@ class PrognosticsModel(ABC):
                 events = kwargs['threshold_keys']
             else:
                 warn('Both `events` and `threshold_keys` were set. `events` will be used.')
-        
-        if isinstance(events, str):
-            # A single threshold key
-            events = [events]
 
+        if events is None:
+            events = self.events.copy()
+        if not isinstance(events, abc.Iterable):
+            # must be string or list-like
+            raise TypeError(f'`events` must be a single event string or list of events. Was unsupported type {type(events)}.')
+        if isinstance(events, str):
+            # A single event
+            events = [events]
         if (events is not None) and not all([key in self.events for key in events]):
             raise ValueError("`events` must be event names")
+        if not isinstance(events, list):
+            # Change to list because of the limits of jsonify
+            events = list(events)
 
         # Configure
         config = {  # Defaults

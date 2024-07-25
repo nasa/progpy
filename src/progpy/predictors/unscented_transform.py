@@ -1,5 +1,6 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
 
+from collections import abc
 from copy import deepcopy
 from filterpy import kalman
 from numpy import diag, array, transpose, isnan
@@ -180,11 +181,28 @@ class UnscentedTransformPredictor(Predictor):
             raise ValueError(f"`event_strategy` {params['event_strategy']} not supported. Currently, only 'all' event strategy is supported")
 
         if events is None:
-            # Predict to all events
-            # change to list because of limits of jsonify
-            events = list(self.model.events)
+            if 'events' in params and params['events'] is not None:
+                # Set at a predictor construction
+                events = params['events']
+            else:
+                # Otherwise, all events
+                events = self.model.events
+        
+        if not isinstance(events, (abc.Iterable)) or isinstance(events, (dict, bytes)):
+            # must be string or list-like (list, tuple, set)
+            # using abc.Iterable adds support for custom data structures
+            # that implement that abstract base class
+            raise TypeError(f'`events` must be a single event string or list of events. Was unsupported type {type(events)}.')
         if len(events) == 0 and 'horizon' not in params:
             raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
+        if isinstance(events, str):
+            # A single event
+            events = [events]
+        if not all([key in self.model.events for key in events]):
+            raise ValueError("`events` must be event names")
+        if not isinstance(events, list):
+            # Change to list because of the limits of jsonify
+            events = list(events)
 
         # Optimizations 
         dt = params['dt']

@@ -82,6 +82,39 @@ class TestPredictors(unittest.TestCase):
         self.assertAlmostEqual(results.time_of_event.mean['falling'], 4.15, 0)
         # self.assertAlmostEqual(mc_results.times[-1], 9, 1)  # Saving every second, last time should be around the 1s after impact event (because one of the sigma points fails afterwards)
 
+        # Setting event manually
+        results = pred.predict(samples, dt=0.01, save_freq=1, events=['falling'])
+        self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)
+        self.assertNotIn('impact', results.time_of_event.mean)
+
+        # Setting event in construction
+        pred = UnscentedTransformPredictor(m, events=['falling'])
+        results = pred.predict(samples, dt=0.01, save_freq=1)
+        self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)
+        self.assertNotIn('impact', results.time_of_event.mean)
+
+        # Override event set in construction
+        results = pred.predict(samples, dt=0.01, save_freq=1, events=['falling', 'impact'])
+        self.assertAlmostEqual(results.time_of_event.mean['impact'], 8.21, 0)
+        self.assertAlmostEqual(results.time_of_event.mean['falling'], 4.15, 0)
+
+        # String event
+        results = pred.predict(samples, dt=0.01, save_freq=1, events='impact')
+        self.assertAlmostEqual(results.time_of_event.mean['impact'], 7.785, 5)
+        self.assertNotIn('falling', results.time_of_event.mean)
+
+        # Invalid event
+        with self.assertRaises(ValueError):
+            results = pred.predict(samples, dt=0.01, save_freq=1, events='invalid')
+        with self.assertRaises(ValueError):
+            # Mix valid, invalid
+            results = pred.predict(samples, dt=0.01, save_freq=1, events=['falling', 'invalid'])
+        with self.assertRaises(ValueError):
+            # Empty
+            results = pred.predict(samples, dt=0.01, save_freq=1, events=[])
+        with self.assertRaises(TypeError):
+            results = pred.predict(samples, dt=0.01, save_freq=1, events=45)
+
     def test_UTP_ThrownObject_One_Event(self):
         # Test thrown object, similar to test_UKP_ThrownObject, but with only the 'falling' event
         m = ThrownObject()
@@ -168,6 +201,28 @@ class TestPredictors(unittest.TestCase):
         results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, events=['falling', 'impact'])
         self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)
         self.assertAlmostEqual(results.time_of_event.mean['impact'], 8.0, 5)
+
+        # String event
+        results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, events='impact')
+        self.assertAlmostEqual(results.time_of_event.mean['impact'], 8.0, 5)
+        self.assertNotIn('falling', results.time_of_event.mean)
+
+        # Invalid event
+        with self.assertRaises(ValueError):
+            results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, events='invalid')
+        with self.assertRaises(ValueError):
+            # Mix valid, invalid
+            results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, events=['falling', 'invalid'])
+        with self.assertRaises(ValueError):
+            # Empty
+            results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, events=[])
+        with self.assertRaises(TypeError):
+            results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, events=45)
+        
+        # Empty with horizon
+        results = mc.predict(m.initialize(), dt=0.2, num_samples=3, save_freq=1, horizon=3, events=[])
+        
+        # TODO(CT): Events in other predictor
     
     def test_MC_ThrownObject_First(self):
         # Test thrown object, similar to test_UKP_ThrownObject, but with only the first event (i.e., 'falling')
