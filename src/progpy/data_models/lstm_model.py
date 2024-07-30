@@ -24,6 +24,15 @@ class LSTMStateTransitionModel(DataModel):
 
     Most users will use the :py:func:`LSTMStateTransitionModel.from_data` method to create a model, but the model can be created by passing in a model directly into the constructor. The LSTM model in this method maps from [u_t-n+1, z_t-n, ..., u_t, z_t-1] to z_t. Past :term:`input` are stored in the :term:`model` internal :term:`state`. Actual calculation of :term:`output` is performed when :py:func:`LSTMStateTransitionModel.output` is called. When using in simulation that may not be until the simulation results are accessed.
 
+    .. note::
+        ProgPy must be installed with [datadriven] option to use LSTM model. either
+
+        pip3 install progpy[datadriven]
+
+        or (if using local version)
+
+        pip3 install '.[datadriven]'
+
     Args:
         output_model (keras.Model): If a state model is present, maps from the state_model outputs to model :term:`output`. Otherwise, maps from model inputs to model :term:`output`
         state_model (keras.Model, optional): Keras model to use for state transition
