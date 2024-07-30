@@ -421,7 +421,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
-        key: pip-cache
+        key: pip-cache-datadriven
     - name: Update
       run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
