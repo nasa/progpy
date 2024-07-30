@@ -2,6 +2,7 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 from collections import abc
+import importlib.util
 from itertools import chain
 import matplotlib.pyplot as plt
 from numbers import Number
@@ -535,7 +536,10 @@ class LSTMStateTransitionModel(DataModel):
             params['normalization'] = (z_mean, z_std)
 
         # Tensorflow is imported here to avoid importing it if not needed
-        from tensorflow import keras
+        try:
+            from tensorflow import keras
+        except ImportError as e:
+            raise ImportError("Missing required dependencies for data-driven model. ProgPy was imported directly. Instead import with datadriven dependencies using pip3 install progpy[datadriven] or pip3 install -e '.[datadriven]' (if installing from local copy)")
 
         # Build model
         callbacks = [ ]
