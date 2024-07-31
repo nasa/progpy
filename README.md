@@ -6,6 +6,8 @@
 
 The NASA Prognostic Package (ProgPy) is a python prognostics framework focused on building, using, and evaluating models and algorithms for prognostics (computation of remaining useful life) and health management of engineering systems, and provides a set of prognostics models for select components and prognostics algorithms developed within this framework, suitable for use in prognostics for these components. It also includes algorithms for state estimation and prediction, including uncertainty propagation.
 
+**ProgPy was the 2024 NASA Software of the Year!**
+
 ProgPy combines NASAs prog_models and prog_algs packages into a single python package, for simplicity and clarity.
 
 ## Installation 
