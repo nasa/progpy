@@ -11,6 +11,12 @@ ProgPy combines NASAs prog_models and prog_algs packages into a single python pa
 ## Installation 
 `pip3 install progpy`
 
+or 
+
+`pip3 install progpy[datadriven]`
+
+to include dependencies for data driven models
+
 ## [Documentation](https://nasa.github.io/progpy/)
 See documentation [here](https://nasa.github.io/progpy/)
  

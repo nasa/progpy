@@ -2,6 +2,7 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 from collections import abc
+import importlib.util
 from itertools import chain
 import matplotlib.pyplot as plt
 from numbers import Number
@@ -22,6 +23,15 @@ class LSTMStateTransitionModel(DataModel):
     State transition models map from the :term:`input` at time t and :term:`output` at time t-1 plus historical data from a set window to the :term:`output` at time t.
 
     Most users will use the :py:func:`LSTMStateTransitionModel.from_data` method to create a model, but the model can be created by passing in a model directly into the constructor. The LSTM model in this method maps from [u_t-n+1, z_t-n, ..., u_t, z_t-1] to z_t. Past :term:`input` are stored in the :term:`model` internal :term:`state`. Actual calculation of :term:`output` is performed when :py:func:`LSTMStateTransitionModel.output` is called. When using in simulation that may not be until the simulation results are accessed.
+
+    .. note::
+        ProgPy must be installed with [datadriven] option to use LSTM model. either
+
+        pip3 install progpy[datadriven]
+
+        or (if using local version)
+
+        pip3 install '.[datadriven]'
 
     Args:
         output_model (keras.Model): If a state model is present, maps from the state_model outputs to model :term:`output`. Otherwise, maps from model inputs to model :term:`output`
@@ -528,7 +538,10 @@ class LSTMStateTransitionModel(DataModel):
             params['normalization'] = (z_mean, z_std)
 
         # Tensorflow is imported here to avoid importing it if not needed
-        from tensorflow import keras
+        try:
+            from tensorflow import keras
+        except ImportError as e:
+            raise ImportError("Missing required dependencies for data-driven model. ProgPy was imported directly. Instead import with datadriven dependencies using pip3 install progpy[datadriven] or pip3 install -e '.[datadriven]' (if installing from local copy)")
 
         # Build model
         callbacks = [ ]
