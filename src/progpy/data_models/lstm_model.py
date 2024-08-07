@@ -572,7 +572,7 @@ class LSTMStateTransitionModel(DataModel):
             output_data.append(t_all)
         
         model = keras.Model(inputs, outputs)
-        model.compile(optimizer="rmsprop", loss="mse", metrics=["mae"])
+        model.compile(optimizer="rmsprop", loss="mse", metrics=["mae"]*len(outputs))
         
         # Train model
         history = model.fit(
