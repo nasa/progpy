@@ -4,7 +4,7 @@
 import numpy as np
 import pandas as pd
 from typing import Union
-from warnings import warn
+from warnings import warn, catch_warnings, simplefilter
 
 
 class DictLikeMatrixWrapper():
@@ -82,10 +82,13 @@ class DictLikeMatrixWrapper():
         """
         get all values associated with a key, ex: all values of 'i'
         """
-        row = self.matrix[self._keys.index(key)]  # creates list from a row of matrix
-        if len(row) == 1:  # list contains 1 value, returns that value (non-vectorized)
-            return row[0]
-        return row  # returns entire row/list (vectorized case)
+        # Disable deprecation warnings for internal progpy code.
+        with catch_warnings():
+            simplefilter("ignore", DeprecationWarning)
+            row = self.matrix[self._keys.index(key)]  # creates list from a row of matrix
+            if len(row) == 1:  # list contains 1 value, returns that value (non-vectorized)
+                return row[0]
+            return row  # returns entire row/list (vectorized case)
 
     def __setitem__(self, key: str, value: int) -> None:
         """
@@ -185,10 +188,13 @@ class DictLikeMatrixWrapper():
         """
         returns keys and values as a list of tuples (for iterating)
         """
-        if len(self.matrix) > 0 and len(
+        # Disable deprecation warnings for internal progpy code.
+        with catch_warnings():
+            simplefilter("ignore", DeprecationWarning)
+            if len(self.matrix) > 0 and len(
                 self.matrix[0]) == 1:  # first row of the matrix has one value (non-vectorized case)
-            return zip(self._keys, np.array([value[0] for value in self.matrix]))
-        return zip(self._keys, self.matrix)
+                return zip(self._keys, np.array([value[0] for value in self.matrix]))
+            return zip(self._keys, self.matrix)
 
     def update(self, other: "DictLikeMatrixWrapper") -> None:
         """
