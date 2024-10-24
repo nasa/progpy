@@ -69,20 +69,21 @@ class DictLikeMatrixWrapper():
             Returns: frame - pd.DataFrame
         """
         warn('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
-        self._frame = pd.DataFrame(self.matrix.T, columns=self._keys)
+        self._frame = pd.DataFrame(self._matrix.T, columns=self._keys)
         return self._frame
 
     def __reduce__(self):
         """
         reduce is overridden for pickles
         """
-        return (DictLikeMatrixWrapper, (self._keys, self.matrix))
+        return (DictLikeMatrixWrapper, (self._keys, self._matrix))
 
     def __getitem__(self, key: str) -> int:
         """
         get all values associated with a key, ex: all values of 'i'
         """
-        row = self.matrix[self._keys.index(key)]  # creates list from a row of matrix
+        # Disable deprecation warnings for internal progpy code.
+        row = self._matrix[self._keys.index(key)]  # creates list from a row of matrix
         if len(row) == 1:  # list contains 1 value, returns that value (non-vectorized)
             return row[0]
         return row  # returns entire row/list (vectorized case)
@@ -92,20 +93,20 @@ class DictLikeMatrixWrapper():
         sets a row at the key given
         """
         index = self._keys.index(key)  # the int value index for the key given
-        self.matrix[index] = np.atleast_1d(value)
+        self._matrix[index] = np.atleast_1d(value)
 
     def __delitem__(self, key: str) -> None:
         """
         removes row associated with key
         """
-        self.matrix = np.delete(self.matrix, self._keys.index(key), axis=0)
+        self._matrix = np.delete(self._matrix, self._keys.index(key), axis=0)
         self._keys.remove(key)
 
     def __add__(self, other: "DictLikeMatrixWrapper") -> "DictLikeMatrixWrapper":
         """
         add another matrix to the existing matrix
         """
-        return DictLikeMatrixWrapper(self._keys, self.matrix + other.matrix)
+        return DictLikeMatrixWrapper(self._keys, self._matrix + other.matrix)
 
     def __iter__(self):
         """
@@ -124,11 +125,11 @@ class DictLikeMatrixWrapper():
         if isinstance(other, dict):  # checks that the list of keys for each matrix match
             list_key_check = (list(self.keys()) == list(
                 other.keys()))  # checks that the list of keys for each matrix are equal
-            matrix_check = (self.matrix == np.array(
+            matrix_check = (self._matrix == np.array(
                 [[other[key]] for key in self._keys])).all()  # checks to see that each row matches
             return list_key_check and matrix_check
         list_key_check = self.keys() == other.keys()
-        matrix_check = (self.matrix == other.matrix).all()
+        matrix_check = (self._matrix == other.matrix).all()
         return list_key_check and matrix_check
 
     def __eq__(self, other: "DictLikeMatrixWrapper") -> bool:
@@ -143,7 +144,7 @@ class DictLikeMatrixWrapper():
         returns hash value sum for keys and matrix
         """
         warn('hash will be deprecated after version 1.5 of ProgPy, will be replace with pandas.util.hash_pandas_object.', DeprecationWarning, stacklevel=2)
-        return hash(self.keys) + hash(self.matrix)
+        return hash(self.keys) + hash(self._matrix)
 
     def __str__(self) -> str:
         """
@@ -163,7 +164,7 @@ class DictLikeMatrixWrapper():
         """
         creates copy of object
         """
-        return DictLikeMatrixWrapper(self._keys, self.matrix.copy())
+        return DictLikeMatrixWrapper(self._keys, self._matrix.copy())
 
     def keys(self) -> list:
         """
@@ -176,19 +177,20 @@ class DictLikeMatrixWrapper():
         returns array of matrix values
         """
         warn("After v1.5, values will be a property instead of a function.", DeprecationWarning, stacklevel=2)
-        if len(self.matrix) > 0 and len(
-                self.matrix[0]) == 1:  # if the first row of the matrix has one value (i.e., non-vectorized)
-            return np.array([value[0] for value in self.matrix])  # the value from the first row
-        return self.matrix  # the matrix (vectorized case)
+        if len(self._matrix) > 0 and len(
+                self._matrix[0]) == 1:  # if the first row of the matrix has one value (i.e., non-vectorized)
+            return np.array([value[0] for value in self._matrix])  # the value from the first row
+        return self._matrix  # the matrix (vectorized case)
 
     def items(self) -> zip:
         """
         returns keys and values as a list of tuples (for iterating)
         """
-        if len(self.matrix) > 0 and len(
-                self.matrix[0]) == 1:  # first row of the matrix has one value (non-vectorized case)
-            return zip(self._keys, np.array([value[0] for value in self.matrix]))
-        return zip(self._keys, self.matrix)
+        # Disable deprecation warnings for internal progpy code.
+        if len(self._matrix) > 0 and len(
+            self._matrix[0]) == 1:  # first row of the matrix has one value (non-vectorized case)
+            return zip(self._keys, np.array([value[0] for value in self._matrix]))
+        return zip(self._keys, self._matrix)
 
     def update(self, other: "DictLikeMatrixWrapper") -> None:
         """
@@ -201,7 +203,7 @@ class DictLikeMatrixWrapper():
             else:  # else it isn't it is appended to self._keys list
                 # A new key!
                 self._keys.append(key)
-                self.matrix = np.vstack((self.matrix, np.array([other[key]])))
+                self._matrix = np.vstack((self._matrix, np.array([other[key]])))
 
     def __contains__(self, key: str) -> bool:
         """
@@ -222,10 +224,10 @@ class DictLikeMatrixWrapper():
 
         returns: a string of dictionaries containing all the keys and associated matrix values
         """
-        if len(self.matrix) > 0 and len(
-                self.matrix[0]) == 1:  # the matrix has rows and the first row/list has one value in it
-            return str({key: value[0] for key, value in zip(self._keys, self.matrix)})
-        return str(dict(zip(self._keys, self.matrix)))
+        if len(self._matrix) > 0 and len(
+                self._matrix[0]) == 1:  # the matrix has rows and the first row/list has one value in it
+            return str({key: value[0] for key, value in zip(self._keys, self._matrix)})
+        return str(dict(zip(self._keys, self._matrix)))
 
 InputContainer = DictLikeMatrixWrapper
 
