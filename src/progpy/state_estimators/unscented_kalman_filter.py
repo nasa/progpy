@@ -55,10 +55,10 @@ class UnscentedKalmanFilter(state_estimator.StateEstimator):
 
         def measure(x):
             # Disable deprecation warnings for internal progpy code.
+            x = model.StateContainer({key: value for (key, value) in zip(x0.keys(), x)})
+            R_err = model.parameters['measurement_noise'].copy()
             with catch_warnings():
                 simplefilter("ignore", DeprecationWarning)
-                x = model.StateContainer({key: value for (key, value) in zip(x0.keys(), x)})
-                R_err = model.parameters['measurement_noise'].copy()
                 model.parameters['measurement_noise'] = dict.fromkeys(R_err, 0)
                 z = model.output(x)
                 model.parameters['measurement_noise'] = R_err
@@ -69,10 +69,10 @@ class UnscentedKalmanFilter(state_estimator.StateEstimator):
 
         def state_transition(x, dt):
             # Disable deprecation warnings for internal progpy code.
+            x = model.StateContainer({key: value for (key, value) in zip(x0.keys(), x)})
+            Q_err = model.parameters['process_noise'].copy()
             with catch_warnings():
                 simplefilter("ignore", DeprecationWarning)
-                x = model.StateContainer({key: value for (key, value) in zip(x0.keys(), x)})
-                Q_err = model.parameters['process_noise'].copy()
                 model.parameters['process_noise'] = dict.fromkeys(Q_err, 0)
                 x = model.next_state(x, self.__input, dt)
                 return array(list(x.values())).ravel()
