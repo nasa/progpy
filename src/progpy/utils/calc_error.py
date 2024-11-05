@@ -190,6 +190,8 @@ def MSE(m, times: List[float], inputs: List[dict], outputs: List[dict], **kwargs
                     warn(f"Model unstable- NAN reached in simulation (t={t}) before cutoff threshold. "
                                      f"Cutoff threshold is {cutoffThreshold}, or roughly {stability_tol * 100}% of the data. Penalty added to score.")
                     # Return value with Penalty added
+                    if counter == 0:
+                        return 100*short_sim_penalty
                     return err_total/counter + (100-(t/cutoffThreshold)*100)*short_sim_penalty
                 else:
                     warn("Model unstable- NaN reached in simulation (t={})".format(t))
