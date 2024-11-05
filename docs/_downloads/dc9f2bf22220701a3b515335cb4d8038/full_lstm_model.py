@@ -30,11 +30,11 @@ def run_example():
     # Step 1: Generate additional data
     # We will use data generated above, but we also want data at additional timesteps 
     print('Generating data...')
-    data = m.simulate_to_threshold(future_loading, threshold_keys='impact', save_freq=TIMESTEP, dt=TIMESTEP)
-    data_half = m.simulate_to_threshold(future_loading, threshold_keys='impact', save_freq=TIMESTEP/2, dt=TIMESTEP/2)
-    data_quarter = m.simulate_to_threshold(future_loading, threshold_keys='impact', save_freq=TIMESTEP/4, dt=TIMESTEP/4)
-    data_twice = m.simulate_to_threshold(future_loading, threshold_keys='impact', save_freq=TIMESTEP*2, dt=TIMESTEP*2)
-    data_four = m.simulate_to_threshold(future_loading, threshold_keys='impact', save_freq=TIMESTEP*4, dt=TIMESTEP*4)
+    data = m.simulate_to_threshold(future_loading, events='impact', save_freq=TIMESTEP, dt=TIMESTEP)
+    data_half = m.simulate_to_threshold(future_loading, events='impact', save_freq=TIMESTEP/2, dt=TIMESTEP/2)
+    data_quarter = m.simulate_to_threshold(future_loading, events='impact', save_freq=TIMESTEP/4, dt=TIMESTEP/4)
+    data_twice = m.simulate_to_threshold(future_loading, events='impact', save_freq=TIMESTEP*2, dt=TIMESTEP*2)
+    data_four = m.simulate_to_threshold(future_loading, events='impact', save_freq=TIMESTEP*4, dt=TIMESTEP*4)
 
     # Step 2: Data Prep
     # We need to add the timestep as a input
@@ -109,8 +109,8 @@ def run_example():
     # Use new dt, not used in training
     # Using a dt not used in training will demonstrate the model's 
     # ability to handle different timesteps not part of training set
-    data = m.simulate_to_threshold(future_loading, threshold_keys='impact', dt=TIMESTEP*3, save_freq=TIMESTEP*3)
-    results3 = m2.simulate_to_threshold(future_loading3, threshold_keys='impact', dt=TIMESTEP*3, save_freq=TIMESTEP*3)
+    data = m.simulate_to_threshold(future_loading, events='impact', dt=TIMESTEP*3, save_freq=TIMESTEP*3)
+    results3 = m2.simulate_to_threshold(future_loading3, events='impact', dt=TIMESTEP*3, save_freq=TIMESTEP*3)
 
     # Step 6: Compare Results
     print('Comparing results...')
