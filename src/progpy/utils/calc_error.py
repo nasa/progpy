@@ -142,7 +142,7 @@ def MSE(m, times: List[float], inputs: List[dict], outputs: List[dict], **kwargs
             If the model goes unstable before stability_tol is met and short_sim_penalty is  None, then exception is raised
             Else if the model goes unstable before stability_tol is met and short_sim_penalty is not None- the penalty is added to the score
             Else, model goes unstable after stability_tol is met, the error calculated from data up to the instability is returned.
-        short_sim_penalty (float, optional): penalty added for simulation becoming unstable before stability_tol, added for each % below tol. Default is 100
+        short_sim_penalty (float, optional): penalty added for simulation becoming unstable before stability_tol, added for each % below tol. If set to None, operation will return an error if simulation becomes unstable before stability_tol. Default is 100
 
     Returns:
         float: Total error
