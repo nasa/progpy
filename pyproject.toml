@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "progpy"
-version = "1.7.0-pre"
+version = "1.7.0"
 dependencies = [
     "scipy",
     "pandas",  # For data downloading features
@@ -29,7 +29,7 @@ maintainers = [
     {name = "Christopher Teubert", email = "christopher.a.teubert@nasa.gov"},
     {name = "Katelyn Griffith", email = "katelyn.j.griffith@nasa.gov"}
 ]
-description = "The NASA Prognostic Package (ProgPy) is a python prognostics framework focused on building, using, and evaluating models and algorithms for prognostics (computation of remaining useful life) and health management of engineering systems, and provides a set of prognostics models for select components and prognostics algorithms developed within this framework, including uncertainty propagation."
+description = "The 2024 NASA Software of the Year, the NASA Prognostic Package (ProgPy) is a python prognostics framework focused on building, using, and evaluating models and algorithms for prognostics (computation of remaining useful life) and health management of engineering systems, and provides a set of prognostics models for select components and prognostics algorithms developed within this framework, including uncertainty propagation."
 readme = "README.md"
 license = {text = "NOSA"}
 keywords = ['prognostics', 'diagnostics', 'fault detection', 'fdir', 'physics modeling', 'prognostics and health management', 'PHM', 'health management', 'surrogate modeling', 'model tuning', 'simulation', 'ivhm']
