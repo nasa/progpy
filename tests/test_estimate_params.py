@@ -5,6 +5,7 @@ import numpy as np
 import unittest
 
 from progpy.models import ThrownObject
+from progpy.models.test_models.other_models import OneInputTwoOutputsOneEvent
 
 
 class TestEstimateParams(unittest.TestCase):
@@ -66,6 +67,26 @@ class TestEstimateParams(unittest.TestCase):
         m.estimate_params(times=results.times, inputs=results.inputs, outputs=results.outputs, keys=keys)
         for key in keys:
             self.assertAlmostEqual(m.parameters[key], gt[key], 2)
+
+    def test_layered_params(self):
+        """
+        Testing case where optimized state is layered (e.g., ['x0]['a']). I.e., stored in a dict or other structure.
+        """
+        m = OneInputTwoOutputsOneEvent()
+
+        ts = [0, 1, 2]
+        us = [{'u0': 1}]*3
+        zs = [ # corresponds to x0 = 1 and a = 2
+            {'x0+b': np.float64(2.0), 'x0+c': np.float64(2.0)},
+            {'x0+b': np.float64(4.0), 'x0+c': np.float64(4.0)},
+            {'x0+b': np.float64(6.0), 'x0+c': np.float64(6.0)}]
+
+        keys = ['a', ('x0', 'x0')]
+
+        m.estimate_params(times=ts, inputs=us, outputs=zs, keys=keys)
+
+        self.assertAlmostEqual(m['x0']['x0'], 1, delta=1e-4)
+        self.assertAlmostEqual(m['a'], 2, delta=1e-4)
 
     def test_estimate_params(self):
         """
@@ -517,7 +538,6 @@ class TestEstimateParams(unittest.TestCase):
         # Testing estimate_params properly handles when results are passed in as np.arrays
         m.estimate_params(times = times, inputs = inputs, outputs = outputs)
 
-
     def test_keys(self):
         """
         Testing features where keys are not parameters in the model
@@ -575,24 +595,19 @@ class TestEstimateParams(unittest.TestCase):
         # Reset parameters after successful estimate_params call
         m.parameters['thrower_height'] = 1.5
         m.parameters['throwing_speed'] = 25
-        
-        # Keys within a list of tuples without any commas
-        # Same as writing - ['thrower_height', 'throwing_speed', 'g']
-        keys = [('thrower_height'), ('throwing_speed'), ('g')]
-        m.estimate_params(times=results.times, inputs=results.inputs, outputs=results.outputs, keys=keys, bounds=bound)  
-        for key in keys:
-            self.assertAlmostEqual(m.parameters[key], gt[key], 4)
-
+  
         # Testing keys within tuples that are a length of one
         keys = [('thrower_height', ), ('throwing_speed', ), ('g', )]
+        m.estimate_params(times=results.times, inputs=results.inputs, outputs=results.outputs, keys=keys, bounds=bound)
+
+        # Testing keys within tuples that are broken
+        keys = [('thrower_height', 'a'), ('throwing_speed', 'b'), ('g', 'c')]
         with self.assertRaises(ValueError):
             m.estimate_params(times=results.times, inputs=results.inputs, outputs=results.outputs, keys=keys, bounds=bound)
 
         # Testing lists within lists
         keys = [['thrower_height'], ['throwing_speed'], ['g']]
-        with self.assertRaises(TypeError):
-            m.estimate_params(times=results.times, inputs=results.inputs, outputs=results.outputs, keys=keys, bounds=bound)
-
+        m.estimate_params(times=results.times, inputs=results.inputs, outputs=results.outputs, keys=keys, bounds=bound)
 
     def test_parameters(self):
         """
