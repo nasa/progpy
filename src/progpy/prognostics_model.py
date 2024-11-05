@@ -8,7 +8,7 @@ import itertools
 import json
 from numbers import Number
 import numpy as np
-from typing import List  # Still needed until v3.9
+from typing import List, Mapping  # Still needed until v3.9
 from warnings import warn
 
 from progpy.exceptions import ProgModelStateLimitWarning, warn_once
@@ -1273,8 +1273,8 @@ class PrognosticsModel(ABC):
         """Estimate the model parameters given data. Overrides model parameters
 
         Keyword Args:
-            keys (list[str]):
-                Parameter keys to optimize
+            keys (list[str] or list[tuple[str]]):
+                Parameter keys to optimize. Use tuple for nested parameters. For example, key ('x0', 'a') corresponds to m.parameters['x0']['a'].
             times (list[float]):
                 Array of times for each sample
             inputs (list[InputContainer]):
@@ -1309,8 +1309,17 @@ class PrognosticsModel(ABC):
             raise ValueError(f"Can not pass in keys as a Set. Sets are unordered by construction, so bounds may be out of order.")
         
         for key in keys:
-            if key not in self.parameters:
-                raise ValueError(f"Key '{key}' not in model parameters")
+            if isinstance(key, (tuple, list)):
+                tmp = self.parameters
+                keys_so_far = ''
+                for key_element in key:
+                    if not isinstance(tmp, Mapping) or key_element not in tmp:
+                        raise ValueError(f"Key '{keys_so_far}[{key_element}]' not in model parameters")
+                    keys_so_far += f'[{key_element}]'
+                    tmp = tmp[key_element]
+            else:
+                if key not in self.parameters:
+                    raise ValueError(f"Key '{key}' not in model parameters")
 
         config = {
             'error_method': 'MSE',
@@ -1401,7 +1410,13 @@ class PrognosticsModel(ABC):
 
         def optimization_fcn(params):
             for key, param in zip(keys, params):
-                self.parameters[key] = param
+                if isinstance(key, (tuple, list)):
+                    tmp = self.parameters
+                    for key_element in key[:-1]:
+                        tmp = tmp[key_element]
+                    tmp[key[-1]] = param
+                else:
+                    self.parameters[key] = param
             err = 0
             for run in runs:
                 try:
@@ -1411,7 +1426,15 @@ class PrognosticsModel(ABC):
                     # If it doesn't work (i.e., throws an error), don't use it
             return err
         
-        params = np.array([self.parameters[key] for key in keys])
+        params = []
+        for key in keys:
+            if isinstance(key, (tuple, list)):
+                tmp = self.parameters
+                for key_element in key[:-1]:
+                    tmp = tmp[key_element]
+                params.append(tmp[key[-1]])
+            else:
+                params.append(self.parameters[key])
 
         res = minimize(optimization_fcn, params, method=method, bounds=config['bounds'], options=config['options'], tol=config['tol'])
 
@@ -1419,7 +1442,13 @@ class PrognosticsModel(ABC):
             warn(f"Parameter Estimation did not converge: {res.message}")
 
         for x, key in zip(res.x, keys):
-            self.parameters[key] = x
+            if isinstance(key, (tuple, list)):
+                tmp = self.parameters
+                for key_element in key[:-1]:
+                    tmp = tmp[key_element]
+                tmp[key[-1]] = x
+            else:
+                self.parameters[key] = x
         
         # Reset noise
         self.parameters['measurement_noise'] = m_noise
