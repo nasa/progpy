@@ -211,10 +211,10 @@ class CompositeModel(PrognosticsModel):
                 self.model_name = model_name
                 self.key = key
                 i = 0
-                for (name, m) in models:
+                for (name, _) in models:
                     if name == model_name:
                         break
-                    i+= 1
+                    i += 1
                 self.model_index = i
                 self.combined_key = self.model_name + '.' + self.key
 
