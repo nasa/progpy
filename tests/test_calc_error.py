@@ -111,11 +111,14 @@ class TestCalcError(unittest.TestCase):
 
         # With our current set parameters, our model goes unstable immediately
         with self.assertRaises(ValueError) as cm:
-            m.calc_error(simulated_results.times, simulated_results.inputs, simulated_results.outputs, dt=1)
+            m.calc_error(simulated_results.times, simulated_results.inputs, simulated_results.outputs, dt=1, short_sim_penalty=None)
         self.assertEqual(
             "Model unstable- NAN reached in simulation (t=0.0) before cutoff threshold. Cutoff threshold is 1900.0, or roughly 95.0% of the data",
             str(cm.exception)
-        ) 
+        )
+
+        # Shouldn't raise error for default case (i.e., short_sim_penalty is not None)
+        m.calc_error(simulated_results.times, simulated_results.inputs, simulated_results.outputs, dt=1)
 
         # Creating duplicate model to check if consistent results occur
         m1 = BatteryElectroChemEOD()
@@ -131,19 +134,25 @@ class TestCalcError(unittest.TestCase):
         
         # Checks to see if model goes unstable before default stability tolerance is met.
         with self.assertRaises(ValueError) as cm:
-            m.calc_error(simulated_results.times, simulated_results.inputs, simulated_results.outputs, dt = 1)
+            m.calc_error(simulated_results.times, simulated_results.inputs, simulated_results.outputs, dt=1, short_sim_penalty=None)
         self.assertEqual(
             "Model unstable- NAN reached in simulation (t=1800.0) before cutoff threshold. Cutoff threshold is 1900.0, or roughly 95.0% of the data",
             str(cm.exception)
         )
+
+        # Shouldn't happen for default case (short_sim_penalty is not none)
+        m.calc_error(simulated_results.times, simulated_results.inputs, simulated_results.outputs, dt=1)
         
         # Checks to see if m1 throws the same exception. 
         with self.assertRaises(ValueError):
-            m1.calc_error(m1_sim_results.times, m1_sim_results.inputs, m1_sim_results.outputs, dt = 1)
+            m1.calc_error(m1_sim_results.times, m1_sim_results.inputs, m1_sim_results.outputs, dt=1, short_sim_penalty=None)
         self.assertEqual(
             "Model unstable- NAN reached in simulation (t=1800.0) before cutoff threshold. Cutoff threshold is 1900.0, or roughly 95.0% of the data",
             str(cm.exception)
         )
+
+        # Shouldn't for default case
+        m1.calc_error(m1_sim_results.times, m1_sim_results.inputs, m1_sim_results.outputs, dt=1)
 
         # Checks to see if stability_tolerance throws Warning rather than an Error when the model goes unstable after threshold
         with self.assertWarns(UserWarning) as cm:
