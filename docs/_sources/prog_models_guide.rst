@@ -323,6 +323,13 @@ State-transition Models
         
         The :py:func:`progpy.data_models.DataModel.from_data` and :py:func:`progpy.data_models.DataModel.from_model` methods are used to construct new models from data or an existing model (i.e., :term:`surrogate`), respectively. The use of these is demonstrated in the following examples.
 
+        .. note:: 
+            To use a data-driven model distributed with progpy you need to install the data-driven dependencies.
+
+            .. code-block:: console
+
+                $ pip install progpy[datadriven] 
+
         * :download:`examples.lstm_model <../../progpy/examples/lstm_model.py>`
             .. automodule:: lstm_model
         

@@ -48,10 +48,20 @@ class Predictor(ABC):
 
         Parameters
         ----------
-        state : UncertainData 
+        state : UncertainData
             Distribution representing current state of the system
         future_loading_eqn : function (t, x) -> z
             Function to generate an estimate of loading at future time t, and state x
+        options (optional, kwargs): configuration options\n
+        Any additional configuration values. Additional keyword arguments may be supported that are are specific to the predictor, but include \n
+            * t0: Starting time (s)
+            * dt : Step size (s)
+            * horizon : Prediction horizon (s)
+            * events : List of events to be predicted (subset of model.events, default is all events)
+            * event_strategy: str, optional
+                Strategy for stopping evaluation. Default is 'first'. One of:\n
+                * *first*: Will stop when first event in `events` list is reached.\n
+                * *all*: Will stop when all events in `events` list have been reached
 
         Return
         ----------

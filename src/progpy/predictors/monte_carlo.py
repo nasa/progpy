@@ -53,9 +53,9 @@ class MonteCarlo(Predictor):
         events : list[str], optional
             Events to predict (subset of model.events) e.g., ['event1', 'event2']
         event_strategy: str, optional
-            Strategy for stopping evaluation. Default is 'all'. One of:\n
-            'first': Will stop when first event in `events` list is reached.
-            'all': Will stop when all events in `events` list have been reached
+            Strategy for stopping evaluation. Default is 'first'. One of:\n
+            * *first*: Will stop when first event in `events` list is reached.\n
+            * *all*: Will stop when all events in `events` list have been reached
         horizon : float, optional
             Prediction horizon (s)
         n_samples : int, optional

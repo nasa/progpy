@@ -38,6 +38,12 @@ Installing progpy
 
             $ pip install progpy
 
+        If you will be using the datadriven tools (e.g., LSTM model), install the datadriven dependencies as well using the following command:
+
+        .. code-block:: console
+
+            $ pip install progpy[datadriven]
+
     .. tab:: Pre-Release
 
         Users who would like to contribute to ProgPy or would like to use pre-release features can do so using the `ProgPy GitHub repo <https://github.com/nasa/progpy>`__. This isn't recommended for most users as this version may be unstable. To do this, use the following commands:
@@ -49,6 +55,12 @@ Installing progpy
             $ git checkout dev 
             $ pip install -e .
 
+        If you will be using the datadriven tools (e.g., LSTM model), install the datadriven dependencies as well using the following command:
+
+        .. code-block:: console
+
+            $ pip install -e '.[datadriven]'
+
 Citing This Repository
 -----------------------
 Use the following to cite this repository:
@@ -56,16 +68,16 @@ Use the following to cite this repository:
 @misc{2023_nasa_progpy,
   | author    = {Christopher Teubert and Katelyn Jarvis Griffith and Matteo Corbetta and Chetan Kulkarni and Portia Banerjee and Jason Watkins and Matthew Daigle},
   | title     = {{ProgPy Python Prognostics Packages}},
-  | month     = Oct,
-  | year      = 2023,
-  | version   = {1.6},
+  | month     = May,
+  | year      = 2024,
+  | version   = {1.7},
   | url       = {https://nasa.github.io/progpy}
   | doi       = {10.5281/ZENODO.8097013}
   | }
 
 The corresponding reference should look like this:
 
-C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, J. Watkins, M. Daigle, ProgPy Python Prognostics Packages, v1.6, Oct 2023. URL https://github.com/nasa/progpy.
+C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, J. Watkins, M. Daigle, ProgPy Python Prognostics Packages, v1.7, May 2024. URL https://github.com/nasa/progpy.
 
 Contributing and Partnering
 -----------------------------

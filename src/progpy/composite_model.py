@@ -16,7 +16,7 @@ class CompositeModel(PrognosticsModel):
     A CompositeModel is a PrognosticsModel that is composed of multiple PrognosticsModels. This is a tool for modeling system-of-systems. I.e., interconnected systems, where the behavior and state of one system effects the state of another system. The composite prognostics models are connected using defined connections between the output or state of one model, and the input of another model. The resulting CompositeModel behaves as a single model.
 
     Args:
-        models ({list[{PrognosticsModel, function}], list[tuple[str, {PrognosticsModel, function}]]):
+        models (list[PrognosticsModel or function] or list[tuple[str, PrognosticsModel or function]]):
             A list of PrognosticsModels to be combined into a single model.
             Provided in one of two forms:
 
@@ -34,6 +34,8 @@ class CompositeModel(PrognosticsModel):
     Keyword Args:
         outputs (list[str]):
             Model outputs in format "model_name.output_name". Must be subset of all outputs from models. If not provided, all outputs will be included.
+
+    
     """
 
     def __init__(self, models: list, connections: list = [], **kwargs):
