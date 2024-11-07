@@ -30,7 +30,8 @@ class MonteCarlo(Predictor):
 
     default_parameters = { 
         'n_samples': None,
-        'event_strategy': 'all'
+        'event_strategy': 'all',
+        'constant_noise': False
     }
 
     def predict(self, state: UncertainData, future_loading_eqn: Callable=None, events=None, **kwargs) -> PredictionResults:
@@ -64,6 +65,8 @@ class MonteCarlo(Predictor):
             Frequency at which results are saved (s)
         save_pts : list[float], optional
             Any additional savepoints (s) e.g., [10.1, 22.5]
+        constant_noise : bool, optional
+            If the same noise should be applied every step. Default: False
 
         Return
         ----------
@@ -147,10 +150,23 @@ class MonteCarlo(Predictor):
         outputs_all = []
         event_states_all = []
 
+        if params['constant_noise']:
+            # Save loads
+            process_noise = self.model['process_noise']
+            process_noise_dist = self.model.parameters.get('process_noise_dist', 'normal')
+
         # Perform prediction
         t0 = params.get('t0', 0)
         HORIZON = params.get('horizon', float('inf'))  # Save the horizon to be used later
         for x in state:
+            if params['constant_noise']:
+                # Calculate process noise
+                x_noise = self.model.apply_process_noise(x.copy(), 1)
+                x_noise = self.model.StateContainer({key: x_noise[key] - x[key] for key in x.keys()})
+
+                self.model['process_noise'] = x_noise
+                self.model['process_noise_dist'] = 'constant'
+
             first_output = self.model.output(x)
             
             time_of_event = {}
@@ -238,6 +254,11 @@ class MonteCarlo(Predictor):
             event_states_all.append(event_states)
             time_of_event_all.append(time_of_event)
             last_states.append(last_state)
+
+            # Reset noise
+            if params['constant_noise']:
+                self.model['process_noise'] = process_noise
+                self.model['process_noise_dist'] = process_noise_dist
               
         inputs_all = UnweightedSamplesPrediction(times_all, inputs_all)
         states_all = UnweightedSamplesPrediction(times_all, states_all)

@@ -43,6 +43,12 @@ measurement_noise_functions = {
 # ---------------------------
 
 
+def constant_process_noise(self, x, dt: float = 1):
+    noise = self.parameters['process_noise'].matrix
+    x.matrix = x.matrix + dt*noise
+    return x
+
+
 def triangular_process_noise(self, x, dt: float = 1):
     noise_mat = self.parameters['process_noise'].matrix
     noise = np.random.triangular(-1*noise_mat, 0, noise_mat, size=x.matrix.shape)
@@ -69,6 +75,7 @@ def no_process_noise(self, x, dt: float = 1) -> dict:
 
 
 process_noise_functions = {
+    'constant': constant_process_noise,
     'uniform': uniform_process_noise,
     'triangular': triangular_process_noise,
     'normal': normal_process_noise,
