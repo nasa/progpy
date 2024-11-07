@@ -506,6 +506,14 @@ class TestModels(unittest.TestCase):
         # That key should be 0 (default)
         self.assertEqual(m.parameters['process_noise'][list(m.states)[-1]], 0)
 
+        # Const noise
+        m.parameters['process_noise_dist'] = 'constant'
+        x = m.StateContainer({key: 0 for key in m.states})
+        x = m.apply_process_noise(x)
+        for key in list(m.states)[:-1]:
+            self.assertAlmostEqual(x[key], 1.0)
+        self.assertAlmostEqual(x[list(m.states)[-1]], 0.0)
+
     def test_measurement_noise(self):
         self.__noise_test('measurement_noise', 'measurement_noise_dist', MockProgModel.outputs)
 
