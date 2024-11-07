@@ -141,6 +141,10 @@ class UnscentedTransformPredictor(Predictor):
             * dt : Step size (s)
             * horizon : Prediction horizon (s)
             * events : List of events to be predicted (subset of model.events, default is all events)
+            * event_strategy: str, optional
+                Strategy for stopping evaluation. Default is 'first'. One of:\n
+                * *first*: Will stop when first event in `events` list is reached.\n
+                * *all*: Will stop when all events in `events` list have been reached
 
         Returns (PredictionResults)
         -------

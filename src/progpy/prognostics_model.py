@@ -788,8 +788,8 @@ class PrognosticsModel(ABC):
             If blank, simulation will occur if any event will be met ()
         event_strategy: str, optional
             Strategy for stopping evaluation. Default is 'first'. One of:\n
-            'first': Will stop when first event in `events` list is reached.
-            'all': Will stop when all events in `events` list have been reached
+            * *first*: Will stop when first event in `events` list is reached.\n
+            * *all*: Will stop when all events in `events` list have been reached
         t0 : float, optional
             Starting time for simulation in seconds (default: 0.0) \n
         dt : float, tuple, str, or function, optional
@@ -1176,7 +1176,7 @@ class PrognosticsModel(ABC):
               * DTW (Dynamic Time Warping)
             x0 (StateContainer, optional): Initial state
             dt (float, optional): Maximum time step in simulation. Time step used in simulation is lower of dt and time between samples. Defaults to time between samples.
-            stability_tol (double, optional): Configurable parameter.
+            stability_tol (double, optional): Configurable cutoff
                 Configurable cutoff value, between 0 and 1, that determines the fraction of the data points for which the model must be stable.
                 In some cases, a prognostics model will become unstable under certain conditions, after which point the model can no longer represent behavior. 
                 stability_tol represents the fraction of the provided argument `times` that are required to be met in simulation, 
@@ -1185,6 +1185,7 @@ class PrognosticsModel(ABC):
                 If the model goes unstable before stability_tol is met, a ValueError is raised.
                 Else, model goes unstable after stability_tol is met, the mean squared error calculated from data up to the instability is returned.
             aggr_method (func, optional): When multiple runs are provided, users can state how to aggregate the results of the errors. Defaults to taking the mean.
+            short_sim_penalty (double, optional): Only for MSE method: penalty added for simulation becoming unstable before stability_tol, added for each % below tol. If set to None, operation will return an error if simulation becomes unstable before stability_tol. Default is 100
 
         Returns:
             float: error

@@ -4,6 +4,59 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in V1.6
+----------------------
+
+progpy
+**************
+* Combined previous prog_models and prog_algs packages into a single package, progpy.
+* Added new :py:class:`progpy.MixtureOfExpertsModel`, which combines multiple models of the same system into a single model, where only the best of the comprised models will be used at each timestep.
+* Added ability to set random seed in :py:class:`progpy.loading.GaussianNoiseWrapper`, allowing for repeatable experiments
+* Various bug fixes and performance improvements
+
+Upgrading from v1.5
+^^^^^^^^^^^^^^^^^^^^^^
+v1.6 combined prog_models and prog_algs into a single package progpy. To upgrade to 1.6, you will need to download the new progpy package (pip install progpy) and update all imports to use progpy. For example `from prog_models import PrognosticsModel` becomes `from progpy import PrognosticsModel`, and `from prog_algs import predictors` becomes `from progpy import predictors`.
+
+prog_server
+************
+* Updated to work with progpy v1.6
+
+Updates in V1.5
+-----------------------
+
+prog_models
+***************
+* **Direct Models**: Added support for new model type: Direct Models. Direct Models directly map current state and future load to time of event, rather than state-transition models which simulate forward to calculate time of event. They're created by implementing the :py:meth:`prog_models.PrognosticsModel.time_of_event`. See `direct model example <https://github.com/nasa/prog_models/blob/master/examples/direct_model.py>`__ for example of use.
+* New model types that combine multiple models.
+
+  * **Ensemble Model**: Combinations of multiple models of the same system where results are aggregated. See `ensemble example <https://github.com/nasa/prog_models/blob/master/examples/ensemble.py>`__  for example of use.
+  * **Composite Model**: Combinations of models of different systems that are interdependent. See `composite example <https://github.com/nasa/prog_models/blob/master/examples/composite_model.py>`__ for example of use.
+
+* **New Model Type**: Aircraft flight model interface, :py:class:`prog_models.models.aircraft_model.AircraftModel`. Anticipated prognostics applications with the aircraft flight model include estimating and predicting loading of other aircraft systems (e.g., powertrain) and safety metrics.
+* New Model: Small Rotorcraft AircraftModel. See `example <https://github.com/nasa/prog_models/blob/master/examples/uav_dynamics_model.py>`__.
+* New DataModel: Polynomial Chaos Expansion (PCE) Direct Surrogate Model (:py:class:`prog_models.data_models.PolynomialChaosExpansion`). See `chaos example <https://github.com/nasa/prog_models/blob/master/examples/pce.py>`__ for example of use.
+* Started transition of InputContainers, StateContainers, OutputContainer and SimResult to use Pandas DataFrames. This release will bring the interface more in compliance with DataFrames. v1.6 will fully transition the classes to DataFrames.
+* Implemented new metrics that can be used in :py:meth:`prog_models.PrognosticsModel.calc_error`: Root Mean Square Error (RMSE), Maximum Error (MAX_E), Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE), and Dynamic Time Warping (DTW)
+* Error calculation metric (above) can now be set when calling :py:meth:`prog_models.PrognosticsModel.estimate_params`
+* Reworked integration methods in simulation
+
+  * New integration methods: RK4 and methods from scipy.integrate
+  * Integration can now be set at the model level. For continuous models the specified integration method will apply when calling next_state
+
+* Python3.11 support
+* Various bug fixes and performance improvements
+
+prog_algs
+**********
+* Integration method can now be set for state estimation and prediction by setting model.parameters[‘integration_method’].
+* Minimum time step can now be set in state estimation, using the argument 'dt'. This is useful for models that become unstable with large time steps.
+* Python3.11 support
+
+prog_server
+************
+* Python3.11 support
+
 Updates in V1.4
 -----------------------
 

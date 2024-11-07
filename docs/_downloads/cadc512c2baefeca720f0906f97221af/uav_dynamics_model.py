@@ -41,8 +41,8 @@ def run_example():
     # Generate trajectory
     # =====================
     # Generate trajectory object and pass the route (waypoints, ETA) to it
-    traj = Trajectory(lat=lat_deg * np.pi/180.0,
-                      lon=lon_deg * np.pi/180.0,
+    traj = Trajectory(lat=lat_deg,
+                      lon=lon_deg,
                       alt=alt_ft * 0.3048,
                       etas=time_unix)
 
@@ -74,8 +74,8 @@ def run_example():
     
     # Generate trajectory object and pass the route (lat/lon/alt, no ETAs)
     # and speed information to it
-    traj_speed = Trajectory(lat=lat_deg * np.pi/180.0,
-                            lon=lon_deg * np.pi/180.0,
+    traj_speed = Trajectory(lat=lat_deg,
+                            lon=lon_deg,
                             alt=alt_ft * 0.3048,
                             cruise_speed=8.0,
                             ascent_speed=2.0,

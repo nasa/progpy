@@ -84,7 +84,7 @@ def run_example():
             z = {'t': float(row[2]), 'v': float(row[3])}
 
             # State Estimation Step
-            filt.estimate(t, i, z) 
+            filt.estimate(t, i, z)
             eod = batt.event_state(filt.x.mean)['EOD']
             print("  - Event State: ", eod)
 

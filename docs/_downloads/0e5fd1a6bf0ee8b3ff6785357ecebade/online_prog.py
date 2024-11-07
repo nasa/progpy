@@ -13,10 +13,10 @@ from pprint import pprint
 from time import sleep
 
 def run_example():
-    # Step 1: Open a session with the server for a thrown object. 
+    # Step 1: Open a session with the server for a thrown object.
     # Use all default configuration options.
     # Except for the save frequency, which we'll set to 1 second.
-    session = prog_client.Session('ThrownObject', pred_cfg =  {'save_freq': 1})
+    session = prog_client.Session('ThrownObject', pred_cfg={'save_freq': 1})
     print(session)  # Printing the Session Information
 
     # Step 2: Prepare data to send to server
@@ -58,7 +58,7 @@ def run_example():
     for i in range(len(example_data)):
         # Send data to server
         print(f'{example_data[i][0]}s: Sending data to server... ', end='')
-        session.send_data(time = example_data[i][0], **example_data[i][1])
+        session.send_data(time=example_data[i][0], **example_data[i][1])
 
         # Check for a prediction result
         status = session.get_prediction_status()

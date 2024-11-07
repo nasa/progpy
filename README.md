@@ -30,20 +30,18 @@ Here is the directory structure for the github repository
 `prog_model_template.py` - Template for Prognostics Model<br />
 `state_estimator_template.py` - Template for State Estimators<br />
 `predictor_template.py` - Template for Predictor<br />
-`tutorial.ipynb` - Tutorial (Juypter Notebook)
 
 ## Citing this repository
 Use the following to cite this repository:
 
 ```
-@misc{2023_nasa_progpy,
+@misc{2024_nasa_progpy,
   | author    = {Christopher Teubert and Katelyn Jarvis Griffith and Matteo Corbetta and Chetan Kulkarni and Portia Banerjee and Matthew Daigle},
   | title     = {{ProgPy Python Prognostics Packages}},
   | month     = May,
   | year      = 2024,
   | version   = {1.7},
   | url       = {https://nasa.github.io/progpy}
-  | doi       = {10.5281/ZENODO.8097013}
   | }
 ```
 

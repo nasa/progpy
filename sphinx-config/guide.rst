@@ -11,16 +11,20 @@ ProgPy Guide
    prog_server_guide
 
 The ProgPy framework consists of three key components that combine to create a flexible and extendible prognostics architecture.
----
+
 .. image:: images/ProgPyComponents.png
+    :align: center
 
-1. The **Prognostics Models** are the backbone of the ProgPy architecture. Models describe the specific system that prognostics will be applied to and how the system will evolve with time. Everything else within ProgPy (e.g. simulation capabilities and prognostics tools) are built on top of a model. 
+1. 
+    The **Prognostics Models** are the backbone of the ProgPy architecture. Models describe the specific system that prognostics will be applied to and how the system will evolve with time. Everything else within ProgPy (e.g. simulation capabilities and prognostics tools) are built on top of a model.
 
-ProgPy supports models that are physics-based, data-driven, or hybrid. ProgPy includes some built-in models (see examples below) but is also written in an easily adaptable way so users can implement models specific to their use-cases. 
+    ProgPy supports models that are physics-based, data-driven, or hybrid. ProgPy includes some built-in models (see examples below) but is also written in an easily adaptable way so users can implement models specific to their use-cases. 
 
-2. The **Prognostics Engine** encapsulates the complex logic of prognostics in a way that is modular and extendable. It includes the necessary tools to perform prognostics on the model, including state estimation, prediction, and uncertainty management. The modularity of the framework allows these capabilities to work with any model (built-in or user-defined) and the extensibility of the architecture allows users to additionally create their own methodologies. 
+2. 
+    The **Prognostics Engine** encapsulates the complex logic of prognostics in a way that is modular and extendable. It includes the necessary tools to perform prognostics on the model, including state estimation, prediction, and uncertainty management. The modularity of the framework allows these capabilities to work with any model (built-in or user-defined) and the extensibility of the architecture allows users to additionally create their own methodologies. 
 
-3. The **Prognostics Support Tools** are a collection of capabilities to help users build new functionalities or understand prognostics results.
+3. 
+    The **Prognostics Support Tools** are a collection of capabilities to help users build new functionalities or understand prognostics results.
 
 These three key components come together to create the comprehensive framework that is ProgPy. More details will be shared in the coming pages. 
 
