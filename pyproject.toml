@@ -17,8 +17,7 @@ dependencies = [
 requires-python = ">=3.7, <3.13"
 authors = [
     {name = "Christopher Teubert", email = "christopher.a.teubert@nasa.gov"},
-    {name = "Katelyn Griffith", email = "katelyn.j.griffith@nasa.gov"}
-    ,
+    {name = "Katelyn Griffith", email = "katelyn.j.griffith@nasa.gov"},
     {name = "Matteo Corbetta"},
     {name = "Chetan Kulkarni"},
     {name = "Portia Banerjee"},
