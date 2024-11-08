@@ -355,6 +355,25 @@ For example, if you have two models, “Batt1” and “Batt2”, and you want t
 <dd class="field-even"><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – Model outputs in format “model_name.output_name”. Must be subset of all outputs from models. If not provided, all outputs will be included.</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">SomeModel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">SomeOtherModel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">kelvin_to_celcius</span><span class="p">(</span><span class="n">temp_in_kelvin</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">temp_in_kelvin</span> <span class="o">-</span> <span class="mf">273.15</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">(</span><span class="s1">&#39;m1.temp&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin_to_celcius.temp_in_kelvin&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">(</span><span class="s1">&#39;kelvin_to_celcius.return&#39;</span><span class="p">,</span> <span class="s1">&#39;m2.temp&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m_composite</span> <span class="o">=</span> <span class="n">CompositeModel</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">((</span><span class="s1">&#39;m1&#39;</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kelvin_to_celcius&#39;</span><span class="p">,</span> <span class="n">kelvin_to_celcius</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="n">m2</span><span class="p">)),</span>  <span class="c1"># models</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">connections</span><span class="o">=</span><span class="n">connections</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Model parameters can be set and accessed using the ‘[model].[param]’ format. For example, for composite model m, m[‘foo.bar’] would set the parameter ‘bar’ for the model ‘foo’.</p>
+</div>
 </dd></dl>
 
 </section>

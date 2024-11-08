@@ -35,7 +35,21 @@ class CompositeModel(PrognosticsModel):
         outputs (list[str]):
             Model outputs in format "model_name.output_name". Must be subset of all outputs from models. If not provided, all outputs will be included.
 
-    
+    Example:
+        >>> m = SomeModel()
+        >>> m2 = SomeOtherModel()
+        >>> def kelvin_to_celcius(temp_in_kelvin):
+        >>>     return temp_in_kelvin - 273.15
+        >>> connections = [
+        >>>     ('m1.temp', 'kelvin_to_celcius.temp_in_kelvin')
+        >>>     ('kelvin_to_celcius.return', 'm2.temp')
+        >>> ]
+        >>> m_composite = CompositeModel(
+        >>>     (('m1', m), ('kelvin_to_celcius', kelvin_to_celcius), ('m2', m2)),  # models
+        >>>     connections=connections
+        >>> )
+
+    .. note:: Model parameters can be set and accessed using the '[model].[param]' format. For example, for composite model m, m['foo.bar'] would set the parameter 'bar' for the model 'foo'.
     """
 
     def __init__(self, models: list, connections: list = [], **kwargs):
