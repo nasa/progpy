@@ -5,12 +5,51 @@
 Auxiliary functions for trajectories and aircraft routes
 """
 
+from matplotlib import pyplot as plt
+from matplotlib.figure import Figure
 import numpy as np
 from warnings import warn
 
 from progpy.utils.traj_gen import geometry as geom
 from progpy.utils.traj_gen.nurbs import NURBS
 
+DEG2RAD: float = (np.pi/180.0)
+
+
+class TrajectoryFigure(Figure):
+    """
+    Figure visualizing a trajectory
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        (ax_traj, ax_alt) = self.subplots(2)
+        ax_traj.set_xlabel('x', fontsize=14)
+        ax_traj.set_ylabel('y', fontsize=14)
+        
+        ax_alt.set_xlabel('time stamp, -', fontsize=14)
+        ax_alt.set_ylabel('z', fontsize=14)
+        
+    def plot_traj(self, x, y, **kwargs) -> None:
+        """
+        Plot the trajectory in 2d space (upper graph)
+
+        Args:
+            x (list[float]): x location
+            y (list[float]): y location
+        """
+        ax_traj = self.axes[0]
+        ax_traj.plot(x, y, **kwargs)
+
+    def plot_alt(self, t, z, **kwargs) -> None:
+        """
+        Plot the altitude vs time (lower graph)
+
+        Args:
+            t (list[float]): Times
+            z (list[float]): z location
+        """
+        ax_alt = self.axes[1]
+        ax_alt.plot(t, z, **kwargs)
 
 def compute_derivatives(position_profile, timevec):
     # Compute derivatives of position: velocity and acceleration
@@ -128,11 +167,11 @@ class Trajectory():
     
     args:
             lat (np.ndarray):
-                rad, n x 1 array, doubles, latitude coordinates of waypoints
+                rad, n x 1 array, doubles, latitude coordinates of waypoints, deg
             lon (np.ndarray):
-                rad, n x 1 array, doubles, longitude coordinates of waypoints
+                rad, n x 1 array, doubles, longitude coordinates of waypoints, deg
             alt (np.ndarray):
-                m, n x 1 array, doubles, altitude coordinates of waypoints
+                m, n x 1 array, doubles, altitude coordinates of waypoints, m
             takeoff_time (float, optional):
                 take off time of the trajectory. Default is None (starting at current time).
             etas (list[float], optional):
@@ -195,15 +234,10 @@ class Trajectory():
         if takeoff_time is not None and not isinstance(takeoff_time, (float, int)):
             raise TypeError("Takeoff time must be provided as a float.")
 
-        # Trajectory dictionary to store output
-        # -----------------------------------
         self.trajectory = {}
-
-        # Route properties
-        # =================
         self.waypoints = {
-            'lat': lat,
-            'lon': lon,
+            'lat': [elem*DEG2RAD for elem in lat],
+            'lon': [elem*DEG2RAD for elem in lon],
             'alt': alt,
             'takeoff_time': takeoff_time,
             'eta': etas,
@@ -219,7 +253,6 @@ class Trajectory():
             else:
                 self.waypoints['takeoff_time'] = 0
 
-        # Generate Heading
         self.waypoints['heading'] = geom.gen_heading_angle(
             self.waypoints['lat'],
             self.waypoints['lon'],
@@ -227,14 +260,12 @@ class Trajectory():
 
         # Set up coordinate system conversion between Geodetic,
         # Earth-Centric Earth-Fixed (ECF), and Cartesian (East-North-Up, ENU)
-        # ------------------------------------------------------
         self.coordinate_system = geom.Coord(
-            self.waypoints['lat'][0],
-            self.waypoints['lon'][0],
-            self.waypoints['alt'][0])
+            lat[0],
+            lon[0],
+            alt[0])
 
         # Define speed parameters - only necessary if ETAs are not defined
-        # ------------------------------------------------------
         if etas is not None and ('cruise_speed' in kwargs or 'ascent_speed' in kwargs or 'descent_speed' in kwargs or 'landing_speed' in kwargs):
             warn("Speed values are ignored since ETAs were specified. To define speeds (cruise, ascent, descent, landing) instead, do not specify ETAs.")
         if etas is None and ('cruise_speed' not in kwargs or 'ascent_speed' not in kwargs or 'descent_speed' not in kwargs or 'landing_speed' not in kwargs):
@@ -253,9 +284,6 @@ class Trajectory():
         # Set ETAs for waypoints
         self.set_eta(idx_land_pos=idx_land_pos)
 
-        # Get waypoints in cartesian frame, unix time,
-        # and calculate heading angle for yaw
-        # ----------------------------------------------
         # Covert to cartesian coordinates
         self.waypoints['x'], \
             self.waypoints['y'], \
@@ -265,10 +293,9 @@ class Trajectory():
                 self.waypoints['alt'])
                 
         # Interpolation properties
-        # ========================
         self.parameters = {'gravity': 9.81,
-                           'max_phi': 45/180.0*np.pi,
-                           'max_theta': 45/180.0*np.pi,
+                           'max_phi': 0.25*np.pi,
+                           'max_theta': 0.25*np.pi,
                            'max_iter': 10,
                            'max_avgjerk': 20.0,
                            'nurbs_order': 4,
@@ -299,6 +326,34 @@ class Trajectory():
             'r': self.trajectory['angVel'][:, 2],
             
             't': self.trajectory['time']}
+
+    def plot(self, fig=None, **kwargs) -> TrajectoryFigure:
+        """
+        Plot the reference trajectory
+
+        Args:
+            fig (TrajectoryFigure, optional): Figure where the additional diagrams are to be added. Creates a new figure if not provided
+
+        Raises:
+            TypeError: if Figure is not a TrajectoryFigure
+
+        Returns:
+            TrajectoryFigure
+        """
+        params = {'figsize': (13, 9), 'linewidth': 2.0, 'alpha_preds': 0.6}
+        params.update(kwargs)
+        if fig is None:
+            fig = plt.figure(FigureClass=TrajectoryFigure)
+        elif not isinstance(fig, TrajectoryFigure):
+            raise TypeError(f"fig must be a TrajectorFigure, was {type(fig)}")
+
+        x = self.trajectory['position'][:, 0].tolist()
+        y = self.trajectory['position'][:, 1].tolist()
+        z = self.trajectory['position'][:, 2].tolist()
+        t = self.trajectory['time'].tolist()
+
+        fig.plot_traj(x, y, **params)
+        fig.plot_alt(t, z, **params)
     
     def compute_attitude(self, heading_profile, acceleration_profile, timestep_size):
         """
@@ -333,36 +388,44 @@ class Trajectory():
             'attitude': np.array([phi, theta, psi]).T,
             'angVel': np.array([p, q, r]).T}
 
-    def compute_trajectory_nurbs(self, dt):
-        # Compute position and yaw profiles with NURBS
-        # --------------------------------------------
+    def compute_trajectory_nurbs(self, dt) -> None:
+        """
+        Compute position and yaw profiles with NURBS
+
+        Args:
+            dt (float): time step
+        """
         # Instantiate NURBS class to generate trajectory
         points = {
             'x': self.waypoints['x'],
             'y': self.waypoints['y'],
             'z': self.waypoints['z']}
-        nurbs_alg = NURBS(points=points,
-                          weights=self.parameters['weight_vector'],
-                          times=self.waypoints['eta'] - self.waypoints['eta'][0],
-                          yaw=self.waypoints['heading'],
-                          order=self.parameters['nurbs_order'],
-                          basis_length=self.parameters['nurbs_basis_length'])
+        nurbs_alg = NURBS(
+            points=points,
+            weights=self.parameters['weight_vector'],
+            times=self.waypoints['eta'] - self.waypoints['eta'][0],
+            yaw=self.waypoints['heading'],
+            order=self.parameters['nurbs_order'],
+            basis_length=self.parameters['nurbs_basis_length'])
         
-        # Generate position and yaw interpolated given the timestep size
+        # Generate position and yaw interpolated given the timestep
         pos_interp, yaw_interp, time_interp = nurbs_alg.generate(timestep_size=dt)
         
-        # Generate velocity, acceleration, and jerk (optional) profile from position profile
+        # Generate velocity, acceleration, and jerk (optional) profile
+        # from position profile
         linear_profiles = compute_derivatives(pos_interp, time_interp)
         
-        # Generate angular profiles: attitude and angular velocities from heading and acceleration
-        angular_profiles = self.compute_attitude(heading_profile=yaw_interp,
-                                                 acceleration_profile=linear_profiles['acceleration'],
-                                                 timestep_size=dt)
-        # Store in trajectory dictionary
-        # ----------------------------
+        # Generate angular profiles:
+        # attitude and angular velocities from heading and acceleration
+        angular_profiles = self.compute_attitude(
+            heading_profile=yaw_interp,
+            acceleration_profile=linear_profiles['acceleration'],
+            timestep_size=dt)
+        
+        # Store as attribute
         self.trajectory = {**{'position': np.vstack(list(pos_interp.values())).T},
-                           **{'velocity': np.vstack(list(linear_profiles['velocity'].values())).T}, 
-                           **{'acceleration': np.vstack(list(linear_profiles['acceleration'].values())).T}, 
+                           **{'velocity': np.vstack(list(linear_profiles['velocity'].values())).T},
+                           **{'acceleration': np.vstack(list(linear_profiles['acceleration'].values())).T},
                            **angular_profiles,
                            **{'time': time_interp}}
 
@@ -374,11 +437,11 @@ class Trajectory():
         :param dt:          s, scalar, time step size used to interpolate the waypoints and generate the trajectory
         :return:            dictionary of state variables describing the trajectory as a function of time
         """
-        self.parameters.update(**kwargs)    # Override NURBS parameters
+        self.parameters.update(**kwargs)  # Override NURBS parameters
         assert len(self.parameters['weight_vector']) == len(self.waypoints['x']), "Length of waypoint weight vector and number of waypoints must coincide."
 
-        self.compute_trajectory_nurbs(dt)     # GENERATE NURBS-BASED TRAJECTORY
-        self.__adjust_eta_given_max_acceleration(dt)    # Adjust profile according to max accelerations
+        self.compute_trajectory_nurbs(dt)
+        self.__adjust_eta_given_max_acceleration(dt)
 
         # Convert trajectory into geodetic coordinates
         # --------------------------------------------
@@ -391,7 +454,7 @@ class Trajectory():
                     self.trajectory['position'][:, 2])
         return self.ref_traj
 
-    def __adjust_eta_given_max_acceleration(self, dt):
+    def __adjust_eta_given_max_acceleration(self, dt) -> None:
         """
         Adjusting the trajectory computed by the NURBS algorithm according to whether the maximum 
         jerk exceeds the limit allowed. This prevents the vehicle to crash because of high accelerations during the flight
@@ -526,7 +589,7 @@ class Trajectory():
         
         return idx_land_pos
     
-    def set_eta(self, idx_land_pos, hovering=0):
+    def set_eta(self, idx_land_pos, hovering=0) -> None:
         """
         Assign ETAs to waypoints
         If ETAS are provided (i.e., eta is not None), assign them.

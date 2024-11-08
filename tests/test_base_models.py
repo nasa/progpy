@@ -13,7 +13,7 @@ sys.path.append(join(dirname(__file__), ".."))
 
 from progpy import PrognosticsModel, CompositeModel
 from progpy.models import ThrownObject, BatteryElectroChemEOD
-from progpy.models.test_models.linear_models import (OneInputNoOutputNoEventLM, OneInputOneOutputNoEventLM, OneInputNoOutputOneEventLM, OneInputOneOutputNoEventLMPM)
+from progpy.models.test_models.linear_models import (OneInputNoOutputNoEventLM, OneInputOneOutputNoEventLM, OneInputTwoStatesNoOutputNoEventLM, OneInputNoOutputOneEventLM, OneInputOneOutputNoEventLMPM)
 from progpy.models.test_models.linear_thrown_object import (LinearThrownObject, LinearThrownDiffThrowingSpeed, LinearThrownObjectUpdatedInitializedMethod, LinearThrownObjectDiffDefaultParams)
 
 
@@ -160,6 +160,14 @@ class TestModels(unittest.TestCase):
         self.assertEqual(x_default['v'], x_rk4['v'])
         self.assertEqual(x_default['x'], x_rk4['x'])
 
+    def test_parameters_statelikematrixwrapper(self):
+        """
+        This is testing a very specific case where a state container from one model is used to define the noise from another.
+        """
+        m0 = OneInputNoOutputNoEventLM()
+        m1 = OneInputTwoStatesNoOutputNoEventLM(process_noise=m0.parameters['process_noise'])
+        self.assertSetEqual(set(m1.parameters['process_noise'].keys()), set(m1.states))
+
     def test_integration_type_scipy(self):
         # SciPy Integrator test.
         # Here we will set the integrator to various scipy integration methods and make sure that it works
@@ -253,7 +261,7 @@ class TestModels(unittest.TestCase):
     def test_size(self):
         m = MockProgModel()
         size = sys.getsizeof(m)
-        self.assertLess(size, 7500)
+        self.assertLess(size, 20000)
 
         # Adding a parameter
         m.parameters['test'] = 8675309
@@ -498,6 +506,14 @@ class TestModels(unittest.TestCase):
         # That key should be 0 (default)
         self.assertEqual(m.parameters['process_noise'][list(m.states)[-1]], 0)
 
+        # Const noise
+        m.parameters['process_noise_dist'] = 'constant'
+        x = m.StateContainer({key: 0 for key in m.states})
+        x = m.apply_process_noise(x)
+        for key in list(m.states)[:-1]:
+            self.assertAlmostEqual(x[key], 1.0)
+        self.assertAlmostEqual(x[list(m.states)[-1]], 0.0)
+
     def test_measurement_noise(self):
         self.__noise_test('measurement_noise', 'measurement_noise_dist', MockProgModel.outputs)
 
@@ -593,28 +609,45 @@ class TestModels(unittest.TestCase):
         self.assertAlmostEqual(states[0]['t'], -1.0, 5)
 
         # Any event, manual
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, threshold_keys=['e1', 'e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'])
         self.assertAlmostEqual(times[-1], 5.0, 5)
 
+        # Any event, manual - specified strategy
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='first')
+        self.assertAlmostEqual(times[-1], 5.0, 5)
+
+        # both e1, e2
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='all')
+        self.assertAlmostEqual(times[-1], 15.0, 5)
+
+        # Any event, manual - unexpected strategy
+        with self.assertRaises(ValueError):
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='fljsdk')
+
         # Only event 2
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, threshold_keys=['e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e2'])
+        self.assertAlmostEqual(times[-1], 15.0, 5)
+
+        # Only event 2 - threshold keys
+        with self.assertWarns(Warning):
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, threshold_keys=['e2'])
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
         # Threshold before event
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=5.0, threshold_keys=['e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=5.0, events='e2')
         self.assertAlmostEqual(times[-1], 5.0, 5)
 
         # Threshold after event
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=20.0, threshold_keys=['e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=20.0, events=['e2'])
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
         # No thresholds
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=20.0, threshold_keys=[])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, horizon=20.0, events=[])
         self.assertAlmostEqual(times[-1], 20.0, 5)
 
         # No thresholds and no horizon
         with self.assertRaises(ValueError):
-            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, threshold_keys=[])
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=[])
 
         # No events and no horizon
         m_noevents = OneInputNoOutputNoEventLM()
@@ -625,7 +658,7 @@ class TestModels(unittest.TestCase):
         def thresh_met(thresholds):
             return all(thresholds.values())
         config = {'dt': 0.5, 'save_freq': 1.0, 'horizon': 20.0, 'thresholds_met_eqn': thresh_met}
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, **config, threshold_keys=['e1', 'e2'])
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, **config, events=['e1', 'e2'])
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
         # With no events and no horizon, but a threshold met eqn
@@ -637,7 +670,7 @@ class TestModels(unittest.TestCase):
         self.assertListEqual(times, [0, 0.5])  # Only one step
 
         with self.assertRaises(ValueError):
-            result = m.simulate_to_threshold(load, {'o1': 0.8}, threshold_keys=['e1', 'e2', 'e3'], dt=0.5, save_freq=1.0)
+            result = m.simulate_to_threshold(load, {'o1': 0.8}, events=['e1', 'e2', 'e3'], dt=0.5, save_freq=1.0)
 
     def test_sim_past_thresh(self):
         m = MockProgModel(process_noise=0.0)
@@ -1079,14 +1112,14 @@ class TestModels(unittest.TestCase):
         
         # Create no drag model ('cd' = 0)
         m_nd.parameters['cd'] = 0
-        simulated_results_nd = m_nd.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+        simulated_results_nd = m_nd.simulate_to_threshold(future_load, events=[event], dt=0.005, save_freq=1)
         # Create default drag model ('cd' = 0.007)
         m_df = ThrownObject(process_noise_dist='none')
-        simulated_results_df = m_df.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+        simulated_results_df = m_df.simulate_to_threshold(future_load, events=[event], dt=0.005, save_freq=1)
         # Create high drag model ('cd' = 1.0)
         m_hi = ThrownObject(process_noise_dist='none')
         m_hi.parameters['cd'] = 1
-        simulated_results_hi = m_hi.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+        simulated_results_hi = m_hi.simulate_to_threshold(future_load, events=[event], dt=0.005, save_freq=1)
 
         # Test no drag simulated results different from default
         self.assertNotEqual(simulated_results_nd.times, simulated_results_df.times)
@@ -1334,6 +1367,21 @@ class TestModels(unittest.TestCase):
 
         self.assertTrue(m1.parameters == m2.parameters) # Checking to see previous equal statements stay the same
         self.assertTrue(m2.parameters == m1.parameters) 
+
+    def test_direct_params(self):
+        m1 = LinearThrownObject()
+        print('test')
+
+        # Accessing parameters directly
+        self.assertEqual(m1.parameters['g'], m1['g'])
+
+        # Setting parameters
+        m1['g'] *= 2  # Doubling 
+        self.assertEqual(m1.parameters['g'], m1['g'])
+
+        # Updating from parameters
+        m1.parameters['g'] *= 2
+        self.assertEqual(m1.parameters['g'], m1['g'])
 
 # This allows the module to be executed directly
 def main():

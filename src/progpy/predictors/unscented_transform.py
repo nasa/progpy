@@ -1,5 +1,6 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
 
+from collections import abc
 from copy import deepcopy
 from filterpy import kalman
 from numpy import diag, array, transpose, isnan
@@ -89,6 +90,7 @@ class UnscentedTransformPredictor(Predictor):
         'kappa': -1,
         't0': 0,
         'dt': 0.5,
+        'event_strategy': 'all',
         'horizon': 1e99,
         'save_pts': [],
         'save_freq': 1e99
@@ -123,7 +125,7 @@ class UnscentedTransformPredictor(Predictor):
         self.filter = kalman.UnscentedKalmanFilter(num_states, num_measurements, self.parameters['dt'], measure, state_transition, self.sigma_points)
         self.filter.Q = self.parameters['Q']
 
-    def predict(self, state, future_loading_eqn: Callable = None, **kwargs) -> PredictionResults:
+    def predict(self, state, future_loading_eqn: Callable = None, events=None, **kwargs) -> PredictionResults:
         """
         Perform a single prediction
 
@@ -139,6 +141,10 @@ class UnscentedTransformPredictor(Predictor):
             * dt : Step size (s)
             * horizon : Prediction horizon (s)
             * events : List of events to be predicted (subset of model.events, default is all events)
+            * event_strategy: str, optional
+                Strategy for stopping evaluation. Default is 'first'. One of:\n
+                * *first*: Will stop when first event in `events` list is reached.\n
+                * *all*: Will stop when all events in `events` list have been reached
 
         Returns (PredictionResults)
         -------
@@ -175,11 +181,34 @@ class UnscentedTransformPredictor(Predictor):
         params = deepcopy(self.parameters) # copy parameters
         params.update(kwargs) # update for specific run
 
-        if len(params['events']) == 0 and 'horizon' not in params:
+        if params['event_strategy'] != 'all':
+            raise ValueError(f"`event_strategy` {params['event_strategy']} not supported. Currently, only 'all' event strategy is supported")
+
+        if events is None:
+            if 'events' in params and params['events'] is not None:
+                # Set at a predictor construction
+                events = params['events']
+            else:
+                # Otherwise, all events
+                events = self.model.events
+        
+        if not isinstance(events, (abc.Iterable)) or isinstance(events, (dict, bytes)):
+            # must be string or list-like (list, tuple, set)
+            # using abc.Iterable adds support for custom data structures
+            # that implement that abstract base class
+            raise TypeError(f'`events` must be a single event string or list of events. Was unsupported type {type(events)}.')
+        if len(events) == 0 and 'horizon' not in params:
             raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
+        if isinstance(events, str):
+            # A single event
+            events = [events]
+        if not all([key in self.model.events for key in events]):
+            raise ValueError("`events` must be event names")
+        if not isinstance(events, list):
+            # Change to list because of the limits of jsonify
+            events = list(events)
 
         # Optimizations 
-        events_to_predict = params['events']
         dt = params['dt']
         model = self.model
         filt = self.filter
@@ -188,7 +217,7 @@ class UnscentedTransformPredictor(Predictor):
         threshold_met = model.threshold_met
         StateContainer = model.StateContainer
 
-        # Update State 
+        # Update State
         self.__state_keys = state_keys = state.mean.keys()  # Used to maintain ordering as we strip keys and return
         filt.x = [x for x in state.mean.values()]
         filt.P = state.cov
@@ -196,8 +225,8 @@ class UnscentedTransformPredictor(Predictor):
         # Setup first states
         t = params['t0']
         save_pt_index = 0
-        ToE = {key: [float('nan') for i in range(n_points)] for key in events_to_predict}  # Keep track of final ToE values
-        last_state = {key: [None for i in range(n_points)] for key in events_to_predict}  # Keep track of final state values
+        ToE = {key: [float('nan') for i in range(n_points)] for key in events}  # Keep track of final ToE values
+        last_state = {key: [None for i in range(n_points)] for key in events}  # Keep track of final state values
 
         times = []
         inputs = []
@@ -239,7 +268,7 @@ class UnscentedTransformPredictor(Predictor):
                 t_met = threshold_met(x)
 
                 # Check Thresholds
-                for key in events_to_predict:
+                for key in events:
                     if t_met[key]:
                         if isnan(ToE[key][i]):
                             # First time event has been reached
@@ -249,7 +278,7 @@ class UnscentedTransformPredictor(Predictor):
                         all_failed = False  # This event for this sigma point hasn't been met yet
             if all_failed:
                 # If all events have been reched for every sigma point
-                break 
+                break
         
         # Prepare Results
         pts = array([[e for e in ToE[key]] for key in ToE.keys()])

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>MixtureOfExperts &#8212; ProgPy Python Packages 1.6 documentation</title>
+    <title>MixtureOfExperts &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -328,7 +328,7 @@ document.write(`
 <h1>MixtureOfExperts<a class="headerlink" href="#mixtureofexperts" title="Permalink to this headline">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="progpy.MixtureOfExpertsModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.</span></span><span class="sig-name descname"><span class="pre">MixtureOfExpertsModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.MixtureOfExpertsModel" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.</span></span><span class="sig-name descname"><span class="pre">MixtureOfExpertsModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.MixtureOfExpertsModel" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="CompositeModel.html#progpy.CompositeModel" title="progpy.composite_model.CompositeModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.composite_model.CompositeModel</span></code></a></p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 1.6.0.</span></p>
@@ -340,7 +340,7 @@ document.write(`
 <p>When calling output, event_state, threshold_met, or performance_metrics, only the model with the best score will be called, and those results returned. In case of a tie, the first model (in the order provided by the constructor) of the tied models will be used. If not every outputs, event, or performance metric has been identified, the next best model will be used to fill in the blanks, and so on.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a><em>]</em>) – List of at least 2 models that form the ensemble</p>
+<dd class="field-odd"><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a><em>]</em>) – List of at least 2 models that form the ensemble</p>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">

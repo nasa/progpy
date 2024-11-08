@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>State Estimation and Prediction Guide &#8212; ProgPy Python Packages 1.6 documentation</title>
+    <title>State Estimation and Prediction Guide &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -325,24 +325,24 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing progpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing ProgPy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures">Data Structures</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimation">State Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending">Extending</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-state-estimators">Extending State Estimators</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Extending</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-predictors">Extending Predictors</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-results">Analyzing Results</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">State Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">State Estimation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicted-future-states">Predicted Future States</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-of-event-toe">Time of Event (ToE)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toe-prediction-profile">ToE Prediction Profile</a></li>
@@ -366,17 +366,25 @@ document.write(`
 <iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=progpy&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
 <p>The Prognostic Python Package (progpy) is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from <a class="reference internal" href="prog_models_guide.html#modeling-and-sim-guide"><span class="std std-ref">Modeling and Simulation Guide</span></a>) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.</p>
 <section id="installing-progpy">
-<h2>Installing progpy<a class="headerlink" href="#installing-progpy" title="Permalink to this headline">#</a></h2>
+<h2>Installing ProgPy<a class="headerlink" href="#installing-progpy" title="Permalink to this headline">#</a></h2>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Stable Version (Recommended)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Pre-Release</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>progpy
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Users who would like to contribute to progpy or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/progpy">progpy GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
+<p>If you will be using the datadriven tools (e.g., LSTM model), install the datadriven dependencies as well using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>progpy<span class="o">[</span>datadriven<span class="o">]</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Users who would like to contribute to ProgPy or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/progpy">ProgPy GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nasa/progpy
 <span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>progpy
 <span class="gp">$ </span>git<span class="w"> </span>checkout<span class="w"> </span>dev
 <span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>If you will be using the datadriven tools (e.g., LSTM model), install the datadriven dependencies as well using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;.[datadriven]&#39;</span>
 </pre></div>
 </div>
 </div></div>
@@ -438,21 +446,21 @@ UKF Details<div class="summary-down docutils">
 <dd class="field-odd"><ul class="simple">
 <li><p class="card-text"><strong>model</strong> (<a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
-<li><p class="card-text"><strong>x0</strong> (<a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – <p class="card-text">Initial (starting) state, with keys defined by model.states</p>
+<li><p class="card-text"><strong>x0</strong> (<a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – <p class="card-text">Initial (starting) state, with keys defined by model.states</p>
 <p class="card-text">e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p class="card-text"><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p class="card-text"><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p class="card-text"><strong>kappa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
-<li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
+<li><p class="card-text"><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
+<li><p class="card-text"><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
+<li><p class="card-text"><strong>kappa</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
+<li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
+<li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
-<li><p class="card-text"><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Process Noise Matrix</p></li>
-<li><p class="card-text"><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Measurement Noise Matrix</p></li>
+<li><p class="card-text"><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Process Noise Matrix</p></li>
+<li><p class="card-text"><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Measurement Noise Matrix</p></li>
 </ul>
 </dd>
 </dl>
@@ -477,17 +485,17 @@ PF Details<div class="summary-down docutils">
 <dd class="field-odd"><ul class="simple">
 <li><p class="card-text"><strong>model</strong> (<a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
-<li><p class="card-text"><strong>x0</strong> (<a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – <p class="card-text">Initial (starting) state, with keys defined by model.states</p>
+<li><p class="card-text"><strong>x0</strong> (<a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – <p class="card-text">Initial (starting) state, with keys defined by model.states</p>
 <p class="card-text">e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
+<li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
+<li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
-<li><p class="card-text"><strong>num_particles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em>, </em><em>optional</em>) – Number of particles in particle filter</p></li>
+<li><p class="card-text"><strong>num_particles</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of particles in particle filter</p></li>
 <li><p class="card-text"><strong>resample_fcn</strong> (<em>function</em><em>, </em><em>optional</em>) – Resampling function ([weights]) -&gt; [indexes] e.g., filterpy.monte_carlo.residual_resample</p></li>
 </ul>
 </dd>
@@ -506,26 +514,26 @@ KF Details<div class="summary-down docutils">
 <dt class="sig sig-object py" id="progpy.state_estimators.KalmanFilter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.state_estimators.</span></span><span class="sig-name descname"><span class="pre">KalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.state_estimators.KalmanFilter" title="Permalink to this definition">#</a></dt>
 <dd><p class="card-text">A Kalman Filter (KF) for state estimation</p>
-<p class="card-text">This class defines the logic for performing a kalman filter with a LinearModel (see Prognostics Model Package). This filter uses measurement data with noise to generate a state estimate and covariance matrix.</p>
+<p class="card-text">This class defines the logic for performing a kalman filter with a linear model (i.e., a subclass of <cite>progpy.LinearModel</cite>). This filter uses measurement data with noise to generate a state estimate and covariance matrix.</p>
 <p class="card-text">The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p class="card-text"><strong>model</strong> (<a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
-<li><p class="card-text"><strong>x0</strong> (<a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><em>dict</em></a>) – <p class="card-text">Initial (starting) state, with keys defined by model.states</p>
+<li><p class="card-text"><strong>x0</strong> (<a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><em>UncertainData</em></a><em>, </em><em>model.StateContainer</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a>) – <p class="card-text">Initial (starting) state, with keys defined by model.states</p>
 <p class="card-text">e.g., x = ScalarData({‘abc’: 332.1, ‘def’: 221.003}) given states = [‘abc’, ‘def’]</p>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
-<li><p class="card-text"><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – KF Scaling parameter. An alpha &gt; 1 turns this into a fading memory filter.</p></li>
-<li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
-<li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
+<li><p class="card-text"><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – KF Scaling parameter. An alpha &gt; 1 turns this into a fading memory filter.</p></li>
+<li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
+<li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
 e.g., dt = 1e-2</p></li>
-<li><p class="card-text"><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Process Noise Matrix</p></li>
-<li><p class="card-text"><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Measurement Noise Matrix</p></li>
+<li><p class="card-text"><strong>Q</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Process Noise Matrix</p></li>
+<li><p class="card-text"><strong>R</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – Kalman Measurement Noise Matrix</p></li>
 </ul>
 </dd>
 </dl>
@@ -556,8 +564,8 @@ Example<div class="summary-down docutils">
 </pre></div>
 </div>
 </div>
-</details><section id="extending">
-<h3>Extending<a class="headerlink" href="#extending" title="Permalink to this headline">#</a></h3>
+</details><section id="extending-state-estimators">
+<h3>Extending State Estimators<a class="headerlink" href="#extending-state-estimators" title="Permalink to this headline">#</a></h3>
 <p>New <a class="reference internal" href="glossary.html#term-state-estimator"><span class="xref std std-term">state estimator</span></a> are created by extending the <a class="reference internal" href="api_ref/progpy/StateEstimator.html#progpy.state_estimators.StateEstimator" title="progpy.state_estimators.StateEstimator"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.state_estimators.StateEstimator</span></code></a> class.</p>
 <p>See <a class="reference download internal" download="" href="_downloads/07c9eb121dbb5de8d48ddffc704c521d/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a> for an example of this approach.</p>
 <section id="example">
@@ -669,15 +677,15 @@ MC Details<div class="summary-down docutils">
 
 </div>
 </details></div>
-</details><section id="id1">
-<h3>Extending<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+</details><section id="extending-predictors">
+<h3>Extending Predictors<a class="headerlink" href="#extending-predictors" title="Permalink to this headline">#</a></h3>
 <p>New <a class="reference internal" href="glossary.html#term-predictor"><span class="xref std std-term">predictor</span></a> are created by extending the <a class="reference internal" href="api_ref/progpy/Predictor.html#progpy.predictors.Predictor" title="progpy.predictors.Predictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.Predictor</span></code></a> class.</p>
 </section>
 </section>
 <section id="analyzing-results">
 <h2>Analyzing Results<a class="headerlink" href="#analyzing-results" title="Permalink to this headline">#</a></h2>
-<section id="id2">
-<h3>State Estimation<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<section id="id1">
+<h3>State Estimation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>The results of the state estimation are stored in an object of type <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a>. This class contains a number of methods for analyzing a state estimate. This includes methods for obtaining statistics about the distribution, including the following:</p>
 <ul class="simple">
 <li><p><strong>mean</strong>: The mean value of the state estimate distribution.</p></li>
@@ -728,7 +736,7 @@ Histogram<div class="summary-down docutils">
 <ul class="simple">
 <li><p><strong>mean</strong>: Estimate the mean value at each time. The result is a list of dictionaries such that prediction.mean[i] corresponds to times[i]</p></li>
 <li><dl class="simple">
-<dt><strong>monotonicity</strong>: Given a single prediction, for each event: go through all predicted states and compare those to the next one.</dt><dd><p>Calculates monotonicity for each event key using its associated mean value in UncertainData <a class="footnote-reference brackets" href="#baptista2022" id="id3">4</a> <a class="footnote-reference brackets" href="#coble2021" id="id4">3</a></p>
+<dt><strong>monotonicity</strong>: Given a single prediction, for each event: go through all predicted states and compare those to the next one.</dt><dd><p>Calculates monotonicity for each event key using its associated mean value in UncertainData <a class="footnote-reference brackets" href="#baptista2022" id="id2">4</a> <a class="footnote-reference brackets" href="#coble2021" id="id3">3</a></p>
 </dd>
 </dl>
 </li>
@@ -736,7 +744,7 @@ Histogram<div class="summary-down docutils">
 </section>
 <section id="time-of-event-toe">
 <h3>Time of Event (ToE)<a class="headerlink" href="#time-of-event-toe" title="Permalink to this headline">#</a></h3>
-<p>Time of Event is also stored as an object of type <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a>, so the analysis functions described in <a class="reference internal" href="#id2"><span class="std std-ref">State Estimation</span></a> are also available for a ToE estimate. See <a class="reference internal" href="#id2"><span class="std std-ref">State Estimation</span></a> or <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a> documentation for details.</p>
+<p>Time of Event is also stored as an object of type <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a>, so the analysis functions described in <a class="reference internal" href="#id1"><span class="std std-ref">State Estimation</span></a> are also available for a ToE estimate. See <a class="reference internal" href="#id1"><span class="std std-ref">State Estimation</span></a> or <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a> documentation for details.</p>
 <p>In addition to these standard UncertainData metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.</p>
 <p>Below is an example calculating probability of success:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.metrics</span> <span class="kn">import</span> <span class="n">prob_success</span>
@@ -748,10 +756,10 @@ Histogram<div class="summary-down docutils">
 <h3>ToE Prediction Profile<a class="headerlink" href="#toe-prediction-profile" title="Permalink to this headline">#</a></h3>
 <p>A <a class="reference internal" href="api_ref/progpy/ToEPredictionProfile.html#progpy.predictors.ToEPredictionProfile" title="progpy.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.ToEPredictionProfile</span></code></a> contains Time of Event (ToE) predictions performed at multiple points. ToEPredictionProfile is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:</p>
 <ul class="simple">
-<li><p><strong>alpha_lambda</strong>: Whether the prediction falls within specified limits at particular times with respect to a performance measure <a class="footnote-reference brackets" href="#goebel2017" id="id5">1</a> <a class="footnote-reference brackets" href="#saxena2010" id="id6">2</a></p></li>
+<li><p><strong>alpha_lambda</strong>: Whether the prediction falls within specified limits at particular times with respect to a performance measure <a class="footnote-reference brackets" href="#goebel2017" id="id4">1</a> <a class="footnote-reference brackets" href="#saxena2010" id="id5">2</a></p></li>
 <li><p><strong>cumulate_relative_accuracy</strong>: The sum of the relative accuracies of each prediction, given a ground truth</p></li>
-<li><p><strong>monotonicity</strong>: The monotonicity of the prediction series <a class="footnote-reference brackets" href="#baptista2022" id="id7">4</a> <a class="footnote-reference brackets" href="#coble2021" id="id8">3</a></p></li>
-<li><p><strong>prognostic_horizon</strong>: The difference between a time <span class="math notranslate nohighlight">\(t_i\)</span>, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event <a class="footnote-reference brackets" href="#goebel2017" id="id9">1</a> <a class="footnote-reference brackets" href="#saxena2010" id="id10">2</a></p></li>
+<li><p><strong>monotonicity</strong>: The monotonicity of the prediction series <a class="footnote-reference brackets" href="#baptista2022" id="id6">4</a> <a class="footnote-reference brackets" href="#coble2021" id="id7">3</a></p></li>
+<li><p><strong>prognostic_horizon</strong>: The difference between a time <span class="math notranslate nohighlight">\(t_i\)</span>, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event <a class="footnote-reference brackets" href="#goebel2017" id="id8">1</a> <a class="footnote-reference brackets" href="#saxena2010" id="id9">2</a></p></li>
 </ul>
 <p>A ToEPredictionProfile also contains a plot method (<code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">profile</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">plot</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">)</span></span></code>), which looks like this:</p>
 <img alt="_images/alpha_chart.png" src="_images/alpha_chart.png" />
@@ -768,12 +776,6 @@ Histogram<div class="summary-down docutils">
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/9af9bdc48da233bdafa07c9ecb46568e/basic_example_battery.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example_battery</span></code></a></dt><dd></dd>
-</dl>
-</li>
-</ul>
-<ul class="simple">
-<li><dl class="simple">
 <dt><a class="reference download internal" download="" href="_downloads/f39895005dabcb4262926b776151bd9a/eol_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.eol_event</span></code></a></dt><dd></dd>
 </dl>
 </li>
@@ -783,10 +785,6 @@ Histogram<div class="summary-down docutils">
 </li>
 <li><dl class="simple">
 <dt><a class="reference download internal" download="" href="_downloads/00d36657bdd9c3fc811494e7586f6a86/horizon.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.horizon</span></code></a></dt><dd></dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/dde96c6cfd6ff506f5048a5c797653e4/kalman_filter.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.kalman_filter</span></code></a></dt><dd></dd>
 </dl>
 </li>
 <li><dl class="simple">
@@ -810,16 +808,16 @@ Histogram<div class="summary-down docutils">
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <dl class="footnote brackets">
-<dt class="label" id="goebel2017"><span class="brackets">1</span><span class="fn-backref">(<a href="#id5">1</a>,<a href="#id9">2</a>)</span></dt>
+<dt class="label" id="goebel2017"><span class="brackets">1</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id8">2</a>)</span></dt>
 <dd><p>Kai Goebel, Matthew John Daigle, Abhinav Saxena, Indranil Roychoudhury, Shankar Sankararaman, and José R Celaya. Prognostics: The science of making predictions. 2017</p>
 </dd>
-<dt class="label" id="saxena2010"><span class="brackets">2</span><span class="fn-backref">(<a href="#id6">1</a>,<a href="#id10">2</a>)</span></dt>
+<dt class="label" id="saxena2010"><span class="brackets">2</span><span class="fn-backref">(<a href="#id5">1</a>,<a href="#id9">2</a>)</span></dt>
 <dd><p>Abhinav Saxena, José Celaya, Sankalita Saha, Bhaskar Saha, and Kai Goebel. Saxena, A., Celaya, J. Metrics for Offline Evaluation of Prognostic Performance. International Journal of Prognostics and Health Management, 1(1), 20. 2010.</p>
 </dd>
-<dt class="label" id="coble2021"><span class="brackets">3</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id8">2</a>)</span></dt>
+<dt class="label" id="coble2021"><span class="brackets">3</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id7">2</a>)</span></dt>
 <dd><p>Jamie Coble et al. Identifying Optimal Prognostic Parameters from Data: A Genetic Algorithms Approach. Annual Conference of the PHM Society. <a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a>, 2021</p>
 </dd>
-<dt class="label" id="baptista2022"><span class="brackets">4</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id7">2</a>)</span></dt>
+<dt class="label" id="baptista2022"><span class="brackets">4</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id6">2</a>)</span></dt>
 <dd><p>Marcia Baptista, et. al.. Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a>, 2022</p>
 </dd>
 </dl>
@@ -874,24 +872,24 @@ Histogram<div class="summary-down docutils">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing progpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing ProgPy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures">Data Structures</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimation">State Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending">Extending</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-state-estimators">Extending State Estimators</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Extending</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-predictors">Extending Predictors</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-results">Analyzing Results</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">State Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">State Estimation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicted-future-states">Predicted Future States</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-of-event-toe">Time of Event (ToE)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toe-prediction-profile">ToE Prediction Profile</a></li>

@@ -1,5 +1,6 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
 
+from collections import abc
 from copy import deepcopy
 from typing import Callable
 from progpy.sim_result import SimResult, LazySimResult
@@ -28,10 +29,12 @@ class MonteCarlo(Predictor):
     __DEFAULT_N_SAMPLES = 100 # Default number of samples to use, if none specified and not UncertainData
 
     default_parameters = { 
-        'n_samples': None
+        'n_samples': None,
+        'event_strategy': 'all',
+        'constant_noise': False
     }
 
-    def predict(self, state: UncertainData, future_loading_eqn: Callable = None, **kwargs) -> PredictionResults:
+    def predict(self, state: UncertainData, future_loading_eqn: Callable=None, events=None, **kwargs) -> PredictionResults:
         """
         Perform a single prediction
 
@@ -50,6 +53,10 @@ class MonteCarlo(Predictor):
             Simulation step size (s), e.g., 0.1
         events : list[str], optional
             Events to predict (subset of model.events) e.g., ['event1', 'event2']
+        event_strategy: str, optional
+            Strategy for stopping evaluation. Default is 'first'. One of:\n
+            * *first*: Will stop when first event in `events` list is reached.\n
+            * *all*: Will stop when all events in `events` list have been reached
         horizon : float, optional
             Prediction horizon (s)
         n_samples : int, optional
@@ -58,6 +65,8 @@ class MonteCarlo(Predictor):
             Frequency at which results are saved (s)
         save_pts : list[float], optional
             Any additional savepoints (s) e.g., [10.1, 22.5]
+        constant_noise : bool, optional
+            If the same noise should be applied every step. Default: False
 
         Return
         ----------
@@ -71,7 +80,7 @@ class MonteCarlo(Predictor):
         """
         if isinstance(state, dict) or isinstance(state, self.model.StateContainer):
             from progpy.uncertain_data import ScalarData
-            state = ScalarData(state, _type = self.model.StateContainer)
+            state = ScalarData(state, _type=self.model.StateContainer)
         elif isinstance(state, UncertainData):
             state._type = self.model.StateContainer
         else:
@@ -80,10 +89,12 @@ class MonteCarlo(Predictor):
         if future_loading_eqn is None:
             future_loading_eqn = lambda t, x=None: self.model.InputContainer({})
 
-        params = deepcopy(self.parameters) # copy parameters
-        params.update(kwargs) # update for specific run
+        params = deepcopy(self.parameters)  # copy parameters
+        params.update(kwargs)  # update for specific run
         params['print'] = False
         params['progress'] = False
+        # Remove event_strategy from params to not confuse simulate_to method call
+        event_strategy = params.pop('event_strategy')
 
         if not isinstance(state, UnweightedSamples) and params['n_samples'] is None:
             # if not unweighted samples, some sample number is required, so set to default.
@@ -91,8 +102,34 @@ class MonteCarlo(Predictor):
         elif isinstance(state, UnweightedSamples) and params['n_samples'] is None:
             params['n_samples'] = len(state)  # number of samples is from provided state
 
-        if len(params['events']) == 0 and 'horizon' not in params:
+        if events is None:
+            if 'events' in params and params['events'] is not None:
+                # Set at a predictor construction
+                events = params['events']
+            else:
+                # Otherwise, all events
+                events = self.model.events
+        
+        if not isinstance(events, (abc.Iterable)) or isinstance(events, (dict, bytes)):
+            # must be string or list-like (list, tuple, set)
+            # using abc.Iterable adds support for custom data structures
+            # that implement that abstract base class
+            raise TypeError(f'`events` must be a single event string or list of events. Was unsupported type {type(events)}.')
+        if len(events) == 0 and 'horizon' not in params:
             raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
+        if isinstance(events, str):
+            # A single event
+            events = [events]
+        if not all([key in self.model.events for key in events]):
+            raise ValueError("`events` must be event names")
+        if not isinstance(events, list):
+            # Change to list because of the limits of jsonify
+            events = list(events)
+
+        if 'events' in params: 
+            # Params is provided as a argument in construction
+            # Remove it so it's not passed to simulate_to*
+            del params['events']
 
         # Sample from state if n_samples specified or state is not UnweightedSamples (Case 2)
         # Or if is Unweighted samples, but there are the wrong number of samples (Case 1)
@@ -113,10 +150,23 @@ class MonteCarlo(Predictor):
         outputs_all = []
         event_states_all = []
 
+        if params['constant_noise']:
+            # Save loads
+            process_noise = self.model['process_noise']
+            process_noise_dist = self.model.parameters.get('process_noise_dist', 'normal')
+
         # Perform prediction
         t0 = params.get('t0', 0)
         HORIZON = params.get('horizon', float('inf'))  # Save the horizon to be used later
         for x in state:
+            if params['constant_noise']:
+                # Calculate process noise
+                x_noise = self.model.apply_process_noise(x.copy(), 1)
+                x_noise = self.model.StateContainer({key: x_noise[key] - x[key] for key in x.keys()})
+
+                self.model['process_noise'] = x_noise
+                self.model['process_noise_dist'] = 'constant'
+
             first_output = self.model.output(x)
             
             time_of_event = {}
@@ -129,20 +179,21 @@ class MonteCarlo(Predictor):
             if 'save_freq' in params and not isinstance(params['save_freq'], tuple):
                 params['save_freq'] = (params['t0'], params['save_freq'])
             
-            if len(params['events']) == 0:  # Predict to time
-                (times, inputs, states, outputs, event_states) = simulate_to_threshold(future_loading_eqn,       
-                    first_output, 
-                    threshold_keys = [],
+            if len(events) == 0:  # Predict to time
+                (times, inputs, states, outputs, event_states) = simulate_to_threshold(
+                    future_loading_eqn,
+                    first_output,
+                    events=[],
                     **params
                 )
             else:
-                events_remaining = params['events'].copy()
+                events_remaining = events.copy()
 
                 times = []
-                inputs = SimResult(_copy = False)
-                states = SimResult(_copy = False)
-                outputs = LazySimResult(fcn = self.model.output, _copy = False)
-                event_states = LazySimResult(fcn = es_eqn, _copy = False)
+                inputs = SimResult(_copy=False)
+                states = SimResult(_copy=False)
+                outputs = LazySimResult(fcn=self.model.output, _copy=False)
+                event_states = LazySimResult(fcn=es_eqn, _copy=False)
 
                 # Non-vectorized prediction
                 while len(events_remaining) > 0:  # Still events to predict
@@ -150,9 +201,10 @@ class MonteCarlo(Predictor):
                     # we must subtract the difference in current t0 from the initial (i.e., prediction t0)
                     # each subsequent simulation
                     params['horizon'] = HORIZON - (params['t0'] - t0)
-                    (t, u, xi, z, es) = simulate_to_threshold(future_loading_eqn,       
-                        first_output, 
-                        threshold_keys = events_remaining,
+                    (t, u, xi, z, es) = simulate_to_threshold(
+                        future_loading_eqn,
+                        first_output,
+                        events=events_remaining,
                         **params
                     )
 
@@ -160,8 +212,8 @@ class MonteCarlo(Predictor):
                     times.extend(t)
                     inputs.extend(u)
                     states.extend(xi)
-                    outputs.extend(z, _copy = False)
-                    event_states.extend(es, _copy = False)
+                    outputs.extend(z, _copy=False)
+                    event_states.extend(es, _copy=False)
 
                     # Get which event occurs
                     t_met = tm_eqn(states[-1])
@@ -178,7 +230,12 @@ class MonteCarlo(Predictor):
 
                     # An event has occured
                     time_of_event[event] = times[-1]
-                    events_remaining.remove(event)  # No longer an event to predect to
+                    if event_strategy == 'all':
+                        events_remaining.remove(event)  # No longer an event to predict to
+                    elif event_strategy in ('first', 'any'):
+                        events_remaining = []
+                    else:
+                        raise ValueError(f"Invalid value for `event_strategy`: {event_strategy}. Should be either 'all' or 'first'")
 
                     # Remove last state (event)
                     params['t0'] = times.pop()
@@ -189,7 +246,7 @@ class MonteCarlo(Predictor):
                     event_states.pop()
             
             # Add to "all" structures
-            if len(times) > len(times_all): # Keep longest
+            if len(times) > len(times_all):  # Keep longest
                 times_all = times
             inputs_all.append(inputs)
             states_all.append(states)
@@ -197,6 +254,11 @@ class MonteCarlo(Predictor):
             event_states_all.append(event_states)
             time_of_event_all.append(time_of_event)
             last_states.append(last_state)
+
+            # Reset noise
+            if params['constant_noise']:
+                self.model['process_noise'] = process_noise
+                self.model['process_noise_dist'] = process_noise_dist
               
         inputs_all = UnweightedSamplesPrediction(times_all, inputs_all)
         states_all = UnweightedSamplesPrediction(times_all, states_all)
@@ -206,14 +268,17 @@ class MonteCarlo(Predictor):
 
         # Transform final states:
         time_of_event.final_state = {
-            key: UnweightedSamples([sample[key] for sample in last_states], _type = self.model.StateContainer) for key in time_of_event.keys()
+            key: UnweightedSamples(
+                    [sample[key] for sample in last_states],
+                    _type=self.model.StateContainer
+                ) for key in time_of_event.keys()
         }
 
         return PredictionResults(
-            times_all, 
-            inputs_all, 
-            states_all, 
-            outputs_all, 
-            event_states_all, 
+            times_all,
+            inputs_all,
+            states_all,
+            outputs_all,
+            event_states_all,
             time_of_event
         )

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>CompositeModel &#8212; ProgPy Python Packages 1.6 documentation</title>
+    <title>CompositeModel &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -328,7 +328,7 @@ document.write(`
 <h1>CompositeModel<a class="headerlink" href="#compositemodel" title="Permalink to this headline">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="progpy.CompositeModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.</span></span><span class="sig-name descname"><span class="pre">CompositeModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">connections</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.CompositeModel" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.</span></span><span class="sig-name descname"><span class="pre">CompositeModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">connections</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.CompositeModel" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel" title="progpy.prognostics_model.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.prognostics_model.PrognosticsModel</span></code></a></p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 1.5.0.</span></p>
@@ -337,24 +337,43 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a><em>]</em><em>]</em>) – <p>A list of PrognosticsModels to be combined into a single model.
+<li><p><strong>models</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a><em> or </em><em>function</em><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a><em> or </em><em>function</em><em>]</em><em>]</em>) – <p>A list of PrognosticsModels to be combined into a single model.
 Provided in one of two forms:</p>
 <ol class="arabic simple">
-<li><p>A list of PrognosticsModels. The name of each model will be the class name. A number will be added for duplicates</p></li>
-<li><p>A list of tuples where the first element is the model name and the second element is the model</p></li>
+<li><p>A list of PrognosticsModels or functions. The name of each model will be the class name for models or ‘function’ for functions. A number will be added for duplicates</p></li>
+<li><p>A list of tuples where the first element is the model/function name and the second element is the model/function</p></li>
 </ol>
 <p>Note: Order provided will be the order that models are executed</p>
 </p></li>
-<li><p><strong>connections</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – A list of tuples where the first element is the name of the output, state, or performance metrics of one model and the second element is the name of the input of another model.
+<li><p><strong>connections</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em><em>]</em><em>, </em><em>optional</em>) – A list of tuples where the first element is the name of the output, state, or performance metrics of one model or function return and the second element is the name of the input of another model or argument of a function.
 The first element of the tuple must be of the form “model_name.output_name”, “model_name.state_name”, or “model_name.performance_metric_key”.
 The second element of the tuple must be of the form “model_name.input_name”.
 For example, if you have two models, “Batt1” and “Batt2”, and you want to connect the output of “Batt1” to the input of “Batt2”, you would use the following connection: (“Batt1.output”, “Batt2.input”)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Keyword Arguments</dt>
-<dd class="field-even"><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>]</em>) – Model outputs in format “model_name.output_name”. Must be subset of all outputs from models. If not provided, all outputs will be included.</p>
+<dd class="field-even"><p><strong>outputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em>) – Model outputs in format “model_name.output_name”. Must be subset of all outputs from models. If not provided, all outputs will be included.</p>
 </dd>
 </dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">SomeModel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">SomeOtherModel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">kelvin_to_celcius</span><span class="p">(</span><span class="n">temp_in_kelvin</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">temp_in_kelvin</span> <span class="o">-</span> <span class="mf">273.15</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">connections</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">(</span><span class="s1">&#39;m1.temp&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin_to_celcius.temp_in_kelvin&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">(</span><span class="s1">&#39;kelvin_to_celcius.return&#39;</span><span class="p">,</span> <span class="s1">&#39;m2.temp&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m_composite</span> <span class="o">=</span> <span class="n">CompositeModel</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">((</span><span class="s1">&#39;m1&#39;</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;kelvin_to_celcius&#39;</span><span class="p">,</span> <span class="n">kelvin_to_celcius</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="n">m2</span><span class="p">)),</span>  <span class="c1"># models</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">connections</span><span class="o">=</span><span class="n">connections</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Model parameters can be set and accessed using the ‘[model].[param]’ format. For example, for composite model m, m[‘foo.bar’] would set the parameter ‘bar’ for the model ‘foo’.</p>
+</div>
 </dd></dl>
 
 </section>

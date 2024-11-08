@@ -23,7 +23,7 @@ def run_example():
 
     # Step 3: Simulate to threshold
     # Here we are simulating till impact using the first state defined above
-    (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(future_load, x = first_state, threshold_keys=['impact'], print = True, dt=0.1, save_freq=2)
+    (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(future_load, x = first_state, events='impact', print = True, dt=0.1, save_freq=2)
 
     # Now lets do the same thing but only stop when all hit the ground
     def thresholds_met_eqn(thresholds_met):

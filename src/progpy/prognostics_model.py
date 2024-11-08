@@ -8,7 +8,7 @@ import itertools
 import json
 from numbers import Number
 import numpy as np
-from typing import List  # Still needed until v3.9
+from typing import List, Mapping  # Still needed until v3.9
 from warnings import warn
 
 from progpy.exceptions import ProgModelStateLimitWarning, warn_once
@@ -201,6 +201,12 @@ class PrognosticsModel(ABC):
         self.OutputContainer = OutputContainer
 
         self.parameters = PrognosticsModelParameters(self, params, self.param_callbacks)
+
+    def __getitem__(self, arg):
+        return self.parameters[arg]
+
+    def __setitem__(self, key, value):
+        self.parameters[key] = value
 
     def initialize(self, u=None, z=None):
         """
@@ -650,14 +656,14 @@ class PrognosticsModel(ABC):
         }
         params.update(kwargs)
 
-        threshold_keys = self.events.copy()
+        events_remaining = self.events.copy()
         t = 0
         state_at_event = {}
-        while len(threshold_keys) > 0:
+        while len(events_remaining) > 0:
             result = self.simulate_to_threshold(x = x, t0 = t, **params)
             for key, value in result.event_states[-1].items():
                 if value <= 0 and key not in state_at_event:
-                    threshold_keys.remove(key)
+                    events_remaining.remove(key)
                     state_at_event[key] = result.states[-1]
             x = result.states[-1]
             t = result.times[-1]
@@ -692,14 +698,14 @@ class PrognosticsModel(ABC):
         }
         params.update(kwargs)
 
-        threshold_keys = self.events.copy()
+        events_remaining = self.events.copy()
         t = 0
         time_of_event = {}
-        while len(threshold_keys) > 0:
+        while len(events_remaining) > 0:
             result = self.simulate_to_threshold(x = x, t0 = t, **params)
             for key, value in result.event_states[-1].items():
                 if value <= 0 and key not in time_of_event:
-                    threshold_keys.remove(key)
+                    events_remaining.remove(key)
                     time_of_event[key] = result.times[-1]
             x = result.states[-1]
             t = result.times[-1]
@@ -766,7 +772,7 @@ class PrognosticsModel(ABC):
 
         return self.simulate_to_threshold(future_loading_eqn, first_output, **kwargs)
  
-    def simulate_to_threshold(self, future_loading_eqn: abc.Callable = None, first_output = None, threshold_keys: list = None, **kwargs) -> namedtuple:
+    def simulate_to_threshold(self, future_loading_eqn: abc.Callable = None, first_output = None, events: list = None, **kwargs) -> namedtuple:
         """
         Simulate prognostics model until any or specified threshold(s) have been met
 
@@ -777,6 +783,13 @@ class PrognosticsModel(ABC):
 
         Keyword Arguments
         -----------------
+        events: abc.Sequence[str] or str, optional
+            Keys for events that will trigger the end of simulation.
+            If blank, simulation will occur if any event will be met ()
+        event_strategy: str, optional
+            Strategy for stopping evaluation. Default is 'first'. One of:\n
+            * *first*: Will stop when first event in `events` list is reached.\n
+            * *all*: Will stop when all events in `events` list have been reached
         t0 : float, optional
             Starting time for simulation in seconds (default: 0.0) \n
         dt : float, tuple, str, or function, optional
@@ -796,9 +809,6 @@ class PrognosticsModel(ABC):
             maximum time that the model will be simulated forward (s), e.g., horizon = 1000 \n
         first_output : OutputContainer, optional
             First measured output, needed to initialize state for some classes. Can be omitted for classes that don't use this
-        threshold_keys: abc.Sequence[str] or str, optional
-            Keys for events that will trigger the end of simulation.
-            If blank, simulation will occur if any event will be met ()
         x : StateContainer, optional
             initial state, e.g., x= m.StateContainer({'x1': 10, 'x2': -5.3})\n
         thresholds_met_eqn : abc.Callable, optional
@@ -854,19 +864,34 @@ class PrognosticsModel(ABC):
             future_loading_eqn = lambda t,x=None: self.InputContainer({})
         elif not (callable(future_loading_eqn)):
             raise ValueError("'future_loading_eqn' must be callable f(t)")
-        
-        if isinstance(threshold_keys, str):
-            # A single threshold key
-            threshold_keys = [threshold_keys]
 
-        if threshold_keys and not all([key in self.events for key in threshold_keys]):
-            raise ValueError("threshold_keys must be event names")
+        if 'threshold_keys' in kwargs:
+            warn('Please use the keyword argument `events` instead of `threshold_keys`')
+            if events is None:
+                events = kwargs['threshold_keys']
+            else:
+                warn('Both `events` and `threshold_keys` were set. `events` will be used.')
+
+        if events is None:
+            events = self.events.copy()
+        if not isinstance(events, abc.Iterable):
+            # must be string or list-like
+            raise TypeError(f'`events` must be a single event string or list of events. Was unsupported type {type(events)}.')
+        if isinstance(events, str):
+            # A single event
+            events = [events]
+        if (events is not None) and not all([key in self.events for key in events]):
+            raise ValueError("`events` must be event names")
+        if not isinstance(events, list):
+            # Change to list because of the limits of jsonify
+            events = list(events)
 
         # Configure
         config = {  # Defaults
             't0': 0.0,
             'dt': ('auto', 1.0),
             'eval_pts': [],
+            'event_strategy': 'first',
             'save_pts': [],
             'save_freq': 10.0,
             'horizon': 1e100,  # Default horizon (in s), essentially inf
@@ -923,21 +948,31 @@ class PrognosticsModel(ABC):
         progress = config['progress']
 
         # Threshold Met Equations
-        def check_thresholds(thresholds_met):
-            t_met = [thresholds_met[key] for key in threshold_keys]
-            if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
-                return np.any(t_met)
-            return any(t_met)
+        if config['event_strategy'] in ('first', 'any'):
+            def check_thresholds(thresholds_met):
+                t_met = [thresholds_met[key] for key in events]
+                if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
+                    return np.any(t_met)
+                return any(t_met)
+        elif config['event_strategy'] == 'all':
+            def check_thresholds(thresholds_met):
+                t_met = [thresholds_met[key] for key in events]
+                if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
+                    return np.all(t_met)
+                return all(t_met)
+        else:
+            raise ValueError(f"Invalid value for `event_strategy`: {config['event_strategy']}. Should be either 'all' or 'first'")
+
         if 'thresholds_met_eqn' in config:
             check_thresholds = config['thresholds_met_eqn']
-            threshold_keys = []
-        elif threshold_keys is None: 
-            # Note: Setting threshold_keys to be all events if it is None
-            threshold_keys = self.events
-        elif len(threshold_keys) == 0:
+            events = []
+        elif events is None: 
+            # Note: Setting events to be all events if it is None
+            events = self.events
+        elif len(events) == 0:
             check_thresholds = lambda _: False
 
-        if len(threshold_keys) == 0 and config.get('thresholds_met_eqn', None) is None and 'horizon' not in kwargs:
+        if len(events) == 0 and config.get('thresholds_met_eqn', None) is None and 'horizon' not in kwargs:
             raise ValueError("Running simulate to threshold for a model with no events requires a horizon to be set. Otherwise simulation would never end.")
 
         # Initialization of save arrays
@@ -1141,7 +1176,7 @@ class PrognosticsModel(ABC):
               * DTW (Dynamic Time Warping)
             x0 (StateContainer, optional): Initial state
             dt (float, optional): Maximum time step in simulation. Time step used in simulation is lower of dt and time between samples. Defaults to time between samples.
-            stability_tol (double, optional): Configurable parameter.
+            stability_tol (double, optional): Configurable cutoff
                 Configurable cutoff value, between 0 and 1, that determines the fraction of the data points for which the model must be stable.
                 In some cases, a prognostics model will become unstable under certain conditions, after which point the model can no longer represent behavior. 
                 stability_tol represents the fraction of the provided argument `times` that are required to be met in simulation, 
@@ -1150,6 +1185,7 @@ class PrognosticsModel(ABC):
                 If the model goes unstable before stability_tol is met, a ValueError is raised.
                 Else, model goes unstable after stability_tol is met, the mean squared error calculated from data up to the instability is returned.
             aggr_method (func, optional): When multiple runs are provided, users can state how to aggregate the results of the errors. Defaults to taking the mean.
+            short_sim_penalty (double, optional): Only for MSE method: penalty added for simulation becoming unstable before stability_tol, added for each % below tol. If set to None, operation will return an error if simulation becomes unstable before stability_tol. Default is 100
 
         Returns:
             float: error
@@ -1238,8 +1274,8 @@ class PrognosticsModel(ABC):
         """Estimate the model parameters given data. Overrides model parameters
 
         Keyword Args:
-            keys (list[str]):
-                Parameter keys to optimize
+            keys (list[str] or list[tuple[str]]):
+                Parameter keys to optimize. Use tuple for nested parameters. For example, key ('x0', 'a') corresponds to m.parameters['x0']['a'].
             times (list[float]):
                 Array of times for each sample
             inputs (list[InputContainer]):
@@ -1274,8 +1310,17 @@ class PrognosticsModel(ABC):
             raise ValueError(f"Can not pass in keys as a Set. Sets are unordered by construction, so bounds may be out of order.")
         
         for key in keys:
-            if key not in self.parameters:
-                raise ValueError(f"Key '{key}' not in model parameters")
+            if isinstance(key, (tuple, list)):
+                tmp = self.parameters
+                keys_so_far = ''
+                for key_element in key:
+                    if not isinstance(tmp, Mapping) or key_element not in tmp:
+                        raise ValueError(f"Key '{keys_so_far}[{key_element}]' not in model parameters")
+                    keys_so_far += f'[{key_element}]'
+                    tmp = tmp[key_element]
+            else:
+                if key not in self.parameters:
+                    raise ValueError(f"Key '{key}' not in model parameters")
 
         config = {
             'error_method': 'MSE',
@@ -1366,7 +1411,13 @@ class PrognosticsModel(ABC):
 
         def optimization_fcn(params):
             for key, param in zip(keys, params):
-                self.parameters[key] = param
+                if isinstance(key, (tuple, list)):
+                    tmp = self.parameters
+                    for key_element in key[:-1]:
+                        tmp = tmp[key_element]
+                    tmp[key[-1]] = param
+                else:
+                    self.parameters[key] = param
             err = 0
             for run in runs:
                 try:
@@ -1376,7 +1427,15 @@ class PrognosticsModel(ABC):
                     # If it doesn't work (i.e., throws an error), don't use it
             return err
         
-        params = np.array([self.parameters[key] for key in keys])
+        params = []
+        for key in keys:
+            if isinstance(key, (tuple, list)):
+                tmp = self.parameters
+                for key_element in key[:-1]:
+                    tmp = tmp[key_element]
+                params.append(tmp[key[-1]])
+            else:
+                params.append(self.parameters[key])
 
         res = minimize(optimization_fcn, params, method=method, bounds=config['bounds'], options=config['options'], tol=config['tol'])
 
@@ -1384,7 +1443,13 @@ class PrognosticsModel(ABC):
             warn(f"Parameter Estimation did not converge: {res.message}")
 
         for x, key in zip(res.x, keys):
-            self.parameters[key] = x
+            if isinstance(key, (tuple, list)):
+                tmp = self.parameters
+                for key_element in key[:-1]:
+                    tmp = tmp[key_element]
+                tmp[key[-1]] = x
+            else:
+                self.parameters[key] = x
         
         # Reset noise
         self.parameters['measurement_noise'] = m_noise

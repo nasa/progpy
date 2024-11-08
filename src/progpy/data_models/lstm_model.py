@@ -2,6 +2,7 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 from collections import abc
+import importlib.util
 from itertools import chain
 import matplotlib.pyplot as plt
 from numbers import Number
@@ -22,6 +23,15 @@ class LSTMStateTransitionModel(DataModel):
     State transition models map from the :term:`input` at time t and :term:`output` at time t-1 plus historical data from a set window to the :term:`output` at time t.
 
     Most users will use the :py:func:`LSTMStateTransitionModel.from_data` method to create a model, but the model can be created by passing in a model directly into the constructor. The LSTM model in this method maps from [u_t-n+1, z_t-n, ..., u_t, z_t-1] to z_t. Past :term:`input` are stored in the :term:`model` internal :term:`state`. Actual calculation of :term:`output` is performed when :py:func:`LSTMStateTransitionModel.output` is called. When using in simulation that may not be until the simulation results are accessed.
+
+    .. note::
+        ProgPy must be installed with [datadriven] option to use LSTM model. either
+
+        pip3 install progpy[datadriven]
+
+        or (if using local version)
+
+        pip3 install '.[datadriven]'
 
     Args:
         output_model (keras.Model): If a state model is present, maps from the state_model outputs to model :term:`output`. Otherwise, maps from model inputs to model :term:`output`
@@ -439,8 +449,6 @@ class LSTMStateTransitionModel(DataModel):
                 If early stopping is desired. Default is True
             early_stop.cfg (dict):
                 Configuration to pass into early stopping callback (if enabled). See keras documentation (https://keras.io/api/callbacks/early_stopping) for options. E.g., {'patience': 5}
-            workers (int):
-                Number of workers to use when training. One worker indicates no multiprocessing
 
         Returns:
             LSTMStateTransitionModel: Generated Model
@@ -460,7 +468,6 @@ class LSTMStateTransitionModel(DataModel):
             'normalize': True,
             'early_stop': True,
             'early_stop.cfg': {'patience': 3, 'monitor': 'loss'},
-            'workers': 1
         }.copy()  # Copy is needed to avoid updating default
 
         params.update(LSTMStateTransitionModel.default_params)
@@ -498,10 +505,6 @@ class LSTMStateTransitionModel(DataModel):
             raise TypeError(f"epochs must be an integer greater than 0, not {type(params['epochs'])}")
         if params['epochs'] < 1:
             raise ValueError(f"epochs must be greater than 0, got {params['epochs']}")
-        if not isinstance(params['workers'], int):
-            raise TypeError(f"workers must be positive integer, got {type(params['workers'])}")
-        if params['workers'] < 1:
-            raise ValueError(f"workers must be positive integer, got {params['workers']}")
         if np.isscalar(inputs):  # Is scalar (e.g., SimResult)
             inputs = [inputs]
         if np.isscalar(outputs):
@@ -535,7 +538,10 @@ class LSTMStateTransitionModel(DataModel):
             params['normalization'] = (z_mean, z_std)
 
         # Tensorflow is imported here to avoid importing it if not needed
-        from tensorflow import keras
+        try:
+            from tensorflow import keras
+        except ImportError as e:
+            raise ImportError("Missing required dependencies for data-driven model. ProgPy was imported directly. Instead import with datadriven dependencies using pip3 install progpy[datadriven] or pip3 install -e '.[datadriven]' (if installing from local copy)")
 
         # Build model
         callbacks = [ ]
@@ -579,7 +585,7 @@ class LSTMStateTransitionModel(DataModel):
             output_data.append(t_all)
         
         model = keras.Model(inputs, outputs)
-        model.compile(optimizer="rmsprop", loss="mse", metrics=["mae"])
+        model.compile(optimizer="rmsprop", loss="mse", metrics=[["mae"]]*len(outputs))
         
         # Train model
         history = model.fit(
@@ -587,9 +593,7 @@ class LSTMStateTransitionModel(DataModel):
             output_data,
             epochs=params['epochs'],
             callbacks=callbacks,
-            validation_split=params['validation_split'],
-            workers=params['workers'],
-            use_multiprocessing=(params['workers'] > 1))
+            validation_split=params['validation_split'])
 
         # Split model into separate models
         n_state_layers = params['layers'] + 1 + (params['dropout'] > 0) + (params['normalize'])
@@ -615,7 +619,7 @@ class LSTMStateTransitionModel(DataModel):
 
         return cls(output_model, state_model, event_state_model, t_met_model, history = history, **params)
         
-    def simulate_to_threshold(self, future_loading_eqn, first_output=None, threshold_keys=None, **kwargs):
+    def simulate_to_threshold(self, future_loading_eqn, first_output=None, events=None, **kwargs):
         t = kwargs.get('t0', 0)
         dt = kwargs.get('dt', 0.1)
         x = kwargs.get('x', self.initialize(future_loading_eqn(t), first_output))
@@ -665,7 +669,7 @@ class LSTMStateTransitionModel(DataModel):
             if kwargs['horizon'] < t:
                 raise ValueError('Prediction horizon does not allow enough steps to fully initialize model')
             kwargs['horizon'] = kwargs['horizon'] - t
-        return super().simulate_to_threshold(future_loading_eqn, first_output, threshold_keys, **kwargs)
+        return super().simulate_to_threshold(future_loading_eqn, first_output, events, **kwargs)
     
     def plot_history(self, metrics=None):
         """

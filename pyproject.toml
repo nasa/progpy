@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "progpy"
+version = "1.7.0"
+dependencies = [
+    "scipy",
+    "pandas",  # For data downloading features
+    "matplotlib",
+    "requests",  # For data downloading features
+    "chaospy",  # For PCE
+    "fastdtw",  # For DTW error calculation
+    "filterpy"
+]
+requires-python = ">=3.7, <3.13"
+authors = [
+    {name = "Christopher Teubert", email = "christopher.a.teubert@nasa.gov"},
+    {name = "Katelyn Griffith", email = "katelyn.j.griffith@nasa.gov"},
+    {name = "Matteo Corbetta"},
+    {name = "Chetan Kulkarni"},
+    {name = "Portia Banerjee"},
+    {name = "Jason Watkins"},
+    {name = "Matthew Daigle"}
+]
+maintainers = [
+    {name = "Christopher Teubert", email = "christopher.a.teubert@nasa.gov"},
+    {name = "Katelyn Griffith", email = "katelyn.j.griffith@nasa.gov"}
+]
+description = "The 2024 NASA Software of the Year, the NASA Prognostic Package (ProgPy) is a python prognostics framework focused on building, using, and evaluating models and algorithms for prognostics (computation of remaining useful life) and health management of engineering systems, and provides a set of prognostics models for select components and prognostics algorithms developed within this framework, including uncertainty propagation."
+readme = "README.md"
+license = {text = "NOSA"}
+keywords = ['prognostics', 'diagnostics', 'fault detection', 'fdir', 'physics modeling', 'prognostics and health management', 'PHM', 'health management', 'surrogate modeling', 'model tuning', 'simulation', 'ivhm']
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+
+    'Intended Audience :: Science/Research',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Manufacturing',
+
+    'Topic :: Scientific/Engineering',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+    'Topic :: Scientific/Engineering :: Physics',
+
+    'License :: Other/Proprietary License ',
+
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3 :: Only'
+]
+
+[project.optional-dependencies]
+datadriven = [
+    "tensorflow; platform_system!='Darwin' or platform_machine!='arm64'",
+    "tensorflow-macos; platform_system=='Darwin' and platform_machine=='arm64'"]
+
+[project.urls]
+Homepage = "https://nasa.github.io/progpy/"
+Documentation = "https://nasa.github.io/progpy/"
+Repository = "https://github.com/nasa/progpy"
+Issues = "https://github.com/nasa/progpy/issues"
+Organization = "https://www.nasa.gov/content/diagnostics-prognostics"

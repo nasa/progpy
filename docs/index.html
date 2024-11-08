@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>ProgPy Prognostics Python Packages &#8212; ProgPy Python Packages 1.6 documentation</title>
+    <title>ProgPy Prognostics Python Packages &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -323,7 +323,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing progpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing ProgPy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citing-this-repository">Citing This Repository</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-and-partnering">Contributing and Partnering</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and Tables</a></li>
@@ -352,10 +352,14 @@ document.write(`
 <div class="toctree-wrapper compound">
 </div>
 <section id="installing-progpy">
-<h2>Installing progpy<a class="headerlink" href="#installing-progpy" title="Permalink to this headline">#</a></h2>
+<h2>Installing ProgPy<a class="headerlink" href="#installing-progpy" title="Permalink to this headline">#</a></h2>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Stable Version (Recommended)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Pre-Release</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>progpy
+</pre></div>
+</div>
+<p>If you will be using the datadriven tools (e.g., LSTM model), install the datadriven dependencies as well using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>progpy<span class="o">[</span>datadriven<span class="o">]</span>
 </pre></div>
 </div>
 </div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Users who would like to contribute to ProgPy or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/progpy">ProgPy GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
@@ -363,6 +367,10 @@ document.write(`
 <span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>progpy
 <span class="gp">$ </span>git<span class="w"> </span>checkout<span class="w"> </span>dev
 <span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>If you will be using the datadriven tools (e.g., LSTM model), install the datadriven dependencies as well using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;.[datadriven]&#39;</span>
 </pre></div>
 </div>
 </div></div>
@@ -374,9 +382,9 @@ document.write(`
 <dt>&#64;misc{2023_nasa_progpy,</dt><dd><div class="line-block">
 <div class="line">author    = {Christopher Teubert and Katelyn Jarvis Griffith and Matteo Corbetta and Chetan Kulkarni and Portia Banerjee and Jason Watkins and Matthew Daigle},</div>
 <div class="line">title     = {{ProgPy Python Prognostics Packages}},</div>
-<div class="line">month     = Oct,</div>
-<div class="line">year      = 2023,</div>
-<div class="line">version   = {1.6},</div>
+<div class="line">month     = May,</div>
+<div class="line">year      = 2024,</div>
+<div class="line">version   = {1.7},</div>
 <div class="line">url       = {<a class="reference external" href="https://nasa.github.io/progpy">https://nasa.github.io/progpy</a>}</div>
 <div class="line">doi       = {10.5281/ZENODO.8097013}</div>
 <div class="line">}</div>
@@ -385,7 +393,7 @@ document.write(`
 </dl>
 <p>The corresponding reference should look like this:</p>
 <ol class="upperalpha simple" start="3">
-<li><p>Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, J. Watkins, M. Daigle, ProgPy Python Prognostics Packages, v1.6, Oct 2023. URL <a class="github reference external" href="https://github.com/nasa/progpy">nasa/progpy</a>.</p></li>
+<li><p>Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, J. Watkins, M. Daigle, ProgPy Python Prognostics Packages, v1.7, May 2024. URL <a class="github reference external" href="https://github.com/nasa/progpy">nasa/progpy</a>.</p></li>
 </ol>
 </section>
 <section id="contributing-and-partnering">
@@ -453,7 +461,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing progpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing ProgPy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citing-this-repository">Citing This Repository</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing-and-partnering">Contributing and Partnering</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and Tables</a></li>

@@ -8,7 +8,7 @@ Developers Guide & Project Plan
 
    npr7150
 
-This document includes some details relevant for developers working on any of the Python Prognostics Packages Tools (prog_models, prog_algs, prog_server)
+This document includes some details relevant for developers working on any of the Python Prognostics Packages Tools (progpy, prog_server)
 
 Installing from a Branch 
 ------------------------
@@ -17,11 +17,21 @@ To install the package package from a specific branch. First clone the repositor
 
 This command installs the package using the checked-out version.
 
+Running Tests
+------------------------
+The run the progpy tests, first clone the repository and checkout the branch, installing the package using the command above. Then navigate into the repository directory. Next install the tests required dependencies, by using the following commands:
+   `pip install notebook`
+   `pip install testbook`
+   `pip install requests`
+
+Then run the tests using the following command:
+   `python -m tests`
+
 Contributing 
 ---------------
-New external (non-NASA or NASA contractor) developers must complete either the `organizational or individual Contributor License Agreement (CLA) <https://github.com/nasa/prog_models/tree/master/forms>`__. 
+New external (non-NASA or NASA contractor) developers must complete either the `organizational or individual Contributor License Agreement (CLA) <https://github.com/nasa/progpy/tree/master/forms>`__. 
 
-Curious about what needs to be done? Have an idea for a new feature? Find a bug? Check out open issues `prog_models <https://github.com/nasa/prog_models/issues>`__, `prog_algs <https://github.com/nasa/prog_algs/issues>`__, `prog_server <https://github.com/nasa/prog_server/issues>`__. 
+Curious about what needs to be done? Have an idea for a new feature? Find a bug? Check out open issues `progpy <https://github.com/nasa/progpy/issues>`__, `prog_server <https://github.com/nasa/prog_server/issues>`__. 
 
 Project Roles
 --------------------
@@ -29,11 +39,11 @@ Project Roles
 * Software Assurance Officer: Christopher Teubert
 * Deputy Software Lead: Katelyn Jarvis
 * Software Management Team: Software Lead, Software Assurance Officer, and Deputy Software Lead
-* Developers: See `prog_models developers <https://github.com/nasa/prog_models/graphs/contributors>`__, `prog_algs developers <https://github.com/nasa/prog_algs/graphs/contributors>`__, `prog_server developers <https://github.com/nasa/prog_server/graphs/contributors>`_
+* Developers: See `progpy developers <https://github.com/nasa/progpy/graphs/contributors>`__, `prog_server developers <https://github.com/nasa/prog_server/graphs/contributors>`_
 
 Branching Strategy
 ------------------
-Our project is following the git strategy described `here <https://nvie.com/posts/a-successful-git-branching-model/>`__. Release branches are not required. Details specific to each branch are described below. 
+Our project is following the git strategy described `here <https://nvie.com/posts/a-successful-git-branching-model/>`__. Release branches are not required. Details specific to each branch are described below. We recommend that developers from within NASA watch `this video <https://nasa-my.sharepoint.com/:v:/g/personal/rduffy_ndc_nasa_gov/EYCJK6qffBZNtSKZTOV9nPMBc9cPPF6fniRuKtG2GWvoPA>` on git strategies and best practices.
 
 `master`: Every merge into the master branch is done using a pull request (never commiting directly), is assigned a release number, and must complete the release checklist. The release checklist is a software assurance tool. 
 
@@ -75,9 +85,8 @@ A release is the merging of a PR where the target is the master branch.
 * Check that each new feature has corresponding tests
 * [Complete - checked automatically in PRs to dev] Confirm that every page has the copyright notice
 * Confirm added dependencies are at the following:
-   * requirements.txt, 
    * setup.py,
-   * the bottom of dev_guide.rst (this document)
+   * the bottom of npr7150.rst
 * Confirm that all issues associated with the release have been closed (i.e., requirements have been met) or assigned to another release
 * Run unit tests `python -m tests` on the following computer types:
    * Apple Silicon Mac
@@ -128,7 +137,12 @@ Post-Release Checklist
 * For prog_server: Update openapi specs on `SwaggerHub <https://app.swaggerhub.com/apis/teubert/prog_server/1.0.0-oas3>`__
 * Send notes to Software Release Office (SRO) of updated version number
 * Publish to PyPi
-* Send Highlight
+* Tag release with DOI
+* Setup release in GitHub
+* Post release in GitHub Discussions
+* Merge doc changes
+* Merge back into dev to get post-release changes
+* Send Highlights - Division, Known Users, LinkedIn, etc.
 
 Notes for Developers
 --------------------
@@ -138,14 +152,15 @@ Notes for Developers
 * When supplied by or to the user, values with names (e.g., inputs, states, outputs, event_states, event occurance, etc.) should be supplied as dictionaries (or dict-like objects) where they can be referred to by name. 
 * subpackages shall be independent (i.e., not have any dependencies with the wider package or other subpackages) when possible
 * Whenever possible Models, UncertainData types, State Estimators, and Predictors should be interchangable with any other class of the same type (e.g., any model should be interchangable with any other model)
-* Demonstrate common use cases as an example. 
+* Demonstrate common use cases as an example.
+* Use collections.abc instead of typing
 * Python code should comply with `PEP 8: Python Style Guide <https://peps.python.org/pep-0008/>`__, where appropriate
   * See also: `Writing Clean and Pythonic Code (JPL) <https://trs.jpl.nasa.gov/bitstream/handle/2014/51618/CL%2319-5039.pdf?sequence=1>`__
 * Code should be complient with the recommendations of `LGTM <lgtm.com>`__, whenever appropriate
 * Every feature should be demonstrated in an example
   * The most commonly used features should be demonstrated in the tutorial
 * Except in the most extreme cases, maintain backwards compatibility for the convenience of existing users
-  * If a feature is to be removed, mark it as depreciated for at least 2 releases before removing
+  * If a feature is to be removed, mark it as depreciated (using DeprecationWarning) for at least 1 release before removing unless marked experimental
 * Examples are included in the examples/ directory. 
    * Examples should cover the major use cases and features. If a major new feature is added, make sure there's an example demonstrating the feature.
    * For new examples- add to examples __all__ and example tests (tests/test_examples).
@@ -155,7 +170,7 @@ Notes for Developers
    * Each new feature should have a test. Check this in each PR review.
    * Check test coverage to improve completeness, automatically reported by bot in each PR.
    * For tests- make sure test are quality. They should cover expected input ranges, error handling. 
-   * There are some example models in prog_models.models.test_models which are useful for testing
+   * There are some example models in progpy.models.test_models which are useful for testing
 * Documentation 
    * Documentation is autogenerated using sphinx from progpy repository
    * Configuration is in sphinx_config.
@@ -165,7 +180,7 @@ Notes for Developers
    * Automated tests are defined in the .github/ directory.
    * The repository administrator can add tests to the set required to pass for each PR must be done by .
 * Template
-   * An empty template of a prognostics model is maintained at `prog_models/prog_model_template.py`.
-   * An empty template of a state estimator and predictor is maintained at `prog_algs/state_estimator_template.py` and `prog_algs/predictor_template.py`.
+   * An empty template of a prognostics model is maintained at `progpy/prog_model_template.py`.
+   * An empty template of a state estimator and predictor is maintained at `progpy/state_estimator_template.py` and `progpy/predictor_template.py`.
    * Any changes to the basic model setup should be documented there.
 * A tutorial is included in tutorial.ipynb. This required Juypter Notebooks. All major features should be illustrated here.

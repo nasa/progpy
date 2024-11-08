@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Predictors &#8212; ProgPy Python Packages 1.6 documentation</title>
+    <title>Predictors &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -425,13 +425,47 @@ document.write(`
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="progpy.predictors.Predictor.predict">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.uncertain_data.UncertainData"><span class="pre">progpy.uncertain_data.uncertain_data.UncertainData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.12)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">progpy.predictors.prediction.PredictionResults</span></span></span><a class="headerlink" href="#progpy.predictors.Predictor.predict" title="Permalink to this definition">#</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.uncertain_data.UncertainData"><span class="pre">progpy.uncertain_data.uncertain_data.UncertainData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">future_loading_eqn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">progpy.predictors.prediction.PredictionResults</span></span></span><a class="headerlink" href="#progpy.predictors.Predictor.predict" title="Permalink to this definition">#</a></dt>
 <dd><p>Perform a single prediction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>state</strong> (<a class="reference internal" href="UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><em>UncertainData</em></a>) – Distribution representing current state of the system</p></li>
 <li><p><strong>future_loading_eqn</strong> (<em>function</em><em> (</em><em>t</em><em>, </em><em>x</em><em>) </em><em>-&gt; z</em>) – Function to generate an estimate of loading at future time t, and state x</p></li>
+<li><p><strong>(</strong><strong>optional</strong> (<em>options</em>) – </p></li>
+<li><p><strong>kwargs</strong><strong>)</strong> (<em>configuration options</em>) – </p></li>
+<li><p><strong>predictor</strong> (<em>Any additional configuration values. Additional keyword arguments may be supported that are are specific to the</em>) – <ul>
+<li><p>t0: Starting time (s)</p></li>
+<li><p>dt : Step size (s)</p></li>
+<li><p>horizon : Prediction horizon (s)</p></li>
+<li><p>events : List of events to be predicted (subset of model.events, default is all events)</p></li>
+<li><dl class="simple">
+<dt>event_strategy: str, optional</dt><dd><p>Strategy for stopping evaluation. Default is ‘first’. One of:</p>
+<ul>
+<li><p><em>first</em>: Will stop when first event in <cite>events</cite> list is reached.</p></li>
+<li><p><em>all</em>: Will stop when all events in <cite>events</cite> list have been reached</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+<li><p><strong>include</strong> (<em>but</em>) – <ul>
+<li><p>t0: Starting time (s)</p></li>
+<li><p>dt : Step size (s)</p></li>
+<li><p>horizon : Prediction horizon (s)</p></li>
+<li><p>events : List of events to be predicted (subset of model.events, default is all events)</p></li>
+<li><dl class="simple">
+<dt>event_strategy: str, optional</dt><dd><p>Strategy for stopping evaluation. Default is ‘first’. One of:</p>
+<ul>
+<li><p><em>first</em>: Will stop when first event in <cite>events</cite> list is reached.</p></li>
+<li><p><em>all</em>: Will stop when all events in <cite>events</cite> list have been reached</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

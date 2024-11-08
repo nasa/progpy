@@ -36,7 +36,7 @@ class TestHorizon(unittest.TestCase):
         # With this horizon, all samples will reach 'falling', but only some will reach 'impact'
         PREDICTION_HORIZON = 2.127 
         STEP_SIZE = 0.001 
-        mc_results = mc.predict(initial_state, future_loading, dt=STEP_SIZE, horizon = PREDICTION_HORIZON)
+        mc_results = mc.predict(initial_state, future_loading, dt=STEP_SIZE, horizon=PREDICTION_HORIZON)
 
         # 'falling' happens before the horizon is met
         falling_res = [mc_results.time_of_event[iter]['falling'] for iter in range(mc.parameters['n_samples']) if mc_results.time_of_event[iter]['falling'] is not None]

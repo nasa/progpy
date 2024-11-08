@@ -1,7 +1,7 @@
 Loading
 =========
 
-The loading subpackage includes some classes for complex load estimation algorithms. See :download:`examples.future_loading <../../../../progpy/examples/future_loading.py>` for more details.
+The loading subpackage includes some classes for complex load estimation algorithms.
 
 Load Estimator Class interface
 ------------------------------

@@ -23,7 +23,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
-        key: pip-cache
+        key: pip-cache-datadriven
     - name: Install additional dependencies
       run: |
         pip install coverage

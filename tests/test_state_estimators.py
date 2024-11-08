@@ -115,12 +115,47 @@ class TestStateEstimators(unittest.TestCase):
             # should be close to right
             self.assertAlmostEqual(x_est[key], x[key], delta=0.4)
 
+    def __test_state_est_no_dt(self, filt, m):
+        x = m.initialize()
+        filt['dt'] = 0.2
+
+        self.assertTrue(all(key in filt.x.mean for key in m.states))
+
+        # run for a while
+        dt = 0.2
+        u = m.InputContainer({})
+        last_time = 0
+        for i in range(500):
+            # Get simulated output (would be measured in a real application)
+            x = m.next_state(x, u, dt)
+            z = m.output(x)
+
+            # Estimate New State every few steps
+            if i % 8 == 0:
+                # This is to test dt setting at the estimator lvl
+                # Without dt, this would fail
+                last_time = (i+1)*dt
+                filt.estimate((i+1)*dt, u, z)
+
+        if last_time != (i+1)*dt:
+            # Final estimate
+            filt.estimate((i+1)*dt, u, z)
+
+        # Check results - make sure it converged
+        x_est = filt.x.mean
+        for key in m.states:
+            # should be close to right
+            self.assertAlmostEqual(x_est[key], x[key], delta=0.4)
+
     def test_UKF(self):
         m = ThrownObject(process_noise=5e-2, measurement_noise=5e-2)
         x_guess = {'x': 1.75, 'v': 35} # Guess of initial state, actual is {'x': 1.83, 'v': 40}
 
         filt = UnscentedKalmanFilter(m, x_guess)
         self.__test_state_est(filt, m)
+
+        filt = UnscentedKalmanFilter(m, x_guess)
+        self.__test_state_est_no_dt(filt, m)
 
         m = ThrownObject(process_noise=5e-2, measurement_noise=5e-2)
 
@@ -322,6 +357,9 @@ class TestStateEstimators(unittest.TestCase):
         filt = ParticleFilter(m, x_guess, num_particles = 1000, measurement_noise = {'x': 1})
         self.__test_state_est(filt, m)
 
+        filt = ParticleFilter(m, x_guess, num_particles = 1000, measurement_noise = {'x': 1})
+        self.__test_state_est_no_dt(filt, m)
+
         # Test ParticleFilter ScalarData
         x_scalar = ScalarData({'x': 1.75, 'v': 38.5})
         filt_scalar = ParticleFilter(m, x_scalar, num_particles = 20) # Sample count does not affect ScalarData testing
@@ -438,8 +476,10 @@ class TestStateEstimators(unittest.TestCase):
         x_guess = {'x': 1.75, 'v': 35} # Guess of initial state, actual is {'x': 1.83, 'v': 40}
 
         filt = KalmanFilter(m, x_guess)
-
         self.__test_state_est(filt, m)
+
+        filt = KalmanFilter(m, x_guess)
+        self.__test_state_est_no_dt(filt, m)
 
         m = ThrownObject(process_noise=5e-2, measurement_noise=5e-2)
 
@@ -545,7 +585,7 @@ class TestStateEstimators(unittest.TestCase):
         config = {
             'dt': 0.01,
             'save_freq': 0.01,
-            'threshold_keys': 'zero'
+            'events': 'zero'
         }
         simulation_result = m.simulate_to_threshold(future_loading, **config)
 

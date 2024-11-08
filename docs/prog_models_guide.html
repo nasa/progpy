@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Modeling and Sim Guide &#8212; ProgPy Python Packages 1.6 documentation</title>
+    <title>Modeling and Sim Guide &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -325,7 +325,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing progpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing ProgPy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy-prognostic-model-format">ProgPy Prognostic Model Format</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs">Inputs</a></li>
@@ -334,7 +334,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise">Noise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading"><span class="xref std std-term">Future Loading</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading">Future Loading</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-notes">General Notes</a></li>
 </ul>
 </li>
@@ -367,17 +367,25 @@ document.write(`
 <h1>Modeling and Sim Guide<a class="headerlink" href="#modeling-and-sim-guide" title="Permalink to this headline">#</a></h1>
 <iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=progpy&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><p>The Prognostics Python Package (ProgPy) includes tools for defining, building, using, and testing models for <a class="reference internal" href="glossary.html#term-prognostics"><span class="xref std std-term">prognostics</span></a> of engineering systems. It also provides a set of prognostics models for select components developed within this framework, suitable for use in prognostics applications for these components and can be used in conjunction with the state estimation and prediction features (see <a class="reference internal" href="prog_algs_guide.html#state-estimation-and-prediction-guide"><span class="std std-ref">State Estimation and Prediction Guide</span></a>) to perform research in prognostics methods.</p>
 <section id="installing-progpy">
-<h2>Installing progpy<a class="headerlink" href="#installing-progpy" title="Permalink to this headline">#</a></h2>
+<h2>Installing ProgPy<a class="headerlink" href="#installing-progpy" title="Permalink to this headline">#</a></h2>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Stable Version (Recommended)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Pre-Release</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>progpy
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Users who would like to contribute to progpy or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/progpy">progpy GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
+<p>If you will be using the datadriven tools (e.g., LSTM model), install the datadriven dependencies as well using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>progpy<span class="o">[</span>datadriven<span class="o">]</span>
+</pre></div>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Users who would like to contribute to ProgPy or would like to use pre-release features can do so using the <a class="reference external" href="https://github.com/nasa/progpy">ProgPy GitHub repo</a>. This isn’t recommended for most users as this version may be unstable. To do this, use the following commands:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nasa/progpy
 <span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>progpy
 <span class="gp">$ </span>git<span class="w"> </span>checkout<span class="w"> </span>dev
 <span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>If you will be using the datadriven tools (e.g., LSTM model), install the datadriven dependencies as well using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;.[datadriven]&#39;</span>
 </pre></div>
 </div>
 </div></div>
@@ -519,10 +527,7 @@ Derived parameters<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <p class="card-text">Sometimes users would like to specify parameters as a function of other parameters. This feature is called “derived parameters”. See example below for more details on this feature.</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/a2f67c14d1e4f8cf993ce8b884f782d6/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd></dd>
-</dl>
-</li>
+<li><p class="card-text"><a class="reference download internal" download="" href="_downloads/412560afd93e3e54078df8279ff54887/04_New%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">04</span> <span class="pre">New</span> <span class="pre">Models</span></code></a></p></li>
 </ul>
 </div>
 </details></section>
@@ -556,7 +561,7 @@ Future Loading Noise<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">Future loading noise is used to represent uncertainty in knowledge of how the system will be loaded in the future (See <span class="xref std std-ref">Future Loading</span>). Future loading noise is applied by the user in their provided future loading method by adding random noise to the estimated future load.</p>
+<p class="card-text">Future loading noise is used to represent uncertainty in knowledge of how the system will be loaded in the future (See <a class="reference internal" href="#future-loading"><span class="std std-ref">Future Loading</span></a>). Future loading noise is applied by the user in their provided future loading method by adding random noise to the estimated future load.</p>
 </div>
 </details><p>See example below for details on how to configure proccess and measurement noise in ProgPy</p>
 <ul class="simple">
@@ -567,8 +572,8 @@ Future Loading Noise<div class="summary-down docutils">
 </ul>
 </section>
 <section id="future-loading">
-<h3><a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">Future Loading</span></a><a class="headerlink" href="#future-loading" title="Permalink to this headline">#</a></h3>
-<p>Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected <a class="reference internal" href="#inputs"><span class="std std-ref">Inputs</span></a> at future times.</p>
+<h3>Future Loading<a class="headerlink" href="#future-loading" title="Permalink to this headline">#</a></h3>
+<p><a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">Future Loading</span></a> is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected <a class="reference internal" href="#inputs"><span class="std std-ref">Inputs</span></a> at future times.</p>
 <p>Future loading is provided by the user either using the predifined loading classes in <cite>progpy.loading</cite>, or as a function of time and optional state. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">future_load</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># Calculate inputs</span>
@@ -577,15 +582,12 @@ Future Loading Noise<div class="summary-down docutils">
 </div>
 <p>See example below for details on how to provide future loading information in ProgPy.</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/e2095f421d8ca12b927634f3fbbba6c4/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd></dd>
-</dl>
-</li>
+<li><p><a class="reference download internal" download="" href="_downloads/9c8e9f4d6db817c0bef52c29c3dbca21/01_Simulation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">01.</span> <span class="pre">Simulation</span></code></a></p></li>
 </ul>
 </section>
 <section id="general-notes">
 <h3>General Notes<a class="headerlink" href="#general-notes" title="Permalink to this headline">#</a></h3>
-<p>Users of ProgPy will need a model describing the behavior of the system of interest. Users will likely either use one of the models distribued with ProgPy (see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html">Included Models</a>), configuring it to their own system using parameter estimation (see <a class="reference download internal" download="" href="_downloads/4665ebe5ec48228f3eb06ed7cb37fbac/param_est.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">examples.param_est</span></code></a>), use a <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven model</span></a> class to learn system behavior from data, or build their own model (see <a class="reference internal" href="#building-new-models">Building New Models</a> section, below).</p>
+<p>Users of ProgPy will need a model describing the behavior of the system of interest. Users will likely either use one of the models distribued with ProgPy (see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html">Included Models</a>), configuring it to their own system using parameter estimation (see <a class="reference download internal" download="" href="_downloads/4dfd843259a83464e8e48a02a37a07b0/02_Parameter%20Estimation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">02</span> <span class="pre">Parameter</span> <span class="pre">Estimation</span></code></a>), use a <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven model</span></a> class to learn system behavior from data, or build their own model (see <a class="reference internal" href="#building-new-models">Building New Models</a> section, below).</p>
 </section>
 </section>
 <section id="building-new-models">
@@ -597,37 +599,19 @@ Future Loading Noise<div class="summary-down docutils">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">physics-based</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">data-driven</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a> are constructed by subclassing <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template <a class="reference download internal" download="" href="_downloads/0f7c5af7c0ba09c1be3bd3db3e6458c9/prog_model_template.py"><code class="xref download docutils literal notranslate"><span class="pre">prog_model_template.ProgModelTemplate</span></code></a>, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> will then work with your new model.</p>
 <p>For simple linear models, users can choose to subclass the simpler <a class="reference internal" href="api_ref/progpy/LinearModel.html#progpy.LinearModel" title="progpy.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.LinearModel</span></code></a> class, as illustrated in the second example. Some methods and algorithms only function on linear models.</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/c416c00aa2e02950fa0b0b4547cf49f9/new_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_model</span></code></a></dt><dd></dd>
-</dl>
-</li>
-<li><p><a class="reference download internal" download="" href="_downloads/08ee9859b313ce1d928f863d2d51af12/linear_model.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">examples.linear_model</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/412560afd93e3e54078df8279ff54887/04_New%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">04.</span> <span class="pre">New</span> <span class="pre">Models</span></code></a></p></li>
 </ul>
-<details class="sphinx-bs dropdown card mb-3">
-<summary class="summary-title card-header">
-Advanced features in model building<div class="summary-down docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="summary-up docutils">
-<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="summary-content card-body docutils">
-<ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/a2f67c14d1e4f8cf993ce8b884f782d6/derived_params.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.derived_params</span></code></a></dt><dd></dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/b261b8e8a2bb840eed75010c0929ce5a/state_limits.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.state_limits</span></code></a></dt><dd></dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/b547422d9b3ae9d9e32d7bee6c092275/events.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.events</span></code></a></dt><dd></dd>
-</dl>
-</li>
-</ul>
-</div>
-</details></div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven models</span></a>, such as those using neural networks, are created by subclassing the <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel" title="progpy.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.data_models.DataModel</span></code></a> class, overriding the <code class="docutils literal notranslate"><span class="pre">from_data</span></code> method.</p>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven models</span></a>, such as those using neural networks, are created by subclassing the <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel" title="progpy.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.data_models.DataModel</span></code></a> class, overriding the <code class="docutils literal notranslate"><span class="pre">from_data</span></code> method.</p>
 <p>The <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel.from_data" title="progpy.data_models.DataModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.data_models.DataModel.from_data()</span></code></a> and <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel.from_model" title="progpy.data_models.DataModel.from_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.data_models.DataModel.from_model()</span></code></a> methods are used to construct new models from data or an existing model (i.e., <a class="reference internal" href="glossary.html#term-surrogate"><span class="xref std std-term">surrogate</span></a>), respectively. The use of these is demonstrated in the following examples.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use a data-driven model distributed with progpy you need to install the data-driven dependencies.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>progpy<span class="o">[</span>datadriven<span class="o">]</span>
+</pre></div>
+</div>
+</div>
 <ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/6b940c6b760d99b131616029abefd14c/05_Data%20Driven.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">05_Data</span> <span class="pre">Driven</span></code></a></p></li>
 <li><dl class="simple">
 <dt><a class="reference download internal" download="" href="_downloads/e7ee62f41f59a26f3cd93b4b0497cc90/lstm_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.lstm_model</span></code></a></dt><dd></dd>
 </dl>
@@ -778,10 +762,7 @@ Step size<div class="summary-down docutils">
 </ul>
 <p class="card-text">For more details on dynamic step sizes, see the following example:</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/290f3878724971806588517e4f7917c9/dynamic_step_size.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.dynamic_step_size</span></code></a></dt><dd></dd>
-</dl>
-</li>
+<li><p class="card-text"><a class="reference download internal" download="" href="_downloads/9c8e9f4d6db817c0bef52c29c3dbca21/01_Simulation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">01</span> <span class="pre">Simulation</span></code></a></p></li>
 </ul>
 </div>
 </details><details class="sphinx-bs dropdown card mb-3">
@@ -836,10 +817,6 @@ Eval Points<div class="summary-down docutils">
 <dt><a class="reference download internal" download="" href="_downloads/a53af2a664a02d85e1a95ed94e2629b1/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/e2095f421d8ca12b927634f3fbbba6c4/future_loading.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.future_loading</span></code></a></dt><dd></dd>
-</dl>
-</li>
 </ul>
 </section>
 <section id="parameter-estimation">
@@ -852,9 +829,6 @@ Eval Points<div class="summary-down docutils">
 </pre></div>
 </div>
 <p>See the example below for more details</p>
-<ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/4665ebe5ec48228f3eb06ed7cb37fbac/param_est.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">examples.param_est</span></code></a></p></li>
-</ul>
 <div class="tip admonition">
 <p class="admonition-title">Note</p>
 <p>Parameters are changes in-place, so the model on which estimate_params is called, is now tuned to match the data</p>
@@ -873,6 +847,12 @@ Eval Points<div class="summary-down docutils">
 <section id="combination-models">
 <h2>Combination Models<a class="headerlink" href="#combination-models" title="Permalink to this headline">#</a></h2>
 <p>There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below.</p>
+<p>For more details, see:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/cb37c25b3e11f6fe8987e558bb775c53/06_Combining%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">06.</span> <span class="pre">Combining</span> <span class="pre">Models</span></code></a></p></li>
+</ul>
+</div></blockquote>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Composite models</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Ensemble models</button><button aria-controls="panel-2-2-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-2" name="2-2" role="tab" tabindex="-1">MixtureOfExperts models</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><p>Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example,</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">CompositeModel</span><span class="p">(</span>
@@ -884,10 +864,6 @@ Eval Points<div class="summary-down docutils">
 <span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For more information, see the example below:</p>
-<ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/f138ed85c70cb3f7616eb0b5ba690cff/composite_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.composite_model</span></code></a></p></li>
-</ul>
 </div><div aria-labelledby="tab-2-2-1" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-1" name="2-1" role="tabpanel" tabindex="0"><p>Unlike composite models which model a system of systems, ensemble models are used when to combine the logic of multiple models which describe the same system. This is used when there are multiple models representing different system behaviors or conditions. The results of each model are aggregated in a way that can be defined by the user. For example,</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">EnsembleModel</span><span class="p">(</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">],</span>
@@ -895,18 +871,10 @@ Eval Points<div class="summary-down docutils">
 <span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For more information, see the example below:</p>
-<ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/e38d3e121ad5b2b31d88a0fdb681fd3b/ensemble.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.ensemble</span></code></a></p></li>
-</ul>
 </div><div aria-labelledby="tab-2-2-2" class="sphinx-tabs-panel" hidden="true" id="panel-2-2-2" name="2-2" role="tabpanel" tabindex="0"><p>Mixture of Experts (MoE) models combine multiple models of the same system, similar to Ensemble models. Unlike Ensemble Models, the aggregation is done by selecting the “best” model. That is the model that has performed the best over the past. Each model will have a ‘score’ that is tracked in the state, and this determines which model is best.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">MixtureOfExpertsModel</span><span class="p">([</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>For more information, see the example below:</p>
-<ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/c586316595cdbd6c17fcb9d03d91ca65/mixture_of_experts.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.mixture_of_experts</span></code></a></p></li>
-</ul>
 </div></div>
 </section>
 <section id="other-examples">
@@ -998,7 +966,7 @@ Eval Points<div class="summary-down docutils">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing progpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy">Installing ProgPy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy-prognostic-model-format">ProgPy Prognostic Model Format</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs">Inputs</a></li>
@@ -1007,7 +975,7 @@ Eval Points<div class="summary-down docutils">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noise">Noise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading"><span class="xref std std-term">Future Loading</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-loading">Future Loading</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-notes">General Notes</a></li>
 </ul>
 </li>

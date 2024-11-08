@@ -13,6 +13,12 @@ ProgPy combines NASAs prog_models and prog_algs packages into a single python pa
 ## Installation 
 `pip3 install progpy`
 
+or 
+
+`pip3 install progpy[datadriven]`
+
+to include dependencies for data driven models
+
 ## [Documentation](https://nasa.github.io/progpy/)
 See documentation [here](https://nasa.github.io/progpy/)
  
@@ -26,26 +32,24 @@ Here is the directory structure for the github repository
 `prog_model_template.py` - Template for Prognostics Model<br />
 `state_estimator_template.py` - Template for State Estimators<br />
 `predictor_template.py` - Template for Predictor<br />
-`tutorial.ipynb` - Tutorial (Juypter Notebook)
 
 ## Citing this repository
 Use the following to cite this repository:
 
 ```
-@misc{2023_nasa_progpy,
+@misc{2024_nasa_progpy,
   | author    = {Christopher Teubert and Katelyn Jarvis Griffith and Matteo Corbetta and Chetan Kulkarni and Portia Banerjee and Matthew Daigle},
   | title     = {{ProgPy Python Prognostics Packages}},
-  | month     = Oct,
-  | year      = 2023,
-  | version   = {1.6},
+  | month     = May,
+  | year      = 2024,
+  | version   = {1.7},
   | url       = {https://nasa.github.io/progpy}
-  | doi       = {10.5281/ZENODO.8097013}
   | }
 ```
 
 The corresponding reference should look like this:
 
-C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, M. Daigle, ProgPy Python Prognostics Packages, v1.6, Oct 2023. URL https://github.com/nasa/progpy.
+C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, M. Daigle, ProgPy Python Prognostics Packages, v1.7, May 2024. URL https://github.com/nasa/progpy.
 
 ## Contributing Organizations
 ProgPy was created by a partnership of multiple organizations, working together to build a set of high-quality prognostic tools for the wider PHM Community. We would like to give a big thank you for the ProgPy community, especially the following contributing organizations:

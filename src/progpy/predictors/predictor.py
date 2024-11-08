@@ -39,7 +39,6 @@ class Predictor(ABC):
         self.model = model
 
         self.parameters = deepcopy(self.default_parameters)
-        self.parameters['events'] = self.model.events.copy()  # Events to predict to
         self.parameters.update(kwargs)
 
     @abstractmethod
@@ -49,10 +48,20 @@ class Predictor(ABC):
 
         Parameters
         ----------
-        state : UncertainData 
+        state : UncertainData
             Distribution representing current state of the system
         future_loading_eqn : function (t, x) -> z
             Function to generate an estimate of loading at future time t, and state x
+        options (optional, kwargs): configuration options\n
+        Any additional configuration values. Additional keyword arguments may be supported that are are specific to the predictor, but include \n
+            * t0: Starting time (s)
+            * dt : Step size (s)
+            * horizon : Prediction horizon (s)
+            * events : List of events to be predicted (subset of model.events, default is all events)
+            * event_strategy: str, optional
+                Strategy for stopping evaluation. Default is 'first'. One of:\n
+                * *first*: Will stop when first event in `events` list is reached.\n
+                * *all*: Will stop when all events in `events` list have been reached
 
         Return
         ----------
@@ -65,3 +74,9 @@ class Predictor(ABC):
             * time_of_event (UncertainData): Distribution of predicted Time of Event (ToE) for each predicted event, represented by some subclass of UncertaintData (e.g., MultivariateNormalDist)
         """
         pass
+
+    def __getitem__(self, arg):
+        return self.parameters[arg]
+
+    def __setitem__(self, key, value):
+        self.parameters[key] = value

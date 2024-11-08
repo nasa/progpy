@@ -44,13 +44,13 @@ def run_example():
     # Step 2: Build standard model
     print("Building standard model...")
     m_batt = LSTMStateTransitionModel.from_data(
-        inputs=input_data,
-        outputs=output_data,  
+        inputs = input_data,
+        outputs = output_data,  
         window=WINDOW, 
         epochs=30, 
         units=64,  # Additional units given the increased complexity of the system
-        input_keys=['i', 'dt'],
-        output_keys=['t', 'v'])
+        input_keys = ['i', 'dt'],
+        output_keys = ['t', 'v'])
     m_batt.plot_history() 
 
     # Step 3: Build custom model
@@ -79,19 +79,22 @@ def run_example():
     # so we need to transpose them to a column vector
     normalization = (u_mean[np.newaxis].T, u_std[np.newaxis].T, z_mean, z_std)
 
+    callbacks = [
+        keras.callbacks.ModelCheckpoint("jena_sense.keras", save_best_only=True)
+    ]
     inputs = keras.Input(shape=u_all.shape[1:])
     x = layers.Bidirectional(layers.LSTM(128))(inputs)
     x = layers.Dropout(0.1)(x)
     x = layers.Dense(z_all.shape[1] if z_all.ndim == 2 else 1)(x)
     model = keras.Model(inputs, x)
     model.compile(optimizer="rmsprop", loss="mse", metrics=["mae"])
-    history = model.fit(u_all, z_all, epochs=30, validation_split=0.1)
+    history = model.fit(u_all, z_all, epochs=30, callbacks = callbacks, validation_split = 0.1)
 
     # Step 4: Build LSTMStateTransitionModel
     m_custom = LSTMStateTransitionModel(model, 
         normalization=normalization, 
-        input_keys=['i', 'dt'],
-        output_keys=['t', 'v'], history=history  # Provide history so plot_history will work
+        input_keys = ['i', 'dt'],
+        output_keys = ['t', 'v'], history=history  # Provide history so plot_history will work
     )
     m_custom.plot_history()
 
@@ -102,7 +105,7 @@ def run_example():
     def future_loading(t, x=None):
         return batt.InputContainer({'i': 3})
 
-    def future_loading2(t, x=None):
+    def future_loading2(t, x = None):
         nonlocal t_counter, x_counter
         z = batt.output(x_counter)
         z = m_batt.InputContainer({'i': 3, 't_t-1': z['t'], 'v_t-1': z['v'], 'dt': t - t_counter})

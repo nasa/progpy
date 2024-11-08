@@ -1,6 +1,7 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
+from warnings import catch_warnings, simplefilter
 from collections import UserDict, abc
 from copy import deepcopy
 import json
@@ -9,6 +10,8 @@ import numpy as np
 from scipy.integrate import OdeSolver
 import types
 
+
+from progpy.utils.containers import DictLikeMatrixWrapper
 from progpy.utils.next_state import next_state_functions, SciPyIntegrateNextState
 from progpy.utils.noise_functions import measurement_noise_functions, process_noise_functions
 from progpy.utils.serialization import CustomEncoder, custom_decoder
@@ -120,9 +123,15 @@ class PrognosticsModelParameters(UserDict):
             if callable(self['process_noise']):  # Provided a function
                 self._m.apply_process_noise = types.MethodType(self['process_noise'], self._m)
             else:  # Not a function
-                # Process noise is single number - convert to dict
+                if key == 'process_noise' and isinstance(self['process_noise'], DictLikeMatrixWrapper):
+                    # If it's already a DictLikeMatrixWrapper- convert to dict,
+                    # so then it will be treated as a dictionary and missing keys will be filled in
+                    # this way we're also sure that the final result is the "right" kind of container
+                    self.data['process_noise'] = dict(self['process_noise'])
+
                 if isinstance(self['process_noise'], Number):
-                    self['process_noise'] = self._m.StateContainer({key: self['process_noise'] for key in self._m.states})
+                    # Process noise is single number - convert to dict
+                    self.data['process_noise'] = self._m.StateContainer({key: self['process_noise'] for key in self._m.states})
                 elif isinstance(self['process_noise'], dict):
                     noise = self['process_noise']
                     for key in self._m.states:
@@ -130,24 +139,30 @@ class PrognosticsModelParameters(UserDict):
                         if key not in noise.keys():
                             noise[key] = 0
                             
-                    self['process_noise'] = self._m.StateContainer(noise)
+                    self.data['process_noise'] = self._m.StateContainer(noise)
                 
                 # Process distribution type
                 if 'process_noise_dist' in self and self['process_noise_dist'].lower() not in process_noise_functions:
                     raise ValueError(f"Unsupported process noise distribution {self['process_noise_dist']}")
                 
-                if all(value == 0 for value in self['process_noise'].values()):
-                    # No noise, use none function
-                    fcn = process_noise_functions['none']
-                    self._m.apply_process_noise = types.MethodType(fcn, self._m)
-                elif 'process_noise_dist' in self:
-                    fcn = process_noise_functions[self['process_noise_dist'].lower()]
-                    self._m.apply_process_noise = types.MethodType(fcn, self._m)
-                else:
-                    # Default to gaussian
-                    fcn = process_noise_functions['gaussian']
-                    self._m.apply_process_noise = types.MethodType(fcn, self._m)
+                # Disable deprecation warnings for internal progpy code.
+                with catch_warnings():
+                    simplefilter("ignore", DeprecationWarning)
+                    
+                    if all(value == 0 for value in self['process_noise'].values()):
+                        # No noise, use none function
+                        fcn = process_noise_functions['none']
+                        self._m.apply_process_noise = types.MethodType(fcn, self._m)
+                    elif 'process_noise_dist' in self:
+                        fcn = process_noise_functions[self['process_noise_dist'].lower()]
+                        self._m.apply_process_noise = types.MethodType(fcn, self._m)
+                    else:
+                        # Default to gaussian
+                        fcn = process_noise_functions['gaussian']
+                        self._m.apply_process_noise = types.MethodType(fcn, self._m)
                 
+                #resetwarnings()
+
                 # Make sure every key is present
                 # (single value already handled above)
                 for key in self._m.states:
@@ -158,33 +173,45 @@ class PrognosticsModelParameters(UserDict):
             if callable(self['measurement_noise']):
                 self._m.apply_measurement_noise = types.MethodType(self['measurement_noise'], self._m)
             else:
-                # Process noise is single number - convert to dict
+                if key == 'measurement_noise' and isinstance(self['measurement_noise'], DictLikeMatrixWrapper):
+                    # If it's already a DictLikeMatrixWrapper- convert to dict,
+                    # so then it will be treated as a dictionary and missing keys will be filled in
+                    # this way we're also sure that the final result is the "right" kind of container
+                    self.data['measurement_noise'] = dict(self['measurement_noise'])
+
                 if isinstance(self['measurement_noise'], Number):
-                    self['measurement_noise'] = self._m.OutputContainer({key: self['measurement_noise'] for key in self._m.outputs})
+                    # Process noise is single number - convert to dict
+                    self.data['measurement_noise'] = self._m.OutputContainer({key: self['measurement_noise'] for key in self._m.outputs})
                 elif isinstance(self['measurement_noise'], dict):
                     noise = self['measurement_noise']
                     for key in self._m.outputs:
                         # Set any missing keys to 0
                         if key not in noise.keys():
                             noise[key] = 0
-                    self['measurement_noise'] = self._m.OutputContainer(noise)
+                    self.data['measurement_noise'] = self._m.OutputContainer(noise)
                 
                 # Process distribution type
                 if 'measurement_noise_dist' in self and self['measurement_noise_dist'].lower() not in measurement_noise_functions:
                     raise ValueError(f"Unsupported measurement noise distribution {self['measurement_noise_dist']}")
 
-                if all(value == 0 for value in self['measurement_noise'].values()):
-                    # No noise, use none function
-                    fcn = measurement_noise_functions['none']
-                    self._m.apply_measurement_noise = types.MethodType(fcn, self._m)
-                elif 'measurement_noise_dist' in self:
-                    fcn = measurement_noise_functions[self['measurement_noise_dist'].lower()]
-                    self._m.apply_measurement_noise = types.MethodType(fcn, self._m)
-                else:
-                    # Default to gaussian
-                    fcn = measurement_noise_functions['gaussian']
-                    self._m.apply_measurement_noise = types.MethodType(fcn, self._m)
-                    
+                # Disable deprecation warnings for internal progpy code.
+                with catch_warnings():
+                    simplefilter("ignore", category=DeprecationWarning)
+
+                    if all(value == 0 for value in self['measurement_noise'].values()):
+                        # No noise, use none function
+                        fcn = measurement_noise_functions['none']
+                        self._m.apply_measurement_noise = types.MethodType(fcn, self._m)
+                    elif 'measurement_noise_dist' in self:
+                        fcn = measurement_noise_functions[self['measurement_noise_dist'].lower()]
+                        self._m.apply_measurement_noise = types.MethodType(fcn, self._m)
+                    else:
+                        # Default to gaussian
+                        fcn = measurement_noise_functions['gaussian']
+                        self._m.apply_measurement_noise = types.MethodType(fcn, self._m)
+
+                #resetwarnings()
+    
                 # Make sure every key is present
                 # (single value already handled above)
                 if not all([key in self['measurement_noise'] for key in self._m.outputs]):

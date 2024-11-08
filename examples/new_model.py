@@ -75,7 +75,7 @@ def run_example():
 
     # Step 3: Simulate to impact
     event = 'impact'
-    simulated_results = m.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1, print = True)
+    simulated_results = m.simulate_to_threshold(future_load, events=event, dt=0.005, save_freq=1, print = True)
     
     # Print flight time
     print('The object hit the ground in {} seconds'.format(round(simulated_results.times[-1],2)))
@@ -86,16 +86,16 @@ def run_example():
 
     # The first way to change the configuration is to pass in your desired config into construction of the model
     m = ThrownObject(g = grav_moon)
-    simulated_moon_results = m.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+    simulated_moon_results = m.simulate_to_threshold(future_load, events=event, dt=0.005, save_freq=1)
 
     grav_mars = -3.711
     # You can also update the parameters after it's constructed
     m.parameters['g'] = grav_mars
-    simulated_mars_results = m.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+    simulated_mars_results = m.simulate_to_threshold(future_load, events=event, dt=0.005, save_freq=1)
 
     grav_venus = -8.87
     m.parameters['g'] = grav_venus
-    simulated_venus_results = m.simulate_to_threshold(future_load, threshold_keys=[event], dt=0.005, save_freq=1)
+    simulated_venus_results = m.simulate_to_threshold(future_load, events=event, dt=0.005, save_freq=1)
 
     print('Time to hit the ground: ')
     print('\tvenus: {}s'.format(round(simulated_venus_results.times[-1],2)))
@@ -103,7 +103,7 @@ def run_example():
     print('\tmars: {}s'.format(round(simulated_mars_results.times[-1],2)))
     print('\tmoon: {}s'.format(round(simulated_moon_results.times[-1],2)))
 
-    # We can also simulate until any event is met by neglecting the threshold_keys argument
+    # We can also simulate until any event is met by neglecting the events argument
     simulated_results = m.simulate_to_threshold(future_load, dt=0.005, save_freq=1)
     threshs_met = m.threshold_met(simulated_results.states[-1])
     for (key, met) in threshs_met.items():

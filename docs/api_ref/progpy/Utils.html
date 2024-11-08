@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Utils &#8212; ProgPy Python Packages 1.6 documentation</title>
+    <title>Utils &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -349,11 +349,11 @@ The profiles are used to generate the desired state of a vehicle that needs to b
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lat</strong> (<em>np.ndarray</em>) – rad, n x 1 array, doubles, latitude coordinates of waypoints</p></li>
-<li><p><strong>lon</strong> (<em>np.ndarray</em>) – rad, n x 1 array, doubles, longitude coordinates of waypoints</p></li>
-<li><p><strong>alt</strong> (<em>np.ndarray</em>) – m, n x 1 array, doubles, altitude coordinates of waypoints</p></li>
-<li><p><strong>takeoff_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>, </em><em>optional</em>) – take off time of the trajectory. Default is None (starting at current time).</p></li>
-<li><p><strong>etas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – ETAs of each waypoints. Default is None. In that case, the ETAs are calculated based on the desired speed between waypoints.</p></li>
+<li><p><strong>lat</strong> (<em>np.ndarray</em>) – rad, n x 1 array, doubles, latitude coordinates of waypoints, deg</p></li>
+<li><p><strong>lon</strong> (<em>np.ndarray</em>) – rad, n x 1 array, doubles, longitude coordinates of waypoints, deg</p></li>
+<li><p><strong>alt</strong> (<em>np.ndarray</em>) – m, n x 1 array, doubles, altitude coordinates of waypoints, m</p></li>
+<li><p><strong>takeoff_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – take off time of the trajectory. Default is None (starting at current time).</p></li>
+<li><p><strong>etas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – ETAs of each waypoints. Default is None. In that case, the ETAs are calculated based on the desired speed between waypoints.</p></li>
 </ul>
 </dd>
 </dl>

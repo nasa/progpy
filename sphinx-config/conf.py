@@ -38,7 +38,7 @@ copyright = '2021 United States Government as represented by the Administrator o
 author = 'Chris Teubert, Katelyn Jarvis, Matteo Corbetta, Chetan Kulkarni, Portia Banerjee, Jason Watkins, and Matthew Daigle'
 
 # The full version, including alpha/beta/rc tags
-release = "1.6"
+release = "1.7"
 
 # -- General configuration ---------------------------------------------------
 

@@ -13,29 +13,7 @@ State Estimation and Prediction Guide
 
 The Prognostic Python Package (progpy) is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from :ref:`Modeling and Simulation Guide<Modeling and Sim Guide>`) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.
 
-Installing progpy
------------------------
-
-.. tabs::
-
-    .. tab:: Stable Version (Recommended)
-
-        The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:
-
-        .. code-block:: console
-
-            $ pip install progpy
-
-    .. tab:: Pre-Release
-
-        Users who would like to contribute to progpy or would like to use pre-release features can do so using the `progpy GitHub repo <https://github.com/nasa/progpy>`__. This isn't recommended for most users as this version may be unstable. To do this, use the following commands:
-
-        .. code-block:: console
-
-            $ git clone https://github.com/nasa/progpy
-            $ cd progpy
-            $ git checkout dev 
-            $ pip install -e .
+.. include:: installing.rst
 
 Summary
 ---------
@@ -107,8 +85,8 @@ The internal state is stored in the estimators x property as a UncertainData sub
         >>> filt.estimate(0.1, load, new_data)
         >>> print('Posterior: ', filt.x.mean)
 
-Extending
-************
+Extending State Estimators
+****************************
 
 New :term:`state estimator` are created by extending the :class:`progpy.state_estimators.StateEstimator` class. 
 
@@ -164,8 +142,8 @@ The stepsize and times at which results are saved can be defined like in a simul
 
         .. autoclass:: progpy.predictors.MonteCarloPredictor
 
-Extending
-*************
+Extending Predictors
+**********************
 
 New :term:`predictor` are created by extending the :class:`progpy.predictors.Predictor` class. 
 
@@ -293,12 +271,6 @@ The best way to learn how to use `progpy` is through the `tutorial <https://mybi
 * :download:`examples.basic_example <../../progpy/examples/basic_example.py>`
     .. automodule:: basic_example
 
-* :download:`examples.basic_example_battery <../../progpy/examples/basic_example_battery.py>`
-    .. automodule:: basic_example_battery
-
-.. * :download:`examples.benchmarking_example <../../progpy/examples/benchmarking_example.py>`
-..     .. automodule:: benchmarking_example
-
 * :download:`examples.eol_event <../../progpy/examples/eol_event.py>`
     .. automodule:: eol_event
 
@@ -307,9 +279,6 @@ The best way to learn how to use `progpy` is through the `tutorial <https://mybi
 
 * :download:`examples.horizon <../../progpy/examples/horizon.py>`
     .. automodule:: horizon
-
-* :download:`examples.kalman_filter <../../progpy/examples/kalman_filter.py>`
-    .. automodule:: kalman_filter
 
 * :download:`examples.measurement_eqn_example <../../progpy/examples/measurement_eqn_example.py>`
     .. automodule:: measurement_eqn_example

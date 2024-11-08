@@ -19,7 +19,7 @@ from progpy import *
 
 def run_example():
     # Step 1: Setup model & future loading
-    m = ThrownObject(process_noise=1)
+    m = ThrownObject(process_noise = 1)
     initial_state = m.initialize()
 
     # Step 2: Demonstrating state estimator

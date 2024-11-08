@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>ProgPy Guide &#8212; ProgPy Python Packages 1.6 documentation</title>
+    <title>ProgPy Guide &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -341,6 +341,16 @@ document.write(`
 <h1>ProgPy Guide<a class="headerlink" href="#progpy-guide" title="Permalink to this headline">#</a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<p>The ProgPy framework consists of three key components that combine to create a flexible and extendible prognostics architecture.</p>
+<img alt="_images/ProgPyComponents.png" class="align-center" src="_images/ProgPyComponents.png" />
+<ol class="arabic">
+<li><p>The <strong>Prognostics Models</strong> are the backbone of the ProgPy architecture. Models describe the specific system that prognostics will be applied to and how the system will evolve with time. Everything else within ProgPy (e.g. simulation capabilities and prognostics tools) are built on top of a model.</p>
+<p>ProgPy supports models that are physics-based, data-driven, or hybrid. ProgPy includes some built-in models (see examples below) but is also written in an easily adaptable way so users can implement models specific to their use-cases.</p>
+</li>
+<li><p>The <strong>Prognostics Engine</strong> encapsulates the complex logic of prognostics in a way that is modular and extendable. It includes the necessary tools to perform prognostics on the model, including state estimation, prediction, and uncertainty management. The modularity of the framework allows these capabilities to work with any model (built-in or user-defined) and the extensibility of the architecture allows users to additionally create their own methodologies.</p></li>
+<li><p>The <strong>Prognostics Support Tools</strong> are a collection of capabilities to help users build new functionalities or understand prognostics results.</p></li>
+</ol>
+<p>These three key components come together to create the comprehensive framework that is ProgPy. More details will be shared in the coming pages.</p>
 <p>This page is a general guide for ProgPy. To access a guide specific to the features you’re using, select it in the menu below.</p>
 <div class="sphinx-bs container pb-4 docutils">
 <div class="row docutils">

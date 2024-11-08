@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Load Estimators &#8212; ProgPy Python Packages 1.6 documentation</title>
+    <title>Load Estimators &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -359,13 +359,11 @@ document.write(`
 <dt class="sig sig-object py" id="prog_server.models.load_ests.MovingAverage">
 <span class="sig-prename descclassname"><span class="pre">prog_server.models.load_ests.</span></span><span class="sig-name descname"><span class="pre">MovingAverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#prog_server.models.load_ests.MovingAverage" title="Permalink to this definition">#</a></dt>
 <dd><p>Moving average load estimator. Load is estimated as the mean of the last <cite>window_size</cite> samples. Noise can be added using the following optional configuration parameters:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p>base_std: standard deviation of noise</p></li>
 <li><p>std_slope: Increase in std with time (e.g., 0.1 = increase of 0.1 in std per second)</p></li>
 <li><p>t0: Starting time for calculation of std</p></li>
 </ul>
-</div></blockquote>
 <p>std of applied noise is defined as base_std + std_slope (t-t0). By default no noise is added</p>
 </dd></dl>
 
