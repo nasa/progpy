@@ -15,7 +15,7 @@ Installing ProgPy
 
         .. code-block:: console
 
-            $ pip install progpy[datadriven]
+            $ pip install 'progpy[datadriven]'
 
     .. tab:: Pre-Release
 

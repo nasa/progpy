@@ -27,7 +27,7 @@ class LSTMStateTransitionModel(DataModel):
     .. note::
         ProgPy must be installed with [datadriven] option to use LSTM model. either
 
-        pip3 install progpy[datadriven]
+        pip3 install 'progpy[datadriven]'
 
         or (if using local version)
 
