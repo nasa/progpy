@@ -82,6 +82,12 @@ class TestPredictors(unittest.TestCase):
         self.assertAlmostEqual(results.time_of_event.mean['falling'], 4.15, 0)
         # self.assertAlmostEqual(mc_results.times[-1], 9, 1)  # Saving every second, last time should be around the 1s after impact event (because one of the sigma points fails afterwards)
 
+        # Test setting dt at class level (otherwise default of 1 will be used and this wont work)
+        pred['dt'] = 0.01
+        results = pred.predict(samples, save_freq=1)
+        self.assertAlmostEqual(results.time_of_event.mean['impact'], 8.21, 0)
+        self.assertAlmostEqual(results.time_of_event.mean['falling'], 4.15, 0)
+
         # Setting event manually
         results = pred.predict(samples, dt=0.01, save_freq=1, events=['falling'])
         self.assertAlmostEqual(results.time_of_event.mean['falling'], 3.8, 5)

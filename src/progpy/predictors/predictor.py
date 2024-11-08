@@ -74,3 +74,9 @@ class Predictor(ABC):
             * time_of_event (UncertainData): Distribution of predicted Time of Event (ToE) for each predicted event, represented by some subclass of UncertaintData (e.g., MultivariateNormalDist)
         """
         pass
+
+    def __getitem__(self, arg):
+        return self.parameters[arg]
+
+    def __setitem__(self, key, value):
+        self.parameters[key] = value

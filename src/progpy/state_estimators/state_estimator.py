@@ -111,3 +111,9 @@ class StateEstimator(ABC):
         -------
         state = filt.x
         """
+    
+    def __getitem__(self, arg):
+        return self.parameters[arg]
+
+    def __setitem__(self, key, value):
+        self.parameters[key] = value
