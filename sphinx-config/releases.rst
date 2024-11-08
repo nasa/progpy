@@ -4,7 +4,35 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
-Updates in V1.6
+Updates in v1.7
+----------------------
+
+progpy
+**************
+* Started "ProgPy Short Course": A series of Jupyter Notebooks designed to help users get started with ProgPy and understand how to use it for prognostics. See https://github.com/nasa/progpy/tree/master/examples
+* Updates to improve composite model:
+   * Support setting parameters in composed models using [model].[param] format (e.g., composite_model["model1.Param1"] = 12)
+   * Support adding functions to composite. Useful for simple translations 
+* Prediction and Simulation event strategy. For models with multiple events can now specify if you would like prediction or simulation to end when "first" or "any" of the events are met
+* Updates to parameter estimation
+  * Users can now estimate nested parameters (e.g., parameters['x0']['a']) using a tuple. For example params=(('x0', 'a'), ...)
+  * MSE updated to include a penalty if model becomes unstable (i.e., returns NaN) before minimum threshold. This encourages parameter estimation to converge on parameters for which the model is stable
+* Tensorflow no longer installed by default (this is important for users who are space constrained). If you're using the data-driven features install ProgPy like so: pip install progpy[datadriven] or pip install -e '.[datadriven]' (if using local copy)
+* Support for Python 3.12
+* Removed some warnings
+* Various Bugfixes and Performance optimizations
+
+**Notes for upgrading:**
+* If you're using the data-driven features install ProgPy like so: pip install progpy[datadriven] or pip install -e '.[datadriven]' (if using local copy)
+* Use "events" keyword instead of "threshold_keys" in simulation
+
+prog_server
+**************
+* Add support for custom model, state_estimator, and predictor
+* New output and output prediction endpoints
+* Various bug fixes and optimizations
+
+Updates in v1.6
 ----------------------
 
 progpy
@@ -27,14 +55,14 @@ Updates in V1.5
 
 prog_models
 ***************
-* **Direct Models**: Added support for new model type: Direct Models. Direct Models directly map current state and future load to time of event, rather than state-transition models which simulate forward to calculate time of event. They're created by implementing the :py:meth:`prog_models.PrognosticsModel.time_of_event`. See `direct model example <https://github.com/nasa/prog_models/blob/master/examples/direct_model.py>`__ for example of use.
-* New model types that combine multiple models.
+* **Direct Models**: Added support for new model type: Direct Models. Direct Models directly map current state and future load to time of event, rather than state-transition models which simulate forward to calculate time of event. They're created by implementing the :py:meth:`prog_models.PrognosticsModel.time_of_event`.
+* New model types that combine multiple models. See `06. Combining Models <https://github.com/nasa/prog_models/blob/master/examples/06_Combining Models.ipynb>`__ for example of use. 
 
-  * **Ensemble Model**: Combinations of multiple models of the same system where results are aggregated. See `ensemble example <https://github.com/nasa/prog_models/blob/master/examples/ensemble.py>`__  for example of use.
-  * **Composite Model**: Combinations of models of different systems that are interdependent. See `composite example <https://github.com/nasa/prog_models/blob/master/examples/composite_model.py>`__ for example of use.
+  * **Ensemble Model**: Combinations of multiple models of the same system where results are aggregated.
+  * **Composite Model**: Combinations of models of different systems that are interdependent.
 
 * **New Model Type**: Aircraft flight model interface, :py:class:`prog_models.models.aircraft_model.AircraftModel`. Anticipated prognostics applications with the aircraft flight model include estimating and predicting loading of other aircraft systems (e.g., powertrain) and safety metrics.
-* New Model: Small Rotorcraft AircraftModel. See `example <https://github.com/nasa/prog_models/blob/master/examples/uav_dynamics_model.py>`__.
+* New Model: Small Rotorcraft AircraftModel.
 * New DataModel: Polynomial Chaos Expansion (PCE) Direct Surrogate Model (:py:class:`prog_models.data_models.PolynomialChaosExpansion`). See `chaos example <https://github.com/nasa/prog_models/blob/master/examples/pce.py>`__ for example of use.
 * Started transition of InputContainers, StateContainers, OutputContainer and SimResult to use Pandas DataFrames. This release will bring the interface more in compliance with DataFrames. v1.6 will fully transition the classes to DataFrames.
 * Implemented new metrics that can be used in :py:meth:`prog_models.PrognosticsModel.calc_error`: Root Mean Square Error (RMSE), Maximum Error (MAX_E), Mean Absolute Error (MAE), Mean Absolute Percentage Error (MAPE), and Dynamic Time Warping (DTW)
@@ -65,13 +93,13 @@ prog_models
 * **Data-Driven Models**
 
   * Created new :py:class:`prog_models.data_models.DataModel` class as interface/superclass for all data-driven models. Data-driven models are interchangeable in use (e.g., simulation, use with prog_algs) with physics-based models. DataModels can be trained using data (:py:meth:`prog_models.data_models.DataModel.from_data`), or an existing model (:py:meth:`prog_models.data_models.DataModel.from_model`)
-  * Introduced new LSTM State Transition DataModel (:py:class:`prog_models.data_models.LSTMStateTransitionModel`). See :download:`examples.lstm_model <../../prog_models/examples/lstm_model.py>`, :download:`examples.full_lstm_model <../../prog_models/examples/full_lstm_model.py>`, and :download:`examples.custom_model <../../prog_models/examples/custom_model.py>` for examples of use
+  * Introduced new LSTM State Transition DataModel (:py:class:`prog_models.data_models.LSTMStateTransitionModel`). 
   * DMD model (:py:class:`prog_models.data_models.DMDModel`) updated to new data-driven model interface. Can now be created from data as well as an existing model
   * Added ability to integrate training noise to data for DMD Model (:py:class:`prog_models.data_models.DMDModel`)
 
 * **New Model**: Single-Phase DC Motor (:py:class:`prog_models.models.DCMotorSP`)
 * Added the ability to select integration method when simulating (see ``integration_method`` keywork argument for :py:func:`prog_models.PrognosticsModel.simulate_to_threshold`). Current options are Euler and RK4
-* New feature allowing serialization of model parameters as JSON. See :py:meth:`prog_models.PrognosticsModel.to_json`, :py:meth:`prog_models.PrognosticsModel.from_json`, and serialization example (:download:`examples.serialization <../../prog_models/examples/serialization.py>`)
+* New feature allowing serialization of model parameters as JSON. See :py:meth:`prog_models.PrognosticsModel.to_json`, :py:meth:`prog_models.PrognosticsModel.from_json`, and serialization example
 * Added automatic step size feature in simulation. When enabled, step size will adapt to meet the exact save_pts and save_freq. Step size range can also be bounded
 * New Example Model: Simple Paris' Law (:py:class:`prog_models.models.ParisLawCrackGrowth`)
 * Added ability to set bounds when estimating parameters (See :py:meth:`prog_models.PrognosticsModel.estimate_params`)
@@ -95,10 +123,10 @@ Updates in V1.3
 
 prog_models
 **************
-* **Surrogate Models** Added initial draft of new feature to generate surrogate models automatically from :class:`prog_models.PrognosticsModel`. (See :download:`examples.generate_surrogate <../../prog_models/examples/generate_surrogate.py>` example). Initial implementation uses Dynamic Mode Decomposition. Additional Surrogate Model Generation approaches will be explored for future releases. [Developed by NASA's DRF Project]
-* **New Example Models** Added new :class:`prog_models.models.DCMotor`, :class:`prog_models.models.ESC`, and :class:`prog_models.models.Powertrain` models (See :download:`examples.sim_powertrain <../../prog_models/examples/sim_powertrain.py>` example) [Developed by NASA's SWS Project]
-* **Datasets** Added new feature that allows users to access prognostic datasets programmatically (See :download:`examples.dataset <../../prog_models/examples/dataset.py>`)
-* Added new :class:`prog_models.LinearModel` class - Linear Prognostics Models can be represented by a Linear Model. Similar to PrognosticsModels, LinearModels are created by subclassing the LinearModel class. Some algorithms will only work with Linear Models. See :download:`examples.linear_model <../../prog_models/examples/linear_model.py>` example for detail
+* **Surrogate Models** Added initial draft of new feature to generate surrogate models automatically from :class:`prog_models.PrognosticsModel`. Initial implementation uses Dynamic Mode Decomposition. Additional Surrogate Model Generation approaches will be explored for future releases. [Developed by NASA's DRF Project]
+* **New Example Models** Added new :class:`prog_models.models.DCMotor`, :class:`prog_models.models.ESC`, and :class:`prog_models.models.Powertrain` models [Developed by NASA's SWS Project]
+* **Datasets** Added new feature that allows users to access prognostic datasets programmatically
+* Added new :class:`prog_models.LinearModel` class - Linear Prognostics Models can be represented by a Linear Model. Similar to PrognosticsModels, LinearModels are created by subclassing the LinearModel class. Some algorithms will only work with Linear Models.
 * Added new StateContainer/InputContainer/OutputContainer objects for classes which allow for data access in matrix form and enforce expected keys. 
 * Added new metric for SimResult: :py:func:`prog_models.sim_result.SimResult.monotonicity`.
 * :py:func:`prog_models.sim_result.SimResult.plot` now automatically shows legends
@@ -118,11 +146,11 @@ prog_models
 
 prog_algs
 **********
-* **New State Estimator Added** :class:`prog_algs.state_estimators.KalmanFilter`. Works with models derived from :class:`prog_models.LinearModel`. See :download:`examples.kalman_filter <../../prog_algs/examples/kalman_filter.py>`
+* **New State Estimator Added** :class:`prog_algs.state_estimators.KalmanFilter`. Works with models derived from :class:`prog_models.LinearModel`.
 * **New Predictor Added** :class:`prog_algs.predictors.UnscentedTransformPredictor`.
-* Initial state estimate (x0) can now be passed as `UncertainData` to represent initial state uncertainty. See :download:`examples.playback <../../prog_algs/examples/playback.py>`
-* Added new metrics for :class:`prog_algs.predictors.ToEPredictionProfile`: Prognostics horizon, Cumulative Relative Accuracy (CRA). See :download:`examples.playback <../../prog_algs/examples/playback.py>`
-* Added ability to plot :class:`prog_algs.predictors.ToEPredictionProfile`: profile.plot(). See :download:`examples.playback <../../prog_algs/examples/playback.py>`
+* Initial state estimate (x0) can now be passed as `UncertainData` to represent initial state uncertainty.
+* Added new metrics for :class:`prog_algs.predictors.ToEPredictionProfile`: Prognostics horizon, Cumulative Relative Accuracy (CRA).
+* Added ability to plot :class:`prog_algs.predictors.ToEPredictionProfile`: profile.plot().
 * Added new metric for :class:`prog_algs.predictors.Prediction`: Monotonicity, Relative Accuracy (RA)
 * Added new metric for :class:`prog_algs.uncertain_data.UncertainData` (and subclasses): Root Mean Square Error (RMSE)
 * Added new describe method for :class:`prog_algs.uncertain_data.UncertainData` (and subclasses)

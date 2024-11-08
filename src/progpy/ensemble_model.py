@@ -19,8 +19,6 @@ class EnsembleModel(PrognosticsModel):
     
     Ensemble Models are constructed from a set of other models (e.g., :python:`m = EnsembleModel((m1, m2, m3))`). The models then operate functionally as one prognostic model.
 
-    See example :download:`examples.ensemble <../../../../progpy/examples/ensemble.py>`
-
     Args:
         models (list[PrognosticsModel]): List of at least 2 models that form the ensemble
 

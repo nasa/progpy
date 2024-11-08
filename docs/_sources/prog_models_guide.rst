@@ -7,29 +7,7 @@ Modeling and Sim Guide
 
 The Prognostics Python Package (ProgPy) includes tools for defining, building, using, and testing models for :term:`prognostics` of engineering systems. It also provides a set of prognostics models for select components developed within this framework, suitable for use in prognostics applications for these components and can be used in conjunction with the state estimation and prediction features (see :ref:`State Estimation and Prediction Guide<State Estimation and Prediction Guide>`) to perform research in prognostics methods. 
 
-Installing progpy
------------------------
-
-.. tabs::
-
-    .. tab:: Stable Version (Recommended)
-
-        The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:
-
-        .. code-block:: console
-
-            $ pip install progpy
-
-    .. tab:: Pre-Release
-
-        Users who would like to contribute to progpy or would like to use pre-release features can do so using the `progpy GitHub repo <https://github.com/nasa/progpy>`__. This isn't recommended for most users as this version may be unstable. To do this, use the following commands:
-
-        .. code-block:: console
-
-            $ git clone https://github.com/nasa/progpy
-            $ cd progpy
-            $ git checkout dev 
-            $ pip install -e .
+.. include:: installing.rst
 
 Getting Started 
 ------------------
@@ -63,6 +41,7 @@ States are transitioned forward in time using the state transition equation.
 .. raw:: html
 
     <div style="text-align: center;">
+
 :math:`x(t+dt) = f(t, x(t), u(t), dt, \Theta)`
 
 .. raw:: html
@@ -119,6 +98,7 @@ Outputs are a function of only the system state (x) and :term:`parameters` (:mat
 .. raw:: html
 
     <div style="text-align: center;">
+
 :math:`z(t) = f(x(t), \Theta)`
 
 .. raw:: html
@@ -233,8 +213,7 @@ The specific parameters are very specific to the system being modeled. For examp
 
     Sometimes users would like to specify parameters as a function of other parameters. This feature is called "derived parameters". See example below for more details on this feature. 
 
-    * :download:`examples.derived_params <../../progpy/examples/derived_params.py>`
-        .. automodule:: derived_params
+    * :download:`04 New Models <../../progpy/examples/04_New Models.ipynb>`
 
 Noise
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -262,10 +241,10 @@ See example below for details on how to configure proccess and measurement noise
 * :download:`examples.noise <../../progpy/examples/noise.py>`
     .. automodule:: noise
 
-:term:`Future Loading <future load>`
+Future Loading
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Future loading is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected :ref:`Inputs` at future times.
+:term:`Future Loading <future load>` is an essential part of prediction and simulation. In order to simulate forward in time, you must have an estimate of how the system will be used (i.e., loaded) during the window of time that the system is simulated. Future load is essentially expected :ref:`Inputs` at future times.
 
 Future loading is provided by the user either using the predifined loading classes in `progpy.loading`, or as a function of time and optional state. For example:
 
@@ -277,13 +256,12 @@ Future loading is provided by the user either using the predifined loading class
 
 See example below for details on how to provide future loading information in ProgPy. 
 
-* :download:`examples.future_loading <../../progpy/examples/future_loading.py>`
-    .. automodule:: future_loading
+* :download:`01. Simulation <../../progpy/examples/01_Simulation.ipynb>`
 
 General Notes
 ^^^^^^^^^^^^^^^^
 
-Users of ProgPy will need a model describing the behavior of the system of interest. Users will likely either use one of the models distribued with ProgPy (see `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__), configuring it to their own system using parameter estimation (see :download:`examples.param_est <../../progpy/examples/param_est.ipynb>`), use a :term:`data-driven model` class to learn system behavior from data, or build their own model (see `Building New Models`_ section, below). 
+Users of ProgPy will need a model describing the behavior of the system of interest. Users will likely either use one of the models distribued with ProgPy (see `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__), configuring it to their own system using parameter estimation (see :download:`02 Parameter Estimation <../../progpy/examples/02_Parameter Estimation.ipynb>`), use a :term:`data-driven model` class to learn system behavior from data, or build their own model (see `Building New Models`_ section, below). 
 
 Building New Models
 ----------------------
@@ -301,21 +279,7 @@ State-transition Models
 
         For simple linear models, users can choose to subclass the simpler :py:class:`progpy.LinearModel` class, as illustrated in the second example. Some methods and algorithms only function on linear models.
 
-        * :download:`examples.new_model <../../progpy/examples/new_model.py>`
-            .. automodule:: new_model
-
-        * :download:`examples.linear_model <../../progpy/examples/linear_model.ipynb>`
-
-        .. dropdown:: Advanced features in model building
-
-            * :download:`examples.derived_params <../../progpy/examples/derived_params.py>`
-                .. automodule:: derived_params
-
-            * :download:`examples.state_limits <../../progpy/examples/state_limits.py>`
-                .. automodule:: state_limits
-
-            * :download:`examples.events <../../progpy/examples/events.py>`
-                .. automodule:: events
+        * :download:`04. New Models <../../progpy/examples/04_New Models.ipynb>`
 
     .. tab:: data-driven
 
@@ -329,6 +293,8 @@ State-transition Models
             .. code-block:: console
 
                 $ pip install progpy[datadriven] 
+
+        * :download:`05_Data Driven <../../progpy/examples/05_Data Driven.ipynb>`
 
         * :download:`examples.lstm_model <../../progpy/examples/lstm_model.py>`
             .. automodule:: lstm_model
@@ -439,8 +405,7 @@ One of the most basic of functions using a model is simulation. Simulation is th
 
     For more details on dynamic step sizes, see the following example:
 
-    * :download:`examples.dynamic_step_size <../../progpy/examples/dynamic_step_size.py>`
-        .. automodule:: dynamic_step_size
+    * :download:`01 Simulation <../../progpy/examples/01_Simulation.ipynb>`
 
 .. dropdown:: Integration Methods
 
@@ -482,9 +447,6 @@ Use of simulation is described further in the following examples:
 * :download:`examples.noise <../../progpy/examples/noise.py>`
     .. automodule:: noise
 
-* :download:`examples.future_loading <../../progpy/examples/future_loading.py>`
-    .. automodule:: future_loading
-
 Parameter Estimation
 ----------------------------
 
@@ -500,8 +462,6 @@ Generally, parameter estimation is done by tuning the parameters of the model so
     >>> m.estimate_params([run1_data, run2_data], params_to_estimate, dt=0.01)
 
 See the example below for more details
-
-* :download:`examples.param_est <../../progpy/examples/param_est.ipynb>`
 
 .. admonition:: Note
     :class: tip
@@ -526,6 +486,10 @@ Combination Models
 
 There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below.
 
+For more details, see:
+
+    * :download:`06. Combining Models <../../progpy/examples/06_Combining Models.ipynb>`
+
 .. tabs::
 
     .. tab:: Composite models
@@ -542,10 +506,6 @@ There are two methods in progpy through which multiple models can be combined an
             >>>     ]
             >>> )
 
-        For more information, see the example below:
-
-        * :download:`examples.composite_model <../../progpy/examples/composite_model.py>`
-    
     .. tab:: Ensemble models
 
         Unlike composite models which model a system of systems, ensemble models are used when to combine the logic of multiple models which describe the same system. This is used when there are multiple models representing different system behaviors or conditions. The results of each model are aggregated in a way that can be defined by the user. For example,
@@ -557,10 +517,6 @@ There are two methods in progpy through which multiple models can be combined an
             >>>     aggregator = np.mean
             >>> )
 
-        For more information, see the example below:
-
-        * :download:`examples.ensemble <../../progpy/examples/ensemble.py>`
-
     .. tab:: MixtureOfExperts models
         
         Mixture of Experts (MoE) models combine multiple models of the same system, similar to Ensemble models. Unlike Ensemble Models, the aggregation is done by selecting the "best" model. That is the model that has performed the best over the past. Each model will have a 'score' that is tracked in the state, and this determines which model is best.
@@ -568,10 +524,6 @@ There are two methods in progpy through which multiple models can be combined an
         .. code-block:: python
 
              >> m = MixtureOfExpertsModel([model1, model2])
-
-        For more information, see the example below:
-
-        * :download:`examples.mixture_of_experts <../../progpy/examples/mixture_of_experts.py>`
 
 Other Examples
 ----------------------------

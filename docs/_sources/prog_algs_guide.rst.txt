@@ -290,9 +290,6 @@ Examples
 
 The best way to learn how to use `progpy` is through the `tutorial <https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb>`__. There are also a number of examples which show different aspects of the package, summarized and linked below:
 
-* :download:`examples.basic_example <../../progpy/examples/basic_example.py>`
-    .. automodule:: basic_example
-
 * :download:`examples.basic_example_battery <../../progpy/examples/basic_example_battery.py>`
     .. automodule:: basic_example_battery
 
