@@ -4,7 +4,7 @@ from io import StringIO
 import sys
 import unittest
 
-from progpy.models import BatteryCircuit, BatteryElectroChem, BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChemEODEOL
+from progpy.models import BatteryCircuit, BatteryElectroChem, BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChemEODEOL, SimplifiedBattery
 from progpy.loading import Piecewise
 
 # Variable (piece-wise) future loading scheme 
@@ -12,6 +12,11 @@ future_loading = Piecewise(
     dict,
     [600, 900, 1800, 3000, float('inf')],
     {'i': [2, 1, 4, 2, 3]})
+
+future_loading_power = Piecewise(
+    dict,
+    [600, 900, 1800, 3000, float('inf')],
+    {'P': [25, 12, 50, 25, 33]})
 
 
 class TestBattery(unittest.TestCase):
@@ -44,6 +49,10 @@ class TestBattery(unittest.TestCase):
     def test_battery_electrochem_EOD(self):
         batt = BatteryElectroChemEOD()
         result = batt.simulate_to(200, future_loading, {'t': 18.95, 'v': 4.183})
+
+    def test_battery_simplified(self):
+        batt = SimplifiedBattery()
+        result = batt.simulate_to(200, future_loading_power, {'v': 4.183})
 
     def test_battery_electrochem_EOL(self):
         batt = BatteryElectroChemEOL()
