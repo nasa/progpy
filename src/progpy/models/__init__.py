@@ -3,6 +3,7 @@
 
 from progpy.models.battery_circuit import BatteryCircuit
 from progpy.models.battery_electrochem import BatteryElectroChem, BatteryElectroChemEOD, BatteryElectroChemEOL, BatteryElectroChemEODEOL
+from progpy.models.battery_simplified import SimplifiedBattery
 from progpy.models.centrifugal_pump import CentrifugalPump, CentrifugalPumpBase, CentrifugalPumpWithWear
 from progpy.models.pneumatic_valve import PneumaticValve, PneumaticValveBase, PneumaticValveWithWear
 from progpy.models.dcmotor import DCMotor
