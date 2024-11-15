@@ -52,6 +52,9 @@ class DiscreteState(enum.Enum):
     def __add__(self, other):
         return type(self)(self._transition(other))
 
+    def __sub__(self, other):
+        return type(self)(self._transition(-other))
+
 def create_discrete_state(n_states: int, names: list=None, transition=_random_transition) -> DiscreteState:
     """
     .. versionadded:: 1.8.0
