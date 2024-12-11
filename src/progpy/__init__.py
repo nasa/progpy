@@ -2,6 +2,7 @@
 
 __all__ = ['predictors', 'uncertain_data', 'state_estimators', 'run_prog_playback', 'metrics']
 
+from progpy.discrete_state import create_discrete_state
 from progpy.prognostics_model import PrognosticsModel
 from progpy.ensemble_model import EnsembleModel
 from progpy.composite_model import CompositeModel
