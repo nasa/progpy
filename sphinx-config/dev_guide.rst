@@ -13,19 +13,29 @@ This document includes some details relevant for developers working on any of th
 Installing from a Branch 
 ------------------------
 To install the package package from a specific branch. First clone the repository and checkout the branch. Then navigate into the repository directory and use the following command:
-   `pip install -e .`
+
+.. code-block:: console
+
+   $ pip install -e .
 
 This command installs the package using the checked-out version.
 
 Running Tests
 ------------------------
 The run the progpy tests, first clone the repository and checkout the branch, installing the package using the command above. Then navigate into the repository directory. Next install the tests required dependencies, by using the following commands:
-   `pip install notebook`
-   `pip install testbook`
-   `pip install requests`
 
+.. code-block:: console
+
+   $ pip install -e '.[test]'
+      
+      
 Then run the tests using the following command:
-   `python -m tests`
+
+.. code-block:: python
+
+   python -m tests
+
+Note: Tests on data-driven tools (e.g., LSTM model) will need the dependencies from the ``datadriven`` option installed.
 
 Contributing 
 ---------------
@@ -43,7 +53,7 @@ Project Roles
 
 Branching Strategy
 ------------------
-Our project is following the git strategy described `here <https://nvie.com/posts/a-successful-git-branching-model/>`__. Release branches are not required. Details specific to each branch are described below. We recommend that developers from within NASA watch `this video <https://nasa-my.sharepoint.com/:v:/g/personal/rduffy_ndc_nasa_gov/EYCJK6qffBZNtSKZTOV9nPMBc9cPPF6fniRuKtG2GWvoPA>` on git strategies and best practices.
+Our project is following the git strategy described `here <https://nvie.com/posts/a-successful-git-branching-model/>`__. Release branches are not required. Details specific to each branch are described below. We recommend that developers from within NASA watch `this video <https://nasa-my.sharepoint.com/:v:/g/personal/rduffy_ndc_nasa_gov/EYCJK6qffBZNtSKZTOV9nPMBc9cPPF6fniRuKtG2GWvoPA>`_ on git strategies and best practices.
 
 `master`: Every merge into the master branch is done using a pull request (never commiting directly), is assigned a release number, and must complete the release checklist. The release checklist is a software assurance tool. 
 
@@ -61,9 +71,8 @@ PR Checklist
 * Ensure errors from static analysis must be resolved.
 * Review the test coverage reports (if there is a change)
 * Review the software benchmarking results (if there is a change)
-* For added dependencies (new)
-   * Add to requirements.txt, 
-   * Add to setup.py,
+* For added dependencies
+   * Add to ``pyproject.toml``
    * Add to the bottom of dev_guide.rst (this document)
    * Notify Project Manager
 * All warnings from static analysis must be reviewed and resolved - if deemed appropriate.
@@ -113,9 +122,9 @@ Updating Documentation
 **************************
 Use the following command to update documentation (requires sphinx). Documentation is in the progpy repository.
 
-.. code-block: bash
+.. code-block:: bash
 
-    sphinx-build sphinx_config docs\
+   sphinx-build sphinx-config/ docs/
 
 Uploading new version to PyPI
 *******************************
