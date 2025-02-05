@@ -57,10 +57,7 @@ classifiers = [
 
 [project.optional-dependencies]
 datadriven = [
-    "tensorflow; platform_system!='Darwin' or platform_machine!='arm64'",
-    "tensorflow-macos; platform_system=='Darwin' and platform_machine=='arm64'",
-    "numpoly==1.2.12; platform_system=='Darwin' and platform_machine=='arm64'",
-    "numpy<2.0.0,>=1.26.0; platform_system=='Darwin' and platform_machine=='arm64'"
+    "tensorflow"
 ]
 
 test = [
