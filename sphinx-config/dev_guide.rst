@@ -26,16 +26,18 @@ The run the progpy tests, first clone the repository and checkout the branch, in
 
 .. code-block:: console
 
-   $ pip install -e '.[test]'
+   $ pip install '.[test]'
       
       
 Then run the tests using the following command:
 
-.. code-block:: python
+.. code-block:: console
 
-   python -m tests
+   $ python -m tests
 
-Note: Tests on data-driven tools (e.g., LSTM model) will need the dependencies from the ``datadriven`` option installed.
+.. admonition:: Note      
+
+   Tests on data-driven tools (e.g., LSTM model) will need dependencies from the ``datadriven`` option installed.
 
 Contributing 
 ---------------
@@ -112,7 +114,7 @@ A release is the merging of a PR where the target is the master branch.
 * Check documents
    * Check that all desired examples are in docs
    * General review: see if any updates are required
-* Rebuild sphinx documents: `sphinx-build sphinx_config/ docs/`
+* Rebuild sphinx documents: `sphinx-build sphinx-config/ docs/`
 * Write release notes
 * Update version number in src/\*/__init__.py and setup.py
 * For releases adding new features- ensure that NASA release process has been followed.
@@ -122,9 +124,10 @@ Updating Documentation
 **************************
 Use the following command to update documentation (requires sphinx). Documentation is in the progpy repository.
 
-.. code-block:: bash
+.. code-block:: console
 
-   sphinx-build sphinx-config/ docs/
+   $ pip install install '.[docs]'
+   $ sphinx-build sphinx-config/ docs/
 
 Uploading new version to PyPI
 *******************************

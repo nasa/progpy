@@ -60,6 +60,14 @@ datadriven = [
     "tensorflow; platform_system!='Darwin' or platform_machine!='arm64'",
     "tensorflow-macos; platform_system=='Darwin' and platform_machine=='arm64'"]
 
+docs = [
+    "sphinx",
+    "sphinx_toolbox",
+    "sphinx_panels",
+    "sphinx_book_theme",
+    "rst2pdf"
+]
+
 [project.urls]
 Homepage = "https://nasa.github.io/progpy/"
 Documentation = "https://nasa.github.io/progpy/"
