@@ -122,12 +122,18 @@ A release is the merging of a PR where the target is the master branch.
 
 Updating Documentation 
 **************************
-Use the following command to update documentation (requires sphinx). Documentation is in the progpy repository.
+Use the following commands to get the relevant dependencies and update the documentation. Documentation is in the progpy repository.
 
 .. code-block:: console
 
-   $ pip install install '.[docs]'
+   $ pip install '.[docs]'
    $ sphinx-build sphinx-config/ docs/
+
+Sphinx-autobuild can be used to automatically rebuild the documentation when changes are made.
+
+.. code-block:: console
+
+   $ sphinx-autobuild sphinx-config/ docs/
 
 Uploading new version to PyPI
 *******************************

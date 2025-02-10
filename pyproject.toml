@@ -62,6 +62,7 @@ datadriven = [
 
 docs = [
     "sphinx",
+    "sphinx-autobuild",
     "sphinx_toolbox",
     "sphinx_panels",
     "sphinx_book_theme",

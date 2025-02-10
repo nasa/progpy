@@ -218,7 +218,7 @@ The specific parameters are very specific to the system being modeled. For examp
 Noise
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods [Goebel2017]_. This model-based prognostic approach incorporates this uncertainty in four forms: initial state uncertainty (:math:`x_0`), :term:`process noise`, :term:`measurement noise`, and :term:`future loading noise`.
+In practice, it is impossible to have absolute knowledge of future states due to uncertainties in the system. There is uncertainty in the estimates of the present state, future inputs, models, and prediction methods [Goebel2017]_. This model-based prognostic approach incorporates this uncertainty in the following forms: :term:`process noise`, :term:`measurement noise`, and :term:`future loading noise`.
 
 .. dropdown:: Process Noise
 
