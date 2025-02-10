@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>NPR 7150 NASA Software Engineering Requirements &#8212; ProgPy Python Packages 1.7 documentation</title>
   
@@ -15,44 +14,48 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css?v=94a3e983" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css?v=995e94df" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css?v=21c0b90a" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
+    <script src="_static/documentation_options.js?v=33946f59"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'npr7150';</script>
+    <link rel="icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Developers Guide &amp; Project Plan" href="dev_guide.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -60,23 +63,16 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+  <div id="pst-scroll-pixel-helper"></div>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -84,7 +80,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -92,16 +87,25 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -114,9 +118,13 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -126,29 +134,36 @@
       
     
     
-    <img src="_static/software_name.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/software_name.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/software_name.png" class="logo__image only-light" alt="ProgPy Python Packages 1.7 documentation - Home"/>
+    <img src="_static/software_name.png" class="logo__image only-dark pst-js-only" alt="ProgPy Python Packages 1.7 documentation - Home"/>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">ProgPy Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">ProgPy Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="prog_models_guide.html">Modeling and Sim Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="prog_algs_guide.html">State Estimation and Prediction Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="prog_server_guide.html">prog_server Guide</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="api_ref.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_ref.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/load_ests.html">Load Estimators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_client.html">prog_client</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_server.html">ProgServer</a></li>
 <li class="toctree-l3"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/progpy.html">ProgPy API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/progpy.html">ProgPy API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
@@ -166,15 +181,15 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/UncertainData.html">Uncertain Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Utils.html">Utils</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">NPR 7150 NASA Software Engineering Requirements</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -183,14 +198,19 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -199,14 +219,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -281,26 +301,20 @@
 </button>
 
 
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script>
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -358,10 +372,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section id="npr-7150-nasa-software-engineering-requirements">
-<h1>NPR 7150 NASA Software Engineering Requirements<a class="headerlink" href="#npr-7150-nasa-software-engineering-requirements" title="Permalink to this headline">#</a></h1>
+<h1>NPR 7150 NASA Software Engineering Requirements<a class="headerlink" href="#npr-7150-nasa-software-engineering-requirements" title="Link to this heading">#</a></h1>
 <p>NASA software must comply with the requirements enumarated in <a class="reference external" href="https://nodis3.gsfc.nasa.gov/displayDir.cfm?t=NPR&amp;c=7150&amp;s=2B">NPR 7150</a>. See the <a class="reference external" href="https://swehb.nasa.gov">NASA Software Engineering and Assurance Handbook</a> for more information.</p>
 <p>Intention is to expand the scope of use to also include its inclusion in Ground software tools that support mission planning or formulation; Ground software that operates a research, development, test, or evaluation laboratory (i.e., not a major engineering/research facility); or Ground software that provides decision support for non-mission-critical situations and airborn software whose anomalous behavior would cause or contribute to a failure of system function resulting in a minor failure condition for the airborne vehicle,
 or whose anomalous behavior would cause or contribute to a failure of system function with no effect on airborne vehicle operational capability or pilot workload. The classification for this increased scope is described below</p>
@@ -379,7 +393,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 <li><p>Assessment done by Christopher Teubert in March 2021</p></li>
 </ul>
 <section id="safety-criticality-analysis">
-<h2>Safety Criticality Analysis<a class="headerlink" href="#safety-criticality-analysis" title="Permalink to this headline">#</a></h2>
+<h2>Safety Criticality Analysis<a class="headerlink" href="#safety-criticality-analysis" title="Link to this heading">#</a></h2>
 <p>The safety criticality assessment was made based on the responses to the following questions:</p>
 <ul class="simple">
 <li><p>Does the software reside in a safety-critical system? NO</p></li>
@@ -393,7 +407,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 <li><p>Does the software process data or analyze trends that lead directly to safety decisions (e.g., determining when to turn power off to a wind tunnel to prevent system destruction)? NO</p></li>
 </ul>
 <section id="compliance-notation-legend">
-<h3>Compliance Notation Legend<a class="headerlink" href="#compliance-notation-legend" title="Permalink to this headline">#</a></h3>
+<h3>Compliance Notation Legend<a class="headerlink" href="#compliance-notation-legend" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>FC: Fully Compliant</p></li>
 <li><p>T: Tailored (Specific tailoring described in mitigation) <a class="reference external" href="https://swehb.nasa.gov/display/7150/SWE-121+-+Document+Alternate+Requirements">SWE-121</a></p></li>
@@ -403,20 +417,14 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="compliance-matrix">
-<h3>Compliance Matrix<a class="headerlink" href="#compliance-matrix" title="Permalink to this headline">#</a></h3>
+<h3>Compliance Matrix<a class="headerlink" href="#compliance-matrix" title="Link to this heading">#</a></h3>
 <p>This matrix tracks the compliance of this software and the project’s software engineering practices with the requirements from 7150.2.</p>
 <p>Note: for requirements with different evidence for the different softwares, they have a capital M (for ProgModels), A (for ProgAlgs) or S (for ProgServer) following the requirement.</p>
 </section>
 </section>
 <section id="life-cycle-management">
-<h2>Life Cycle Management<a class="headerlink" href="#life-cycle-management" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
+<h2>Life Cycle Management<a class="headerlink" href="#life-cycle-management" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -552,6 +560,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>Note on software processes [SWE 034]:</p>
 <p>The project manager shall establish and maintain the software processes, software documentation plans, list of developed electronic products, deliverables, and list of tasks for the software development that are required for the project’s software developers, as well as the action required (e.g., approval, review) of the Government upon receipt of each of the deliverables.</p>
 <ul class="simple">
@@ -562,14 +571,8 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="cost-estimation">
-<h2>Cost Estimation<a class="headerlink" href="#cost-estimation" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
+<h2>Cost Estimation<a class="headerlink" href="#cost-estimation" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -595,19 +598,14 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>Software Cost Estimation Note:</strong></p>
 <p>The Python Prognostics Packages are a collaborative product of multiple projects. As projects use the software they will implement features and fix bugs to accomplish the goals of their projects, with some input from the Project Manager as the chief software architect. These improvements are incorporated into the shared product for the all participating projects to benefit from.</p>
 <p>Responsibility for cost accounting for these contributions is delegated to the project(s) conducting them. Cost of contributing to the Prognostics Python Packages should be represented in their project plans and other documents.</p>
 </section>
 <section id="schedules">
-<h2>Schedules<a class="headerlink" href="#schedules" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
+<h2>Schedules<a class="headerlink" href="#schedules" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -633,17 +631,12 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>Note: Release checklist includes confirming schedule exists for next release</p>
 </section>
 <section id="classification">
-<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
+<h2>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -664,16 +657,11 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="software-assurance">
-<h2>Software Assurance<a class="headerlink" href="#software-assurance" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 9%" />
-<col style="width: 46%" />
-<col style="width: 16%" />
-<col style="width: 28%" />
-</colgroup>
+<h2>Software Assurance<a class="headerlink" href="#software-assurance" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -689,17 +677,12 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>See checklists at top of page for software assurance activities. Additionally, some software activities are enforced by github branch policies.</p>
 </section>
 <section id="safety-critical-software">
-<h2>Safety Critical Software<a class="headerlink" href="#safety-critical-software" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 9%" />
-<col style="width: 46%" />
-<col style="width: 16%" />
-<col style="width: 28%" />
-</colgroup>
+<h2>Safety Critical Software<a class="headerlink" href="#safety-critical-software" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -735,17 +718,12 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>This software is not safety critical, see [NPR 7150 NASA Software Engineering Requirements](<a class="reference external" href="https://nasa.github.io/progpy/dev_guide.html#npr-7150-nasa-software-engineering-requirements">https://nasa.github.io/progpy/dev_guide.html#npr-7150-nasa-software-engineering-requirements</a>) for more details</p>
 </section>
 <section id="automatic-generation-of-source-code">
-<h2>Automatic Generation of Source Code<a class="headerlink" href="#automatic-generation-of-source-code" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 9%" />
-<col style="width: 46%" />
-<col style="width: 16%" />
-<col style="width: 28%" />
-</colgroup>
+<h2>Automatic Generation of Source Code<a class="headerlink" href="#automatic-generation-of-source-code" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -766,16 +744,11 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="reuse">
-<h2>Reuse<a class="headerlink" href="#reuse" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 29%" />
-<col style="width: 10%" />
-<col style="width: 55%" />
-</colgroup>
+<h2>Reuse<a class="headerlink" href="#reuse" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -806,6 +779,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>Notes on SWE-147: Reusability requirements</p>
 <ul class="simple">
 <li><p>This software is a research support software. As, such it is designed to be reusable and to support a wide variety of use-cases. The requirements and coding standards are specified to ensure re-usability.</p></li>
@@ -818,14 +792,8 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="cybersecurity">
-<h2>Cybersecurity<a class="headerlink" href="#cybersecurity" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 7%" />
-<col style="width: 36%" />
-<col style="width: 12%" />
-<col style="width: 46%" />
-</colgroup>
+<h2>Cybersecurity<a class="headerlink" href="#cybersecurity" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -866,6 +834,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>Cybersecurity risks were assessed, the identified cybersecurity threats and our mitigations are described below:</p>
 <ul class="simple">
 <li><dl class="simple">
@@ -916,14 +885,8 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="bi-directional-traceability">
-<h2>Bi-Directional Traceability<a class="headerlink" href="#bi-directional-traceability" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 26%" />
-<col style="width: 9%" />
-<col style="width: 60%" />
-</colgroup>
+<h2>Bi-Directional Traceability<a class="headerlink" href="#bi-directional-traceability" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -939,16 +902,11 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 26%" />
-<col style="width: 9%" />
-<col style="width: 60%" />
-</colgroup>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -984,6 +942,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>Note on SWE-55: Requirement Validation:</p>
 <ul class="simple">
 <li><p>This is a Research Suffort Software. As such it has many different usages that the requirements must fulfill.</p></li>
@@ -991,14 +950,8 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 26%" />
-<col style="width: 9%" />
-<col style="width: 60%" />
-</colgroup>
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -1039,6 +992,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>Static Analysis Methods Used:</p>
 <ul class="simple">
 <li><p>CodeFactor.io (<a class="reference external" href="https://www.codefactor.io/repository/github/nasa/progpy">progpy</a>, <a class="reference external" href="https://www.codefactor.io/repository/github/nasa/prog_server">prog_server</a>): Runs automatically in each PR. If issues are detected, they are noted in the PR chat.</p></li>
@@ -1049,14 +1003,8 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 22%" />
-<col style="width: 8%" />
-<col style="width: 66%" />
-</colgroup>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -1132,6 +1080,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>Notes on SWE-068: Evaluate Test Results:</p>
 <ul class="simple">
 <li><p>All tests are conducted automatically, using github actions, using multiple versions of Python and both dev and release versions of compatable software.</p></li>
@@ -1145,14 +1094,8 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="operations-maintenance-and-retirement">
-<h2>Operations, Maintenance, and Retirement<a class="headerlink" href="#operations-maintenance-and-retirement" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 22%" />
-<col style="width: 8%" />
-<col style="width: 66%" />
-</colgroup>
+<h2>Operations, Maintenance, and Retirement<a class="headerlink" href="#operations-maintenance-and-retirement" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -1188,6 +1131,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>Operations and Maintenance: During the operational phase of the software, the team will do the following:</p>
 <ul class="simple">
 <li><p>Provide documentation, examples, tutorial, templates, and source code to users to help them use the software</p></li>
@@ -1212,14 +1156,8 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="configuration-management">
-<h2>Configuration Management<a class="headerlink" href="#configuration-management" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 28%" />
-<col style="width: 10%" />
-<col style="width: 56%" />
-</colgroup>
+<h2>Configuration Management<a class="headerlink" href="#configuration-management" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -1285,6 +1223,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <p>Note on SWE084- Configuration Audits: Configuration audits are conducted in parts throughout the lifecycle process</p>
 <ul class="simple">
 <li><p>To a large degree- configuration audits are performed automatically by GitHub actions and branch restrictions. These check the following:</p>
@@ -1311,14 +1250,8 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="non-conformances">
-<h2>Non-Conformances<a class="headerlink" href="#non-conformances" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 28%" />
-<col style="width: 10%" />
-<col style="width: 56%" />
-</colgroup>
+<h2>Non-Conformances<a class="headerlink" href="#non-conformances" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -1339,16 +1272,11 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="transition-to-a-higher-class">
-<h2>Transition to a Higher Class<a class="headerlink" href="#transition-to-a-higher-class" title="Permalink to this headline">#</a></h2>
-<table class="table">
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 28%" />
-<col style="width: 10%" />
-<col style="width: 56%" />
-</colgroup>
+<h2>Transition to a Higher Class<a class="headerlink" href="#transition-to-a-higher-class" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>SWE #</p></th>
 <th class="head"><p>Description</p></th>
@@ -1364,16 +1292,17 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </tr>
 </tbody>
 </table>
+</div>
 <section id="aquisition-options">
-<h3>Aquisition Options<a class="headerlink" href="#aquisition-options" title="Permalink to this headline">#</a></h3>
+<h3>Aquisition Options<a class="headerlink" href="#aquisition-options" title="Link to this heading">#</a></h3>
 <p>Assessed, there are some existing prognostics tools but no general Python package that can support model-based prognostics like we need and no general python package that can support model-based prognostics is an Service Oriented Architecture (SOA) like we need (prog_server).</p>
 </section>
 <section id="requirement-tracking">
-<h3>Requirement Tracking<a class="headerlink" href="#requirement-tracking" title="Permalink to this headline">#</a></h3>
+<h3>Requirement Tracking<a class="headerlink" href="#requirement-tracking" title="Link to this heading">#</a></h3>
 <p>Requirements are tracked as issues with the “Enhancement” label (See <a class="reference external" href="https://github.com/nasa/progpy/labels/enhancement">progpy</a>, <a class="reference external" href="https://github.com/nasa/prog_server/labels/enhancement">prog_server</a> Enhancement Issues). An issue template is used to ensure that the requirement has the desired information. Issues are closed to indicate the requirement has been met. Closing a requirement issue is done with a pull request, which is linked to the relevant requirement, for tracability. Closing the requirement issue requires a code review (see above for details), and requires implementation of passing tests that test the requirement (i.e., verification tests). The tests are reviewed with the code implementing the requirement. Issues are assigned to a milestone (i.e., release) indicating the requirements for that release. Github automatically tracks any changes to the issues (i.e., requirements)</p>
 </section>
 <section id="dependencies">
-<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">#</a></h3>
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h3>
 <p>The following dependencies are used in the project:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://numpy.org/">numpy</a></p>
@@ -1473,7 +1402,7 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 </ul>
 </section>
 <section id="tracability-notes">
-<h3>Tracability Notes<a class="headerlink" href="#tracability-notes" title="Permalink to this headline">#</a></h3>
+<h3>Tracability Notes<a class="headerlink" href="#tracability-notes" title="Link to this heading">#</a></h3>
 <p>Hazards and non-conformances are tracked as issues with the label bug (See <a class="reference external" href="https://github.com/nasa/progpy/labels/bug">progpy</a>, <a class="reference external" href="https://github.com/nasa/prog_server/labels/bug">prog_server</a>). In the template for a bug report, there is a section asking for relevant enhancement issues (i.e., requirements). This linking establishes tracability from hazards/non-conformances to the underlying requirement. These linkings are automatically marked by the github system in the requirement issue. Additionally, to close an enhancement issue (i.e., requirement), passing verification tests must be created and checked in. The PR where these tests are created and the implementation is completed is linked to the issue establishing tracability from requirement -&gt; verification test. These tests run automatically at every change/PR.</p>
 <p>Additionally, requirements are assigned to milestones/releases, establishing bi-directional tracability to these</p>
 <p>Summary: The following tracabilities are maintained:</p>
@@ -1495,11 +1424,10 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="dev_guide.html"
@@ -1510,17 +1438,16 @@ or whose anomalous behavior would cause or contribute to a failure of system fun
         <p class="prev-next-title">Developers Guide &amp; Project Plan</p>
       </div>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1577,6 +1504,7 @@ By Chris Teubert, Katelyn Jarvis, Matteo Corbetta, Chetan Kulkarni, Portia Baner
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..
@@ -1603,8 +1531,8 @@ By Chris Teubert, Katelyn Jarvis, Matteo Corbetta, Chetan Kulkarni, Portia Baner
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
 
 Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
