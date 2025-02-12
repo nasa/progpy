@@ -20,10 +20,10 @@ class Tank(PrognosticsModel):
 
     :term:`States<state>`: (2)
         | state (DiscreteState): state of the valve
-        | h: Height of the fluid in the valve (m)
+        | h: Height of the fluid in the tank (m)
 
     :term:`Outputs<output>`: (1)
-        h: Height of the fluid in the valve (m)
+        h: Height of the fluid in the tank (m)
 
     Keyword Args
     ------------
