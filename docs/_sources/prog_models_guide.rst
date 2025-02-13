@@ -324,7 +324,7 @@ Direct-prediction models
 Using Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wether you're using :term:`data-driven<data-driven model>`, :term:`physics-based<physics-based model>`, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see `Parameter Estimation`) and validate the model.
+Whether you're using :term:`data-driven<data-driven model>`, :term:`physics-based<physics-based model>`, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see `Parameter Estimation`) and validate the model.
 
 ProgPy includes some example datasets. See `ProgPy Datasets <https://nasa.github.io/progpy/api_ref/progpy/DataSets.html>`_ and the example below for details. 
 
@@ -540,7 +540,7 @@ Other Examples
 Tips
 ----
 * If you're only doing diagnostics without prognostics- just define a next_state equation with no change of :term:`state` and don't perform prediction. The :term:`state estimator` can still be used to estimate if any of the :term:`events<event>` have occured.
-* Sudden :term:`event's<event>` use a binary :term:`event state` (1=healthy, 0=failed).
+* Sudden :term:`events<event>` use a binary :term:`event state` (1=healthy, 0=failed).
 * You can predict as many :term:`events<event>` as you would like, sometimes one :term:`event` must happen before another, in this case the :term:`event` occurance for event 1 can be a part of the equation for event 2 ('event 2': event_1 and [OTHER LOGIC]).
 
 References

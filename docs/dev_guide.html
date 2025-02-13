@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Developers Guide &amp; Project Plan &#8212; ProgPy Python Packages 1.7 documentation</title>
   
@@ -15,45 +14,49 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css?v=94a3e983" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css?v=995e94df" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css?v=21c0b90a" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
+    <script src="_static/documentation_options.js?v=33946f59"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dev_guide';</script>
+    <link rel="icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="NPR 7150 NASA Software Engineering Requirements" href="npr7150.html" />
     <link rel="prev" title="Glossary" href="glossary.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -61,23 +64,16 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+  <div id="pst-scroll-pixel-helper"></div>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -85,7 +81,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -93,16 +88,25 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -115,9 +119,13 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -127,29 +135,36 @@
       
     
     
-    <img src="_static/software_name.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/software_name.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/software_name.png" class="logo__image only-light" alt="ProgPy Python Packages 1.7 documentation - Home"/>
+    <img src="_static/software_name.png" class="logo__image only-dark pst-js-only" alt="ProgPy Python Packages 1.7 documentation - Home"/>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">ProgPy Guide</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="guide.html">ProgPy Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="prog_models_guide.html">Modeling and Sim Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="prog_algs_guide.html">State Estimation and Prediction Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="prog_server_guide.html">prog_server Guide</a></li>
 </ul>
-</li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="api_ref.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_ref.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/load_ests.html">Load Estimators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_client.html">prog_client</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_server.html">ProgServer</a></li>
 <li class="toctree-l3"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
 </ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/progpy.html">ProgPy API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/progpy.html">ProgPy API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
@@ -167,15 +182,15 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/UncertainData.html">Uncertain Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Utils.html">Utils</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
-</li>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Developers Guide &amp; Project Plan</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Developers Guide &amp; Project Plan</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="npr7150.html">NPR 7150 NASA Software Engineering Requirements</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
     </div>
@@ -184,14 +199,19 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -200,14 +220,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -282,26 +302,20 @@
 </button>
 
 
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script>
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -344,39 +358,43 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section id="developers-guide-project-plan">
-<h1>Developers Guide &amp; Project Plan<a class="headerlink" href="#developers-guide-project-plan" title="Permalink to this headline">#</a></h1>
+<h1>Developers Guide &amp; Project Plan<a class="headerlink" href="#developers-guide-project-plan" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <p>This document includes some details relevant for developers working on any of the Python Prognostics Packages Tools (progpy, prog_server)</p>
 <section id="installing-from-a-branch">
-<h2>Installing from a Branch<a class="headerlink" href="#installing-from-a-branch" title="Permalink to this headline">#</a></h2>
-<dl class="simple">
-<dt>To install the package package from a specific branch. First clone the repository and checkout the branch. Then navigate into the repository directory and use the following command:</dt><dd><p><cite>pip install -e .</cite></p>
-</dd>
-</dl>
+<h2>Installing from a Branch<a class="headerlink" href="#installing-from-a-branch" title="Link to this heading">#</a></h2>
+<p>To install the package package from a specific branch. First clone the repository and checkout the branch. Then navigate into the repository directory and use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
 <p>This command installs the package using the checked-out version.</p>
 </section>
 <section id="running-tests">
-<h2>Running Tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">#</a></h2>
-<dl class="simple">
-<dt>The run the progpy tests, first clone the repository and checkout the branch, installing the package using the command above. Then navigate into the repository directory. Next install the tests required dependencies, by using the following commands:</dt><dd><p><cite>pip install notebook</cite>
-<cite>pip install testbook</cite>
-<cite>pip install requests</cite></p>
-</dd>
-<dt>Then run the tests using the following command:</dt><dd><p><cite>python -m tests</cite></p>
-</dd>
-</dl>
+<h2>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading">#</a></h2>
+<p>The run the progpy tests, first clone the repository and checkout the branch, installing the package using the command above. Then navigate into the repository directory. Next install the tests required dependencies, by using the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;.[test]&#39;</span>
+</pre></div>
+</div>
+<p>Then run the tests using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python<span class="w"> </span>-m<span class="w"> </span>tests
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>Tests on data-driven tools (e.g., LSTM model) will need dependencies from the <code class="docutils literal notranslate"><span class="pre">datadriven</span></code> option installed.</p>
+</div>
 </section>
 <section id="contributing">
-<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h2>
+<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h2>
 <p>New external (non-NASA or NASA contractor) developers must complete either the <a class="reference external" href="https://github.com/nasa/progpy/tree/master/forms">organizational or individual Contributor License Agreement (CLA)</a>.</p>
 <p>Curious about what needs to be done? Have an idea for a new feature? Find a bug? Check out open issues <a class="reference external" href="https://github.com/nasa/progpy/issues">progpy</a>, <a class="reference external" href="https://github.com/nasa/prog_server/issues">prog_server</a>.</p>
 </section>
 <section id="project-roles">
-<h2>Project Roles<a class="headerlink" href="#project-roles" title="Permalink to this headline">#</a></h2>
+<h2>Project Roles<a class="headerlink" href="#project-roles" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Software Lead: Christopher Teubert</p></li>
 <li><p>Software Assurance Officer: Christopher Teubert</p></li>
@@ -386,15 +404,15 @@ document.write(`
 </ul>
 </section>
 <section id="branching-strategy">
-<h2>Branching Strategy<a class="headerlink" href="#branching-strategy" title="Permalink to this headline">#</a></h2>
-<p>Our project is following the git strategy described <a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model/">here</a>. Release branches are not required. Details specific to each branch are described below. We recommend that developers from within NASA watch <cite>this video &lt;https://nasa-my.sharepoint.com/:v:/g/personal/rduffy_ndc_nasa_gov/EYCJK6qffBZNtSKZTOV9nPMBc9cPPF6fniRuKtG2GWvoPA&gt;</cite> on git strategies and best practices.</p>
+<h2>Branching Strategy<a class="headerlink" href="#branching-strategy" title="Link to this heading">#</a></h2>
+<p>Our project is following the git strategy described <a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model/">here</a>. Release branches are not required. Details specific to each branch are described below. We recommend that developers from within NASA watch <a class="reference external" href="https://nasa-my.sharepoint.com/:v:/g/personal/rduffy_ndc_nasa_gov/EYCJK6qffBZNtSKZTOV9nPMBc9cPPF6fniRuKtG2GWvoPA">this video</a> on git strategies and best practices.</p>
 <p><cite>master</cite>: Every merge into the master branch is done using a pull request (never commiting directly), is assigned a release number, and must complete the release checklist. The release checklist is a software assurance tool.</p>
 <p><cite>dev</cite>: Every commit on the dev branch should be functional. The PR checklist must be completed before merging into dev. Merging into dev should only be done through a PR, unless only documentation has been updated.</p>
 <p><cite>Feature or Bugfix Branches</cite>: These branches include changes specific to a new feature or fixing a bug.</p>
 <p><cite>Hotfix Branches</cite>: These branches are to fix an urgent issue in master. Hotfixes are branched directly off of master. Hotfixes are merged into both master and dev, after being approved by the Software Management Team.</p>
 </section>
 <section id="pr-checklist">
-<h2>PR Checklist<a class="headerlink" href="#pr-checklist" title="Permalink to this headline">#</a></h2>
+<h2>PR Checklist<a class="headerlink" href="#pr-checklist" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><dl class="simple">
 <dt>If target is dev or master, ensure PR is reviewed by someone other than the author.</dt><dd><ul>
@@ -408,9 +426,8 @@ document.write(`
 <li><p>Review the test coverage reports (if there is a change)</p></li>
 <li><p>Review the software benchmarking results (if there is a change)</p></li>
 <li><dl class="simple">
-<dt>For added dependencies (new)</dt><dd><ul>
-<li><p>Add to requirements.txt,</p></li>
-<li><p>Add to setup.py,</p></li>
+<dt>For added dependencies</dt><dd><ul>
+<li><p>Add to <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code></p></li>
 <li><p>Add to the bottom of dev_guide.rst (this document)</p></li>
 <li><p>Notify Project Manager</p></li>
 </ul>
@@ -433,7 +450,7 @@ document.write(`
 <p>Note: when making change to this, update the message in the github actions workflows</p>
 </section>
 <section id="release-checklist">
-<h2>Release Checklist<a class="headerlink" href="#release-checklist" title="Permalink to this headline">#</a></h2>
+<h2>Release Checklist<a class="headerlink" href="#release-checklist" title="Link to this heading">#</a></h2>
 <p>A release is the merging of a PR where the target is the master branch.</p>
 <ul class="simple">
 <li><p>[Complete - done in PRs to dev] Code review - all software must be checked by someone other than the author</p></li>
@@ -473,25 +490,33 @@ document.write(`
 </dd>
 </dl>
 </li>
-<li><p>Rebuild sphinx documents: <cite>sphinx-build sphinx_config/ docs/</cite></p></li>
+<li><p>Rebuild sphinx documents: <cite>sphinx-build sphinx-config/ docs/</cite></p></li>
 <li><p>Write release notes</p></li>
 <li><p>Update version number in src/*/__init__.py and setup.py</p></li>
 <li><p>For releases adding new features- ensure that NASA release process has been followed.</p></li>
 <li><p>Confirm that on GitHub Releases page, the next release has been started and that a schedule is present including at least Release Date, Release Review Date, and Release Branch Opening Date.</p></li>
 </ul>
 <section id="updating-documentation">
-<h3>Updating Documentation<a class="headerlink" href="#updating-documentation" title="Permalink to this headline">#</a></h3>
-<p>Use the following command to update documentation (requires sphinx). Documentation is in the progpy repository.</p>
+<h3>Updating Documentation<a class="headerlink" href="#updating-documentation" title="Link to this heading">#</a></h3>
+<p>Use the following commands to get the relevant dependencies and update the documentation. Documentation is in the progpy repository.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;.[docs]&#39;</span>
+<span class="gp">$ </span>sphinx-build<span class="w"> </span>sphinx-config/<span class="w"> </span>docs/
+</pre></div>
+</div>
+<p>Sphinx-autobuild can be used to automatically rebuild the documentation when changes are made.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sphinx-autobuild<span class="w"> </span>sphinx-config/<span class="w"> </span>docs/
+</pre></div>
+</div>
 </section>
 <section id="uploading-new-version-to-pypi">
-<h3>Uploading new version to PyPI<a class="headerlink" href="#uploading-new-version-to-pypi" title="Permalink to this headline">#</a></h3>
+<h3>Uploading new version to PyPI<a class="headerlink" href="#uploading-new-version-to-pypi" title="Link to this heading">#</a></h3>
 <p>New versions are uploaded upon release (i.e., merging into master branch). The Release Checklist must be complete prior to release</p>
 <p>See <a class="reference external" href="https://packaging.python.org/guides/distributing-packages-using-setuptools/#packaging-your-project">here</a></p>
 <p>Note: when making change to this, update the message in the github actions workflows</p>
 </section>
 </section>
 <section id="post-release-checklist">
-<h2>Post-Release Checklist<a class="headerlink" href="#post-release-checklist" title="Permalink to this headline">#</a></h2>
+<h2>Post-Release Checklist<a class="headerlink" href="#post-release-checklist" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>For prog_server: Update openapi specs on <a class="reference external" href="https://app.swaggerhub.com/apis/teubert/prog_server/1.0.0-oas3">SwaggerHub</a></p></li>
 <li><p>Send notes to Software Release Office (SRO) of updated version number</p></li>
@@ -505,7 +530,7 @@ document.write(`
 </ul>
 </section>
 <section id="notes-for-developers">
-<h2>Notes for Developers<a class="headerlink" href="#notes-for-developers" title="Permalink to this headline">#</a></h2>
+<h2>Notes for Developers<a class="headerlink" href="#notes-for-developers" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Configuration-controlled items: source code, tests, test workflow, issues (requirements, non-conformances, bugs, etc.), milestones, examples, tutorial, templates, project plan (this document and 7150 document), and documentation (in progpy repo)</p></li>
 <li><p>The package itself is stored in the src directory.</p></li>
@@ -580,11 +605,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="glossary.html"
@@ -604,17 +628,16 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -656,6 +679,7 @@ By Chris Teubert, Katelyn Jarvis, Matteo Corbetta, Chetan Kulkarni, Portia Baner
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..
@@ -682,8 +706,8 @@ By Chris Teubert, Katelyn Jarvis, Matteo Corbetta, Chetan Kulkarni, Portia Baner
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
 
 Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
