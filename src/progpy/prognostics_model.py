@@ -960,10 +960,14 @@ class PrognosticsModel(ABC):
                 if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
                     return np.all(t_met)
                 return all(t_met)
+        elif callable(config['event_strategy']):
+            check_thresholds = config['event_strategy']
         else:
             raise ValueError(f"Invalid value for `event_strategy`: {config['event_strategy']}. Should be either 'all' or 'first'")
 
         if 'thresholds_met_eqn' in config:
+            warn('thresholds_met_eqn will be removed after version 1.7 of ProgPy. The thresholds_met_eqn argument can now be passed into event_strategy.',
+                DeprecationWarning, stacklevel=2)
             check_thresholds = config['thresholds_met_eqn']
             events = []
         elif events is None: 
