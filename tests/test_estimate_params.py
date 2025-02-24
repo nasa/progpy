@@ -957,11 +957,11 @@ class TestEstimateParams(unittest.TestCase):
             m.estimate_params(times = results.times, inputs = results.inputs, outputs = results.outputs, 
                               bounds=bound, keys = keys , tol = "12")    
 
-        # When tolerance is empty list
+        # When tolerance is not passed in (default)
         m.parameters['thrower_height'] = 3.1
         m.parameters['throwing_speed'] = 29
         m.parameters['g'] = 10
-        m.estimate_params(times = results.times, inputs = results.inputs, outputs = results.outputs, keys = keys, tol = [])
+        m.estimate_params(times = results.times, inputs = results.inputs, outputs = results.outputs, keys = keys)
         hold1 = m.calc_error(results.times, results.inputs, results.outputs)
 
         # Tolerance works as intended as long as it is within a sequence of length 1
