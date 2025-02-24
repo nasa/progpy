@@ -620,6 +620,12 @@ class TestModels(unittest.TestCase):
         (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='all')
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
+        # both e1, e2 - threshold met eqn
+        def thresh_met(thresholds):
+            return all(thresholds.values())
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy=thresh_met)
+        self.assertAlmostEqual(times[-1], 15.0, 5)
+
         # Any event, manual - unexpected strategy
         with self.assertRaises(ValueError):
             (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='fljsdk')
@@ -654,11 +660,12 @@ class TestModels(unittest.TestCase):
         with self.assertRaises(ValueError):
             (times, inputs, states, outputs, event_states) = m_noevents.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0)
 
-        # Custom thresholds met eqn- both keys
+        # Custom thresholds met eqn - both keys
         def thresh_met(thresholds):
             return all(thresholds.values())
         config = {'dt': 0.5, 'save_freq': 1.0, 'horizon': 20.0, 'thresholds_met_eqn': thresh_met}
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, **config, events=['e1', 'e2'])
+        with self.assertWarns(Warning):
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, **config, events=['e1', 'e2'])
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
         # With no events and no horizon, but a threshold met eqn
