@@ -963,7 +963,7 @@ class PrognosticsModel(ABC):
         elif callable(config['event_strategy']):
             check_thresholds = config['event_strategy']
         else:
-            raise ValueError(f"Invalid value for `event_strategy`: {config['event_strategy']}. Should be either 'all' or 'first'")
+            raise ValueError(f"Invalid value for `event_strategy`: {config['event_strategy']}. Should 'all', 'first', or a function")
 
         if 'thresholds_met_eqn' in config:
             warn('thresholds_met_eqn will be removed after version 1.7 of ProgPy. The thresholds_met_eqn argument can now be passed into event_strategy.',
