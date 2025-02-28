@@ -786,10 +786,11 @@ class PrognosticsModel(ABC):
         events: abc.Sequence[str] or str, optional
             Keys for events that will trigger the end of simulation.
             If blank, simulation will occur if any event will be met ()
-        event_strategy: str, optional
+        event_strategy: str or abc.Callable, optional
             Strategy for stopping evaluation. Default is 'first'. One of:\n
             * *first*: Will stop when first event in `events` list is reached.\n
-            * *all*: Will stop when all events in `events` list have been reached
+            * *all*: Will stop when all events in `events` list have been reached\n
+            * *abc.Callable*: Custom equation to indicate logic for when to stop sim f(thresholds_met) -> bool
         t0 : float, optional
             Starting time for simulation in seconds (default: 0.0) \n
         dt : float, tuple, str, or function, optional
