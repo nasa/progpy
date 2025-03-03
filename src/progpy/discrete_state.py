@@ -94,7 +94,9 @@ def create_discrete_state(n_states: int, names: list=None, transition=_random_tr
     # Enumerated states
     members = {name: i for i, name in enumerate(names)}
 
+    discrete_state = DiscreteState('Discrete State', members)
+
     # Transition is set to be nonmember (meaning it's not an enumerated state)
-    members['_transition'] = enum.nonmember(transition)
+    discrete_state._transition = transition
     
-    return DiscreteState('Discrete State', members)
+    return discrete_state
