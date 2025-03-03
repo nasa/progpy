@@ -939,6 +939,11 @@ class PrognosticsModel(ABC):
 
         if not isinstance(x, self.StateContainer):
             x = self.StateContainer(x)
+
+        if 'integration_method' in config:
+            # Update integration method for the duration of the simulation
+            old_integration_method = self.parameters.get('integration_method', 'euler')
+            self.parameters['integration_method'] = config['integration_method']
         
         # Optimization
         output = self.__output
@@ -1090,11 +1095,6 @@ class PrognosticsModel(ABC):
             simulate_progress = ProgressBar(100, "Progress")
             last_percentage = 0
 
-        if 'integration_method' in config:
-            # Update integration method for the duration of the simulation
-            old_integration_method = self.parameters.get('integration_method', 'euler')
-            self.parameters['integration_method'] = config['integration_method']
-       
         while t < horizon:
             dt_i = next_time(t, x)
             t_load = t + dt_i/2  # Saving as separate variable reduces likelihood of floating point error
