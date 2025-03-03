@@ -15,15 +15,16 @@ def _random_transition(state, disruption):
 
 def _sequential_transition(state, disruption):
     """
-    Sequential transition from one state to the next if disruption is >= 0.5.
+    Sequential transition from one state to the next if disruption is >= 0.5
     
     Examples:
         Mode 1 + 0.5 -> Mode 2
         Mode 2 - 0.5 -> Mode 1
         Mode 1 + 1.5 -> Mode 3
         Mode 1 + 0.4 -> Mode 1
+        Mode 0 - 2 -> Mode 0 (Minimum limit)
     """
-    return state._value_ + round(disruption)
+    return min(max(state._value_ + round(disruption), 0), len(type(state))-1)
 
 def _no_transition(state, disruption):
     """
