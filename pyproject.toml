@@ -10,7 +10,6 @@ dependencies = [
     "pandas",  # For data downloading features
     "matplotlib",
     "requests",  # For data downloading features
-    "chaospy",  # For PCE
     "fastdtw",  # For DTW error calculation
     "filterpy"
 ]
@@ -57,7 +56,8 @@ classifiers = [
 
 [project.optional-dependencies]
 datadriven = [
-    "tensorflow"
+    "tensorflow",
+    "chaospy" # For PCE
 ]
 
 test = [
