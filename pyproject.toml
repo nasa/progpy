@@ -11,7 +11,7 @@ dependencies = [
     "matplotlib",
     "requests",  # For data downloading features
     "fastdtw",  # For DTW error calculation
-    "filterpy"
+    "filterpy>=1.4.4",
 ]
 requires-python = ">=3.7, <3.13"
 authors = [
@@ -56,8 +56,8 @@ classifiers = [
 
 [project.optional-dependencies]
 datadriven = [
-    "tensorflow",
-    "chaospy" # For PCE
+    "tensorflow>=2.18.0",   # Note that older versions of tensorflow may work with older numpy and numpoly versions
+    "chaospy>=4.3.17"   # For PCE
 ]
 
 test = [
