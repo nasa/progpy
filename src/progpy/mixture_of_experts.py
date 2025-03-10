@@ -124,9 +124,8 @@ class MixtureOfExpertsModel(CompositeModel):
                 x[name + '.' + key] = value
 
         # If z is present and not none - update score
-        output_estimates = [u[key] for key in self.outputs]
-        if (len(set(self.outputs)- set(u.keys())) == 0 and not None in output_estimates and# Not missing an output
-            not np.any(np.isnan(output_estimates))): # Not case where Output is NaN
+        if (len(set(self.outputs)- set(u.keys())) == 0 and # Not missing an output
+             not np.any(np.isnan([u[key] for key in self.outputs]))): # Not case where Output is NaN
             # If none in not u, that means that we have an updated output, so update the scores
             # u excluded when there is not update
             mses = []
