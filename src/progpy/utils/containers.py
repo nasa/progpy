@@ -50,7 +50,7 @@ class DictLikeMatrixWrapper():
             # ravel is used to prevent vectorized case, where data[key] returns multiple values,  from resulting in a 3D matrix
             self._matrix = np.array(
                 [
-                    np.ravel([int_fix(data[key])]) if key in data else [None] for key in keys
+                    np.ravel([int_fix(data[key])]) if key in data else [np.float64('nan')] for key in keys
                 ])
         else:
             raise TypeError(f"Data must be a dictionary or numpy array, not {type(data)}")
