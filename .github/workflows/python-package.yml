@@ -18,7 +18,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -36,7 +36,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -54,7 +54,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -72,7 +72,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -90,7 +90,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -108,7 +108,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -126,7 +126,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -146,7 +146,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -164,7 +164,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -182,7 +182,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -200,7 +200,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -218,7 +218,7 @@ jobs:
   #   - name: Set up Python
   #     uses: actions/setup-python@v4
   #     with:
-  #       python-version: '3.7'
+  #       python-version: '3.8'
   #   - name: Install dependencies cache
   #     uses: actions/cache@v4
   #     with:
@@ -236,7 +236,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -254,7 +254,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -272,7 +272,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -290,7 +290,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -308,7 +308,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -326,7 +326,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -344,7 +344,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -362,7 +362,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -380,7 +380,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -398,7 +398,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -416,7 +416,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -434,7 +434,7 @@ jobs:
   #   - name: Set up Python
   #     uses: actions/setup-python@v4
   #     with:
-  #       python-version: '3.7'
+  #       python-version: '3.8'
   #   - name: Install dependencies cache
   #     uses: actions/cache@v4
   #     with:
@@ -455,7 +455,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
@@ -473,7 +473,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.8'
     - name: Install dependencies cache
       uses: actions/cache@v4
       with:
