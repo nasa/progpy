@@ -46,13 +46,11 @@ class TestDiscreteStates(unittest.TestCase):
         self.assertEqual(x - 0.51, StateType(0))
         self.assertEqual(x + 1.51, StateType(3))
 
-        with self.assertRaises(ValueError):
-            # lower bound
-            x - 1.51
+        # lower bound
+        self.assertEqual(x - 1.51, StateType(0))
         
-        with self.assertRaises(ValueError):
-            # Upper bound
-            x + 10
+        # upper bound
+        self.assertEqual(x + 10.51, StateType(9))
     
     def test_custom_transition(self):
         # Define transition function
