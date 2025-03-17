@@ -23,6 +23,7 @@ ProgPy documentation is split into three senctions described below.
    api_ref
    releases
    glossary
+   troubleshooting
    dev_guide
 
 .. include:: installing.rst
