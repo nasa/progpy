@@ -27,5 +27,3 @@ If you are using data-driven tools (e.g., LSTM model), make sure the datadriven 
         .. code-block:: console
 
             $ pip install -e '.[datadriven]'
-
-
