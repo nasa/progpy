@@ -60,8 +60,6 @@ This page is a general guide for ProgPy. To access a guide specific to the featu
         :text: prog_server
         :classes: stretched-link btn-outline-primary btn-block
 
-For help with troubleshooting, see the :ref:`Troubleshooting Guide <troubleshooting>`.
-
 What is Prognostics
 ------------------------------
 ProgPy uses the following definition for :term:`prognostics`:

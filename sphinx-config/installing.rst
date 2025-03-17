@@ -33,3 +33,5 @@ Installing ProgPy
         .. code-block:: console
 
             $ pip install -e '.[datadriven]'
+
+For help with troubleshooting, see the :ref:`troubleshooting`.

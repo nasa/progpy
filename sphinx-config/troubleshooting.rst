@@ -1,3 +1,5 @@
+.. _troubleshooting:
+
 Troubleshooting Guide
 ==============
 This document includes common ProgPy issues and ways to troubleshoot.
