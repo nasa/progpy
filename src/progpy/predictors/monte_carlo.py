@@ -138,7 +138,6 @@ class MonteCarlo(Predictor):
             or not isinstance(state, UnweightedSamples)):  # Case 2
             state = state.sample(params['n_samples'])
 
-        es_eqn = self.model.event_state
         tm_eqn = self.model.threshold_met
         simulate_to_threshold = self.model.simulate_to_threshold
 
@@ -193,7 +192,7 @@ class MonteCarlo(Predictor):
                 inputs = SimResult(_copy=False)
                 states = SimResult(_copy=False)
                 outputs = LazySimResult(fcn=self.model.output, _copy=False)
-                event_states = LazySimResult(fcn=es_eqn, _copy=False)
+                event_states = SimResult(_copy=False)
 
                 # Non-vectorized prediction
                 while len(events_remaining) > 0:  # Still events to predict
@@ -213,7 +212,7 @@ class MonteCarlo(Predictor):
                     inputs.extend(u)
                     states.extend(xi)
                     outputs.extend(z, _copy=False)
-                    event_states.extend(es, _copy=False)
+                    event_states.extend(es)
 
                     # Get which event occurs
                     t_met = tm_eqn(states[-1])
