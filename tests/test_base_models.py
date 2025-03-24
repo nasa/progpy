@@ -629,15 +629,15 @@ class TestModels(unittest.TestCase):
         # Any event, manual - threshold met eqn - two arguments
         def thresh_met(thresholds, num):
             return thresholds.values() > num
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy=thresh_met)
 
         # Any event, manual - threshold met eqn - no argument
         def thresh_met():
             return 1
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy=thresh_met)
-
+            
         # Any event, manual - unexpected strategy
         with self.assertRaises(ValueError):
             (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='fljsdk')

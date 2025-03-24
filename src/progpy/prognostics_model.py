@@ -924,6 +924,8 @@ class PrognosticsModel(ABC):
             raise TypeError("'thresholds_met_eqn' must be callable (e.g., function or lambda)")
         if 'thresholds_met_eqn' in config and config['thresholds_met_eqn'].__code__.co_argcount != 1:
             raise ValueError("'thresholds_met_eqn' must accept one argument (thresholds)-> bool")
+        if 'event_strategy' in config and callable(config['event_strategy']) and config['event_strategy'].__code__.co_argcount != 1:
+            raise ValueError("'event_strategy' callable must accept one argument (thresholds)-> bool")
         if not isinstance(config['print'], bool):
             raise TypeError("'print' must be a bool, was a {}".format(type(config['print'])))
 
