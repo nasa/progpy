@@ -29,7 +29,7 @@ jobs:
         pip install coverage
         pip install importlib_metadata
     - name: Update
-      run: pip install --upgrade --upgrade-strategy eager -e .
+      run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run coverage
       run: |
         coverage run -m tests.test_base_models
