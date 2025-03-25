@@ -5,6 +5,7 @@ from os.path import dirname, join
 import sys
 import unittest
 import warnings
+from testbook import testbook
 
 sys.path.append(join(dirname(__file__), ".."))  # needed to access tutorial
 
@@ -29,10 +30,7 @@ class TestTutorials(unittest.TestCase):
             './examples/10_Prognostics Server.ipynb',
             './examples/2024PHMTutorial.ipynb'
         ]
-        if importlib.util.find_spec('testbook') is None:
-            warnings.warn('testbook not installed')
-        else:
-            for notebook_path in notebook_paths:
+        for notebook_path in notebook_paths:
                 self.run_notebook_test(notebook_path)
 
 def main():
