@@ -430,7 +430,7 @@ jobs:
         key: pip-cache-datadriven
     - name: Update
       run: |
-        pip install --upgrade --upgrade-strategy eager -e .[datadriven, test]
+        pip install --upgrade --upgrade-strategy eager -e .[datadriven,test]
     - name: Run tests
       run: python -m tests.test_tutorials
   test_uav_model:

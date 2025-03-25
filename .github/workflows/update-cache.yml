@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install -e .[datadriven, test]
+        python -m pip install -e .[datadriven,test]
     - uses: actions/cache@v4
       with:
         path: ~/.cache/pip
@@ -37,7 +37,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install -e '.[datadriven, test]'
+        python -m pip install -e '.[datadriven,test]'
     - uses: actions/cache@v4
       with:
         path: ~/.cache/pip
