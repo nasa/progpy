@@ -215,7 +215,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Placeholder
-      run: pecho "Placholder test in process of getting removed - job will pass."
+      run: echo "Placholder test in process of getting removed - job will pass."
   test_horizon:
     timeout-minutes: 5
     runs-on: ubuntu-latest
