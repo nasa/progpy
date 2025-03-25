@@ -33,7 +33,7 @@ class TestTutorials(unittest.TestCase):
             warnings.warn('testbook not installed')
         else:
             for notebook_path in notebook_paths:
-                self.test_notebooks(notebook_path)
+                self.run_notebook_test(notebook_path)
 
 def main():
     load_test = unittest.TestLoader()
