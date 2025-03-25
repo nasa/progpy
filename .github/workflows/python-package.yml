@@ -210,24 +210,12 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
       run: python -m tests.test_estimate_params
-  # test_examples:
-  #   timeout-minutes: 25
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Set up Python
-  #     uses: actions/setup-python@v4
-  #     with:
-  #       python-version: '3.9'
-  #   - name: Install dependencies cache
-  #     uses: actions/cache@v4
-  #     with:
-  #       path: ~/.cache/pip
-  #       key: pip-cache
-  #   - name: Update
-  #     run: pip install --upgrade --upgrade-strategy eager -e .
-  #   - name: Run tests
-  #     run: python -m tests.test_examples
+  test_examples:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - name: Placeholder
+      run: pecho "Placholder test in process of getting removed - job will pass."
   test_horizon:
     timeout-minutes: 5
     runs-on: ubuntu-latest
@@ -426,27 +414,27 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run tests
       run: python -m tests.test_surrogates
-  # test_tutorials:
-  #   timeout-minutes: 5
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Set up Python
-  #     uses: actions/setup-python@v4
-  #     with:
-  #       python-version: '3.9'
-  #   - name: Install dependencies cache
-  #     uses: actions/cache@v4
-  #     with:
-  #       path: ~/.cache/pip
-  #       key: pip-cache-datadriven
-  #   - name: Update
-  #     run: |
-  #       pip install --upgrade --upgrade-strategy eager -e .
-  #       pip install notebook
-  #       pip install testbook
-  #   - name: Run tests
-  #     run: python -m tests.test_tutorials
+  test_tutorials:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install dependencies cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: pip-cache-datadriven
+    - name: Update
+      run: |
+        pip install --upgrade --upgrade-strategy eager -e .[datadriven]
+        pip install notebook
+        pip install testbook
+    - name: Run tests
+      run: python -m tests.test_tutorials
   test_uav_model:
     timeout-minutes: 10
     runs-on: ubuntu-latest
