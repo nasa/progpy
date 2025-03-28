@@ -27,8 +27,7 @@ class TestTutorials(unittest.TestCase):
             './examples/07_State Estimation.ipynb',
             './examples/08_Prediction.ipynb',
             './examples/09_Prognostic Example.ipynb',
-            # Requires prog_server and need to fix issues
-            # './examples/10_Prognostics Server.ipynb',
+            './examples/10_Prognostics Server.ipynb',
             './examples/2024PHMTutorial.ipynb'
         ]
         for notebook_path in notebook_paths:

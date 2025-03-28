@@ -431,6 +431,7 @@ jobs:
     - name: Update
       run: |
         pip install --upgrade --upgrade-strategy eager -e .[datadriven,test]
+        pip install prog_server
     - name: Run tests
       run: python -m tests.test_tutorials
   test_uav_model:
