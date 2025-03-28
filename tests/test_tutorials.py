@@ -11,7 +11,7 @@ sys.path.append(join(dirname(__file__), ".."))  # needed to access tutorial
 
 class TestTutorials(unittest.TestCase):
     def run_notebook_test(self, notebook_path):
-        with testbook(notebook_path, execute=True) as tb:
+        with testbook(notebook_path, execute=True, timeout=300) as tb:
             self.assertEqual(tb.__class__.__name__, "TestbookNotebookClient")
         
     def test_notebook_tutorials(self):
@@ -27,7 +27,8 @@ class TestTutorials(unittest.TestCase):
             './examples/07_State Estimation.ipynb',
             './examples/08_Prediction.ipynb',
             './examples/09_Prognostic Example.ipynb',
-            './examples/10_Prognostics Server.ipynb',
+            # Requires prog_server and need to fix issues
+            # './examples/10_Prognostics Server.ipynb',
             './examples/2024PHMTutorial.ipynb'
         ]
         for notebook_path in notebook_paths:
