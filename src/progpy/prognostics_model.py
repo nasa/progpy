@@ -1463,7 +1463,11 @@ class PrognosticsModel(ABC):
         self.parameters['process_noise'] = p_noise
 
         return res
-
+    
+    def estimate_noise(self, runs: List[tuple] = None, keys: List[str] = None, times: List[float] = None, inputs: List[InputContainer] = None,
+                    outputs: List[OutputContainer] = None, method: str = 'nelder-mead', **kwargs) -> None:
+        print("Estimating noise", runs, keys, times, inputs, outputs, method, kwargs)
+        return
 
     def generate_surrogate(self, load_functions: List[abc.Callable], method: str = 'dmd', **kwargs):
         """
