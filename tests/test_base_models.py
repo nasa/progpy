@@ -997,6 +997,13 @@ class TestModels(unittest.TestCase):
         result = m.simulate_to_threshold(load, dt = 0.1, integration_method='rk4')
         self.assertAlmostEqual(result.times[-1], 8.3)
 
+    def test_integration_sim(self):
+        m = LinearThrownObject(process_noise=0, measurement_noise=0)
+
+        default_result = m.simulate_to_threshold(dt = 0.1)
+        rk4_result = m.simulate_to_threshold(dt = 0.1, integration_method='rk4')
+        self.assertNotEqual(rk4_result.outputs[-1]['x'], default_result.outputs[-1]['x'])
+
     # when range specified when state doesn't exist or entered incorrectly
     def test_state_limits(self):
         m = MockProgModel()
