@@ -415,7 +415,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_surrogates
   test_tutorials:
-    timeout-minutes: 60
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -434,6 +434,26 @@ jobs:
         pip install prog_server
     - name: Run tests
       run: python -m tests.test_tutorials
+  test_tutorials_part_two:
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install dependencies cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: pip-cache-datadriven
+    - name: Update
+      run: |
+        pip install --upgrade --upgrade-strategy eager -e .[datadriven,test]
+        pip install prog_server
+    - name: Run tests
+      run: python -m tests.test_tutorials_part_two
   test_uav_model:
     timeout-minutes: 10
     runs-on: ubuntu-latest
