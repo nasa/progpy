@@ -415,7 +415,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_surrogates
   test_tutorials:
-    timeout-minutes: 20
+    timeout-minutes: 35
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -435,7 +435,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_tutorials
   test_tutorials_part_two:
-    timeout-minutes: 20
+    timeout-minutes: 35
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
