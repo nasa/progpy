@@ -20,7 +20,7 @@ jobs:
         python -m pip install notebook
         python -m pip install testbook
         python -m pip install requests
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -44,7 +44,7 @@ jobs:
         python -m pip install notebook
         python -m pip install testbook
         python -m pip install requests
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache-datadriven

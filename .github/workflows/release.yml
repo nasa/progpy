@@ -31,7 +31,7 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 src/prog_models --count --benchmark --exit-zero --show-source --max-complexity=10 --max-line-length=127 --statistics --tee --output-file=lint_results_${{ matrix.python-version }}.txt
     - name: Upload Lint Results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with: 
         name: lint_results_${{matrix.python-version}}
         path: lint_results_${{matrix.python-version}}.txt

@@ -21,6 +21,7 @@ ProgPy documentation is split into three senctions described below.
 
    guide
    api_ref
+   troubleshooting
    releases
    glossary
    dev_guide

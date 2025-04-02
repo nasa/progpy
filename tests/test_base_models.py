@@ -620,6 +620,24 @@ class TestModels(unittest.TestCase):
         (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='all')
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
+        # both e1, e2 - threshold met eqn
+        def thresh_met(thresholds):
+            return all(thresholds.values())
+        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy=thresh_met)
+        self.assertAlmostEqual(times[-1], 15.0, 5)
+
+        # Any event, manual - threshold met eqn - two arguments
+        def thresh_met(thresholds, num):
+            return thresholds.values() > num
+        with self.assertRaises(ValueError):
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy=thresh_met)
+
+        # Any event, manual - threshold met eqn - no argument
+        def thresh_met():
+            return 1
+        with self.assertRaises(ValueError):
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy=thresh_met)
+            
         # Any event, manual - unexpected strategy
         with self.assertRaises(ValueError):
             (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0, events=['e1', 'e2'], event_strategy='fljsdk')
@@ -654,11 +672,12 @@ class TestModels(unittest.TestCase):
         with self.assertRaises(ValueError):
             (times, inputs, states, outputs, event_states) = m_noevents.simulate_to_threshold(load, {'o1': 0.8}, dt=0.5, save_freq=1.0)
 
-        # Custom thresholds met eqn- both keys
+        # Custom thresholds met eqn - both keys
         def thresh_met(thresholds):
             return all(thresholds.values())
         config = {'dt': 0.5, 'save_freq': 1.0, 'horizon': 20.0, 'thresholds_met_eqn': thresh_met}
-        (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, **config, events=['e1', 'e2'])
+        with self.assertWarns(Warning):
+            (times, inputs, states, outputs, event_states) = m.simulate_to_threshold(load, {'o1': 0.8}, **config, events=['e1', 'e2'])
         self.assertAlmostEqual(times[-1], 15.0, 5)
 
         # With no events and no horizon, but a threshold met eqn
@@ -977,6 +996,13 @@ class TestModels(unittest.TestCase):
 
         result = m.simulate_to_threshold(load, dt = 0.1, integration_method='rk4')
         self.assertAlmostEqual(result.times[-1], 8.3)
+
+    def test_integration_sim(self):
+        m = LinearThrownObject(process_noise=0, measurement_noise=0)
+
+        default_result = m.simulate_to_threshold(dt = 0.1)
+        rk4_result = m.simulate_to_threshold(dt = 0.1, integration_method='rk4')
+        self.assertNotEqual(rk4_result.outputs[-1]['x'], default_result.outputs[-1]['x'])
 
     # when range specified when state doesn't exist or entered incorrectly
     def test_state_limits(self):

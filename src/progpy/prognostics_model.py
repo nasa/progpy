@@ -786,10 +786,11 @@ class PrognosticsModel(ABC):
         events: abc.Sequence[str] or str, optional
             Keys for events that will trigger the end of simulation.
             If blank, simulation will occur if any event will be met ()
-        event_strategy: str, optional
+        event_strategy: str or abc.Callable, optional
             Strategy for stopping evaluation. Default is 'first'. One of:\n
             * *first*: Will stop when first event in `events` list is reached.\n
-            * *all*: Will stop when all events in `events` list have been reached
+            * *all*: Will stop when all events in `events` list have been reached\n
+            * *abc.Callable*: Custom equation to indicate logic for when to stop sim f(thresholds_met) -> bool
         t0 : float, optional
             Starting time for simulation in seconds (default: 0.0) \n
         dt : float, tuple, str, or function, optional
@@ -923,6 +924,8 @@ class PrognosticsModel(ABC):
             raise TypeError("'thresholds_met_eqn' must be callable (e.g., function or lambda)")
         if 'thresholds_met_eqn' in config and config['thresholds_met_eqn'].__code__.co_argcount != 1:
             raise ValueError("'thresholds_met_eqn' must accept one argument (thresholds)-> bool")
+        if 'event_strategy' in config and callable(config['event_strategy']) and config['event_strategy'].__code__.co_argcount != 1:
+            raise ValueError("'event_strategy' callable must accept one argument (thresholds)-> bool")
         if not isinstance(config['print'], bool):
             raise TypeError("'print' must be a bool, was a {}".format(type(config['print'])))
 
@@ -936,6 +939,11 @@ class PrognosticsModel(ABC):
 
         if not isinstance(x, self.StateContainer):
             x = self.StateContainer(x)
+
+        if 'integration_method' in config:
+            # Update integration method for the duration of the simulation
+            old_integration_method = self.parameters.get('integration_method', 'euler')
+            self.parameters['integration_method'] = config['integration_method']
         
         # Optimization
         output = self.__output
@@ -960,10 +968,14 @@ class PrognosticsModel(ABC):
                 if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
                     return np.all(t_met)
                 return all(t_met)
+        elif callable(config['event_strategy']):
+            check_thresholds = config['event_strategy']
         else:
-            raise ValueError(f"Invalid value for `event_strategy`: {config['event_strategy']}. Should be either 'all' or 'first'")
+            raise ValueError(f"Invalid value for `event_strategy`: {config['event_strategy']}. Should 'all', 'first', or a callable (e.g., function or lambda)")
 
         if 'thresholds_met_eqn' in config:
+            warn('thresholds_met_eqn will be removed after version 1.7 of ProgPy. The thresholds_met_eqn argument can now be passed into event_strategy.',
+                DeprecationWarning, stacklevel=2)
             check_thresholds = config['thresholds_met_eqn']
             events = []
         elif events is None: 
@@ -1083,11 +1095,6 @@ class PrognosticsModel(ABC):
             simulate_progress = ProgressBar(100, "Progress")
             last_percentage = 0
 
-        if 'integration_method' in config:
-            # Update integration method for the duration of the simulation
-            old_integration_method = self.parameters.get('integration_method', 'euler')
-            self.parameters['integration_method'] = config['integration_method']
-       
         while t < horizon:
             dt_i = next_time(t, x)
             t_load = t + dt_i/2  # Saving as separate variable reduces likelihood of floating point error

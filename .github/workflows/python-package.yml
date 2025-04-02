@@ -18,9 +18,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -36,9 +36,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -54,9 +54,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -72,9 +72,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -90,9 +90,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -108,9 +108,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache-datadriven
@@ -126,9 +126,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -146,9 +146,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -164,9 +164,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -182,9 +182,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -200,9 +200,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -218,9 +218,9 @@ jobs:
   #   - name: Set up Python
   #     uses: actions/setup-python@v4
   #     with:
-  #       python-version: '3.7'
+  #       python-version: '3.9'
   #   - name: Install dependencies cache
-  #     uses: actions/cache@v2
+  #     uses: actions/cache@v4
   #     with:
   #       path: ~/.cache/pip
   #       key: pip-cache
@@ -236,9 +236,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -254,9 +254,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -272,9 +272,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -290,9 +290,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -308,9 +308,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -326,9 +326,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -344,14 +344,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
-        key: pip-cache
+        key: pip-cache-datadriven
     - name: Update
-      run: pip install --upgrade --upgrade-strategy eager -e .
+      run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run tests
       run: python -m tests.test_predictors
   test_serialization:
@@ -362,14 +362,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
-        key: pip-cache
+        key: pip-cache-datadriven
     - name: Update
-      run: pip install --upgrade --upgrade-strategy eager -e .
+      run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run tests
       run: python -m tests.test_serialization
   test_sim_result:
@@ -380,9 +380,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -398,14 +398,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
-        key: pip-cache
+        key: pip-cache-datadriven
     - name: Update
-      run: pip install --upgrade --upgrade-strategy eager -e .
+      run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run tests
       run: python -m tests.test_state_estimators
   test_surrogates:
@@ -416,9 +416,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache-datadriven
@@ -434,9 +434,9 @@ jobs:
   #   - name: Set up Python
   #     uses: actions/setup-python@v4
   #     with:
-  #       python-version: '3.7'
+  #       python-version: '3.9'
   #   - name: Install dependencies cache
-  #     uses: actions/cache@v2
+  #     uses: actions/cache@v4
   #     with:
   #       path: ~/.cache/pip
   #       key: pip-cache-datadriven
@@ -455,9 +455,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -473,9 +473,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
