@@ -14,11 +14,8 @@ class TestTutorialsPartTwo(unittest.TestCase):
         
     def test_notebook_tutorials(self):
         notebook_paths = [
-            './examples/07_State Estimation.ipynb',
             './examples/08_Prediction.ipynb',
-            './examples/09_Prognostic Example.ipynb',
-            './examples/10_Prognostics Server.ipynb',
-            './examples/2024PHMTutorial.ipynb'
+            './examples/09_Prognostic Example.ipynb'
         ]
         for notebook_path in notebook_paths:
                 self.run_notebook_test(notebook_path)
@@ -26,7 +23,7 @@ class TestTutorialsPartTwo(unittest.TestCase):
 def main():
     load_test = unittest.TestLoader()
     runner = unittest.TextTestRunner()
-    print("\n\nTesting Tutorials")
+    print("\n\nTesting Tutorials - Part 3")
     result = runner.run(load_test.loadTestsFromTestCase(TestTutorialsPartTwo)).wasSuccessful()
 
     if not result:
