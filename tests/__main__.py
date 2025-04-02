@@ -7,6 +7,7 @@ from tests.test_composite import main as composite_main
 from tests.test_data_model import main as lstm_main
 from tests.test_datasets import main as datasets_main
 from tests.test_dict_like_matrix_wrapper import main as dict_like_matrix_wrapper_main
+from tests.test_discrete_state import main as discrete_state_main
 from tests.test_direct import main as direct_main
 from tests.test_ensemble import main as ensemble_main
 from tests.test_estimate_params import main as estimate_params_main
@@ -62,6 +63,11 @@ if __name__ == '__main__':
 
     try:
         direct_main()
+    except Exception:
+        was_successful = False
+
+    try:
+        discrete_state_main()
     except Exception:
         was_successful = False
 

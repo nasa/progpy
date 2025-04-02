@@ -167,7 +167,7 @@ class SmallRotorcraft(AircraftModel):
             air_density=self.parameters['air_density']),
           'lift': None}
 
-    def dx(self, x, u):
+    def next_state(self, x, u, dt):
         # Extract useful values
         m = self.parameters['mass']['total']  # vehicle mass
         Ixx, Iyy, Izz = self.parameters['mass']['Ixx'], self.parameters['mass']['Iyy'], self.parameters['mass']['Izz']  # vehicle inertia
@@ -217,27 +217,33 @@ class SmallRotorcraft(AircraftModel):
 
         # Update state vector
         # -------------------
-        dxdt = np.zeros((len(x),))
 
-        dxdt[0] = vx_a    # x-position increment (airspeed along x-direction)
-        dxdt[1] = vy_a    # y-position increment (airspeed along y-direction)
-        dxdt[2] = vz_a    # z-position increment (airspeed along z-direction)
+        # Positions
+        x['x'] += vx_a*dt
+        x['y'] += vy_a*dt
+        x['z'] += vz_a*dt
 
-        dxdt[3] = p + q * sin_phi * tan_theta + r * cos_phi * tan_theta        # Euler's angle phi increment
-        dxdt[4] = q * cos_phi - r * sin_phi                                    # Euler's angle theta increment
-        dxdt[5] = q * sin_phi / cos_theta + r * cos_phi / cos_theta            # Euler's angle psi increment
+        # Euler's angles
+        x['phi'] += (p + q * sin_phi * tan_theta + r * cos_phi * tan_theta)*dt
+        x['theta'] += (q * cos_phi - r * sin_phi)*dt
+        x['psi'] += (q * sin_phi / cos_theta + r * cos_phi / cos_theta)*dt
 
-        dxdt[6] = ((sin_theta * cos_psi * cos_phi + sin_phi * sin_psi) * T - fe_drag[0]) / m   # Acceleration along x-axis
-        dxdt[7] = ((sin_theta * sin_psi * cos_phi - sin_phi * cos_psi) * T - fe_drag[1]) / m   # Acceleration along y-axis
-        dxdt[8] = -self.parameters['gravity'] + (cos_phi * cos_theta * T - fe_drag[2]) / m   # Acceleration along z-axis
+        # Velocities
+        x['vx'] += dt*((sin_theta * cos_psi * cos_phi + sin_phi * sin_psi) * T - fe_drag[0]) / m
+        x['vy'] += dt*((sin_theta * sin_psi * cos_phi - sin_phi * cos_psi) * T - fe_drag[1]) / m
+        x['vz'] += dt*((cos_phi * cos_theta * T - fe_drag[2]) / m - self.parameters['gravity'])
 
-        dxdt[9] = ((Iyy - Izz) * q * r + tp * self.parameters['geom']['arm_length']) / Ixx  # Angular acceleration along body x-axis: roll rate
-        dxdt[10] = ((Izz - Ixx) * p * r + tq * self.parameters['geom']['arm_length']) / Iyy  # Angular acceleration along body y-axis: pitch rate
-        dxdt[11] = ((Ixx - Iyy) * p * q + tr * 1) / Izz  # Angular acceleration along body z-axis: yaw rate
-        dxdt[12] = 1     # Auxiliary time variable
-        dxdt[13] = (u['mission_complete'] - x['mission_complete']) / self.parameters['dt']    # Value to keep track of percentage of mission completed
+        # Angular rates
+        x['p'] += dt*((Iyy - Izz) * q * r + tp * self.parameters['geom']['arm_length']) / Ixx
+        x['q'] += dt*((Izz - Ixx) * p * r + tq * self.parameters['geom']['arm_length']) / Iyy
+        x['r'] += dt*((Ixx - Iyy) * p * q + tr * 1) / Izz
 
-        return self.StateContainer(np.array([np.atleast_1d(item) for item in dxdt]))
+        # Time
+        x['t'] += dt
+
+        x['mission_complete'] = u['mission_complete']
+
+        return x
 
     def event_state(self, x) -> dict:
         # Based on percentage of reference trajectory completed
