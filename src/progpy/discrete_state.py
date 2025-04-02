@@ -28,7 +28,7 @@ def _sequential_transition(state, disruption):
 
 def _no_transition(state, disruption):
     """
-    No transition at all. This is used for case where all transitions are done manually (e.g., in state transition equation). This way state will not be effected by noise
+    No transition at all. This is used for case where all transitions are done manually (e.g., in state transition equation). This way state will not be affected by noise
     """
     return state
 
@@ -60,7 +60,7 @@ def create_discrete_state(n_states: int, names: list=None, transition=_random_tr
     """
     .. versionadded:: 1.8.0
 
-    Crate a discrete state for use with a progpy model. Users construct a discrete state for the default x0 to make that state discrete.
+    Create a discrete state for use with a progpy model. Users construct a discrete state for the default x0 to make that state discrete.
 
     Args:
         n_states (int): Number of possible states.
