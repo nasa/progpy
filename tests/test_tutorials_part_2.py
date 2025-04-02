@@ -15,7 +15,7 @@ class TestTutorialsPartTwo(unittest.TestCase):
     def test_notebook_tutorials(self):
         notebook_paths = [
             './examples/05_Data Driven.ipynb',
-            './examples/06_Combining Models.ipynb'
+            './examples/06_Combining Models.ipynb',
             './examples/07_State Estimation.ipynb'
         ]
         for notebook_path in notebook_paths:
