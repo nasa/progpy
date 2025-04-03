@@ -434,7 +434,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_tutorials
   test_tutorials_part_2:
-    timeout-minutes: 25
+    timeout-minutes: 35
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -453,7 +453,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_tutorials_part_2
   test_tutorials_part_3:
-    timeout-minutes: 25
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -472,7 +472,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_tutorials_part_3
   test_tutorials_part_4:
-    timeout-minutes: 25
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
