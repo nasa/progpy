@@ -6,6 +6,7 @@ import pandas as pd
 from typing import Union
 from warnings import warn
 
+int_fix = lambda x: np.float64(x) if isinstance(x, (int, type(None))) else x
 
 class DictLikeMatrixWrapper():
     """
@@ -24,17 +25,33 @@ class DictLikeMatrixWrapper():
             keys = list(keys)  # creates list with keys
         self._keys = keys.copy()
         if isinstance(data, np.matrix):
-            self._matrix = np.array(data, dtype=np.float64)
+            self._matrix = np.array(data)
+            if np.issubdtype(data.dtype, (np.integer)):
+                # If integer, switch to float
+                # Using int type will force results to remain ints (so if you add float to it
+                # then there will be an error or it will again round to int
+                data = np.array(data, dtype=np.float64)
         elif isinstance(data, np.ndarray):
             if data.ndim == 1:
                 data = data[np.newaxis].T
+            if np.issubdtype(data.dtype, np.integer):
+                # If integer, switch to float
+                # Using int type will force results to remain ints (so if you add float to it
+                # then there will be an error or it will again round to int
+                data = np.array(data, dtype=np.float64)
+            elif np.issubdtype(data.dtype, np.dtype('O')):
+                # if "object" (e.g., includes DiscreteState or None)
+                # Make sure each element if float or object
+                for i in range(data.shape[0]):
+                    for j in range(data.shape[1]):
+                        data[i][j] = int_fix(data[i][j])
             self._matrix = data
         elif isinstance(data, (dict, DictLikeMatrixWrapper)):
             # ravel is used to prevent vectorized case, where data[key] returns multiple values,  from resulting in a 3D matrix
             self._matrix = np.array(
                 [
-                    np.ravel([data[key]]) if key in data else [None] for key in keys
-                ], dtype=np.float64)
+                    np.ravel([int_fix(data[key])]) if key in data else [np.float64('nan')] for key in keys
+                ])
         else:
             raise TypeError(f"Data must be a dictionary or numpy array, not {type(data)}")
 
@@ -107,7 +124,14 @@ class DictLikeMatrixWrapper():
         """
         add another matrix to the existing matrix
         """
-        return DictLikeMatrixWrapper(self._keys, self._matrix + other.matrix)
+        if isinstance(other, DictLikeMatrixWrapper):
+            return DictLikeMatrixWrapper(self._keys, self._matrix + other.matrix)
+        elif isinstance(other, np.ndarray):
+            return DictLikeMatrixWrapper(self._keys, self._matrix + other)
+        elif isinstance(other, dict):
+            DictLikeMatrixWrapper(self._keys, [self[key] + other[key] for key in self._keys])
+        else:
+            raise TypeError()
 
     def __iter__(self):
         """

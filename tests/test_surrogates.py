@@ -168,7 +168,10 @@ class TestSurrogate(unittest.TestCase):
         surrogate_results = surrogate.simulate_to_threshold(future_loading, **options_sim)
 
         self.assertAlmostEqual(surrogate_results.times[-1], result.times[-1], delta=250)
-        MSE = m.calc_error(surrogate_results.times, surrogate_results.inputs, surrogate_results.outputs)
+        # Note: base must be surrogate
+        #  if base is m, then this will cause an error because surrogate does not have output ('t')
+        #  this is by design, we're testing the case where the surrogate has a subset of outputs
+        MSE = surrogate.calc_error(result.times, result.inputs, result.outputs)
         self.assertLess(MSE, 0.02) # Pretty good approx
     
     def test_surrogate_subsets(self):
