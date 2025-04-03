@@ -9,7 +9,7 @@ sys.path.append(join(dirname(__file__), ".."))
 
 class TestTutorials(unittest.TestCase):
     def run_notebook_test(self, notebook_path):
-        with testbook(notebook_path, execute=True, timeout=300) as tb:
+        with testbook(notebook_path, execute=True) as tb:
             self.assertEqual(tb.__class__.__name__, "TestbookNotebookClient")
         
     def test_notebook_tutorials(self):
