@@ -9,11 +9,12 @@ sys.path.append(join(dirname(__file__), ".."))
 
 class TestTutorialsPartTwo(unittest.TestCase):
     def run_notebook_test(self, notebook_path):
-        with testbook(notebook_path, execute=True, timeout=600) as tb:
+        with testbook(notebook_path, execute=True, timeout=1200) as tb:
             self.assertEqual(tb.__class__.__name__, "TestbookNotebookClient")
         
     def test_notebook_tutorials(self):
         notebook_paths = [
+            './examples/07_State Estimation.ipynb',
             './examples/08_Prediction.ipynb',
             './examples/09_Prognostic Example.ipynb'
         ]
