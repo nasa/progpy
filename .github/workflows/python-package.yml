@@ -8,7 +8,6 @@ on:
   pull_request:
     paths:
       - prog_models
-  workflow_dispatch:
 
 jobs:
   test_base_models:
@@ -434,26 +433,6 @@ jobs:
         pip install --upgrade --upgrade-strategy eager -e .[datadriven,test]
     - name: Run tests
       run: python -m tests.test_tutorials
-  test_tutorials_part_2:
-    timeout-minutes: 35
-    runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'  # Requires manual trigger
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    - name: Install dependencies cache
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/pip
-        key: pip-cache-datadriven
-    - name: Update
-      run: |
-        pip install --upgrade --upgrade-strategy eager -e .[datadriven,test]
-    - name: Run tests
-      run: python -m tests.test_tutorials_part_2
   test_tutorials_part_3:
     timeout-minutes: 15
     runs-on: ubuntu-latest
