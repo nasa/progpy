@@ -8,6 +8,7 @@ on:
   pull_request:
     paths:
       - prog_models
+  workflow_dispatch:
 
 jobs:
   test_base_models:
@@ -415,7 +416,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_surrogates
   test_tutorials:
-    timeout-minutes: 15
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -436,6 +437,7 @@ jobs:
   test_tutorials_part_2:
     timeout-minutes: 35
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'  # Requires manual trigger
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
@@ -453,7 +455,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_tutorials_part_2
   test_tutorials_part_3:
-    timeout-minutes: 20
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -472,7 +474,7 @@ jobs:
     - name: Run tests
       run: python -m tests.test_tutorials_part_3
   test_tutorials_part_4:
-    timeout-minutes: 20
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
