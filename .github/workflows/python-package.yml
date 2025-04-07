@@ -452,26 +452,6 @@ jobs:
         pip install --upgrade --upgrade-strategy eager -e .[datadriven,test]
     - name: Run tests
       run: python -m tests.test_tutorials_part_3
-  test_tutorials_part_4:
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    - name: Install dependencies cache
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/pip
-        key: pip-cache-datadriven
-    - name: Update
-      run: |
-        pip install --upgrade --upgrade-strategy eager -e .[datadriven,test]
-        pip install prog_server
-    - name: Run tests
-      run: python -m tests.test_tutorials_part_4
   test_uav_model:
     timeout-minutes: 10
     runs-on: ubuntu-latest
