@@ -1020,13 +1020,14 @@ class PrognosticsModel(ABC):
                 saved_states.append(deepcopy(x))  # Avoid optimization where x is not copied
                 saved_outputs.append(output(x))
                 saved_event_states.append(event_state(x))
-                print("Time: {}\n\tInput: {}\n\tState: {}\n\tOutput: {}\n\tEvent State: {}\n"
+                print("Time: {}\n\tInput: {}\n\tState: {}\n\tOutput: {}\n\tEvent State: {}\n\tParameters: {}"
                     .format(
                         saved_times[-1],
                         saved_inputs[-1],
                         saved_states[-1],
                         saved_outputs[-1],
-                        saved_event_states[-1]))  
+                        saved_event_states[-1],
+                        self.parameters))  
         else:
             def update_all():
                 saved_times.append(t)
