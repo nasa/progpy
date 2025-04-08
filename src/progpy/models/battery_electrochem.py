@@ -736,10 +736,10 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     is_vectorized = True
 
     param_callbacks = {  # Callbacks for derived parameters
-        'qMobile': [update_qmax],
+        # 'qMobile': [update_qmax],
         'VolSFraction': [update_vols, update_qpSBmin, update_qSBmax],
         'Vol': [update_vols],
-        'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
         'xpMin': [update_qpSBmin],
         'xpMax': [update_xnMin],
         'xnMin': [update_qnmin],
@@ -791,7 +791,22 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     }
 
     def dx(self, x, u):
-        params = self.parameters     
+        params = self.parameters    
+
+        # 'qMobile': [update_qmax],
+        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
+
+        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+        params['x0'] ={
+            **params['x0'],
+            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
+            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
+        }
+        
+        params['qnMin'] = params['qMax']*params['xnMin']
+        params['qnMax'] = params['qMax']*params['xnMax']
+        params['qSMax'] = params['qMax']*params['VolSFraction']
+        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
 
         # Negative Surface
         CnBulk = x['qnB']/params['VolB']
@@ -834,6 +849,10 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
 
         Tbdot = voltage_eta*u['i']/mC + (params['x0']['tb'] - x['tb'])/tau # Newman
 
+        qMobiledot = 0
+        Rodot = 0
+        tDiffusiondot = 0
+
         return self.StateContainer(np.array([
             np.atleast_1d(Tbdot),
             np.atleast_1d(Vodot),
@@ -843,13 +862,28 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
             np.atleast_1d(qnSdot),
             np.atleast_1d(qpBdot),
             np.atleast_1d(qpSdot),
-            np.atleast_1d(x['qMobile']),
-            np.atleast_1d(x['tDiffusion']),
-            np.atleast_1d(x['Ro'])
+            np.atleast_1d(qMobiledot),
+            np.atleast_1d(Rodot),
+            np.atleast_1d(tDiffusiondot)
         ]))
 
     def performance_metrics(self, x):
         params = self.parameters
+
+         # 'qMobile': [update_qmax],
+        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
+
+        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+        params['x0'] ={
+            **params['x0'],
+            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
+            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
+        }
+        params['qnMin'] = params['qMax']*params['xnMin']
+        params['qnMax'] = params['qMax']*params['xnMax']
+        params['qSMax'] = params['qMax']*params['VolSFraction']
+        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
+
         An = params['An']
         # Negative Surface
         xnS = x['qnS']/params['qSMax']
@@ -916,6 +950,21 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         # longer accurately captures this behavior, so voltage_EOD takes over as 
         # the driving factor. 
         params = self.parameters
+
+        # 'qMobile': [update_qmax],
+        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
+
+        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+        params['x0'] = {
+            **params['x0'],
+            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
+            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
+        }
+        params['qnMin'] = params['qMax']*params['xnMin']
+        params['qnMax'] = params['qMax']*params['xnMax']
+        params['qSMax'] = params['qMax']*params['VolSFraction']
+        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
+
         An = params['An']
         # Negative Surface
         xnS = x['qnS']/params['qSMax']
@@ -971,6 +1020,21 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
 
     def output(self, x):
         params = self.parameters
+
+        # 'qMobile': [update_qmax],
+        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
+
+        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+        params['x0'] = {
+            **params['x0'],
+            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
+            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
+        }
+        params['qnMin'] = params['qMax']*params['xnMin']
+        params['qnMax'] = params['qMax']*params['xnMax']
+        params['qSMax'] = params['qMax']*params['VolSFraction']
+        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
+
         An = params['An']
         # Negative Surface
         xnS = x['qnS']/params['qSMax']
