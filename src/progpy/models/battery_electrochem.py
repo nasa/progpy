@@ -728,12 +728,22 @@ class BatteryElectroChemEODEOL(BatteryElectroChemEOL, BatteryElectroChemEOD):
 BatteryElectroChem = BatteryElectroChemEODEOL
 
 class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
-    events = ['EOD']
+    events = ['EOD', 'InsufficientCapacity']
     inputs = ['i']
-    states = ['tb', 'Vo', 'Vsn', 'Vsp', 'qnB', 'qnS', 'qpB', 'qpS', 'qMobile', 'tDiffusion', 'Ro']
+    states = ['tb', 'Vo', 'Vsn', 'Vsp', 'qnB', 'qnS', 'qpB', 'qpS', 'qMobile', 'tDiffusion', 'Ro', 'Ro2', 'qMax', 'D']
     outputs = ['t', 'v']
     performance_metric_keys = ['max_i']
-    is_vectorized = True
+
+    is_vectorized = False
+
+    state_limits = {
+        'tb': (0, np.inf),  # Limited by Absolute Zero (0 K)
+        'qnB': (0, np.inf),
+        'qnS': (0, np.inf),
+        'qpB': (0, np.inf),
+        'qpS': (0, np.inf),
+        'qMax': (0, np.inf)
+    }
 
     param_callbacks = {  # Callbacks for derived parameters
         # 'qMobile': [update_qmax],
@@ -751,7 +761,12 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         'xnMin': 0.0,
         'xpMax': 1.0,
         'xpMin': 0.4,
-        'qMax': 7600/(0.6-0.0),
+        'qMax': 7600/(0.6),
+
+        'wq': -1e-2,
+        'wr': 1e-6,
+        'wd': 1e-2,
+        'qMaxThreshold': 5320,
         
         # Li-ion parameters
         'alpha': 0.5,
@@ -762,7 +777,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         'Vol': 2e-5,
         'VolSFraction': 0.1,
 
-        # time constants
+        # Time constants
         'to': 6.08671,
         'tsn': 1001.38,
         'tsp': 46.4311,
@@ -781,8 +796,11 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
             'Vsp': 0,
             'tb': 292.1,  # in K, about 18.95 C
             'qMobile': 7600,
+            'tDiffusion': 7e6,
             'Ro': 0.117215,
-            'tDiffusion': 7e6
+            'Ro2': 0.117215,
+            'qMax': 7600,
+            'D': 7e6
         },
 
         # End of discharge voltage threshold
@@ -791,7 +809,11 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     }
 
     def dx(self, x, u):
-        params = self.parameters    
+        params = self.parameters
+
+        x['qMobile'] = x['qMax']
+        x['Ro'] = x['Ro2']
+        x['tDiffusion'] = x['D']
 
         # 'qMobile': [update_qmax],
         params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
@@ -850,8 +872,12 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         Tbdot = voltage_eta*u['i']/mC + (params['x0']['tb'] - x['tb'])/tau # Newman
 
         qMobiledot = 0
-        Rodot = 0
         tDiffusiondot = 0
+        Rodot = 0
+        
+        Ro2dot = params['wr'] * abs(u['i'])
+        qMaxdot = params['wq'] * abs(u['i'])
+        Ddot = params['wd'] * abs(u['i'])
 
         return self.StateContainer(np.array([
             np.atleast_1d(Tbdot),
@@ -863,26 +889,15 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
             np.atleast_1d(qpBdot),
             np.atleast_1d(qpSdot),
             np.atleast_1d(qMobiledot),
+            np.atleast_1d(tDiffusiondot),
             np.atleast_1d(Rodot),
-            np.atleast_1d(tDiffusiondot)
+            np.atleast_1d(Ro2dot),
+            np.atleast_1d(qMaxdot),
+            np.atleast_1d(Ddot)
         ]))
 
     def performance_metrics(self, x):
         params = self.parameters
-
-         # 'qMobile': [update_qmax],
-        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
-
-        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
-        params['x0'] ={
-            **params['x0'],
-            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
-            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
-        }
-        params['qnMin'] = params['qMax']*params['xnMin']
-        params['qnMax'] = params['qMax']*params['xnMax']
-        params['qSMax'] = params['qMax']*params['VolSFraction']
-        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
 
         An = params['An']
         # Negative Surface
@@ -951,20 +966,6 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         # the driving factor. 
         params = self.parameters
 
-        # 'qMobile': [update_qmax],
-        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
-
-        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
-        params['x0'] = {
-            **params['x0'],
-            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
-            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
-        }
-        params['qnMin'] = params['qMax']*params['xnMin']
-        params['qnMax'] = params['qMax']*params['xnMax']
-        params['qSMax'] = params['qMax']*params['VolSFraction']
-        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
-
         An = params['An']
         # Negative Surface
         xnS = x['qnS']/params['qSMax']
@@ -1014,12 +1015,18 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
 
         charge_EOD = (x['qnS'] + x['qnB'])/self.parameters['qnMax']
         voltage_EOD = (v - self.parameters['VEOD'])/self.parameters['VDropoff'] 
+
+        e_state = (x['qMax']-self.parameters['qMaxThreshold'])/(self.parameters['x0']['qMax']-self.parameters['qMaxThreshold'])
+    
         return {
-            'EOD': np.clip(min(charge_EOD, voltage_EOD), 0, 1)
+            'EOD': np.clip(min(charge_EOD, voltage_EOD), 0, 1),
+            'InsufficientCapacity': max(min(e_state, 1.0), 0.0)
         }
 
     def output(self, x):
         params = self.parameters
+
+        x['qMobile'] = x['qMax']
 
         # 'qMobile': [update_qmax],
         params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
@@ -1092,5 +1099,6 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
 
         # Return true if voltage is less than the voltage threshold
         return {
-             'EOD': z['v'] < self.parameters['VEOD']
+            'EOD': z['v'] < self.parameters['VEOD'],
+            'InsufficientCapacity': x['qMax'] < self.parameters['qMaxThreshold']
         }
