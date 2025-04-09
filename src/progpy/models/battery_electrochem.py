@@ -761,8 +761,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         'xnMin': 0.0,
         'xpMax': 1.0,
         'xpMin': 0.4,
-        'qMax': 7600/(0.6),
-
+        'qMax': 7600/(0.6 - 0.0),
         'wq': -1e-2,
         'wr': 1e-6,
         'wd': 1e-2,
