@@ -1026,8 +1026,7 @@ class PrognosticsModel(ABC):
                         saved_inputs[-1],
                         saved_states[-1],
                         saved_outputs[-1],
-                        saved_event_states[-1],
-                        self.parameters))  
+                        saved_event_states[-1]))  
         else:
             def update_all():
                 saved_times.append(t)
