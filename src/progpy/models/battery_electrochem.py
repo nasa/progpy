@@ -137,6 +137,130 @@ def update_qSBmax(params: dict) -> dict:
         'qBMax': params['qMax']*(1.0-params['VolSFraction']),
     }
 
+def update_local_params(x, params: dict) -> dict:
+    # 'qMobile': [update_qmax],
+    params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
+
+    # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+    params['x0'] = {
+        **params['x0'],
+        'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
+        'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
+    }
+    params['qnMin'] = params['qMax']*params['xnMin']
+    params['qnMax'] = params['qMax']*params['xnMax']
+    params['qSMax'] = params['qMax']*params['VolSFraction']
+    params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
+
+    return params
+
+def calculate_temp_voltage(x, params):
+    An = params['An']
+    # Negative Surface
+    xnS = x['qnS']/params['qSMax']
+    xnS2 = xnS+xnS  # Note: in python x+x is more efficient than 2*x
+
+    one_minus_xnS = 1 - xnS
+    xnS2_minus_1 = xnS2 - 1
+    VenParts = [
+        An[0] *xnS2_minus_1/F,  # Ven0
+        An[1] *(xnS2_minus_1**2  - (xnS2*one_minus_xnS))/F,  # Ven1
+        An[2] *(xnS2_minus_1**3  - (4 *xnS*one_minus_xnS)*xnS2_minus_1)/F,  #Ven2
+        An[3] *(xnS2_minus_1**4  - (6 *xnS*one_minus_xnS)*xnS2_minus_1**2) /F,  #Ven3
+        An[4] *(xnS2_minus_1**5  - (8 *xnS*one_minus_xnS)*xnS2_minus_1**3) /F,  #Ven4
+        An[5] *(xnS2_minus_1**6  - (10*xnS*one_minus_xnS)*xnS2_minus_1**4) /F,  #Ven5
+        An[6] *(xnS2_minus_1**7  - (12*xnS*one_minus_xnS)*xnS2_minus_1**5) /F,  #Ven6
+        An[7] *(xnS2_minus_1**8  - (14*xnS*one_minus_xnS)*xnS2_minus_1**6) /F,  #Ven7
+        An[8] *(xnS2_minus_1**9  - (16*xnS*one_minus_xnS)*xnS2_minus_1**7) /F,  #Ven8
+        An[9] *(xnS2_minus_1**10 - (18*xnS*one_minus_xnS)*xnS2_minus_1**8) /F,  #Ven9
+        An[10]*(xnS2_minus_1**11 - (20*xnS*one_minus_xnS)*xnS2_minus_1**9) /F,  #Ven10
+        An[11]*(xnS2_minus_1**12 - (22*xnS*one_minus_xnS)*xnS2_minus_1**10)/F,  #Ven11
+        An[12]*(xnS2_minus_1**13 - (24*xnS*one_minus_xnS)*xnS2_minus_1**11)/F   #Ven12
+    ]
+    Ven = params['U0n'] + R*x['tb']/F*np.log(one_minus_xnS/xnS) + sum(VenParts)
+
+    # Positive Surface
+    Ap = params['Ap']
+    xpS = x['qpS']/params['qSMax']
+    one_minus_xpS = 1 - xpS
+    xpS2 = xpS + xpS
+    xpS2_minus_1 = xpS2 - 1
+    VepParts = [
+        Ap[0] *(xpS2_minus_1)/F,  #Vep0
+        Ap[1] *((xpS2_minus_1)**2  - (xpS2*one_minus_xpS))/F,  #Vep1 
+        Ap[2] *((xpS2_minus_1)**3  - (4 *xpS*one_minus_xpS)*(xpS2_minus_1)) /F,  #Vep2
+        Ap[3] *((xpS2_minus_1)**4  - (6 *xpS*one_minus_xpS)*(xpS2_minus_1)**(2)) /F,  #Vep3
+        Ap[4] *((xpS2_minus_1)**5  - (8 *xpS*one_minus_xpS)*(xpS2_minus_1)**(3)) /F,  #Vep4
+        Ap[5] *((xpS2_minus_1)**6  - (10*xpS*one_minus_xpS)*(xpS2_minus_1)**(4)) /F,  #Vep5
+        Ap[6] *((xpS2_minus_1)**7  - (12*xpS*one_minus_xpS)*(xpS2_minus_1)**(5)) /F,  #Vep6
+        Ap[7] *((xpS2_minus_1)**8  - (14*xpS*one_minus_xpS)*(xpS2_minus_1)**(6)) /F,  #Vep7
+        Ap[8] *((xpS2_minus_1)**9  - (16*xpS*one_minus_xpS)*(xpS2_minus_1)**(7)) /F,  #Vep8
+        Ap[9] *((xpS2_minus_1)**10 - (18*xpS*one_minus_xpS)*(xpS2_minus_1)**(8)) /F,  #Vep9
+        Ap[10]*((xpS2_minus_1)**11 - (20*xpS*one_minus_xpS)*(xpS2_minus_1)**(9)) /F,  #Vep10
+        Ap[11]*((xpS2_minus_1)**12 - (22*xpS*one_minus_xpS)*(xpS2_minus_1)**(10))/F,  #Vep11
+        Ap[12]*((xpS2_minus_1)**13 - (24*xpS*one_minus_xpS)*(xpS2_minus_1)**(11))/F   #Vep12
+    ]
+    Vep = params['U0p'] + R*x['tb']/F*np.log(one_minus_xpS/xpS) + sum(VepParts)
+
+    t = np.atleast_1d(x['tb'] - 273.15)
+    v = np.atleast_1d(Vep - Ven - x['Vo'] - x['Vsn'] - x['Vsp'])
+
+    return (t, v)
+
+def calculate_EOD(x, params):
+    original_params = params
+
+    An = params['An']
+    # Negative Surface
+    xnS = x['qnS']/params['qSMax']
+    xnS2 = xnS+xnS  # Note: in python x+x is more efficient than 2*x
+    one_minus_xnS = 1 - xnS
+    xnS2_minus_1 = xnS2 - 1
+    VenParts = [
+        An[0] *xnS2_minus_1/F,  # Ven0
+        An[1] *(xnS2_minus_1**2  - (xnS2*one_minus_xnS))/F,  # Ven1
+        An[2] *(xnS2_minus_1**3  - (4 *xnS*one_minus_xnS)*xnS2_minus_1)/F,  #Ven2
+        An[3] *(xnS2_minus_1**4  - (6 *xnS*one_minus_xnS)*xnS2_minus_1**2) /F,  #Ven3
+        An[4] *(xnS2_minus_1**5  - (8 *xnS*one_minus_xnS)*xnS2_minus_1**3) /F,  #Ven4
+        An[5] *(xnS2_minus_1**6  - (10*xnS*one_minus_xnS)*xnS2_minus_1**4) /F,  #Ven5
+        An[6] *(xnS2_minus_1**7  - (12*xnS*one_minus_xnS)*xnS2_minus_1**5) /F,  #Ven6
+        An[7] *(xnS2_minus_1**8  - (14*xnS*one_minus_xnS)*xnS2_minus_1**6) /F,  #Ven7
+        An[8] *(xnS2_minus_1**9  - (16*xnS*one_minus_xnS)*xnS2_minus_1**7) /F,  #Ven8
+        An[9] *(xnS2_minus_1**10 - (18*xnS*one_minus_xnS)*xnS2_minus_1**8) /F,  #Ven9
+        An[10]*(xnS2_minus_1**11 - (20*xnS*one_minus_xnS)*xnS2_minus_1**9) /F,  #Ven10
+        An[11]*(xnS2_minus_1**12 - (22*xnS*one_minus_xnS)*xnS2_minus_1**10)/F,  #Ven11
+        An[12]*(xnS2_minus_1**13 - (24*xnS*one_minus_xnS)*xnS2_minus_1**11)/F   #Ven12
+    ]
+    Ven = params['U0n'] + R*x['tb']/F*np.log(one_minus_xnS/xnS) + sum(VenParts)
+
+    # Positive Surface
+    Ap = params['Ap']
+    xpS = x['qpS']/params['qSMax']
+    one_minus_xpS = 1 - xpS
+    xpS2 = xpS + xpS
+    xpS2_minus_1 = xpS2 - 1
+    VepParts = [
+        Ap[0] *(xpS2_minus_1)/F,  #Vep0
+        Ap[1] *((xpS2_minus_1)**2  - (xpS2*one_minus_xpS))/F,  #Vep1 
+        Ap[2] *((xpS2_minus_1)**3  - (4 *xpS*one_minus_xpS)*(xpS2_minus_1)) /F,  #Vep2
+        Ap[3] *((xpS2_minus_1)**4  - (6 *xpS*one_minus_xpS)*(xpS2_minus_1)**(2)) /F,  #Vep3
+        Ap[4] *((xpS2_minus_1)**5  - (8 *xpS*one_minus_xpS)*(xpS2_minus_1)**(3)) /F,  #Vep4
+        Ap[5] *((xpS2_minus_1)**6  - (10*xpS*one_minus_xpS)*(xpS2_minus_1)**(4)) /F,  #Vep5
+        Ap[6] *((xpS2_minus_1)**7  - (12*xpS*one_minus_xpS)*(xpS2_minus_1)**(5)) /F,  #Vep6
+        Ap[7] *((xpS2_minus_1)**8  - (14*xpS*one_minus_xpS)*(xpS2_minus_1)**(6)) /F,  #Vep7
+        Ap[8] *((xpS2_minus_1)**9  - (16*xpS*one_minus_xpS)*(xpS2_minus_1)**(7)) /F,  #Vep8
+        Ap[9] *((xpS2_minus_1)**10 - (18*xpS*one_minus_xpS)*(xpS2_minus_1)**(8)) /F,  #Vep9
+        Ap[10]*((xpS2_minus_1)**11 - (20*xpS*one_minus_xpS)*(xpS2_minus_1)**(9)) /F,  #Vep10
+        Ap[11]*((xpS2_minus_1)**12 - (22*xpS*one_minus_xpS)*(xpS2_minus_1)**(10))/F,  #Vep11
+        Ap[12]*((xpS2_minus_1)**13 - (24*xpS*one_minus_xpS)*(xpS2_minus_1)**(11))/F   #Vep12
+    ]
+    Vep = params['U0p'] + R*x['tb']/F*np.log(one_minus_xpS/xpS) + sum(VepParts)
+    v = Vep - Ven - x['Vo'] - x['Vsn'] - x['Vsp']
+
+    charge_EOD = (x['qnS'] + x['qnB'])/original_params['qnMax']
+    voltage_EOD = (v - original_params['VEOD'])/original_params['VDropoff']
+
+    return np.clip(min(charge_EOD, voltage_EOD), 0, 1)
 
 class BatteryElectroChemEOD(PrognosticsModel):
     """
@@ -423,119 +547,24 @@ class BatteryElectroChemEOD(PrognosticsModel):
         # longer accurately captures this behavior, so voltage_EOD takes over as 
         # the driving factor. 
         params = self.parameters
-        An = params['An']
-        # Negative Surface
-        xnS = x['qnS']/params['qSMax']
-        xnS2 = xnS+xnS  # Note: in python x+x is more efficient than 2*x
-        one_minus_xnS = 1 - xnS
-        xnS2_minus_1 = xnS2 - 1
-        VenParts = [
-            An[0] *xnS2_minus_1/F,  # Ven0
-            An[1] *(xnS2_minus_1**2  - (xnS2*one_minus_xnS))/F,  # Ven1
-            An[2] *(xnS2_minus_1**3  - (4 *xnS*one_minus_xnS)*xnS2_minus_1)/F,  #Ven2
-            An[3] *(xnS2_minus_1**4  - (6 *xnS*one_minus_xnS)*xnS2_minus_1**2) /F,  #Ven3
-            An[4] *(xnS2_minus_1**5  - (8 *xnS*one_minus_xnS)*xnS2_minus_1**3) /F,  #Ven4
-            An[5] *(xnS2_minus_1**6  - (10*xnS*one_minus_xnS)*xnS2_minus_1**4) /F,  #Ven5
-            An[6] *(xnS2_minus_1**7  - (12*xnS*one_minus_xnS)*xnS2_minus_1**5) /F,  #Ven6
-            An[7] *(xnS2_minus_1**8  - (14*xnS*one_minus_xnS)*xnS2_minus_1**6) /F,  #Ven7
-            An[8] *(xnS2_minus_1**9  - (16*xnS*one_minus_xnS)*xnS2_minus_1**7) /F,  #Ven8
-            An[9] *(xnS2_minus_1**10 - (18*xnS*one_minus_xnS)*xnS2_minus_1**8) /F,  #Ven9
-            An[10]*(xnS2_minus_1**11 - (20*xnS*one_minus_xnS)*xnS2_minus_1**9) /F,  #Ven10
-            An[11]*(xnS2_minus_1**12 - (22*xnS*one_minus_xnS)*xnS2_minus_1**10)/F,  #Ven11
-            An[12]*(xnS2_minus_1**13 - (24*xnS*one_minus_xnS)*xnS2_minus_1**11)/F   #Ven12
-        ]
-        Ven = params['U0n'] + R*x['tb']/F*np.log(one_minus_xnS/xnS) + sum(VenParts)
 
-        # Positive Surface
-        Ap = params['Ap']
-        xpS = x['qpS']/params['qSMax']
-        one_minus_xpS = 1 - xpS
-        xpS2 = xpS + xpS
-        xpS2_minus_1 = xpS2 - 1
-        VepParts = [
-            Ap[0] *(xpS2_minus_1)/F,  #Vep0
-            Ap[1] *((xpS2_minus_1)**2  - (xpS2*one_minus_xpS))/F,  #Vep1 
-            Ap[2] *((xpS2_minus_1)**3  - (4 *xpS*one_minus_xpS)*(xpS2_minus_1)) /F,  #Vep2
-            Ap[3] *((xpS2_minus_1)**4  - (6 *xpS*one_minus_xpS)*(xpS2_minus_1)**(2)) /F,  #Vep3
-            Ap[4] *((xpS2_minus_1)**5  - (8 *xpS*one_minus_xpS)*(xpS2_minus_1)**(3)) /F,  #Vep4
-            Ap[5] *((xpS2_minus_1)**6  - (10*xpS*one_minus_xpS)*(xpS2_minus_1)**(4)) /F,  #Vep5
-            Ap[6] *((xpS2_minus_1)**7  - (12*xpS*one_minus_xpS)*(xpS2_minus_1)**(5)) /F,  #Vep6
-            Ap[7] *((xpS2_minus_1)**8  - (14*xpS*one_minus_xpS)*(xpS2_minus_1)**(6)) /F,  #Vep7
-            Ap[8] *((xpS2_minus_1)**9  - (16*xpS*one_minus_xpS)*(xpS2_minus_1)**(7)) /F,  #Vep8
-            Ap[9] *((xpS2_minus_1)**10 - (18*xpS*one_minus_xpS)*(xpS2_minus_1)**(8)) /F,  #Vep9
-            Ap[10]*((xpS2_minus_1)**11 - (20*xpS*one_minus_xpS)*(xpS2_minus_1)**(9)) /F,  #Vep10
-            Ap[11]*((xpS2_minus_1)**12 - (22*xpS*one_minus_xpS)*(xpS2_minus_1)**(10))/F,  #Vep11
-            Ap[12]*((xpS2_minus_1)**13 - (24*xpS*one_minus_xpS)*(xpS2_minus_1)**(11))/F   #Vep12
-        ]
-        Vep = params['U0p'] + R*x['tb']/F*np.log(one_minus_xpS/xpS) + sum(VepParts)
-        v = Vep - Ven - x['Vo'] - x['Vsn'] - x['Vsp']
-
-        charge_EOD = (x['qnS'] + x['qnB'])/self.parameters['qnMax']
-        voltage_EOD = (v - self.parameters['VEOD'])/self.parameters['VDropoff'] 
         return {
-            'EOD': np.clip(min(charge_EOD, voltage_EOD), 0, 1)
+            'EOD': calculate_EOD(x, params)
         }
 
     def output(self, x):
         params = self.parameters
-        An = params['An']
-        # Negative Surface
-        xnS = x['qnS']/params['qSMax']
-        xnS2 = xnS+xnS  # Note: in python x+x is more efficient than 2*x
 
-        one_minus_xnS = 1 - xnS
-        xnS2_minus_1 = xnS2 - 1
-        VenParts = [
-            An[0] *xnS2_minus_1/F,  # Ven0
-            An[1] *(xnS2_minus_1**2  - (xnS2*one_minus_xnS))/F,  # Ven1
-            An[2] *(xnS2_minus_1**3  - (4 *xnS*one_minus_xnS)*xnS2_minus_1)/F,  #Ven2
-            An[3] *(xnS2_minus_1**4  - (6 *xnS*one_minus_xnS)*xnS2_minus_1**2) /F,  #Ven3
-            An[4] *(xnS2_minus_1**5  - (8 *xnS*one_minus_xnS)*xnS2_minus_1**3) /F,  #Ven4
-            An[5] *(xnS2_minus_1**6  - (10*xnS*one_minus_xnS)*xnS2_minus_1**4) /F,  #Ven5
-            An[6] *(xnS2_minus_1**7  - (12*xnS*one_minus_xnS)*xnS2_minus_1**5) /F,  #Ven6
-            An[7] *(xnS2_minus_1**8  - (14*xnS*one_minus_xnS)*xnS2_minus_1**6) /F,  #Ven7
-            An[8] *(xnS2_minus_1**9  - (16*xnS*one_minus_xnS)*xnS2_minus_1**7) /F,  #Ven8
-            An[9] *(xnS2_minus_1**10 - (18*xnS*one_minus_xnS)*xnS2_minus_1**8) /F,  #Ven9
-            An[10]*(xnS2_minus_1**11 - (20*xnS*one_minus_xnS)*xnS2_minus_1**9) /F,  #Ven10
-            An[11]*(xnS2_minus_1**12 - (22*xnS*one_minus_xnS)*xnS2_minus_1**10)/F,  #Ven11
-            An[12]*(xnS2_minus_1**13 - (24*xnS*one_minus_xnS)*xnS2_minus_1**11)/F   #Ven12
-        ]
-        Ven = params['U0n'] + R*x['tb']/F*np.log(one_minus_xnS/xnS) + sum(VenParts)
-
-        # Positive Surface
-        Ap = params['Ap']
-        xpS = x['qpS']/params['qSMax']
-        one_minus_xpS = 1 - xpS
-        xpS2 = xpS + xpS
-        xpS2_minus_1 = xpS2 - 1
-        VepParts = [
-            Ap[0] *(xpS2_minus_1)/F,  #Vep0
-            Ap[1] *((xpS2_minus_1)**2  - (xpS2*one_minus_xpS))/F,  #Vep1 
-            Ap[2] *((xpS2_minus_1)**3  - (4 *xpS*one_minus_xpS)*(xpS2_minus_1)) /F,  #Vep2
-            Ap[3] *((xpS2_minus_1)**4  - (6 *xpS*one_minus_xpS)*(xpS2_minus_1)**(2)) /F,  #Vep3
-            Ap[4] *((xpS2_minus_1)**5  - (8 *xpS*one_minus_xpS)*(xpS2_minus_1)**(3)) /F,  #Vep4
-            Ap[5] *((xpS2_minus_1)**6  - (10*xpS*one_minus_xpS)*(xpS2_minus_1)**(4)) /F,  #Vep5
-            Ap[6] *((xpS2_minus_1)**7  - (12*xpS*one_minus_xpS)*(xpS2_minus_1)**(5)) /F,  #Vep6
-            Ap[7] *((xpS2_minus_1)**8  - (14*xpS*one_minus_xpS)*(xpS2_minus_1)**(6)) /F,  #Vep7
-            Ap[8] *((xpS2_minus_1)**9  - (16*xpS*one_minus_xpS)*(xpS2_minus_1)**(7)) /F,  #Vep8
-            Ap[9] *((xpS2_minus_1)**10 - (18*xpS*one_minus_xpS)*(xpS2_minus_1)**(8)) /F,  #Vep9
-            Ap[10]*((xpS2_minus_1)**11 - (20*xpS*one_minus_xpS)*(xpS2_minus_1)**(9)) /F,  #Vep10
-            Ap[11]*((xpS2_minus_1)**12 - (22*xpS*one_minus_xpS)*(xpS2_minus_1)**(10))/F,  #Vep11
-            Ap[12]*((xpS2_minus_1)**13 - (24*xpS*one_minus_xpS)*(xpS2_minus_1)**(11))/F   #Vep12
-        ]
-        Vep = params['U0p'] + R*x['tb']/F*np.log(one_minus_xpS/xpS) + sum(VepParts)
-
-        return self.OutputContainer(np.array([
-            np.atleast_1d(x['tb'] - 273.15),
-            np.atleast_1d(Vep - Ven - x['Vo'] - x['Vsn'] - x['Vsp'])
-        ]))
-
+        t, v = calculate_temp_voltage(x, params)
+        
+        return self.OutputContainer(np.array([t, v]))
+        
     def threshold_met(self, x) -> dict:
         z = self.output(x)
 
         # Return true if voltage is less than the voltage threshold
         return {
-             'EOD': z['v'] < self.parameters['VEOD']
+            'EOD': z['v'] < self.parameters['VEOD']
         }
 
 
@@ -898,6 +927,21 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     def performance_metrics(self, x):
         params = self.parameters
 
+        # 'qMobile': [update_qmax],
+        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
+
+        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+        params['x0'] ={
+            **params['x0'],
+            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
+            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
+        }
+        
+        params['qnMin'] = params['qMax']*params['xnMin']
+        params['qnMax'] = params['qMax']*params['xnMax']
+        params['qSMax'] = params['qMax']*params['VolSFraction']
+        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
+
         An = params['An']
         # Negative Surface
         xnS = x['qnS']/params['qSMax']
@@ -980,60 +1024,10 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         params['qSMax'] = params['qMax']*params['VolSFraction']
         params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
 
-        An = params['An']
-        # Negative Surface
-        xnS = x['qnS']/params['qSMax']
-        xnS2 = xnS+xnS  # Note: in python x+x is more efficient than 2*x
-        one_minus_xnS = 1 - xnS
-        xnS2_minus_1 = xnS2 - 1
-        VenParts = [
-            An[0] *xnS2_minus_1/F,  # Ven0
-            An[1] *(xnS2_minus_1**2  - (xnS2*one_minus_xnS))/F,  # Ven1
-            An[2] *(xnS2_minus_1**3  - (4 *xnS*one_minus_xnS)*xnS2_minus_1)/F,  #Ven2
-            An[3] *(xnS2_minus_1**4  - (6 *xnS*one_minus_xnS)*xnS2_minus_1**2) /F,  #Ven3
-            An[4] *(xnS2_minus_1**5  - (8 *xnS*one_minus_xnS)*xnS2_minus_1**3) /F,  #Ven4
-            An[5] *(xnS2_minus_1**6  - (10*xnS*one_minus_xnS)*xnS2_minus_1**4) /F,  #Ven5
-            An[6] *(xnS2_minus_1**7  - (12*xnS*one_minus_xnS)*xnS2_minus_1**5) /F,  #Ven6
-            An[7] *(xnS2_minus_1**8  - (14*xnS*one_minus_xnS)*xnS2_minus_1**6) /F,  #Ven7
-            An[8] *(xnS2_minus_1**9  - (16*xnS*one_minus_xnS)*xnS2_minus_1**7) /F,  #Ven8
-            An[9] *(xnS2_minus_1**10 - (18*xnS*one_minus_xnS)*xnS2_minus_1**8) /F,  #Ven9
-            An[10]*(xnS2_minus_1**11 - (20*xnS*one_minus_xnS)*xnS2_minus_1**9) /F,  #Ven10
-            An[11]*(xnS2_minus_1**12 - (22*xnS*one_minus_xnS)*xnS2_minus_1**10)/F,  #Ven11
-            An[12]*(xnS2_minus_1**13 - (24*xnS*one_minus_xnS)*xnS2_minus_1**11)/F   #Ven12
-        ]
-        Ven = params['U0n'] + R*x['tb']/F*np.log(one_minus_xnS/xnS) + sum(VenParts)
-
-        # Positive Surface
-        Ap = params['Ap']
-        xpS = x['qpS']/params['qSMax']
-        one_minus_xpS = 1 - xpS
-        xpS2 = xpS + xpS
-        xpS2_minus_1 = xpS2 - 1
-        VepParts = [
-            Ap[0] *(xpS2_minus_1)/F,  #Vep0
-            Ap[1] *((xpS2_minus_1)**2  - (xpS2*one_minus_xpS))/F,  #Vep1 
-            Ap[2] *((xpS2_minus_1)**3  - (4 *xpS*one_minus_xpS)*(xpS2_minus_1)) /F,  #Vep2
-            Ap[3] *((xpS2_minus_1)**4  - (6 *xpS*one_minus_xpS)*(xpS2_minus_1)**(2)) /F,  #Vep3
-            Ap[4] *((xpS2_minus_1)**5  - (8 *xpS*one_minus_xpS)*(xpS2_minus_1)**(3)) /F,  #Vep4
-            Ap[5] *((xpS2_minus_1)**6  - (10*xpS*one_minus_xpS)*(xpS2_minus_1)**(4)) /F,  #Vep5
-            Ap[6] *((xpS2_minus_1)**7  - (12*xpS*one_minus_xpS)*(xpS2_minus_1)**(5)) /F,  #Vep6
-            Ap[7] *((xpS2_minus_1)**8  - (14*xpS*one_minus_xpS)*(xpS2_minus_1)**(6)) /F,  #Vep7
-            Ap[8] *((xpS2_minus_1)**9  - (16*xpS*one_minus_xpS)*(xpS2_minus_1)**(7)) /F,  #Vep8
-            Ap[9] *((xpS2_minus_1)**10 - (18*xpS*one_minus_xpS)*(xpS2_minus_1)**(8)) /F,  #Vep9
-            Ap[10]*((xpS2_minus_1)**11 - (20*xpS*one_minus_xpS)*(xpS2_minus_1)**(9)) /F,  #Vep10
-            Ap[11]*((xpS2_minus_1)**12 - (22*xpS*one_minus_xpS)*(xpS2_minus_1)**(10))/F,  #Vep11
-            Ap[12]*((xpS2_minus_1)**13 - (24*xpS*one_minus_xpS)*(xpS2_minus_1)**(11))/F   #Vep12
-        ]
-        Vep = params['U0p'] + R*x['tb']/F*np.log(one_minus_xpS/xpS) + sum(VepParts)
-        v = Vep - Ven - x['Vo'] - x['Vsn'] - x['Vsp']
-
-        charge_EOD = (x['qnS'] + x['qnB'])/self.parameters['qnMax']
-        voltage_EOD = (v - self.parameters['VEOD'])/self.parameters['VDropoff'] 
-
         e_state = (x['qMax']-self.parameters['qMaxThreshold'])/(self.parameters['x0']['qMax']-self.parameters['qMaxThreshold'])
     
         return {
-            'EOD': np.clip(min(charge_EOD, voltage_EOD), 0, 1),
+            'EOD': calculate_EOD(x, params),
             'InsufficientCapacity': max(min(e_state, 1.0), 0.0)
         }
 
@@ -1056,63 +1050,12 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         params['qSMax'] = params['qMax']*params['VolSFraction']
         params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
 
-        An = params['An']
-        # Negative Surface
-        xnS = x['qnS']/params['qSMax']
-        xnS2 = xnS+xnS  # Note: in python x+x is more efficient than 2*x
+        t, v = calculate_temp_voltage(x, params)
 
-        one_minus_xnS = 1 - xnS
-        xnS2_minus_1 = xnS2 - 1
-        VenParts = [
-            An[0] *xnS2_minus_1/F,  # Ven0
-            An[1] *(xnS2_minus_1**2  - (xnS2*one_minus_xnS))/F,  # Ven1
-            An[2] *(xnS2_minus_1**3  - (4 *xnS*one_minus_xnS)*xnS2_minus_1)/F,  #Ven2
-            An[3] *(xnS2_minus_1**4  - (6 *xnS*one_minus_xnS)*xnS2_minus_1**2) /F,  #Ven3
-            An[4] *(xnS2_minus_1**5  - (8 *xnS*one_minus_xnS)*xnS2_minus_1**3) /F,  #Ven4
-            An[5] *(xnS2_minus_1**6  - (10*xnS*one_minus_xnS)*xnS2_minus_1**4) /F,  #Ven5
-            An[6] *(xnS2_minus_1**7  - (12*xnS*one_minus_xnS)*xnS2_minus_1**5) /F,  #Ven6
-            An[7] *(xnS2_minus_1**8  - (14*xnS*one_minus_xnS)*xnS2_minus_1**6) /F,  #Ven7
-            An[8] *(xnS2_minus_1**9  - (16*xnS*one_minus_xnS)*xnS2_minus_1**7) /F,  #Ven8
-            An[9] *(xnS2_minus_1**10 - (18*xnS*one_minus_xnS)*xnS2_minus_1**8) /F,  #Ven9
-            An[10]*(xnS2_minus_1**11 - (20*xnS*one_minus_xnS)*xnS2_minus_1**9) /F,  #Ven10
-            An[11]*(xnS2_minus_1**12 - (22*xnS*one_minus_xnS)*xnS2_minus_1**10)/F,  #Ven11
-            An[12]*(xnS2_minus_1**13 - (24*xnS*one_minus_xnS)*xnS2_minus_1**11)/F   #Ven12
-        ]
-        Ven = params['U0n'] + R*x['tb']/F*np.log(one_minus_xnS/xnS) + sum(VenParts)
-
-        # Positive Surface
-        Ap = params['Ap']
-        xpS = x['qpS']/params['qSMax']
-        one_minus_xpS = 1 - xpS
-        xpS2 = xpS + xpS
-        xpS2_minus_1 = xpS2 - 1
-        VepParts = [
-            Ap[0] *(xpS2_minus_1)/F,  #Vep0
-            Ap[1] *((xpS2_minus_1)**2  - (xpS2*one_minus_xpS))/F,  #Vep1 
-            Ap[2] *((xpS2_minus_1)**3  - (4 *xpS*one_minus_xpS)*(xpS2_minus_1)) /F,  #Vep2
-            Ap[3] *((xpS2_minus_1)**4  - (6 *xpS*one_minus_xpS)*(xpS2_minus_1)**(2)) /F,  #Vep3
-            Ap[4] *((xpS2_minus_1)**5  - (8 *xpS*one_minus_xpS)*(xpS2_minus_1)**(3)) /F,  #Vep4
-            Ap[5] *((xpS2_minus_1)**6  - (10*xpS*one_minus_xpS)*(xpS2_minus_1)**(4)) /F,  #Vep5
-            Ap[6] *((xpS2_minus_1)**7  - (12*xpS*one_minus_xpS)*(xpS2_minus_1)**(5)) /F,  #Vep6
-            Ap[7] *((xpS2_minus_1)**8  - (14*xpS*one_minus_xpS)*(xpS2_minus_1)**(6)) /F,  #Vep7
-            Ap[8] *((xpS2_minus_1)**9  - (16*xpS*one_minus_xpS)*(xpS2_minus_1)**(7)) /F,  #Vep8
-            Ap[9] *((xpS2_minus_1)**10 - (18*xpS*one_minus_xpS)*(xpS2_minus_1)**(8)) /F,  #Vep9
-            Ap[10]*((xpS2_minus_1)**11 - (20*xpS*one_minus_xpS)*(xpS2_minus_1)**(9)) /F,  #Vep10
-            Ap[11]*((xpS2_minus_1)**12 - (22*xpS*one_minus_xpS)*(xpS2_minus_1)**(10))/F,  #Vep11
-            Ap[12]*((xpS2_minus_1)**13 - (24*xpS*one_minus_xpS)*(xpS2_minus_1)**(11))/F   #Vep12
-        ]
-        Vep = params['U0p'] + R*x['tb']/F*np.log(one_minus_xpS/xpS) + sum(VepParts)
-
-        return self.OutputContainer(np.array([
-            np.atleast_1d(x['tb'] - 273.15),
-            np.atleast_1d(Vep - Ven - x['Vo'] - x['Vsn'] - x['Vsp'])
-        ]))
+        return self.OutputContainer(np.array([t, v]))
 
     def threshold_met(self, x) -> dict:
-        z = self.output(x)
+        t_met = BatteryElectroChemEOD.threshold_met(self, x)
+        t_met.update(BatteryElectroChemEOL.threshold_met(self, x))
 
-        # Return true if voltage is less than the voltage threshold
-        return {
-            'EOD': z['v'] < self.parameters['VEOD'],
-            'InsufficientCapacity': x['qMax'] < self.parameters['qMaxThreshold']
-        }
+        return t_met
