@@ -138,10 +138,11 @@ def update_qSBmax(params: dict) -> dict:
     }
 
 def update_local_params(x, params: dict) -> dict:
-    # 'qMobile': [update_qmax],
+    # Local parameter updates prevent parameter callback overriding for qMobile and qMax
+    # 'qMobile': [update_qmax]
     params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
 
-    # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+    # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax]
     params['x0'] = {
         **params['x0'],
         'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
@@ -803,10 +804,8 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     }
 
     param_callbacks = {  # Callbacks for derived parameters
-        # 'qMobile': [update_qmax],
         'VolSFraction': [update_vols, update_qpSBmin, update_qSBmax],
         'Vol': [update_vols],
-        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
         'xpMin': [update_qpSBmin],
         'xpMax': [update_xnMin],
         'xnMin': [update_qnmin],
@@ -818,7 +817,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         'xnMin': 0.0,
         'xpMax': 1.0,
         'xpMin': 0.4,
-        'qMax': 7600/(0.6 - 0.0),
+        'qMax': 7600/0.6,
         'wq': -1e-2,
         'wr': 1e-6,
         'wd': 1e-2,
@@ -873,6 +872,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
 
         params = update_local_params(x, params)
 
+        # EOD model dx
         # Negative Surface
         CnBulk = x['qnB']/params['VolB']
         CnSurface = x['qnS']/params['VolS']
@@ -914,10 +914,12 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
 
         Tbdot = voltage_eta*u['i']/mC + (params['x0']['tb'] - x['tb'])/tau # Newman
 
+        # Additional states
         qMobiledot = 0
         tDiffusiondot = 0
         Rodot = 0
-        
+
+        # EOL model dx
         Ro2dot = params['wr'] * abs(u['i'])
         qMaxdot = params['wq'] * abs(u['i'])
         Ddot = params['wd'] * abs(u['i'])
@@ -940,11 +942,6 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         ]))
    
     def event_state(self, x) -> dict:
-        # The most "correct" indication of SOC is based on charge (charge_EOD), 
-        # since voltage decreases non-linearally. 
-        # However, as voltage approaches VEOD, the charge-based approach no 
-        # longer accurately captures this behavior, so voltage_EOD takes over as 
-        # the driving factor. 
         params = self.parameters
         params = update_local_params(x, params)
 
