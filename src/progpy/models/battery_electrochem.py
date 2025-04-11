@@ -788,7 +788,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     """
     events = ['EOD', 'InsufficientCapacity']
     inputs = ['i']
-    states = ['tb', 'Vo', 'Vsn', 'Vsp', 'qnB', 'qnS', 'qpB', 'qpS', 'qMobile', 'tDiffusion', 'Ro', 'Ro2', 'qMax', 'D']
+    states = ['tb', 'Vo', 'Vsn', 'Vsp', 'qnB', 'qnS', 'qpB', 'qpS', 'qMobile', 'tDiffusion', 'Ro', 'qMax', 'D']
     outputs = ['t', 'v']
     performance_metric_keys = ['max_i']
 
@@ -853,7 +853,6 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
             'qMobile': 7600,
             'tDiffusion': 7e6,
             'Ro': 0.117215,
-            'Ro2': 0.117215,
             'qMax': 7600,
             'D': 7e6
         },
@@ -867,7 +866,6 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         params = self.parameters
 
         x['qMobile'] = x['qMax']
-        x['Ro'] = x['Ro2']
         x['tDiffusion'] = x['D']
 
         params = update_local_params(x, params)
@@ -917,10 +915,9 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         # Additional states
         qMobiledot = 0
         tDiffusiondot = 0
-        Rodot = 0
+        Rodot = params['wr'] * abs(u['i'])
 
         # EOL model dx
-        Ro2dot = params['wr'] * abs(u['i'])
         qMaxdot = params['wq'] * abs(u['i'])
         Ddot = params['wd'] * abs(u['i'])
 
@@ -936,7 +933,6 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
             np.atleast_1d(qMobiledot),
             np.atleast_1d(tDiffusiondot),
             np.atleast_1d(Rodot),
-            np.atleast_1d(Ro2dot),
             np.atleast_1d(qMaxdot),
             np.atleast_1d(Ddot)
         ]))
