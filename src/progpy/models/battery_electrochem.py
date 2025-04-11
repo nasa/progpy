@@ -965,6 +965,21 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         # the driving factor. 
         params = self.parameters
 
+        # 'qMobile': [update_qmax],
+        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
+
+        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
+        params['x0'] ={
+            **params['x0'],
+            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
+            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
+        }
+        
+        params['qnMin'] = params['qMax']*params['xnMin']
+        params['qnMax'] = params['qMax']*params['xnMax']
+        params['qSMax'] = params['qMax']*params['VolSFraction']
+        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
+
         An = params['An']
         # Negative Surface
         xnS = x['qnS']/params['qSMax']
