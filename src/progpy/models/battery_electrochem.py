@@ -757,6 +757,33 @@ class BatteryElectroChemEODEOL(BatteryElectroChemEOL, BatteryElectroChemEOD):
 BatteryElectroChem = BatteryElectroChemEODEOL
 
 class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
+    """
+    Prognostics :term:`model` for a battery degredation and discharge, represented by an electrochemical model as described in [Daigle2013]_ and [Daigle2016]_
+
+    The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the Prognostics Center of Excellence Data Repository [DataRepo]_.
+
+    :term:`Events<event>`: (2)
+        | EOD: End of Discharge
+        | InsufficientCapacity: Insufficient battery capacity
+
+    :term:`Inputs/Loading<input>`: (1)
+        i: Current draw on the battery
+
+    :term:`States<state>`: (11)
+        See BatteryElectroChemEOD, BatteryElectroChemEOL
+
+    :term:`Outputs<output>` (2)
+        | t: Temperature of battery (°C) 
+        | v: Voltage supplied by battery
+
+    See Also
+    --------
+    BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChem
+
+    Note
+    ----
+    For keyword arguments, see BatteryElectroChemEOD, BatteryElectroChemEOL
+    """
     events = ['EOD', 'InsufficientCapacity']
     inputs = ['i']
     states = ['tb', 'Vo', 'Vsn', 'Vsp', 'qnB', 'qnS', 'qpB', 'qpS', 'qMobile', 'tDiffusion', 'Ro', 'Ro2', 'qMax', 'D']
@@ -843,20 +870,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         x['Ro'] = x['Ro2']
         x['tDiffusion'] = x['D']
 
-        # 'qMobile': [update_qmax],
-        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
-
-        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
-        params['x0'] ={
-            **params['x0'],
-            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
-            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
-        }
-        
-        params['qnMin'] = params['qMax']*params['xnMin']
-        params['qnMax'] = params['qMax']*params['xnMax']
-        params['qSMax'] = params['qMax']*params['VolSFraction']
-        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
+        params = update_local_params(x, params)
 
         # Negative Surface
         CnBulk = x['qnB']/params['VolB']
@@ -931,21 +945,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         # longer accurately captures this behavior, so voltage_EOD takes over as 
         # the driving factor. 
         params = self.parameters
-
-        # 'qMobile': [update_qmax],
-        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
-
-        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
-        params['x0'] ={
-            **params['x0'],
-            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
-            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
-        }
-        
-        params['qnMin'] = params['qMax']*params['xnMin']
-        params['qnMax'] = params['qMax']*params['xnMax']
-        params['qSMax'] = params['qMax']*params['VolSFraction']
-        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
+        params = update_local_params(x, params)
 
         e_state = (x['qMax']-self.parameters['qMaxThreshold'])/(self.parameters['x0']['qMax']-self.parameters['qMaxThreshold'])
     
@@ -959,20 +959,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
 
         x['qMobile'] = x['qMax']
 
-        # 'qMobile': [update_qmax],
-        params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
-
-        # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax],
-        params['x0'] = {
-            **params['x0'],
-            'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
-            'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
-        }
-        params['qnMin'] = params['qMax']*params['xnMin']
-        params['qnMax'] = params['qMax']*params['xnMax']
-        params['qSMax'] = params['qMax']*params['VolSFraction']
-        params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
-
+        params = update_local_params(x, params)
         t, v = calculate_temp_voltage(x, params)
 
         return self.OutputContainer(np.array([t, v]))
