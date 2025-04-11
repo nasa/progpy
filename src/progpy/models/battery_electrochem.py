@@ -260,7 +260,10 @@ def calculate_EOD(x, params):
     charge_EOD = (x['qnS'] + x['qnB'])/original_params['qnMax']
     voltage_EOD = (v - original_params['VEOD'])/original_params['VDropoff']
 
-    return np.clip(min(charge_EOD, voltage_EOD), 0, 1)
+    return {
+        'EOD': np.clip(min(charge_EOD, voltage_EOD), 0, 1)
+    }
+    
 
 class BatteryElectroChemEOD(PrognosticsModel):
     """
@@ -548,9 +551,7 @@ class BatteryElectroChemEOD(PrognosticsModel):
         # the driving factor. 
         params = self.parameters
 
-        return {
-            'EOD': calculate_EOD(x, params)
-        }
+        return calculate_EOD(x, params)
 
     def output(self, x):
         params = self.parameters
@@ -947,12 +948,10 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         params = self.parameters
         params = update_local_params(x, params)
 
-        e_state = (x['qMax']-self.parameters['qMaxThreshold'])/(self.parameters['x0']['qMax']-self.parameters['qMaxThreshold'])
-    
-        return {
-            'EOD': calculate_EOD(x, params),
-            'InsufficientCapacity': max(min(e_state, 1.0), 0.0)
-        }
+        e_state = calculate_EOD(x, params)
+        e_state.update(BatteryElectroChemEOL.event_state(self, x))
+
+        return e_state
 
     def output(self, x):
         params = self.parameters
