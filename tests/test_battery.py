@@ -4,7 +4,7 @@ from io import StringIO
 import sys
 import unittest
 
-from progpy.models import BatteryCircuit, BatteryElectroChem, BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChemEODEOL, SimplifiedBattery
+from progpy.models import BatteryCircuit, BatteryElectroChem, BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChemEODEOL, SimplifiedBattery, NEW_BatteryElectroChemEODEOL
 from progpy.loading import Piecewise
 
 # Variable (piece-wise) future loading scheme 
@@ -45,6 +45,56 @@ class TestBattery(unittest.TestCase):
 
         with self.assertWarns(UserWarning):
             batt.parameters['tDiffusion'] = 10
+
+    def test_battery_electrochem_printed(self):
+        config = {
+            'save_freq': 1000,
+            'dt': 2,
+            'events': 'InsufficientCapacity',
+            'print': True
+        }
+        
+        def future_loading1(t, x=None):
+            load = 1
+            
+            if x is not None:
+                event_state = batt.event_state(x)
+                if event_state["EOD"] > 0.95:
+                    load = 1 # Discharge
+                elif event_state["EOD"] < 0.05:
+                    load = -1 # Charge
+                    
+            return batt.InputContainer({'i': load})
+        
+        config2 = {
+            'save_freq': 1000,
+            'dt': 2,
+            'events': 'InsufficientCapacity',
+            'print': False
+        }
+        
+        def future_loading2(t, x=None):
+            load = 1
+            
+            if x is not None:
+                event_state = batt2.event_state(x)
+                if event_state["EOD"] > 0.95:
+                    load = 1 # Discharge
+                elif event_state["EOD"] < 0.05:
+                    load = -1 # Charge
+
+            return batt2.InputContainer({'i': load})
+
+        batt = NEW_BatteryElectroChemEODEOL()
+        batt2 = NEW_BatteryElectroChemEODEOL()
+
+        result = batt.simulate_to_threshold(future_loading1, **config)
+        result2 = batt2.simulate_to_threshold(future_loading2, **config2)
+
+        self.assertEqual(result.times, result2.times)
+        self.assertEqual(result.states, result2.states)
+        self.assertEqual(result.event_states, result2.event_states)
+        self.assertEqual(result.outputs, result2.outputs)
 
     def test_battery_electrochem_EOD(self):
         batt = BatteryElectroChemEOD()
