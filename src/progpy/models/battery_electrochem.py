@@ -863,7 +863,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     }
 
     def dx(self, x, u):
-        params = self.parameters
+        params = deepcopy(self.parameters)
 
         x['qMobile'] = x['qMax']
         x['tDiffusion'] = x['D']
@@ -938,7 +938,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         ]))
    
     def event_state(self, x) -> dict:
-        params = self.parameters
+        params = deepcopy(self.parameters)
         params = update_local_params(x, params)
 
         e_state = calculate_EOD(x, params)
@@ -947,7 +947,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         return e_state
 
     def output(self, x):
-        params = self.parameters
+        params = deepcopy(self.parameters)
 
         x['qMobile'] = x['qMax']
 
