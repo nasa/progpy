@@ -30,4 +30,4 @@ If you are using data-driven tools (e.g., LSTM model), make sure the datadriven 
 
 Installing ProgPy Data-Driven Tools with Python 3.13
 ------------------------
-Tensorflow does not support python3.13 as of the writing of this. Until this is fixed, ProgPy data-driven features may not work correctly. If you are having trouble running data-driven features with Python3.13, try with an earlier version of Python.
+Tensorflow does not support Python3.13 as of the writing of this (April 2025). Until this is fixed, ProgPy data-driven features may not work correctly. If you are having trouble running data-driven features with Python3.13, try with an earlier version of Python.
