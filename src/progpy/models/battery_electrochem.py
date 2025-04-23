@@ -137,28 +137,10 @@ def update_qSBmax(params: dict) -> dict:
         'qBMax': params['qMax']*(1.0-params['VolSFraction']),
     }
 
-def update_local_params(x, params: dict) -> dict:
-    # Local parameter updates prevent parameter callback overriding for qMobile and qMax
-    # 'qMobile': [update_qmax]
-    params['qMax'] = x['qMobile']/(params['xnMax']-params['xnMin']) 
-
-    # 'qMax': [update_qpSBmin, update_qnmin, update_qnmax, update_qpSBmin, update_qSBmax]
-    params['x0'] = {
-        **params['x0'],
-        'qpS': params['qMax']*params['xpMin']*params['VolSFraction'],
-        'qpB': params['qMax']*params['xpMin']*(1.0-params['VolSFraction'])
-    }
-    params['qnMin'] = params['qMax']*params['xnMin']
-    params['qnMax'] = params['qMax']*params['xnMax']
-    params['qSMax'] = params['qMax']*params['VolSFraction']
-    params['qBMax'] = params['qMax']*(1.0-params['VolSFraction'])
-
-    return params
-
-def calculate_temp_voltage(x, params):
+def calculate_temp_voltage(x, params, qSMax):
     An = params['An']
     # Negative Surface
-    xnS = x['qnS']/params['qSMax']
+    xnS = x['qnS']/qSMax
     xnS2 = xnS+xnS  # Note: in python x+x is more efficient than 2*x
 
     one_minus_xnS = 1 - xnS
@@ -182,7 +164,7 @@ def calculate_temp_voltage(x, params):
 
     # Positive Surface
     Ap = params['Ap']
-    xpS = x['qpS']/params['qSMax']
+    xpS = x['qpS']/qSMax
     one_minus_xpS = 1 - xpS
     xpS2 = xpS + xpS
     xpS2_minus_1 = xpS2 - 1
@@ -208,12 +190,10 @@ def calculate_temp_voltage(x, params):
 
     return (t, v)
 
-def calculate_EOD(x, params):
-    original_params = params
-
+def calculate_EOD(x, params, qnMax, qSMax):
     An = params['An']
     # Negative Surface
-    xnS = x['qnS']/params['qSMax']
+    xnS = x['qnS']/qSMax
     xnS2 = xnS+xnS  # Note: in python x+x is more efficient than 2*x
     one_minus_xnS = 1 - xnS
     xnS2_minus_1 = xnS2 - 1
@@ -236,7 +216,7 @@ def calculate_EOD(x, params):
 
     # Positive Surface
     Ap = params['Ap']
-    xpS = x['qpS']/params['qSMax']
+    xpS = x['qpS']/qSMax
     one_minus_xpS = 1 - xpS
     xpS2 = xpS + xpS
     xpS2_minus_1 = xpS2 - 1
@@ -258,8 +238,8 @@ def calculate_EOD(x, params):
     Vep = params['U0p'] + R*x['tb']/F*np.log(one_minus_xpS/xpS) + sum(VepParts)
     v = Vep - Ven - x['Vo'] - x['Vsn'] - x['Vsp']
 
-    charge_EOD = (x['qnS'] + x['qnB'])/original_params['qnMax']
-    voltage_EOD = (v - original_params['VEOD'])/original_params['VDropoff']
+    charge_EOD = (x['qnS'] + x['qnB'])/qnMax
+    voltage_EOD = (v - params['VEOD'])/params['VDropoff']
 
     return {
         'EOD': np.clip(min(charge_EOD, voltage_EOD), 0, 1)
@@ -552,12 +532,12 @@ class BatteryElectroChemEOD(PrognosticsModel):
         # the driving factor. 
         params = self.parameters
 
-        return calculate_EOD(x, params)
+        return calculate_EOD(x, params, params['qnMax'], params['qSMax'])
 
     def output(self, x):
         params = self.parameters
 
-        t, v = calculate_temp_voltage(x, params)
+        t, v = calculate_temp_voltage(x, params, params['qSMax'])
         
         return self.OutputContainer(np.array([t, v]))
         
@@ -788,7 +768,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     """
     events = ['EOD', 'InsufficientCapacity']
     inputs = ['i']
-    states = ['tb', 'Vo', 'Vsn', 'Vsp', 'qnB', 'qnS', 'qpB', 'qpS', 'qMobile', 'tDiffusion', 'Ro', 'qMax', 'D']
+    states = ['tb', 'Vo', 'Vsn', 'Vsp', 'qnB', 'qnS', 'qpB', 'qpS', 'qMobile', 'tDiffusion', 'Ro']
     outputs = ['t', 'v']
     performance_metric_keys = ['max_i']
 
@@ -800,7 +780,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         'qnS': (0, np.inf),
         'qpB': (0, np.inf),
         'qpS': (0, np.inf),
-        'qMax': (0, np.inf)
+        'qMobile': (0, np.inf)
     }
 
     param_callbacks = {  # Callbacks for derived parameters
@@ -853,8 +833,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
             'qMobile': 7600,
             'tDiffusion': 7e6,
             'Ro': 0.117215,
-            'qMax': 7600,
-            'D': 7e6
+            'qMax': 7600  # Kept in so EOL model will work
         },
 
         # End of discharge voltage threshold
@@ -863,18 +842,16 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     }
 
     def dx(self, x, u):
-        params = deepcopy(self.parameters)
-
-        x['qMobile'] = x['qMax']
-        x['tDiffusion'] = x['D']
-
-        params = update_local_params(x, params)
+        params = self.parameters
 
         # EOD model dx
         # Negative Surface
         CnBulk = x['qnB']/params['VolB']
         CnSurface = x['qnS']/params['VolS']
-        xnS = x['qnS']/params['qSMax']
+        qMax = x['qMobile']/(params['xnMax']-params['xnMin'])
+        qSMax = qMax*params['VolSFraction']
+
+        xnS = x['qnS']/qSMax
 
         qdotDiffusionBSn = (CnBulk-CnSurface)/x['tDiffusion']
         qnBdot = -qdotDiffusionBSn
@@ -891,7 +868,7 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         # Positive Surface
         CpBulk = x['qpB']/params['VolB']
         CpSurface = x['qpS']/params['VolS']
-        xpS = x['qpS']/params['qSMax']
+        xpS = x['qpS']/qSMax
         
         qdotDiffusionBSp = (CpBulk-CpSurface)/x['tDiffusion']
         qpBdot = -qdotDiffusionBSp
@@ -913,13 +890,11 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         Tbdot = voltage_eta*u['i']/mC + (params['x0']['tb'] - x['tb'])/tau # Newman
 
         # Additional states
-        qMobiledot = 0
-        tDiffusiondot = 0
         Rodot = params['wr'] * abs(u['i'])
 
         # EOL model dx
-        qMaxdot = params['wq'] * abs(u['i'])
-        Ddot = params['wd'] * abs(u['i'])
+        qMobiledot = params['wq'] * abs(u['i'])
+        tDiffusiondot = params['wd'] * abs(u['i'])
 
         return self.StateContainer(np.array([
             np.atleast_1d(Tbdot),
@@ -933,31 +908,32 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
             np.atleast_1d(qMobiledot),
             np.atleast_1d(tDiffusiondot),
             np.atleast_1d(Rodot),
-            np.atleast_1d(qMaxdot),
-            np.atleast_1d(Ddot)
         ]))
-   
+       
     def event_state(self, x) -> dict:
-        params = deepcopy(self.parameters)
-        params = update_local_params(x, params)
+        params = self.parameters
 
-        e_state = calculate_EOD(x, params)
-        e_state.update(BatteryElectroChemEOL.event_state(self, x))
+        qMax = x['qMobile']/(params['xnMax']-params['xnMin']) 
+        qnMax = qMax*params['xnMax']
+        qSMax =  qMax*params['VolSFraction']
+
+        e_state = calculate_EOD(x, params, qnMax, qSMax)
+        e_state.update(BatteryElectroChemEOL.event_state(self, {'qMax': x['qMobile']}))
 
         return e_state
 
     def output(self, x):
-        params = deepcopy(self.parameters)
+        params = self.parameters
 
-        x['qMobile'] = x['qMax']
+        qMax = x['qMobile']/(params['xnMax']-params['xnMin']) 
+        qSMax =  qMax*params['VolSFraction']
 
-        params = update_local_params(x, params)
-        t, v = calculate_temp_voltage(x, params)
+        t, v = calculate_temp_voltage(x, params, qSMax)
 
         return self.OutputContainer(np.array([t, v]))
 
     def threshold_met(self, x) -> dict:
         t_met = BatteryElectroChemEOD.threshold_met(self, x)
-        t_met.update(BatteryElectroChemEOL.threshold_met(self, x))
+        t_met.update(BatteryElectroChemEOL.threshold_met(self, {'qMax': x['qMobile']}))
 
         return t_met
