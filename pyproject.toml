@@ -29,7 +29,8 @@ maintainers = [
 ]
 description = "The 2024 NASA Software of the Year, the NASA Prognostic Package (ProgPy) is a python prognostics framework focused on building, using, and evaluating models and algorithms for prognostics (computation of remaining useful life) and health management of engineering systems, and provides a set of prognostics models for select components and prognostics algorithms developed within this framework, including uncertainty propagation."
 readme = "README.md"
-license = {text = "NOSA"}
+license = "NASA-1.3"
+license-files = ["prog_models license.pdf", "prog_algs license.pdf"]
 keywords = ['prognostics', 'diagnostics', 'fault detection', 'fdir', 'physics modeling', 'prognostics and health management', 'PHM', 'health management', 'surrogate modeling', 'model tuning', 'simulation', 'ivhm']
 classifiers = [
     'Development Status :: 5 - Production/Stable',
@@ -41,8 +42,6 @@ classifiers = [
     'Topic :: Scientific/Engineering',
     'Topic :: Scientific/Engineering :: Artificial Intelligence',
     'Topic :: Scientific/Engineering :: Physics',
-
-    'License :: Other/Proprietary License ',
 
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.9',
