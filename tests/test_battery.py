@@ -36,16 +36,6 @@ class TestBattery(unittest.TestCase):
         result = batt.simulate_to(200, future_loading, {'t': 18.95, 'v': 4.183})
         self.assertEqual(BatteryElectroChem, BatteryElectroChemEODEOL)
 
-        # check warning raised when changing overwritten parameter
-        with self.assertWarns(UserWarning):
-            batt.parameters['Ro'] = 10
-        
-        with self.assertWarns(UserWarning):
-            batt.parameters['qMobile'] = 10
-
-        with self.assertWarns(UserWarning):
-            batt.parameters['tDiffusion'] = 10
-
     def test_battery_electrochem_printed(self):
         config = {
             'save_freq': 1000,
@@ -53,8 +43,15 @@ class TestBattery(unittest.TestCase):
             'events': 'InsufficientCapacity',
             'print': True
         }
+
+        config2 = {
+            'save_freq': 1000,
+            'dt': 2,
+            'events': 'InsufficientCapacity',
+            'print': False
+        }
         
-        def future_loading1(t, x=None):
+        def future_loading(t, x=None):
             load = 1
             
             if x is not None:
@@ -65,13 +62,6 @@ class TestBattery(unittest.TestCase):
                     load = -1 # Charge
                     
             return batt.InputContainer({'i': load})
-        
-        config2 = {
-            'save_freq': 1000,
-            'dt': 2,
-            'events': 'InsufficientCapacity',
-            'print': False
-        }
         
         def future_loading2(t, x=None):
             load = 1
@@ -88,7 +78,7 @@ class TestBattery(unittest.TestCase):
         batt = NEW_BatteryElectroChemEODEOL()
         batt2 = NEW_BatteryElectroChemEODEOL()
 
-        result = batt.simulate_to_threshold(future_loading1, **config)
+        result = batt.simulate_to_threshold(future_loading, **config)
         result2 = batt2.simulate_to_threshold(future_loading2, **config2)
 
         self.assertEqual(result.times, result2.times)

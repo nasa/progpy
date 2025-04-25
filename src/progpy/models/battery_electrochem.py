@@ -745,14 +745,24 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the Prognostics Center of Excellence Data Repository [DataRepo]_.
 
     :term:`Events<event>`: (2)
-        | EOD: End of Discharge
+        | EOD: End of discharge
         | InsufficientCapacity: Insufficient battery capacity
 
     :term:`Inputs/Loading<input>`: (1)
         i: Current draw on the battery
 
     :term:`States<state>`: (11)
-        See BatteryElectroChemEOD, BatteryElectroChemEOL
+        | tb: Battery temperature (K)
+        | Vo: Voltage drops due to solid-phase ohmic resistances
+        | Vsn: Negative surface voltage (V)
+        | Vsp: Positive surface voltage (V)
+        | qnB: Amount of negative ions at the battery bulk
+        | qnS: Amount of negative ions at the battery surface
+        | qpB: Amount of positive ions at the battery bulk
+        | qpS: Amount of positive ions at the battery surface
+        | qMobile: Maximum battery capacity
+        | tDiffusion : Diffusion time constant (increasing this causes decrease in diffusion rate)
+        | Ro : Ohmic drop (current collector resistances plus electrolyte resistance plus solid phase resistances at anode and cathode)
 
     :term:`Outputs<output>` (2)
         | t: Temperature of battery (°C) 
