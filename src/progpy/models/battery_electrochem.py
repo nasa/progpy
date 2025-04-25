@@ -740,7 +740,7 @@ BatteryElectroChem = BatteryElectroChemEODEOL
 
 class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
     """
-    Prognostics :term:`model` for a battery degredation and discharge, represented by an electrochemical model as described in [Daigle2013]_ and [Daigle2016]_
+    Prognostics :term:`model` for a battery degredation and discharge, represented by an electrochemical model as described in [Daigle2013]_ and [Daigle2016]_.
 
     The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the Prognostics Center of Excellence Data Repository [DataRepo]_.
 
@@ -768,13 +768,70 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         | t: Temperature of battery (°C) 
         | v: Voltage supplied by battery
 
+    Keyword Args
+    ------------
+        process_noise : Optional, float or dict[str, float]
+          :term:`Process noise<process noise>` (applied at dx/next_state). 
+          Can be number (e.g., .2) applied to every state, a dictionary of values for each 
+          state (e.g., {'x1': 0.2, 'x2': 0.3}), or a function (x) -> x
+        process_noise_dist : Optional, str
+          Distribution for :term:`Process noise` (e.g., normal, uniform, triangular)
+        measurement_noise : Optional, float or dict[str, float]
+          :term:`Measurement noise<measurement noise>` (applied in output eqn).
+          Can be number (e.g., .2) applied to every output, a dictionary of values for each
+          output (e.g., {'z1': 0.2, 'z2': 0.3}), or a function (z) -> z
+        measurement_noise_dist : Optional, str
+          Distribution for :term:`measurement noise` (e.g., normal, uniform, triangular)
+        xnMax : float
+            Maximum mole fraction (neg electrode)
+        xpMax : float
+            Maximum mole fraction (pos electrode). Typically 1.
+        alpha : float
+            Anodic/cathodic electrochemical transfer coefficient
+        Sn : float
+            Surface area (- electrode) 
+        Sp : float
+            Surface area (+ electrode)
+        kn : float
+            Lumped constant for BV (- electrode)
+        kp : float
+            Lumped constant for BV (+ electrode)
+        Vol : float
+            Total interior battery volume/2 (for computing concentrations)
+        VolSFraction : float
+            Fraction of total volume occupied by surface volume
+        to : float
+            For Ohmic voltage
+        tsn : float
+            For surface overpotential (neg)
+        tsp : float
+            For surface overpotential (pos)
+        U0p : float
+            Redlich-Kister parameter (+ electrode)
+        Ap : float
+            Redlich-Kister parameter (+ electrode)
+        U0n : float
+            Redlich-Kister parameter (- electrode)
+        An : float
+            Redlich-Kister parameter (- electrode)
+        VEOD : float
+            End of discharge voltage threshold
+        VDropoff : float
+            Voltage above EOD after which voltage will be considered in SOC calculation
+        qMaxThreshold : float
+            Threshold for qMax (for threshold_met and event_state), after which the InsufficientCapacity event has occurred. Note: Battery manufacturers specify a threshold of 70-80% of qMax
+        wq : float
+            Wear rate for qMax
+        wr : float
+            Wear rate for Ro
+        wd : float
+            Wear rate for D
+        x0 : dict[str, float]
+            Initial :term:`state`
+
     See Also
     --------
     BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChem
-
-    Note
-    ----
-    For keyword arguments, see BatteryElectroChemEOD, BatteryElectroChemEOL
     """
     events = ['EOD', 'InsufficientCapacity']
     inputs = ['i']
