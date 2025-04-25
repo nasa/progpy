@@ -328,6 +328,8 @@ class BatteryElectroChemEOD(PrognosticsModel):
             Redlich-Kister parameter (- electrode)
         VEOD : float
             End of Discharge Voltage Threshold
+        VDropoff : float
+            Voltage above EOD after which voltage will be considered in SOC calculation
         x0 : dict[str, float]
             Initial :term:`state`
 
@@ -650,95 +652,8 @@ def merge_dicts(a: dict, b: dict) -> None:
         else:
             a[key] = b[key]
 
-def OverwrittenWarning(params):
-    """
-    Function to warn if overwritten changes
-    """
-    warnings.warn("Ro, qMobile, and tDiffusion will be overwritten within the model as part of battery aging modeling. Use BatteryElectroChemEOD to remove this behavior.")
-    return {}
 
-
-class BatteryElectroChemEODEOL(BatteryElectroChemEOL, BatteryElectroChemEOD):
-    """
-    Prognostics :term:`model` for a battery degredation and discharge, represented by an electrochemical model as described in [Daigle2013]_ and [Daigle2016]_
-
-    The default model parameters included are for Li-ion batteries, specifically 18650-type cells. Experimental discharge curves for these cells can be downloaded from the Prognostics Center of Excellence Data Repository [DataRepo]_.
-
-    :term:`Events<event>`: (2)
-        | EOD: End of Discharge
-        | InsufficientCapacity: Insufficient battery capacity
-
-    :term:`Inputs/Loading<input>`: (1)
-        i: Current draw on the battery
-
-    :term:`States<state>`: (11)
-        See BatteryElectroChemEOD, BatteryElectroChemEOL
-
-    :term:`Outputs<output>` (2)
-        | t: Temperature of battery (°C) 
-        | v: Voltage supplied by battery
-
-    See Also
-    --------
-    BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChem
-
-    Note
-    ----
-    For keyword arguments, see BatteryElectroChemEOD, BatteryElectroChemEOL
-    """
-    inputs = BatteryElectroChemEOD.inputs
-    outputs = BatteryElectroChemEOD.outputs
-    states = BatteryElectroChemEOD.states + BatteryElectroChemEOL.states
-    events = BatteryElectroChemEOD.events + BatteryElectroChemEOL.events
-
-    is_vectorized = False
-
-    default_parameters = deepcopy(BatteryElectroChemEOD.default_parameters)
-    merge_dicts(default_parameters,
-        BatteryElectroChemEOL.default_parameters)
-
-    state_limits = deepcopy(BatteryElectroChemEOD.state_limits)
-    state_limits.update(BatteryElectroChemEOL.state_limits)
-
-    def __init__(self, **kwargs):
-        self.param_callbacks['qMobile'].append(OverwrittenWarning)
-        self.param_callbacks['tDiffusion'] = [OverwrittenWarning]
-        self.param_callbacks['Ro'] = [OverwrittenWarning]
-        super().__init__(**kwargs)
-
-    def dx(self, x, u):
-        # Set EOD Parameters (corresponding to health)
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            self.parameters['qMobile'] = x['qMax']
-            self.parameters['Ro'] = x['Ro']
-            self.parameters['tDiffusion'] = x['D']
-        
-        # Calculate 
-        x_dot = BatteryElectroChemEOD.dx(self, x, u)
-        x_dot2 = BatteryElectroChemEOL.dx(self, x, u)
-        x_dot.matrix = np.vstack((x_dot.matrix, x_dot2.matrix))
-        return x_dot
-
-    def output(self, x):
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore")
-            self.parameters['qMobile'] = x['qMax']
-        return BatteryElectroChemEOD.output(self, x)
-
-    def event_state(self, x) -> dict:
-        e_state = BatteryElectroChemEOD.event_state(self, x)
-        e_state.update(BatteryElectroChemEOL.event_state(self, x))
-        return e_state
-
-    def threshold_met(self, x) -> dict:
-        t_met = BatteryElectroChemEOD.threshold_met(self, x)
-        t_met.update(BatteryElectroChemEOL.threshold_met(self, x))
-        return t_met
-
-BatteryElectroChem = BatteryElectroChemEODEOL
-
-class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
+class BatteryElectroChemEODEOL(PrognosticsModel):
     """
     Prognostics :term:`model` for a battery degredation and discharge, represented by an electrochemical model as described in [Daigle2013]_ and [Daigle2016]_.
 
@@ -1004,3 +919,5 @@ class NEW_BatteryElectroChemEODEOL(PrognosticsModel):
         t_met.update(BatteryElectroChemEOL.threshold_met(self, {'qMax': x['qMobile']}))
 
         return t_met
+    
+BatteryElectroChem = BatteryElectroChemEODEOL

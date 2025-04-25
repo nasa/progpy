@@ -4,7 +4,7 @@ from io import StringIO
 import sys
 import unittest
 
-from progpy.models import BatteryCircuit, BatteryElectroChem, BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChemEODEOL, SimplifiedBattery, NEW_BatteryElectroChemEODEOL
+from progpy.models import BatteryCircuit, BatteryElectroChem, BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChemEODEOL, SimplifiedBattery
 from progpy.loading import Piecewise
 
 # Variable (piece-wise) future loading scheme 
@@ -75,8 +75,8 @@ class TestBattery(unittest.TestCase):
 
             return batt2.InputContainer({'i': load})
 
-        batt = NEW_BatteryElectroChemEODEOL()
-        batt2 = NEW_BatteryElectroChemEODEOL()
+        batt = BatteryElectroChem()
+        batt2 = BatteryElectroChem()
 
         result = batt.simulate_to_threshold(future_loading, **config)
         result2 = batt2.simulate_to_threshold(future_loading2, **config2)
