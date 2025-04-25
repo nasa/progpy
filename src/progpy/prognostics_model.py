@@ -1032,7 +1032,6 @@ class PrognosticsModel(ABC):
                 saved_times.append(t)
                 saved_inputs.append(u)
                 saved_states.append(deepcopy(x))  # Avoid optimization where x is not copied
-                saved_event_states.append(event_state(x))
 
         # configuring next_time function to define prediction time step, default is constant dt
         if callable(config['dt']):
@@ -1144,9 +1143,11 @@ class PrognosticsModel(ABC):
         
         if not saved_outputs:
             # saved_outputs is empty, so it wasn't calculated in simulation - used cached result
-            saved_outputs = LazySimResult(self.__output, saved_times, saved_states) 
+            saved_outputs = LazySimResult(self.__output, saved_times, saved_states)
+            saved_event_states = LazySimResult(self.event_state, saved_times, saved_states)
         else:
             saved_outputs = SimResult(saved_times, saved_outputs, _copy=False)
+            saved_event_states = SimResult(saved_times, saved_event_states, _copy=False)
         
         if 'integration_method' in config:
             # Reset integration method
@@ -1157,7 +1158,7 @@ class PrognosticsModel(ABC):
             SimResult(saved_times, saved_inputs, _copy=False), 
             SimResult(saved_times, saved_states, _copy=False), 
             saved_outputs, 
-            SimResult(saved_times, saved_event_states, _copy=False)
+            saved_event_states
         )
 
     def __sizeof__(self):
