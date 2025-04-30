@@ -36,6 +36,11 @@ class TestBattery(unittest.TestCase):
         result = batt.simulate_to(200, future_loading, {'t': 18.95, 'v': 4.183})
         self.assertEqual(BatteryElectroChem, BatteryElectroChemEODEOL)
 
+    # Test that the combined model has the same result if print is True or False. 
+    # This check is necessary since the event_state and output are calculated 
+    # during the simulation when print is True but only as needed 
+    # when print is False due to LazySim optimization.
+    # For more details, refer to https://github.com/nasa/progpy/issues/199
     def test_battery_electrochem_printed(self):
         config = {
             'save_freq': 1000,

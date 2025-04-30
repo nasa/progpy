@@ -136,6 +136,15 @@ def update_qSBmax(params: dict) -> dict:
     }
 
 def calculate_temp_voltage(x, params, qSMax):
+    '''
+    Calculate and return the temperature and voltage of the battery.
+
+    :param x: battery state
+    :param params: battery parameters
+    :param qSMax: maximum charge at the surface
+    :return t: battery temperature
+    :return v: battery voltage
+    '''
     An = params['An']
     # Negative Surface
     xnS = x['qnS']/qSMax
@@ -186,9 +195,18 @@ def calculate_temp_voltage(x, params, qSMax):
     t = np.atleast_1d(x['tb'] - 273.15)
     v = np.atleast_1d(Vep - Ven - x['Vo'] - x['Vsn'] - x['Vsp'])
 
-    return (t, v)
+    return t, v
 
 def calculate_EOD(x, params, qnMax, qSMax):
+    '''
+    Calculate and return the battery EOD.
+
+    :param x: battery state
+    :param params: battery parameters
+    :param qnMax: maximum charge at the negative electrode
+    :param qSMax: maximum charge at the surface
+    :return: dictionary with battery EOD
+    '''
     An = params['An']
     # Negative Surface
     xnS = x['qnS']/qSMax
