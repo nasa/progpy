@@ -2,6 +2,7 @@
 
 from collections import UserList, defaultdict, abc
 from copy import deepcopy
+from functools import cached_property
 from matplotlib.pyplot import figure
 import numpy as np
 import pandas as pd
@@ -23,7 +24,6 @@ class SimResult(UserList):
     __slots__ = ['times', 'data']  # Optimization
 
     def __init__(self, times: list = None, data: list = None, _copy=True):
-        self._frame = None
         if times is None or data is None:
             self.times = []
             self.data = []
@@ -60,27 +60,24 @@ class SimResult(UserList):
         """
         return super().__iter__()
 
-    @property
+    @cached_property
     def frame(self) -> pd.DataFrame:
         """
         .. versionadded:: 1.5.0
         
             pd.DataFrame: A pandas DataFrame representing the SimResult data
         """
-        warn_once('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
-        if self._frame is None:
-            if len(self.data) > 0:  #
-                self._frame = pd.concat([
-                    pd.DataFrame(dict(dframe), index=[0]) for dframe in self.data
-                ], ignore_index=True, axis=0)
-            else:
-                self._frame = pd.DataFrame()
-            if self.times is not None:
-                self._frame.insert(0, "time", self.times)
-                self._frame = self._frame.set_index('time')
-            return self._frame
+        # warn_once('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
+        if len(self.data) > 0:
+            frame = pd.concat([
+                pd.DataFrame(dict(dframe), index=[0]) for dframe in self.data
+            ], ignore_index=True, axis=0)
         else:
-            return self._frame
+            frame = pd.DataFrame()
+        if self.times is not None:
+            frame.insert(0, "time", self.times)
+            frame = frame.set_index('time')
+        return frame
         
     def frame_is_empty(self) -> bool:
         """
@@ -89,33 +86,33 @@ class SimResult(UserList):
         Returns:
             bool: If the value has been calculated
         """
-        return self._frame.empty
+        return self.frame.empty
 
     def __setitem__(self, key, value):
         """
             in addition to the normal functionality, updates the _frame if it exists
         """
         super().__setitem__(key, value)
-        if self._frame is not None:
+        if 'frame' in self.__dict__:  # Has been calculated
             for col in value:
-                self._frame.at[key, col] = value[col]
+                self.__dict__['frame'].at[key, col] = value[col]
 
     def __delitem__(self, key):
         """
             in addition to the normal functionality, updates the _frame if it exists
         """
         super().__delitem__(key)
-        if self._frame is not None:
-            self._frame = self._frame.drop([key])
+        if 'frame' in self.__dict__:
+            self.__dict__['frame'].drop([key], inplace=True)
 
     def insert(self, i: int, item) -> None:
         """
             in addition to the normal functionality, updates the _frame if it exists
         """
         self.insert(i, item)
-        if self._frame is not None:
+        if 'frame' in self.__dict__:
             for value in item:
-                self._frame.insert(i, column=[value], value=item[value])
+                self.__dict__['frame'].insert(i, column=[value], value=item[value])
 
     @property
     def iloc(self):
@@ -197,8 +194,8 @@ class SimResult(UserList):
             self.data.extend(other.data)
         else:
             raise ValueError(f"ValueError: Argument must be of type {self.__class__}")
-        if self._frame is not None:
-            self._frame = None
+        if 'frame' in self.__dict__:
+            del self.__dict__['frame']
 
     def pop_by_index(self, index: int = -1) -> dict:
         """Remove and return an element
@@ -210,8 +207,8 @@ class SimResult(UserList):
             dict: Element Removed
         """
         self.times.pop(index)
-        if self._frame is not None:
-            self._frame = self._frame.drop([self._frame.index.values[index]])
+        if 'frame' in self.__dict__:
+            self.__dict__['frame'].drop([self.__dict__['frame'].index.values[index]], inplace=True)
         return self.data.pop(index)
 
     def pop(self, index: int = -1) -> dict:
@@ -248,7 +245,7 @@ class SimResult(UserList):
         """Clear the SimResult"""
         self.times = []
         self.data = []
-        self._frame = None
+        del self.__dict__['frame']
 
     def time(self, index: int) -> float:
         """Get time for data point at index `index`
@@ -364,7 +361,6 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
             data (array(dict)): Data points where data[n] corresponds to times[n]
         """
         self.fcn = fcn
-        self.__data = None
         if times is None or states is None:
             self.times = []
             self.states = []
@@ -383,14 +379,14 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
         Returns:
             bool: If the value has been calculated
         """
-        return self.__data is not None
+        return 'data' in self.__dict__
 
     def clear(self) -> None:
         """
         Clears the times, states, and data cache for a LazySimResult object
         """
         self.times = []
-        self.__data = None
+        del self.__dict__['data']
         self.states = []
 
     def extend(self, other: "LazySimResult", _copy=True) -> None:
@@ -409,10 +405,13 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
                 self.states.extend(deepcopy(other.states))
             else:
                 self.states.extend(other.states)
-            if self.__data is None or not other.is_cached():
-                self.__data = None
-            else:
-                self.__data.extend(other.data)
+            if 'data' in self.__dict__:  # self is cached
+                if not other.is_cached():
+                    # Either are not cached
+                    if 'data' in self.__dict__:
+                        del self.__dict__['data']
+                else:
+                    self.__dict__['data'].extend(other.data)
         elif (isinstance(other, SimResult)):
             raise ValueError(
                 f"ValueError: {self.__class__} cannot be extended by SimResult. First convert to SimResult using to_simresult() method.")
@@ -430,8 +429,8 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
         """
         self.times.pop(index)
         x = self.states.pop(index)
-        if self.__data is not None:
-            return self.__data.pop(index)
+        if 'data' in self.__dict__:  # is cached
+            return self.__dict__['data'].pop(index)
         return self.fcn(x)
 
     def remove(self, d: float = None, t: float = None, s=None) -> None:
@@ -457,7 +456,7 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
     def to_simresult(self) -> SimResult:
         return SimResult(self.times, self.data)
 
-    @property
+    @cached_property
     def data(self) -> List[dict]:
         """
         Get the data (elements of list). Only calculated on first request
@@ -465,8 +464,4 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
         Returns:
             array(dict): data
         """
-        if self.__data is None:
-            self.__data = [self.fcn(x) for x in self.states]
-        return self.__data
-
-
+        return [self.fcn(x) for x in self.states]
