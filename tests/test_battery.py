@@ -38,9 +38,14 @@ class TestBattery(unittest.TestCase):
         self.assertEqual(BatteryElectroChem, BatteryElectroChemEODEOL)
 
     '''
-    Test that the combined model has the same results as the original model. The related changes can be 
-    found here: https://github.com/nasa/progpy/pull/207
+    Test that the current combined model has the same results as the initial implementation. 
     
+    Note that this initial implementation is no longer in ProgPy. While we have confidence in 
+    the quantitative results, a development challenge related to different results if print is True or False
+    forced the need for an updated EODEOL model (see https://github.com/nasa/progpy/issues/199). In the 
+    below test, some values from this initial implementation are hard-coded for testing purposes.
+
+    The combined model changes can be found here: https://github.com/nasa/progpy/pull/207 
     Note that states are not compared since the updated implementation uses different states and parameters.
     '''
     def test_battery_electrochem_results(self):
@@ -78,7 +83,8 @@ class TestBattery(unittest.TestCase):
         self.assertEqual(result.event_states[-1], {'EOD': np.float64(0.08759698870698607), 'InsufficientCapacity': 0.0})
 
     '''
-    Test that the combined model has the same result if print is True or False. 
+    Test that the combined model has the same result if print is True or False.
+
     This check is necessary since the event_state and output are calculated during the simulation 
     when print is True but only as needed when print is False due to LazySim optimization.
     For more details, refer to https://github.com/nasa/progpy/issues/199
