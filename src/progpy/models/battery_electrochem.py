@@ -782,12 +782,10 @@ class BatteryElectroChemEODEOL(PrognosticsModel):
     }
 
     param_callbacks = {  # Callbacks for derived parameters
-        'VolSFraction': [update_vols, update_qpSBmin, update_qSBmax],
+        'VolSFraction': [update_vols],
         'Vol': [update_vols],
-        'xpMin': [update_qpSBmin],
         'xpMax': [update_xnMin],
-        'xnMin': [update_qnmin],
-        'xnMax': [update_xpMin, update_qnmax, update_qnSBmax]
+        'xnMax': [update_xpMin]
     }
 
     default_parameters = {  # Set to defaults
@@ -795,7 +793,6 @@ class BatteryElectroChemEODEOL(PrognosticsModel):
         'xnMin': 0.0,
         'xpMax': 1.0,
         'xpMin': 0.4,
-        'qMax': 7600/0.6,
         'wq': -1e-2,
         'wr': 1e-6,
         'wd': 1e-2,
@@ -838,6 +835,16 @@ class BatteryElectroChemEODEOL(PrognosticsModel):
         'VEOD': 3.0, 
         'VDropoff': 0.1 # Voltage above EOD after which voltage will be considered in SOC calculation
     }
+
+    def initialize(self, u=None, z=None):
+        params = self.parameters
+        x0 = deepcopy(self.parameters['x0'])
+        qMax = x0['qMobile']/(params['xnMax']-params['xnMin'])
+        x0['qpS'] = qMax*params['xpMin']*params['VolSFraction'],
+        x0['qpB'] = qMax*params['xpMin']*(1.0-params['VolSFraction'])
+        x0['qnS'] = qMax*params['xnMax']*params['VolSFraction']
+        x0['qnB'] = qMax*params['xnMax']*(1.0-params['VolSFraction'])
+        return self.StateContainer(x0)
 
     def dx(self, x, u):
         params = self.parameters
