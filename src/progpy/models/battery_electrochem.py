@@ -3,6 +3,7 @@
 
 import numpy as np
 from scipy.optimize import fsolve
+from copy import deepcopy
 
 from progpy import PrognosticsModel
 
