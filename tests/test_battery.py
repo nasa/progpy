@@ -3,6 +3,7 @@
 from io import StringIO
 import sys
 import unittest
+import numpy as np
 
 from progpy.models import BatteryCircuit, BatteryElectroChem, BatteryElectroChemEOL, BatteryElectroChemEOD, BatteryElectroChemEODEOL, SimplifiedBattery
 from progpy.loading import Piecewise
@@ -36,15 +37,107 @@ class TestBattery(unittest.TestCase):
         result = batt.simulate_to(200, future_loading, {'t': 18.95, 'v': 4.183})
         self.assertEqual(BatteryElectroChem, BatteryElectroChemEODEOL)
 
-        # check warning raised when changing overwritten parameter
-        with self.assertWarns(UserWarning):
-            batt.parameters['Ro'] = 10
-        
-        with self.assertWarns(UserWarning):
-            batt.parameters['qMobile'] = 10
+    '''
+    Test that the current combined model has the same results as the initial implementation. 
+    
+    Note that this initial implementation is no longer in ProgPy. While we have confidence in 
+    the quantitative results, a development challenge related to different results if print is True or False
+    forced the need for an updated EODEOL model (see https://github.com/nasa/progpy/issues/199). In the 
+    below test, some values from this initial implementation are hard-coded for testing purposes.
 
-        with self.assertWarns(UserWarning):
-            batt.parameters['tDiffusion'] = 10
+    The combined model changes can be found here: https://github.com/nasa/progpy/pull/207 
+    Note that states are not compared since the updated implementation uses different states and parameters.
+    '''
+    def test_battery_electrochem_results(self):
+        config = {
+            'save_freq': 1000,
+            'dt': 2,
+            'events': 'InsufficientCapacity'
+        }
+
+        def future_loading(t, x=None):
+            load = 1
+            
+            if x is not None:
+                event_state = batt.event_state(x)
+                if event_state["EOD"] > 0.95:
+                    load = 1 # Discharge
+                elif event_state["EOD"] < 0.05:
+                    load = -1 # Charge
+                    
+            return batt.InputContainer({'i': load})
+        
+        batt = BatteryElectroChem()
+        result = batt.simulate_to_threshold(future_loading, **config)
+
+        # Check a middle result
+        self.assertEqual(result.times[-10], 219000.0)
+        self.assertEqual(result.inputs[-10], {'i': np.float64(-1.0)})
+        self.assertEqual(result.outputs[-10], {'t': np.float64(18.775450787889213), 'v': np.float64(3.0165983707625728)})
+        self.assertEqual(result.event_states[-10], {'EOD': np.float64(0.16598370762572756), 'InsufficientCapacity': np.float64(0.03947368418956007)})
+
+        # Check the last result
+        self.assertEqual(result.times[-1], 228000.0)
+        self.assertEqual(result.inputs[-1], {'i': np.float64(-1.0)})
+        self.assertEqual(result.outputs[-1], {'t': np.float64(18.76922976507518), 'v': np.float64(3.0087596988706986)})
+        self.assertEqual(result.event_states[-1], {'EOD': np.float64(0.08759698870698607), 'InsufficientCapacity': 0.0})
+
+    '''
+    Test that the combined model has the same result if print is True or False.
+
+    This check is necessary since the event_state and output are calculated during the simulation 
+    when print is True but only as needed when print is False due to LazySim optimization.
+    For more details, refer to https://github.com/nasa/progpy/issues/199
+    '''
+    def test_battery_electrochem_printed(self):
+        config = {
+            'save_freq': 1000,
+            'dt': 2,
+            'events': 'InsufficientCapacity',
+            'print': True
+        }
+
+        config2 = {
+            'save_freq': 1000,
+            'dt': 2,
+            'events': 'InsufficientCapacity',
+            'print': False
+        }
+        
+        def future_loading(t, x=None):
+            load = 1
+            
+            if x is not None:
+                event_state = batt.event_state(x)
+                if event_state["EOD"] > 0.95:
+                    load = 1 # Discharge
+                elif event_state["EOD"] < 0.05:
+                    load = -1 # Charge
+                    
+            return batt.InputContainer({'i': load})
+        
+        def future_loading2(t, x=None):
+            load = 1
+            
+            if x is not None:
+                event_state = batt2.event_state(x)
+                if event_state["EOD"] > 0.95:
+                    load = 1 # Discharge
+                elif event_state["EOD"] < 0.05:
+                    load = -1 # Charge
+
+            return batt2.InputContainer({'i': load})
+
+        batt = BatteryElectroChem()
+        batt2 = BatteryElectroChem()
+
+        result = batt.simulate_to_threshold(future_loading, **config)
+        result2 = batt2.simulate_to_threshold(future_loading2, **config2)
+
+        self.assertEqual(result.times, result2.times)
+        self.assertEqual(result.states, result2.states)
+        self.assertEqual(result.event_states, result2.event_states)
+        self.assertEqual(result.outputs, result2.outputs)
 
     def test_battery_electrochem_EOD(self):
         batt = BatteryElectroChemEOD()
