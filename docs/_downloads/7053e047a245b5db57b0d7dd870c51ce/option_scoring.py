@@ -42,7 +42,7 @@ def run_example():
         }
     ]
     
-    # Step 2: Open a session with the server for a thrown object. 
+    # Step 2: Open a session with the server for a battery circuit. 
     # We are specifying a time of interest of 2000 seconds.
     # This could be the end of a mission/session, or some inspection time. 
     print('\nStarting Sessions')

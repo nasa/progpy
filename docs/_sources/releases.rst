@@ -4,6 +4,19 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in v1.8.0
+----------------------
+
+progpy
+**************
+
+Updates in v1.7.1
+----------------------
+
+progpy
+**************
+Hotfix fixing issue with dataset download
+
 Updates in v1.7
 ----------------------
 

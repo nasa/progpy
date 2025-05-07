@@ -12,7 +12,7 @@ from progpy import predictors, state_estimators, uncertain_data
 
 import warnings
 
-__version__ = '1.8.0-pre'
+__version__ = '1.8.0'
 
 def run_prog_playback(obs, pred, future_loading, output_measurements, **kwargs):
     warnings.warn("Depreciated in 1.2.0, will be removed in a future release.", DeprecationWarning)

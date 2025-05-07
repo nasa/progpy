@@ -537,11 +537,15 @@ Other Examples
 * :download:`examples.serialization <../../progpy/examples/serialization.py>`
     .. automodule:: serialization
 
-Tips
-----
+Tips & Best Practices
+----------------------
 * If you're only doing diagnostics without prognostics- just define a next_state equation with no change of :term:`state` and don't perform prediction. The :term:`state estimator` can still be used to estimate if any of the :term:`events<event>` have occured.
 * Sudden :term:`events<event>` use a binary :term:`event state` (1=healthy, 0=failed).
 * You can predict as many :term:`events<event>` as you would like, sometimes one :term:`event` must happen before another, in this case the :term:`event` occurance for event 1 can be a part of the equation for event 2 ('event 2': event_1 and [OTHER LOGIC]).
+* Minimize the number of state variables whenever possible
+* Whenever possible, if calculations dont include state or inputs, include values as parameters or derived parameters instead of calculating within state transition
+* Use constant units throughout the model
+* Document all assumptions and limitations
 
 References
 ----------------------------

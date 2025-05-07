@@ -4,6 +4,12 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in v1.8.0
+----------------------
+
+progpy
+**************
+
 Updates in v1.7.1
 ----------------------
 

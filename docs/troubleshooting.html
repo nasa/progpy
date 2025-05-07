@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>API Reference &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>Troubleshooting Guide &#8212; ProgPy Python Packages 1.7 documentation</title>
   
   
   
@@ -46,12 +46,14 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/tabs.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'troubleshooting';</script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="prog_server API Reference" href="api_ref/prog_server.html" />
-    <link rel="prev" title="prog_server Guide" href="prog_server_guide.html" />
+    <link rel="next" title="Release Notes" href="releases.html" />
+    <link rel="prev" title="Utils" href="api_ref/progpy/Utils.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -141,7 +143,7 @@
 <li class="toctree-l2"><a class="reference internal" href="prog_server_guide.html">prog_server Guide</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_ref.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/load_ests.html">Load Estimators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_client.html">prog_client</a></li>
@@ -170,7 +172,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -231,7 +233,7 @@
       
       
       
-      <li><a href="_sources/api_ref.rst" target="_blank"
+      <li><a href="_sources/troubleshooting.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -300,7 +302,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -311,11 +315,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>API Reference</h1>
+    <h1>Troubleshooting Guide</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensorflow-version-compatibility">Tensorflow Version Compatibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-driven-tools">Data-Driven Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy-data-driven-tools-with-python-3-13">Installing ProgPy Data-Driven Tools with Python 3.13</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-divergence">Simulation Divergence</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -325,38 +340,39 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/prog_server/load_ests.html">Load Estimators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/prog_server/prog_client.html">prog_client</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/prog_server/prog_server.html">ProgServer</a></li>
-<li class="toctree-l2"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api_ref/progpy.html">ProgPy API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/EnsembleModel.html">EnsembleModel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/Loading.html">Loading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/MixtureOfExperts.html">MixtureOfExperts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/Prediction.html">Prediction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/Predictor.html">Predictors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/PrognosticModel.html">PrognosticsModel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/SimResult.html">SimResult</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/StateEstimator.html">State Estimators</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/ToEPredictionProfile.html">ToEPredictionProfile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/UncertainData.html">Uncertain Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_ref/progpy/Utils.html">Utils</a></li>
-</ul>
-</li>
-</ul>
+  <section id="troubleshooting-guide">
+<span id="troubleshooting"></span><h1>Troubleshooting Guide<a class="headerlink" href="#troubleshooting-guide" title="Permalink to this headline">#</a></h1>
+<p>This document includes common ProgPy issues and ways to troubleshoot.</p>
+<section id="tensorflow-version-compatibility">
+<h2>Tensorflow Version Compatibility<a class="headerlink" href="#tensorflow-version-compatibility" title="Permalink to this headline">#</a></h2>
+<p>The current datadriven dependencies require <code class="docutils literal notranslate"><span class="pre">tensorflow&gt;=2.18.0</span></code> due to compatibility with newer versions of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> (from 2.0) and <code class="docutils literal notranslate"><span class="pre">numpoly</span></code> (from 1.3.6). Dependency specifications can be found in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>.</p>
+<p>Older versions of <cite>tensorflow</cite> may work with older <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and <code class="docutils literal notranslate"><span class="pre">numpoly</span></code> versions. One known version that works is <code class="docutils literal notranslate"><span class="pre">tensorflow==2.16.2</span></code> with <code class="docutils literal notranslate"><span class="pre">numpy==1.26.4</span></code> and <code class="docutils literal notranslate"><span class="pre">numpoly==1.2.12</span></code>.</p>
+</section>
+<section id="data-driven-tools">
+<h2>Data-Driven Tools<a class="headerlink" href="#data-driven-tools" title="Permalink to this headline">#</a></h2>
+<p>If you are using data-driven tools (e.g., LSTM model), make sure the datadriven dependencies are installed using the following command:</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Stable Version (Recommended)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Pre-Release</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;progpy[datadriven]&#39;</span>
+</pre></div>
 </div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;.[datadriven]&#39;</span>
+</pre></div>
+</div>
+</div></div>
+</section>
+<section id="installing-progpy-data-driven-tools-with-python-3-13">
+<h2>Installing ProgPy Data-Driven Tools with Python 3.13<a class="headerlink" href="#installing-progpy-data-driven-tools-with-python-3-13" title="Permalink to this headline">#</a></h2>
+<p>Tensorflow does not support Python3.13 as of the writing of this (April 2025). Until this is fixed, ProgPy data-driven features may not work correctly. If you are having trouble running data-driven features with Python3.13, try with an earlier version of Python.</p>
+</section>
+<section id="simulation-divergence">
+<h2>Simulation Divergence<a class="headerlink" href="#simulation-divergence" title="Permalink to this headline">#</a></h2>
+<p>Simulation divergance or instability can occur for a variety of reasons. A few suggestions for debugging are included below:</p>
+<ul class="simple">
+<li><p>Check that your state transition equations are numerically stable</p></li>
+<li><p>Verify that your time step (dt) is appropriate for your system dynamics</p></li>
+<li><p>Consider using a different integration method if default Euler method fails</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -372,20 +388,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="prog_server_guide.html"
+       href="api_ref/progpy/Utils.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">prog_server Guide</p>
+        <p class="prev-next-title">Utils</p>
       </div>
     </a>
     <a class="right-next"
-       href="api_ref/prog_server.html"
+       href="releases.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">prog_server API Reference</p>
+        <p class="prev-next-title">Release Notes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -398,6 +414,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensorflow-version-compatibility">Tensorflow Version Compatibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-driven-tools">Data-Driven Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-progpy-data-driven-tools-with-python-3-13">Installing ProgPy Data-Driven Tools with Python 3.13</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-divergence">Simulation Divergence</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

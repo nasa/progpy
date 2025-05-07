@@ -96,7 +96,7 @@ A release is the merging of a PR where the target is the master branch.
 * Check that each new feature has corresponding tests
 * [Complete - checked automatically in PRs to dev] Confirm that every page has the copyright notice
 * Confirm added dependencies are at the following:
-   * setup.py,
+   * ``pyproject.toml``,
    * the bottom of npr7150.rst
 * Confirm that all issues associated with the release have been closed (i.e., requirements have been met) or assigned to another release
 * Run unit tests `python -m tests` on the following computer types:
@@ -116,7 +116,7 @@ A release is the merging of a PR where the target is the master branch.
    * General review: see if any updates are required
 * Rebuild sphinx documents: `sphinx-build sphinx-config/ docs/`
 * Write release notes
-* Update version number in src/\*/__init__.py and setup.py
+* Update version number in ``src/\*/__init__.py`` and ``pyproject.toml``
 * For releases adding new features- ensure that NASA release process has been followed.
 * Confirm that on GitHub Releases page, the next release has been started and that a schedule is present including at least Release Date, Release Review Date, and Release Branch Opening Date.
 
