@@ -5,6 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "progpy"
 version = "1.8.0"
+
 dependencies = [
     "scipy",
     "pandas",  # For data downloading features
