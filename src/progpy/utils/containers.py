@@ -62,7 +62,7 @@ class DictLikeMatrixWrapper():
 
             Returns: numpy array
         """
-        warn('Matrix will be deprecated after version 1.5 of ProgPy. When using for matrix multiplication, please use .dot function. e.g., c.dot(np.array([1, 2, 3])).', DeprecationWarning, stacklevel=2)
+        # warn('Matrix will be deprecated after version 1.5 of ProgPy. When using for matrix multiplication, please use .dot function. e.g., c.dot(np.array([1, 2, 3])).', DeprecationWarning, stacklevel=2)
         return self._matrix
 
     @matrix.setter
@@ -86,7 +86,7 @@ class DictLikeMatrixWrapper():
         """
             Returns: frame - pd.DataFrame
         """
-        warn('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
+        # warn('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
         self._frame = pd.DataFrame(self._matrix.T, columns=self._keys)
         return self._frame
 
@@ -137,7 +137,7 @@ class DictLikeMatrixWrapper():
         """
         creates iterator object for the list of keys
         """
-        warn("After v1.5, iteration will iterate through values instead of keys. Please iterate through keys directly (e.g., for k in s.keys())", DeprecationWarning, stacklevel=2)
+        warn("In a future version, iteration will iterate through values instead of keys. Please iterate through keys directly (e.g., for k in s.keys())", DeprecationWarning, stacklevel=2)
         return iter(self._keys)
 
     def __len__(self) -> int:
@@ -161,14 +161,14 @@ class DictLikeMatrixWrapper():
         """
         Compares two DictLikeMatrixWrappers (i.e. *Containers) or a DictLikeMatrixWrapper and a dictionary
         """
-        warn("Behavior of '==' operator will change after version 1.5 of ProgPy. New behavior will return element wise equality as a new series. To check if two Containers are equal use container.equal(other).", DeprecationWarning)
+        warn("Behavior of '==' operator will change in a future version of ProgPy. New behavior will return element wise equality as a new series. To check if two Containers are equal use container.equals(other).", DeprecationWarning)
         return self.equals(other)
 
     def __hash__(self):
         """
         returns hash value sum for keys and matrix
         """
-        warn('hash will be deprecated after version 1.5 of ProgPy, will be replace with pandas.util.hash_pandas_object.', DeprecationWarning, stacklevel=2)
+        # warn('hash will be deprecated in a future version of ProgPy, will be replace with pandas.util.hash_pandas_object.', DeprecationWarning, stacklevel=2)
         return hash(self.keys) + hash(self._matrix)
 
     def __str__(self) -> str:
@@ -201,7 +201,7 @@ class DictLikeMatrixWrapper():
         """
         returns array of matrix values
         """
-        warn("After v1.5, values will be a property instead of a function.", DeprecationWarning, stacklevel=2)
+        # warn("After v1.5, values will be a property instead of a function.", DeprecationWarning, stacklevel=2)
         if len(self._matrix) > 0 and len(
                 self._matrix[0]) == 1:  # if the first row of the matrix has one value (i.e., non-vectorized)
             return np.array([value[0] for value in self._matrix])  # the value from the first row

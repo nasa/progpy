@@ -34,23 +34,23 @@ class SimResult(UserList):
             else:
                 self.data = data
 
-    def __getitem__(self, item):
-        """
-            created for deprecation warning. [] continues to be handled by parent
-        """
-        warn_once('[] for access by row number will be deprecated after version 1.5 of ProgPy. After v1.5, [] will access by column (e.g., data[\'state1\']), Users may use \'iloc\' to access by row number (e.g., data.iloc[10])'
-            'data by element.', DeprecationWarning, stacklevel=2)
-        return super().__getitem__(item)
+    # def __getitem__(self, item):
+    #     """
+    #         created for deprecation warning. [] continues to be handled by parent
+    #     """
+    #     warn_once('[] for access by row number will be deprecated after version 1.5 of ProgPy. After v1.5, [] will access by column (e.g., data[\'state1\']), Users may use \'iloc\' to access by row number (e.g., data.iloc[10])'
+    #         'data by element.', DeprecationWarning, stacklevel=2)
+    #     return super().__getitem__(item)
     
-    def __iter__(self):
-        """
-            created for deprecation warning. iteration continues to be handled by parent
-        """
-        warn_once(
-            'iteration will be deprecated after version 1.5 of ProgPy. The function will be renamed, iterrows, '
-            'and users may begin using it under this name now.',
-            DeprecationWarning, stacklevel=2)
-        return super().__iter__()
+    # def __iter__(self):
+    #     """
+    #         created for deprecation warning. iteration continues to be handled by parent
+    #     """
+    #     warn_once(
+    #         'iteration will be deprecated after version 1.5 of ProgPy. The function will be renamed, iterrows, '
+    #         'and users may begin using it under this name now.',
+    #         DeprecationWarning, stacklevel=2)
+    #     return super().__iter__()
     
     def iterrows(self):
         """
@@ -68,7 +68,7 @@ class SimResult(UserList):
             pd.DataFrame: A pandas DataFrame representing the SimResult data
         """
         # warn_once('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
-        if len(self.data) > 0:
+        if len(self.data) > 0:  #
             frame = pd.concat([
                 pd.DataFrame(dict(dframe), index=[0]) for dframe in self.data
             ], ignore_index=True, axis=0)
@@ -147,10 +147,10 @@ class SimResult(UserList):
         Returns:
             bool: If the two SimResults are equal
         """
-        warn_once(
-            ' \' == \' will be deprecated after version 1.5 of ProgPy. The function will be available as \' equals() \', '
-            'and users may begin using it under this name now.',
-            DeprecationWarning, stacklevel=2)
+        # warn_once(
+        #     ' \' == \' will be deprecated after version 1.5 of ProgPy. The function will be available as \' equals() \', '
+        #     'and users may begin using it under this name now.',
+        #     DeprecationWarning, stacklevel=2)
 
         return self.equals(other)
 
@@ -176,7 +176,7 @@ class SimResult(UserList):
         Returns:
             int: Index of first sample where other occurs
         """
-        warn_once('index will be deprecated after version 1.5 of ProgPy. The function will be renamed, index_of_data, and users may begin using it under this name now.',
+        warn_once('index is deprecated. Use index_of_data instead.',
             DeprecationWarning, stacklevel=2)
 
         return self.index_of_data(other, *args, **kwargs)
@@ -221,7 +221,7 @@ class SimResult(UserList):
             dict: Element Removed
         """
         warn_once(
-            'pop will be deprecated after version 1.5 of ProgPy. The function will be renamed, pop_by_index, and users may begin using it under this name now.',
+            'pop is deprecated. Use pop_by_index instead',
             DeprecationWarning, stacklevel=2)
         return self.pop_by_index(index)
 
@@ -298,7 +298,7 @@ class SimResult(UserList):
         Returns:
             Figure
         """
-        warn_once('Behavior of SimResult.plot() will change with version 1.6. New behavior will match that of a pandas data frame.')
+        # warn_once('Behavior of SimResult.plot() will change with version 1.6. New behavior will match that of a pandas data frame.')
         return plot_timeseries(self.times, self.data, legend={'display': True}, options=kwargs)
 
     def monotonicity(self) -> Dict[str, float]:
@@ -328,11 +328,11 @@ class SimResult(UserList):
 
         # For each event, calculate monotonicity using formula
         result = {}
-        for key, l in by_event.items():
+        for key, value in by_event.items():
             mono_sum = 0
-            for i in range(len(l) - 1):
-                mono_sum += np.sign(l[i + 1] - l[i])
-            result[key] = abs(mono_sum / (len(l) - 1))
+            for i in range(len(value) - 1):
+                mono_sum += np.sign(value[i + 1] - value[i])
+            result[key] = abs(mono_sum / (len(value) - 1))
         return result
 
     def __not_implemented(self):  # lgtm [py/inheritance/signature-mismatch]

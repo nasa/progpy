@@ -35,7 +35,7 @@ class UncertainData(ABC):
         """
 
     @property
-    @abstractproperty
+    @abstractmethod
     def median(self) -> dict:
         """The median of the UncertainData distribution or samples 
 
@@ -49,7 +49,7 @@ class UncertainData(ABC):
         """
 
     @property
-    @abstractproperty
+    @abstractmethod
     def mean(self) -> dict:
         """The mean of the UncertainData distribution or samples 
 
@@ -63,7 +63,7 @@ class UncertainData(ABC):
         """
 
     @property
-    @abstractproperty
+    @abstractmethod
     def cov(self) -> array:
         """The covariance matrix of the UncertiantyData distribution or samples in order of keys (i.e., cov[1][1] is the standard deviation for key keys()[1])
 
