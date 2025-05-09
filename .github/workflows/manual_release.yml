@@ -4,7 +4,7 @@ on:
   workflow_dispatch
 
 jobs:
-  analysis:
+  run_tests:
     timeout-minutes: 30
     strategy:
       matrix:
@@ -17,8 +17,8 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Update
-      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, tests]'
+    - name: Install
+      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
     - name: Upload coverage to Codecov
