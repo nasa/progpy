@@ -50,7 +50,7 @@
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Release Notes" href="../../releases.html" />
+    <link rel="next" title="Troubleshooting Guide" href="../../troubleshooting.html" />
     <link rel="prev" title="Uncertain Data" href="UncertainData.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -170,6 +170,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -339,74 +340,6 @@ document.write(`
 <p>There are a number of support functions and classes included in progpy.utils. These utilities are used throughout the package, but are also available for use in your own code.</p>
 <section id="trajectory">
 <h2>Trajectory<a class="headerlink" href="#trajectory" title="Permalink to this headline">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="progpy.utils.traj_gen.Trajectory">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.utils.traj_gen.</span></span><span class="sig-name descname"><span class="pre">Trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">takeoff_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">etas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.utils.traj_gen.Trajectory" title="Permalink to this definition">#</a></dt>
-<dd><p>Trajectory class.</p>
-<p>This class generates a trajectory object that is used to create a smooth profile including
-position, velocity, acceleration, Euler’s angles, and attitude rates.
-The profiles are used to generate the desired state of a vehicle that needs to be followed to complete the trajectory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>lat</strong> (<em>np.ndarray</em>) – rad, n x 1 array, doubles, latitude coordinates of waypoints, deg</p></li>
-<li><p><strong>lon</strong> (<em>np.ndarray</em>) – rad, n x 1 array, doubles, longitude coordinates of waypoints, deg</p></li>
-<li><p><strong>alt</strong> (<em>np.ndarray</em>) – m, n x 1 array, doubles, altitude coordinates of waypoints, m</p></li>
-<li><p><strong>takeoff_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – take off time of the trajectory. Default is None (starting at current time).</p></li>
-<li><p><strong>etas</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – ETAs of each waypoints. Default is None. In that case, the ETAs are calculated based on the desired speed between waypoints.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="simple">
-<dt>kwargs:</dt><dd><dl class="simple">
-<dt>gravity (float, optional):</dt><dd><p>Magnitude of force of gravity. Default 9.81 m/s^2</p>
-</dd>
-<dt>max_phi (float, optional):</dt><dd><p>Maximum Euler’s angle (rad). Default 45/180.0*np.pi</p>
-</dd>
-<dt>max_theta (float, optional):</dt><dd><p>maximum Euler’s angle (rad). Default 45/180.0*np.pi</p>
-</dd>
-<dt>max_iter (int, optional):</dt><dd><p>maximum number of iterations to adjust the trajectory according to the maximum average jerk. Default: 10</p>
-</dd>
-<dt>max_avgjerk (float, optional):</dt><dd><p>maximum average Jerk allowed (m/s^3), if the generated trajectory has a higher value, new, more forgiving ETAs are generated to satisfy this constraint. Default: 20</p>
-</dd>
-<dt>nurbs_order (int, optional):</dt><dd><p>order of the NURBS used to generate the position profile. Default: 4</p>
-</dd>
-<dt>waypoint_weight (int, optional):</dt><dd><p>default weight value associated to all the waypoints. Default: 20</p>
-</dd>
-<dt>weight_vector (np.ndarray, optional):</dt><dd><p>Waypoint weight vector. Default is None (all waypoints will have same value from ‘waypoint_weight’). If passed, the user can define different weight for each waypoints, such that some waypoints will be approached more closely and some will be approached more smoothly.</p>
-</dd>
-<dt>nurbs_basis_length (int, optional):</dt><dd><p>default length of basis function used to generate the position profile with the NURBS.Default: 1000</p>
-</dd>
-<dt>cruise_speed (float, optional):</dt><dd><p>desired cruise speed between waypoints (m/s). If ETAs are provided, this value is ignored. Default = 6.0.</p>
-</dd>
-<dt>ascent_speed (float, optional):</dt><dd><p>desired ascent speed (m/s) between waypoints. If ETAs are provided, this value is ignored. Defualt: 3</p>
-</dd>
-<dt>descent_speed (float, optional):</dt><dd><p>desired descent speed (m/s) between waypoints. If ETAs are provided, this value is ignored. Default: 3</p>
-</dd>
-<dt>landing_speed (float, optional):</dt><dd><p>desired landing speed (m/s) between waypoints. This speed is used when the vehicle’s altitude is lower than ‘landing_altitude’ parameter. If ETAs are provided, this value is ignored. Default: 1.5</p>
-</dd>
-<dt>landing_altitude (float, optional):</dt><dd><p>landing altitude (m) below which the vehicle is supposed to move at ‘landing_speed’. Default: 10.5</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="progpy.utils.traj_gen.Trajectory.generate">
-<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.utils.traj_gen.Trajectory.generate" title="Permalink to this definition">#</a></dt>
-<dd><p>Generate trajectory given the waypoints and desired velocity or ETAs.
-The function requires the time step size dt, in seconds, used to interpolate the waypoints and generate the trajectory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dt</strong> – s, scalar, time step size used to interpolate the waypoints and generate the trajectory</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>dictionary of state variables describing the trajectory as a function of time</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 
@@ -432,11 +365,11 @@ The function requires the time step size dt, in seconds, used to interpolate the
       </div>
     </a>
     <a class="right-next"
-       href="../../releases.html"
+       href="../../troubleshooting.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Release Notes</p>
+        <p class="prev-next-title">Troubleshooting Guide</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

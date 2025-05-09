@@ -172,6 +172,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -364,7 +365,7 @@ document.write(`
 <section id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this headline">#</a></h2>
 <p><cite>prog_server</cite> uses progpy. The best way to learn how to use prog_server is to first learn how to use that package. See <a class="reference internal" href="prog_algs_guide.html#state-estimation-and-prediction-guide"><span class="std std-ref">State Estimation and Prediction Guide</span></a> and <a class="reference internal" href="prog_models_guide.html#modeling-and-sim-guide"><span class="std std-ref">Modeling and Simulation Guide</span></a> for more details.</p>
-<p>The PaaS Sandbox is actually two packages, <code class="docutils literal notranslate"><span class="pre">prog_server</span></code> and <code class="docutils literal notranslate"><span class="pre">prog_client</span></code>. The <code class="docutils literal notranslate"><span class="pre">prog_server</span></code> package is the server that provides the REST API. The <code class="docutils literal notranslate"><span class="pre">prog_client</span></code> package is a python client that uses the REST API (see <a class="reference internal" href="api_ref/prog_server/prog_client.html#prog_client.Session" title="prog_client.Session"><code class="xref py py-class docutils literal notranslate"><span class="pre">prog_client.Session</span></code></a>). The <code class="docutils literal notranslate"><span class="pre">prog_server</span></code> package is the PaaS Sandbox Server. Once started the server can accept requests from one or more applications requesting prognostics, using its REST API (described in <a class="reference internal" href="api_ref/prog_server.html#prog-server-api-reference"><span class="std std-ref">prog_server API Reference</span></a>).</p>
+<p>The PaaS Sandbox is actually two packages, <code class="docutils literal notranslate"><span class="pre">prog_server</span></code> and <code class="docutils literal notranslate"><span class="pre">prog_client</span></code>. The <code class="docutils literal notranslate"><span class="pre">prog_server</span></code> package is the server that provides the REST API. The <code class="docutils literal notranslate"><span class="pre">prog_client</span></code> package is a python client that uses the REST API (see <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_client.Session</span></code>). The <code class="docutils literal notranslate"><span class="pre">prog_server</span></code> package is the PaaS Sandbox Server. Once started the server can accept requests from one or more applications requesting prognostics, using its REST API (described in <a class="reference internal" href="api_ref/prog_server.html#prog-server-api-reference"><span class="std std-ref">prog_server API Reference</span></a>).</p>
 </section>
 <section id="starting-the-prog-server">
 <h2>Starting the prog_server<a class="headerlink" href="#starting-the-prog-server" title="Permalink to this headline">#</a></h2>
@@ -390,34 +391,19 @@ document.write(`
 <span class="gp">&gt;&gt;&gt; </span><span class="n">prog_server</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1"># Starts the server- blocking.</span>
 </pre></div>
 </div>
-<p>Both run and start accept the following optional keyword arguments:</p>
-<ul class="simple">
-<li><p><strong>host</strong> (str): Server host address. Defaults to ‘127.0.0.1’</p></li>
-<li><p><strong>port</strong> (int): Server port address. Defaults to 5000</p></li>
-<li><p><strong>debug</strong> (bool): If the server is to be started in debug mode</p></li>
-</ul>
+<p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">prog_server.start()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">prog_server.run()</span></code> for details on accepted command line arguments</p>
 </div></div>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
 <p>The best way to learn how to use prog_server is to look at examples. There are a number of examples included with prog_server, listed below:</p>
-<ul>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/0e5fd1a6bf0ee8b3ff6785357ecebade/online_prog.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.online_prog</span></code></a></dt><dd><span class="target" id="module-online_prog"></span><dl class="simple">
-<dt>This example shows how to use the PaaS Client and Server for online prognostics. Prior to running the example start the server in a terminal window with the command:</dt><dd><p>python -m prog_server</p>
-</dd>
-</dl>
-<p>This example creates a session with the server to run prognostics for a Thrown Object, a simplified model of an object thrown into the air. Data is then sent to the server and a prediction is requested. The prediction is then displayed.</p>
-</dd>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/0e5fd1a6bf0ee8b3ff6785357ecebade/online_prog.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.online_prog</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl>
-<dt><a class="reference download internal" download="" href="_downloads/7053e047a245b5db57b0d7dd870c51ce/option_scoring.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.option_scoring</span></code></a></dt><dd><span class="target" id="module-option_scoring"></span><dl class="simple">
-<dt>This example demonstrates how to score multiple considered options using the PaaS Sandbox. Prior to running the example start the server in a terminal window with the command:</dt><dd><p>python -m prog_server</p>
-</dd>
-</dl>
-<p>This example creates a session with the server to run prognostics for a BatteryCircuit. Three options with different loading profiles are compared by creating a session for each option and comparing the resulting prediction metrics</p>
-</dd>
+<li><dl class="simple">
+<dt><a class="reference download internal" download="" href="_downloads/7053e047a245b5db57b0d7dd870c51ce/option_scoring.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.option_scoring</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>

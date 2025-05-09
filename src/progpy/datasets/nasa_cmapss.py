@@ -7,7 +7,7 @@ import requests
 import zipfile
 
 cache = None
-URL = "https://data.nasa.gov/download/ff5v-kuh6/application%2Fzip"
+URL = "https://zenodo.org/records/15346912/files/CMAPSSData.zip?download=1"
 
 
 def load_data(dataset_id: int) -> tuple:

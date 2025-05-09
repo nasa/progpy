@@ -18,9 +18,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -36,9 +36,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -54,9 +54,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -72,9 +72,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -90,9 +90,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -108,9 +108,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache-datadriven
@@ -126,9 +126,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -146,9 +146,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -164,9 +164,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -182,9 +182,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -200,9 +200,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -210,24 +210,12 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e .
     - name: Run tests
       run: python -m tests.test_estimate_params
-  # test_examples:
-  #   timeout-minutes: 25
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Set up Python
-  #     uses: actions/setup-python@v4
-  #     with:
-  #       python-version: '3.7'
-  #   - name: Install dependencies cache
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: ~/.cache/pip
-  #       key: pip-cache
-  #   - name: Update
-  #     run: pip install --upgrade --upgrade-strategy eager -e .
-  #   - name: Run tests
-  #     run: python -m tests.test_examples
+  test_examples:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - name: Placeholder
+      run: echo "Placholder test in process of getting removed - job will pass."
   test_horizon:
     timeout-minutes: 5
     runs-on: ubuntu-latest
@@ -236,9 +224,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -254,9 +242,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -272,9 +260,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -290,9 +278,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -308,9 +296,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -326,9 +314,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -344,14 +332,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
-        key: pip-cache
+        key: pip-cache-datadriven
     - name: Update
-      run: pip install --upgrade --upgrade-strategy eager -e .
+      run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run tests
       run: python -m tests.test_predictors
   test_serialization:
@@ -362,14 +350,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
-        key: pip-cache
+        key: pip-cache-datadriven
     - name: Update
-      run: pip install --upgrade --upgrade-strategy eager -e .
+      run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run tests
       run: python -m tests.test_serialization
   test_sim_result:
@@ -380,9 +368,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -398,14 +386,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
-        key: pip-cache
+        key: pip-cache-datadriven
     - name: Update
-      run: pip install --upgrade --upgrade-strategy eager -e .
+      run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run tests
       run: python -m tests.test_state_estimators
   test_surrogates:
@@ -416,9 +404,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache-datadriven
@@ -426,27 +414,45 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run tests
       run: python -m tests.test_surrogates
-  # test_tutorials:
-  #   timeout-minutes: 5
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - name: Set up Python
-  #     uses: actions/setup-python@v4
-  #     with:
-  #       python-version: '3.7'
-  #   - name: Install dependencies cache
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: ~/.cache/pip
-  #       key: pip-cache-datadriven
-  #   - name: Update
-  #     run: |
-  #       pip install --upgrade --upgrade-strategy eager -e .
-  #       pip install notebook
-  #       pip install testbook
-  #   - name: Run tests
-  #     run: python -m tests.test_tutorials
+  test_tutorials:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install dependencies cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: pip-cache-datadriven
+    - name: Update
+      run: |
+        pip install --upgrade --upgrade-strategy eager -e .[datadriven,test]
+    - name: Run tests
+      run: python -m tests.test_tutorials
+  test_tutorials_part_3:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install dependencies cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: pip-cache-datadriven
+    - name: Update
+      run: |
+        pip install --upgrade --upgrade-strategy eager -e .[datadriven,test]
+        pip install prog_server
+    - name: Run tests
+      run: python -m tests.test_tutorials_part_3
   test_uav_model:
     timeout-minutes: 10
     runs-on: ubuntu-latest
@@ -455,9 +461,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache
@@ -473,9 +479,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.7'
+        python-version: '3.9'
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache

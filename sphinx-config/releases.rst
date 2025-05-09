@@ -4,6 +4,12 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in v1.8.0
+----------------------
+
+progpy
+**************
+
 Updates in v1.7.1
 ----------------------
 
@@ -199,7 +205,7 @@ prog_algs
         * new ```List[float]``` where times[m] corresponds to timepoint m for all samples.
     * End of Life (EOL)/ Time of Event (ToE) estimates:
         * previous ```List[float]``` where the times correspond to the time that the first event occurs.
-        * new ```UnweightedSamples``` where keys correspond to the inidividualevents predicted.
+        * new ```UnweightedSamples``` where keys correspond to the individual events predicted.
     * State at time of event (ToE).
     * previous: element in states.
     * new: member of ToE structure (e.g., ToE.final_state['event1']).

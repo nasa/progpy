@@ -88,7 +88,7 @@ Algorithms for :term:`state estimation<state estimator>` and :term:`prediction<p
 More information
 ------------------------------
 
-For more information, see the inidividual guides
+For more information, see the individual guides
 
 .. panels::
     :img-top-cls: pt-2, pb-2

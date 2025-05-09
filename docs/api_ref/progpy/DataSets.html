@@ -170,6 +170,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -344,122 +345,9 @@ document.write(`
 </div>
 <section id="variable-load-battery-data-nasa-battery">
 <h2>Variable Load Battery Data (nasa_battery)<a class="headerlink" href="#variable-load-battery-data-nasa-battery" title="Permalink to this headline">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="progpy.datasets.nasa_battery.load_data">
-<span class="sig-prename descclassname"><span class="pre">progpy.datasets.nasa_battery.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batt_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span></span><a class="headerlink" href="#progpy.datasets.nasa_battery.load_data" title="Permalink to this definition">#</a></dt>
-<dd><div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3.0.</span></p>
-</div>
-<p>Loads data for one or more batteries from NASA’s PCoE Dataset, ‘11. Randomized Battery Usage Data Set’
-<a class="reference external" href="https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository">https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>batt_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Battery name from dataset (RW1-28)</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – Battery not in dataset (should be RW1-28)</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – Battery id must be a string or int</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ConnectionError" title="(in Python v3.13)"><strong>ConnectionError</strong></a> – Failed to download data. This may be because of issues with your internet connection or the datasets may have moved. Please check your internet connection and make sure you’re using the latest version of progpy.</p></li>
-</ul>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Data and description as a tuple (description, data), where the data is a list of pandas DataFrames such that data[i] is the data for run i, corresponding with details[i], above. The columns of the dataframe are (‘relativeTime’, ‘current’ (amps), ‘voltage’, ‘temperature’ (°C)) in that order.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>[pd.DataFrame]]</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 <section id="cmapss-jet-engine-data-nasa-cmapss">
 <h2>CMAPSS Jet Engine Data (nasa_cmapss)<a class="headerlink" href="#cmapss-jet-engine-data-nasa-cmapss" title="Permalink to this headline">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="progpy.datasets.nasa_cmapss.load_data">
-<span class="sig-prename descclassname"><span class="pre">progpy.datasets.nasa_cmapss.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span></span><a class="headerlink" href="#progpy.datasets.nasa_cmapss.load_data" title="Permalink to this definition">#</a></dt>
-<dd><div class="versionadded">
-<p><span class="versionmodified added">New in version 1.3.0.</span></p>
-</div>
-<p>Loads data for one CMAPSS trajectory from NASA’s PCoE Dataset. See ‘6. Turbofan Engine Degredation Simulation Data Set’ at
-<a class="reference external" href="https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository">https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository</a></p>
-<dl>
-<dt>Data Set: 1</dt><dd><div class="line-block">
-<div class="line">Train trajectories: 100</div>
-<div class="line">Test trajectories: 100</div>
-<div class="line">Conditions: ONE (Sea Level)</div>
-<div class="line">Fault Modes: ONE (HPC Degradation)</div>
-</div>
-</dd>
-<dt>Data Set: 2</dt><dd><div class="line-block">
-<div class="line">Train trajectories: 260</div>
-<div class="line">Test trajectories: 259</div>
-<div class="line">Conditions: SIX</div>
-<div class="line">Fault Modes: ONE (HPC Degradation)</div>
-</div>
-</dd>
-<dt>Data Set: 3</dt><dd><div class="line-block">
-<div class="line">Train trajectories: 100</div>
-<div class="line">Test trajectories: 100</div>
-<div class="line">Conditions: ONE (Sea Level)</div>
-<div class="line">Fault Modes: TWO (HPC Degradation, Fan Degradation)</div>
-</div>
-</dd>
-<dt>Data Set: 4</dt><dd><div class="line-block">
-<div class="line">Train trajectories: 248</div>
-<div class="line">Test trajectories: 249</div>
-<div class="line">Conditions: SIX</div>
-<div class="line">Fault Modes: TWO (HPC Degradation, Fan Degradation)</div>
-</div>
-</dd>
-</dl>
-<p>Data sets consists of multiple multivariate time series. Each data set is further divided into training and test subsets. Each time series is from a different engine i.e., the data can be considered to be from a fleet of engines of the same type. Each engine starts with different degrees of initial wear and manufacturing variation which is unknown to the user. This wear and variation is considered normal, i.e., it is not considered a fault condition. There are three operational settings that have a substantial effect on engine performance. These settings are also included in the data. The data is contaminated with sensor noise.</p>
-<p>The engine is operating normally at the start of each time series, and develops a fault at some point during the series. In the training set, the fault grows in magnitude until system failure. In the test set, the time series ends some time prior to system failure. The objective of the competition is to predict the number of remaining operational cycles before failure in the test set, i.e., the number of operational cycles after the last cycle that the engine will continue to operate. Also provided a vector of true Remaining Useful Life (RUL) values for the test data. <a class="footnote-reference brackets" href="#id2" id="id1">0</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dataset_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Dataset id</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – Data not in dataset (should be 1-4)</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – Data not in dataset (should be 1-4)</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ConnectionError" title="(in Python v3.13)"><strong>ConnectionError</strong></a> – Failed to download data. This may be because of issues with your internet connection or the datasets may have moved. Please check your internet connection and make sure you’re using the latest version of progpy.</p></li>
-</ul>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><p>Tuple of data: training data, testing data, time of end of life)</p>
-<dl>
-<dt>Each row of the training and testing data is a snapshot of data taken during a single operational cycle, each column is a different variable. The columns in the pandas dataframe correspond to:</dt><dd><ol class="arabic simple">
-<li><p>unit number</p></li>
-<li><p>time, in cycles</p></li>
-<li><p>operational setting 1</p></li>
-<li><p>operational setting 2</p></li>
-<li><p>operational setting 3</p></li>
-<li><p>sensor measurement  1</p></li>
-<li><p>sensor measurement  2</p></li>
-</ol>
-<p>…</p>
-<ol class="arabic simple" start="26">
-<li><p>sensor measurement  21</p></li>
-</ol>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)">tuple</a>[pd.DataFrame, pd.DataFrame, np.array]</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">0</a></span></dt>
-<dd><ol class="upperalpha simple">
-<li><p>Saxena, K. Goebel, D. Simon, and N. Eklund, Damage Propagation Modeling for Aircraft Engine Run-to-Failure Simulation, in the Proceedings of the Ist International Conference on Prognostics and Health Management (PHM08), Denver CO, Oct 2008.</p></li>
-</ol>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 </section>
 

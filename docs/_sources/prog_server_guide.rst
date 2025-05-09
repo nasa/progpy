@@ -84,11 +84,7 @@ There are two methods for starting the prog_server, described below:
             >>> import prog_server
             >>> prog_server.run() # Starts the server- blocking.
 
-        Both run and start accept the following optional keyword arguments:
-
-        * **host** (str): Server host address. Defaults to '127.0.0.1'
-        * **port** (int): Server port address. Defaults to 5000
-        * **debug** (bool): If the server is to be started in debug mode
+        See :py:func:`prog_server.start` and :py:func:`prog_server.run` for details on accepted command line arguments 
 
 Examples
 ------------
