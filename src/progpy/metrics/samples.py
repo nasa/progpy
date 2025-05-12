@@ -27,20 +27,4 @@ def root_mean_square_error(values, ground_truth):
     Returns:
         float: root mean square error of ToE predictions
     """
-    return sqrt(sum([(mean(x) - ground_truth) ** 2 for x in values]) / len(values))
-
-
-def percentage_in_bounds(toe: list, bounds: tuple) -> float:
-    """Calculate percentage of ToE dist is within specified bounds
-
-    Args:
-        toe (List[float]): Times of Event (ToE) for a single event, output from predictor
-        bounds ((float, float)): Lower and upper bounds
-
-    Returns:
-        float: Percentage within bounds (where 1 = 100%)
-    """
-    warn(
-        "percentage_in_bounds has been deprecated in favor of UncertainData.percentage_in_bounds(bounds). This function will be removed in a future release"
-    )
-    return sum([x < bounds[1] and x > bounds[0] for x in toe]) / len(toe)
+    return sqrt(sum([(mean(x) - ground_truth)**2 for x in values])/len(values))
