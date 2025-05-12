@@ -145,7 +145,7 @@ The stepsize and times at which results are saved can be defined like in a simul
 Extending Predictors
 **********************
 
-New :term:`predictor` are created by extending the :class:`progpy.predictors.Predictor` class. 
+A new :term:`predictor` is created by extending the :class:`progpy.predictors.Predictor` class. 
 
 
 Analyzing Results
@@ -164,7 +164,7 @@ The results of the state estimation are stored in an object of type :class:`prog
 * **percentage_in_bounds**: The percentage of the state estimate that is within defined bounds.
 * **relative_accuracy**: Relative accuracy is how close the mean of the distribution is to the ground truth, on relative terms
 
-There are also a number of figures available to describe a state estimate, described below
+There are also a number of figures available to describe a state estimate, described below.
 
 .. dropdown:: Scatter Plot
 
@@ -226,8 +226,8 @@ Predicted Future States
 Predicted future states, inputs, outputs, and event states come in the form of a :class:`progpy.predictors.Prediction` object. Predictions store distributions of predicted future values at multiple future times. Predictions contain a number of tools for analyzing the results, some of which are described below:
 
 * **mean**: Estimate the mean value at each time. The result is a list of dictionaries such that prediction.mean[i] corresponds to times[i]
-* **monotonicity**: Given a single prediction, for each event: go through all predicted states and compare those to the next one.
-        Calculates monotonicity for each event key using its associated mean value in UncertainData [#Baptista2022]_ [#Coble2021]_
+
+* **monotonicity**: Given a single prediction, for each event: go through all predicted states and compare those to the next one. Calculates monotonicity for each event key using its associated mean value in ``UncertainData``. [#Baptista2022]_ [#Coble2021]_
 
 
 Time of Event (ToE)
@@ -235,7 +235,7 @@ Time of Event (ToE)
 
 Time of Event is also stored as an object of type :class:`progpy.uncertain_data.UncertainData`, so the analysis functions described in :ref:`State Estimation` are also available for a ToE estimate. See :ref:`State Estimation` or :class:`progpy.uncertain_data.UncertainData` documentation for details.
 
-In addition to these standard UncertainData metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.
+In addition to these standard ``UncertainData`` metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.
 
 Below is an example calculating probability of success:
 
@@ -247,14 +247,14 @@ Below is an example calculating probability of success:
 ToE Prediction Profile
 **************************
 
-A :class:`progpy.predictors.ToEPredictionProfile` contains Time of Event (ToE) predictions performed at multiple points. ToEPredictionProfile is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:
+A :class:`progpy.predictors.ToEPredictionProfile` contains Time of Event (ToE) predictions performed at multiple points. ``ToEPredictionProfile`` is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:
 
 * **alpha_lambda**: Whether the prediction falls within specified limits at particular times with respect to a performance measure [#Goebel2017]_ [#Saxena2010]_
 * **cumulate_relative_accuracy**: The sum of the relative accuracies of each prediction, given a ground truth
 * **monotonicity**: The monotonicity of the prediction series [#Baptista2022]_ [#Coble2021]_
 * **prognostic_horizon**: The difference between a time :math:`t_i`, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event [#Goebel2017]_ [#Saxena2010]_
 
-A ToEPredictionProfile also contains a plot method (:pythoncode:`profile.plot(...)`), which looks like this:
+A ``ToEPredictionProfile`` also contains a plot method (:pythoncode:`profile.plot(...)`), which looks like this:
 
 .. image:: images/alpha_chart.png
 
