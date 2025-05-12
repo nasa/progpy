@@ -4,7 +4,8 @@
 import math
 from progpy import PrognosticsModel, create_discrete_state
 
-ValveState = create_discrete_state(2, ['open', 'closed'])
+ValveState = create_discrete_state(2, ["open", "closed"])
+
 
 class Tank(PrognosticsModel):
     """
@@ -28,8 +29,8 @@ class Tank(PrognosticsModel):
     Keyword Args
     ------------
         process_noise : Optional, float or dict[str, float]
-          :term:`Process noise<process noise>` (applied at dx/next_state). 
-          Can be number (e.g., .2) applied to every state, a dictionary of values for each 
+          :term:`Process noise<process noise>` (applied at dx/next_state).
+          Can be number (e.g., .2) applied to every state, a dictionary of values for each
           state (e.g., {'x1': 0.2, 'x2': 0.3}), or a function (x) -> x
         process_noise_dist : Optional, str
           distribution for :term:`process noise` (e.g., normal, uniform, triangular)
@@ -56,51 +57,55 @@ class Tank(PrognosticsModel):
         x0 : Optional, dict
             Initial State
     """
-    inputs = ['q_in', 'valve_command']
-    states = ['valve', 'h']
-    outputs = ['h']
-    events = ['full', 'empty']
+
+    inputs = ["q_in", "valve_command"]
+    states = ["valve", "h"]
+    outputs = ["h"]
+    events = ["full", "empty"]
 
     default_parameters = {
-        'crosssection_area': 1,
-        'height': 1,
-        'rho': 1000,
-        'g': -9.81,
-        'valve_r': 3e-3,
-        'valve_l': 0.001,
-        'viscosity': 1e-3,
-        'x0': {
-            'valve': ValveState.closed,
-            'h': 0,
-        }
+        "crosssection_area": 1,
+        "height": 1,
+        "rho": 1000,
+        "g": -9.81,
+        "valve_r": 3e-3,
+        "valve_l": 0.001,
+        "viscosity": 1e-3,
+        "x0": {
+            "valve": ValveState.closed,
+            "h": 0,
+        },
     }
 
-    state_limits = {
-        'h': (0, float('inf'))
-    }
+    state_limits = {"h": (0, float("inf"))}
 
     def next_state(self, x, u, dt):
-        x['valve'] = ValveState(u['valve_command'])
+        x["valve"] = ValveState(u["valve_command"])
 
         # Relative pressure of fluid
-        p = self['rho']*self['g']*x['h']
-        if x['valve'] == ValveState.open:
+        p = self["rho"] * self["g"] * x["h"]
+        if x["valve"] == ValveState.open:
             # flow rate out through valve m^3/s
-            q_out = p*math.pi*self['valve_r']**4/(8*self['viscosity']*self['valve_l'])
+            q_out = (
+                p
+                * math.pi
+                * self["valve_r"] ** 4
+                / (8 * self["viscosity"] * self["valve_l"])
+            )
         else:
             # Valve is closed, no flow
             q_out = 0
-        x['h'] += (u['q_in']+q_out)*dt/self['crosssection_area']
+        x["h"] += (u["q_in"] + q_out) * dt / self["crosssection_area"]
 
         # Limit to height of tank
-        x['h'] = min(x['h'], self['height'])
+        x["h"] = min(x["h"], self["height"])
         return x
 
     def output(self, x):
-        return self.OutputContainer({'h': x['h']})
+        return self.OutputContainer({"h": x["h"]})
 
     def event_state(self, x):
         return {
-            'full': (self['height']-x['h'])/self['height'],
-            'empty': x['h']/self['height']
+            "full": (self["height"] - x["h"]) / self["height"],
+            "empty": x["h"] / self["height"],
         }

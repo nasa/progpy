@@ -33,14 +33,13 @@ def euler_next_state(model, x, u, dt: float):
     PrognosticsModel.next_state
     """
     dx = model.dx(x, u)
-    return model.StateContainer(
-        {key: x[key] + dx[key]*dt for key in dx.keys()})
+    return model.StateContainer({key: x[key] + dx[key] * dt for key in dx.keys()})
 
 
 def rk4_next_state(model, x, u, dt: float):
     """
     .. versionadded:: 1.5.0
-    
+
     State transition equation using rungekutta4 integration: Calls next_state(), calculating the next state, and then adds noise and applies limits
 
     Parameters
@@ -66,23 +65,27 @@ def rk4_next_state(model, x, u, dt: float):
     PrognosticsModel.next_state
     """
     dx1 = model.StateContainer(model.dx(x, u))
-    x2 = model.StateContainer(x.matrix + dx1.matrix*dt/2)
+    x2 = model.StateContainer(x.matrix + dx1.matrix * dt / 2)
     dx2 = model.dx(x2, u)
 
     x3 = model.StateContainer(
-        {key: x[key] + dt*dx_i/2 for key, dx_i in dx2.items()})
+        {key: x[key] + dt * dx_i / 2 for key, dx_i in dx2.items()}
+    )
     dx3 = model.dx(x3, u)
-    
-    x4 = model.StateContainer(
-        {key: x[key] + dt*dx_i for key, dx_i in dx3.items()})
+
+    x4 = model.StateContainer({key: x[key] + dt * dx_i for key, dx_i in dx3.items()})
     dx4 = model.dx(x4, u)
 
     x = model.StateContainer(
-        {key: x[key] + dt/3*(dx1[key]/2 + dx2[key] + dx3[key] + dx4[key]/2) for key in dx1.keys()})
+        {
+            key: x[key] + dt / 3 * (dx1[key] / 2 + dx2[key] + dx3[key] + dx4[key] / 2)
+            for key in dx1.keys()
+        }
+    )
     return x
 
 
-class SciPyIntegrateNextState():
+class SciPyIntegrateNextState:
     """
     .. versionadded:: 1.5.0
 
@@ -106,8 +109,8 @@ class SciPyIntegrateNextState():
         {'tb': 292.10000192371604, 'qb': 7856.125358239746, 'qcp': 0.19067532151000474, 'qcs': 0.19925202272004439}
 
     """
-    def __init__(self, m, method):
 
+    def __init__(self, m, method):
         def f(_, x, u):
             return m.dx(m.StateContainer(x), m.InputContainer(u)).matrix.T[0]
 
@@ -115,18 +118,15 @@ class SciPyIntegrateNextState():
         self.method = method
 
     def __call__(self, m, x, u, dt: float):
-
         next_state = solve_ivp(
             self.f,
             t_span=(0, dt),
             y0=x.matrix.T[0],
-            args=(u,),    # must be a tuple, "," forces a tuple in (u,) when u is a dict
+            args=(u,),  # must be a tuple, "," forces a tuple in (u,) when u is a dict
             method=self.method,
-            **m.parameters.get('integrator_config', {}))
+            **m.parameters.get("integrator_config", {}),
+        )
         return m.StateContainer(next_state.y.T[-1])
 
 
-next_state_functions = {
-    'euler': euler_next_state,
-    'rk4': rk4_next_state
-}
+next_state_functions = {"euler": euler_next_state, "rk4": rk4_next_state}

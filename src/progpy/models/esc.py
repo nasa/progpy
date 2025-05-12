@@ -7,20 +7,15 @@ import scipy.signal as signal
 
 from progpy import PrognosticsModel
 
-RAD_TO_DEG = 180/np.pi
+RAD_TO_DEG = 180 / np.pi
 PI2 = 2 * np.pi
-CL = [[1, -1, 0],
-      [1, 0, -1],
-      [0, 1, -1],
-      [-1, 1, 0],
-      [-1, 0, 1],
-      [0, -1, 1]]
+CL = [[1, -1, 0], [1, 0, -1], [0, 1, -1], [-1, 1, 0], [-1, 0, 1], [0, -1, 1]]
 
 
 def commutation(theta):
     """selection of switching pattern based on rotor position (theta)"""
     theta *= RAD_TO_DEG  # convert rad to deg
-    return CL[floor(theta/60) % 6]
+    return CL[floor(theta / 60) % 6]
 
 
 class ESC(PrognosticsModel):
@@ -37,7 +32,7 @@ class ESC(PrognosticsModel):
 
     :term:`Events<event>`: (0)
         | None
-    
+
     :term:`Inputs/Loading<input>`: (3)
         | duty :        Duty cycle (unitless), percentage the input is "on" (i.e., voltage is supplied). 0 = no voltage supply (always closed), 1 = 100% voltage supply (always open).
         | theta :       rotor position (rad).
@@ -58,7 +53,7 @@ class ESC(PrognosticsModel):
     Keyword Args
     ------------
         process_noise : Optional, float or dict[str, float]
-          :term:`Process noise<process noise>` (applied at dx/next_state). 
+          :term:`Process noise<process noise>` (applied at dx/next_state).
           Can be number (e.g., .2) applied to every state, a dictionary of values for each
           state (e.g., {'x1': 0.2, 'x2': 0.3}), or a function (x) -> x
         process_noise_dist : Optional, str
@@ -76,37 +71,42 @@ class ESC(PrognosticsModel):
 
     References
     ----------
-    .. [0] Matteo Corbetta, Chetan S. Kulkarni. An approach for uncertainty quantification and management of unmanned aerial vehicle health. 
+    .. [0] Matteo Corbetta, Chetan S. Kulkarni. An approach for uncertainty quantification and management of unmanned aerial vehicle health.
     Annual Conference of the PHM Society, Scottsdale, AZ, 2019. http://papers.phmsociety.org/index.php/phmconf/article/view/847
     .. [1] George E. Gorospe Jr, Chetan S. Kulkarni, Edward Hogge, Andrew Hsu, and Natalie Ownby. A Study of the Degradation of Electronic Speed Controllers forBrushless DC Motors.
     Asia Pacific Conference of the Prognostics and Health Management Society, 2017. https://ntrs.nasa.gov/citations/20200000579
     """
-    default_parameters = {
-        'sawtooth_freq': 16000,  # Hz
 
+    default_parameters = {
+        "sawtooth_freq": 16000,  # Hz
         # Motor Parameters
-        'x0': {
-            'v_a': 0,
-            'v_b': 0,
-            'v_c': 0,
-            't': 0
-        }
+        "x0": {"v_a": 0, "v_b": 0, "v_c": 0, "t": 0},
     }
 
-    states = ['v_a', 'v_b', 'v_c', 't']
-    inputs = ['duty', 'theta', 'v']
+    states = ["v_a", "v_b", "v_c", "t"]
+    inputs = ["duty", "theta", "v"]
     outputs = states
 
     def next_state(self, x, u, dt: float):
-        pw = np.maximum(signal.square(PI2 * self.parameters['sawtooth_freq'] * x['t'], duty=u['duty']), 0)
-        V = pw*u['v']
-        SP = commutation(u['theta'])
+        pw = np.maximum(
+            signal.square(
+                PI2 * self.parameters["sawtooth_freq"] * x["t"], duty=u["duty"]
+            ),
+            0,
+        )
+        V = pw * u["v"]
+        SP = commutation(u["theta"])
         VP = [V * sp_i for sp_i in SP]
-        return self.StateContainer(np.array([
-            np.atleast_1d(VP[0]),
-            np.atleast_1d(VP[1]),
-            np.atleast_1d(VP[2]),
-            np.atleast_1d(x['t'] + dt)]))
+        return self.StateContainer(
+            np.array(
+                [
+                    np.atleast_1d(VP[0]),
+                    np.atleast_1d(VP[1]),
+                    np.atleast_1d(VP[2]),
+                    np.atleast_1d(x["t"] + dt),
+                ]
+            )
+        )
 
     def output(self, x):
         return self.OutputContainer(x)

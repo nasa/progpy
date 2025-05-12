@@ -21,7 +21,7 @@ class SimResult(UserList):
             data (array[Dict[str, float]]): Data points where data[n] corresponds to times[n]
     """
 
-    __slots__ = ['times', 'data']  # Optimization
+    __slots__ = ["times", "data"]  # Optimization
 
     def __init__(self, times: list = None, data: list = None, _copy=True):
         if times is None or data is None:
@@ -36,26 +36,32 @@ class SimResult(UserList):
 
     def __getitem__(self, item):
         """
-            created for deprecation warning. [] continues to be handled by parent
-        """
-        warn_once('[] for access by row number will be deprecated after version 1.5 of ProgPy. After v1.5, [] will access by column (e.g., data[\'state1\']), Users may use \'iloc\' to access by row number (e.g., data.iloc[10])'
-            'data by element.', DeprecationWarning, stacklevel=2)
-        return super().__getitem__(item)
-    
-    def __iter__(self):
-        """
-            created for deprecation warning. iteration continues to be handled by parent
+        created for deprecation warning. [] continues to be handled by parent
         """
         warn_once(
-            'iteration will be deprecated after version 1.5 of ProgPy. The function will be renamed, iterrows, '
-            'and users may begin using it under this name now.',
-            DeprecationWarning, stacklevel=2)
+            "[] for access by row number will be deprecated after version 1.5 of ProgPy. After v1.5, [] will access by column (e.g., data['state1']), Users may use 'iloc' to access by row number (e.g., data.iloc[10])"
+            "data by element.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return super().__getitem__(item)
+
+    def __iter__(self):
+        """
+        created for deprecation warning. iteration continues to be handled by parent
+        """
+        warn_once(
+            "iteration will be deprecated after version 1.5 of ProgPy. The function will be renamed, iterrows, "
+            "and users may begin using it under this name now.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         return super().__iter__()
-    
+
     def iterrows(self):
         """
         .. versionadded:: 1.5.0
-        
+
             Iterates -- through keys
         """
         return super().__iter__()
@@ -64,25 +70,27 @@ class SimResult(UserList):
     def frame(self) -> pd.DataFrame:
         """
         .. versionadded:: 1.5.0
-        
+
             pd.DataFrame: A pandas DataFrame representing the SimResult data
         """
         # warn_once('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
         if len(self.data) > 0:
-            frame = pd.concat([
-                pd.DataFrame(dict(dframe), index=[0]) for dframe in self.data
-            ], ignore_index=True, axis=0)
+            frame = pd.concat(
+                [pd.DataFrame(dict(dframe), index=[0]) for dframe in self.data],
+                ignore_index=True,
+                axis=0,
+            )
         else:
             frame = pd.DataFrame()
         if self.times is not None:
             frame.insert(0, "time", self.times)
-            frame = frame.set_index('time')
+            frame = frame.set_index("time")
         return frame
-        
+
     def frame_is_empty(self) -> bool:
         """
         .. versionadded:: 1.5.0
-        
+
         Returns:
             bool: If the value has been calculated
         """
@@ -90,35 +98,35 @@ class SimResult(UserList):
 
     def __setitem__(self, key, value):
         """
-            in addition to the normal functionality, updates the _frame if it exists
+        in addition to the normal functionality, updates the _frame if it exists
         """
         super().__setitem__(key, value)
-        if 'frame' in self.__dict__:  # Has been calculated
+        if "frame" in self.__dict__:  # Has been calculated
             for col in value:
-                self.__dict__['frame'].at[key, col] = value[col]
+                self.__dict__["frame"].at[key, col] = value[col]
 
     def __delitem__(self, key):
         """
-            in addition to the normal functionality, updates the _frame if it exists
+        in addition to the normal functionality, updates the _frame if it exists
         """
         super().__delitem__(key)
-        if 'frame' in self.__dict__:
-            self.__dict__['frame'].drop([key], inplace=True)
+        if "frame" in self.__dict__:
+            self.__dict__["frame"].drop([key], inplace=True)
 
     def insert(self, i: int, item) -> None:
         """
-            in addition to the normal functionality, updates the _frame if it exists
+        in addition to the normal functionality, updates the _frame if it exists
         """
         self.insert(i, item)
-        if 'frame' in self.__dict__:
+        if "frame" in self.__dict__:
             for value in item:
-                self.__dict__['frame'].insert(i, column=[value], value=item[value])
+                self.__dict__["frame"].insert(i, column=[value], value=item[value])
 
     @property
     def iloc(self):
         """
         .. versionadded:: 1.5.0
-        
+
             returns the iloc indexer
         """
         return self.frame.iloc
@@ -126,7 +134,7 @@ class SimResult(UserList):
     def equals(self, other: "SimResult") -> bool:
         """
         .. versionadded:: 1.5.0
-        
+
         Compare 2 SimResults
 
         Args:
@@ -148,9 +156,11 @@ class SimResult(UserList):
             bool: If the two SimResults are equal
         """
         warn_once(
-            ' \' == \' will be deprecated after version 1.5 of ProgPy. The function will be available as \' equals() \', '
-            'and users may begin using it under this name now.',
-            DeprecationWarning, stacklevel=2)
+            " ' == ' will be deprecated after version 1.5 of ProgPy. The function will be available as ' equals() ', "
+            "and users may begin using it under this name now.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
 
         return self.equals(other)
 
@@ -165,7 +175,7 @@ class SimResult(UserList):
             int: Index of first sample where other occurs
         """
         return self.data.index(other, *args, **kwargs)
-    
+
     def index(self, other: dict, *args, **kwargs) -> int:
         """
         Get the index of the first sample where other occurs
@@ -176,8 +186,11 @@ class SimResult(UserList):
         Returns:
             int: Index of first sample where other occurs
         """
-        warn_once('index will be deprecated after version 1.5 of ProgPy. The function will be renamed, index_of_data, and users may begin using it under this name now.',
-            DeprecationWarning, stacklevel=2)
+        warn_once(
+            "index will be deprecated after version 1.5 of ProgPy. The function will be renamed, index_of_data, and users may begin using it under this name now.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
 
         return self.index_of_data(other, *args, **kwargs)
 
@@ -194,8 +207,8 @@ class SimResult(UserList):
             self.data.extend(other.data)
         else:
             raise ValueError(f"ValueError: Argument must be of type {self.__class__}")
-        if 'frame' in self.__dict__:
-            del self.__dict__['frame']
+        if "frame" in self.__dict__:
+            del self.__dict__["frame"]
 
     def pop_by_index(self, index: int = -1) -> dict:
         """Remove and return an element
@@ -207,8 +220,10 @@ class SimResult(UserList):
             dict: Element Removed
         """
         self.times.pop(index)
-        if 'frame' in self.__dict__:
-            self.__dict__['frame'].drop([self.__dict__['frame'].index.values[index]], inplace=True)
+        if "frame" in self.__dict__:
+            self.__dict__["frame"].drop(
+                [self.__dict__["frame"].index.values[index]], inplace=True
+            )
         return self.data.pop(index)
 
     def pop(self, index: int = -1) -> dict:
@@ -221,8 +236,10 @@ class SimResult(UserList):
             dict: Element Removed
         """
         warn_once(
-            'pop will be deprecated after version 1.5 of ProgPy. The function will be renamed, pop_by_index, and users may begin using it under this name now.',
-            DeprecationWarning, stacklevel=2)
+            "pop will be deprecated after version 1.5 of ProgPy. The function will be renamed, pop_by_index, and users may begin using it under this name now.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         return self.pop_by_index(index)
 
     def remove(self, d: dict = None, t: float = None) -> None:
@@ -233,9 +250,11 @@ class SimResult(UserList):
             t: Time value to be removed.
         """
         if sum([i is None for i in (d, t)]) != 1:
-            raise ValueError("ValueError: Only one named argument (d, t) can be specified.")
+            raise ValueError(
+                "ValueError: Only one named argument (d, t) can be specified."
+            )
 
-        if (t is not None):
+        if t is not None:
             target_index = self.times.index(t)
         else:
             target_index = self.data.index(d)
@@ -245,7 +264,7 @@ class SimResult(UserList):
         """Clear the SimResult"""
         self.times = []
         self.data = []
-        del self.__dict__['frame']
+        del self.__dict__["frame"]
 
     def time(self, index: int) -> float:
         """Get time for data point at index `index`
@@ -276,8 +295,10 @@ class SimResult(UserList):
             return np.array([u_i.matrix[:, 0] for u_i in self.data], dtype=np.float64)
         if keys is None:
             keys = self.data[0].keys()
-        return np.array([[u_i[key] for key in keys] for u_i in self.data], dtype=np.float64)
-    
+        return np.array(
+            [[u_i[key] for key in keys] for u_i in self.data], dtype=np.float64
+        )
+
     def plot(self, **kwargs) -> figure:
         """
         Plot the simresult as a line plot
@@ -298,8 +319,12 @@ class SimResult(UserList):
         Returns:
             Figure
         """
-        warn_once('Behavior of SimResult.plot() will change with version 1.6. New behavior will match that of a pandas data frame.')
-        return plot_timeseries(self.times, self.data, legend={'display': True}, options=kwargs)
+        warn_once(
+            "Behavior of SimResult.plot() will change with version 1.6. New behavior will match that of a pandas data frame."
+        )
+        return plot_timeseries(
+            self.times, self.data, legend={"display": True}, options=kwargs
+        )
 
     def monotonicity(self) -> Dict[str, float]:
         """
@@ -353,7 +378,9 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
     Used to store the result of a simulation, which is only calculated on first request
     """
 
-    def __init__(self, fcn: abc.Callable, times: list = None, states: list = None, _copy=True) -> None:
+    def __init__(
+        self, fcn: abc.Callable, times: list = None, states: list = None, _copy=True
+    ) -> None:
         """
         Args:
             fcn (abc.Callable): function (x) -> z where x is the state and z is the data
@@ -379,14 +406,14 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
         Returns:
             bool: If the value has been calculated
         """
-        return 'data' in self.__dict__
+        return "data" in self.__dict__
 
     def clear(self) -> None:
         """
         Clears the times, states, and data cache for a LazySimResult object
         """
         self.times = []
-        del self.__dict__['data']
+        del self.__dict__["data"]
         self.states = []
 
     def extend(self, other: "LazySimResult", _copy=True) -> None:
@@ -399,22 +426,23 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
             other (LazySimResult)
 
         """
-        if (isinstance(other, self.__class__)):
+        if isinstance(other, self.__class__):
             self.times.extend(other.times)
             if _copy:
                 self.states.extend(deepcopy(other.states))
             else:
                 self.states.extend(other.states)
-            if 'data' in self.__dict__:  # self is cached
+            if "data" in self.__dict__:  # self is cached
                 if not other.is_cached():
                     # Either are not cached
-                    if 'data' in self.__dict__:
-                        del self.__dict__['data']
+                    if "data" in self.__dict__:
+                        del self.__dict__["data"]
                 else:
-                    self.__dict__['data'].extend(other.data)
-        elif (isinstance(other, SimResult)):
+                    self.__dict__["data"].extend(other.data)
+        elif isinstance(other, SimResult):
             raise ValueError(
-                f"ValueError: {self.__class__} cannot be extended by SimResult. First convert to SimResult using to_simresult() method.")
+                f"ValueError: {self.__class__} cannot be extended by SimResult. First convert to SimResult using to_simresult() method."
+            )
         else:
             raise ValueError(f"ValueError: Argument must be of type {self.__class__}.")
 
@@ -429,8 +457,8 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
         """
         self.times.pop(index)
         x = self.states.pop(index)
-        if 'data' in self.__dict__:  # is cached
-            return self.__dict__['data'].pop(index)
+        if "data" in self.__dict__:  # is cached
+            return self.__dict__["data"].pop(index)
         return self.fcn(x)
 
     def remove(self, d: float = None, t: float = None, s=None) -> None:
@@ -443,11 +471,13 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
             s: State value to be removed
         """
         if sum([i is None for i in (d, t, s)]) != 2:
-            raise ValueError("ValueError: Only one named argument (d, t, s) can be specified.")
+            raise ValueError(
+                "ValueError: Only one named argument (d, t, s) can be specified."
+            )
 
-        if (t is not None):
+        if t is not None:
             target_index = self.times.index(t)
-        elif (s is not None):
+        elif s is not None:
             target_index = self.states.index(s)
         else:
             target_index = self.data.index(d)

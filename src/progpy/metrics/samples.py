@@ -13,7 +13,8 @@ def mean_square_error(values: list, ground_truth: float) -> float:
     Returns:
         float: mean square error of ToE predictions
     """
-    return sum([(mean(x) - ground_truth)**2 for x in values])/len(values)
+    return sum([(mean(x) - ground_truth) ** 2 for x in values]) / len(values)
+
 
 def root_mean_square_error(values, ground_truth):
     """Root Mean Square Error
@@ -23,7 +24,8 @@ def root_mean_square_error(values, ground_truth):
     Returns:
         float: root mean square error of ToE predictions
     """
-    return sqrt(sum([(mean(x) - ground_truth)**2 for x in values])/len(values))
+    return sqrt(sum([(mean(x) - ground_truth) ** 2 for x in values]) / len(values))
+
 
 def percentage_in_bounds(toe: list, bounds: tuple) -> float:
     """Calculate percentage of ToE dist is within specified bounds
@@ -35,5 +37,7 @@ def percentage_in_bounds(toe: list, bounds: tuple) -> float:
     Returns:
         float: Percentage within bounds (where 1 = 100%)
     """
-    warn('percentage_in_bounds has been deprecated in favor of UncertainData.percentage_in_bounds(bounds). This function will be removed in a future release')
-    return sum([x < bounds[1] and x > bounds[0] for x in toe])/ len(toe)
+    warn(
+        "percentage_in_bounds has been deprecated in favor of UncertainData.percentage_in_bounds(bounds). This function will be removed in a future release"
+    )
+    return sum([x < bounds[1] and x > bounds[0] for x in toe]) / len(toe)

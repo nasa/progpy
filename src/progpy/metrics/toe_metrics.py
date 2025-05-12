@@ -3,10 +3,12 @@
 """
 This file includes functions for calculating metrics specific to Time of Event (ToE) from a single event or multiple events given the same time of prediction
 """
+
 from typing import Iterable
 from numpy import isscalar
 
 from ..uncertain_data import UncertainData, UnweightedSamples
+
 
 def prob_success(toe: UncertainData, time: float, **kwargs) -> float:
     """Calculate probability of success - i.e., probability that event will not occur within a given time (i.e., success)
@@ -26,8 +28,8 @@ def prob_success(toe: UncertainData, time: float, **kwargs) -> float:
 
             # ToE estimate distribution is returned from a predictor's predict method
             result = predictor.predict(...)
-            toe = result.time_of_event 
-            
+            toe = result.time_of_event
+
             from progpy.metrics import prob_success
             now = 10 # Current time
             p_success = prob_success(toe, now)
@@ -35,13 +37,13 @@ def prob_success(toe: UncertainData, time: float, **kwargs) -> float:
             p_success = prob_success(toe, now, keys = ['event1']) # Can specify specific keys to consider
     """
     params = {
-        'n_samples': 10000,  # Default 
+        "n_samples": 10000,  # Default
     }
     params.update(kwargs)
 
     if isinstance(toe, UncertainData):
         # Default to all keys
-        keys = params.setdefault('keys', toe.keys())
+        keys = params.setdefault("keys", toe.keys())
         if isinstance(keys, str):
             keys = [keys]
 
@@ -50,15 +52,13 @@ def prob_success(toe: UncertainData, time: float, **kwargs) -> float:
         else:
             # Some other distribution besides unweighted samples
             # Generate Samples
-            samples = toe.sample(params['n_samples'])
+            samples = toe.sample(params["n_samples"])
 
         # If unweighted_samples, calculate metrics for each key
-        return {key: prob_success(samples.key(key), 
-                time, 
-                **kwargs) for key in keys}
+        return {key: prob_success(samples.key(key), time, **kwargs) for key in keys}
     elif isinstance(toe, Iterable):
         if len(toe) == 0:
-            raise ValueError('Time of Event must not be empty')
+            raise ValueError("Time of Event must not be empty")
         # Is list or array
         if isscalar(toe[0]) or toe[0] is None:
             # list of numbers - this is the case that we can calculate
@@ -68,8 +68,16 @@ def prob_success(toe: UncertainData, time: float, **kwargs) -> float:
             toe = UnweightedSamples(toe)
             return prob_success(toe, time, **kwargs)
         else:
-            raise TypeError("ToE must be type Uncertain Data or array of dicts, was {}".format(type(toe)))
+            raise TypeError(
+                "ToE must be type Uncertain Data or array of dicts, was {}".format(
+                    type(toe)
+                )
+            )
     else:
-        raise TypeError("ToE must be type Uncertain Data or array of dicts, was {}".format(type(toe)))
+        raise TypeError(
+            "ToE must be type Uncertain Data or array of dicts, was {}".format(
+                type(toe)
+            )
+        )
 
-    return sum([e is None or e > time for e in toe])/len(toe)
+    return sum([e is None or e > time for e in toe]) / len(toe)
