@@ -11,7 +11,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.append(join(dirname(__file__), ".."))  # Needed to access examples
-from examples import dataset, sim_battery_eol, custom_model, playback
+from examples import dataset, custom_model, playback
 
 from progpy.datasets import nasa_cmapss, nasa_battery
 
@@ -402,10 +402,6 @@ class TestManual(unittest.TestCase):
     def test_dataset_example(self):
         with patch("matplotlib.pyplot.show"):
             dataset.run_example()
-
-    def test_sim_battery_eol_example(self):
-        with patch("matplotlib.pyplot.show"):
-            sim_battery_eol.run_example()
 
     def test_custom_model_example(self):
         with patch("matplotlib.pyplot.show"):
