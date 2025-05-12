@@ -8,7 +8,8 @@ from warnings import warn
 
 int_fix = lambda x: np.float64(x) if isinstance(x, (int, type(None))) else x
 
-class DictLikeMatrixWrapper():
+
+class DictLikeMatrixWrapper:
     """
     A container that behaves like a dictionary, but is backed by a numpy array, which is itself directly accessible. This is used for model states, inputs, and outputs- and enables efficient matrix operations.
 
@@ -39,7 +40,7 @@ class DictLikeMatrixWrapper():
                 # Using int type will force results to remain ints (so if you add float to it
                 # then there will be an error or it will again round to int
                 data = np.array(data, dtype=np.float64)
-            elif np.issubdtype(data.dtype, np.dtype('O')):
+            elif np.issubdtype(data.dtype, np.dtype("O")):
                 # if "object" (e.g., includes DiscreteState or None)
                 # Make sure each element if float or object
                 for i in range(data.shape[0]):
@@ -50,17 +51,23 @@ class DictLikeMatrixWrapper():
             # ravel is used to prevent vectorized case, where data[key] returns multiple values,  from resulting in a 3D matrix
             self._matrix = np.array(
                 [
-                    np.ravel([int_fix(data[key])]) if key in data else [np.float64('nan')] for key in keys
-                ])
+                    np.ravel([int_fix(data[key])])
+                    if key in data
+                    else [np.float64("nan")]
+                    for key in keys
+                ]
+            )
         else:
-            raise TypeError(f"Data must be a dictionary or numpy array, not {type(data)}")
+            raise TypeError(
+                f"Data must be a dictionary or numpy array, not {type(data)}"
+            )
 
     @property
     def matrix(self) -> np.array:
         """
-            matrix -- Getter for numpy array
+        matrix -- Getter for numpy array
 
-            Returns: numpy array
+        Returns: numpy array
         """
         # warn('Matrix will be deprecated after version 1.5 of ProgPy. When using for matrix multiplication, please use .dot function. e.g., c.dot(np.array([1, 2, 3])).', DeprecationWarning, stacklevel=2)
         return self._matrix
@@ -68,10 +75,10 @@ class DictLikeMatrixWrapper():
     @matrix.setter
     def matrix(self, value: np.array) -> None:
         """
-            matrix -- Setter for numpy array
+        matrix -- Setter for numpy array
 
-            Arguments:
-                value -- numpy array
+        Arguments:
+            value -- numpy array
         """
         self._matrix = value
 
@@ -84,7 +91,7 @@ class DictLikeMatrixWrapper():
     @property
     def frame(self) -> pd.DataFrame:
         """
-            Returns: frame - pd.DataFrame
+        Returns: frame - pd.DataFrame
         """
         # warn('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
         self._frame = pd.DataFrame(self._matrix.T, columns=self._keys)
@@ -129,7 +136,9 @@ class DictLikeMatrixWrapper():
         elif isinstance(other, np.ndarray):
             return DictLikeMatrixWrapper(self._keys, self._matrix + other)
         elif isinstance(other, dict):
-            DictLikeMatrixWrapper(self._keys, [self[key] + other[key] for key in self._keys])
+            DictLikeMatrixWrapper(
+                self._keys, [self[key] + other[key] for key in self._keys]
+            )
         else:
             raise TypeError()
 
@@ -137,7 +146,11 @@ class DictLikeMatrixWrapper():
         """
         creates iterator object for the list of keys
         """
-        warn("In a future version, iteration will iterate through values instead of keys. Please iterate through keys directly (e.g., for k in s.keys())", DeprecationWarning, stacklevel=2)
+        warn(
+            "In a future version, iteration will iterate through values instead of keys. Please iterate through keys directly (e.g., for k in s.keys())",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         return iter(self._keys)
 
     def __len__(self) -> int:
@@ -147,11 +160,15 @@ class DictLikeMatrixWrapper():
         return len(self._keys)
 
     def equals(self, other):
-        if isinstance(other, dict):  # checks that the list of keys for each matrix match
-            list_key_check = (list(self.keys()) == list(
-                other.keys()))  # checks that the list of keys for each matrix are equal
-            matrix_check = (self._matrix == np.array(
-                [[other[key]] for key in self._keys])).all()  # checks to see that each row matches
+        if isinstance(
+            other, dict
+        ):  # checks that the list of keys for each matrix match
+            list_key_check = list(self.keys()) == list(
+                other.keys()
+            )  # checks that the list of keys for each matrix are equal
+            matrix_check = (
+                self._matrix == np.array([[other[key]] for key in self._keys])
+            ).all()  # checks to see that each row matches
             return list_key_check and matrix_check
         list_key_check = self.keys() == other.keys()
         matrix_check = (self._matrix == other.matrix).all()
@@ -161,7 +178,10 @@ class DictLikeMatrixWrapper():
         """
         Compares two DictLikeMatrixWrappers (i.e. *Containers) or a DictLikeMatrixWrapper and a dictionary
         """
-        warn("Behavior of '==' operator will change in a future version of ProgPy. New behavior will return element wise equality as a new series. To check if two Containers are equal use container.equals(other).", DeprecationWarning)
+        warn(
+            "Behavior of '==' operator will change in a future version of ProgPy. New behavior will return element wise equality as a new series. To check if two Containers are equal use container.equals(other).",
+            DeprecationWarning,
+        )
         return self.equals(other)
 
     def __hash__(self):
@@ -202,9 +222,12 @@ class DictLikeMatrixWrapper():
         returns array of matrix values
         """
         # warn("After v1.5, values will be a property instead of a function.", DeprecationWarning, stacklevel=2)
-        if len(self._matrix) > 0 and len(
-                self._matrix[0]) == 1:  # if the first row of the matrix has one value (i.e., non-vectorized)
-            return np.array([value[0] for value in self._matrix])  # the value from the first row
+        if (
+            len(self._matrix) > 0 and len(self._matrix[0]) == 1
+        ):  # if the first row of the matrix has one value (i.e., non-vectorized)
+            return np.array(
+                [value[0] for value in self._matrix]
+            )  # the value from the first row
         return self._matrix  # the matrix (vectorized case)
 
     def items(self) -> zip:
@@ -212,8 +235,9 @@ class DictLikeMatrixWrapper():
         returns keys and values as a list of tuples (for iterating)
         """
         # Disable deprecation warnings for internal progpy code.
-        if len(self._matrix) > 0 and len(
-            self._matrix[0]) == 1:  # first row of the matrix has one value (non-vectorized case)
+        if (
+            len(self._matrix) > 0 and len(self._matrix[0]) == 1
+        ):  # first row of the matrix has one value (non-vectorized case)
             return zip(self._keys, np.array([value[0] for value in self._matrix]))
         return zip(self._keys, self._matrix)
 
@@ -249,10 +273,12 @@ class DictLikeMatrixWrapper():
 
         returns: a string of dictionaries containing all the keys and associated matrix values
         """
-        if len(self._matrix) > 0 and len(
-                self._matrix[0]) == 1:  # the matrix has rows and the first row/list has one value in it
+        if (
+            len(self._matrix) > 0 and len(self._matrix[0]) == 1
+        ):  # the matrix has rows and the first row/list has one value in it
             return str({key: value[0] for key, value in zip(self._keys, self._matrix)})
         return str(dict(zip(self._keys, self._matrix)))
+
 
 InputContainer = DictLikeMatrixWrapper
 

@@ -44,7 +44,7 @@ class DataModel(PrognosticsModel, ABC):
                 List of :term:`output` keys
             event_keys (list[str]):
                 List of :term:`event` keys
-        
+
         See specific data class for more additional keyword arguments
 
         Returns:
@@ -66,7 +66,7 @@ class DataModel(PrognosticsModel, ABC):
         # This is necessary to support pickling
         # Override this, replacing the [] with any arguments from constructor
         return ([], self.parameters.data)
-    
+
     def summary(self, file=sys.stdout):
         """
         Print a summary of the model
@@ -76,7 +76,9 @@ class DataModel(PrognosticsModel, ABC):
     @staticmethod
     def check_data_format(inputs, outputs, states=None, event_states=None, t_mets=None):
         if len(inputs) == 0:
-            raise ValueError("No data provided. inputs must be in format [run1_inputs, ...] and have at least one element")
+            raise ValueError(
+                "No data provided. inputs must be in format [run1_inputs, ...] and have at least one element"
+            )
         if len(inputs) != len(outputs):
             raise ValueError("Inputs must be same length as outputs")
         if states is not None and len(inputs) != len(states):
@@ -85,9 +87,11 @@ class DataModel(PrognosticsModel, ABC):
             raise ValueError("Event States must be same length as inputs")
         if t_mets is not None and len(inputs) != len(t_mets):
             raise ValueError("Thresholds met must be same length as inputs")
-        
+
     @classmethod
-    def from_model(cls, m: PrognosticsModel, load_functions: list, **kwargs) -> "DataModel":
+    def from_model(
+        cls, m: PrognosticsModel, load_functions: list, **kwargs
+    ) -> "DataModel":
         """
         Create a Data Model from an existing PrognosticsModel (i.e., a :term:`surrogate` model). Generates data through simulation with supplied load functions. Then calls :py:func:`from_data` to generate the model.
 
@@ -108,11 +112,11 @@ class DataModel(PrognosticsModel, ABC):
         """
         # Configure
         config = {  # Defaults
-            'add_dt': True,
-            'input_keys': m.inputs.copy(),
-            'output_keys': m.outputs.copy(),
-            'state_keys': m.states.copy(),
-            'event_keys': m.events.copy()
+            "add_dt": True,
+            "input_keys": m.inputs.copy(),
+            "output_keys": m.outputs.copy(),
+            "state_keys": m.states.copy(),
+            "event_keys": m.events.copy(),
         }
         config.update(kwargs)
 
@@ -120,61 +124,79 @@ class DataModel(PrognosticsModel, ABC):
             # Only one function
             load_functions = [load_functions]
 
-        sim_cfg_params = ['dt', 't0', 'integration_method', 'save_freq', 'save_pts', 'horizon', 'first_output', 'events', 'x', 'thresholds_met_eqn']
+        sim_cfg_params = [
+            "dt",
+            "t0",
+            "integration_method",
+            "save_freq",
+            "save_pts",
+            "horizon",
+            "first_output",
+            "events",
+            "x",
+            "thresholds_met_eqn",
+        ]
 
         # Check format of cfg item and split into cfg for each sim if scalar
         for cfg in sim_cfg_params:
             if cfg in config:
-                if np.isscalar(config[cfg]) or isinstance(config[cfg], tuple) or callable(config[cfg]):
+                if (
+                    np.isscalar(config[cfg])
+                    or isinstance(config[cfg], tuple)
+                    or callable(config[cfg])
+                ):
                     # Single element to be applied to all
                     config[cfg] = [config[cfg] for _ in load_functions]
                 elif len(config[cfg]) != len(load_functions):
-                    raise ValueError(f"If providing multiple values for sim config item, must provide the same number of values as number of load functions. For {cfg} provided {len(config[cfg])}, expected {len(load_functions)}.")
+                    raise ValueError(
+                        f"If providing multiple values for sim config item, must provide the same number of values as number of load functions. For {cfg} provided {len(config[cfg])}, expected {len(load_functions)}."
+                    )
                 # Otherwise, already in correct form
 
-        if 'dt' not in config:
-            config['dt'] = [1.0 for _ in load_functions]  # default
-        if 'save_freq' not in config:
-            config['save_freq'] = config['dt']
+        if "dt" not in config:
+            config["dt"] = [1.0 for _ in load_functions]  # default
+        if "save_freq" not in config:
+            config["save_freq"] = config["dt"]
 
         # Create sim config for each element
-        sim_cfg = [{
-            cfg: config[cfg][i]
-            for cfg in sim_cfg_params if cfg in config
-        } for i in range(len(load_functions))]
+        sim_cfg = [
+            {cfg: config[cfg][i] for cfg in sim_cfg_params if cfg in config}
+            for i in range(len(load_functions))
+        ]
 
         # Simulate
         data = [
             m.simulate_to_threshold(load, **sim_cfg[i])
-            for (i, load) in enumerate(load_functions)]
+            for (i, load) in enumerate(load_functions)
+        ]
 
         # Prepare data
         times = [d.times for d in data]
-        if config['add_dt']:
-            config['input_keys'].append('dt')
+        if config["add_dt"]:
+            config["input_keys"].append("dt")
             if len(data[0].inputs) > 0 and len(data[0].inputs[0]) == 0:
                 # No inputs
                 inputs = [
-                    np.array(
-                        [[config['dt'][i]] for _ in data[i].inputs],
-                        dtype=float)
-                    for i in range(len(data))]
+                    np.array([[config["dt"][i]] for _ in data[i].inputs], dtype=float)
+                    for i in range(len(data))
+                ]
             else:
                 inputs = [
                     np.array(
                         [
-                            np.hstack((u_i.matrix[:][0].T, [config['dt'][i]]))
-                            for u_i in d.inputs],
-                        dtype=float)
-                    for i, d in enumerate(data)]
+                            np.hstack((u_i.matrix[:][0].T, [config["dt"][i]]))
+                            for u_i in d.inputs
+                        ],
+                        dtype=float,
+                    )
+                    for i, d in enumerate(data)
+                ]
         else:
             inputs = [d.inputs for d in data]
         outputs = [d.outputs for d in data]
         states = [d.states for d in data]
         event_states = [d.event_states for d in data]
-        t_met = [
-            [list(m.threshold_met(x).values()) for x in state]
-            for state in states]
+        t_met = [[list(m.threshold_met(x).values()) for x in state] for state in states]
 
         return cls.from_data(
             times=times,
@@ -183,4 +205,5 @@ class DataModel(PrognosticsModel, ABC):
             outputs=outputs,
             event_states=event_states,
             t_met=t_met,
-            **config)
+            **config,
+        )

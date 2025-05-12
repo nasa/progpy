@@ -6,12 +6,16 @@ from progpy.visualize import plot_scatter
 
 class TestVisualize(unittest.TestCase):
     def test_scatter(self):
-        # Nominal 
-        data = [{'x': 1, 'y': 2, 'z': 3}, {'x': 1.5, 'y': 2.2, 'z': -1}, {'x': 0.9, 'y': 2.1, 'z': 7}]
+        # Nominal
+        data = [
+            {"x": 1, "y": 2, "z": 3},
+            {"x": 1.5, "y": 2.2, "z": -1},
+            {"x": 0.9, "y": 2.1, "z": 7},
+        ]
         fig = plot_scatter(data)
         fig = plot_scatter(data, fig=fig)  # Add to figure
-        plot_scatter(data, fig=fig, keys=['x', 'y', 'z'])  # All keys
-        plot_scatter(data, keys=['y', 'z'])  # Subset of keys
+        plot_scatter(data, fig=fig, keys=["x", "y", "z"])  # All keys
+        plot_scatter(data, keys=["y", "z"])  # Subset of keys
 
         # Incorrect keys
         try:
@@ -21,7 +25,7 @@ class TestVisualize(unittest.TestCase):
             pass
 
         try:
-            plot_scatter(data, keys=['x', 'i'])  # Not present
+            plot_scatter(data, keys=["x", "i"])  # Not present
             self.fail()
         except Exception:
             pass
@@ -29,19 +33,20 @@ class TestVisualize(unittest.TestCase):
         # Changing number of keys
         fig = plot_scatter(data)
         try:
-            plot_scatter(data, fig=fig, keys=['y', 'z'])  # Different number of keys
+            plot_scatter(data, fig=fig, keys=["y", "z"])  # Different number of keys
             self.fail()
         except Exception:
             pass
 
         # Too few keys
         try:
-            plot_scatter(data, keys=['y'])  # Only one key
+            plot_scatter(data, keys=["y"])  # Only one key
             self.fail()
         except Exception:
             pass
 
-# This allows the module to be executed directly    
+
+# This allows the module to be executed directly
 def main():
     l = unittest.TestLoader()
     runner = unittest.TextTestRunner()
@@ -51,5 +56,6 @@ def main():
     if not result:
         raise Exception("Failed test")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -7,9 +7,7 @@ from progpy import PrognosticsModel
 
 
 def update_Cq(params):
-    return {
-        'C_q': params['c_q'] * params['rho'] * pow(params['D'], 5)
-    }
+    return {"C_q": params["c_q"] * params["rho"] * pow(params["D"], 5)}
 
 
 class PropellerLoad(PrognosticsModel):
@@ -31,34 +29,33 @@ class PropellerLoad(PrognosticsModel):
     :term:`Outputs<output>`: (1):
         t_l: Load Torque
     """
-    inputs = ['v_rot']
-    states = ['t_l']
-    outputs = ['t_l']
+
+    inputs = ["v_rot"]
+    states = ["t_l"]
+    outputs = ["t_l"]
 
     param_callbacks = {
-        'c_q': [update_Cq],
-        'rho': [update_Cq],
-        'D': [update_Cq],
+        "c_q": [update_Cq],
+        "rho": [update_Cq],
+        "D": [update_Cq],
     }
 
     default_parameters = {
         # Load parameters
-        'c_q': 5.42e-7,  # coefficient of torque (APC data, derived) [dimensionless]
-        'rho': 1.225,  # (Kg/m^3)
-        'D': 0.381,  # (m)
-
-        'x0': {
-            't_l': 0,
-        }
+        "c_q": 5.42e-7,  # coefficient of torque (APC data, derived) [dimensionless]
+        "rho": 1.225,  # (Kg/m^3)
+        "D": 0.381,  # (m)
+        "x0": {
+            "t_l": 0,
+        },
     }
 
     state_limits = {
-        't_l': (0, np.inf),
+        "t_l": (0, np.inf),
     }
 
     def next_state(self, x, u, dt: float):
-        return self.StateContainer({
-            't_l': self.parameters['C_q']*u['v_rot']**2})
-    
+        return self.StateContainer({"t_l": self.parameters["C_q"] * u["v_rot"] ** 2})
+
     def output(self, x):
         return x

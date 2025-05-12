@@ -2,10 +2,11 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 """
-Example of a powertrain being simulated for a set amount of time. 
+Example of a powertrain being simulated for a set amount of time.
 """
 
 from prog_models.models import Powertrain, ESC, DCMotor
+
 
 def run_example():
     # Create a model object
@@ -15,16 +16,16 @@ def run_example():
 
     # Define future loading function - 100% duty all the time
     def future_loading(t, x=None):
-        return powertrain.InputContainer({
-            'duty': 1,
-            'v': 23
-        })
-    
-    # Simulate to threshold
-    print('\n\n------------------------------------------------')
-    print('Simulating to threshold\n\n')
-    simulated_results = powertrain.simulate_to(2, future_loading, dt=2e-5, save_freq=0.1, print=True)
+        return powertrain.InputContainer({"duty": 1, "v": 23})
 
-# This allows the module to be executed directly 
-if __name__ == '__main__':
+    # Simulate to threshold
+    print("\n\n------------------------------------------------")
+    print("Simulating to threshold\n\n")
+    simulated_results = powertrain.simulate_to(
+        2, future_loading, dt=2e-5, save_freq=0.1, print=True
+    )
+
+
+# This allows the module to be executed directly
+if __name__ == "__main__":
     run_example()

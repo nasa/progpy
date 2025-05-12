@@ -2,19 +2,21 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 """
-Example further illustrating the concept of 'events' which generalizes EOL. 
+Example further illustrating the concept of 'events' which generalizes EOL.
 
 .. dropdown:: More details
 
     :term:`Events<event>` is the term used to describe something to be predicted. Generally in the PHM community these are referred to as End of Life (EOL). However, they can be much more.
 
-    In prog_models, events can be anything that needs to be predicted. Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds, or any Event of Interest (EOI). 
+    In prog_models, events can be anything that needs to be predicted. Events can represent End of Life (EOL), End of Mission (EOM), warning thresholds, or any Event of Interest (EOI).
 
-    This example demonstrates how events can be used in your applications. 
+    This example demonstrates how events can be used in your applications.
 """
+
 import matplotlib.pyplot as plt
 from progpy.loading import Piecewise
 from progpy.models import BatteryElectroChemEOD
+
 
 def run_example():
     # Example: Warning thresholds
@@ -22,7 +24,7 @@ def run_example():
     # We of course are interested in end of discharge, but for this example we
     # have a requirement that says the battery must not fall below 5% State of Charge (SOC)
     # Note: SOC is the event state for the End of Discharge (EOD) event
-    # Event states, like SOC go between 0 and 1, where 1 is healthy and at 0 the event has occurred. 
+    # Event states, like SOC go between 0 and 1, where 1 is healthy and at 0 the event has occurred.
     # So, 5% SOC corresponds to an 'EOD' event state of 0.05
     # Additionally, we have two warning thresholds (yellow and red)
 
@@ -32,7 +34,11 @@ def run_example():
 
     # Step 1: Extend the battery model to define the additional events
     class MyBatt(BatteryElectroChemEOD):
-        events = BatteryElectroChemEOD.events + ['EOD_warn_yellow', 'EOD_warn_red', 'EOD_requirement_threshold']
+        events = BatteryElectroChemEOD.events + [
+            "EOD_warn_yellow",
+            "EOD_warn_red",
+            "EOD_requirement_threshold",
+        ]
 
         def event_state(self, state):
             # Get event state from parent
@@ -41,9 +47,15 @@ def run_example():
             # Add yellow, red, and failure states by scaling EOD state
             # Here we scale so the threshold SOC is 0 by their associated events, while SOC of 1 is still 1
             # For example, for yellow we want EOD_warn_yellow to be 1 when SOC is 1, and 0 when SOC is YELLOW_THRESH or lower
-            event_state['EOD_warn_yellow'] = (event_state['EOD']-YELLOW_THRESH)/(1-YELLOW_THRESH) 
-            event_state['EOD_warn_red'] = (event_state['EOD']-RED_THRESH)/(1-RED_THRESH)
-            event_state['EOD_requirement_threshold'] = (event_state['EOD']-THRESHOLD)/(1-THRESHOLD)
+            event_state["EOD_warn_yellow"] = (event_state["EOD"] - YELLOW_THRESH) / (
+                1 - YELLOW_THRESH
+            )
+            event_state["EOD_warn_red"] = (event_state["EOD"] - RED_THRESH) / (
+                1 - RED_THRESH
+            )
+            event_state["EOD_requirement_threshold"] = (
+                event_state["EOD"] - THRESHOLD
+            ) / (1 - THRESHOLD)
 
             # Return
             return event_state
@@ -54,9 +66,11 @@ def run_example():
 
             # Add yell and red states from event_state
             event_state = self.event_state(x)
-            t_met['EOD_warn_yellow'] = event_state['EOD_warn_yellow'] <= 0
-            t_met['EOD_warn_red'] = event_state['EOD_warn_red'] <= 0
-            t_met['EOD_requirement_threshold'] = event_state['EOD_requirement_threshold'] <= 0
+            t_met["EOD_warn_yellow"] = event_state["EOD_warn_yellow"] <= 0
+            t_met["EOD_warn_red"] = event_state["EOD_warn_red"] <= 0
+            t_met["EOD_requirement_threshold"] = (
+                event_state["EOD_requirement_threshold"] <= 0
+            )
 
             return t_met
 
@@ -65,20 +79,22 @@ def run_example():
 
     # 2a: Setup model
 
-    # Variable (piece-wise) future loading scheme 
-    # For a battery, future loading is in term of current 'i' in amps. 
+    # Variable (piece-wise) future loading scheme
+    # For a battery, future loading is in term of current 'i' in amps.
     future_loading = Piecewise(
-        m.InputContainer,
-        [600, 900, 1800, 3000, float('inf')],
-        {'i': [2, 1, 4, 2, 3]})
-    
+        m.InputContainer, [600, 900, 1800, 3000, float("inf")], {"i": [2, 1, 4, 2, 3]}
+    )
+
     # 2b: Simulate to threshold
-    simulated_results = m.simulate_to_threshold(future_loading, threshold_keys=['EOD'], print = True)
+    simulated_results = m.simulate_to_threshold(
+        future_loading, threshold_keys=["EOD"], print=True
+    )
 
     # 2c: Plot results
     simulated_results.event_states.plot()
     plt.show()
 
-# This allows the module to be executed directly 
-if __name__ == '__main__':
+
+# This allows the module to be executed directly
+if __name__ == "__main__":
     run_example()

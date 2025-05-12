@@ -4,11 +4,9 @@
 import math
 from progpy import PrognosticsModel
 
+
 def update_x0(params):
-    return {'x0': 
-        {
-            'SOC': params['x0']['SOC'], 
-            'v': params['v_L']}}
+    return {"x0": {"SOC": params["x0"]["SOC"], "v": params["v_L"]}}
 
 
 class SimplifiedBattery(PrognosticsModel):
@@ -34,8 +32,8 @@ class SimplifiedBattery(PrognosticsModel):
     Keyword Args
     ------------
         process_noise : Optional, float or dict[str, float]
-          :term:`Process noise<process noise>` (applied at dx/next_state). 
-          Can be number (e.g., .2) applied to every state, a dictionary of values for each 
+          :term:`Process noise<process noise>` (applied at dx/next_state).
+          Can be number (e.g., .2) applied to every state, a dictionary of values for each
           state (e.g., {'x1': 0.2, 'x2': 0.3}), or a function (x) -> x
         process_noise_dist : Optional, str
           distribution for :term:`process noise` (e.g., normal, uniform, triangular)
@@ -55,53 +53,49 @@ class SimplifiedBattery(PrognosticsModel):
     .. [Sierra2019] G. Sierra and M. Orchard and K. Goebel and C. Kulkarni, "Battery health management for small-size rotary-wing electric unmanned aerial vehicles: An efficient approach for constrained computing platforms," Reliability Engineering & System Safety, Volume 182,2019. https://www.sciencedirect.com/science/article/pii/S0951832018301406
     """
 
-    inputs = ['P']
-    states = ['SOC', 'v']
-    outputs = ['v']
-    events = ['EOD', 'Low V']
+    inputs = ["P"]
+    states = ["SOC", "v"]
+    outputs = ["v"]
+    events = ["EOD", "Low V"]
 
-    state_limits = {
-        'SOC': (0.0, 1.0),
-        'v': (0, float('inf'))
-    }
+    state_limits = {"SOC": (0.0, 1.0), "v": (0, float("inf"))}
 
     default_parameters = {
-        'E_crit': 202426.858,
-        'v_L': 11.148,
-        'lambda': 0.046,
-        'gamma': 3.355,
-        'mu': 2.759,
-        'beta': 8.482,
-        'R_int': 0.027,
-        'VEOD': 9,
-
-        'x0': {
-            'SOC': 1,
-            'v': 11.148
-        }
+        "E_crit": 202426.858,
+        "v_L": 11.148,
+        "lambda": 0.046,
+        "gamma": 3.355,
+        "mu": 2.759,
+        "beta": 8.482,
+        "R_int": 0.027,
+        "VEOD": 9,
+        "x0": {"SOC": 1, "v": 11.148},
     }
 
-    param_callbacks = {
-        'v_L': [update_x0]
-    }
+    param_callbacks = {"v_L": [update_x0]}
 
     def next_state(self, x, u, dt):
-        x['SOC'] = x['SOC'] - u['P'] * dt / self['E_crit']
+        x["SOC"] = x["SOC"] - u["P"] * dt / self["E_crit"]
 
-        v_oc = self['v_L'] - self['lambda']**(self['gamma']*x['SOC']) - self['mu'] * math.exp(-self['beta']* math.sqrt(x['SOC']))
-        i = (v_oc - math.sqrt(v_oc**2 - 4 * self['R_int'] * u['P']))/(2 * self['R_int'])
-        v = v_oc - i * self['R_int']
+        v_oc = (
+            self["v_L"]
+            - self["lambda"] ** (self["gamma"] * x["SOC"])
+            - self["mu"] * math.exp(-self["beta"] * math.sqrt(x["SOC"]))
+        )
+        i = (v_oc - math.sqrt(v_oc**2 - 4 * self["R_int"] * u["P"])) / (
+            2 * self["R_int"]
+        )
+        v = v_oc - i * self["R_int"]
 
-        x['v'] = v
+        x["v"] = v
 
         return x
 
     def output(self, x):
-        return self.OutputContainer({
-            'v': x['v']})
-    
+        return self.OutputContainer({"v": x["v"]})
+
     def event_state(self, x):
         return {
-            'EOD': x['SOC'],
-            'Low V': (x['v'] - self['VEOD'])/(self['v_L'] - self['VEOD'])
+            "EOD": x["SOC"],
+            "Low V": (x["v"] - self["VEOD"]) / (self["v_L"] - self["VEOD"]),
         }

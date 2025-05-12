@@ -3,7 +3,8 @@
 from copy import deepcopy
 
 from progpy.predictors import Predictor, Prediction, PredictionResults
-# Replace the following with whatever form of UncertainData you would like to use to represent ToE 
+
+# Replace the following with whatever form of UncertainData you would like to use to represent ToE
 from progpy.uncertain_data import ScalarData
 
 
@@ -14,8 +15,8 @@ class TemplatePredictor(Predictor):
 
     # REPLACE THE FOLLOWING LIST WITH CONFIGURED PARAMETERS
     default_parameters = {  # Default Parameters, used as config for UKF
-        'Example Parameter': 0.0
-    } 
+        "Example Parameter": 0.0
+    }
 
     def __init__(self, model, **kwargs):
         """
@@ -43,7 +44,7 @@ class TemplatePredictor(Predictor):
         Returns (namedtuple)
         -------
         times : List[float]
-            Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]            
+            Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]
         inputs : Prediction
             Inputs at each savepoint such that inputs.snapshot(i) is the input distribution (type UncertainData) at times[i]
         states : Prediction
@@ -71,15 +72,10 @@ class TemplatePredictor(Predictor):
         event_states = Prediction(times, [])
 
         # Time of event is represented by some type of UncertainData (e.g., MultivariateNormalDist)
-        time_of_event = ScalarData({'event1': 748, 'event2': 300})
+        time_of_event = ScalarData({"event1": 748, "event2": 300})
         # Save the final state when each event occurs like this, with each final state represented by an UncertainData object (e.g., MultivariateNormalDist)
         # time_of_event.final_state = {'event1': ScalarData({'state1': 10, 'state2': 20}), 'event2': ScalarData({'state1': 12, 'state2': 18})}
 
         return PredictionResults(
-            times,
-            inputs,
-            states,
-            outputs,
-            event_states,
-            time_of_event
+            times, inputs, states, outputs, event_states, time_of_event
         )

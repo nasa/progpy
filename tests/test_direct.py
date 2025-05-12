@@ -25,7 +25,7 @@ class TestDirect(unittest.TestCase):
 
         x = m.initialize()
         tic = time.perf_counter()
-        m.time_of_event(x, dt = 0.05)
+        m.time_of_event(x, dt=0.05)
         toc = time.perf_counter()
         t_nondirect = toc - tic
 
@@ -33,11 +33,11 @@ class TestDirect(unittest.TestCase):
             def time_of_event(self, x, **kwargs):
                 # calculate time when object hits ground given x['x'] and x['v']
                 # 0 = x0 + v0*t - 0.5*g*t^2
-                g = self.parameters['g']
-                t_impact = -(x['v'] + np.sqrt(x['v']*x['v'] - 2*g*x['x']))/g
+                g = self.parameters["g"]
+                t_impact = -(x["v"] + np.sqrt(x["v"] * x["v"] - 2 * g * x["x"])) / g
                 # 0 = v0 - g*t
-                t_falling = -x['v']/g
-                return {'impact': t_impact, 'falling': t_falling}
+                t_falling = -x["v"] / g
+                return {"impact": t_impact, "falling": t_falling}
 
         m_direct = DirectThrownObject()
         x = m_direct.initialize()
@@ -45,11 +45,11 @@ class TestDirect(unittest.TestCase):
         tic = time.perf_counter()
         m_direct.time_of_event(x, dt=0.05)
         toc = time.perf_counter()
-        t_direct = toc-tic
+        t_direct = toc - tic
         # Direct should be at least 10x faster
-        self.assertLess(t_direct, t_nondirect/10)
+        self.assertLess(t_direct, t_nondirect / 10)
 
-        # Direct should have same events, states, inputs, outputs as non-direct 
+        # Direct should have same events, states, inputs, outputs as non-direct
         self.assertListEqual(m_direct.events, m.events)
         self.assertListEqual(m_direct.states, m.states)
         self.assertListEqual(m_direct.inputs, m.inputs)
@@ -73,26 +73,27 @@ class TestDirect(unittest.TestCase):
             def time_of_event(self, x, **kwargs):
                 # calculate time when object hits ground given x['x'] and x['v']
                 # 0 = x0 + v0*t - 0.5*g*t^2
-                g = self.parameters['g']
-                t_impact = -(x['v'] + np.sqrt(x['v']*x['v'] - 2*g*x['x']))/g
+                g = self.parameters["g"]
+                t_impact = -(x["v"] + np.sqrt(x["v"] * x["v"] - 2 * g * x["x"])) / g
                 # 0 = v0 - g*t
-                t_falling = -x['v']/g
-                return {'impact': t_impact, 'falling': t_falling}
+                t_falling = -x["v"] / g
+                return {"impact": t_impact, "falling": t_falling}
 
         class DirectNonInheritedThrownObject(PrognosticsModel):
-            states = ['x', 'v']
-            events = ['impact', 'falling']
+            states = ["x", "v"]
+            events = ["impact", "falling"]
             default_parameters = {
-                'g': -9.81,
+                "g": -9.81,
             }
+
             def time_of_event(self, x, **kwargs):
                 # calculate time when object hits ground given x['x'] and x['v']
                 # 0 = x0 + v0*t - 0.5*g*t^2
-                g = self.parameters['g']
-                t_impact = -(x['v'] + np.sqrt(x['v']*x['v'] - 2*g*x['x']))/g
+                g = self.parameters["g"]
+                t_impact = -(x["v"] + np.sqrt(x["v"] * x["v"] - 2 * g * x["x"])) / g
                 # 0 = v0 - g*t
-                t_falling = -x['v']/g
-                return {'impact': t_impact, 'falling': t_falling}
+                t_falling = -x["v"] / g
+                return {"impact": t_impact, "falling": t_falling}
 
         m_inherited = DirectInheritedThrownObject()
         m_non_inherited = DirectNonInheritedThrownObject()
@@ -107,6 +108,7 @@ class TestDirect(unittest.TestCase):
             # Should warn that outputs are not supported
             m_non_inherited.output(x)
 
+
 # This allows the module to be executed directly
 def main():
     load_test = unittest.TestLoader()
@@ -117,5 +119,6 @@ def main():
     if not result:
         raise Exception("Failed test")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

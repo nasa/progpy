@@ -7,7 +7,8 @@ from progpy import PrognosticsModel
 class AircraftModel(PrognosticsModel):
     """
     .. versionadded:: 1.5.0
-    
+
     Base class for aircraft models
     """
+
     pass

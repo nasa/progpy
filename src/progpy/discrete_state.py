@@ -4,19 +4,21 @@
 import enum
 import random
 
+
 # Transition Functions
 def _random_transition(state, disruption):
     """
     Random transition from one state to another if disruption is >= 0.5
     """
     if abs(disruption) >= 0.5:
-        return random.randint(0, len(type(state))-1)
+        return random.randint(0, len(type(state)) - 1)
     return state
+
 
 def _sequential_transition(state, disruption):
     """
     Sequential transition from one state to the next if disruption is >= 0.5
-    
+
     Examples:
         Mode 1 + 0.5 -> Mode 2
         Mode 2 - 0.5 -> Mode 1
@@ -24,7 +26,8 @@ def _sequential_transition(state, disruption):
         Mode 1 + 0.4 -> Mode 1
         Mode 0 - 2 -> Mode 0 (Minimum limit)
     """
-    return min(max(state._value_ + round(disruption), 0), len(type(state))-1)
+    return min(max(state._value_ + round(disruption), 0), len(type(state)) - 1)
+
 
 def _no_transition(state, disruption):
     """
@@ -32,11 +35,13 @@ def _no_transition(state, disruption):
     """
     return state
 
+
 TRANSITION_LOOKUP = {
-    'random': _random_transition,
-    'sequential': _sequential_transition,
-    'none': _no_transition
+    "random": _random_transition,
+    "sequential": _sequential_transition,
+    "none": _no_transition,
 }
+
 
 class DiscreteState(enum.Enum):
     """
@@ -50,13 +55,17 @@ class DiscreteState(enum.Enum):
 
     The add method is overwritten to provide logic for transition (according to provided function)
     """
+
     def __add__(self, other):
         return type(self)(self._transition(other))
 
     def __sub__(self, other):
         return type(self)(self._transition(-other))
 
-def create_discrete_state(n_states: int, names: list=None, transition=_random_transition) -> DiscreteState:
+
+def create_discrete_state(
+    n_states: int, names: list = None, transition=_random_transition
+) -> DiscreteState:
     """
     .. versionadded:: 1.8.0
 
@@ -84,19 +93,23 @@ def create_discrete_state(n_states: int, names: list=None, transition=_random_tr
         if transition in TRANSITION_LOOKUP:
             transition = TRANSITION_LOOKUP[transition]
         else:
-            raise Exception(f'Transition name {transition} not recognized. Supported modes are {str(list(TRANSITION_LOOKUP.keys()))}')
+            raise Exception(
+                f"Transition name {transition} not recognized. Supported modes are {str(list(TRANSITION_LOOKUP.keys()))}"
+            )
 
     if names is None:
-        names = [f'State {i}' for i in range(n_states)]
+        names = [f"State {i}" for i in range(n_states)]
     elif len(names) != n_states:
-        raise ValueError(f'If providing names, must provide one for each state. Provided {len(names)} for {n_states} states.')
+        raise ValueError(
+            f"If providing names, must provide one for each state. Provided {len(names)} for {n_states} states."
+        )
 
     # Enumerated states
     members = {name: i for i, name in enumerate(names)}
 
-    discrete_state = DiscreteState('Discrete State', members)
+    discrete_state = DiscreteState("Discrete State", members)
 
     # Transition is set to be nonmember (meaning it's not an enumerated state)
     discrete_state._transition = transition
-    
+
     return discrete_state

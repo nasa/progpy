@@ -1,5 +1,5 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
-# This ensures that the directory containing examples is in the python search directories 
+# This ensures that the directory containing examples is in the python search directories
 
 import chaospy as cp
 import numpy as np
@@ -36,19 +36,28 @@ class PolynomialChaosExpansion(DataModel):
     Note:
         The generated model is only valid for the intial state at which the data was generated. If the initial state is different, the model will not be valid.
     """
+
     def __init__(self, models, times, input_keys, **kwargs):
         self.inputs = input_keys
         self.states = []
         self.outputs = []
-        self.events = kwargs.get('event_keys', [f'e{i}' for i in range(len(models))])
+        self.events = kwargs.get("event_keys", [f"e{i}" for i in range(len(models))])
 
         super().__init__(**kwargs)
-        self.parameters['models'] = models
-        self.parameters['times'] = times
+        self.parameters["models"] = models
+        self.parameters["times"] = times
 
     def time_of_event(self, x, future_loading_eqn, **kwargs) -> dict:
-        loading = np.reshape(np.array([future_loading_eqn(t, x).matrix for t in self.parameters['times']]).T, (len(self.inputs * len(self.parameters['times']))))
-        return {key: model(*loading) for key, model in zip(self.events, self.parameters['models'])}
+        loading = np.reshape(
+            np.array(
+                [future_loading_eqn(t, x).matrix for t in self.parameters["times"]]
+            ).T,
+            (len(self.inputs * len(self.parameters["times"]))),
+        )
+        return {
+            key: model(*loading)
+            for key, model in zip(self.events, self.parameters["models"])
+        }
 
     @classmethod
     def from_data(cls, times, inputs, time_of_event, input_keys, **kwargs):
@@ -74,37 +83,41 @@ class PolynomialChaosExpansion(DataModel):
                 Order of the polynomial chaos expansion
         """
         default_params = {
-            'J': None,
-            'input_dists': None,
-            'order': 2,
+            "J": None,
+            "input_dists": None,
+            "order": 2,
         }
         params = default_params.copy()
         params.update(kwargs)
-        
+
         if len(input_keys) == 0:
-            raise ValueError('Must provide at least one input key, was empty')
-        if params['J'] is None and params['input_dists'] is None:
-            raise ValueError('Either J or input_dists must be provided')
-        if params['J'] is None:
-            params['J'] = cp.J(*params['input_dists'])
-        if params['order'] < 1:
-            raise ValueError(f'order must be greater than 0, was {params["order"]}')
+            raise ValueError("Must provide at least one input key, was empty")
+        if params["J"] is None and params["input_dists"] is None:
+            raise ValueError("Either J or input_dists must be provided")
+        if params["J"] is None:
+            params["J"] = cp.J(*params["input_dists"])
+        if params["order"] < 1:
+            raise ValueError(f"order must be greater than 0, was {params['order']}")
         if len(time_of_event) == 0:
-            raise ValueError('Time of event must include at least one run')
+            raise ValueError("Time of event must include at least one run")
         if len(times) == 0:
-            raise ValueError('Times must include at least one time')
+            raise ValueError("Times must include at least one time")
         if len(inputs) == 0:
-            raise ValueError('Inputs must include at least one run')
+            raise ValueError("Inputs must include at least one run")
         if len(time_of_event) != len(inputs):
-            raise ValueError('There must be the same number of runs for inputs and time of event')
+            raise ValueError(
+                "There must be the same number of runs for inputs and time of event"
+            )
 
         n_events = len(time_of_event[0])
         if n_events == 0:
-            raise ValueError('There must be at least one event to train an PCE model')
+            raise ValueError("There must be at least one event to train an PCE model")
 
         # Train
         inputs = inputs.T
-        expansion = cp.generate_expansion(order=params['order'], dist=params['J'])  # Order=2 is the only hyperparameter
+        expansion = cp.generate_expansion(
+            order=params["order"], dist=params["J"]
+        )  # Order=2 is the only hyperparameter
         surrogates = [
             cp.fit_regression(expansion, inputs, toe_i) for toe_i in time_of_event.T
         ]
@@ -135,59 +148,66 @@ class PolynomialChaosExpansion(DataModel):
                 Order of the polynomial chaos expansion
         """
         default_params = {
-            'N': 1000,
-            'dt': 0.1,
+            "N": 1000,
+            "dt": 0.1,
         }
         params = default_params.copy()
         params.update(kwargs)
 
-        if params['N'] < 1:
-            raise ValueError(f'N must be greater than 0, was {params["N"]}. At least one sample required')
+        if params["N"] < 1:
+            raise ValueError(
+                f"N must be greater than 0, was {params['N']}. At least one sample required"
+            )
         if len(m.events) < 1:
-            raise ValueError('Model must have at least one event')
+            raise ValueError("Model must have at least one event")
         if len(m.inputs) < 1:
-            raise ValueError('Model must have at least one input')
+            raise ValueError("Model must have at least one input")
 
         # ChaosPy doesn't support copying distributions.
         # As a workaround we create a new UserDistribution for each timepoint for each input
         # The UserDistribution is functionally the same as the original distribution
-        input_dists = [cp.UserDistribution(
+        input_dists = [
+            cp.UserDistribution(
                 cdf=input_dists[key].cdf,
                 pdf=input_dists[key].pdf,
-                ppf=input_dists[key].ppf
+                ppf=input_dists[key].ppf,
             )
             for key in m.inputs
             for _ in range(len(times))
-            ]
+        ]
         J = cp.J(*input_dists)  # Joint distribution to sample from
-        
+
         # Simulate to collect time_of_event data
-        time_of_event = np.empty((params['N'], len(m.events)), dtype=np.float64)
+        time_of_event = np.empty((params["N"], len(m.events)), dtype=np.float64)
 
         def future_loading(t, x=None):
             nonlocal interpolator
             return m.InputContainer(interpolator(t)[np.newaxis].T)
-        
-        all_samples = J.sample(size=params['N'], rule='latin_hypercube')
-        for i in range(params['N']):
+
+        all_samples = J.sample(size=params["N"], rule="latin_hypercube")
+        for i in range(params["N"]):
             # Sample
             inputs = np.reshape(all_samples[:, i], (len(m.inputs), len(times)))
-            interpolator = sp.interpolate.interp1d(times, inputs, bounds_error=False, fill_value=inputs[:, -1])
+            interpolator = sp.interpolate.interp1d(
+                times, inputs, bounds_error=False, fill_value=inputs[:, -1]
+            )
 
             # Simulate to get data
-            time_of_event_i = m.time_of_event(x, future_loading, dt=params['dt'])
+            time_of_event_i = m.time_of_event(x, future_loading, dt=params["dt"])
 
             # Add to list
             time_of_event[i] = [time_of_event_i[key] for key in m.events]
-        
-        params['input_keys'] = m.inputs
-        params['x'] = x
-        params['times'] = times
+
+        params["input_keys"] = m.inputs
+        params["x"] = x
+        params["times"] = times
         return cls.from_data(
             inputs=all_samples.T,
             time_of_event=time_of_event,
             event_keys=m.events,
             J=J,
-            **params)
+            **params,
+        )
+
 
 PCE = PolynomialChaosExpansion
