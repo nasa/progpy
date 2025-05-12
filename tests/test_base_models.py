@@ -355,7 +355,7 @@ class TestModels(unittest.TestCase):
         self.assertLess(diff - sum_of_parts, 100)
 
     def test_templates(self):
-        import prog_model_template
+        import templates.prog_model_template as prog_model_template
 
         m = prog_model_template.ProgModelTemplate()
 

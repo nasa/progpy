@@ -64,7 +64,7 @@ class TestPredictors(unittest.TestCase):
         )
 
     def test_pred_template(self):
-        from predictor_template import TemplatePredictor
+        from templates.predictor_template import TemplatePredictor
 
         m = MockProgModel()
         pred = TemplatePredictor(m)

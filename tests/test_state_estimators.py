@@ -93,7 +93,7 @@ class TestStateEstimators(unittest.TestCase):
         )
 
     def test_state_est_template(self):
-        from state_estimator_template import TemplateStateEstimator
+        from templates.state_estimator_template import TemplateStateEstimator
 
         se = TemplateStateEstimator(
             self._m_mock, {"a": 0.0, "b": 0.0, "c": 0.0, "t": 0.0}
