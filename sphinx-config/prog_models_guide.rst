@@ -211,7 +211,7 @@ The specific parameters are very specific to the system being modeled. For examp
 
 .. dropdown:: Derived parameters
 
-    Sometimes users would like to specify parameters as a function of other parameters. This feature is called "derived parameters". See example below for more details on this feature. 
+    Sometimes users would like to specify parameters as a function of other parameters. This feature is called "derived parameters". See the derived parameters section in the example below for more details on this feature. 
 
     * :download:`04 New Models <../../progpy/examples/04_New Models.ipynb>`
 
@@ -236,10 +236,9 @@ In practice, it is impossible to have absolute knowledge of future states due to
 
     Future loading noise is used to represent uncertainty in knowledge of how the system will be loaded in the future (See :ref:`Future Loading`). Future loading noise is applied by the user in their provided future loading method by adding random noise to the estimated future load.
 
-See example below for details on how to configure proccess and measurement noise in ProgPy
+See the noise section in the example below for details on how to configure proccess and measurement noise in ProgPy.
 
-* :download:`examples.noise <../../progpy/examples/noise.py>`
-    .. automodule:: noise
+* :download:`01 Simulation <../../progpy/examples/01_Simulation.ipynb>`
 
 Future Loading
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -254,9 +253,9 @@ Future loading is provided by the user either using the predifined loading class
         # Calculate inputs 
         return m.InputContainer({'input1': ...})
 
-See example below for details on how to provide future loading information in ProgPy. 
+See the future loading section in the example below for details on how to provide future loading information in ProgPy. 
 
-* :download:`01. Simulation <../../progpy/examples/01_Simulation.ipynb>`
+* :download:`01 Simulation <../../progpy/examples/01_Simulation.ipynb>`
 
 General Notes
 ^^^^^^^^^^^^^^^^
@@ -279,7 +278,7 @@ State-transition Models
 
         For simple linear models, users can choose to subclass the simpler :py:class:`progpy.LinearModel` class, as illustrated in the second example. Some methods and algorithms only function on linear models.
 
-        * :download:`04. New Models <../../progpy/examples/04_New Models.ipynb>`
+        * :download:`04 New Models <../../progpy/examples/04_New Models.ipynb>`
 
     .. tab:: data-driven
 
@@ -316,10 +315,9 @@ State-transition Models
 Direct-prediction models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:term:`Direct-prediction models<direct-prediction model>` are models that estimate :term:`time of event` directly from the current state and :term:`future load`, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.
+:term:`Direct-prediction models<direct-prediction model>` are models that estimate :term:`time of event` directly from the current state and :term:`future load`, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See the direct models section in the example below for more information.
 
-* :download:`examples.direct_model <../../progpy/examples/direct_model.py>`
-    .. automodule:: direct_model
+* :download:`04 New Models <../../progpy/examples/04_New Models.ipynb>`
 
 Using Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -338,13 +336,7 @@ Using provided models
 
 ProgPy includes a number of predefined models in the :py:mod:`progpy.models` module. These models are parameterized, so they can be configured to represent specific systems (see :ref:`Parameter Estimation`). 
 
-For details on the included models see `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__. The examples below illustrate use of some of the models provided in the :py:mod:`progpy.models` module.
-
-* :download:`examples.sim <../../progpy/examples/sim.py>`
-    .. automodule:: sim
-
-* :download:`examples.sim_battery_eol <../../progpy/examples/sim_battery_eol.py>`
-    .. automodule:: sim_battery_eol
+For details on the included models, see `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__. The examples below also illustrate the use of some models provided in the :py:mod:`progpy.models` module.
 
 * :download:`examples.sim_pump <../../progpy/examples/sim_pump.py>`
     .. automodule:: sim_pump
@@ -392,7 +384,7 @@ One of the most basic of functions using a model is simulation. Simulation is th
     .. admonition:: Note
         :class: tip
 
-        Data will always be saved at the next time after the save_pt or save_freq. As a result the data may not correspond to the exact time specified. Use automatic step sizes to save at the exact time.
+        Data will always be saved at the next time after the ``save_pt`` or ``save_freq``. As a result, the data may not correspond to the exact time specified. Use automatic step sizes to save at the exact time.
 
 .. dropdown:: Step size
 
@@ -439,13 +431,9 @@ One of the most basic of functions using a model is simulation. Simulation is th
 
     Now loading is applied correctly.
 
-Use of simulation is described further in the following examples:
+For simulation examples, see the following notebook for details.
 
-* :download:`examples.sim <../../progpy/examples/sim.py>`
-    .. automodule:: sim
-
-* :download:`examples.noise <../../progpy/examples/noise.py>`
-    .. automodule:: noise
+* :download:`01 Simulation <../../progpy/examples/01_Simulation.ipynb>`
 
 Parameter Estimation
 ----------------------------
@@ -461,12 +449,12 @@ Generally, parameter estimation is done by tuning the parameters of the model so
     >>> params_to_estimate = ['param1', 'param2']
     >>> m.estimate_params([run1_data, run2_data], params_to_estimate, dt=0.01)
 
-See the example below for more details
+See the example below for more details.
 
 .. admonition:: Note
     :class: tip
 
-    Parameters are changes in-place, so the model on which estimate_params is called, is now tuned to match the data
+    Parameters are changes in-place, so the model on which ``estimate_params`` is called, is now tuned to match the data.
 
 Visualizing Results
 ----------------------------
@@ -484,11 +472,9 @@ See :py:meth:`progpy.sim_result.SimResult.plot` for more details on plotting cap
 Combination Models
 ----------------------------
 
-There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below.
+There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below. For more details, see the example below.
 
-For more details, see:
-
-    * :download:`06. Combining Models <../../progpy/examples/06_Combining Models.ipynb>`
+:download:`06. Combining Models <../../progpy/examples/06_Combining Models.ipynb>`
 
 .. tabs::
 
@@ -533,9 +519,6 @@ Other Examples
 
 * :download:`examples.sensitivity <../../progpy/examples/sensitivity.py>`
     .. automodule:: sensitivity
-
-* :download:`examples.serialization <../../progpy/examples/serialization.py>`
-    .. automodule:: serialization
 
 Tips & Best Practices
 ----------------------

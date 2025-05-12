@@ -113,7 +113,7 @@ A predictors ``predict`` method is used to perform prediction, generally defined
 
     result = predictor.predict(x0, future_loading, **config)
 
-Where x0 is the initial state as an UncertainData object (often the output of state estimation), future_loading is a function defining future loading as a function of state and time, and config is a dictionary of any additional configuration parameters, specific to the predictor being used. See `Predictors <https://nasa.github.io/progpy/api_ref/progpy/Predictors.html>`__ for options available for each predictor
+Where x0 is the initial state as an UncertainData object (often the output of state estimation), future_loading is a function defining future loading as a function of state and time, and config is a dictionary of any additional configuration parameters, specific to the predictor being used. See `Predictors <https://nasa.github.io/progpy/api_ref/progpy/Predictor.html>`__ for options available for each predictor
 
 The result of the predict method is a named tuple with the following members:
 
@@ -123,11 +123,11 @@ The result of the predict method is a named tuple with the following members:
 * **event_states**: :py:class:`progpy.predictors.Prediction` object containing predicted event states at each savepoint such that event_states.snapshot(i) corresponds to times[i]
 * **time_of_event**: :py:class:`progpy.uncertain_data.UncertainData` object containing the predicted Time of Event (ToE) for each event. Additionally, final state at time of event is saved at time_of_event.final_state -> :py:class:`progpy.uncertain_data.UncertainData` for each event
 
-The stepsize and times at which results are saved can be defined like in a simulation. See `Simulation <https://nasa.github.io/progpy/docs/prog_models_guide.html#simulation>`__.
+The stepsize and times at which results are saved can be defined like in a simulation. See `Simulation <https://nasa.github.io/progpy/prog_models_guide.html?#simulation>`__.
 
 .. dropdown:: Included Predictors
 
-    ProgPy includes a number of predictors in the *progpy.predictors* package. The most commonly used of these are highlighted below. See `Predictors <https://nasa.github.io/progpy/api_ref/progpy/Predictors.html>`__ for a full list of supported predictors.
+    ProgPy includes a number of predictors in the *progpy.predictors* package. The most commonly used of these are highlighted below. See `Predictors <https://nasa.github.io/progpy/api_ref/progpy/Predictor.html>`__ for a full list of supported predictors.
 
     * **Unscented Transform (UT)**: A type of predictor for non-linear models where the state distribution is represented by a set of sigma points, calculated by an unscented tranform. Sigma points are propogated forward with time until the pass the threshold. The times at which each sigma point passes the threshold are converted to a distribution of time of event. The predicted future states and time of event are represented by a :py:class:`progpy.uncertain_data.MultivariateNormalDist`. By it's nature, UTs are much faster than MCs, but they fit the data to a normal distribution, resulting in some loss of information.
     * **Monte Carlo (MC)**: A sample-based prediction algorithm, where the distribution of likely states is represented by a set of unweighted samples. These samples are propagated forward with time. By its nature, MC is more accurate than a PF, but much slower. The predicted future states and time of event are represented by a :py:class:`progpy.uncertain_data.UnweightedSamples`. Full accuracy of MC can be adjusted by increasing or decreasing the number of samples
