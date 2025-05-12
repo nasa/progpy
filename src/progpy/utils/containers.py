@@ -146,7 +146,11 @@ class DictLikeMatrixWrapper:
         """
         creates iterator object for the list of keys
         """
-        warn("In a future version, iteration will iterate through values instead of keys. Please iterate through keys directly (e.g., for k in s.keys())", DeprecationWarning, stacklevel=2)
+        warn(
+            "In a future version, iteration will iterate through values instead of keys. Please iterate through keys directly (e.g., for k in s.keys())",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         return iter(self._keys)
 
     def __len__(self) -> int:
@@ -174,7 +178,10 @@ class DictLikeMatrixWrapper:
         """
         Compares two DictLikeMatrixWrappers (i.e. *Containers) or a DictLikeMatrixWrapper and a dictionary
         """
-        warn("Behavior of '==' operator will change in a future version of ProgPy. New behavior will return element wise equality as a new series. To check if two Containers are equal use container.equals(other).", DeprecationWarning)
+        warn(
+            "Behavior of '==' operator will change in a future version of ProgPy. New behavior will return element wise equality as a new series. To check if two Containers are equal use container.equals(other).",
+            DeprecationWarning,
+        )
         return self.equals(other)
 
     def __hash__(self):
@@ -215,9 +222,12 @@ class DictLikeMatrixWrapper:
         returns array of matrix values
         """
         # warn("After v1.5, values will be a property instead of a function.", DeprecationWarning, stacklevel=2)
-        if len(self._matrix) > 0 and len(
-                self._matrix[0]) == 1:  # if the first row of the matrix has one value (i.e., non-vectorized)
-            return np.array([value[0] for value in self._matrix])  # the value from the first row
+        if (
+            len(self._matrix) > 0 and len(self._matrix[0]) == 1
+        ):  # if the first row of the matrix has one value (i.e., non-vectorized)
+            return np.array(
+                [value[0] for value in self._matrix]
+            )  # the value from the first row
         return self._matrix  # the matrix (vectorized case)
 
     def items(self) -> zip:

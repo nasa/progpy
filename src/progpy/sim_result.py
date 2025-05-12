@@ -41,7 +41,7 @@ class SimResult(UserList):
     #     warn_once('[] for access by row number will be deprecated after version 1.5 of ProgPy. After v1.5, [] will access by column (e.g., data[\'state1\']), Users may use \'iloc\' to access by row number (e.g., data.iloc[10])'
     #         'data by element.', DeprecationWarning, stacklevel=2)
     #     return super().__getitem__(item)
-    
+
     # def __iter__(self):
     #     """
     #         created for deprecation warning. iteration continues to be handled by parent
@@ -51,7 +51,7 @@ class SimResult(UserList):
     #         'and users may begin using it under this name now.',
     #         DeprecationWarning, stacklevel=2)
     #     return super().__iter__()
-    
+
     def iterrows(self):
         """
         .. versionadded:: 1.5.0
@@ -178,8 +178,11 @@ class SimResult(UserList):
         Returns:
             int: Index of first sample where other occurs
         """
-        warn_once('index is deprecated. Use index_of_data instead.',
-            DeprecationWarning, stacklevel=2)
+        warn_once(
+            "index is deprecated. Use index_of_data instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
 
         return self.index_of_data(other, *args, **kwargs)
 
@@ -225,8 +228,10 @@ class SimResult(UserList):
             dict: Element Removed
         """
         warn_once(
-            'pop is deprecated. Use pop_by_index instead',
-            DeprecationWarning, stacklevel=2)
+            "pop is deprecated. Use pop_by_index instead",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         return self.pop_by_index(index)
 
     def remove(self, d: dict = None, t: float = None) -> None:
@@ -307,7 +312,9 @@ class SimResult(UserList):
             Figure
         """
         # warn_once('Behavior of SimResult.plot() will change with version 1.6. New behavior will match that of a pandas data frame.')
-        return plot_timeseries(self.times, self.data, legend={'display': True}, options=kwargs)
+        return plot_timeseries(
+            self.times, self.data, legend={"display": True}, options=kwargs
+        )
 
     def monotonicity(self) -> Dict[str, float]:
         """

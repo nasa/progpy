@@ -4,9 +4,10 @@
 from numpy import mean, sqrt
 from warnings import warn
 
-from .uncertain_data_metrics import calc_metrics as eol_metrics
-from .toe_metrics import prob_success
-from .toe_profile_metrics import alpha_lambda
+from .uncertain_data_metrics import calc_metrics as eol_metrics  # noqa: F401
+from .toe_metrics import prob_success  # noqa: F401
+from .toe_profile_metrics import alpha_lambda  # noqa: F401
+
 
 def mean_square_error(values: list, ground_truth: float) -> float:
     """Mean Square Error
@@ -27,4 +28,4 @@ def root_mean_square_error(values, ground_truth):
     Returns:
         float: root mean square error of ToE predictions
     """
-    return sqrt(sum([(mean(x) - ground_truth)**2 for x in values])/len(values))
+    return sqrt(sum([(mean(x) - ground_truth) ** 2 for x in values]) / len(values))
