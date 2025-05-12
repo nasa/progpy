@@ -9,6 +9,15 @@ Updates in v1.8.0
 
 progpy
 **************
+* **New Feature** Discrete States (:py:class:`progpy.discrete_state.DiscreteState`): Inputs, states, outputs, or performance metrics can now be represented by a discrete state object, which will only exist in a set of defined states. See the [Discrete State Notebook](https://github.com/nasa/progpy/blob/release/v1.8/examples/discrete_state.ipynb) for examples of use
+**New model**: Simplified Battery (:py:class:`progpy.models.BatterySimplified`). This is a simplified version of the BatteryElectroChemEOD model first introduced in the PHM Society Conference ProgPy Tutorial. See [Included Models](https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html) for details
+* Support for Python3.13
+* Improved “ProgPy Short Course”: A series of Jupyter Notebooks designed to help users get started with ProgPy and understand how to use it for prognostics. See https://github.com/nasa/progpy/tree/master/examples
+* Various bugfixes and efficiency improvements
+
+prog_server
+************
+* Support for Python3.13
 
 Updates in v1.7.1
 ----------------------
