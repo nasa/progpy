@@ -29,7 +29,6 @@ def run_example():
     ## State Estimation - perform a single ukf state estimate step
     filt = state_estimators.UnscentedKalmanFilter(batt, batt.parameters['x0'])
 
-    import matplotlib.pyplot as plt  # For plotting
     print("Prior State:", filt.x.mean)
     print('\tSOC: ', batt.event_state(filt.x.mean)['EOD'])
     example_measurements = {'t': 32.2, 'v': 3.915}

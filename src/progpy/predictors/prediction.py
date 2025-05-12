@@ -3,7 +3,6 @@
 from collections import UserList, defaultdict, namedtuple
 from typing import Dict, List
 from numpy import sign
-from warnings import warn
 
 from ..uncertain_data import UnweightedSamples, UncertainData
 

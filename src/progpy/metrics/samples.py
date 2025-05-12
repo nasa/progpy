@@ -4,9 +4,6 @@
 from numpy import mean, sqrt
 from warnings import warn
 
-from .uncertain_data_metrics import calc_metrics as eol_metrics
-from .toe_metrics import prob_success
-from .toe_profile_metrics import alpha_lambda
 
 def mean_square_error(values: list, ground_truth: float) -> float:
     """Mean Square Error

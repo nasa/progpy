@@ -33,12 +33,12 @@ class Piecewise():
             elif n_values != len(values[key]):
                 diff = len(values[key]) - n_values
                 raise ValueError(
-                    f"All elements in values must have "
+                    "All elements in values must have "
                     "the same number of elements. {key} had "
                     "{f'{diff} more' if diff > 0 else f'{-diff} less'}")
         if n_values is not None and (n_values != len(times) and n_values != (len(times) + 1)):
             raise ValueError(
-                f"Elements in values must have the same or "
+                "Elements in values must have the same or "
                 "one more element than times")
 
         self.times = times

@@ -1,8 +1,7 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
 
 from filterpy.monte_carlo import residual_resample
-import numpy as np
-from numpy import array, empty, take, exp, max, take, float64
+from numpy import array, empty, exp, max, take, float64
 from scipy.stats import norm
 from warnings import warn
 

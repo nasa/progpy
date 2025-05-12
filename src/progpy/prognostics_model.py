@@ -1260,13 +1260,13 @@ class PrognosticsModel(ABC):
                 
         # Checks stability_tol is within bounds
         if not isinstance(kwargs['stability_tol'], Number):
-            raise TypeError(f"Keyword argument 'stability_tol' must be either a int, float, or double.")
+            raise TypeError("Keyword argument 'stability_tol' must be either a int, float, or double.")
         if kwargs['stability_tol'] > 1 or kwargs['stability_tol'] <= 0:
             raise ValueError(f"Configurable cutoff must be some float value in the domain (0, 1]. Received {kwargs['stability_tol']}.")
 
         # Type and Value checking dt to make sure it has correctly passed in values.
         if not isinstance(dt, Number):
-            raise TypeError(f"Keyword argument 'dt' must be either a int, float, or double.")
+            raise TypeError("Keyword argument 'dt' must be either a int, float, or double.")
         if dt <= 0:
             raise ValueError(f"Keyword argument 'dt' must a initialized to a value greater than 0. Currently passed in {dt}.")
         
@@ -1314,7 +1314,7 @@ class PrognosticsModel(ABC):
             keys = [key for key in self.parameters.keys() if isinstance(self.parameters[key], Number)]
         
         if isinstance(keys, set):
-            raise ValueError(f"Can not pass in keys as a Set. Sets are unordered by construction, so bounds may be out of order.")
+            raise ValueError("Can not pass in keys as a Set. Sets are unordered by construction, so bounds may be out of order.")
         
         for key in keys:
             if isinstance(key, (tuple, list)):
@@ -1338,7 +1338,7 @@ class PrognosticsModel(ABC):
         config.update(kwargs)
 
         if isinstance(times, set) or isinstance(inputs, set) or isinstance(outputs, set):
-            raise TypeError(f"Times, inputs, and outputs cannot be a set. Sets are unordered by definition, so passing in arguments as sets may result in incorrect behavior.")
+            raise TypeError("Times, inputs, and outputs cannot be a set. Sets are unordered by definition, so passing in arguments as sets may result in incorrect behavior.")
 
         # if parameters not in parent wrapper sequence, then place them into one.
         if isinstance(times, np.ndarray):
@@ -1371,7 +1371,7 @@ class PrognosticsModel(ABC):
                 raise ValueError(f"Times, inputs, and outputs must be same length. Length of times: {len(times)}, Length of inputs: {len(inputs)}, Length of outputs: {len(outputs)}")
             if len(times) == 0:
                 # Since inputs, times, and outputs are already confirmed to be the same length, only check that one is not empty
-                raise ValueError(f"Times, inputs, and outputs must have at least one element")
+                raise ValueError("Times, inputs, and outputs must have at least one element")
             # For now- convert to runs
             runs = [(t, u, z) for t, u, z in zip(times, inputs, outputs)]
 

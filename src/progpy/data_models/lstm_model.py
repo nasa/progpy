@@ -2,7 +2,6 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 from collections import abc
-import importlib.util
 from itertools import chain
 import matplotlib.pyplot as plt
 from numbers import Number
@@ -540,7 +539,7 @@ class LSTMStateTransitionModel(DataModel):
         # Tensorflow is imported here to avoid importing it if not needed
         try:
             from tensorflow import keras
-        except ImportError as e:
+        except ImportError:
             raise ImportError("Missing required dependencies for data-driven model. ProgPy was imported directly. Instead import with datadriven dependencies using pip3 install progpy[datadriven] or pip3 install -e '.[datadriven]' (if installing from local copy)")
 
         # Build model
@@ -653,7 +652,7 @@ class LSTMStateTransitionModel(DataModel):
         # I don't know if this interferes with how the PrognosticsModel class works. 
         while x.matrix[0,0] is None:
             if 'horizon' in kwargs and t > kwargs['horizon']:
-                raise Exception(f'Not enough timesteps to reach minimum number of steps for model simulation')
+                raise Exception('Not enough timesteps to reach minimum number of steps for model simulation')
             dt = next_time(t, x)
             t = t + dt/2
             # Use state at midpoint of step to best represent the load during the duration of the step
