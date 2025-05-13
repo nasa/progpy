@@ -338,6 +338,8 @@ ProgPy includes a number of predefined models in the :py:mod:`progpy.models` mod
 
 For details on the included models, see `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__. The examples below also illustrate the use of some models provided in the :py:mod:`progpy.models` module.
 
+* :download:`03 Included Models <../../progpy/examples/03_Existing Models.ipynb>`
+
 * :download:`examples.sim_pump <../../progpy/examples/sim_pump.py>`
     .. automodule:: sim_pump
 
