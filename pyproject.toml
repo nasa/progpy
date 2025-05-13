@@ -1,82 +1,62 @@
-[build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
-
-[project]
+[tool.poetry]
 name = "progpy"
 version = "1.8.0"
-
-dependencies = [
-    "scipy",
-    "pandas",  # For data downloading features
-    "matplotlib",
-    "requests",  # For data downloading features
-    "fastdtw",  # For DTW error calculation
-    "filterpy>=1.4.4",
-]
-requires-python = ">=3.9, <3.14"
+description = "The 2024 NASA Software of the Year, the NASA Prognostic Package (ProgPy) is a python prognostics framework focused on building, using, and evaluating models and algorithms for prognostics (computation of remaining useful life) and health management of engineering systems, and provides a set of prognostics models for select components and prognostics algorithms developed within this framework, including uncertainty propagation."
 authors = [
-    {name = "Christopher Teubert", email = "christopher.a.teubert@nasa.gov"},
-    {name = "Katelyn Griffith", email = "katelyn.j.griffith@nasa.gov"},
-    {name = "Matteo Corbetta"},
-    {name = "Chetan Kulkarni"},
-    {name = "Portia Banerjee"},
-    {name = "Jason Watkins"},
-    {name = "Matthew Daigle"}
+    "Christopher Teubert <christopher.a.teubert@nasa.gov>",
+    "Katelyn Griffith <katelyn.j.griffith@nasa.gov>",
+    "Matteo Corbetta",
+    "Chetan Kulkarni",
+    "Portia Banerjee",
+    "Jason Watkins",
+    "Matthew Daigle"
 ]
 maintainers = [
-    {name = "Christopher Teubert", email = "christopher.a.teubert@nasa.gov"},
-    {name = "Katelyn Griffith", email = "katelyn.j.griffith@nasa.gov"}
+    "Christopher Teubert <christopher.a.teubert@nasa.gov>",
+    "Katelyn Griffith <katelyn.j.griffith@nasa.gov>"
 ]
-description = "The 2024 NASA Software of the Year, the NASA Prognostic Package (ProgPy) is a python prognostics framework focused on building, using, and evaluating models and algorithms for prognostics (computation of remaining useful life) and health management of engineering systems, and provides a set of prognostics models for select components and prognostics algorithms developed within this framework, including uncertainty propagation."
-readme = "README.md"
 license = "NASA-1.3"
-license-files = ["prog_models license.pdf", "prog_algs license.pdf"]
-keywords = ['prognostics', 'diagnostics', 'fault detection', 'fdir', 'physics modeling', 'prognostics and health management', 'PHM', 'health management', 'surrogate modeling', 'model tuning', 'simulation', 'ivhm']
+readme = "README.md"
+homepage = "https://nasa.github.io/progpy/"
+repository = "https://github.com/nasa/progpy"
+documentation = "https://nasa.github.io/progpy/"
+keywords = [
+    "prognostics", "diagnostics", "fault detection", "fdir", "physics modeling",
+    "prognostics and health management", "PHM", "health management",
+    "surrogate modeling", "model tuning", "simulation", "ivhm"
+]
 classifiers = [
-    'Development Status :: 5 - Production/Stable',
-
-    'Intended Audience :: Science/Research',
-    'Intended Audience :: Developers',
-    'Intended Audience :: Manufacturing',
-
-    'Topic :: Scientific/Engineering',
-    'Topic :: Scientific/Engineering :: Artificial Intelligence',
-    'Topic :: Scientific/Engineering :: Physics',
-
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.9',
-    'Programming Language :: Python :: 3.10',
-    'Programming Language :: Python :: 3.11',
-    'Programming Language :: Python :: 3.12',
-    'Programming Language :: Python :: 3.13',
-    'Programming Language :: Python :: 3 :: Only'
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Manufacturing",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only"
 ]
 
-[project.optional-dependencies]
-datadriven = [
-    "tensorflow>=2.18.0",   # Note that older versions of tensorflow may work with older numpy and numpoly versions
-    "chaospy>=4.3.17"   # For PCE
-]
+[tool.poetry.dependencies]
+python = ">=3.9,<3.14"
+scipy = "*"
+pandas = "*"                # For data downloading features
+matplotlib = "*"
+requests = "*"              # For data downloading features
+fastdtw = "*"               # For DTW error calculation
+filterpy = ">=1.4.4"
+tensorflow = ">=2.18.0"     # For data-driven features
+chaospy = ">=4.3.17"        # For data-driven features
 
-test = [
-    "notebook",
-    "testbook",
-    "requests"
-]
+[tool.poetry.extras]
+test = ["notebook", "testbook", "requests"]
+docs = ["sphinx", "sphinx-autobuild", "sphinx_toolbox", "sphinx_panels", "sphinx_book_theme", "rst2pdf"]
 
-docs = [
-    "sphinx",
-    "sphinx-autobuild",
-    "sphinx_toolbox",
-    "sphinx_panels",
-    "sphinx_book_theme",
-    "rst2pdf"
-]
-
-[project.urls]
-Homepage = "https://nasa.github.io/progpy/"
-Documentation = "https://nasa.github.io/progpy/"
-Repository = "https://github.com/nasa/progpy"
-Issues = "https://github.com/nasa/progpy/issues"
-Organization = "https://www.nasa.gov/content/diagnostics-prognostics"
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
