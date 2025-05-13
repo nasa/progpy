@@ -85,10 +85,10 @@ In the prediction step, the state estimate at the prediction time and system mod
 
 Algorithms for :term:`state estimation<state estimator>` and :term:`prediction<predictor>` along with tools analyzing and visualizing results of state estimation and prediction, managing uncertainty, and creating new state estimators or predictors, see the :ref:`State Estimation and Prediction Guide<State Estimation and Prediction Guide>`.
 
-More information
+More Information
 ------------------------------
 
-For more information, see the individual guides
+For more information, see the individual guides.
 
 .. panels::
     :img-top-cls: pt-2, pb-2

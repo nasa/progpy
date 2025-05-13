@@ -61,7 +61,7 @@ In a ProgPy model, this state transition can be represented one of two ways, eit
     :align: center
 
 
-.. dropdown::  State transition equation example
+.. dropdown::  State Transition Equation Example
 
     An example of a state transition equation for a thrown object is included below. In this example, a model is created to describe an object thrown directly into the air. It has two states: position (x) and velocity (v), and no inputs.
 
@@ -105,7 +105,7 @@ Outputs are a function of only the system state (x) and :term:`parameters` (:mat
     
     </div>
 
-.. dropdown::  Output equation example
+.. dropdown::  Output Equation Example
 
     An example of a output equation for a thrown object is included below. In this example, a model is created to describe an object thrown directly into the air. It has two states: position (x) and velocity (v). In this case we're saying that the position of the object is directly measurable. 
 
@@ -209,7 +209,7 @@ Parameters can be set in model construction, using the *parameters* property aft
 
 The specific parameters are very specific to the system being modeled. For example, a battery might have parameters for the capacity and internal resistance. When using provided models, see the documentation for that model for details on parameters supported.
 
-.. dropdown:: Derived parameters
+.. dropdown:: Derived Parameters
 
     Sometimes users would like to specify parameters as a function of other parameters. This feature is called "derived parameters". See the derived parameters section in the example below for more details on this feature. 
 
@@ -267,12 +267,12 @@ Building New Models
 
 ProgPy provides a framework for building new models. Generally, models can be divided into three basis categories: :term:`physics-based models<physics-based model>`, :term:`data-driven models<data-driven model>`, and hybrid models. Additionally, models can rely on state-transition for prediction, or they can use what is called direct-prediction. These two categories are described below.
 
-State-transition Models
+State-Transition Models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tabs::
 
-    .. tab:: physics-based
+    .. tab:: Physics-Based
 
         New :term:`physics-based models<physics-based model>` are constructed by subclassing :py:class:`progpy.PrognosticsModel` as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template :download:`prog_model_template.ProgModelTemplate <../../progpy/prog_model_template.py>`, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in :class:`progpy.PrognosticsModel` will then work with your new model. 
 
@@ -280,7 +280,7 @@ State-transition Models
 
         * :download:`04 New Models <../../progpy/examples/04_New Models.ipynb>`
 
-    .. tab:: data-driven
+    .. tab:: Data-Driven
 
         New :term:`data-driven models<data-driven model>`, such as those using neural networks, are created by subclassing the :py:class:`progpy.data_models.DataModel` class, overriding the ``from_data`` method.
         
@@ -312,7 +312,7 @@ State-transition Models
             * :download:`examples.custom_model <../../progpy/examples/custom_model.py>`
                 .. automodule:: custom_model
 
-Direct-prediction models
+Direct-Prediction Models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 :term:`Direct-prediction models<direct-prediction model>` are models that estimate :term:`time of event` directly from the current state and :term:`future load`, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See the direct models section in the example below for more information.
@@ -331,7 +331,7 @@ ProgPy includes some example datasets. See `ProgPy Datasets <https://nasa.github
 
 .. note:: To use the dataset feature, you must install the requests package.
 
-Using provided models
+Using Provided Models
 ----------------------------
 
 ProgPy includes a number of predefined models in the :py:mod:`progpy.models` module. These models are parameterized, so they can be configured to represent specific systems (see :ref:`Parameter Estimation`). 
@@ -363,7 +363,7 @@ One of the most basic of functions using a model is simulation. Simulation is th
 .. role:: pythoncode(code)
    :language: python
 
-.. dropdown:: Saving results
+.. dropdown:: Saving Results
 
     :py:meth:`progpy.PrognosticsModel.simulate_to` and :py:meth:`progpy.PrognosticsModel.simulate_to_threshold` return the inputs, states, outputs, and event states at various points in the simulation. Returning these values for every timestep would require a lot of memory, and is not necessary for most use cases, so ProgPy provides an ability for users to specify what data to save. 
 
@@ -388,7 +388,7 @@ One of the most basic of functions using a model is simulation. Simulation is th
 
         Data will always be saved at the next time after the ``save_pt`` or ``save_freq``. As a result, the data may not correspond to the exact time specified. Use automatic step sizes to save at the exact time.
 
-.. dropdown:: Step size
+.. dropdown:: Step Size
 
     Step size is the size of the step taken in integration. It is specified by the ``dt`` argument. It is an important consideration when simulating. Too large of a step size could result in wildly incorrect results, and two small of a step size can be computationally expensive. Step size can be provided in a few different ways, described below:
 
@@ -480,7 +480,7 @@ There are two methods in progpy through which multiple models can be combined an
 
 .. tabs::
 
-    .. tab:: Composite models
+    .. tab:: Composite Models
 
         Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example, 
 
@@ -494,7 +494,7 @@ There are two methods in progpy through which multiple models can be combined an
             >>>     ]
             >>> )
 
-    .. tab:: Ensemble models
+    .. tab:: Ensemble Models
 
         Unlike composite models which model a system of systems, ensemble models are used when to combine the logic of multiple models which describe the same system. This is used when there are multiple models representing different system behaviors or conditions. The results of each model are aggregated in a way that can be defined by the user. For example,
 
@@ -505,7 +505,7 @@ There are two methods in progpy through which multiple models can be combined an
             >>>     aggregator = np.mean
             >>> )
 
-    .. tab:: MixtureOfExperts models
+    .. tab:: MixtureOfExperts Models
         
         Mixture of Experts (MoE) models combine multiple models of the same system, similar to Ensemble models. Unlike Ensemble Models, the aggregation is done by selecting the "best" model. That is the model that has performed the best over the past. Each model will have a 'score' that is tracked in the state, and this determines which model is best.
 

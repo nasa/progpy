@@ -66,7 +66,7 @@ The internal state is stored in the estimators x property as a UncertainData sub
 
         .. autoclass:: progpy.state_estimators.KalmanFilter
 
-.. dropdown:: Example
+.. dropdown:: State Estimation Example
 
     Here's an example of its use. In this example we use the unscented kalman filter state estimator and the ThrownObject model. 
 

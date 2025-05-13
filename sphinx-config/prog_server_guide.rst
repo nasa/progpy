@@ -29,7 +29,7 @@ Installing prog_server
 
             $ pip install prog_server
 
-    .. tab:: Pre-release
+    .. tab:: Pre-Release
 
         Users who would like to contribute to ``prog_server`` or would like to use pre-release features can do so using the `prog_server GitHub repo <https://github.com/nasa/prog_server>`__. This isn't recommended for most users as this version may be unstable. To use this version, use the following commands:
 
@@ -47,13 +47,13 @@ About
 
 The PaaS Sandbox is actually two packages, ``prog_server`` and ``prog_client``. The ``prog_server`` package is the server that provides the REST API. The ``prog_client`` package is a python client that uses the REST API (see :py:class:`prog_client.Session`). The ``prog_server`` package is the PaaS Sandbox Server. Once started the server can accept requests from one or more applications requesting prognostics, using its REST API (described in :ref:`prog_server API Reference`). 
 
-Starting the prog_server 
+Starting prog_server 
 --------------------------
 There are two methods for starting the ``prog_server``, described below:
 
 .. tabs::
 
-    .. tab:: Command line
+    .. tab:: Command Line
 
         Generally, you can start the ``prog_server`` by running the module, like this:
 
