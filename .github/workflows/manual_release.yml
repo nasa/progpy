@@ -13,6 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       KERAS_BACKEND: torch
+      PYTORCH_MPS_HIGH_WATERMARK_RATIO: 0.0
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
