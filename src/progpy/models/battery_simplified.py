@@ -16,8 +16,8 @@ class SimplifiedBattery(PrognosticsModel):
     Simplified battery model from [Sierra2019]_. Introduced in 2024 PHM Society Tutorial.
 
     :term:`Events<event>`: (2)
-        EOD: End of Discharge (Complete)
-        Low V: When voltage hits a specified threshold (VEOD)
+        | EOD: End of Discharge (Complete)
+        | Low V: When voltage hits a specified threshold (VEOD)
 
     :term:`Inputs/Loading<input>`: (1)
         P: Power draw on the battery
