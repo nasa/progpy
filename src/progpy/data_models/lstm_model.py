@@ -656,8 +656,8 @@ class LSTMStateTransitionModel(DataModel):
             z_std[z_std == 0] = 1
 
             # Add output (since z_t-1 is last input)
-            u_mean = np.hstack((u_mean, z_mean))
-            u_std = np.hstack((u_std, z_std))
+            u_mean = np.hstack((u_mean, z_mean), dtype='float')
+            u_std = np.hstack((u_std, z_std), dtype='float')
 
             z_all = (z_all - z_mean) / z_std
 
@@ -679,9 +679,12 @@ class LSTMStateTransitionModel(DataModel):
         if params["early_stop"]:
             callbacks.append(keras.callbacks.EarlyStopping(**params["early_stop.cfg"]))
 
-        inputs = keras.Input(shape=u_all.shape[1:])
+        inputs = keras.Input(shape=u_all.shape[1:], dtype='float32')
         x = inputs
         if params["normalize"]:
+            # Torch requires we use float32 here
+            u_mean = u_mean.astype('float32')
+            u_std = u_std.astype('float32')
             x = keras.layers.Normalization(mean=u_mean, variance=u_std**2)(inputs)
         for i in range(params["layers"]):
             if i == params["layers"] - 1:
