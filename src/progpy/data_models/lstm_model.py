@@ -556,7 +556,7 @@ class LSTMStateTransitionModel(DataModel):
             LSTMStateTransitionModel: Generated Model
 
         See Also:
-            https://www.tensorflow.org/api_docs/python/tf/keras/layers/LSTM
+            https://keras.io/api/layers/recurrent_layers/lstm/
         """
         params = {  # default_params
             "window": 128,
@@ -665,9 +665,9 @@ class LSTMStateTransitionModel(DataModel):
             # so we need to transpose them to a column vector
             params["normalization"] = (z_mean, z_std)
 
-        # Tensorflow is imported here to avoid importing it if not needed
+        # Keras is imported here to avoid importing it if not needed
         try:
-            from tensorflow import keras
+            import keras
         except ImportError:
             raise ImportError(
                 "Missing required dependencies for data-driven model. ProgPy was imported directly. Instead import with datadriven dependencies using pip3 install progpy[datadriven] or pip3 install -e '.[datadriven]' (if installing from local copy)"

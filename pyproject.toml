@@ -55,7 +55,8 @@ classifiers = [
 
 [project.optional-dependencies]
 datadriven = [
-    "tensorflow>=2.18.0",   # Note that older versions of tensorflow may work with older numpy and numpoly versions
+    "torch",
+    "keras",
     "chaospy>=4.3.17"   # For PCE
 ]
 
