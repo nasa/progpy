@@ -69,7 +69,7 @@ def create_discrete_state(
     """
     .. versionadded:: 1.8.0
 
-    Create a discrete state for use with a progpy model. Users construct a discrete state for the default x0 to make that state discrete.
+    Create a discrete state for use with a progpy model. Users construct a :term:`discrete state` for the default x0 to make that state discrete.
 
     Args:
         n_states (int): Number of possible states.
@@ -86,7 +86,23 @@ def create_discrete_state(
     Example:
         >>> # Representing 'gear' of car
         >>> Gear = create_discrete_state(5, transition='sequential')
-        >>> x0['gear] = Gear(1)
+        >>> x0['gear'] = Gear(1)
+
+    Example:
+        >>> # Custom Transition
+        >>> import random
+        >>> def transition(current_state, amount_added):
+        >>>     # this is an example function- in reality it could be anything
+        >>>     # Transition in this case is from 1-> any state and
+        >>>     #  if not in state 1 can only transition back to 1
+        >>>     if current_state == type(current_state)(1) and amount_added > 0.5:
+        >>>         return random.randint(0, len(type(current_state)) - 1)
+        >>>     elif amount_added > 0.5:
+        >>>         return 1
+        >>>     # No transition
+        >>>     return current_state
+        >>> StateType = create_discrete_state(10, transition=transition)
+        >>> x = StateType(1)
     """
     # Input Validation
     if isinstance(transition, str):

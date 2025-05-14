@@ -50,7 +50,7 @@ States are transitioned forward in time using the state transition equation.
 
 where :math:`x(t)` is :term:`state` at time :math:`t`, :math:`u(t)` is :term:`input` at time :math:`t` , :math:`dt` is the stepsize, and :math:`\Theta` are the model :term:`parameters` .
 
-In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of continuous models, state transition behavior is defined by defining the first derivative, using the :py:func:`progpy.PrognosticsModel.dx` method. For discrete models, state transition behavior is defined using the :py:func:`progpy.PrognosticsModel.next_state` method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.
+In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of :term:`continuous models<continuous model>`, state transition behavior is defined by defining the first derivative, using the :py:func:`progpy.PrognosticsModel.dx` method. For :term:`discrete models <discrete model>`, state transition behavior is defined using the :py:func:`progpy.PrognosticsModel.next_state` method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.
 
 .. image:: images/next_state.png
     :width: 70 %
@@ -60,6 +60,22 @@ In a ProgPy model, this state transition can be represented one of two ways, eit
     :width: 70 %
     :align: center
 
+States can also be discrete or continuous. :term:`Discrete states<discrete state>` are those which can only exist in a finite set of values. Where continuous states are those initialized with a number, discrete states are initialized using the function :py:func:`progpy.create_discrete_state`, like the examples below. Each discrete state represents a unique condition or mode, and transitions between states are governed by defined rules or events, providing clarity and predictability in state management.
+
+.. code-block:: python
+
+    >>> from progpy import create_discrete_state
+    >>> ValveState = create_discrete_state(2, ["open", "closed"])
+    >>> x["valve"] = ValveState.open
+
+.. code-block:: python
+
+    >>> from progpy import create_discrete_state
+    >>> GearState = create_discrete_state(5, transition="sequential")
+    >>> x["gear"] = GearState(1)
+
+.. note::
+    :term:`Discrete states <discrete state>` are different from :term:`discrete models <discrete model>`. Discrete models are models where state transition is discrete, where discrete states are where the state itself is discrete. Discrete models may have continuous states.
 
 .. dropdown::  State Transition Equation Example
 
