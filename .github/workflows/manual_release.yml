@@ -11,6 +11,8 @@ jobs:
         python-version: ['3.9', '3.12']  # TODO: Add 3.13 when it is released
         os: [ubuntu-latest, macos-latest, macos-13, windows-latest]
     runs-on: ${{ matrix.os }}
+    env:
+      KERAS_BACKEND: torch
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
