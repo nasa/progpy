@@ -55,8 +55,16 @@ classifiers = [
 
 [project.optional-dependencies]
 datadriven = [
-    "tensorflow>=2.18.0",   # Note that older versions of tensorflow may work with older numpy and numpoly versions
-    "chaospy>=4.3.17"   # For PCE
+    # Dependency workaround for Intel-based Macs due to tensorflow version constraints at 2.16.2
+    "tensorflow==2.16.2; platform_system == 'Darwin' and platform_machine != 'arm64'",
+    "numpy==1.26.4; platform_system == 'Darwin' and platform_machine != 'arm64'",
+    "numpoly==1.2.12; platform_system == 'Darwin' and platform_machine != 'arm64'",
+
+    # Everything else (non-Intel macOS, Linux, Windows, etc.) Note that older versions of tensorflow may work with older numpy and numpoly versions
+    "tensorflow>=2.18.0; platform_system != 'Darwin' or platform_machine == 'arm64'",
+
+    # For PCE
+    "chaospy>=4.3.17"
 ]
 
 test = [
