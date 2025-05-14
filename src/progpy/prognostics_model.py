@@ -860,8 +860,6 @@ class PrognosticsModel(ABC):
             First measured output, needed to initialize state for some classes. Can be omitted for classes that don't use this
         x : StateContainer, optional
             initial state, e.g., x= m.StateContainer({'x1': 10, 'x2': -5.3})\n
-        thresholds_met_eqn : abc.Callable, optional
-            custom equation to indicate logic for when to stop sim f(thresholds_met) -> bool\n
         print : bool, optional
             toggle intermediate printing, e.g., print = True\n
             e.g., m.simulate_to_threshold(eqn, z, dt=0.1, save_pts=[1, 2])
