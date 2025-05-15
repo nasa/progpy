@@ -1,60 +1,62 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>State Estimation and Prediction Guide &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>State Estimation and Prediction Guide &#8212; ProgPy Python Packages 1.8 documentation</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css?v=94a3e983" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=a5c4661c" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css?v=995e94df" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css?v=21c0b90a" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="_static/documentation_options.js?v=33946f59"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/tabs.js?v=3030b3cb"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/tabs.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'prog_algs_guide';</script>
-    <link rel="icon" href="_static/nasa_logo.ico"/>
+    <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="prog_server Guide" href="prog_server_guide.html" />
     <link rel="prev" title="Modeling and Sim Guide" href="prog_models_guide.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -62,23 +64,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -100,20 +98,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -128,13 +118,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
-  
-    
   
 
 <a class="navbar-brand logo" href="index.html">
-  
   
   
   
@@ -144,43 +130,33 @@
       
     
     
-    <img src="_static/software_name.png" class="logo__image only-light" alt="ProgPy Python Packages 1.7 documentation - Home"/>
-    <script>document.write(`<img src="_static/software_name.png" class="logo__image only-dark" alt="ProgPy Python Packages 1.7 documentation - Home"/>`);</script>
+    <img src="_static/software_name.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/software_name.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="guide.html">ProgPy Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="guide.html">ProgPy Guide</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="prog_models_guide.html">Modeling and Sim Guide</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">State Estimation and Prediction Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="prog_server_guide.html">prog_server Guide</a></li>
 </ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="api_ref.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_ref.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/prog_server.html">prog_server API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/load_ests.html">Load Estimators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_client.html">prog_client</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/prog_server/prog_server.html">ProgServer</a></li>
 <li class="toctree-l3"><a class="reference external" href="https://app.swaggerhub.com/apis-docs/teubert/prog_server">Prog Server API</a></li>
 </ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/progpy.html">ProgPy API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api_ref/progpy.html">ProgPy API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DiscreteStates.html">Discrete States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/EnsembleModel.html">EnsembleModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
@@ -195,16 +171,16 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/UncertainData.html">Uncertain Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/Utils.html">Utils</a></li>
 </ul>
-</details></li>
+</li>
 </ul>
-</details></li>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="npr7150.html">NPR 7150 NASA Software Engineering Requirements</a></li>
 </ul>
-</details></li>
+</li>
 </ul>
 
     </div>
@@ -220,7 +196,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -229,14 +205,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -311,28 +287,26 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -359,9 +333,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimation">State Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.state_estimators.UnscentedKalmanFilter"><code class="docutils literal notranslate"><span class="pre">UnscentedKalmanFilter</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.state_estimators.ParticleFilter"><code class="docutils literal notranslate"><span class="pre">ParticleFilter</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.state_estimators.KalmanFilter"><code class="docutils literal notranslate"><span class="pre">KalmanFilter</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-state-estimators">Extending State Estimators</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
@@ -369,14 +340,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.predictors.UnscentedTransformPredictor"><code class="docutils literal notranslate"><span class="pre">UnscentedTransformPredictor</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.predictors.MonteCarlo"><code class="docutils literal notranslate"><span class="pre">MonteCarlo</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.predictors.MonteCarloPredictor"><code class="docutils literal notranslate"><span class="pre">MonteCarloPredictor</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-predictors">Extending Predictors</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-results">Analyzing Results</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">State Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">State Estimation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicted-future-states">Predicted Future States</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-of-event-toe">Time of Event (ToE)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toe-prediction-profile">ToE Prediction Profile</a></li>
@@ -393,15 +361,14 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section id="state-estimation-and-prediction-guide">
-<h1>State Estimation and Prediction Guide<a class="headerlink" href="#state-estimation-and-prediction-guide" title="Link to this heading">#</a></h1>
-<iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=progpy&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" />
-</a>
+<h1>State Estimation and Prediction Guide<a class="headerlink" href="#state-estimation-and-prediction-guide" title="Permalink to this headline">#</a></h1>
+<iframe src="https://ghbtns.com/github-btn.html?user=nasa&repo=progpy&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe><a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
 <p>The Prognostic Python Package (progpy) is a python framework for prognostics (computation of remaining useful life or future states) of engineering systems. The package provides an extendable set of algorithms for state estimation and prediction, including uncertainty propagation. The package also include metrics, visualization, and analysis tools needed to measure the prognostic performance. The algorithms use prognostic models (from <a class="reference internal" href="prog_models_guide.html#modeling-and-sim-guide"><span class="std std-ref">Modeling and Simulation Guide</span></a>) to perform estimation and prediction functions. The package enables the rapid development of prognostics solutions for given models of components and systems. Different algorithms can be easily swapped to do comparative studies and evaluations of different algorithms to select the best for the application at hand.</p>
 <section id="installing-progpy">
-<h2>Installing ProgPy<a class="headerlink" href="#installing-progpy" title="Link to this heading">#</a></h2>
+<h2>Installing ProgPy<a class="headerlink" href="#installing-progpy" title="Permalink to this headline">#</a></h2>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Stable Version (Recommended)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Pre-Release</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>The latest stable release of ProgPy is hosted on PyPi. For most users, this version will be adequate. To install via the command line, use the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>progpy
@@ -426,12 +393,12 @@ document.write(`
 <p>For help with troubleshooting, see the <a class="reference internal" href="troubleshooting.html#troubleshooting"><span class="std std-ref">Troubleshooting Guide</span></a>.</p>
 </section>
 <section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
 <p>The structure of the packages is illustrated below:</p>
 <img alt="_images/package_structure.png" src="_images/package_structure.png" />
 <p>Prognostics is performed using <a class="reference internal" href="api_ref/progpy/StateEstimator.html#state-estimators"><span class="std std-ref">State Estimators</span></a> and <a class="reference internal" href="api_ref/progpy/Predictor.html#predictors"><span class="std std-ref">Predictors</span></a>. State Estimators are resposible for estimating the current state of the modeled system using sensor data and a prognostics model (see: <a class="reference internal" href="prog_models_guide.html#modeling-and-sim-guide"><span class="std std-ref">Modeling and Simulation Guide</span></a>). The state estimator then produces an estimate of the system state with uncertainty in the form of an <a class="reference internal" href="api_ref/progpy/UncertainData.html#uncertain-data"><span class="std std-ref">uncertain data object</span></a>. This state estimate is used by the predictor to predict when events will occur (Time of Event, ToE - returned as an <a class="reference internal" href="api_ref/progpy/UncertainData.html#uncertain-data"><span class="std std-ref">uncertain data object</span></a>), and future system states (returned as a <a class="reference internal" href="#prediction"><span class="std std-ref">Prediction object</span></a>).</p>
 <section id="data-structures">
-<h3>Data Structures<a class="headerlink" href="#data-structures" title="Link to this heading">#</a></h3>
+<h3>Data Structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">#</a></h3>
 <dl class="simple">
 <dt>A few custom data structures are available for storing and manipulating prognostics data of various forms. These structures are listed below and desribed on their respective pages:</dt><dd><ul class="simple">
 <li><p><a class="reference internal" href="api_ref/progpy/SimResult.html#progpy.sim_result.SimResult" title="progpy.sim_result.SimResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.sim_result.SimResult</span></code></a> : The result of a single simulation (without uncertainty). Can be used to store inputs, outputs, states, event_states, observables, etc. Is returned by the model.simulate_to* methods.</p></li>
@@ -444,13 +411,13 @@ document.write(`
 </section>
 </section>
 <section id="state-estimation">
-<h2>State Estimation<a class="headerlink" href="#state-estimation" title="Link to this heading">#</a></h2>
+<h2>State Estimation<a class="headerlink" href="#state-estimation" title="Permalink to this headline">#</a></h2>
 <p><a class="reference internal" href="glossary.html#term-state-estimation"><span class="xref std std-term">State estimation</span></a> is the process of estimating the internal model <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> (x) using <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a> (i.e., loading), <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a> (i.e., sensor data), and system <a class="reference internal" href="glossary.html#term-parameters"><span class="xref std std-term">parameters</span></a>. State estimation is necessary for cases where model state isn’t directly measurable (i.e., <cite>hidden state</cite>) or where there is sensor noise. Most state estimators estimate the state with some representation of uncertainty.</p>
 <p>The foundation of state estimators is the estimate method. The estimate method is called with a time, inputs, and outputs. Each time estimate is called, the internal state estimate is updated.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The internal state is stored in the estimators x property as a UncertainData subclass (see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/UncertainData.html">UncertainData</a>). State is accessed like so <code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">x_est</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">x</span></code>.</p>
+<p>The internal state is stored in the estimators x property as a UncertainData subclass (see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/UncertainData.html">UncertainData</a>). State is accessed like so <code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">x_est</span></span> <span class="operator"><span class="pre">=</span></span> <span class="name"><span class="pre">estimator</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">x</span></span></code>.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 Included State Estimators<div class="summary-down docutils">
@@ -473,12 +440,12 @@ UKF Details<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <dl class="py class">
 <dt class="sig sig-object py" id="progpy.state_estimators.UnscentedKalmanFilter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.state_estimators.</span></span><span class="sig-name descname"><span class="pre">UnscentedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.state_estimators.UnscentedKalmanFilter" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.state_estimators.</span></span><span class="sig-name descname"><span class="pre">UnscentedKalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.state_estimators.UnscentedKalmanFilter" title="Permalink to this definition">#</a></dt>
 <dd><p class="card-text">An Unscented Kalman Filter (UKF) for state estimation</p>
 <p class="card-text">This class defines logic for performing an unscented kalman filter with a Prognostics Model (see Prognostics Model Package). This filter uses measurement data with noise to generate a state estimate and covariance matrix.</p>
 <p class="card-text">The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p class="card-text"><strong>model</strong> (<a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
@@ -487,7 +454,7 @@ See: Prognostics Model Package</p></li>
 </p></li>
 </ul>
 </dd>
-<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><p class="card-text"><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
 <li><p class="card-text"><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – UKF Scaling parameter</p></li>
@@ -512,12 +479,12 @@ PF Details<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <dl class="py class">
 <dt class="sig sig-object py" id="progpy.state_estimators.ParticleFilter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.state_estimators.</span></span><span class="sig-name descname"><span class="pre">ParticleFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.state_estimators.ParticleFilter" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.state_estimators.</span></span><span class="sig-name descname"><span class="pre">ParticleFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.state_estimators.ParticleFilter" title="Permalink to this definition">#</a></dt>
 <dd><p class="card-text">Estimates state using a Particle Filter (PF) algorithm.</p>
 <p class="card-text">This class defines logic for a PF using a Prognostics Model (see Prognostics Model Package). This filter uses measurement data with noise to estimate the state of the system using a particles. At each step, particles are predicted forward (with noise). Particles are resampled with replacement from the existing particles according to how well the particles match the observed measurements.</p>
 <p class="card-text">The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p class="card-text"><strong>model</strong> (<a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
@@ -526,7 +493,7 @@ See: Prognostics Model Package</p></li>
 </p></li>
 </ul>
 </dd>
-<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
 <li><p class="card-text"><strong>dt</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Maximum timestep for prediction in seconds. By default, the timestep dt is the difference between the last and current call of .estimate(). Some models are unstable at larger dt. Setting a smaller dt will force the model to take smaller steps; resulting in multiple prediction steps for each estimate step. Default is the parameters[‘dt’]
@@ -548,12 +515,12 @@ KF Details<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <dl class="py class">
 <dt class="sig sig-object py" id="progpy.state_estimators.KalmanFilter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.state_estimators.</span></span><span class="sig-name descname"><span class="pre">KalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.state_estimators.KalmanFilter" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.state_estimators.</span></span><span class="sig-name descname"><span class="pre">KalmanFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.state_estimators.KalmanFilter" title="Permalink to this definition">#</a></dt>
 <dd><p class="card-text">A Kalman Filter (KF) for state estimation</p>
 <p class="card-text">This class defines the logic for performing a kalman filter with a linear model (i.e., a subclass of <cite>progpy.LinearModel</cite>). This filter uses measurement data with noise to generate a state estimate and covariance matrix.</p>
 <p class="card-text">The supported configuration parameters (keyword arguments) for UKF construction are described below:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p class="card-text"><strong>model</strong> (<a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><em>PrognosticsModel</em></a>) – A prognostics model to be used in state estimation
 See: Prognostics Model Package</p></li>
@@ -562,7 +529,7 @@ See: Prognostics Model Package</p></li>
 </p></li>
 </ul>
 </dd>
-<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dt class="field-even">Keyword Arguments</dt>
 <dd class="field-even"><ul class="simple">
 <li><p class="card-text"><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – KF Scaling parameter. An alpha &gt; 1 turns this into a fading memory filter.</p></li>
 <li><p class="card-text"><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time (s)</p></li>
@@ -585,8 +552,8 @@ State Estimation Example<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
 <p class="card-text">Here’s an example of its use. In this example we use the unscented kalman filter state estimator and the ThrownObject model.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">progpy.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThrownObject</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">progpy.state_estimators</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnscentedKalmanFilter</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.models</span> <span class="kn">import</span> <span class="n">ThrownObject</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.state_estimators</span> <span class="kn">import</span> <span class="n">UnscentedKalmanFilter</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">ThrownObject</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
@@ -601,14 +568,14 @@ State Estimation Example<div class="summary-down docutils">
 </div>
 </div>
 </details><section id="extending-state-estimators">
-<h3>Extending State Estimators<a class="headerlink" href="#extending-state-estimators" title="Link to this heading">#</a></h3>
+<h3>Extending State Estimators<a class="headerlink" href="#extending-state-estimators" title="Permalink to this headline">#</a></h3>
 <p>New <a class="reference internal" href="glossary.html#term-state-estimator"><span class="xref std std-term">state estimator</span></a> are created by extending the <a class="reference internal" href="api_ref/progpy/StateEstimator.html#progpy.state_estimators.StateEstimator" title="progpy.state_estimators.StateEstimator"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.state_estimators.StateEstimator</span></code></a> class.</p>
-<p>See <a class="reference download internal" download="" href="_downloads/067e6c82fdc9573fb921219d62002181/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a> for an example of this approach.</p>
+<p>See <a class="reference download internal" download="" href="_downloads/07c9eb121dbb5de8d48ddffc704c521d/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a> for an example of this approach.</p>
 <section id="example">
-<h4>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h4>
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/067e6c82fdc9573fb921219d62002181/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd></dd>
+<dt><a class="reference download internal" download="" href="_downloads/07c9eb121dbb5de8d48ddffc704c521d/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
@@ -616,7 +583,7 @@ State Estimation Example<div class="summary-down docutils">
 </section>
 </section>
 <section id="prediction">
-<h2>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h2>
+<h2>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">#</a></h2>
 <p>Prediction is the process by which future states are estimated, given the initial state (e.g., from State Estimation), a model, and an estimate of <a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">future load</span></a>. An algorithm used to do this is called a <a class="reference internal" href="glossary.html#term-predictor"><span class="xref std std-term">predictor</span></a>. Prediction is often computationally expensive, especially for sample-based approaches with strict precision requirements (which therefore require large number of samples).</p>
 <p>With this framework, there are a number of results that can be predicted. The exact prediction results are selected based on the needs of the end-user. The most common prediction results are Time of Event (ToE) and Time to Event (TtE). Time of Event at a specific prediction time (<span class="math notranslate nohighlight">\(t_P\)</span>) is defined as the time when the event is expected to occur (with uncertainty), or equivalently, the time where the event state for that event is zero. Time to Event is defined as the time to ToE (<span class="math notranslate nohighlight">\(TtE = ToE - t_P\)</span>). In prognostics, ToE and TtE are often referred to as End of Life (EOL) and Remaining Useful Life (RUL), respectively.</p>
 <p>Beyond these, results of prediction can also include event state, outputs, performance metrics, and system states at different future times, including at ToE. For approaches that predict ToE with uncertainty, some users consider Probability of Success (PoS) or Probability of Failure (PoF). PoF is defined as the percentage of predictions that result in failure before the prognostics horizon (<span class="math notranslate nohighlight">\(PoS \triangleq 1 - PoF\)</span>).</p>
@@ -655,12 +622,10 @@ UT Details<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <dl class="py class">
 <dt class="sig sig-object py" id="progpy.predictors.UnscentedTransformPredictor">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.predictors.</span></span><span class="sig-name descname"><span class="pre">UnscentedTransformPredictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.predictors.UnscentedTransformPredictor" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.predictors.</span></span><span class="sig-name descname"><span class="pre">UnscentedTransformPredictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.predictors.UnscentedTransformPredictor" title="Permalink to this definition">#</a></dt>
 <dd><p class="card-text">Class for performing model-based prediction using an unscented transform.</p>
 <p class="card-text">This class defines logic for performing model-based state prediction using sigma points and an unscented transform. The Unscented Transform Predictor propagates the sigma-points in the state-space in time domain until the event threshold is met. The step at which the i-th sigma point reaches the threshold is the step at which the i-th sigma point will be placed along the time dimension. By repeating the procedure for all sigma-points, we obtain the sigma-points defining the distribution of the time of event (ToE); for example, the End Of Life (EOL) event. The provided future loading equation is used to compute the inputs to the system at any given time point.</p>
 <p class="card-text">The following configuration parameters are supported (as kwargs in constructor or as parameters in predict method):</p>
-<section id="configuration-parameters">
-<h3>Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>alpha, beta, kappa: float</dt><dd><p class="card-text">UKF Scaling parameters. See: <a class="reference external" href="https://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter">https://en.wikipedia.org/wiki/Kalman_filter#Unscented_Kalman_filter</a></p>
 </dd>
@@ -683,7 +648,6 @@ UT Details<div class="summary-down docutils">
 <p class="admonition-title">Note</p>
 <p class="card-text">The resulting sigma-points along the time dimension are used to compute mean and covariance of the event time (ToE), under the hypothesis that the ToE distribution would also be well represented by a Gaussian. This is a strong assumption that likely cannot be satisfied for real systems with strong non-linear state propagation or nonlinear ToE curves. Therefore, the user should be cautious and verify that modeling the event time using a Gaussian distribution is satisfactory.</p>
 </div>
-</section>
 </dd></dl>
 
 </div>
@@ -696,38 +660,35 @@ MC Details<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <dl class="py class">
 <dt class="sig sig-object py" id="progpy.predictors.MonteCarlo">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.predictors.</span></span><span class="sig-name descname"><span class="pre">MonteCarlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.predictors.MonteCarlo" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">progpy.predictors.</span></span><span class="sig-name descname"><span class="pre">MonteCarlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#progpy.predictors.MonteCarlo" title="Permalink to this definition">#</a></dt>
 <dd><p class="card-text">Class for performing a monte-carlo model-based prediction.</p>
 <p class="card-text">A Predictor using the monte carlo algorithm. The provided initial states are simulated until either a specified time horizon is met, or the threshold for all simulated events is reached for all samples. A provided future loading equation is used to compute the inputs to the system at any given time point.</p>
 <p class="card-text">The following configuration parameters are supported (as kwargs in constructor or as parameters in predict method):</p>
-<section id="id1">
-<h3>Configuration Parameters<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <dl class="simple">
 <dt>n_samples<span class="classifier">int, optional</span></dt><dd><p class="card-text">Default number of samples to use. If not specified, a default value is used. If state is type UnweightedSamples and n_samples is not provided, the provided unweighted samples will be used directly.</p>
 </dd>
 <dt>save_freq<span class="classifier">float, optional</span></dt><dd><p class="card-text">Default frequency at which results are saved (s).</p>
 </dd>
 </dl>
-</section>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="progpy.predictors.MonteCarloPredictor">
-<span class="sig-prename descclassname"><span class="pre">progpy.predictors.</span></span><span class="sig-name descname"><span class="pre">MonteCarloPredictor</span></span><a class="headerlink" href="#progpy.predictors.MonteCarloPredictor" title="Link to this definition">#</a></dt>
-<dd><p class="card-text">alias of <a class="reference internal" href="#progpy.predictors.MonteCarlo" title="progpy.predictors.monte_carlo.MonteCarlo"><code class="xref py py-class docutils literal notranslate"><span class="pre">MonteCarlo</span></code></a></p>
+<span class="sig-prename descclassname"><span class="pre">progpy.predictors.</span></span><span class="sig-name descname"><span class="pre">MonteCarloPredictor</span></span><a class="headerlink" href="#progpy.predictors.MonteCarloPredictor" title="Permalink to this definition">#</a></dt>
+<dd><p class="card-text">alias of <a class="reference internal" href="#progpy.predictors.MonteCarlo" title="progpy.predictors.monte_carlo.MonteCarlo"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.monte_carlo.MonteCarlo</span></code></a></p>
 </dd></dl>
 
 </div>
 </details></div>
 </details><section id="extending-predictors">
-<h3>Extending Predictors<a class="headerlink" href="#extending-predictors" title="Link to this heading">#</a></h3>
+<h3>Extending Predictors<a class="headerlink" href="#extending-predictors" title="Permalink to this headline">#</a></h3>
 <p>A new <a class="reference internal" href="glossary.html#term-predictor"><span class="xref std std-term">predictor</span></a> is created by extending the <a class="reference internal" href="api_ref/progpy/Predictor.html#progpy.predictors.Predictor" title="progpy.predictors.Predictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.Predictor</span></code></a> class.</p>
 </section>
 </section>
 <section id="analyzing-results">
-<h2>Analyzing Results<a class="headerlink" href="#analyzing-results" title="Link to this heading">#</a></h2>
-<section id="id2">
-<h3>State Estimation<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h2>Analyzing Results<a class="headerlink" href="#analyzing-results" title="Permalink to this headline">#</a></h2>
+<section id="id1">
+<h3>State Estimation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>The results of the state estimation are stored in an object of type <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a>. This class contains a number of methods for analyzing a state estimate. This includes methods for obtaining statistics about the distribution, including the following:</p>
 <ul class="simple">
 <li><p><strong>mean</strong>: The mean value of the state estimate distribution.</p></li>
@@ -746,7 +707,7 @@ Scatter Plot<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">A scatter plot is one of the best ways to visualize a distribution. The scatter plot will combine all of the states into a single plot, so you can see the correlation between different states as well as the distribution. This figure is made using the <code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">state</span><span class="o">.</span><span class="n">plot_scatter</span><span class="p">()</span></code> method. An example is illustrated below.</p>
+<p class="card-text">A scatter plot is one of the best ways to visualize a distribution. The scatter plot will combine all of the states into a single plot, so you can see the correlation between different states as well as the distribution. This figure is made using the <code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">state</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">plot_scatter</span></span><span class="punctuation"><span class="pre">()</span></span></code> method. An example is illustrated below.</p>
 <div style="text-align: center;"><img alt="_images/single_scatter.png" src="_images/single_scatter.png" />
 </div><p class="card-text">Multiple states can be overlayed on the same plot. This is typically done to show how a state evolves with time. The following example shows the distribution of states at different future times:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -767,108 +728,98 @@ Histogram<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">The simplest representation of a state estimate is a histogram. A histogram plot is genearted using the built in <code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">state</span><span class="o">.</span><span class="n">plot_hist</span><span class="p">()</span></code> method. The result is one histogram for each value in the state estimate, describing the distribution, as illustrated below:</p>
-<div style="text-align: center;"><a class="reference internal image-reference" href="_images/histogram.png"><img alt="_images/histogram.png" class="align-center" src="_images/histogram.png" style="width: 70%;" />
-</a>
+<p class="card-text">The simplest representation of a state estimate is a histogram. A histogram plot is genearted using the built in <code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">state</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">plot_hist</span></span><span class="punctuation"><span class="pre">()</span></span></code> method. The result is one histogram for each value in the state estimate, describing the distribution, as illustrated below:</p>
+<div style="text-align: center;"><a class="reference internal image-reference" href="_images/histogram.png"><img alt="_images/histogram.png" class="align-center" src="_images/histogram.png" style="width: 70%;" /></a>
 </div></div>
 </details><p>See <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a> documentation for more details.</p>
 </section>
 <section id="predicted-future-states">
-<h3>Predicted Future States<a class="headerlink" href="#predicted-future-states" title="Link to this heading">#</a></h3>
+<h3>Predicted Future States<a class="headerlink" href="#predicted-future-states" title="Permalink to this headline">#</a></h3>
 <p>Predicted future states, inputs, outputs, and event states come in the form of a <a class="reference internal" href="api_ref/progpy/Prediction.html#progpy.predictors.Prediction" title="progpy.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.Prediction</span></code></a> object. Predictions store distributions of predicted future values at multiple future times. Predictions contain a number of tools for analyzing the results, some of which are described below:</p>
 <ul class="simple">
 <li><p><strong>mean</strong>: Estimate the mean value at each time. The result is a list of dictionaries such that prediction.mean[i] corresponds to times[i]</p></li>
-<li><p><strong>monotonicity</strong>: Given a single prediction, for each event: go through all predicted states and compare those to the next one. Calculates monotonicity for each event key using its associated mean value in <code class="docutils literal notranslate"><span class="pre">UncertainData</span></code>. <a class="footnote-reference brackets" href="#baptista2022" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#coble2021" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
+<li><p><strong>monotonicity</strong>: Given a single prediction, for each event: go through all predicted states and compare those to the next one. Calculates monotonicity for each event key using its associated mean value in <code class="docutils literal notranslate"><span class="pre">UncertainData</span></code>. <a class="footnote-reference brackets" href="#baptista2022" id="id2">4</a> <a class="footnote-reference brackets" href="#coble2021" id="id3">3</a></p></li>
 </ul>
 </section>
 <section id="time-of-event-toe">
-<h3>Time of Event (ToE)<a class="headerlink" href="#time-of-event-toe" title="Link to this heading">#</a></h3>
-<p>Time of Event is also stored as an object of type <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a>, so the analysis functions described in <a class="reference internal" href="#id2"><span class="std std-ref">State Estimation</span></a> are also available for a ToE estimate. See <a class="reference internal" href="#id2"><span class="std std-ref">State Estimation</span></a> or <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a> documentation for details.</p>
+<h3>Time of Event (ToE)<a class="headerlink" href="#time-of-event-toe" title="Permalink to this headline">#</a></h3>
+<p>Time of Event is also stored as an object of type <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a>, so the analysis functions described in <a class="reference internal" href="#id1"><span class="std std-ref">State Estimation</span></a> are also available for a ToE estimate. See <a class="reference internal" href="#id1"><span class="std std-ref">State Estimation</span></a> or <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a> documentation for details.</p>
 <p>In addition to these standard <code class="docutils literal notranslate"><span class="pre">UncertainData</span></code> metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.</p>
 <p>Below is an example calculating probability of success:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">progpy.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">prob_success</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.metrics</span> <span class="kn">import</span> <span class="n">prob_success</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span> <span class="o">=</span> <span class="n">prob_success</span><span class="p">(</span><span class="n">some_distribution</span><span class="p">,</span> <span class="n">end_of_mission</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="toe-prediction-profile">
-<h3>ToE Prediction Profile<a class="headerlink" href="#toe-prediction-profile" title="Link to this heading">#</a></h3>
+<h3>ToE Prediction Profile<a class="headerlink" href="#toe-prediction-profile" title="Permalink to this headline">#</a></h3>
 <p>A <a class="reference internal" href="api_ref/progpy/ToEPredictionProfile.html#progpy.predictors.ToEPredictionProfile" title="progpy.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.ToEPredictionProfile</span></code></a> contains Time of Event (ToE) predictions performed at multiple points. <code class="docutils literal notranslate"><span class="pre">ToEPredictionProfile</span></code> is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:</p>
 <ul class="simple">
-<li><p><strong>alpha_lambda</strong>: Whether the prediction falls within specified limits at particular times with respect to a performance measure <a class="footnote-reference brackets" href="#goebel2017" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#saxena2010" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p></li>
+<li><p><strong>alpha_lambda</strong>: Whether the prediction falls within specified limits at particular times with respect to a performance measure <a class="footnote-reference brackets" href="#goebel2017" id="id4">1</a> <a class="footnote-reference brackets" href="#saxena2010" id="id5">2</a></p></li>
 <li><p><strong>cumulate_relative_accuracy</strong>: The sum of the relative accuracies of each prediction, given a ground truth</p></li>
-<li><p><strong>monotonicity</strong>: The monotonicity of the prediction series <a class="footnote-reference brackets" href="#baptista2022" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#coble2021" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
-<li><p><strong>prognostic_horizon</strong>: The difference between a time <span class="math notranslate nohighlight">\(t_i\)</span>, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event <a class="footnote-reference brackets" href="#goebel2017" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#saxena2010" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p></li>
+<li><p><strong>monotonicity</strong>: The monotonicity of the prediction series <a class="footnote-reference brackets" href="#baptista2022" id="id6">4</a> <a class="footnote-reference brackets" href="#coble2021" id="id7">3</a></p></li>
+<li><p><strong>prognostic_horizon</strong>: The difference between a time <span class="math notranslate nohighlight">\(t_i\)</span>, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event <a class="footnote-reference brackets" href="#goebel2017" id="id8">1</a> <a class="footnote-reference brackets" href="#saxena2010" id="id9">2</a></p></li>
 </ul>
-<p>A <code class="docutils literal notranslate"><span class="pre">ToEPredictionProfile</span></code> also contains a plot method (<code class="code highlight pythoncode python docutils literal highlight-python"><span class="n">profile</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code>), which looks like this:</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">ToEPredictionProfile</span></code> also contains a plot method (<code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">profile</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">plot</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">)</span></span></code>), which looks like this:</p>
 <img alt="_images/alpha_chart.png" src="_images/alpha_chart.png" />
 <p>This chart shows the distribution of estimated RUL (y-axis) at different prediction times (x-axis) in red. The ground truth and an alpha bound around the ground truth is displayed in green.</p>
 </section>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
-<a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" />
-</a>
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb"><img alt="https://mybinder.org/badge_logo.svg" src="https://mybinder.org/badge_logo.svg" /></a>
 <p>The best way to learn how to use <cite>progpy</cite> is through the <a class="reference external" href="https://mybinder.org/v2/gh/nasa/progpy/master?labpath=tutorial.ipynb">tutorial</a>. There are also a number of examples which show different aspects of the package, summarized and linked below:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/b5b078b0fe440e9fa4d922ec9f4f1eea/basic_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example</span></code></a></dt><dd></dd>
+<dt><a class="reference download internal" download="" href="_downloads/638751a90485d06ba802c6a90154e62b/basic_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.basic_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/d8bf57631d1133f1784a65d1b777032f/eol_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.eol_event</span></code></a></dt><dd></dd>
+<dt><a class="reference download internal" download="" href="_downloads/f39895005dabcb4262926b776151bd9a/eol_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.eol_event</span></code></a></dt><dd></dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/067e6c82fdc9573fb921219d62002181/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd></dd>
+<dt><a class="reference download internal" download="" href="_downloads/07c9eb121dbb5de8d48ddffc704c521d/new_state_estimator_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.new_state_estimator_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/44de953994033adbab05302cdc8c05e4/horizon.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.horizon</span></code></a></dt><dd></dd>
+<dt><a class="reference download internal" download="" href="_downloads/00d36657bdd9c3fc811494e7586f6a86/horizon.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.horizon</span></code></a></dt><dd></dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/daee0732ebc9103bad35edc2271b7f8d/measurement_eqn_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.measurement_eqn_example</span></code></a></dt><dd></dd>
+<dt><a class="reference download internal" download="" href="_downloads/7c5976947f77971a5ed9939937b15116/measurement_eqn_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.measurement_eqn_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/847c5bdc6f78e586d5a56a90de4f1d95/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></dt><dd></dd>
+<dt><a class="reference download internal" download="" href="_downloads/8b8068cadf898f26bec76d85c19e7d58/playback.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.playback</span></code></a></dt><dd></dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/ea97230ef09e27d10dd5f70f57cc729a/predict_specific_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.predict_specific_event</span></code></a></dt><dd></dd>
+<dt><a class="reference download internal" download="" href="_downloads/5fadba24f260d034499545c9e4baa297/predict_specific_event.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.predict_specific_event</span></code></a></dt><dd></dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/a61393d56728af1a85621dfbed0a6ee1/particle_filter_battery_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.particle_filter_battery_example</span></code></a></dt><dd></dd>
+<dt><a class="reference download internal" download="" href="_downloads/744aa18ff0c29f655326d5633e2946ab/particle_filter_battery_example.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.particle_filter_battery_example</span></code></a></dt><dd></dd>
 </dl>
 </li>
 </ul>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="goebel2017" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id5">1</a>,<a role="doc-backlink" href="#id9">2</a>)</span>
-<p>Kai Goebel, Matthew John Daigle, Abhinav Saxena, Indranil Roychoudhury, Shankar Sankararaman, and José R Celaya. Prognostics: The science of making predictions. 2017</p>
-</aside>
-<aside class="footnote brackets" id="saxena2010" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
-<p>Abhinav Saxena, José Celaya, Sankalita Saha, Bhaskar Saha, and Kai Goebel. Saxena, A., Celaya, J. Metrics for Offline Evaluation of Prognostic Performance. International Journal of Prognostics and Health Management, 1(1), 20. 2010.</p>
-</aside>
-<aside class="footnote brackets" id="coble2021" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id8">2</a>)</span>
-<p>Jamie Coble et al. Identifying Optimal Prognostic Parameters from Data: A Genetic Algorithms Approach. Annual Conference of the PHM Society. <a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a>, 2021</p>
-</aside>
-<aside class="footnote brackets" id="baptista2022" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id7">2</a>)</span>
-<p>Marcia Baptista, et. al.. Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a>, 2022</p>
-</aside>
-</aside>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<dl class="footnote brackets">
+<dt class="label" id="goebel2017"><span class="brackets">1</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id8">2</a>)</span></dt>
+<dd><p>Kai Goebel, Matthew John Daigle, Abhinav Saxena, Indranil Roychoudhury, Shankar Sankararaman, and José R Celaya. Prognostics: The science of making predictions. 2017</p>
+</dd>
+<dt class="label" id="saxena2010"><span class="brackets">2</span><span class="fn-backref">(<a href="#id5">1</a>,<a href="#id9">2</a>)</span></dt>
+<dd><p>Abhinav Saxena, José Celaya, Sankalita Saha, Bhaskar Saha, and Kai Goebel. Saxena, A., Celaya, J. Metrics for Offline Evaluation of Prognostic Performance. International Journal of Prognostics and Health Management, 1(1), 20. 2010.</p>
+</dd>
+<dt class="label" id="coble2021"><span class="brackets">3</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id7">2</a>)</span></dt>
+<dd><p>Jamie Coble et al. Identifying Optimal Prognostic Parameters from Data: A Genetic Algorithms Approach. Annual Conference of the PHM Society. <a class="reference external" href="http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404">http://www.papers.phmsociety.org/index.php/phmconf/article/view/1404</a>, 2021</p>
+</dd>
+<dt class="label" id="baptista2022"><span class="brackets">4</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id6">2</a>)</span></dt>
+<dd><p>Marcia Baptista, et. al.. Relation between prognostics predictor evaluation metrics and local interpretability SHAP values. Aritifical Intelligence, Volume 306. <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0004370222000078">https://www.sciencedirect.com/science/article/pii/S0004370222000078</a>, 2022</p>
+</dd>
+</dl>
 </section>
 </section>
 
@@ -878,10 +829,11 @@ Histogram<div class="summary-down docutils">
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="prog_models_guide.html"
@@ -901,7 +853,10 @@ Histogram<div class="summary-down docutils">
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -909,7 +864,6 @@ Histogram<div class="summary-down docutils">
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -923,9 +877,6 @@ Histogram<div class="summary-down docutils">
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimation">State Estimation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.state_estimators.UnscentedKalmanFilter"><code class="docutils literal notranslate"><span class="pre">UnscentedKalmanFilter</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.state_estimators.ParticleFilter"><code class="docutils literal notranslate"><span class="pre">ParticleFilter</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.state_estimators.KalmanFilter"><code class="docutils literal notranslate"><span class="pre">KalmanFilter</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-state-estimators">Extending State Estimators</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
@@ -933,14 +884,11 @@ Histogram<div class="summary-down docutils">
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction">Prediction</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.predictors.UnscentedTransformPredictor"><code class="docutils literal notranslate"><span class="pre">UnscentedTransformPredictor</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.predictors.MonteCarlo"><code class="docutils literal notranslate"><span class="pre">MonteCarlo</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy.predictors.MonteCarloPredictor"><code class="docutils literal notranslate"><span class="pre">MonteCarloPredictor</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extending-predictors">Extending Predictors</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-results">Analyzing Results</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">State Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">State Estimation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicted-future-states">Predicted Future States</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-of-event-toe">Time of Event (ToE)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toe-prediction-profile">ToE Prediction Profile</a></li>
@@ -969,7 +917,6 @@ By Chris Teubert, Katelyn Jarvis, Matteo Corbetta, Chetan Kulkarni, Portia Baner
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
       © Copyright 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved..
@@ -996,8 +943,8 @@ By Chris Teubert, Katelyn Jarvis, Matteo Corbetta, Chetan Kulkarni, Portia Baner
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
 
 Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.

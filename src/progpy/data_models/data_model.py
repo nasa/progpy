@@ -1,7 +1,7 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
-from abc import ABC, abstractclassmethod
+from abc import ABC, abstractmethod
 import numpy as np
 import sys
 
@@ -18,7 +18,8 @@ class DataModel(PrognosticsModel, ABC):
         PrognosticsModel
     """
 
-    @abstractclassmethod
+    @classmethod
+    @abstractmethod
     def from_data(cls, **kwargs) -> "DataModel":
         """
         Create a Data Model from data. This class is overwritten by specific data-driven classes (e.g., :py:class:`LSTMStateTransitionModel`)

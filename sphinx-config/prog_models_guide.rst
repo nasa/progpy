@@ -60,7 +60,7 @@ In a ProgPy model, this state transition can be represented one of two ways, eit
     :width: 70 %
     :align: center
 
-States can also be discrete or continuous. :term:`Discrete states<discrete state>` are those which can only exist in a finite set of values. Where continuous states are those initialized with a number, discrete states are initialized using the function :py:func:`progpy.create_discrete_state`, like the examples below. Each discrete state represents a unique condition or mode, and transitions between states are governed by defined rules or events, providing clarity and predictability in state management.
+States can also be discrete or continuous. :term:`Discrete states<discrete state>` are those which can only exist in a finite set of values. Continuous states are initialized with a number and discrete states are initialized using the function :py:func:`progpy.create_discrete_state`, like the examples below. Each discrete state represents a unique condition or mode, and transitions between states are governed by defined rules or events, providing clarity and predictability in state management.
 
 .. code-block:: python
 
