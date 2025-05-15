@@ -4,88 +4,114 @@ on:
   workflow_dispatch
 
 jobs:
-  ubuntu_tests:
+  ubuntu_test_3.9:
     timeout-minutes: 30
-    strategy:
-      matrix:
-        python-version: ['3.9', '3.12']  # TODO: Add 3.13 when it is released
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.9'
     - name: Install
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
 
-  macos_13_tests:
+  ubuntu_test_3.12:
     timeout-minutes: 30
-    strategy:
-      matrix:
-        python-version: ['3.9', '3.12']  # TODO: Add 3.13 when it is released
-        os: [macos-13]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.12'
     - name: Install
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
 
-  macos_latest_tests:
+  macos_13_test_3.9:
     timeout-minutes: 30
-    strategy:
-      matrix:
-        python-version: ['3.9', '3.12']  # TODO: Add 3.13 when it is released
-        os: [macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-13
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.9'
     - name: Install
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
 
-  windows_tests:
+  macos_13_test_3.12:
     timeout-minutes: 30
-    strategy:
-      matrix:
-        python-version: ['3.9', '3.12']  # TODO: Add 3.13 when it is released
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    - name: Install
+      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
+    - name: Run tests
+      run: python -m tests
+
+  macos_latest_test_3.9:
+    timeout-minutes: 30
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install
+      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
+    - name: Run tests
+      run: python -m tests
+
+  macos_latest_test_3.12:
+    timeout-minutes: 30
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    - name: Install
+      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
+    - name: Run tests
+      run: python -m tests
+
+  windows_test_3.9:
+    timeout-minutes: 30
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.9'
     - name: Install
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+
+  windows_test_3.12:
+    timeout-minutes: 30
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
-        file: ./coverage.xml
+        python-version: '3.12'
+    - name: Install
+      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
+    - name: Run tests
+      run: python -m tests
