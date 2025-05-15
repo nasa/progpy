@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>DataModel &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>DataModel &#8212; ProgPy Python Packages 1.8 documentation</title>
   
   
   
@@ -32,7 +32,6 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
@@ -47,6 +46,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_ref/progpy/DataModel';</script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -153,6 +153,7 @@
 <li class="toctree-l3"><a class="reference internal" href="CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DiscreteStates.html">Discrete States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="EnsembleModel.html">EnsembleModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="LinearModel.html">LinearModel</a></li>
@@ -170,6 +171,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -360,10 +362,10 @@ document.write(`
 <p>There are a few ways to construct a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> object, described below.</p>
 <section id="from-data">
 <h3>From Data<a class="headerlink" href="#from-data" title="Permalink to this headline">#</a></h3>
-<p>This is the most common way to construct a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> object, using the <code class="xref py py-func docutils literal notranslate"><span class="pre">DataModel.from_data()</span></code> method. It involves using one or more runs of data to train the model. Each DataModel class expects different data from the following set: times, inputs, states, outputs, and event_states. See documentation for the specific algorithm to see what it expects. Below is an example if it’s use with the LSTMStateTransitionModel, which expects inputs and outputs.</p>
+<p>This is the most common way to construct a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataModel</span></code> object, using the <code class="xref py py-func docutils literal notranslate"><span class="pre">DataModel.from_data()</span></code> method. It involves using one or more runs of data to train the model. Each <code class="docutils literal notranslate"><span class="pre">DataModel</span></code> class expects different data from the following set: times, inputs, states, outputs, and event_states. Below is an example if it’s use with the <code class="docutils literal notranslate"><span class="pre">LSTMStateTransitionModel</span></code>, which expects inputs and outputs.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
-example<div class="summary-down docutils">
+DataModel Example<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -378,10 +380,10 @@ example<div class="summary-down docutils">
 </details></section>
 <section id="from-another-prognosticsmodel-i-e-surrogate">
 <h3>From Another PrognosticsModel (i.e., Surrogate)<a class="headerlink" href="#from-another-prognosticsmodel-i-e-surrogate" title="Permalink to this headline">#</a></h3>
-<p>Surrogate models are constructed using the <code class="xref py py-func docutils literal notranslate"><span class="pre">DataModel.from_model()</span></code> Class Method. These models are trained using data from the original model, i.e., as a surrogate for the original model. The original model is not modified. Below is an example if it’s use. In this example a surrogate (m2) of the original ThrownObject Model (m) is created, and can then be used interchangeably with the original model.</p>
+<p>Surrogate models are constructed using the <code class="xref py py-func docutils literal notranslate"><span class="pre">DataModel.from_model()</span></code> class method. These models are trained using data from the original model, i.e., as a surrogate for the original model. The original model is not modified. Below is an example if it’s use. In this example a surrogate (m2) of the original <code class="docutils literal notranslate"><span class="pre">ThrownObject</span></code> model (m) is created, and can then be used interchangeably with the original model.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
-example<div class="summary-down docutils">
+Surrogate Model Example<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -1073,10 +1075,11 @@ Additional configuration parameters from <cite>from_data</cite></p>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>events</strong> (<em>abc.Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Keys for events that will trigger the end of simulation.
 If blank, simulation will occur if any event will be met ()</p></li>
-<li><p><strong>event_strategy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Strategy for stopping evaluation. Default is ‘first’. One of:</p>
+<li><p><strong>event_strategy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><em>abc.Callable</em><em>, </em><em>optional</em>) – <p>Strategy for stopping evaluation. Default is ‘first’. One of:</p>
 <ul>
 <li><p><em>first</em>: Will stop when first event in <cite>events</cite> list is reached.</p></li>
 <li><p><em>all</em>: Will stop when all events in <cite>events</cite> list have been reached</p></li>
+<li><p><em>abc.Callable</em>: Custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
 </ul>
 </p></li>
 <li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time for simulation in seconds (default: 0.0)</p></li>
@@ -1092,7 +1095,6 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <li><p><strong>horizon</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – maximum time that the model will be simulated forward (s), e.g., horizon = 1000</p></li>
 <li><p><strong>first_output</strong> (<a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel.OutputContainer" title="progpy.PrognosticsModel.OutputContainer"><em>OutputContainer</em></a><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that don’t use this</p></li>
 <li><p><strong>x</strong> (<a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel.StateContainer" title="progpy.PrognosticsModel.StateContainer"><em>StateContainer</em></a><em>, </em><em>optional</em>) – initial state, e.g., x= m.StateContainer({‘x1’: 10, ‘x2’: -5.3})</p></li>
-<li><p><strong>thresholds_met_eqn</strong> (<em>abc.Callable</em><em>, </em><em>optional</em>) – custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
 <li><p><strong>print</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>toggle intermediate printing, e.g., print = True</p>
 <p>e.g., m.simulate_to_threshold(eqn, z, dt=0.1, save_pts=[1, 2])</p>
 </p></li>

@@ -66,7 +66,7 @@ The internal state is stored in the estimators x property as a UncertainData sub
 
         .. autoclass:: progpy.state_estimators.KalmanFilter
 
-.. dropdown:: Example
+.. dropdown:: State Estimation Example
 
     Here's an example of its use. In this example we use the unscented kalman filter state estimator and the ThrownObject model. 
 
@@ -113,7 +113,7 @@ A predictors ``predict`` method is used to perform prediction, generally defined
 
     result = predictor.predict(x0, future_loading, **config)
 
-Where x0 is the initial state as an UncertainData object (often the output of state estimation), future_loading is a function defining future loading as a function of state and time, and config is a dictionary of any additional configuration parameters, specific to the predictor being used. See `Predictors <https://nasa.github.io/progpy/api_ref/progpy/Predictors.html>`__ for options available for each predictor
+Where x0 is the initial state as an UncertainData object (often the output of state estimation), future_loading is a function defining future loading as a function of state and time, and config is a dictionary of any additional configuration parameters, specific to the predictor being used. See `Predictors <https://nasa.github.io/progpy/api_ref/progpy/Predictor.html>`__ for options available for each predictor
 
 The result of the predict method is a named tuple with the following members:
 
@@ -123,11 +123,11 @@ The result of the predict method is a named tuple with the following members:
 * **event_states**: :py:class:`progpy.predictors.Prediction` object containing predicted event states at each savepoint such that event_states.snapshot(i) corresponds to times[i]
 * **time_of_event**: :py:class:`progpy.uncertain_data.UncertainData` object containing the predicted Time of Event (ToE) for each event. Additionally, final state at time of event is saved at time_of_event.final_state -> :py:class:`progpy.uncertain_data.UncertainData` for each event
 
-The stepsize and times at which results are saved can be defined like in a simulation. See `Simulation <https://nasa.github.io/progpy/docs/prog_models_guide.html#simulation>`__.
+The stepsize and times at which results are saved can be defined like in a simulation. See `Simulation <https://nasa.github.io/progpy/prog_models_guide.html?#simulation>`__.
 
 .. dropdown:: Included Predictors
 
-    ProgPy includes a number of predictors in the *progpy.predictors* package. The most commonly used of these are highlighted below. See `Predictors <https://nasa.github.io/progpy/api_ref/progpy/Predictors.html>`__ for a full list of supported predictors.
+    ProgPy includes a number of predictors in the *progpy.predictors* package. The most commonly used of these are highlighted below. See `Predictors <https://nasa.github.io/progpy/api_ref/progpy/Predictor.html>`__ for a full list of supported predictors.
 
     * **Unscented Transform (UT)**: A type of predictor for non-linear models where the state distribution is represented by a set of sigma points, calculated by an unscented tranform. Sigma points are propogated forward with time until the pass the threshold. The times at which each sigma point passes the threshold are converted to a distribution of time of event. The predicted future states and time of event are represented by a :py:class:`progpy.uncertain_data.MultivariateNormalDist`. By it's nature, UTs are much faster than MCs, but they fit the data to a normal distribution, resulting in some loss of information.
     * **Monte Carlo (MC)**: A sample-based prediction algorithm, where the distribution of likely states is represented by a set of unweighted samples. These samples are propagated forward with time. By its nature, MC is more accurate than a PF, but much slower. The predicted future states and time of event are represented by a :py:class:`progpy.uncertain_data.UnweightedSamples`. Full accuracy of MC can be adjusted by increasing or decreasing the number of samples
@@ -145,7 +145,7 @@ The stepsize and times at which results are saved can be defined like in a simul
 Extending Predictors
 **********************
 
-New :term:`predictor` are created by extending the :class:`progpy.predictors.Predictor` class. 
+A new :term:`predictor` is created by extending the :class:`progpy.predictors.Predictor` class. 
 
 
 Analyzing Results
@@ -164,7 +164,7 @@ The results of the state estimation are stored in an object of type :class:`prog
 * **percentage_in_bounds**: The percentage of the state estimate that is within defined bounds.
 * **relative_accuracy**: Relative accuracy is how close the mean of the distribution is to the ground truth, on relative terms
 
-There are also a number of figures available to describe a state estimate, described below
+There are also a number of figures available to describe a state estimate, described below.
 
 .. dropdown:: Scatter Plot
 
@@ -226,8 +226,8 @@ Predicted Future States
 Predicted future states, inputs, outputs, and event states come in the form of a :class:`progpy.predictors.Prediction` object. Predictions store distributions of predicted future values at multiple future times. Predictions contain a number of tools for analyzing the results, some of which are described below:
 
 * **mean**: Estimate the mean value at each time. The result is a list of dictionaries such that prediction.mean[i] corresponds to times[i]
-* **monotonicity**: Given a single prediction, for each event: go through all predicted states and compare those to the next one.
-        Calculates monotonicity for each event key using its associated mean value in UncertainData [#Baptista2022]_ [#Coble2021]_
+
+* **monotonicity**: Given a single prediction, for each event: go through all predicted states and compare those to the next one. Calculates monotonicity for each event key using its associated mean value in ``UncertainData``. [#Baptista2022]_ [#Coble2021]_
 
 
 Time of Event (ToE)
@@ -235,7 +235,7 @@ Time of Event (ToE)
 
 Time of Event is also stored as an object of type :class:`progpy.uncertain_data.UncertainData`, so the analysis functions described in :ref:`State Estimation` are also available for a ToE estimate. See :ref:`State Estimation` or :class:`progpy.uncertain_data.UncertainData` documentation for details.
 
-In addition to these standard UncertainData metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.
+In addition to these standard ``UncertainData`` metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.
 
 Below is an example calculating probability of success:
 
@@ -247,14 +247,14 @@ Below is an example calculating probability of success:
 ToE Prediction Profile
 **************************
 
-A :class:`progpy.predictors.ToEPredictionProfile` contains Time of Event (ToE) predictions performed at multiple points. ToEPredictionProfile is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:
+A :class:`progpy.predictors.ToEPredictionProfile` contains Time of Event (ToE) predictions performed at multiple points. ``ToEPredictionProfile`` is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:
 
 * **alpha_lambda**: Whether the prediction falls within specified limits at particular times with respect to a performance measure [#Goebel2017]_ [#Saxena2010]_
 * **cumulate_relative_accuracy**: The sum of the relative accuracies of each prediction, given a ground truth
 * **monotonicity**: The monotonicity of the prediction series [#Baptista2022]_ [#Coble2021]_
 * **prognostic_horizon**: The difference between a time :math:`t_i`, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event [#Goebel2017]_ [#Saxena2010]_
 
-A ToEPredictionProfile also contains a plot method (:pythoncode:`profile.plot(...)`), which looks like this:
+A ``ToEPredictionProfile`` also contains a plot method (:pythoncode:`profile.plot(...)`), which looks like this:
 
 .. image:: images/alpha_chart.png
 

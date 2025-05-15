@@ -7,6 +7,7 @@ from tests.test_composite import main as composite_main
 from tests.test_data_model import main as lstm_main
 from tests.test_datasets import main as datasets_main
 from tests.test_dict_like_matrix_wrapper import main as dict_like_matrix_wrapper_main
+from tests.test_discrete_state import main as discrete_state_main
 from tests.test_direct import main as direct_main
 from tests.test_ensemble import main as ensemble_main
 from tests.test_estimate_params import main as estimate_params_main
@@ -28,7 +29,7 @@ from tests.test_uav_model import main as uav_main
 from tests.test_uncertain_data import main as udata_main
 from tests.test_visualize import main as visualize_main
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     was_successful = True
 
     try:
@@ -62,6 +63,11 @@ if __name__ == '__main__':
 
     try:
         direct_main()
+    except Exception:
+        was_successful = False
+
+    try:
+        discrete_state_main()
     except Exception:
         was_successful = False
 
@@ -129,7 +135,7 @@ if __name__ == '__main__':
         serialization_main()
     except Exception:
         was_successful = False
-    
+
     try:
         sim_result_main()
     except Exception:
@@ -166,4 +172,4 @@ if __name__ == '__main__':
         was_successful = False
 
     if not was_successful:
-        raise Exception('Tests Failed')
+        raise Exception("Tests Failed")

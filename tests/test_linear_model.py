@@ -4,9 +4,14 @@ import numpy as np
 import unittest
 import copy
 import pickle
-from progpy.models.test_models.linear_thrown_object import (LinearThrownObject, LinearThrownObjectNoE, LinearThrownObjectWrongB,
-                                                                 LinearThrownDiffThrowingSpeed, LinearThrownObjectUpdatedInitializedMethod,
-                                                                 LinearThrownObjectFourStates)
+from progpy.models.test_models.linear_thrown_object import (
+    LinearThrownObject,
+    LinearThrownObjectNoE,
+    LinearThrownObjectWrongB,
+    LinearThrownDiffThrowingSpeed,
+    LinearThrownObjectUpdatedInitializedMethod,
+    LinearThrownObjectFourStates,
+)
 from progpy.models.test_models.linear_models import FNoneNoEventStateLM
 
 
@@ -14,7 +19,7 @@ class TestLinearModel(unittest.TestCase):
     def test_linear_model(self):
         m = LinearThrownObject()
 
-        #Checking to see if initialization would error when passing in incorrect parameter forms
+        # Checking to see if initialization would error when passing in incorrect parameter forms
         with self.assertRaises(AttributeError):
             b = LinearThrownObjectWrongB()
 
@@ -25,49 +30,49 @@ class TestLinearModel(unittest.TestCase):
 
         # @A
         with self.assertRaises(TypeError):
-            m.A = "[[0, 1], [0, 0]]" # string
-            m.matrixCheck() 
-        with self.assertRaises(TypeError):
-            m.A = None # None
-            m.matrixCheck() 
-        with self.assertRaises(TypeError):
-            m.A = 0 # int
+            m.A = "[[0, 1], [0, 0]]"  # string
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.A = 3.14 # float
+            m.A = None  # None
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.A = {} # dict
-            m.matrixCheck() 
+            m.A = 0  # int
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.A = () # tuple
-            m.matrixCheck() 
+            m.A = 3.14  # float
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.A = set() # set
-            m.matrixCheck() 
+            m.A = {}  # dict
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.A = True # boolean
+            m.A = ()  # tuple
+            m.matrixCheck()
+        with self.assertRaises(TypeError):
+            m.A = set()  # set
+            m.matrixCheck()
+        with self.assertRaises(TypeError):
+            m.A = True  # boolean
             m.matrixCheck()
         # Matrix Dimension Checking
         # when matrix is not proper dimensional (1-D array = C, D, G; 2-D array = A,B,E; None = F;)
         with self.assertRaises(AttributeError):
-            m.A = np.array([0, 1]) # 1-D array
+            m.A = np.array([0, 1])  # 1-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.A = np.array([[[[0, 1], [0, 0], [1, 0]]]]) # 3-D array
+            m.A = np.array([[[[0, 1], [0, 0], [1, 0]]]])  # 3-D array
             m.matrixCheck()
         # When Matrix is improperly formed
         with self.assertRaises(AttributeError):
-            m.A = np.array([[0, 1, 2, 3], [0, 0, 1, 2]]) # extra column values per row
+            m.A = np.array([[0, 1, 2, 3], [0, 0, 1, 2]])  # extra column values per row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.A = np.array([[0], [0]]) # less column values per row
+            m.A = np.array([[0], [0]])  # less column values per row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.A = np.array([[0, 1], [0, 0], [2, 2]]) # extra row
+        with self.assertRaises(AttributeError):
+            m.A = np.array([[0, 1], [0, 0], [2, 2]])  # extra row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.A = np.array([[0, 1]]) # less row
+        with self.assertRaises(AttributeError):
+            m.A = np.array([[0, 1]])  # less row
             m.matrixCheck()
         # Reset Process
         m.A = np.array([[0, 1], [0, 2]])
@@ -78,279 +83,276 @@ class TestLinearModel(unittest.TestCase):
             m.B = "[[0, 1], [0, 0]]"
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.B = 0 # int
+            m.B = 0  # int
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.B = 3.14 # float
+            m.B = 3.14  # float
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.B = {} # dict
-            m.matrixCheck() 
+            m.B = {}  # dict
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.B = () # tuple
-            m.matrixCheck() 
+            m.B = ()  # tuple
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.B = set() # set
-            m.matrixCheck() 
+            m.B = set()  # set
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.B = True # boolean
+            m.B = True  # boolean
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.B = np.array(2) # 0-D array
+            m.B = np.array(2)  # 0-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.B = np.array([[0, 0], [1, 1]]) # 2-D array
+            m.B = np.array([[0, 0], [1, 1]])  # 2-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.B = np.array([[1, 0, 2]]) # extra column values per row
+            m.B = np.array([[1, 0, 2]])  # extra column values per row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.B = np.array([[1]]) # less column values per row
+            m.B = np.array([[1]])  # less column values per row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.B = np.array([[0, 0], [1, 1], [2, 2]]) # extra row
+        with self.assertRaises(AttributeError):
+            m.B = np.array([[0, 0], [1, 1], [2, 2]])  # extra row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.B = np.array([[]]) # less row 
+        with self.assertRaises(AttributeError):
+            m.B = np.array([[]])  # less row
             m.matrixCheck()
-        m.B = None #sets parameter B to default value
+        m.B = None  # sets parameter B to default value
         m.matrixCheck()
 
         # @C
         with self.assertRaises(TypeError):
-            m.C = "[[0, 1], [0, 0]]" # string
-            m.matrixCheck() 
-        with self.assertRaises(TypeError):
-            m.C = 0 # int
+            m.C = "[[0, 1], [0, 0]]"  # string
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.C = 3.14 # float
+            m.C = 0  # int
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.C = {} # dict
-            m.matrixCheck() 
+            m.C = 3.14  # float
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.C = () # tuple
-            m.matrixCheck() 
+            m.C = {}  # dict
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.C = set() # set
-            m.matrixCheck() 
+            m.C = ()  # tuple
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.C = True # boolean
+            m.C = set()  # set
+            m.matrixCheck()
+        with self.assertRaises(TypeError):
+            m.C = True  # boolean
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.C = np.array(2) # 0-D array
+            m.C = np.array(2)  # 0-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.C = np.array([[0, 0], [1, 1]]) # 2-D array
+            m.C = np.array([[0, 0], [1, 1]])  # 2-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.C = np.array([[1, 0, 2]]) # extra column values per row
+            m.C = np.array([[1, 0, 2]])  # extra column values per row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.C = np.array([[1]]) # less column values per row
+            m.C = np.array([[1]])  # less column values per row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.C = np.array([[0, 0], [1, 1], [2, 2]]) # extra row
+        with self.assertRaises(AttributeError):
+            m.C = np.array([[0, 0], [1, 1], [2, 2]])  # extra row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.C = np.array([[]]) # less row 
+        with self.assertRaises(AttributeError):
+            m.C = np.array([[]])  # less row
             m.matrixCheck()
         m.C = np.array([[1, 0]])
         m.matrixCheck()
 
-
-# Included some tests that are checking if exceptions are being thrown without matrixCheck being invoked
+        # Included some tests that are checking if exceptions are being thrown without matrixCheck being invoked
         with self.assertRaises(TypeError):
-            m.D = "[[0, 1], [0, 0]]" # string
-            m.matrixCheck() 
-        with self.assertRaises(TypeError):
-            m.D = 0 # int
+            m.D = "[[0, 1], [0, 0]]"  # string
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.D = 3.14 # float
+            m.D = 0  # int
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.D = {} # dict
-            m.matrixCheck() 
+            m.D = 3.14  # float
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.D = () # tuple
+            m.D = {}  # dict
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.D = set() # set
+            m.D = ()  # tuple
         with self.assertRaises(TypeError):
-            m.D = True # boolean
+            m.D = set()  # set
+        with self.assertRaises(TypeError):
+            m.D = True  # boolean
             m.matrixCheck()
         # @D 1x
         with self.assertRaises(AttributeError):
-            m.D = np.array(1) # 0-D array
+            m.D = np.array(1)  # 0-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.D = np.array([[2], [1]]) # 2-D array with incorrect values passed in
+            m.D = np.array([[2], [1]])  # 2-D array with incorrect values passed in
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.D = np.array([1, 2]) # extra column values per row
+            m.D = np.array([1, 2])  # extra column values per row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.D = np.array([[]]) # less column values per row
-        with self.assertRaises(AttributeError): 
-            m.D = np.array([[0], [1]]) # extra row
-        with self.assertRaises(AttributeError): 
-            m.D = np.array([[]]) # less row
-        m.D = np.array([[1]]) # sets to Default Value
+            m.D = np.array([[]])  # less column values per row
+        with self.assertRaises(AttributeError):
+            m.D = np.array([[0], [1]])  # extra row
+        with self.assertRaises(AttributeError):
+            m.D = np.array([[]])  # less row
+        m.D = np.array([[1]])  # sets to Default Value
         m.D = None
         m.matrixCheck()
 
         # @E
         with self.assertRaises(TypeError):
-            m.E = "[[0, 1], [0, 0]]" # string
-            m.matrixCheck() 
-        with self.assertRaises(TypeError):
-            m.E = 0 # int
+            m.E = "[[0, 1], [0, 0]]"  # string
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.E = 3.14 # float
+            m.E = 0  # int
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.E = {} # dict
-            m.matrixCheck() 
+            m.E = 3.14  # float
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.E = () # tuple
-            m.matrixCheck() 
+            m.E = {}  # dict
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.E = set() # set
-            m.matrixCheck() 
+            m.E = ()  # tuple
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.E = True # boolean
+            m.E = set()  # set
+            m.matrixCheck()
+        with self.assertRaises(TypeError):
+            m.E = True  # boolean
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.E = np.array([[0]]) # 2-D array
+            m.E = np.array([[0]])  # 2-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.E = np.array([[0], [1], [2]]) # 3-D array
+            m.E = np.array([[0], [1], [2]])  # 3-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.E = np.array([[0,0], [-9.81, -1]]) # extra column values per row
+            m.E = np.array([[0, 0], [-9.81, -1]])  # extra column values per row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.E = np.array([[], []]) # less column values per row
+            m.E = np.array([[], []])  # less column values per row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.E = np.array([[0, 1], [0, 0], [2, 2]]) # extra row
+        with self.assertRaises(AttributeError):
+            m.E = np.array([[0, 1], [0, 0], [2, 2]])  # extra row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.E = np.array([[0, 1]]) # less row
+        with self.assertRaises(AttributeError):
+            m.E = np.array([[0, 1]])  # less row
             m.matrixCheck()
         m.E = np.array([[0], [-9.81]])
         m.matrixCheck()
-        
 
         # @F
         with self.assertRaises(TypeError):
-            m.F = "[[0, 1], [0, 0]]" # string
-            m.matrixCheck() 
-        with self.assertRaises(TypeError):
-            m.F = 0 # int
+            m.F = "[[0, 1], [0, 0]]"  # string
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.F = 3.14 # float
+            m.F = 0  # int
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.F = {} # dict
-            m.matrixCheck() 
+            m.F = 3.14  # float
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.F = () # tuple
-            m.matrixCheck() 
+            m.F = {}  # dict
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.F = set() # set
-            m.matrixCheck() 
+            m.F = ()  # tuple
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.F = True # boolean
+            m.F = set()  # set
+            m.matrixCheck()
+        with self.assertRaises(TypeError):
+            m.F = True  # boolean
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.F = np.array([[0]]) # 2-D array
+            m.F = np.array([[0]])  # 2-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.F = np.array([[0], [1], [2]]) # 3-D array
+            m.F = np.array([[0], [1], [2]])  # 3-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.F = np.array([[0,0], [-9.81, -1]]) # extra column values per row
+            m.F = np.array([[0, 0], [-9.81, -1]])  # extra column values per row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.F = np.array([[], []]) # less column values per row
+            m.F = np.array([[], []])  # less column values per row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.F = np.array([[0, 1], [0, 0], [2, 2]]) # extra row
+        with self.assertRaises(AttributeError):
+            m.F = np.array([[0, 1], [0, 0], [2, 2]])  # extra row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
             # if F is none, we need to override event_state
             m_noes = FNoneNoEventStateLM()
-        m.F = np.array([[0, 1]]) # less row
+        m.F = np.array([[0, 1]])  # less row
         m.matrixCheck()
         m.F = None
         m.matrixCheck()
 
-        #G
+        # G
         with self.assertRaises(TypeError):
-            m.G = "[[0, 1], [0, 0]]" # string
-            m.matrixCheck() 
-        with self.assertRaises(TypeError):
-            m.G = 0 # int
+            m.G = "[[0, 1], [0, 0]]"  # string
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.G = 3.14 # float
+            m.G = 0  # int
             m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.G = {} # dict
-            m.matrixCheck() 
+            m.G = 3.14  # float
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.G = () # tuple
-            m.matrixCheck() 
+            m.G = {}  # dict
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.G = set() # set
-            m.matrixCheck() 
+            m.G = ()  # tuple
+            m.matrixCheck()
         with self.assertRaises(TypeError):
-            m.G = True # boolean
+            m.G = set()  # set
+            m.matrixCheck()
+        with self.assertRaises(TypeError):
+            m.G = True  # boolean
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.G = np.array([0]) # 1-D Array
+            m.G = np.array([0])  # 1-D Array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.G = np.array([[[0], [1], [2]]]) # 3-D array
+            m.G = np.array([[[0], [1], [2]]])  # 3-D array
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.G = np.array([[0,0], [-9.81, -1]]) # extra column values per row
+            m.G = np.array([[0, 0], [-9.81, -1]])  # extra column values per row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.G = np.array([[], []]) # less column values per row
-            m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.G = np.array([[0, 1], [0, 0], [2, 2]]) # extra row
-            m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.G = np.array([[0, 1]]) # less row
+            m.G = np.array([[], []])  # less column values per row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.G = np.array([0, 1]) # extra column values per row
+            m.G = np.array([[0, 1], [0, 0], [2, 2]])  # extra row
             m.matrixCheck()
         with self.assertRaises(AttributeError):
-            m.G = np.array([[]]) # less column values per row
+            m.G = np.array([[0, 1]])  # less row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.G = np.array([[0], [1]]) # extra row
+        with self.assertRaises(AttributeError):
+            m.G = np.array([0, 1])  # extra column values per row
             m.matrixCheck()
-        with self.assertRaises(AttributeError): 
-            m.G = np.array([[]]) # less row
+        with self.assertRaises(AttributeError):
+            m.G = np.array([[]])  # less column values per row
             m.matrixCheck()
-        m.G = np.array([[0]]) # 1-D Array
+        with self.assertRaises(AttributeError):
+            m.G = np.array([[0], [1]])  # extra row
+            m.matrixCheck()
+        with self.assertRaises(AttributeError):
+            m.G = np.array([[]])  # less row
+            m.matrixCheck()
+        m.G = np.array([[0]])  # 1-D Array
         m.matrixCheck()
-        m.G = None # sets to Default Value
+        m.G = None  # sets to Default Value
         m.matrixCheck()
 
         # Error Demonstration
         mTest = LinearThrownObjectFourStates()
         with self.assertRaises(AttributeError):
             mTest.B = np.array([[0], [1], [2], [3]])
-
 
         # Error Demonstration
         mTest = LinearThrownObjectFourStates()
@@ -360,14 +362,13 @@ class TestLinearModel(unittest.TestCase):
     @unittest.skip
     def test_copy_linear(self):
         m1 = LinearThrownObject()
-        copym1 = copy.copy(m1)  
+        copym1 = copy.copy(m1)
 
-        self.assertTrue(m1 == copym1) # Testing Copy for Linear Model
+        self.assertTrue(m1 == copym1)  # Testing Copy for Linear Model
         deepcopym1 = copy.deepcopy(m1)
         # Checking to see if all the copies are equal to one another before making changes to one or the other
         self.assertTrue(m1 == deepcopym1)
         self.assertTrue(copym1 == deepcopym1)
-
 
         m2 = LinearThrownObject()
         copym2 = copy.copy(m2)
@@ -387,23 +388,21 @@ class TestLinearModel(unittest.TestCase):
 
         self.assertTrue(deepcopym3 == copym3)
         self.assertFalse(copym4 == copym3)
-        
-        self.assertFalse(deepcopym4 == deepcopym3)
 
+        self.assertFalse(deepcopym4 == deepcopym3)
 
         m5 = LinearThrownObjectUpdatedInitializedMethod()
         copym5 = copy.copy(m5)
         deepcopym5 = copy.deepcopy(m5)
 
         self.assertTrue(m5 == copym5 == deepcopym5)
-        
-        m5.states.append('C')
-        copym5.states.append('D')
-        deepcopym5.states.append('E')
+
+        m5.states.append("C")
+        copym5.states.append("D")
+        deepcopym5.states.append("E")
         # This test should be failing, but it is passing
         self.assertFalse(copym5 == deepcopym5)
 
-        
     def test_linear_pickle(self):
         # future tests can compress, transfer to a file, and see if it still works
         m1 = LinearThrownObject()
@@ -412,9 +411,11 @@ class TestLinearModel(unittest.TestCase):
         # Note: dumps = serializing;
         #       loads = deserializing
 
-        bytes_m1 = pickle.dumps(m1) #serializing object 
-        loaded_m1 = pickle.loads(bytes_m1) #deserializing the object
-        self.assertTrue(m1 == loaded_m1) # see if serializing and deserializing changes original form
+        bytes_m1 = pickle.dumps(m1)  # serializing object
+        loaded_m1 = pickle.loads(bytes_m1)  # deserializing the object
+        self.assertTrue(
+            m1 == loaded_m1
+        )  # see if serializing and deserializing changes original form
 
         bytes_m2 = pickle.dumps(m2)
         loaded_m2 = pickle.loads(bytes_m2)
@@ -437,23 +438,23 @@ class TestLinearModel(unittest.TestCase):
 
     def test_F_property_not_none(self):
         class ThrownObject(LinearThrownObject):
-            F = np.array([[1, 0]]) # Will override method
+            F = np.array([[1, 0]])  # Will override method
 
             default_parameters = {
-                'thrower_height': 1.83,  # m
-                'throwing_speed': 40,  # m/s
-                'g': -9.81  # Acceleration due to gravity in m/s^2
+                "thrower_height": 1.83,  # m
+                "throwing_speed": 40,  # m/s
+                "g": -9.81,  # Acceleration due to gravity in m/s^2
             }
 
         m = ThrownObject()
-        m.simulate_to_threshold(lambda t, x = None: m.InputContainer({}))
+        m.simulate_to_threshold(lambda t, x=None: m.InputContainer({}))
         m.matrixCheck()
         self.assertIsInstance(m.F, np.ndarray)
         self.assertTrue(np.array_equal(m.F, np.array([[1, 0]])))
 
     def test_init_matrix_as_list(self):
-        # LinearThrown Object defines A, E, C as np arrays, thus we define with python lists instead. 
-        
+        # LinearThrown Object defines A, E, C as np arrays, thus we define with python lists instead.
+
         class ThrownObject(LinearThrownObject):
             A = [[0, 1], [0, 0]]
             E = [[0], [-9.81]]
@@ -472,23 +473,25 @@ class TestLinearModel(unittest.TestCase):
 
     def test_event_state_function(self):
         class ThrownObject(LinearThrownObject):
-            F = None # Will override method
-            
+            F = None  # Will override method
+
             def threshold_met(self, x):
-                return {
-                    'falling': x['v'] < 0,
-                    'impact': x['x'] <= 0
-                }
+                return {"falling": x["v"] < 0, "impact": x["x"] <= 0}
+
         # Needs more development; test coverage needs testing of event_state not overridden
+
 
 def main():
     load_test = unittest.TestLoader()
     runner = unittest.TextTestRunner()
     print("\n\nTesting Linear Models")
-    result = runner.run(load_test.loadTestsFromTestCase(TestLinearModel)).wasSuccessful()
+    result = runner.run(
+        load_test.loadTestsFromTestCase(TestLinearModel)
+    ).wasSuccessful()
 
     if not result:
         raise Exception("Failed test")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

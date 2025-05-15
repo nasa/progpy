@@ -14,15 +14,14 @@ from numpy import inf
 
 from prog_models import PrognosticsModel
 
+
 # REPLACE THIS WITH DERIVED PARAMETER CALLBACKS (IF ANY)
 # See examples.derived_params
 #
 # Each function defines one or more derived parameters as a function of the other parameters.
 def example_callback(params):
     # Return format: dict of key: new value pair for at least one derived parameter
-    return {
-        "Example Parameter 1": params["Example Parameter 2"]-3
-    }
+    return {"Example Parameter 1": params["Example Parameter 2"] - 3}
 
 
 class ProgModelTemplate(PrognosticsModel):
@@ -34,58 +33,50 @@ class ProgModelTemplate(PrognosticsModel):
     # is_vectorized = True
 
     # REPLACE THE FOLLOWING LIST WITH EVENTS BEING PREDICTED
-    events = [
-        'Example Event'
-    ]
-    
+    events = ["Example Event"]
+
     # REPLACE THE FOLLOWING LIST WITH INPUTS (LOADING)
-    inputs = [
-        'Example Input 1',
-        'Example Input 2'
-    ]
+    inputs = ["Example Input 1", "Example Input 2"]
 
     # REPLACE THE FOLLOWING LIST WITH STATES
     states = [
-        'Examples State 1',
-        'Examples State 2',
-        'Examples State 3',
-        'Examples State 4'
+        "Examples State 1",
+        "Examples State 2",
+        "Examples State 3",
+        "Examples State 4",
     ]
 
     # REPLACE THE FOLLOWING LIST WITH OUTPUTS (MEASURED VALUES)
-    outputs = [
-        'Example Output 1',
-        'Example Output 2'
-    ]
+    outputs = ["Example Output 1", "Example Output 2"]
 
     # REPLACE THE FOLLOWING LIST WITH PERFORMANCE METRICS
     # i.e., NON-MEASURED VALUES THAT ARE A FUNCTION OF STATE
     # e.g., maximum torque of a motor
     performance_metric_keys = [
-        'metric 1',
+        "metric 1",
     ]
 
     # REPLACE THE FOLLOWING LIST WITH CONFIGURED PARAMETERS
     # Note- everything required to configure the model
     # should be in parameters- this is to enable the serialization features
     default_parameters = {  # Set default parameters
-        'Example Parameter 1': 0,
-        'Example Parameter 2': 3,
-        'process_noise': 0.1,  # Process noise
-        'x0': {  # Initial state
-            'Examples State 1': 1.5,
-            'Examples State 2': -935,
-            'Examples State 3': 42.1,
-            'Examples State 4': 0
-        }
+        "Example Parameter 1": 0,
+        "Example Parameter 2": 3,
+        "process_noise": 0.1,  # Process noise
+        "x0": {  # Initial state
+            "Examples State 1": 1.5,
+            "Examples State 2": -935,
+            "Examples State 3": 42.1,
+            "Examples State 4": 0,
+        },
     }
 
     # REPLACE THE FOLLOWING WITH STATE BOUNDS IF NEEDED
     state_limits = {
         # 'state': (lower_limit, upper_limit)
         # only specify for states with limits
-        'Examples State 1': (0, inf),
-        'Examples State 4': (-2, 3)
+        "Examples State 1": (0, inf),
+        "Examples State 4": (-2, 3),
     }
 
     # Identify callbacks used by this model
@@ -95,9 +86,7 @@ class ProgModelTemplate(PrognosticsModel):
     # And callbacks are one or more callback functions that define parameters that are
     # derived from that parameter
     # REPLACE THIS WITH ACTUAL DERIVED PARAMETER CALLBACKS
-    param_callbacks = {
-        "Example Parameter 2": [example_callback]
-    }
+    param_callbacks = {"Example Parameter 2": [example_callback]}
 
     # UNCOMMENT THIS FUNCTION IF YOU NEED CONSTRUCTION LOGIC (E.G., INPUT VALIDATION)
     # def __init__(self, **kwargs):
@@ -176,7 +165,7 @@ class ProgModelTemplate(PrognosticsModel):
     #     dx : StateContainer
     #         First derivative of state, with keys defined by model.states
     #         e.g., dx = {'abc': 3.1, 'def': -2.003} given states = ['abc', 'def']
-    # 
+    #
     #     Example
     #     -------
     #     | m = DerivProgModel() # Replace with specific model being simulated
@@ -233,7 +222,7 @@ class ProgModelTemplate(PrognosticsModel):
         x : StateContainer
             state, with keys defined by model.states
             e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
-        
+
         Returns
         -------
         z : OutputContainer
@@ -243,10 +232,7 @@ class ProgModelTemplate(PrognosticsModel):
 
         # REPLACE BELOW WITH LOGIC TO CALCULATE OUTPUTS
         # NOTE: KEYS FOR z MATCH 'outputs' LIST ABOVE
-        z = self.OutputContainer({
-            'Example Output 1': 0.0,
-            'Example Output 2': 0.0
-        })
+        z = self.OutputContainer({"Example Output 1": 0.0, "Example Output 2": 0.0})
 
         return z
 
@@ -259,7 +245,7 @@ class ProgModelTemplate(PrognosticsModel):
         x : StateContainer
             state, with keys defined by model.states
             e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
-        
+
         Returns
         -------
         event_state : dict
@@ -269,12 +255,10 @@ class ProgModelTemplate(PrognosticsModel):
 
         # REPLACE BELOW WITH LOGIC TO CALCULATE EVENT STATES
         # NOTE: KEYS FOR event_x MATCH 'events' LIST ABOVE
-        event_x = {
-            'Example Event': 0.95
-        }
+        event_x = {"Example Event": 0.95}
 
         return event_x
-        
+
     # Note: Thresholds met equation below is not strictly necessary.
     # By default, threshold_met will check if event_state is ≤ 0 for each event
     def threshold_met(self, x):
@@ -286,7 +270,7 @@ class ProgModelTemplate(PrognosticsModel):
         x : StateContainer
             state, with keys defined by model.states
             e.g., x = {'abc': 332.1, 'def': 221.003} given states = ['abc', 'def']
-        
+
         Returns
         -------
         thresholds_met : dict
@@ -296,9 +280,7 @@ class ProgModelTemplate(PrognosticsModel):
 
         # REPLACE BELOW WITH LOGIC TO CALCULATE IF THRESHOLDS ARE MET
         # NOTE: KEYS FOR t_met MATCH 'events' LIST ABOVE
-        t_met = {
-            'Example Event': False
-        }
+        t_met = {"Example Event": False}
 
         return t_met
 
@@ -311,7 +293,7 @@ class ProgModelTemplate(PrognosticsModel):
         x : StateContainer
             state, with keys defined by model.states \n
             e.g., x = m.StateContainer({'abc': 332.1, 'def': 221.003}) given states = ['abc', 'def']
-        
+
         Returns
         -------
         pm : dict
@@ -329,9 +311,7 @@ class ProgModelTemplate(PrognosticsModel):
 
         # REPLACE BELOW WITH LOGIC TO CALCULATE PERFORMANCE METRICS
         # NOTE: KEYS FOR p_metrics MATCH 'performance_metric_keys' LIST ABOVE
-        p_metrics = {
-            'metric1': 23
-        }
+        p_metrics = {"metric1": 23}
         return p_metrics
 
     # V UNCOMMENT THE BELOW FUNCTION FOR DIRECT FUNCTIONS V

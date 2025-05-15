@@ -1,7 +1,15 @@
-# name: Print Benchmarking
+name: Print Benchmarking
 
-# on: pull_request
+on: pull_request
 
+jobs:
+  benchmark_branch:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "Placholder benchmark in process of getting fixed - job will pass."
+        
 # jobs:
 #   benchmark_branch: 
 #     timeout-minutes: 20

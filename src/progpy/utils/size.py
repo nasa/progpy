@@ -20,15 +20,16 @@ def object_handler(o):
 
 # Set of handlers that describe how to estimate the size of the payload of an
 # object of a given type in format {type: handler}
-all_handlers = {tuple: iter,
-                list: iter,
-                np.ndarray: lambda a: iter(list(a.flat)),
-                dict: dict_handler,
-                set: iter,
-                frozenset: iter,
-                DictLikeMatrixWrapper: dict_handler,
-                SimResult: iter
-                }
+all_handlers = {
+    tuple: iter,
+    list: iter,
+    np.ndarray: lambda a: iter(list(a.flat)),
+    dict: dict_handler,
+    set: iter,
+    frozenset: iter,
+    DictLikeMatrixWrapper: dict_handler,
+    SimResult: iter,
+}
 
 
 def getsizeof(o):
@@ -47,6 +48,7 @@ def getsizeof(o):
     # This is to avoid circular imports
     from progpy import PrognosticsModel
     from progpy.utils.parameters import PrognosticsModelParameters
+
     all_handlers[PrognosticsModelParameters] = object_handler
     all_handlers[PrognosticsModel] = object_handler
 
@@ -80,4 +82,5 @@ def getsizeof(o):
         # If no handler found, return size of object itself (no recursion)
         # This is mostly for simple types (e.g., int) that don't have a payload
         return s
+
     return sizeof(o)

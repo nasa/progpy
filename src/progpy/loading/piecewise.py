@@ -1,10 +1,11 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
-class Piecewise():
+
+class Piecewise:
     """
     .. versionadded:: 1.5.0
-    
+
     This is a simple piecewise future loading class. It takes a list of times and values and returns the value that corresponds to the current time. The object replaces the future_loading_eqn for simulate_to and simulate_to_threshold.
 
     Args
@@ -23,6 +24,7 @@ class Piecewise():
     >>> future_load = Piecewise(m.InputContainer, [0, 10, 20], {'input0': [0, 1, 0, 0.2]})
     >>> m.simulate_to_threshold(future_load)
     """
+
     def __init__(self, InputContainer, times, values):
         self.InputContainer = InputContainer
 
@@ -33,20 +35,23 @@ class Piecewise():
             elif n_values != len(values[key]):
                 diff = len(values[key]) - n_values
                 raise ValueError(
-                    f"All elements in values must have "
+                    "All elements in values must have "
                     "the same number of elements. {key} had "
-                    "{f'{diff} more' if diff > 0 else f'{-diff} less'}")
-        if n_values is not None and (n_values != len(times) and n_values != (len(times) + 1)):
+                    "{f'{diff} more' if diff > 0 else f'{-diff} less'}"
+                )
+        if n_values is not None and (
+            n_values != len(times) and n_values != (len(times) + 1)
+        ):
             raise ValueError(
-                f"Elements in values must have the same or "
-                "one more element than times")
+                "Elements in values must have the same or one more element than times"
+            )
 
         self.times = times
         self.values = values
 
         if n_values is not None and (n_values == len(times) + 1):
             # Last is the default (i.e, the value after the last time)
-            self.times.append(float('inf')) 
+            self.times.append(float("inf"))
 
     def __call__(self, t, x=None):
         """
@@ -59,6 +64,13 @@ class Piecewise():
         Returns:
             InputContainer: The value that corresponds to the current time
         """
-        return self.InputContainer({
-            key: next(self.values[key][i] for i in range(len(self.times)) if self.times[i] > t)
-            for key in self.values})
+        return self.InputContainer(
+            {
+                key: next(
+                    self.values[key][i]
+                    for i in range(len(self.times))
+                    if self.times[i] > t
+                )
+                for key in self.values
+            }
+        )

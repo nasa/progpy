@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>State Estimation and Prediction Guide &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>State Estimation and Prediction Guide &#8212; ProgPy Python Packages 1.8 documentation</title>
   
   
   
@@ -32,11 +32,11 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
@@ -46,9 +46,9 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/tabs.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/tabs.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'prog_algs_guide';</script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -156,6 +156,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DiscreteStates.html">Discrete States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/EnsembleModel.html">EnsembleModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
@@ -173,6 +174,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -388,6 +390,7 @@ document.write(`
 </pre></div>
 </div>
 </div></div>
+<p>For help with troubleshooting, see the <a class="reference internal" href="troubleshooting.html#troubleshooting"><span class="std std-ref">Troubleshooting Guide</span></a>.</p>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h2>
@@ -543,7 +546,7 @@ e.g., dt = 1e-2</p></li>
 </details></div>
 </details><details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
-Example<div class="summary-down docutils">
+State Estimation Example<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -588,7 +591,7 @@ Example<div class="summary-down docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">future_loading</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Where x0 is the initial state as an UncertainData object (often the output of state estimation), future_loading is a function defining future loading as a function of state and time, and config is a dictionary of any additional configuration parameters, specific to the predictor being used. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/Predictors.html">Predictors</a> for options available for each predictor</p>
+<p>Where x0 is the initial state as an UncertainData object (often the output of state estimation), future_loading is a function defining future loading as a function of state and time, and config is a dictionary of any additional configuration parameters, specific to the predictor being used. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/Predictor.html">Predictors</a> for options available for each predictor</p>
 <p>The result of the predict method is a named tuple with the following members:</p>
 <ul class="simple">
 <li><p><strong>times</strong>: array of times for each savepoint such that times[i] corresponds to inputs.snapshot(i)</p></li>
@@ -597,7 +600,7 @@ Example<div class="summary-down docutils">
 <li><p><strong>event_states</strong>: <a class="reference internal" href="api_ref/progpy/Prediction.html#progpy.predictors.Prediction" title="progpy.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.Prediction</span></code></a> object containing predicted event states at each savepoint such that event_states.snapshot(i) corresponds to times[i]</p></li>
 <li><p><strong>time_of_event</strong>: <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a> object containing the predicted Time of Event (ToE) for each event. Additionally, final state at time of event is saved at time_of_event.final_state -&gt; <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a> for each event</p></li>
 </ul>
-<p>The stepsize and times at which results are saved can be defined like in a simulation. See <a class="reference external" href="https://nasa.github.io/progpy/docs/prog_models_guide.html#simulation">Simulation</a>.</p>
+<p>The stepsize and times at which results are saved can be defined like in a simulation. See <a class="reference external" href="https://nasa.github.io/progpy/prog_models_guide.html?#simulation">Simulation</a>.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 Included Predictors<div class="summary-down docutils">
@@ -605,7 +608,7 @@ Included Predictors<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">ProgPy includes a number of predictors in the <em>progpy.predictors</em> package. The most commonly used of these are highlighted below. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/Predictors.html">Predictors</a> for a full list of supported predictors.</p>
+<p class="card-text">ProgPy includes a number of predictors in the <em>progpy.predictors</em> package. The most commonly used of these are highlighted below. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/Predictor.html">Predictors</a> for a full list of supported predictors.</p>
 <ul class="simple">
 <li><p class="card-text"><strong>Unscented Transform (UT)</strong>: A type of predictor for non-linear models where the state distribution is represented by a set of sigma points, calculated by an unscented tranform. Sigma points are propogated forward with time until the pass the threshold. The times at which each sigma point passes the threshold are converted to a distribution of time of event. The predicted future states and time of event are represented by a <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.MultivariateNormalDist" title="progpy.uncertain_data.MultivariateNormalDist"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.MultivariateNormalDist</span></code></a>. By it’s nature, UTs are much faster than MCs, but they fit the data to a normal distribution, resulting in some loss of information.</p></li>
 <li><p class="card-text"><strong>Monte Carlo (MC)</strong>: A sample-based prediction algorithm, where the distribution of likely states is represented by a set of unweighted samples. These samples are propagated forward with time. By its nature, MC is more accurate than a PF, but much slower. The predicted future states and time of event are represented by a <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UnweightedSamples" title="progpy.uncertain_data.UnweightedSamples"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UnweightedSamples</span></code></a>. Full accuracy of MC can be adjusted by increasing or decreasing the number of samples</p></li>
@@ -679,7 +682,7 @@ MC Details<div class="summary-down docutils">
 </details></div>
 </details><section id="extending-predictors">
 <h3>Extending Predictors<a class="headerlink" href="#extending-predictors" title="Permalink to this headline">#</a></h3>
-<p>New <a class="reference internal" href="glossary.html#term-predictor"><span class="xref std std-term">predictor</span></a> are created by extending the <a class="reference internal" href="api_ref/progpy/Predictor.html#progpy.predictors.Predictor" title="progpy.predictors.Predictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.Predictor</span></code></a> class.</p>
+<p>A new <a class="reference internal" href="glossary.html#term-predictor"><span class="xref std std-term">predictor</span></a> is created by extending the <a class="reference internal" href="api_ref/progpy/Predictor.html#progpy.predictors.Predictor" title="progpy.predictors.Predictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.Predictor</span></code></a> class.</p>
 </section>
 </section>
 <section id="analyzing-results">
@@ -696,7 +699,7 @@ MC Details<div class="summary-down docutils">
 <li><p><strong>percentage_in_bounds</strong>: The percentage of the state estimate that is within defined bounds.</p></li>
 <li><p><strong>relative_accuracy</strong>: Relative accuracy is how close the mean of the distribution is to the ground truth, on relative terms</p></li>
 </ul>
-<p>There are also a number of figures available to describe a state estimate, described below</p>
+<p>There are also a number of figures available to describe a state estimate, described below.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 Scatter Plot<div class="summary-down docutils">
@@ -735,17 +738,13 @@ Histogram<div class="summary-down docutils">
 <p>Predicted future states, inputs, outputs, and event states come in the form of a <a class="reference internal" href="api_ref/progpy/Prediction.html#progpy.predictors.Prediction" title="progpy.predictors.Prediction"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.Prediction</span></code></a> object. Predictions store distributions of predicted future values at multiple future times. Predictions contain a number of tools for analyzing the results, some of which are described below:</p>
 <ul class="simple">
 <li><p><strong>mean</strong>: Estimate the mean value at each time. The result is a list of dictionaries such that prediction.mean[i] corresponds to times[i]</p></li>
-<li><dl class="simple">
-<dt><strong>monotonicity</strong>: Given a single prediction, for each event: go through all predicted states and compare those to the next one.</dt><dd><p>Calculates monotonicity for each event key using its associated mean value in UncertainData <a class="footnote-reference brackets" href="#baptista2022" id="id2">4</a> <a class="footnote-reference brackets" href="#coble2021" id="id3">3</a></p>
-</dd>
-</dl>
-</li>
+<li><p><strong>monotonicity</strong>: Given a single prediction, for each event: go through all predicted states and compare those to the next one. Calculates monotonicity for each event key using its associated mean value in <code class="docutils literal notranslate"><span class="pre">UncertainData</span></code>. <a class="footnote-reference brackets" href="#baptista2022" id="id2">4</a> <a class="footnote-reference brackets" href="#coble2021" id="id3">3</a></p></li>
 </ul>
 </section>
 <section id="time-of-event-toe">
 <h3>Time of Event (ToE)<a class="headerlink" href="#time-of-event-toe" title="Permalink to this headline">#</a></h3>
 <p>Time of Event is also stored as an object of type <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a>, so the analysis functions described in <a class="reference internal" href="#id1"><span class="std std-ref">State Estimation</span></a> are also available for a ToE estimate. See <a class="reference internal" href="#id1"><span class="std std-ref">State Estimation</span></a> or <a class="reference internal" href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData" title="progpy.uncertain_data.UncertainData"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.uncertain_data.UncertainData</span></code></a> documentation for details.</p>
-<p>In addition to these standard UncertainData metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.</p>
+<p>In addition to these standard <code class="docutils literal notranslate"><span class="pre">UncertainData</span></code> metrics, Probability of Success (PoS) is an important metric for prognostics. Probability of Success is the probability that a event will not occur before a defined time. For example, in aeronautics, PoS might be the probability that no failure will occur before end of mission.</p>
 <p>Below is an example calculating probability of success:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy.metrics</span> <span class="kn">import</span> <span class="n">prob_success</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span> <span class="o">=</span> <span class="n">prob_success</span><span class="p">(</span><span class="n">some_distribution</span><span class="p">,</span> <span class="n">end_of_mission</span><span class="p">)</span>
@@ -754,14 +753,14 @@ Histogram<div class="summary-down docutils">
 </section>
 <section id="toe-prediction-profile">
 <h3>ToE Prediction Profile<a class="headerlink" href="#toe-prediction-profile" title="Permalink to this headline">#</a></h3>
-<p>A <a class="reference internal" href="api_ref/progpy/ToEPredictionProfile.html#progpy.predictors.ToEPredictionProfile" title="progpy.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.ToEPredictionProfile</span></code></a> contains Time of Event (ToE) predictions performed at multiple points. ToEPredictionProfile is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:</p>
+<p>A <a class="reference internal" href="api_ref/progpy/ToEPredictionProfile.html#progpy.predictors.ToEPredictionProfile" title="progpy.predictors.ToEPredictionProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.predictors.ToEPredictionProfile</span></code></a> contains Time of Event (ToE) predictions performed at multiple points. <code class="docutils literal notranslate"><span class="pre">ToEPredictionProfile</span></code> is frequently used to evaluate the prognostic quality for a given prognostic solution. It contains a number of methods to help with this, including:</p>
 <ul class="simple">
 <li><p><strong>alpha_lambda</strong>: Whether the prediction falls within specified limits at particular times with respect to a performance measure <a class="footnote-reference brackets" href="#goebel2017" id="id4">1</a> <a class="footnote-reference brackets" href="#saxena2010" id="id5">2</a></p></li>
 <li><p><strong>cumulate_relative_accuracy</strong>: The sum of the relative accuracies of each prediction, given a ground truth</p></li>
 <li><p><strong>monotonicity</strong>: The monotonicity of the prediction series <a class="footnote-reference brackets" href="#baptista2022" id="id6">4</a> <a class="footnote-reference brackets" href="#coble2021" id="id7">3</a></p></li>
 <li><p><strong>prognostic_horizon</strong>: The difference between a time <span class="math notranslate nohighlight">\(t_i\)</span>, when the predictions meet specified performance criteria, and the time corresponding to the true Time of Event (ToE), for each event <a class="footnote-reference brackets" href="#goebel2017" id="id8">1</a> <a class="footnote-reference brackets" href="#saxena2010" id="id9">2</a></p></li>
 </ul>
-<p>A ToEPredictionProfile also contains a plot method (<code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">profile</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">plot</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">)</span></span></code>), which looks like this:</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">ToEPredictionProfile</span></code> also contains a plot method (<code class="code pythoncode python docutils literal notranslate"><span class="name"><span class="pre">profile</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">plot</span></span><span class="punctuation"><span class="pre">(</span></span><span class="operator"><span class="pre">...</span></span><span class="punctuation"><span class="pre">)</span></span></code>), which looks like this:</p>
 <img alt="_images/alpha_chart.png" src="_images/alpha_chart.png" />
 <p>This chart shows the distribution of estimated RUL (y-axis) at different prediction times (x-axis) in red. The ground truth and an alpha bound around the ground truth is displayed in green.</p>
 </section>

@@ -8,10 +8,10 @@ Functions for aerodynamics effects
 import numpy as np
 
 
-class DragModel():
+class DragModel:
     """
     .. versionadded:: 1.5.0
-    
+
     Bluff body drag model of the form:
 
             F_D = 1/2 * rho * A * Cd * V^2
@@ -20,6 +20,7 @@ class DragModel():
     Cd is the drag coefficient, also dependent on geometry.
     V is the body or fluid speed, and F_D is the drag force opposing motion wrt the direction of V.
     """
+
     def __init__(self, bodyarea=None, Cd=None, air_density=None):
         """
         DragModel initialization function.
@@ -41,4 +42,3 @@ class DragModel():
         """
         vsq = air_v * np.abs(air_v)
         return 0.5 * self.rho * self.area * self.cd * vsq
- 

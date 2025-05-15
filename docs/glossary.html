@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Glossary &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>Glossary &#8212; ProgPy Python Packages 1.8 documentation</title>
   
   
   
@@ -32,7 +32,6 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
@@ -48,6 +47,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'glossary';</script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -154,6 +154,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DiscreteStates.html">Discrete States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/EnsembleModel.html">EnsembleModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
@@ -171,6 +172,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -330,11 +332,19 @@ document.write(`
 <dl class="glossary simple">
 <dt id="term-composite-model">composite model<a class="headerlink" href="#term-composite-model" title="Permalink to this term">#</a></dt><dd><p>A model consisting of multiple inter-related Prognostics Models, where the <a class="reference internal" href="#term-input"><span class="xref std std-term">input</span></a> of one <a class="reference internal" href="#term-model"><span class="xref std std-term">model</span></a> is a function of the <a class="reference internal" href="#term-output"><span class="xref std std-term">output</span></a> or <a class="reference internal" href="#term-state"><span class="xref std std-term">state</span></a> of another. This is a tool for representing system-of-systems. Composite models are implemented using the <a class="reference internal" href="api_ref/progpy/CompositeModel.html#progpy.CompositeModel" title="progpy.CompositeModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.CompositeModel</span></code></a> class.</p>
 </dd>
+<dt id="term-continuous-model">continuous model<a class="headerlink" href="#term-continuous-model" title="Permalink to this term">#</a></dt><dd><p>A model where state transition is continuous. Discrete models define the <cite>dx</cite> equation for state transition.</p>
+</dd>
+<dt id="term-continuous-state">continuous state<a class="headerlink" href="#term-continuous-state" title="Permalink to this term">#</a></dt><dd><p>A system state representation that can vary smoothly over a continuous range of values. Discrete states are initialized using a floating point number.</p>
+</dd>
 <dt id="term-controller">controller<a class="headerlink" href="#term-controller" title="Permalink to this term">#</a></dt><dd><p>A closed loop future loading method. Calculates future loading as a function of state, like the <a class="reference internal" href="api_ref/progpy/Loading.html#progpy.loading.controllers.LQR" title="progpy.loading.controllers.LQR"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.loading.controllers.LQR</span></code></a> controller used by the <a class="reference internal" href="api_ref/progpy/IncludedModels.html#progpy.models.aircraft_model.SmallRotorcraft" title="progpy.models.aircraft_model.SmallRotorcraft"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.models.aircraft_model.SmallRotorcraft</span></code></a> model.</p>
 </dd>
 <dt id="term-data-driven-model">data-driven model<a class="headerlink" href="#term-data-driven-model" title="Permalink to this term">#</a></dt><dd><p>A model where the behavior is learned from data. In ProgPy, data-driven models derive from the parent class <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel" title="progpy.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.data_models.DataModel</span></code></a>. A common example of data-driven models is models using neural networks (e.g., <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.LSTMStateTransitionModel" title="progpy.data_models.LSTMStateTransitionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.data_models.LSTMStateTransitionModel</span></code></a>).</p>
 </dd>
 <dt id="term-direct-prediction-model">direct-prediction model<a class="headerlink" href="#term-direct-prediction-model" title="Permalink to this term">#</a></dt><dd><p>A model where the <a class="reference internal" href="#term-time-of-event"><span class="xref std std-term">time of event</span></a> is directly estimated from the current state and/or <a class="reference internal" href="#term-future-load"><span class="xref std std-term">future load</span></a>, instead of predicted through simulation to threshold. These are implemented using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.time_to_event()</span></code> method.</p>
+</dd>
+<dt id="term-discrete-model">discrete model<a class="headerlink" href="#term-discrete-model" title="Permalink to this term">#</a></dt><dd><p>A model where state transition is discrete. Discrete models define the <cite>next_state</cite> equation for state transition.</p>
+</dd>
+<dt id="term-discrete-state">discrete state<a class="headerlink" href="#term-discrete-state" title="Permalink to this term">#</a></dt><dd><p>A system state representation that can only occupy one of a finite set of predefined values. Transitions between discrete states occur based on defined logic or triggering events. Discrete states are initialized using the function <a class="reference internal" href="api_ref/progpy/DiscreteStates.html#progpy.create_discrete_state" title="progpy.create_discrete_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.create_discrete_state()</span></code></a>.</p>
 </dd>
 <dt id="term-event">event<a class="headerlink" href="#term-event" title="Permalink to this term">#</a></dt><dd><p>Something that can be predicted (e.g., system failure). An event has either occurred or not. See also: <a class="reference internal" href="#term-threshold"><span class="xref std std-term">threshold</span></a></p>
 </dd>

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>LinearModel &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>LinearModel &#8212; ProgPy Python Packages 1.8 documentation</title>
   
   
   
@@ -32,7 +32,6 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
@@ -47,6 +46,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_ref/progpy/LinearModel';</script>
     <link rel="shortcut icon" href="../../_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -153,6 +153,7 @@
 <li class="toctree-l3"><a class="reference internal" href="CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DiscreteStates.html">Discrete States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="EnsembleModel.html">EnsembleModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">LinearModel</a></li>
@@ -170,6 +171,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -934,10 +936,11 @@ e.g., x = m.StateContainer({‘abc’: 332.1, ‘def’: 221.003}) given states 
 <dd class="field-even"><ul class="simple">
 <li><p><strong>events</strong> (<em>abc.Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Keys for events that will trigger the end of simulation.
 If blank, simulation will occur if any event will be met ()</p></li>
-<li><p><strong>event_strategy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Strategy for stopping evaluation. Default is ‘first’. One of:</p>
+<li><p><strong>event_strategy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> or </em><em>abc.Callable</em><em>, </em><em>optional</em>) – <p>Strategy for stopping evaluation. Default is ‘first’. One of:</p>
 <ul>
 <li><p><em>first</em>: Will stop when first event in <cite>events</cite> list is reached.</p></li>
 <li><p><em>all</em>: Will stop when all events in <cite>events</cite> list have been reached</p></li>
+<li><p><em>abc.Callable</em>: Custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
 </ul>
 </p></li>
 <li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Starting time for simulation in seconds (default: 0.0)</p></li>
@@ -953,7 +956,6 @@ If blank, simulation will occur if any event will be met ()</p></li>
 <li><p><strong>horizon</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – maximum time that the model will be simulated forward (s), e.g., horizon = 1000</p></li>
 <li><p><strong>first_output</strong> (<a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel.OutputContainer" title="progpy.PrognosticsModel.OutputContainer"><em>OutputContainer</em></a><em>, </em><em>optional</em>) – First measured output, needed to initialize state for some classes. Can be omitted for classes that don’t use this</p></li>
 <li><p><strong>x</strong> (<a class="reference internal" href="PrognosticModel.html#progpy.PrognosticsModel.StateContainer" title="progpy.PrognosticsModel.StateContainer"><em>StateContainer</em></a><em>, </em><em>optional</em>) – initial state, e.g., x= m.StateContainer({‘x1’: 10, ‘x2’: -5.3})</p></li>
-<li><p><strong>thresholds_met_eqn</strong> (<em>abc.Callable</em><em>, </em><em>optional</em>) – custom equation to indicate logic for when to stop sim f(thresholds_met) -&gt; bool</p></li>
 <li><p><strong>print</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – <p>toggle intermediate printing, e.g., print = True</p>
 <p>e.g., m.simulate_to_threshold(eqn, z, dt=0.1, save_pts=[1, 2])</p>
 </p></li>

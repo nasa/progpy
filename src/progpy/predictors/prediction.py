@@ -3,14 +3,16 @@
 from collections import UserList, defaultdict, namedtuple
 from typing import Dict, List
 from numpy import sign
-from warnings import warn
 
 from ..uncertain_data import UnweightedSamples, UncertainData
 
-PredictionResults = namedtuple('PredictionResults', ["times", "inputs", "states", "outputs", "event_states", "time_of_event"])
+PredictionResults = namedtuple(
+    "PredictionResults",
+    ["times", "inputs", "states", "outputs", "event_states", "time_of_event"],
+)
 
 
-class Prediction():
+class Prediction:
     """
     Class for the result of a prediction. Is returned by the predict method of a predictor.
 
@@ -18,10 +20,10 @@ class Prediction():
         times (list[float]):
             Times for each data point where times[n] corresponds to data[n]
         data (list[UncertainData]):
-            Data points for each time in times 
+            Data points for each time in times
     """
 
-    def __init__(self, times : list, data : list):
+    def __init__(self, times: list, data: list):
         self.times = times
         self.data = data
 
@@ -53,7 +55,7 @@ class Prediction():
         """Estimate of the mean value of the prediction at each time
 
         Returns:
-            list[dict]: 
+            list[dict]:
                 Mean value of the prediction at each time where mean[n] corresponds to the mean value of the prediction at time times[n].\n
                 The mean value at each time is a dictionary. \n
                 e.g., [{'state1': 1.2, 'state2': 1.3, ...}, ...]
@@ -64,10 +66,10 @@ class Prediction():
         return [dist.mean for dist in self.data]
 
     def monotonicity(self) -> Dict[str, float]:
-        """Calculate monotonicty for a single prediction. 
+        """Calculate monotonicty for a single prediction.
         Given a single prediction, for each event: go through all predicted states and compare those to the next one.
         Calculates monotonicity for each event key using its associated mean value in UncertainData.
-        
+
         :math:`monotonoicity = \| \Sigma \dfrac{sign(i+1 - i)}{N-1}\|`
 
         Where N is number of measurements and sign indicates sign of calculation [0]_ [1]_.
@@ -83,17 +85,18 @@ class Prediction():
         # Collect and organize mean values for each event
         by_event = defaultdict(list)
         for uncertaindata in self.data:
-            for key,value in uncertaindata.mean.items():
+            for key, value in uncertaindata.mean.items():
                 by_event[key].append(value)
 
         # For each event, calculate monotonicity using formula
         result = {}
-        for key,l in by_event.items():
+        for key, l in by_event.items():
             mono_sum = []
-            for i in range(len(l)-1): 
-                mono_sum.append(sign(l[i+1] - l[i])) 
-            result[key] = abs(sum(mono_sum) / (len(l)-1))
+            for i in range(len(l) - 1):
+                mono_sum.append(sign(l[i + 1] - l[i]))
+            result[key] = abs(sum(mono_sum) / (len(l) - 1))
         return result
+
 
 class UnweightedSamplesPrediction(Prediction, UserList):
     """
@@ -115,9 +118,17 @@ class UnweightedSamplesPrediction(Prediction, UserList):
         Calculate tranform of the data from data[sample_id][time_id] to data[time_id][sample_id]. Result is cached as self.__transform and is used in methods which look at a snapshot for a specific time
         """
         # Lazy calculation of tranform - only if needed
-        # Note: prediction stops when event is reached, so for the length of all will not be the same. 
+        # Note: prediction stops when event is reached, so for the length of all will not be the same.
         # If the prediction doesn't go this far, then the value is set to None
-        self.__transform = [UnweightedSamples([sample[time_index] if len(sample) > time_index else None for sample in self.data]) for time_index in range(len(self.times))]
+        self.__transform = [
+            UnweightedSamples(
+                [
+                    sample[time_index] if len(sample) > time_index else None
+                    for sample in self.data
+                ]
+            )
+            for time_index in range(len(self.times))
+        ]
         self.__transformed = True
 
     def __str__(self) -> str:
@@ -147,7 +158,7 @@ class UnweightedSamplesPrediction(Prediction, UserList):
         This function is not implemented. Calling this will raise an error. Is is only included to make the class immutable.
 
         Raises:
-            ValueError: 
+            ValueError:
         """
         raise ValueError("UnweightedSamplesPrediction is immutable (i.e., read only)")
 

@@ -18,9 +18,9 @@ There are a few ways to construct a :py:class:`DataModel` object, described belo
 
 From Data
 *************************************************
-This is the most common way to construct a :py:class:`DataModel` object, using the :py:func:`DataModel.from_data` method. It involves using one or more runs of data to train the model. Each DataModel class expects different data from the following set: times, inputs, states, outputs, and event_states. See documentation for the specific algorithm to see what it expects. Below is an example if it's use with the LSTMStateTransitionModel, which expects inputs and outputs.
+This is the most common way to construct a :py:class:`DataModel` object, using the :py:func:`DataModel.from_data` method. It involves using one or more runs of data to train the model. Each ``DataModel`` class expects different data from the following set: times, inputs, states, outputs, and event_states. Below is an example if it's use with the ``LSTMStateTransitionModel``, which expects inputs and outputs.
 
-.. dropdown:: example
+.. dropdown:: DataModel Example
 
    .. code-block:: python
 
@@ -31,9 +31,9 @@ This is the most common way to construct a :py:class:`DataModel` object, using t
 
 From Another PrognosticsModel (i.e., Surrogate)
 *************************************************
-Surrogate models are constructed using the :py:func:`DataModel.from_model` Class Method. These models are trained using data from the original model, i.e., as a surrogate for the original model. The original model is not modified. Below is an example if it's use. In this example a surrogate (m2) of the original ThrownObject Model (m) is created, and can then be used interchangeably with the original model.
+Surrogate models are constructed using the :py:func:`DataModel.from_model` class method. These models are trained using data from the original model, i.e., as a surrogate for the original model. The original model is not modified. Below is an example if it's use. In this example a surrogate (m2) of the original ``ThrownObject`` model (m) is created, and can then be used interchangeably with the original model.
 
-.. dropdown:: example
+.. dropdown:: Surrogate Model Example
 
    .. code-block:: python
 

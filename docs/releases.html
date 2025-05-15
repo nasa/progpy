@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Release Notes &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>Release Notes &#8212; ProgPy Python Packages 1.8 documentation</title>
   
   
   
@@ -32,7 +32,6 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
@@ -47,11 +46,12 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'releases';</script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Glossary" href="glossary.html" />
-    <link rel="prev" title="Utils" href="api_ref/progpy/Utils.html" />
+    <link rel="prev" title="Troubleshooting Guide" href="troubleshooting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -153,6 +153,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DiscreteStates.html">Discrete States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/EnsembleModel.html">EnsembleModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
@@ -170,6 +171,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -322,45 +324,54 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-7">Updates in v1.7</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-8-0">Updates in v1.8.0</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy">progpy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-server">prog_server</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-7-1">Updates in v1.7.1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">progpy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-7">Updates in v1.7</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">progpy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">prog_server</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-6">Updates in v1.6</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">progpy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">progpy</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrading-from-v1-5">Upgrading from v1.5</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">prog_server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">prog_server</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-5">Updates in V1.5</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-models">prog_models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-algs">prog_algs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">prog_server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">prog_server</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-4">Updates in V1.4</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">prog_models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">prog_algs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-server-and-prog-client">prog_server and prog_client</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-3">Updates in V1.3</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">prog_models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">prog_algs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">prog_server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">prog_server</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-client">prog_client</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-2">Updates in V1.2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">prog_models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">prog_algs</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-1">Updates in V1.1</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">prog_models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">prog_models</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#electrochemistry-model-updates">ElectroChemistry Model Updates</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#centrifugalpump-model-updates">CentrifugalPump Model Updates</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pneumaticvalve-model-updates">PneumaticValve Model Updates</a></li>
@@ -381,10 +392,37 @@ document.write(`
                   
   <section id="release-notes">
 <h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">#</a></h1>
-<section id="updates-in-v1-7">
-<h2>Updates in v1.7<a class="headerlink" href="#updates-in-v1-7" title="Permalink to this headline">#</a></h2>
+<section id="updates-in-v1-8-0">
+<h2>Updates in v1.8.0<a class="headerlink" href="#updates-in-v1-8-0" title="Permalink to this headline">#</a></h2>
 <section id="progpy">
 <h3>progpy<a class="headerlink" href="#progpy" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p><strong>New Feature</strong> <a class="reference internal" href="glossary.html#term-discrete-state"><span class="xref std std-term">Discrete States</span></a> (created by <a class="reference internal" href="api_ref/progpy/DiscreteStates.html#progpy.create_discrete_state" title="progpy.create_discrete_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.create_discrete_state()</span></code></a>): Inputs, states, outputs, or performance metrics can now be represented by a discrete state object, which will only exist in a set of defined states. See the <a class="reference external" href="https://github.com/nasa/progpy/blob/release/v1.8/examples/discrete_state.ipynb">Discrete State Notebook</a> for examples of use</p></li>
+<li><p><strong>New model</strong>: Simplified Battery (<code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.models.BatterySimplified</span></code>). This is a simplified version of the BatteryElectroChemEOD model by <a class="reference external" href="https://www.sciencedirect.com/science/article/abs/pii/S0951832018301406">Gina Sierra et al.</a> first introduced in the <a class="reference external" href="https://github.com/nasa/progpy/blob/master/examples/2024PHMTutorial.ipynb">PHM Society Conference ProgPy Tutorial</a> from November 2024. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html">Included Models</a> for details</p></li>
+<li><p>Support for Python3.13 (with the exception of ProgPy’s data driven dependencies due to Tensorflow not yet supporting this Python version)</p></li>
+<li><p>Dropped support of end-of-life Python3.7 and Python3.8</p></li>
+<li><p>Improved “ProgPy Short Course”: A series of Jupyter Notebooks designed to help users get started with ProgPy and understand how to use it for prognostics. See <a class="github reference external" href="https://github.com/nasa/progpy/tree/master/examples">nasa/progpy</a></p></li>
+<li><p>Various bugfixes and efficiency improvements</p></li>
+</ul>
+</section>
+<section id="prog-server">
+<h3>prog_server<a class="headerlink" href="#prog-server" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Support for Python3.13</p></li>
+</ul>
+</section>
+</section>
+<section id="updates-in-v1-7-1">
+<h2>Updates in v1.7.1<a class="headerlink" href="#updates-in-v1-7-1" title="Permalink to this headline">#</a></h2>
+<section id="id1">
+<h3>progpy<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>Hotfix fixing issue with dataset download</p>
+</section>
+</section>
+<section id="updates-in-v1-7">
+<h2>Updates in v1.7<a class="headerlink" href="#updates-in-v1-7" title="Permalink to this headline">#</a></h2>
+<section id="id2">
+<h3>progpy<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Started “ProgPy Short Course”: A series of Jupyter Notebooks designed to help users get started with ProgPy and understand how to use it for prognostics. See <a class="github reference external" href="https://github.com/nasa/progpy/tree/master/examples">nasa/progpy</a></p></li>
 <li><dl class="simple">
@@ -408,8 +446,8 @@ document.write(`
 * If you’re using the data-driven features install ProgPy like so: pip install progpy[datadriven] or pip install -e ‘.[datadriven]’ (if using local copy)
 * Use “events” keyword instead of “threshold_keys” in simulation</p>
 </section>
-<section id="prog-server">
-<h3>prog_server<a class="headerlink" href="#prog-server" title="Permalink to this headline">#</a></h3>
+<section id="id3">
+<h3>prog_server<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Add support for custom model, state_estimator, and predictor</p></li>
 <li><p>New output and output prediction endpoints</p></li>
@@ -419,8 +457,8 @@ document.write(`
 </section>
 <section id="updates-in-v1-6">
 <h2>Updates in v1.6<a class="headerlink" href="#updates-in-v1-6" title="Permalink to this headline">#</a></h2>
-<section id="id1">
-<h3>progpy<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<section id="id4">
+<h3>progpy<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Combined previous prog_models and prog_algs packages into a single package, progpy.</p></li>
 <li><p>Added new <a class="reference internal" href="api_ref/progpy/MixtureOfExperts.html#progpy.MixtureOfExpertsModel" title="progpy.MixtureOfExpertsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.MixtureOfExpertsModel</span></code></a>, which combines multiple models of the same system into a single model, where only the best of the comprised models will be used at each timestep.</p></li>
@@ -432,8 +470,8 @@ document.write(`
 <p>v1.6 combined prog_models and prog_algs into a single package progpy. To upgrade to 1.6, you will need to download the new progpy package (pip install progpy) and update all imports to use progpy. For example <cite>from prog_models import PrognosticsModel</cite> becomes <cite>from progpy import PrognosticsModel</cite>, and <cite>from prog_algs import predictors</cite> becomes <cite>from progpy import predictors</cite>.</p>
 </section>
 </section>
-<section id="id2">
-<h3>prog_server<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<section id="id5">
+<h3>prog_server<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Updated to work with progpy v1.6</p></li>
 </ul>
@@ -475,8 +513,8 @@ document.write(`
 <li><p>Python3.11 support</p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>prog_server<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<section id="id6">
+<h3>prog_server<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Python3.11 support</p></li>
 </ul>
@@ -484,8 +522,8 @@ document.write(`
 </section>
 <section id="updates-in-v1-4">
 <h2>Updates in V1.4<a class="headerlink" href="#updates-in-v1-4" title="Permalink to this headline">#</a></h2>
-<section id="id4">
-<h3>prog_models<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<section id="id7">
+<h3>prog_models<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><strong>Data-Driven Models</strong></p>
 <ul>
@@ -505,8 +543,8 @@ document.write(`
 <li><p>Various bug fixes and performance improvements</p></li>
 </ul>
 </section>
-<section id="id5">
-<h3>prog_algs<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<section id="id8">
+<h3>prog_algs<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Added new <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile</span></code> Metric: Monotonicity. See <code class="xref py py-func docutils literal notranslate"><span class="pre">prog_algs.predictors.ToEPredictionProfile.monotonicity()</span></code></p></li>
 <li><p>Updated to support prog_models v1.4</p></li>
@@ -524,8 +562,8 @@ document.write(`
 </section>
 <section id="updates-in-v1-3">
 <h2>Updates in V1.3<a class="headerlink" href="#updates-in-v1-3" title="Permalink to this headline">#</a></h2>
-<section id="id6">
-<h3>prog_models<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<section id="id9">
+<h3>prog_models<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><strong>Surrogate Models</strong> Added initial draft of new feature to generate surrogate models automatically from <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.PrognosticsModel</span></code>. Initial implementation uses Dynamic Mode Decomposition. Additional Surrogate Model Generation approaches will be explored for future releases. [Developed by NASA’s DRF Project]</p></li>
 <li><p><strong>New Example Models</strong> Added new <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.DCMotor</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.ESC</span></code>, and <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.models.Powertrain</span></code> models [Developed by NASA’s SWS Project]</p></li>
@@ -541,8 +579,8 @@ document.write(`
 <li><p>Various performance improvements and bug fixes</p></li>
 </ul>
 </section>
-<section id="id7">
-<h3>prog_algs<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<section id="id10">
+<h3>prog_algs<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p><strong>New State Estimator Added</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.state_estimators.KalmanFilter</span></code>. Works with models derived from <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_models.LinearModel</span></code>.</p></li>
 <li><p><strong>New Predictor Added</strong> <code class="xref py py-class docutils literal notranslate"><span class="pre">prog_algs.predictors.UnscentedTransformPredictor</span></code>.</p></li>
@@ -556,8 +594,8 @@ document.write(`
 <li><p>Various performance improvements and bugfixes</p></li>
 </ul>
 </section>
-<section id="id8">
-<h3>prog_server<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<section id="id11">
+<h3>prog_server<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Added ability to set state using pickled prog_algs.uncertain_data.UncertainData type</p></li>
 </ul>
@@ -571,8 +609,8 @@ document.write(`
 </section>
 <section id="updates-in-v1-2">
 <h2>Updates in V1.2<a class="headerlink" href="#updates-in-v1-2" title="Permalink to this headline">#</a></h2>
-<section id="id9">
-<h3>prog_models<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<section id="id12">
+<h3>prog_models<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Vectorized Models</dt><dd><ul>
@@ -600,8 +638,8 @@ document.write(`
 <li><p>Various bug fixes</p></li>
 </ul>
 </section>
-<section id="id10">
-<h3>prog_algs<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<section id="id13">
+<h3>prog_algs<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>New Feature: Histogram and Scatter Plot of UncertainData.</p></li>
 <li><dl class="simple">
@@ -628,8 +666,8 @@ document.write(`
 </section>
 <section id="updates-in-v1-1">
 <h2>Updates in V1.1<a class="headerlink" href="#updates-in-v1-1" title="Permalink to this headline">#</a></h2>
-<section id="id11">
-<h3>prog_models<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<section id="id14">
+<h3>prog_models<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt>New Feature: Derived Parameters</dt><dd><ul>
@@ -739,12 +777,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="api_ref/progpy/Utils.html"
+       href="troubleshooting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Utils</p>
+        <p class="prev-next-title">Troubleshooting Guide</p>
       </div>
     </a>
     <a class="right-next"
@@ -774,45 +812,54 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-7">Updates in v1.7</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-8-0">Updates in v1.8.0</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#progpy">progpy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-server">prog_server</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-7-1">Updates in v1.7.1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">progpy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-7">Updates in v1.7</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">progpy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">prog_server</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-6">Updates in v1.6</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">progpy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">progpy</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#upgrading-from-v1-5">Upgrading from v1.5</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">prog_server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">prog_server</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-5">Updates in V1.5</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-models">prog_models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-algs">prog_algs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">prog_server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">prog_server</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-4">Updates in V1.4</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">prog_models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">prog_algs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-server-and-prog-client">prog_server and prog_client</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-3">Updates in V1.3</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">prog_models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">prog_algs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">prog_server</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">prog_server</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prog-client">prog_client</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-2">Updates in V1.2</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">prog_models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">prog_algs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">prog_models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">prog_algs</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updates-in-v1-1">Updates in V1.1</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">prog_models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">prog_models</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#electrochemistry-model-updates">ElectroChemistry Model Updates</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#centrifugalpump-model-updates">CentrifugalPump Model Updates</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pneumaticvalve-model-updates">PneumaticValve Model Updates</a></li>

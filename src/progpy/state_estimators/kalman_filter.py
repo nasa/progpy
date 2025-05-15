@@ -39,32 +39,30 @@ class KalmanFilter(state_estimator.StateEstimator):
         R (list[list[float]], optional):
             Kalman Measurement Noise Matrix
     """
-    default_parameters = {
-        'alpha': 1,
-        't0': -1e-10,
-        'dt': 1
-    }
-    
+
+    default_parameters = {"alpha": 1, "t0": -1e-10, "dt": 1}
+
     def __init__(self, model, x0, **kwargs):
         # Note: Measurement equation kept in constructor to keep it consistent
         # with other state estimators. This way measurement equation can be
         # provided as an ordered argument, and will just be ignored here
         if not isinstance(model, LinearModel):
             raise TypeError(
-                'Kalman Filter only supports Linear Models '
-                '(i.e., models derived from progpy.LinearModel)')
+                "Kalman Filter only supports Linear Models "
+                "(i.e., models derived from progpy.LinearModel)"
+            )
 
         super().__init__(model, x0, **kwargs)
 
         self.x0 = x0
 
-        if 'Q' not in self.parameters:
-            self.parameters['Q'] = np.diag([1.0e-3 for i in x0.keys()])
-        if 'R' not in self.parameters:
+        if "Q" not in self.parameters:
+            self.parameters["Q"] = np.diag([1.0e-3 for i in x0.keys()])
+        if "R" not in self.parameters:
             # Size of what's being measured (not output)
             # This is determined by running measure() on the first state
-            self.parameters['R'] = np.diag([1.0e-3 for i in range(model.n_outputs)])
-        
+            self.parameters["R"] = np.diag([1.0e-3 for i in range(model.n_outputs)])
+
         num_states = len(x0.keys())
         num_inputs = model.n_inputs + 1
         num_measurements = model.n_outputs
@@ -80,31 +78,34 @@ class KalmanFilter(state_estimator.StateEstimator):
         self.filter = kalman.KalmanFilter(num_states, num_measurements, num_inputs)
 
         if isinstance(x0, dict) or isinstance(x0, model.StateContainer):
-            warn("Warning: Use UncertainData type if estimating filtering with uncertain data.")
+            warn(
+                "Warning: Use UncertainData type if estimating filtering with uncertain data."
+            )
             self.filter.x = np.array([[x0[key]] for key in model.states])
-            self.filter.P = self.parameters['Q'] / 10
+            self.filter.P = self.parameters["Q"] / 10
         elif isinstance(x0, UncertainData):
             x_mean = x0.mean
             self.filter.x = np.array([[x_mean[key]] for key in model.states])
 
             # Reorder covariance to be in same order as model.states
             mapping = {
-                i: list(x0.keys()).index(key)
-                for i, key in enumerate(model.states)}
+                i: list(x0.keys()).index(key) for i, key in enumerate(model.states)
+            }
             # Set covariance in case it has been calculated
             cov = x0.cov
             # Set covariance based on mapping
             mapped_cov = [
-                [cov[mapping[i]][mapping[j]]
-                 for j in range(len(cov))] for i in range(len(cov))]
+                [cov[mapping[i]][mapping[j]] for j in range(len(cov))]
+                for i in range(len(cov))
+            ]
             self.filter.P = np.array(mapped_cov)
         else:
             raise TypeError(
-                "TypeError: x0 initial state must be of type "
-                "{{dict, UncertainData}}")
+                "TypeError: x0 initial state must be of type {{dict, UncertainData}}"
+            )
 
-        self.filter.Q = self.parameters['Q']
-        self.filter.R = self.parameters['R']
+        self.filter.Q = self.parameters["Q"]
+        self.filter.R = self.parameters["R"]
         self.filter.F = F
         self.filter.B = B
 
@@ -131,13 +132,13 @@ class KalmanFilter(state_estimator.StateEstimator):
             e.g., dt = 1e-2
         """
         assert t > self.t, "New time must be greater than previous"
-        dt = kwargs.get('dt', self.parameters['dt'])
+        dt = kwargs.get("dt", self.parameters["dt"])
 
         # Ensure dt is not larger than the maximum time step
         dt = min(t - self.t, dt)
 
         # Create u array, ensuring order of model.inputs. And reshaping to (n,1), n can be 0.
-        inputs = np.array([u[key] for key in self.model.inputs]).reshape((-1,1))
+        inputs = np.array([u[key] for key in self.model.inputs]).reshape((-1, 1))
 
         # Add row of ones (to account for constant E term)
         if np.size(inputs) == 0:
@@ -151,7 +152,7 @@ class KalmanFilter(state_estimator.StateEstimator):
         # Therefore we need to add the diagnol matrix 1 to A to convert
         # And A and B should be multiplied by the time step
         B = np.multiply(self.filter.B, dt)
-        F = np.multiply(self.filter.F, dt) + np.diag([1]*self.model.n_states)
+        F = np.multiply(self.filter.F, dt) + np.diag([1] * self.model.n_states)
 
         # Predict
         while self.t < t:
@@ -169,14 +170,19 @@ class KalmanFilter(state_estimator.StateEstimator):
         outputs = outputs - self.model.D
 
         self.filter.update(outputs, H=self.model.C)
-    
+
     @property
     def x(self) -> MultivariateNormalDist:
         """
-        Getter for property 'x', the current estimated state. 
+        Getter for property 'x', the current estimated state.
 
         Example
         -------
         state = observer.x
         """
-        return MultivariateNormalDist(self.model.states, self.filter.x.ravel(), self.filter.P, _type=self.model.StateContainer)
+        return MultivariateNormalDist(
+            self.model.states,
+            self.filter.x.ravel(),
+            self.filter.P,
+            _type=self.model.StateContainer,
+        )

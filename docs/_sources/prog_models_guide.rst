@@ -50,7 +50,7 @@ States are transitioned forward in time using the state transition equation.
 
 where :math:`x(t)` is :term:`state` at time :math:`t`, :math:`u(t)` is :term:`input` at time :math:`t` , :math:`dt` is the stepsize, and :math:`\Theta` are the model :term:`parameters` .
 
-In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of continuous models, state transition behavior is defined by defining the first derivative, using the :py:func:`progpy.PrognosticsModel.dx` method. For discrete models, state transition behavior is defined using the :py:func:`progpy.PrognosticsModel.next_state` method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.
+In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of :term:`continuous models<continuous model>`, state transition behavior is defined by defining the first derivative, using the :py:func:`progpy.PrognosticsModel.dx` method. For :term:`discrete models <discrete model>`, state transition behavior is defined using the :py:func:`progpy.PrognosticsModel.next_state` method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.
 
 .. image:: images/next_state.png
     :width: 70 %
@@ -60,8 +60,24 @@ In a ProgPy model, this state transition can be represented one of two ways, eit
     :width: 70 %
     :align: center
 
+States can also be discrete or continuous. :term:`Discrete states<discrete state>` are those which can only exist in a finite set of values. Continuous states are initialized with a number and discrete states are initialized using the function :py:func:`progpy.create_discrete_state`, like the examples below. Each discrete state represents a unique condition or mode, and transitions between states are governed by defined rules or events, providing clarity and predictability in state management.
 
-.. dropdown::  State transition equation example
+.. code-block:: python
+
+    >>> from progpy import create_discrete_state
+    >>> ValveState = create_discrete_state(2, ["open", "closed"])
+    >>> x["valve"] = ValveState.open
+
+.. code-block:: python
+
+    >>> from progpy import create_discrete_state
+    >>> GearState = create_discrete_state(5, transition="sequential")
+    >>> x["gear"] = GearState(1)
+
+.. note::
+    :term:`Discrete states <discrete state>` are different from :term:`discrete models <discrete model>`. Discrete models are models where state transition is discrete, where discrete states are where the state itself is discrete. Discrete models may have continuous states.
+
+.. dropdown::  State Transition Equation Example
 
     An example of a state transition equation for a thrown object is included below. In this example, a model is created to describe an object thrown directly into the air. It has two states: position (x) and velocity (v), and no inputs.
 
@@ -105,7 +121,7 @@ Outputs are a function of only the system state (x) and :term:`parameters` (:mat
     
     </div>
 
-.. dropdown::  Output equation example
+.. dropdown::  Output Equation Example
 
     An example of a output equation for a thrown object is included below. In this example, a model is created to describe an object thrown directly into the air. It has two states: position (x) and velocity (v). In this case we're saying that the position of the object is directly measurable. 
 
@@ -209,9 +225,9 @@ Parameters can be set in model construction, using the *parameters* property aft
 
 The specific parameters are very specific to the system being modeled. For example, a battery might have parameters for the capacity and internal resistance. When using provided models, see the documentation for that model for details on parameters supported.
 
-.. dropdown:: Derived parameters
+.. dropdown:: Derived Parameters
 
-    Sometimes users would like to specify parameters as a function of other parameters. This feature is called "derived parameters". See example below for more details on this feature. 
+    Sometimes users would like to specify parameters as a function of other parameters. This feature is called "derived parameters". See the derived parameters section in the example below for more details on this feature. 
 
     * :download:`04 New Models <../../progpy/examples/04_New Models.ipynb>`
 
@@ -236,10 +252,9 @@ In practice, it is impossible to have absolute knowledge of future states due to
 
     Future loading noise is used to represent uncertainty in knowledge of how the system will be loaded in the future (See :ref:`Future Loading`). Future loading noise is applied by the user in their provided future loading method by adding random noise to the estimated future load.
 
-See example below for details on how to configure proccess and measurement noise in ProgPy
+See the noise section in the example below for details on how to configure proccess and measurement noise in ProgPy.
 
-* :download:`examples.noise <../../progpy/examples/noise.py>`
-    .. automodule:: noise
+* :download:`01 Simulation <../../progpy/examples/01_Simulation.ipynb>`
 
 Future Loading
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -254,9 +269,9 @@ Future loading is provided by the user either using the predifined loading class
         # Calculate inputs 
         return m.InputContainer({'input1': ...})
 
-See example below for details on how to provide future loading information in ProgPy. 
+See the future loading section in the example below for details on how to provide future loading information in ProgPy. 
 
-* :download:`01. Simulation <../../progpy/examples/01_Simulation.ipynb>`
+* :download:`01 Simulation <../../progpy/examples/01_Simulation.ipynb>`
 
 General Notes
 ^^^^^^^^^^^^^^^^
@@ -268,20 +283,20 @@ Building New Models
 
 ProgPy provides a framework for building new models. Generally, models can be divided into three basis categories: :term:`physics-based models<physics-based model>`, :term:`data-driven models<data-driven model>`, and hybrid models. Additionally, models can rely on state-transition for prediction, or they can use what is called direct-prediction. These two categories are described below.
 
-State-transition Models
+State-Transition Models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tabs::
 
-    .. tab:: physics-based
+    .. tab:: Physics-Based
 
         New :term:`physics-based models<physics-based model>` are constructed by subclassing :py:class:`progpy.PrognosticsModel` as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template :download:`prog_model_template.ProgModelTemplate <../../progpy/prog_model_template.py>`, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in :class:`progpy.PrognosticsModel` will then work with your new model. 
 
         For simple linear models, users can choose to subclass the simpler :py:class:`progpy.LinearModel` class, as illustrated in the second example. Some methods and algorithms only function on linear models.
 
-        * :download:`04. New Models <../../progpy/examples/04_New Models.ipynb>`
+        * :download:`04 New Models <../../progpy/examples/04_New Models.ipynb>`
 
-    .. tab:: data-driven
+    .. tab:: Data-Driven
 
         New :term:`data-driven models<data-driven model>`, such as those using neural networks, are created by subclassing the :py:class:`progpy.data_models.DataModel` class, overriding the ``from_data`` method.
         
@@ -313,18 +328,17 @@ State-transition Models
             * :download:`examples.custom_model <../../progpy/examples/custom_model.py>`
                 .. automodule:: custom_model
 
-Direct-prediction models
+Direct-Prediction Models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:term:`Direct-prediction models<direct-prediction model>` are models that estimate :term:`time of event` directly from the current state and :term:`future load`, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.
+:term:`Direct-prediction models<direct-prediction model>` are models that estimate :term:`time of event` directly from the current state and :term:`future load`, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See the direct models section in the example below for more information.
 
-* :download:`examples.direct_model <../../progpy/examples/direct_model.py>`
-    .. automodule:: direct_model
+* :download:`04 New Models <../../progpy/examples/04_New Models.ipynb>`
 
 Using Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wether you're using :term:`data-driven<data-driven model>`, :term:`physics-based<physics-based model>`, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see `Parameter Estimation`) and validate the model.
+Whether you're using :term:`data-driven<data-driven model>`, :term:`physics-based<physics-based model>`, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see `Parameter Estimation`) and validate the model.
 
 ProgPy includes some example datasets. See `ProgPy Datasets <https://nasa.github.io/progpy/api_ref/progpy/DataSets.html>`_ and the example below for details. 
 
@@ -333,18 +347,14 @@ ProgPy includes some example datasets. See `ProgPy Datasets <https://nasa.github
 
 .. note:: To use the dataset feature, you must install the requests package.
 
-Using provided models
+Using Provided Models
 ----------------------------
 
 ProgPy includes a number of predefined models in the :py:mod:`progpy.models` module. These models are parameterized, so they can be configured to represent specific systems (see :ref:`Parameter Estimation`). 
 
-For details on the included models see `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__. The examples below illustrate use of some of the models provided in the :py:mod:`progpy.models` module.
+For details on the included models, see `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__. The examples below also illustrate the use of some models provided in the :py:mod:`progpy.models` module.
 
-* :download:`examples.sim <../../progpy/examples/sim.py>`
-    .. automodule:: sim
-
-* :download:`examples.sim_battery_eol <../../progpy/examples/sim_battery_eol.py>`
-    .. automodule:: sim_battery_eol
+* :download:`03 Included Models <../../progpy/examples/03_Existing Models.ipynb>`
 
 * :download:`examples.sim_pump <../../progpy/examples/sim_pump.py>`
     .. automodule:: sim_pump
@@ -369,7 +379,7 @@ One of the most basic of functions using a model is simulation. Simulation is th
 .. role:: pythoncode(code)
    :language: python
 
-.. dropdown:: Saving results
+.. dropdown:: Saving Results
 
     :py:meth:`progpy.PrognosticsModel.simulate_to` and :py:meth:`progpy.PrognosticsModel.simulate_to_threshold` return the inputs, states, outputs, and event states at various points in the simulation. Returning these values for every timestep would require a lot of memory, and is not necessary for most use cases, so ProgPy provides an ability for users to specify what data to save. 
 
@@ -392,9 +402,9 @@ One of the most basic of functions using a model is simulation. Simulation is th
     .. admonition:: Note
         :class: tip
 
-        Data will always be saved at the next time after the save_pt or save_freq. As a result the data may not correspond to the exact time specified. Use automatic step sizes to save at the exact time.
+        Data will always be saved at the next time after the ``save_pt`` or ``save_freq``. As a result, the data may not correspond to the exact time specified. Use automatic step sizes to save at the exact time.
 
-.. dropdown:: Step size
+.. dropdown:: Step Size
 
     Step size is the size of the step taken in integration. It is specified by the ``dt`` argument. It is an important consideration when simulating. Too large of a step size could result in wildly incorrect results, and two small of a step size can be computationally expensive. Step size can be provided in a few different ways, described below:
 
@@ -439,13 +449,9 @@ One of the most basic of functions using a model is simulation. Simulation is th
 
     Now loading is applied correctly.
 
-Use of simulation is described further in the following examples:
+For simulation examples, see the following notebook for details.
 
-* :download:`examples.sim <../../progpy/examples/sim.py>`
-    .. automodule:: sim
-
-* :download:`examples.noise <../../progpy/examples/noise.py>`
-    .. automodule:: noise
+* :download:`01 Simulation <../../progpy/examples/01_Simulation.ipynb>`
 
 Parameter Estimation
 ----------------------------
@@ -461,12 +467,12 @@ Generally, parameter estimation is done by tuning the parameters of the model so
     >>> params_to_estimate = ['param1', 'param2']
     >>> m.estimate_params([run1_data, run2_data], params_to_estimate, dt=0.01)
 
-See the example below for more details
+See the example below for more details.
 
 .. admonition:: Note
     :class: tip
 
-    Parameters are changes in-place, so the model on which estimate_params is called, is now tuned to match the data
+    Parameters are changes in-place, so the model on which ``estimate_params`` is called, is now tuned to match the data.
 
 Visualizing Results
 ----------------------------
@@ -484,15 +490,13 @@ See :py:meth:`progpy.sim_result.SimResult.plot` for more details on plotting cap
 Combination Models
 ----------------------------
 
-There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below.
+There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below. For more details, see the example below.
 
-For more details, see:
-
-    * :download:`06. Combining Models <../../progpy/examples/06_Combining Models.ipynb>`
+:download:`06. Combining Models <../../progpy/examples/06_Combining Models.ipynb>`
 
 .. tabs::
 
-    .. tab:: Composite models
+    .. tab:: Composite Models
 
         Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example, 
 
@@ -506,7 +510,7 @@ For more details, see:
             >>>     ]
             >>> )
 
-    .. tab:: Ensemble models
+    .. tab:: Ensemble Models
 
         Unlike composite models which model a system of systems, ensemble models are used when to combine the logic of multiple models which describe the same system. This is used when there are multiple models representing different system behaviors or conditions. The results of each model are aggregated in a way that can be defined by the user. For example,
 
@@ -517,7 +521,7 @@ For more details, see:
             >>>     aggregator = np.mean
             >>> )
 
-    .. tab:: MixtureOfExperts models
+    .. tab:: MixtureOfExperts Models
         
         Mixture of Experts (MoE) models combine multiple models of the same system, similar to Ensemble models. Unlike Ensemble Models, the aggregation is done by selecting the "best" model. That is the model that has performed the best over the past. Each model will have a 'score' that is tracked in the state, and this determines which model is best.
 
@@ -534,14 +538,15 @@ Other Examples
 * :download:`examples.sensitivity <../../progpy/examples/sensitivity.py>`
     .. automodule:: sensitivity
 
-* :download:`examples.serialization <../../progpy/examples/serialization.py>`
-    .. automodule:: serialization
-
-Tips
-----
+Tips & Best Practices
+----------------------
 * If you're only doing diagnostics without prognostics- just define a next_state equation with no change of :term:`state` and don't perform prediction. The :term:`state estimator` can still be used to estimate if any of the :term:`events<event>` have occured.
-* Sudden :term:`event's<event>` use a binary :term:`event state` (1=healthy, 0=failed).
+* Sudden :term:`events<event>` use a binary :term:`event state` (1=healthy, 0=failed).
 * You can predict as many :term:`events<event>` as you would like, sometimes one :term:`event` must happen before another, in this case the :term:`event` occurance for event 1 can be a part of the equation for event 2 ('event 2': event_1 and [OTHER LOGIC]).
+* Minimize the number of state variables whenever possible
+* Whenever possible, if calculations dont include state or inputs, include values as parameters or derived parameters instead of calculating within state transition
+* Use constant units throughout the model
+* Document all assumptions and limitations
 
 References
 ----------------------------

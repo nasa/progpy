@@ -13,4 +13,16 @@ from .unscented_transform import UnscentedTransformPredictor
 UnscentedTransform = UnscentedTransformPredictor
 MonteCarloPredictor = MonteCarlo
 
-__all__ = ['predictor', 'monte_carlo', 'unscented_transform', 'MonteCarlo', 'Predictor', 'Prediction', 'UnweightedSamplesPrediction', 'ToEPredictionProfile', 'UnscentedTransformPredictor', 'UnscentedTransform', 'MonteCarloPredictor']
+__all__ = [
+    "predictor",
+    "monte_carlo",
+    "unscented_transform",
+    "MonteCarlo",
+    "Predictor",
+    "Prediction",
+    "UnweightedSamplesPrediction",
+    "ToEPredictionProfile",
+    "UnscentedTransformPredictor",
+    "UnscentedTransform",
+    "MonteCarloPredictor",
+]
