@@ -4,7 +4,7 @@ on:
   workflow_dispatch
 
 jobs:
-  ubuntu_test_3.9:
+  ubuntu_test_python_3_9:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +18,7 @@ jobs:
     - name: Run tests
       run: python -m tests
 
-  ubuntu_test_3.12:
+  ubuntu_test_python_3_12:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +32,7 @@ jobs:
     - name: Run tests
       run: python -m tests
 
-  macos_13_test_3.9:
+  macos_13_test_python_3_9:
     timeout-minutes: 30
     runs-on: macos-13
     steps:
@@ -46,7 +46,7 @@ jobs:
     - name: Run tests
       run: python -m tests
 
-  macos_13_test_3.12:
+  macos_13_test_python_3_12:
     timeout-minutes: 30
     runs-on: macos-13
     steps:
@@ -60,7 +60,7 @@ jobs:
     - name: Run tests
       run: python -m tests
 
-  macos_latest_test_3.9:
+  macos_latest_test_python_3_9:
     timeout-minutes: 30
     runs-on: macos-latest
     steps:
@@ -74,7 +74,7 @@ jobs:
     - name: Run tests
       run: python -m tests
 
-  macos_latest_test_3.12:
+  macos_latest_test_python_3_12:
     timeout-minutes: 30
     runs-on: macos-latest
     steps:
@@ -88,7 +88,7 @@ jobs:
     - name: Run tests
       run: python -m tests
 
-  windows_test_3.9:
+  windows_test_python_3_9:
     timeout-minutes: 30
     runs-on: windows-latest
     steps:
@@ -102,7 +102,7 @@ jobs:
     - name: Run tests
       run: python -m tests
 
-  windows_test_3.12:
+  windows_test_python_3_12:
     timeout-minutes: 30
     runs-on: windows-latest
     steps:
