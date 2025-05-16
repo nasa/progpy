@@ -4,138 +4,26 @@ on:
   workflow_dispatch
 
 jobs:
-  ubuntu_test_python_3_9:
-    timeout-minutes: 30
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    - name: Installm
-      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
-    - name: Run tests
-      run: python -m tests
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
-
-  ubuntu_test_python_3_12:
-    timeout-minutes: 30
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-    - name: Install
-      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
-    - name: Run tests
-      run: python -m tests
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
-
-  macos_13_test_python_3_9:
+  run_tests:
     timeout-minutes: 45
-    runs-on: macos-13
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.9', '3.12']  # TODO: Add 3.13 when it is released
+        os: [ubuntu-latest, macos-latest, macos-13, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
-    - name: Install
-      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
-    - name: Run tests
-      run: python -m tests
-
-  macos_13_test_python_3_12:
-    timeout-minutes: 45
-    runs-on: macos-13
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-    - name: Install
-      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
-    - name: Run tests
-      run: python -m tests
-
-  macos_latest_test_python_3_9:
-    timeout-minutes: 30
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
+        python-version: ${{ matrix.python-version }}
     - name: Install
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
-
-  macos_latest_test_python_3_12:
-    timeout-minutes: 30
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-    - name: Install
-      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
-    - name: Run tests
-      run: python -m tests
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
-
-  windows_test_python_3_9:
-    timeout-minutes: 30
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    - name: Install
-      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
-    - name: Run tests
-      run: python -m tests
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
-
-  windows_test_python_3_12:
-    timeout-minutes: 30
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-    - name: Install
-      run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
-    - name: Run tests
-      run: python -m tests
-    - name: Upload coverage to Codecov
+      if: ${{ matrix.python-version }} == '3.12' && ${{ matrix.os }} == 'ubuntu-latest'
       uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml
