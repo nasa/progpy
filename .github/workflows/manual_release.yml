@@ -13,10 +13,14 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
-    - name: Install
+    - name: Installm
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
 
   ubuntu_test_python_3_12:
     timeout-minutes: 30
@@ -31,6 +35,10 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
 
   macos_13_test_python_3_9:
     timeout-minutes: 30
@@ -45,6 +53,10 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
 
   macos_13_test_python_3_12:
     timeout-minutes: 30
@@ -59,6 +71,10 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
 
   macos_latest_test_python_3_9:
     timeout-minutes: 30
@@ -73,6 +89,10 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
 
   macos_latest_test_python_3_12:
     timeout-minutes: 30
@@ -87,6 +107,10 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
 
   windows_test_python_3_9:
     timeout-minutes: 30
@@ -101,6 +125,10 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
 
   windows_test_python_3_12:
     timeout-minutes: 30
@@ -115,3 +143,7 @@ jobs:
       run: pip install --upgrade --upgrade-strategy eager -e '.[datadriven, test]'
     - name: Run tests
       run: python -m tests
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
