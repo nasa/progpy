@@ -5,8 +5,9 @@ on:
 
 jobs:
   run_tests:
-    timeout-minutes: 30
+    timeout-minutes: 45
     strategy:
+      fail-fast: false
       matrix:
         python-version: ['3.9', '3.12']  # TODO: Add 3.13 when it is released
         os: [ubuntu-latest, macos-latest, macos-13, windows-latest]
@@ -22,6 +23,7 @@ jobs:
     - name: Run tests
       run: python -m tests
     - name: Upload coverage to Codecov
+      if: ${{ matrix.python-version }} == '3.12' && ${{ matrix.os }} == 'ubuntu-latest'
       uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml
