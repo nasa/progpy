@@ -14,10 +14,10 @@ class MonteCarlo(Predictor):
     """
     Class for performing a monte-carlo model-based prediction.
 
-    A Predictor using the monte carlo algorithm. The provided initial states are simulated until either a specified time horizon is met, or the threshold for all simulated events is reached for all samples. A provided future loading equation is used to compute the inputs to the system at any given time point. 
+    A Predictor using the monte carlo algorithm. The provided initial states are simulated until either a specified time horizon is met, or the threshold for all simulated events is reached for all samples. A provided future loading equation is used to compute the inputs to the system at any given time point.
 
     The following configuration parameters are supported (as kwargs in constructor or as parameters in predict method):
-    
+
     Configuration Parameters
     ------------------------------
     n_samples : int, optional
@@ -26,21 +26,29 @@ class MonteCarlo(Predictor):
         Default frequency at which results are saved (s).
     """
 
-    __DEFAULT_N_SAMPLES = 100 # Default number of samples to use, if none specified and not UncertainData
+    __DEFAULT_N_SAMPLES = (
+        100  # Default number of samples to use, if none specified and not UncertainData
+    )
 
-    default_parameters = { 
-        'n_samples': None,
-        'event_strategy': 'all',
-        'constant_noise': False
+    default_parameters = {
+        "n_samples": None,
+        "event_strategy": "all",
+        "constant_noise": False,
     }
 
-    def predict(self, state: UncertainData, future_loading_eqn: Callable=None, events=None, **kwargs) -> PredictionResults:
+    def predict(
+        self,
+        state: UncertainData,
+        future_loading_eqn: Callable = None,
+        events=None,
+        **kwargs,
+    ) -> PredictionResults:
         """
         Perform a single prediction
 
         Parameters
         ----------
-        state : UncertainData 
+        state : UncertainData
             Distribution representing current state of the system
         future_loading_eqn : function (t, x=None) -> z, optional
             Function to generate an estimate of loading at future time t, and state x
@@ -71,7 +79,7 @@ class MonteCarlo(Predictor):
         Return
         ----------
         result from prediction, including: NameTuple
-            * times (List[float]): Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]            
+            * times (List[float]): Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]
             * inputs (Prediction): Inputs at each savepoint such that inputs.snapshot(i) is the input distribution (type UncertainData) at times[i]
             * states (Prediction): States at each savepoint such that states.snapshot(i) is the state distribution (type UncertainData) at times[i]
             * outputs (Prediction): Outputs at each savepoint such that outputs.snapshot(i) is the output distribution (type UncertainData) at times[i]
@@ -80,6 +88,7 @@ class MonteCarlo(Predictor):
         """
         if isinstance(state, dict) or isinstance(state, self.model.StateContainer):
             from progpy.uncertain_data import ScalarData
+
             state = ScalarData(state, _type=self.model.StateContainer)
         elif isinstance(state, UncertainData):
             state._type = self.model.StateContainer
@@ -91,32 +100,36 @@ class MonteCarlo(Predictor):
 
         params = deepcopy(self.parameters)  # copy parameters
         params.update(kwargs)  # update for specific run
-        params['print'] = False
-        params['progress'] = False
+        params["print"] = False
+        params["progress"] = False
         # Remove event_strategy from params to not confuse simulate_to method call
-        event_strategy = params.pop('event_strategy')
+        event_strategy = params.pop("event_strategy")
 
-        if not isinstance(state, UnweightedSamples) and params['n_samples'] is None:
+        if not isinstance(state, UnweightedSamples) and params["n_samples"] is None:
             # if not unweighted samples, some sample number is required, so set to default.
-            params['n_samples'] = MonteCarlo.__DEFAULT_N_SAMPLES
-        elif isinstance(state, UnweightedSamples) and params['n_samples'] is None:
-            params['n_samples'] = len(state)  # number of samples is from provided state
+            params["n_samples"] = MonteCarlo.__DEFAULT_N_SAMPLES
+        elif isinstance(state, UnweightedSamples) and params["n_samples"] is None:
+            params["n_samples"] = len(state)  # number of samples is from provided state
 
         if events is None:
-            if 'events' in params and params['events'] is not None:
+            if "events" in params and params["events"] is not None:
                 # Set at a predictor construction
-                events = params['events']
+                events = params["events"]
             else:
                 # Otherwise, all events
                 events = self.model.events
-        
+
         if not isinstance(events, (abc.Iterable)) or isinstance(events, (dict, bytes)):
             # must be string or list-like (list, tuple, set)
             # using abc.Iterable adds support for custom data structures
             # that implement that abstract base class
-            raise TypeError(f'`events` must be a single event string or list of events. Was unsupported type {type(events)}.')
-        if len(events) == 0 and 'horizon' not in params:
-            raise ValueError("If specifying no event (i.e., simulate to time), must specify horizon")
+            raise TypeError(
+                f"`events` must be a single event string or list of events. Was unsupported type {type(events)}."
+            )
+        if len(events) == 0 and "horizon" not in params:
+            raise ValueError(
+                "If specifying no event (i.e., simulate to time), must specify horizon"
+            )
         if isinstance(events, str):
             # A single event
             events = [events]
@@ -126,17 +139,21 @@ class MonteCarlo(Predictor):
             # Change to list because of the limits of jsonify
             events = list(events)
 
-        if 'events' in params: 
+        if "events" in params:
             # Params is provided as a argument in construction
             # Remove it so it's not passed to simulate_to*
-            del params['events']
+            del params["events"]
 
         # Sample from state if n_samples specified or state is not UnweightedSamples (Case 2)
         # Or if is Unweighted samples, but there are the wrong number of samples (Case 1)
         if (
-            (isinstance(state, UnweightedSamples) and len(state) != params['n_samples'])  # Case 1
-            or not isinstance(state, UnweightedSamples)):  # Case 2
-            state = state.sample(params['n_samples'])
+            (
+                isinstance(state, UnweightedSamples)
+                and len(state) != params["n_samples"]
+            )  # Case 1
+            or not isinstance(state, UnweightedSamples)
+        ):  # Case 2
+            state = state.sample(params["n_samples"])
 
         es_eqn = self.model.event_state
         tm_eqn = self.model.threshold_met
@@ -150,41 +167,44 @@ class MonteCarlo(Predictor):
         outputs_all = []
         event_states_all = []
 
-        if params['constant_noise']:
+        if params["constant_noise"]:
             # Save loads
-            process_noise = self.model['process_noise']
-            process_noise_dist = self.model.parameters.get('process_noise_dist', 'normal')
+            process_noise = self.model["process_noise"]
+            process_noise_dist = self.model.parameters.get(
+                "process_noise_dist", "normal"
+            )
 
         # Perform prediction
-        t0 = params.get('t0', 0)
-        HORIZON = params.get('horizon', float('inf'))  # Save the horizon to be used later
+        t0 = params.get("t0", 0)
+        HORIZON = params.get(
+            "horizon", float("inf")
+        )  # Save the horizon to be used later
         for x in state:
-            if params['constant_noise']:
+            if params["constant_noise"]:
                 # Calculate process noise
                 x_noise = self.model.apply_process_noise(x.copy(), 1)
-                x_noise = self.model.StateContainer({key: x_noise[key] - x[key] for key in x.keys()})
+                x_noise = self.model.StateContainer(
+                    {key: x_noise[key] - x[key] for key in x.keys()}
+                )
 
-                self.model['process_noise'] = x_noise
-                self.model['process_noise_dist'] = 'constant'
+                self.model["process_noise"] = x_noise
+                self.model["process_noise_dist"] = "constant"
 
             first_output = self.model.output(x)
-            
+
             time_of_event = {}
             last_state = {}
 
-            params['t0'] = t0
-            params['x'] = x
-            params['horizon'] = HORIZON  # reset to initial horizon
+            params["t0"] = t0
+            params["x"] = x
+            params["horizon"] = HORIZON  # reset to initial horizon
 
-            if 'save_freq' in params and not isinstance(params['save_freq'], tuple):
-                params['save_freq'] = (params['t0'], params['save_freq'])
-            
+            if "save_freq" in params and not isinstance(params["save_freq"], tuple):
+                params["save_freq"] = (params["t0"], params["save_freq"])
+
             if len(events) == 0:  # Predict to time
                 (times, inputs, states, outputs, event_states) = simulate_to_threshold(
-                    future_loading_eqn,
-                    first_output,
-                    events=[],
-                    **params
+                    future_loading_eqn, first_output, events=[], **params
                 )
             else:
                 events_remaining = events.copy()
@@ -200,12 +220,12 @@ class MonteCarlo(Predictor):
                     # Since horizon is relative to t0 (the simulation starting point),
                     # we must subtract the difference in current t0 from the initial (i.e., prediction t0)
                     # each subsequent simulation
-                    params['horizon'] = HORIZON - (params['t0'] - t0)
+                    params["horizon"] = HORIZON - (params["t0"] - t0)
                     (t, u, xi, z, es) = simulate_to_threshold(
                         future_loading_eqn,
                         first_output,
                         events=events_remaining,
-                        **params
+                        **params,
                     )
 
                     # Add results
@@ -217,7 +237,9 @@ class MonteCarlo(Predictor):
 
                     # Get which event occurs
                     t_met = tm_eqn(states[-1])
-                    t_met = {key: t_met[key] for key in events_remaining}  # Only look at remaining keys
+                    t_met = {
+                        key: t_met[key] for key in events_remaining
+                    }  # Only look at remaining keys
 
                     try:
                         event = list(t_met.keys())[list(t_met.values()).index(True)]
@@ -230,21 +252,25 @@ class MonteCarlo(Predictor):
 
                     # An event has occured
                     time_of_event[event] = times[-1]
-                    if event_strategy == 'all':
-                        events_remaining.remove(event)  # No longer an event to predict to
-                    elif event_strategy in ('first', 'any'):
+                    if event_strategy == "all":
+                        events_remaining.remove(
+                            event
+                        )  # No longer an event to predict to
+                    elif event_strategy in ("first", "any"):
                         events_remaining = []
                     else:
-                        raise ValueError(f"Invalid value for `event_strategy`: {event_strategy}. Should be either 'all' or 'first'")
+                        raise ValueError(
+                            f"Invalid value for `event_strategy`: {event_strategy}. Should be either 'all' or 'first'"
+                        )
 
                     # Remove last state (event)
-                    params['t0'] = times.pop()
+                    params["t0"] = times.pop()
                     inputs.pop()
-                    params['x'] = states.pop()
-                    last_state[event] = params['x'].copy()
+                    params["x"] = states.pop()
+                    last_state[event] = params["x"].copy()
                     outputs.pop()
                     event_states.pop()
-            
+
             # Add to "all" structures
             if len(times) > len(times_all):  # Keep longest
                 times_all = times
@@ -256,10 +282,10 @@ class MonteCarlo(Predictor):
             last_states.append(last_state)
 
             # Reset noise
-            if params['constant_noise']:
-                self.model['process_noise'] = process_noise
-                self.model['process_noise_dist'] = process_noise_dist
-              
+            if params["constant_noise"]:
+                self.model["process_noise"] = process_noise
+                self.model["process_noise_dist"] = process_noise_dist
+
         inputs_all = UnweightedSamplesPrediction(times_all, inputs_all)
         states_all = UnweightedSamplesPrediction(times_all, states_all)
         outputs_all = UnweightedSamplesPrediction(times_all, outputs_all)
@@ -269,9 +295,9 @@ class MonteCarlo(Predictor):
         # Transform final states:
         time_of_event.final_state = {
             key: UnweightedSamples(
-                    [sample[key] for sample in last_states],
-                    _type=self.model.StateContainer
-                ) for key in time_of_event.keys()
+                [sample[key] for sample in last_states], _type=self.model.StateContainer
+            )
+            for key in time_of_event.keys()
         }
 
         return PredictionResults(
@@ -280,5 +306,5 @@ class MonteCarlo(Predictor):
             states_all,
             outputs_all,
             event_states_all,
-            time_of_event
+            time_of_event,
         )

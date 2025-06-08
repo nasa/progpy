@@ -4,6 +4,22 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in v1.8.0
+----------------------
+
+progpy
+**************
+* **New Feature** :term:`Discrete States<discrete state>` (created by :py:func:`progpy.create_discrete_state`): Inputs, states, outputs, or performance metrics can now be represented by a discrete state object, which will only exist in a set of defined states. See the `Discrete State Notebook <https://github.com/nasa/progpy/blob/release/v1.8/examples/discrete_state.ipynb>`__ for examples of use
+* **New model**: Simplified Battery (:py:class:`progpy.models.BatterySimplified`). This is a simplified version of the BatteryElectroChemEOD model by `Gina Sierra et al. <https://www.sciencedirect.com/science/article/abs/pii/S0951832018301406>`__ first introduced in the `PHM Society Conference ProgPy Tutorial <https://github.com/nasa/progpy/blob/master/examples/2024PHMTutorial.ipynb>`__ from November 2024. See `Included Models <https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html>`__ for details
+* Support for Python3.13 (with the exception of ProgPy's data driven dependencies due to Tensorflow not yet supporting this Python version)
+* Dropped support of end-of-life Python3.7 and Python3.8
+* Improved “ProgPy Short Course”: A series of Jupyter Notebooks designed to help users get started with ProgPy and understand how to use it for prognostics. See https://github.com/nasa/progpy/tree/master/examples
+* Various bugfixes and efficiency improvements
+
+prog_server
+************
+* Support for Python3.13
+
 Updates in v1.7.1
 ----------------------
 
@@ -199,7 +215,7 @@ prog_algs
         * new ```List[float]``` where times[m] corresponds to timepoint m for all samples.
     * End of Life (EOL)/ Time of Event (ToE) estimates:
         * previous ```List[float]``` where the times correspond to the time that the first event occurs.
-        * new ```UnweightedSamples``` where keys correspond to the inidividualevents predicted.
+        * new ```UnweightedSamples``` where keys correspond to the individual events predicted.
     * State at time of event (ToE).
     * previous: element in states.
     * new: member of ToE structure (e.g., ToE.final_state['event1']).

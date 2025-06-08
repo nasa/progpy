@@ -5,7 +5,14 @@ import matplotlib.pyplot as plt
 from math import sqrt
 from typing import List
 
-def plot_scatter(samples : List[dict], fig : Figure = None, keys : List[str] = None, legend : str = 'auto', **kwargs) -> Figure:
+
+def plot_scatter(
+    samples: List[dict],
+    fig: Figure = None,
+    keys: List[str] = None,
+    legend: str = "auto",
+    **kwargs,
+) -> Figure:
     """
     Produce a scatter plot for a given list of states
 
@@ -21,7 +28,7 @@ def plot_scatter(samples : List[dict], fig : Figure = None, keys : List[str] = N
 
     Returns:
         Figure
-    
+
     Example:
             states = UnweightedSamples([1, 2, 3, 4, 5])
             plot_scatter(states.sample(100)) # With 100 samples
@@ -29,17 +36,21 @@ def plot_scatter(samples : List[dict], fig : Figure = None, keys : List[str] = N
     """
     # Input checks
     if len(samples) <= 0:
-        raise Exception('Must include atleast one sample to plot')
-    
+        raise Exception("Must include atleast one sample to plot")
+
     if keys is not None:
         try:
             iter(keys)
         except TypeError:
-            raise TypeError("Keys should be a list of strings (e.g., ['state1', 'state2'], was {}".format(type(keys)))
+            raise TypeError(
+                "Keys should be a list of strings (e.g., ['state1', 'state2'], was {}".format(
+                    type(keys)
+                )
+            )
 
     # Handle input
     parameters = {  # defaults
-        'alpha': 0.5
+        "alpha": 0.5
     }
     parameters.update(kwargs)
 
@@ -54,41 +65,51 @@ def plot_scatter(samples : List[dict], fig : Figure = None, keys : List[str] = N
     if fig is None:
         # If no figure provided, create one
         fig = plt.figure()
-        axes = [[fig.add_subplot(n-1, n-1, 1 + i + j*(n-1)) for i in range(n-1)] for j in range(n-1)]
+        axes = [
+            [fig.add_subplot(n - 1, n - 1, 1 + i + j * (n - 1)) for i in range(n - 1)]
+            for j in range(n - 1)
+        ]
     else:
         # Check size of axes
-        if len(fig.axes) != (n-1)*(n-1):
-            raise Exception("Cannot use existing figure - Existing figure graphs {} states, data includes {} states".format(sqrt(len(fig.axes))+1, n))
+        if len(fig.axes) != (n - 1) * (n - 1):
+            raise Exception(
+                "Cannot use existing figure - Existing figure graphs {} states, data includes {} states".format(
+                    sqrt(len(fig.axes)) + 1, n
+                )
+            )
 
         # Unpack axes
-        axes = [[fig.axes[i + j*(n-1)] for i in range(n-1)] for j in range(n-1)]
+        axes = [[fig.axes[i + j * (n - 1)] for i in range(n - 1)] for j in range(n - 1)]
 
-    for i in range(n-1):
+    for i in range(n - 1):
         # For each column
-        x_key = keys[i] 
+        x_key = keys[i]
 
         # Set labels on extremes
         axes[-1][i].set_xlabel(x_key)  # Bottom row
-        axes[i][0].set_ylabel(keys[i+1])  # Left column
+        axes[i][0].set_ylabel(keys[i + 1])  # Left column
 
-        # plot 
-        for j in range(i, n-1): 
+        # plot
+        for j in range(i, n - 1):
             # for each row
-            y_key = keys[j+1]
+            y_key = keys[j + 1]
             x1 = [x[x_key] for x in samples if x is not None]
             x2 = [x[y_key] for x in samples if x is not None]
             axes[j][i].scatter(x1, x2, **parameters)
 
-        # Hide axes not used in plots 
+        # Hide axes not used in plots
         for j in range(0, i):
             axes[j][i].set_visible(False)
 
     # Set legend
-    if legend == 'auto' or legend:
-        labels = [thing.get_label() for thing in axes[0][0].get_children()
-            if isinstance(thing, PathCollection)]
-        if legend == 'auto' and len(labels) > 0 or legend:
+    if legend == "auto" or legend:
+        labels = [
+            thing.get_label()
+            for thing in axes[0][0].get_children()
+            if isinstance(thing, PathCollection)
+        ]
+        if legend == "auto" and len(labels) > 0 or legend:
             fig.legend().remove()  # Remove any existing legend - prevents "ghost effect"
-            fig.legend(labels=labels, loc='upper right')
+            fig.legend(labels=labels, loc="upper right")
 
     return fig

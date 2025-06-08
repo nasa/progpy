@@ -24,6 +24,10 @@ Battery Model
 
         .. autoclass:: progpy.models.BatteryElectroChemEODEOL
 
+    .. tab:: Simplified
+
+        .. autoclass:: progpy.models.SimplifiedBattery
+    
     .. tab:: Circuit
 
         .. autoclass:: progpy.models.BatteryCircuit

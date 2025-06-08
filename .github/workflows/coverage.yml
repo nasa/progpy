@@ -20,7 +20,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: pip-cache-datadriven
@@ -29,7 +29,7 @@ jobs:
         pip install coverage
         pip install importlib_metadata
     - name: Update
-      run: pip install --upgrade --upgrade-strategy eager -e .
+      run: pip install --upgrade --upgrade-strategy eager -e .[datadriven]
     - name: Run coverage
       run: |
         coverage run -m tests.test_base_models

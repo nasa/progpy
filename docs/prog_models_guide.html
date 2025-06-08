@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Modeling and Sim Guide &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>Modeling and Sim Guide &#8212; ProgPy Python Packages 1.8 documentation</title>
   
   
   
@@ -32,11 +32,11 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
@@ -46,9 +46,9 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/tabs.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/tabs.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'prog_models_guide';</script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -156,6 +156,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DiscreteStates.html">Discrete States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/EnsembleModel.html">EnsembleModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
@@ -173,6 +174,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -339,18 +341,18 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-new-models">Building New Models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-transition-models">State-transition Models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-prediction-models">Direct-prediction models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-transition-models">State-Transition Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-prediction-models">Direct-Prediction Models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-data">Using Data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-provided-models">Using provided models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-provided-models">Using Provided Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-estimation">Parameter Estimation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results">Visualizing Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-models">Combination Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-examples">Other Examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips">Tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-best-practices">Tips &amp; Best Practices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
@@ -389,6 +391,7 @@ document.write(`
 </pre></div>
 </div>
 </div></div>
+<p>For help with troubleshooting, see the <a class="reference internal" href="troubleshooting.html#troubleshooting"><span class="std std-ref">Troubleshooting Guide</span></a>.</p>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h2>
@@ -410,12 +413,27 @@ document.write(`
 <p>States are transitioned forward in time using the state transition equation.</p>
 <div style="text-align: center;"><p><span class="math notranslate nohighlight">\(x(t+dt) = f(t, x(t), u(t), dt, \Theta)\)</span></p>
 </div><p>where <span class="math notranslate nohighlight">\(x(t)\)</span> is <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(u(t)\)</span> is <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a> at time <span class="math notranslate nohighlight">\(t\)</span> , <span class="math notranslate nohighlight">\(dt\)</span> is the stepsize, and <span class="math notranslate nohighlight">\(\Theta\)</span> are the model <a class="reference internal" href="glossary.html#term-parameters"><span class="xref std std-term">parameters</span></a> .</p>
-<p>In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of continuous models, state transition behavior is defined by defining the first derivative, using the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.dx" title="progpy.PrognosticsModel.dx"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.dx()</span></code></a> method. For discrete models, state transition behavior is defined using the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.next_state" title="progpy.PrognosticsModel.next_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.next_state()</span></code></a> method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.</p>
+<p>In a ProgPy model, this state transition can be represented one of two ways, either discrete or continuous, depending on the nature of state transition. In the case of <a class="reference internal" href="glossary.html#term-continuous-model"><span class="xref std std-term">continuous models</span></a>, state transition behavior is defined by defining the first derivative, using the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.dx" title="progpy.PrognosticsModel.dx"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.dx()</span></code></a> method. For <a class="reference internal" href="glossary.html#term-discrete-model"><span class="xref std std-term">discrete models</span></a>, state transition behavior is defined using the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.next_state" title="progpy.PrognosticsModel.next_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.next_state()</span></code></a> method. The continuous state transition behavior is recommended, because defining the first derivative enables some approaches that rely on that information.</p>
 <a class="reference internal image-reference" href="_images/next_state.png"><img alt="_images/next_state.png" class="align-center" src="_images/next_state.png" style="width: 70%;" /></a>
 <a class="reference internal image-reference" href="_images/dx.png"><img alt="_images/dx.png" class="align-center" src="_images/dx.png" style="width: 70%;" /></a>
+<p>States can also be discrete or continuous. <a class="reference internal" href="glossary.html#term-discrete-state"><span class="xref std std-term">Discrete states</span></a> are those which can only exist in a finite set of values. Continuous states are initialized with a number and discrete states are initialized using the function <a class="reference internal" href="api_ref/progpy/DiscreteStates.html#progpy.create_discrete_state" title="progpy.create_discrete_state"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.create_discrete_state()</span></code></a>, like the examples below. Each discrete state represents a unique condition or mode, and transitions between states are governed by defined rules or events, providing clarity and predictability in state management.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy</span> <span class="kn">import</span> <span class="n">create_discrete_state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ValveState</span> <span class="o">=</span> <span class="n">create_discrete_state</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;open&quot;</span><span class="p">,</span> <span class="s2">&quot;closed&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;valve&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ValveState</span><span class="o">.</span><span class="n">open</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">progpy</span> <span class="kn">import</span> <span class="n">create_discrete_state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">GearState</span> <span class="o">=</span> <span class="n">create_discrete_state</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">transition</span><span class="o">=</span><span class="s2">&quot;sequential&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;gear&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">GearState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="glossary.html#term-discrete-state"><span class="xref std std-term">Discrete states</span></a> are different from <a class="reference internal" href="glossary.html#term-discrete-model"><span class="xref std std-term">discrete models</span></a>. Discrete models are models where state transition is discrete, where discrete states are where the state itself is discrete. Discrete models may have continuous states.</p>
+</div>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
-State transition equation example<div class="summary-down docutils">
+State Transition Equation Example<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -446,7 +464,7 @@ State transition equation example<div class="summary-down docutils">
 <div style="text-align: center;"><p><span class="math notranslate nohighlight">\(z(t) = f(x(t), \Theta)\)</span></p>
 </div><details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
-Output equation example<div class="summary-down docutils">
+Output Equation Example<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -520,12 +538,12 @@ Event Examples<div class="summary-down docutils">
 <p>The specific parameters are very specific to the system being modeled. For example, a battery might have parameters for the capacity and internal resistance. When using provided models, see the documentation for that model for details on parameters supported.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
-Derived parameters<div class="summary-down docutils">
+Derived Parameters<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">Sometimes users would like to specify parameters as a function of other parameters. This feature is called “derived parameters”. See example below for more details on this feature.</p>
+<p class="card-text">Sometimes users would like to specify parameters as a function of other parameters. This feature is called “derived parameters”. See the derived parameters section in the example below for more details on this feature.</p>
 <ul class="simple">
 <li><p class="card-text"><a class="reference download internal" download="" href="_downloads/412560afd93e3e54078df8279ff54887/04_New%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">04</span> <span class="pre">New</span> <span class="pre">Models</span></code></a></p></li>
 </ul>
@@ -563,12 +581,9 @@ Future Loading Noise<div class="summary-down docutils">
 </summary><div class="summary-content card-body docutils">
 <p class="card-text">Future loading noise is used to represent uncertainty in knowledge of how the system will be loaded in the future (See <a class="reference internal" href="#future-loading"><span class="std std-ref">Future Loading</span></a>). Future loading noise is applied by the user in their provided future loading method by adding random noise to the estimated future load.</p>
 </div>
-</details><p>See example below for details on how to configure proccess and measurement noise in ProgPy</p>
+</details><p>See the noise section in the example below for details on how to configure proccess and measurement noise in ProgPy.</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/a53af2a664a02d85e1a95ed94e2629b1/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd></dd>
-</dl>
-</li>
+<li><p><a class="reference download internal" download="" href="_downloads/9c8e9f4d6db817c0bef52c29c3dbca21/01_Simulation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">01</span> <span class="pre">Simulation</span></code></a></p></li>
 </ul>
 </section>
 <section id="future-loading">
@@ -580,9 +595,9 @@ Future Loading Noise<div class="summary-down docutils">
     <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">InputContainer</span><span class="p">({</span><span class="s1">&#39;input1&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">})</span>
 </pre></div>
 </div>
-<p>See example below for details on how to provide future loading information in ProgPy.</p>
+<p>See the future loading section in the example below for details on how to provide future loading information in ProgPy.</p>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/9c8e9f4d6db817c0bef52c29c3dbca21/01_Simulation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">01.</span> <span class="pre">Simulation</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/9c8e9f4d6db817c0bef52c29c3dbca21/01_Simulation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">01</span> <span class="pre">Simulation</span></code></a></p></li>
 </ul>
 </section>
 <section id="general-notes">
@@ -594,12 +609,12 @@ Future Loading Noise<div class="summary-down docutils">
 <h2>Building New Models<a class="headerlink" href="#building-new-models" title="Permalink to this headline">#</a></h2>
 <p>ProgPy provides a framework for building new models. Generally, models can be divided into three basis categories: <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a>, <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven models</span></a>, and hybrid models. Additionally, models can rely on state-transition for prediction, or they can use what is called direct-prediction. These two categories are described below.</p>
 <section id="state-transition-models">
-<h3>State-transition Models<a class="headerlink" href="#state-transition-models" title="Permalink to this headline">#</a></h3>
+<h3>State-Transition Models<a class="headerlink" href="#state-transition-models" title="Permalink to this headline">#</a></h3>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">physics-based</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">data-driven</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a> are constructed by subclassing <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template <a class="reference download internal" download="" href="_downloads/0f7c5af7c0ba09c1be3bd3db3e6458c9/prog_model_template.py"><code class="xref download docutils literal notranslate"><span class="pre">prog_model_template.ProgModelTemplate</span></code></a>, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> will then work with your new model.</p>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">Physics-Based</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Data-Driven</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based models</span></a> are constructed by subclassing <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> as illustrated in the first example. To generate a new model, create a new class for your model that inherits from this class. Alternatively, you can copy the template <code class="xref download docutils literal notranslate"><span class="pre">prog_model_template.ProgModelTemplate</span></code>, replacing the methods with logic defining your specific model. The analysis and simulation tools defined in <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel" title="progpy.PrognosticsModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.PrognosticsModel</span></code></a> will then work with your new model.</p>
 <p>For simple linear models, users can choose to subclass the simpler <a class="reference internal" href="api_ref/progpy/LinearModel.html#progpy.LinearModel" title="progpy.LinearModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.LinearModel</span></code></a> class, as illustrated in the second example. Some methods and algorithms only function on linear models.</p>
 <ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/412560afd93e3e54078df8279ff54887/04_New%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">04.</span> <span class="pre">New</span> <span class="pre">Models</span></code></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/412560afd93e3e54078df8279ff54887/04_New%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">04</span> <span class="pre">New</span> <span class="pre">Models</span></code></a></p></li>
 </ul>
 </div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>New <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven models</span></a>, such as those using neural networks, are created by subclassing the <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel" title="progpy.data_models.DataModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">progpy.data_models.DataModel</span></code></a> class, overriding the <code class="docutils literal notranslate"><span class="pre">from_data</span></code> method.</p>
 <p>The <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel.from_data" title="progpy.data_models.DataModel.from_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.data_models.DataModel.from_data()</span></code></a> and <a class="reference internal" href="api_ref/progpy/DataModel.html#progpy.data_models.DataModel.from_model" title="progpy.data_models.DataModel.from_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">progpy.data_models.DataModel.from_model()</span></code></a> methods are used to construct new models from data or an existing model (i.e., <a class="reference internal" href="glossary.html#term-surrogate"><span class="xref std std-term">surrogate</span></a>), respectively. The use of these is demonstrated in the following examples.</p>
@@ -646,18 +661,15 @@ Advanced features in data models<div class="summary-down docutils">
 </details></div></div>
 </section>
 <section id="direct-prediction-models">
-<h3>Direct-prediction models<a class="headerlink" href="#direct-prediction-models" title="Permalink to this headline">#</a></h3>
-<p><a class="reference internal" href="glossary.html#term-direct-prediction-model"><span class="xref std std-term">Direct-prediction models</span></a> are models that estimate <a class="reference internal" href="glossary.html#term-time-of-event"><span class="xref std std-term">time of event</span></a> directly from the current state and <a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">future load</span></a>, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See example below for more information.</p>
+<h3>Direct-Prediction Models<a class="headerlink" href="#direct-prediction-models" title="Permalink to this headline">#</a></h3>
+<p><a class="reference internal" href="glossary.html#term-direct-prediction-model"><span class="xref std std-term">Direct-prediction models</span></a> are models that estimate <a class="reference internal" href="glossary.html#term-time-of-event"><span class="xref std std-term">time of event</span></a> directly from the current state and <a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">future load</span></a>, instead of being predicted through state transition. When models are pure direct-prediction models, future states cannot be predicted. See the direct models section in the example below for more information.</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/beb178906ed56d1dc980686684fd5359/direct_model.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.direct_model</span></code></a></dt><dd></dd>
-</dl>
-</li>
+<li><p><a class="reference download internal" download="" href="_downloads/412560afd93e3e54078df8279ff54887/04_New%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">04</span> <span class="pre">New</span> <span class="pre">Models</span></code></a></p></li>
 </ul>
 </section>
 <section id="using-data">
 <h3>Using Data<a class="headerlink" href="#using-data" title="Permalink to this headline">#</a></h3>
-<p>Wether you’re using <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven</span></a>, <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based</span></a>, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see <cite>Parameter Estimation</cite>) and validate the model.</p>
+<p>Whether you’re using <a class="reference internal" href="glossary.html#term-data-driven-model"><span class="xref std std-term">data-driven</span></a>, <a class="reference internal" href="glossary.html#term-physics-based-model"><span class="xref std std-term">physics-based</span></a>, expert knowledge, or some hybrid approach, building and validating a model requires data. In the case of data-driven approaches, data is used to train and validate the model. In the case of physics-based, data is used to estimate parameters (see <cite>Parameter Estimation</cite>) and validate the model.</p>
 <p>ProgPy includes some example datasets. See <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/DataSets.html">ProgPy Datasets</a> and the example below for details.</p>
 <ul class="simple">
 <li><dl class="simple">
@@ -672,18 +684,11 @@ Advanced features in data models<div class="summary-down docutils">
 </section>
 </section>
 <section id="using-provided-models">
-<h2>Using provided models<a class="headerlink" href="#using-provided-models" title="Permalink to this headline">#</a></h2>
+<h2>Using Provided Models<a class="headerlink" href="#using-provided-models" title="Permalink to this headline">#</a></h2>
 <p>ProgPy includes a number of predefined models in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">progpy.models</span></code> module. These models are parameterized, so they can be configured to represent specific systems (see <a class="reference internal" href="#parameter-estimation"><span class="std std-ref">Parameter Estimation</span></a>).</p>
-<p>For details on the included models see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html">Included Models</a>. The examples below illustrate use of some of the models provided in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">progpy.models</span></code> module.</p>
+<p>For details on the included models, see <a class="reference external" href="https://nasa.github.io/progpy/api_ref/progpy/IncludedModels.html">Included Models</a>. The examples below also illustrate the use of some models provided in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">progpy.models</span></code> module.</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/160687b265770e7120266d22a6015f55/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd></dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/b0f882b08ad06c468dcd7cc5ad370a58/sim_battery_eol.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_battery_eol</span></code></a></dt><dd></dd>
-</dl>
-</li>
+<li><p><a class="reference download internal" download="" href="_downloads/dff76589941453c29eb744884d63b0e8/03_Existing%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">03</span> <span class="pre">Included</span> <span class="pre">Models</span></code></a></p></li>
 <li><dl class="simple">
 <dt><a class="reference download internal" download="" href="_downloads/e2fe425b405c324c9ddabb88b4675b84/sim_pump.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim_pump</span></code></a></dt><dd></dd>
 </dl>
@@ -711,7 +716,7 @@ Advanced features in data models<div class="summary-down docutils">
 <p>One of the most basic of functions using a model is simulation. Simulation is the process of predicting the evolution of system <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> with time, given a specific <a class="reference internal" href="glossary.html#term-future-load"><span class="xref std std-term">future load</span></a> profile. Unlike full prognostics, simulation does not include uncertainty in the state and other product (e.g., <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a>) representation. For a prognostics model, simulation is done using the <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to" title="progpy.PrognosticsModel.simulate_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to()</span></code></a> and <a class="reference internal" href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.simulate_to_threshold" title="progpy.PrognosticsModel.simulate_to_threshold"><code class="xref py py-meth docutils literal notranslate"><span class="pre">progpy.PrognosticsModel.simulate_to_threshold()</span></code></a> methods.</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
-Saving results<div class="summary-down docutils">
+Saving Results<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -743,12 +748,12 @@ Saving results<div class="summary-down docutils">
 </table>
 <div class="tip admonition">
 <p class="admonition-title">Note</p>
-<p class="card-text">Data will always be saved at the next time after the save_pt or save_freq. As a result the data may not correspond to the exact time specified. Use automatic step sizes to save at the exact time.</p>
+<p class="card-text">Data will always be saved at the next time after the <code class="docutils literal notranslate"><span class="pre">save_pt</span></code> or <code class="docutils literal notranslate"><span class="pre">save_freq</span></code>. As a result, the data may not correspond to the exact time specified. Use automatic step sizes to save at the exact time.</p>
 </div>
 </div>
 </details><details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
-Step size<div class="summary-down docutils">
+Step Size<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -807,16 +812,9 @@ Eval Points<div class="summary-down docutils">
 </div></blockquote>
 <p class="card-text">Now loading is applied correctly.</p>
 </div>
-</details><p>Use of simulation is described further in the following examples:</p>
+</details><p>For simulation examples, see the following notebook for details.</p>
 <ul class="simple">
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/160687b265770e7120266d22a6015f55/sim.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sim</span></code></a></dt><dd></dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/a53af2a664a02d85e1a95ed94e2629b1/noise.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.noise</span></code></a></dt><dd></dd>
-</dl>
-</li>
+<li><p><a class="reference download internal" download="" href="_downloads/9c8e9f4d6db817c0bef52c29c3dbca21/01_Simulation.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">01</span> <span class="pre">Simulation</span></code></a></p></li>
 </ul>
 </section>
 <section id="parameter-estimation">
@@ -828,10 +826,10 @@ Eval Points<div class="summary-down docutils">
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">estimate_params</span><span class="p">([</span><span class="n">run1_data</span><span class="p">,</span> <span class="n">run2_data</span><span class="p">],</span> <span class="n">params_to_estimate</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>See the example below for more details</p>
+<p>See the example below for more details.</p>
 <div class="tip admonition">
 <p class="admonition-title">Note</p>
-<p>Parameters are changes in-place, so the model on which estimate_params is called, is now tuned to match the data</p>
+<p>Parameters are changes in-place, so the model on which <code class="docutils literal notranslate"><span class="pre">estimate_params</span></code> is called, is now tuned to match the data.</p>
 </div>
 </section>
 <section id="visualizing-results">
@@ -846,15 +844,10 @@ Eval Points<div class="summary-down docutils">
 </section>
 <section id="combination-models">
 <h2>Combination Models<a class="headerlink" href="#combination-models" title="Permalink to this headline">#</a></h2>
-<p>There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below.</p>
-<p>For more details, see:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/cb37c25b3e11f6fe8987e558bb775c53/06_Combining%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">06.</span> <span class="pre">Combining</span> <span class="pre">Models</span></code></a></p></li>
-</ul>
-</div></blockquote>
+<p>There are two methods in progpy through which multiple models can be combined and used together: composite models and ensemble models, described below. For more details, see the example below.</p>
+<p><a class="reference download internal" download="" href="_downloads/cb37c25b3e11f6fe8987e558bb775c53/06_Combining%20Models.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">06.</span> <span class="pre">Combining</span> <span class="pre">Models</span></code></a></p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Composite models</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Ensemble models</button><button aria-controls="panel-2-2-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-2" name="2-2" role="tab" tabindex="-1">MixtureOfExperts models</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><p>Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example,</p>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-2-2-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-2-2-0" name="2-0" role="tab" tabindex="0">Composite Models</button><button aria-controls="panel-2-2-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-1" name="2-1" role="tab" tabindex="-1">Ensemble Models</button><button aria-controls="panel-2-2-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-2-2-2" name="2-2" role="tab" tabindex="-1">MixtureOfExperts Models</button></div><div aria-labelledby="tab-2-2-0" class="sphinx-tabs-panel" id="panel-2-2-0" name="2-0" role="tabpanel" tabindex="0"><p>Composite models are used to represent the behavior of a system of interconnected systems. Each system is represented by its own model. These models are combined into a single composite model which behaves as a single model. When definiting the composite model the user provides a discription of any connections between the state or output of one model and the input of another. For example,</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">CompositeModel</span><span class="p">(</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">model1</span><span class="p">,</span> <span class="n">model2</span><span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">connections</span> <span class="o">=</span> <span class="p">[</span>
@@ -888,18 +881,18 @@ Eval Points<div class="summary-down docutils">
 <dt><a class="reference download internal" download="" href="_downloads/98e318f1c85976fc33e5b193dd2922a1/sensitivity.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.sensitivity</span></code></a></dt><dd></dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt><a class="reference download internal" download="" href="_downloads/6c00d1b4a87a04ca552d41096eeda216/serialization.py"><code class="xref download docutils literal notranslate"><span class="pre">examples.serialization</span></code></a></dt><dd></dd>
-</dl>
-</li>
 </ul>
 </section>
-<section id="tips">
-<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">#</a></h2>
+<section id="tips-best-practices">
+<h2>Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>If you’re only doing diagnostics without prognostics- just define a next_state equation with no change of <a class="reference internal" href="glossary.html#term-state"><span class="xref std std-term">state</span></a> and don’t perform prediction. The <a class="reference internal" href="glossary.html#term-state-estimator"><span class="xref std std-term">state estimator</span></a> can still be used to estimate if any of the <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">events</span></a> have occured.</p></li>
-<li><p>Sudden <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">event’s</span></a> use a binary <a class="reference internal" href="glossary.html#term-event-state"><span class="xref std std-term">event state</span></a> (1=healthy, 0=failed).</p></li>
+<li><p>Sudden <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">events</span></a> use a binary <a class="reference internal" href="glossary.html#term-event-state"><span class="xref std std-term">event state</span></a> (1=healthy, 0=failed).</p></li>
 <li><p>You can predict as many <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">events</span></a> as you would like, sometimes one <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">event</span></a> must happen before another, in this case the <a class="reference internal" href="glossary.html#term-event"><span class="xref std std-term">event</span></a> occurance for event 1 can be a part of the equation for event 2 (‘event 2’: event_1 and [OTHER LOGIC]).</p></li>
+<li><p>Minimize the number of state variables whenever possible</p></li>
+<li><p>Whenever possible, if calculations dont include state or inputs, include values as parameters or derived parameters instead of calculating within state transition</p></li>
+<li><p>Use constant units throughout the model</p></li>
+<li><p>Document all assumptions and limitations</p></li>
 </ul>
 </section>
 <section id="references">
@@ -980,18 +973,18 @@ Eval Points<div class="summary-down docutils">
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-new-models">Building New Models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-transition-models">State-transition Models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-prediction-models">Direct-prediction models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-transition-models">State-Transition Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-prediction-models">Direct-Prediction Models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-data">Using Data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-provided-models">Using provided models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-provided-models">Using Provided Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation">Simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-estimation">Parameter Estimation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-results">Visualizing Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combination-models">Combination Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-examples">Other Examples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips">Tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-best-practices">Tips &amp; Best Practices</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>

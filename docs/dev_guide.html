@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Developers Guide &amp; Project Plan &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>Developers Guide &amp; Project Plan &#8212; ProgPy Python Packages 1.8 documentation</title>
   
   
   
@@ -32,7 +32,6 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
@@ -47,6 +46,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dev_guide';</script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -153,6 +153,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DiscreteStates.html">Discrete States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/EnsembleModel.html">EnsembleModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
@@ -170,6 +171,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Developers Guide &amp; Project Plan</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -353,22 +355,26 @@ document.write(`
 <p>This document includes some details relevant for developers working on any of the Python Prognostics Packages Tools (progpy, prog_server)</p>
 <section id="installing-from-a-branch">
 <h2>Installing from a Branch<a class="headerlink" href="#installing-from-a-branch" title="Permalink to this headline">#</a></h2>
-<dl class="simple">
-<dt>To install the package package from a specific branch. First clone the repository and checkout the branch. Then navigate into the repository directory and use the following command:</dt><dd><p><cite>pip install -e .</cite></p>
-</dd>
-</dl>
+<p>To install the package package from a specific branch. First clone the repository and checkout the branch. Then navigate into the repository directory and use the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
 <p>This command installs the package using the checked-out version.</p>
 </section>
 <section id="running-tests">
 <h2>Running Tests<a class="headerlink" href="#running-tests" title="Permalink to this headline">#</a></h2>
-<dl class="simple">
-<dt>The run the progpy tests, first clone the repository and checkout the branch, installing the package using the command above. Then navigate into the repository directory. Next install the tests required dependencies, by using the following commands:</dt><dd><p><cite>pip install notebook</cite>
-<cite>pip install testbook</cite>
-<cite>pip install requests</cite></p>
-</dd>
-<dt>Then run the tests using the following command:</dt><dd><p><cite>python -m tests</cite></p>
-</dd>
-</dl>
+<p>The run the progpy tests, first clone the repository and checkout the branch, installing the package using the command above. Then navigate into the repository directory. Next install the tests required dependencies, by using the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;.[test]&#39;</span>
+</pre></div>
+</div>
+<p>Then run the tests using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python<span class="w"> </span>-m<span class="w"> </span>tests
+</pre></div>
+</div>
+<div class="admonition-note admonition">
+<p class="admonition-title">Note</p>
+<p>Tests on data-driven tools (e.g., LSTM model) will need dependencies from the <code class="docutils literal notranslate"><span class="pre">datadriven</span></code> option installed.</p>
+</div>
 </section>
 <section id="contributing">
 <h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h2>
@@ -387,7 +393,7 @@ document.write(`
 </section>
 <section id="branching-strategy">
 <h2>Branching Strategy<a class="headerlink" href="#branching-strategy" title="Permalink to this headline">#</a></h2>
-<p>Our project is following the git strategy described <a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model/">here</a>. Release branches are not required. Details specific to each branch are described below. We recommend that developers from within NASA watch <cite>this video &lt;https://nasa-my.sharepoint.com/:v:/g/personal/rduffy_ndc_nasa_gov/EYCJK6qffBZNtSKZTOV9nPMBc9cPPF6fniRuKtG2GWvoPA&gt;</cite> on git strategies and best practices.</p>
+<p>Our project is following the git strategy described <a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model/">here</a>. Release branches are not required. Details specific to each branch are described below. We recommend that developers from within NASA watch <a class="reference external" href="https://nasa-my.sharepoint.com/:v:/g/personal/rduffy_ndc_nasa_gov/EYCJK6qffBZNtSKZTOV9nPMBc9cPPF6fniRuKtG2GWvoPA">this video</a> on git strategies and best practices.</p>
 <p><cite>master</cite>: Every merge into the master branch is done using a pull request (never commiting directly), is assigned a release number, and must complete the release checklist. The release checklist is a software assurance tool.</p>
 <p><cite>dev</cite>: Every commit on the dev branch should be functional. The PR checklist must be completed before merging into dev. Merging into dev should only be done through a PR, unless only documentation has been updated.</p>
 <p><cite>Feature or Bugfix Branches</cite>: These branches include changes specific to a new feature or fixing a bug.</p>
@@ -408,9 +414,8 @@ document.write(`
 <li><p>Review the test coverage reports (if there is a change)</p></li>
 <li><p>Review the software benchmarking results (if there is a change)</p></li>
 <li><dl class="simple">
-<dt>For added dependencies (new)</dt><dd><ul>
-<li><p>Add to requirements.txt,</p></li>
-<li><p>Add to setup.py,</p></li>
+<dt>For added dependencies</dt><dd><ul>
+<li><p>Add to <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code></p></li>
 <li><p>Add to the bottom of dev_guide.rst (this document)</p></li>
 <li><p>Notify Project Manager</p></li>
 </ul>
@@ -441,7 +446,7 @@ document.write(`
 <li><p>[Complete - checked automatically in PRs to dev] Confirm that every page has the copyright notice</p></li>
 <li><dl class="simple">
 <dt>Confirm added dependencies are at the following:</dt><dd><ul>
-<li><p>setup.py,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>,</p></li>
 <li><p>the bottom of npr7150.rst</p></li>
 </ul>
 </dd>
@@ -473,15 +478,23 @@ document.write(`
 </dd>
 </dl>
 </li>
-<li><p>Rebuild sphinx documents: <cite>sphinx-build sphinx_config/ docs/</cite></p></li>
+<li><p>Rebuild sphinx documents: <cite>sphinx-build sphinx-config/ docs/</cite></p></li>
 <li><p>Write release notes</p></li>
-<li><p>Update version number in src/*/__init__.py and setup.py</p></li>
+<li><p>Update version number in <code class="docutils literal notranslate"><span class="pre">src/\*/__init__.py</span></code>, <code class="docutils literal notranslate"><span class="pre">sphinx-config/conf.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code></p></li>
 <li><p>For releases adding new features- ensure that NASA release process has been followed.</p></li>
 <li><p>Confirm that on GitHub Releases page, the next release has been started and that a schedule is present including at least Release Date, Release Review Date, and Release Branch Opening Date.</p></li>
 </ul>
 <section id="updating-documentation">
 <h3>Updating Documentation<a class="headerlink" href="#updating-documentation" title="Permalink to this headline">#</a></h3>
-<p>Use the following command to update documentation (requires sphinx). Documentation is in the progpy repository.</p>
+<p>Use the following commands to get the relevant dependencies and update the documentation. Documentation is in the progpy repository.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;.[docs]&#39;</span>
+<span class="gp">$ </span>sphinx-build<span class="w"> </span>sphinx-config/<span class="w"> </span>docs/
+</pre></div>
+</div>
+<p>Sphinx-autobuild can be used to automatically rebuild the documentation when changes are made.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sphinx-autobuild<span class="w"> </span>sphinx-config/<span class="w"> </span>docs/
+</pre></div>
+</div>
 </section>
 <section id="uploading-new-version-to-pypi">
 <h3>Uploading new version to PyPI<a class="headerlink" href="#uploading-new-version-to-pypi" title="Permalink to this headline">#</a></h3>

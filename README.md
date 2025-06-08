@@ -41,15 +41,15 @@ Use the following to cite this repository:
   | author    = {Christopher Teubert and Katelyn Jarvis Griffith and Matteo Corbetta and Chetan Kulkarni and Portia Banerjee and Matthew Daigle},
   | title     = {{ProgPy Python Prognostics Packages}},
   | month     = May,
-  | year      = 2024,
-  | version   = {1.7},
+  | year      = 2025,
+  | version   = {1.8},
   | url       = {https://nasa.github.io/progpy}
   | }
 ```
 
 The corresponding reference should look like this:
 
-C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, M. Daigle, ProgPy Python Prognostics Packages, v1.7, May 2024. URL https://github.com/nasa/progpy.
+C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, M. Daigle, ProgPy Python Prognostics Packages, v1.8, May 2025. URL https://github.com/nasa/progpy.
 
 ## Contributing Organizations
 ProgPy was created by a partnership of multiple organizations, working together to build a set of high-quality prognostic tools for the wider PHM Community. We would like to give a big thank you for the ProgPy community, especially the following contributing organizations:

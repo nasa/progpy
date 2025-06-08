@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; ProgPy Python Packages 1.7 documentation</title>
+    <title>Index &#8212; ProgPy Python Packages 1.8 documentation</title>
   
   
   
@@ -31,7 +31,6 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/css/sphinx-toolbox.css" />
-    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
@@ -45,7 +44,6 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/tabs.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
     <link rel="shortcut icon" href="_static/nasa_logo.ico"/>
@@ -152,6 +150,7 @@
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/CompositeModel.html">CompositeModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataModel.html">DataModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DataSets.html">Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/DiscreteStates.html">Discrete States</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/EnsembleModel.html">EnsembleModel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/IncludedModels.html">Included Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api_ref/progpy/LinearModel.html">LinearModel</a></li>
@@ -169,6 +168,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="dev_guide.html">Developers Guide &amp; Project Plan</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -373,19 +373,25 @@ document.write(`
         <li><a href="api_ref/progpy/SimResult.html#progpy.sim_result.SimResult.clear">(progpy.sim_result.SimResult method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="glossary.html#term-composite-model"><strong>composite model</strong></a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/progpy/CompositeModel.html#progpy.CompositeModel">CompositeModel (class in progpy)</a>
 </li>
       <li><a href="api_ref/prog_server/load_ests.html#prog_server.models.load_ests.Const">Const() (in module prog_server.models.load_ests)</a>
+</li>
+      <li><a href="glossary.html#term-continuous-model"><strong>continuous model</strong></a>
+</li>
+      <li><a href="glossary.html#term-continuous-state"><strong>continuous state</strong></a>
 </li>
       <li><a href="glossary.html#term-controller"><strong>controller</strong></a>
 </li>
       <li><a href="api_ref/progpy/Prediction.html#progpy.predictors.UnweightedSamplesPrediction.count">count() (progpy.predictors.UnweightedSamplesPrediction method)</a>
 </li>
       <li><a href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData.cov">cov (progpy.uncertain_data.UncertainData property)</a>
+</li>
+      <li><a href="api_ref/progpy/DiscreteStates.html#progpy.create_discrete_state">create_discrete_state() (in module progpy)</a>
 </li>
       <li><a href="api_ref/progpy/ToEPredictionProfile.html#progpy.predictors.ToEPredictionProfile.cumulative_relative_accuracy">cumulative_relative_accuracy() (progpy.predictors.ToEPredictionProfile method)</a>
 </li>
@@ -407,9 +413,13 @@ document.write(`
 </li>
       <li><a href="api_ref/progpy/UncertainData.html#progpy.uncertain_data.UncertainData.describe">describe() (progpy.uncertain_data.UncertainData method)</a>
 </li>
+      <li><a href="glossary.html#term-direct-prediction-model"><strong>direct-prediction model</strong></a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="glossary.html#term-direct-prediction-model"><strong>direct-prediction model</strong></a>
+      <li><a href="glossary.html#term-discrete-model"><strong>discrete model</strong></a>
+</li>
+      <li><a href="glossary.html#term-discrete-state"><strong>discrete state</strong></a>
 </li>
       <li><a href="api_ref/progpy/DataModel.html#progpy.data_models.DMDModel.dmd_matrix">dmd_matrix (progpy.data_models.DMDModel attribute)</a>
 </li>
@@ -699,19 +709,15 @@ document.write(`
         <li><a href="api_ref/progpy/DataModel.html#progpy.data_models.LSTMStateTransitionModel.model">(progpy.data_models.LSTMStateTransitionModel attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     module
 
       <ul>
-        <li><a href="prog_server_guide.html#module-online_prog">online_prog</a>
-</li>
-        <li><a href="prog_server_guide.html#module-option_scoring">option_scoring</a>
-</li>
         <li><a href="api_ref/prog_server/prog_server.html#module-prog_server">prog_server</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/progpy/Prediction.html#progpy.predictors.Prediction.monotonicity">monotonicity() (progpy.predictors.Prediction method)</a>
 
       <ul>
@@ -750,22 +756,6 @@ document.write(`
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    online_prog
-
-      <ul>
-        <li><a href="prog_server_guide.html#module-online_prog">module</a>
-</li>
-      </ul></li>
-      <li>
-    option_scoring
-
-      <ul>
-        <li><a href="prog_server_guide.html#module-option_scoring">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="glossary.html#term-output"><strong>output</strong></a>
 </li>
       <li><a href="api_ref/progpy/LinearModel.html#progpy.LinearModel.output">output() (progpy.LinearModel method)</a>
@@ -774,6 +764,8 @@ document.write(`
         <li><a href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.output">(progpy.PrognosticsModel method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.OutputContainer">OutputContainer (progpy.PrognosticsModel attribute)</a>
 </li>
       <li><a href="api_ref/progpy/PrognosticModel.html#progpy.PrognosticsModel.outputs">outputs (progpy.PrognosticsModel attribute)</a>
@@ -900,6 +892,8 @@ document.write(`
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session">Session (class in prog_client)</a>
 </li>
       <li><a href="api_ref/prog_server/prog_client.html#prog_client.Session.set_state">set_state() (prog_client.Session method)</a>
+</li>
+      <li><a href="api_ref/progpy/IncludedModels.html#progpy.models.SimplifiedBattery">SimplifiedBattery (class in progpy.models)</a>
 </li>
       <li><a href="api_ref/progpy/SimResult.html#progpy.sim_result.SimResult">SimResult (class in progpy.sim_result)</a>
 </li>

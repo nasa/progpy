@@ -5,4 +5,4 @@ from .unweighted_samples import UnweightedSamples
 from .scalar_data import ScalarData
 from .multivariate_normal_dist import MultivariateNormalDist
 
-__all__ = ['UncertainData', 'UnweightedSamples', 'ScalarData', 'MultivariateNormalDist']
+__all__ = ["UncertainData", "UnweightedSamples", "ScalarData", "MultivariateNormalDist"]
