@@ -56,9 +56,7 @@ def alpha_lambda(
                     print("\n", key)
                     print("\ttoe:", toe.key(key))
                     print(
-                        "\tBounds: [{} - {}]({}%)".format(
-                            bounds[key][0], bounds[key][1], pib[key]
-                        )
+                        f"\tBounds: [{bounds[key][0]} - {bounds[key][1]}]({pib[key]}%)"
                     )
             return result
 
@@ -156,7 +154,7 @@ def monotonicity(toe_profile: ToEPredictionProfile, **kwargs) -> Dict[str, float
     Returns:
         dict (str, float): Dictionary where keys represent an event and values are float representing its respective monotonicitiy value between [0, 1].
     """
-    result = dict()
+    result = {}
     by_event = defaultdict(list)
     for time, uncertaindata in toe_profile.items():
         # Collect and organize mean values for each event in the individual prediction v

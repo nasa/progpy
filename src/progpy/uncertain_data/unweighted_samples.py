@@ -21,15 +21,18 @@ class UnweightedSamples(UncertainData, UserList):
             If InputContainer, OutputContainer, or StateContainer, must be of the form of *Container({'key': value, ...})
     """
 
-    def __init__(self, samples: list = [], _type=dict):
+    def __init__(self, samples: list = None, _type=dict):
         super().__init__(_type)
-        if isinstance(samples, dict) or isinstance(samples, DictLikeMatrixWrapper):
+        if samples is None:
+            self.data = []
+            return
+        if isinstance(samples, (dict, DictLikeMatrixWrapper)):
             # Is in form of {key: [value, ...], ...}
             # Convert to array of samples
             if len(samples.keys()) == 0:
                 self.data = []  # is empty
                 return
-            n_samples = len(list(samples.values())[0])  # Number of samples
+            n_samples = len(next(iter(samples.values())))  # Number of samples
             self.data = [
                 {key: value[i] for key, value in samples.items()}
                 for i in range(n_samples)
@@ -38,8 +41,8 @@ class UnweightedSamples(UncertainData, UserList):
             # is in form of [{key: value, ...}, ...]
             self.data = samples
         else:
-            raise ValueError(
-                "Invalid input. Must be list or dict, was {}".format(type(samples))
+            raise TypeError(
+                f"Invalid input. Must be list or dict, was {type(samples)}"
             )
 
     def __eq__(self, other):
@@ -175,7 +178,7 @@ class UnweightedSamples(UncertainData, UserList):
         return cov(unlabeled_samples)
 
     def __str__(self):
-        return "UnweightedSamples({})".format(self.data)
+        return f"UnweightedSamples({self.data})"
 
     @property
     def size(self) -> int:
@@ -194,12 +197,10 @@ class UnweightedSamples(UncertainData, UserList):
         if isinstance(bounds, list):
             bounds = {key: bounds for key in self.keys()}
         if not isinstance(bounds, dict) or all(
-            [isinstance(b, list) and len(b) == 2 for b in bounds]
+            isinstance(b, list) and len(b) == 2 for b in bounds
         ):
             raise TypeError(
-                "Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {}".format(
-                    type(bounds)
-                )
+                f"Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {type(bounds)}"
             )
         n_elements = len(self.data)
         return {

@@ -2,7 +2,9 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 from abc import ABC, abstractmethod
+
 import numpy as np
+
 from progpy import PrognosticsModel
 
 
@@ -122,9 +124,7 @@ class LinearModel(PrognosticsModel, ABC):
             or matrixShape[1] != colsCount
         ):  # check all rows are equal to correct column count
             raise AttributeError(
-                "Matrix size check failed: @property {} dimensions improperly formed along {} x {}.".format(
-                    notes[0], notes[1], notes[2]
-                )
+                f"Matrix size check failed: @property {notes[0]} dimensions improperly formed along {notes[1]} x {notes[2]}."
             )
 
     @property

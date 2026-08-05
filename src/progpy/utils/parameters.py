@@ -252,7 +252,7 @@ class PrognosticsModelParameters(UserDict):
                 # Make sure every key is present
                 # (single value already handled above)
                 if not all(
-                    [key in self["measurement_noise"] for key in self._m.outputs]
+                    key in self["measurement_noise"] for key in self._m.outputs
                 ):
                     raise ValueError(
                         "Measurement noise must have ever key in model.outputs"

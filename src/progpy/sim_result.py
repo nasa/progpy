@@ -198,7 +198,7 @@ class SimResult(UserList):
             self.times.extend(other.times)
             self.data.extend(other.data)
         else:
-            raise ValueError(f"ValueError: Argument must be of type {self.__class__}")
+            raise TypeError(f"Argument must be of type {self.__class__}")
         if "frame" in self.__dict__:
             del self.__dict__["frame"]
 
@@ -430,11 +430,11 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
                 else:
                     self.__dict__["data"].extend(other.data)
         elif isinstance(other, SimResult):
-            raise ValueError(
-                f"ValueError: {self.__class__} cannot be extended by SimResult. First convert to SimResult using to_simresult() method."
+            raise TypeError(
+                f"{self.__class__} cannot be extended by SimResult. First convert to SimResult using to_simresult() method."
             )
         else:
-            raise ValueError(f"ValueError: Argument must be of type {self.__class__}.")
+            raise TypeError(f"Argument must be of type {self.__class__}.")
 
     def pop(self, index: int = -1) -> dict:
         """Remove an element. If data hasn't been cached, remove the state - so it wont be calculated
@@ -461,9 +461,7 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
             s: State value to be removed
         """
         if sum([i is None for i in (d, t, s)]) != 2:
-            raise ValueError(
-                "ValueError: Only one named argument (d, t, s) can be specified."
-            )
+            raise TypeError("Only one named argument (d, t, s) can be specified.")
 
         if t is not None:
             target_index = self.times.index(t)

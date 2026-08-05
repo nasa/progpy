@@ -208,7 +208,7 @@ def MSE(
                         + (100 - (t / cutoffThreshold) * 100) * short_sim_penalty
                     )
                 else:
-                    warn("Model unstable- NaN reached in simulation (t={})".format(t))
+                    warn(f"Model unstable- NaN reached in simulation (t={t})")
                     break
             err_total += np.sum(
                 np.square(z.matrix - z_obs.matrix), where=~np.isnan(z.matrix)

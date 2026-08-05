@@ -27,7 +27,7 @@ class ScalarData(UncertainData):
     def __add__(self, other: int) -> "UncertainData":
         if other == 0:
             return self
-        new_state = dict()
+        new_state = {}
         for k, v in self.__state.items():
             new_state[k] = v + other
         return ScalarData(new_state)
@@ -42,7 +42,7 @@ class ScalarData(UncertainData):
         return self
 
     def __sub__(self, other: int) -> "UncertainData":
-        new_state = dict()
+        new_state = {}
         for k, v in self.__state.items():
             new_state[k] = v - other
         return ScalarData(new_state)
@@ -75,7 +75,7 @@ class ScalarData(UncertainData):
         return UnweightedSamples([self.__state] * num_samples, _type=self._type)
 
     def __str__(self) -> str:
-        return "ScalarData({})".format(self.__state)
+        return f"ScalarData({self.__state})"
 
     def percentage_in_bounds(self, bounds: Union[list, dict]) -> dict:
         if isinstance(bounds, list):

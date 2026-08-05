@@ -2,7 +2,6 @@
 
 # This file is kept for backwards compatability
 from numpy import mean, sqrt
-from warnings import warn
 
 from .uncertain_data_metrics import calc_metrics as eol_metrics  # noqa: F401
 from .toe_metrics import prob_success  # noqa: F401

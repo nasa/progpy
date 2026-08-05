@@ -96,9 +96,7 @@ class MultivariateNormalDist(UncertainData):
         )
 
     def __str__(self) -> str:
-        return "MultivariateNormalDist(mean: {}, covar: {})".format(
-            self.__mean, self.__covar
-        )
+        return f"MultivariateNormalDist(mean: {self.__mean}, covar: {self.__covar})"
 
     @property
     def cov(self) -> array:
