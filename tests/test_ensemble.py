@@ -1,7 +1,9 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
+from copy import deepcopy
 from io import StringIO
+import pickle
 import numpy as np
 import sys
 import unittest
@@ -17,6 +19,75 @@ class TestEnsemble(unittest.TestCase):
 
     def tearDown(self):
         sys.stdout = sys.__stdout__
+
+    def assert_restored_ensemble(self, original, restored):
+        self.assertIsNot(original, restored)
+        for key in ('inputs', 'states', 'outputs', 'events'):
+            self.assertEqual(getattr(original, key), getattr(restored, key))
+        for key in ('n_inputs', 'n_states', 'n_outputs', 'n_events'):
+            self.assertEqual(getattr(original, key), getattr(restored, key))
+        self.assertIs(restored.parameters._m, restored)
+        self.assertIsNot(original.parameters['models'], restored.parameters['models'])
+        for model, restored_model in zip(
+                original.parameters['models'], restored.parameters['models']):
+            self.assertIsNot(model, restored_model)
+            self.assertEqual(model.parameters, restored_model.parameters)
+
+        x0 = original.initialize()
+        restored_x0 = restored.initialize()
+        self.assertEqual(x0, restored_x0)
+        inputs = {key: 1 for key in original.inputs}
+        x = original.next_state(x0, original.InputContainer(inputs), 1)
+        restored_x = restored.next_state(
+            restored_x0, restored.InputContainer(inputs), 1)
+        self.assertEqual(x, restored_x)
+        self.assertEqual(original.output(x), restored.output(restored_x))
+        self.assertEqual(original.event_state(x), restored.event_state(restored_x))
+        self.assertEqual(original.threshold_met(x), restored.threshold_met(restored_x))
+        self.assertEqual(original.performance_metrics(x), restored.performance_metrics(restored_x))
+
+    def test_deepcopy_single_model(self):
+        model = EnsembleModel([OneInputOneOutputOneEventLM()])
+        self.assert_restored_ensemble(model, deepcopy(model))
+
+    def test_deepcopy_different_models(self):
+        model = EnsembleModel([
+            OneInputOneOutputOneEventLM(), OneInputOneOutputOneEventAltLM()])
+        self.assert_restored_ensemble(model, deepcopy(model))
+
+    def test_deepcopy_custom_aggregation_and_independent_parameters(self):
+        model = EnsembleModel([
+            OneInputOneOutputOneEventLM(), OneInputOneOutputOneEventLM(x0={'x1': 2})],
+            aggregation_method=np.max, process_noise=0.1, measurement_noise=0.2)
+        restored = deepcopy(model)
+        self.assert_restored_ensemble(model, restored)
+        self.assertIs(restored.parameters['aggregation_method'], np.max)
+        self.assertEqual(restored.initialize()['x1'], 2)
+        self.assertEqual(model.parameters['process_noise'], restored.parameters['process_noise'])
+        self.assertEqual(model.parameters['measurement_noise'], restored.parameters['measurement_noise'])
+
+        restored.parameters['models'][1].parameters['x0']['x1'] = 8
+        self.assertEqual(model.initialize()['x1'], 2)
+        self.assertEqual(restored.initialize()['x1'], 8)
+        restored.parameters['process_noise']['x1'] = 0.5
+        self.assertEqual(model.parameters['process_noise']['x1'], 0.1)
+
+    def test_pickle_single_model(self):
+        model = EnsembleModel([OneInputOneOutputOneEventLM()])
+        self.assert_restored_ensemble(model, pickle.loads(pickle.dumps(model)))
+
+    def test_pickle_different_models(self):
+        model = EnsembleModel([
+            OneInputOneOutputOneEventLM(), OneInputOneOutputOneEventAltLM()],
+            aggregation_method=np.max)
+        restored = pickle.loads(pickle.dumps(model))
+        self.assert_restored_ensemble(model, restored)
+        self.assertIs(restored.parameters['aggregation_method'], np.max)
+
+    def test_nested_ensemble_deepcopy(self):
+        inner = EnsembleModel([OneInputOneOutputOneEventLM()])
+        model = EnsembleModel([inner, OneInputOneOutputOneEventAltLM()])
+        self.assert_restored_ensemble(model, deepcopy(model))
 
     def test_no_model(self):
         with self.assertRaises(ValueError):
