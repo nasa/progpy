@@ -245,7 +245,7 @@ class DictLikeMatrixWrapper:
         """
         merges other DictLikeMatrixWrapper, updating values
         """
-        for key in other.keys():
+        for key in other:
             if key in self._keys:  # checks to see if every key in 'other' is in 'self'
                 # Existing key
                 self[key] = other[key]
@@ -278,6 +278,23 @@ class DictLikeMatrixWrapper:
         ):  # the matrix has rows and the first row/list has one value in it
             return str({key: value[0] for key, value in zip(self._keys, self._matrix)})
         return str(dict(zip(self._keys, self._matrix)))
+    
+    def to_dict(self) -> dict:
+        """
+        Converts the DictLikeMatrixWrapper to a dictionary. Important for json serialization and other operations that require a standard Python dictionary.
+
+        Returns:
+            dict: A dictionary representation of the DictLikeMatrixWrapper.
+        """
+        if len(self._matrix) > 0 and len(self._matrix[0]) == 1:
+            return {key: value[0] for key, value in zip(self._keys, self._matrix)}
+        return dict(zip(self._keys, self._matrix))
+    
+    @classmethod
+    def json_encoder(cls, o):
+        if isinstance(o, DictLikeMatrixWrapper):
+            return o.to_dict()
+        return o
 
 
 InputContainer = DictLikeMatrixWrapper
