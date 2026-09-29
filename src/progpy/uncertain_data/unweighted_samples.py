@@ -69,7 +69,7 @@ class UnweightedSamples(UncertainData, UserList):
     def __iadd__(self, other: int) -> "UncertainData":
         if other != 0:
             for i in range(len(self.data)):
-                for k, v in self.data[i].items():
+                for k in self.data[i]:
                     self.data[i][k] += other
         return self
 
@@ -90,7 +90,7 @@ class UnweightedSamples(UncertainData, UserList):
     def __isub__(self, other: int) -> "UncertainData":
         if other != 0:
             for i in range(len(self.data)):
-                for k, v in self.data[i].items():
+                for k in self.data[i]:
                     self.data[i][k] -= other
         return self
 

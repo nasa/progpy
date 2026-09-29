@@ -37,7 +37,7 @@ class ScalarData(UncertainData):
 
     def __iadd__(self, other: int) -> "UncertainData":
         if other != 0:
-            for k in self.__state.keys():
+            for k in self.__state:
                 self.__state[k] += other
         return self
 
@@ -52,7 +52,7 @@ class ScalarData(UncertainData):
 
     def __isub__(self, other: int) -> "UncertainData":
         if other != 0:
-            for k in self.__state.keys():
+            for k in self.__state:
                 self.__state[k] -= other
         return self
 
@@ -82,9 +82,7 @@ class ScalarData(UncertainData):
             bounds = {key: bounds for key in self.keys()}
         if not isinstance(bounds, dict) and all([isinstance(b, list) for b in bounds]):
             raise TypeError(
-                "Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {}".format(
-                    type(bounds)
-                )
+                f"Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {type(bounds)}"
             )
         return {
             key: (1 if bounds[key][0] < x and bounds[key][1] > x else 0)
