@@ -1,7 +1,7 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration. All Rights Reserved.
 
 import unittest
-from progpy.uncertain_data import UnweightedSamples, MultivariateNormalDist, ScalarData
+from progpy.uncertain_data import UnweightedSamples, MultivariateNormalDist, ScalarData, decode_json
 from numpy import array
 
 
@@ -56,6 +56,14 @@ class TestUncertainData(unittest.TestCase):
             data.percentage_in_bounds({"a": [0, 2.5], "b": [0, 1.5]}),
             {"a": 0.6, "b": 0.2},
         )
+        
+        # Test serialization and deserialization
+        json_data = data.encode_json()
+        decoded_data = UnweightedSamples.decode_json(json_data)
+        self.assertEqual(data, decoded_data)
+        
+        decoded_data = decode_json(json_data)
+        self.assertEqual(data, decoded_data)
 
     def test_multivariatenormaldist(self):
         try:
@@ -73,6 +81,14 @@ class TestUncertainData(unittest.TestCase):
         self.assertEqual(dist.sample(10).size, 10)
         self.assertTrue((dist.cov == array([[1, 0], [0, 1]])).all())
         dist.percentage_in_bounds([0, 10])
+        
+        # Test serialization and deserialization
+        json_data = dist.encode_json()
+        decoded_data = MultivariateNormalDist.decode_json(json_data)
+        self.assertEqual(dist, decoded_data)
+        
+        decoded_data = decode_json(json_data)
+        self.assertEqual(dist, decoded_data)
 
     def test_scalardist(self):
         data = {"a": 12, "b": 14}
@@ -83,6 +99,14 @@ class TestUncertainData(unittest.TestCase):
         self.assertEqual(d.percentage_in_bounds([13, 20]), {"a": 0, "b": 1})
         self.assertEqual(d.percentage_in_bounds([0, 10]), {"a": 0, "b": 0})
         self.assertEqual(d.percentage_in_bounds([0, 20]), {"a": 1, "b": 1})
+        
+        # Test serialization and deserialization
+        json_data = d.encode_json()
+        decoded_data = ScalarData.decode_json(json_data)
+        self.assertEqual(d, decoded_data)
+        
+        decoded_data = decode_json(json_data)
+        self.assertEqual(d, decoded_data)
 
     def test_pickle_unweightedsamples(self):
         data = {"a": 12, "b": 14}
