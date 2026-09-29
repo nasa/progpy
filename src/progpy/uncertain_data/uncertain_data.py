@@ -297,3 +297,11 @@ class UncertainData(ABC):
         Args:
             other (int): Integer value to be applied to class where appropriate.
         """
+        
+    @abstractmethod
+    def encode_json(self):
+        """Encode UncertainData object to JSON serializable format.
+
+        Returns:
+            dict: JSON serializable representation of the UncertainData object.
+        """

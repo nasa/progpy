@@ -88,3 +88,30 @@ class ScalarData(UncertainData):
             key: (1 if bounds[key][0] < x and bounds[key][1] > x else 0)
             for (key, x) in self.__state.items()
         }
+    
+    def encode_json(self):
+        """Encode ScalarData object to JSON serializable format.
+
+        Returns:
+            dict: JSON serializable representation of the ScalarData object.
+        """
+        return {
+            "type": "ScalarData",
+            "state": self.__state,
+        }
+        
+    @classmethod
+    def decode_json(cls, data):
+        """Decode JSON serializable ScalarData object.
+
+        Args:
+            data (dict): JSON serializable representation of the ScalarData object.
+
+        Returns:
+            ScalarData: Decoded ScalarData object.
+        """
+        if data["type"] != "ScalarData":
+            raise ValueError(
+                f"Invalid type for ScalarData decoding: {data['type']}. Expected 'ScalarData'."
+            )
+        return ScalarData(data["state"])

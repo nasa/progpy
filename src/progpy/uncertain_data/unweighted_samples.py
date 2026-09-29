@@ -213,3 +213,29 @@ class UnweightedSamples(UncertainData, UserList):
             / n_elements
             for key in keys
         }
+        
+    def encode_json(self) -> dict:
+        """Encode UnweightedSamples to JSON serializable dictionary
+
+        Returns:
+            dict: JSON serializable dictionary
+        """
+        return {
+            "type": "UnweightedSamples",
+            'samples': self.data
+        }
+        
+    @classmethod
+    def decode_json(cls, data: dict) -> "UnweightedSamples":
+        """Decode UnweightedSamples from JSON serializable dictionary
+
+        Args:
+            data (dict): JSON serializable dictionary
+        Returns:
+            UnweightedSamples: Decoded UnweightedSamples object
+        """
+        if data.get("type") != "UnweightedSamples":
+            raise ValueError(
+                f"Invalid type for UnweightedSamples decoding, expected 'UnweightedSamples', got {data.get('type')}"
+            )
+        return cls(samples=data.get("samples", []))
