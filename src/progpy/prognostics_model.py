@@ -1412,7 +1412,7 @@ class PrognosticsModel(ABC):
                 f"Keyword argument 'dt' must a initialized to a value greater than 0. Currently passed in {dt}."
             )
 
-        if "x0" in kwargs.keys() and not isinstance(
+        if "x0" in kwargs and not isinstance(
             kwargs["x0"], (self.StateContainer, dict)
         ):
             raise TypeError(
@@ -1548,7 +1548,7 @@ class PrognosticsModel(ABC):
         # Convert bounds
         if isinstance(config["bounds"], dict):
             # Allows for partial bounds definition, and definition by key name
-            for key in config["bounds"].keys():
+            for key in config["bounds"]:
                 if key not in self.parameters:
                     warn(
                         f"{key} is not a valid parameter (i.e., it is not a parameter present in this model) and should not be passed in to the bounds"
@@ -1703,11 +1703,9 @@ class PrognosticsModel(ABC):
         """
         from progpy.data_models import SURROGATE_METHOD_LOOKUP
 
-        if method not in SURROGATE_METHOD_LOOKUP.keys():
+        if method not in SURROGATE_METHOD_LOOKUP:
             raise ValueError(
-                "Method {} not supported. Supported methods: {}".format(
-                    method, SURROGATE_METHOD_LOOKUP.keys()
-                )
+                f"Method {method} not supported. Supported methods: {SURROGATE_METHOD_LOOKUP.keys()}"
             )
 
         # Configure
@@ -1728,7 +1726,7 @@ class PrognosticsModel(ABC):
 
         if len(load_functions) <= 0:
             raise ValueError("load_functions must contain at least one element")
-        if "save_pts" in config.keys():
+        if "save_pts" in config:
             raise ValueError("'save_pts' is not a valid input for DMD Surrogate Model.")
 
         if isinstance(config["input_keys"], str):

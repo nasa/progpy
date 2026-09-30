@@ -1,26 +1,25 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
-from warnings import catch_warnings, simplefilter
+import json
+import types
 from collections import UserDict, abc
 from copy import deepcopy
-import json
 from numbers import Number
+from typing import TYPE_CHECKING
+from warnings import catch_warnings, simplefilter
+
 import numpy as np
 from scipy.integrate import OdeSolver
-import types
-
 
 from progpy.utils.containers import DictLikeMatrixWrapper
-from progpy.utils.next_state import next_state_functions, SciPyIntegrateNextState
+from progpy.utils.next_state import SciPyIntegrateNextState, next_state_functions
 from progpy.utils.noise_functions import (
     measurement_noise_functions,
     process_noise_functions,
 )
 from progpy.utils.serialization import CustomEncoder, custom_decoder
 from progpy.utils.size import getsizeof
-
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     # Fix circular import issue in PrognosticsModelParameters init

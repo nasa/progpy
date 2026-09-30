@@ -89,7 +89,7 @@ def prognostic_horizon(
     params.update(kwargs)
 
     ph_result = {
-        k: None for k in ground_truth.keys()
+        k: None for k in ground_truth
     }  # False means not yet met; will be either a numerical value or None if met
     for t_prediction, toe in toe_profile.items():
         # Convert to TtE for toe and ground_truth
