@@ -1,6 +1,8 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
 from os.path import dirname, join
+import copy
 import numpy as np
+import pickle
 import random
 import sys
 import unittest
@@ -218,6 +220,50 @@ class TestStateEstimators(unittest.TestCase):
         with self.assertRaises(Exception):
             # Missing states
             UnscentedKalmanFilter(ThrownObject, {})
+
+    def test_UKF_pickle(self):
+        m = ThrownObject(process_noise=5e-2, measurement_noise=5e-2)
+        x_guess = {"x": 1.75, "v": 35}
+
+        filt = UnscentedKalmanFilter(m, x_guess)
+
+        # Test pickling
+        pickled = pickle.dumps(filt)
+        filt_unpickled = pickle.loads(pickled)
+
+        self.assertIsInstance(filt_unpickled, UnscentedKalmanFilter)
+        self.assertEqual(filt.t, filt_unpickled.t)
+        for k in filt.parameters.keys():
+            if isinstance(filt.parameters[k], np.ndarray):
+                np.testing.assert_array_equal(filt.parameters[k], filt_unpickled.parameters[k])
+            else:
+                self.assertEqual(filt.parameters[k], filt_unpickled.parameters[k])
+        for k in filt.x.mean.keys():
+            self.assertAlmostEqual(filt.x.mean[k], filt_unpickled.x.mean[k])
+
+        # Test estimation on unpickled filter
+        u = m.InputContainer({})
+        z = m.output(filt.x.mean)
+        filt.estimate(0.1, u, z)
+        filt_unpickled.estimate(0.1, u, z)
+
+        for k in filt.x.mean.keys():
+            self.assertAlmostEqual(filt.x.mean[k], filt_unpickled.x.mean[k])
+        self.assertTrue(
+            equal_cov(
+                (list(filt.x.keys()), filt.x.cov),
+                (list(filt_unpickled.x.keys()), filt_unpickled.x.cov),
+            )
+        )
+
+        # Test deepcopy
+        filt_copy = copy.deepcopy(filt)
+        self.assertIsInstance(filt_copy, UnscentedKalmanFilter)
+        filt.estimate(0.2, u, z)
+        filt_copy.estimate(0.2, u, z)
+        for k in filt.x.mean.keys():
+            self.assertAlmostEqual(filt.x.mean[k], filt_copy.x.mean[k])
+
         
     def __incorrect_input_tests(self, filter):
         class IncompleteModel:
