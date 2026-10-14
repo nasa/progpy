@@ -6,6 +6,7 @@ import unittest
 
 from progpy.models import BatteryElectroChemEOD as Battery
 from progpy.data_models import DMDModel
+from progpy import PrognosticsModel
 from progpy.models.test_models.linear_models import OneInputOneOutputOneEventLM
 
 
@@ -21,8 +22,9 @@ class TestSerialization(unittest.TestCase):
         model = OneInputOneOutputOneEventLM()
         model.parameters["process_noise"] = 0.1
 
-        restored = OneInputOneOutputOneEventLM.from_json(model.to_json())
+        restored = PrognosticsModel.from_json(model.to_json())
 
+        self.assertIs(type(restored), OneInputOneOutputOneEventLM)
         self.assertEqual(model.parameters, restored.parameters)
         self.assertEqual(model.inputs, restored.inputs)
         self.assertEqual(model.states, restored.states)
@@ -31,6 +33,11 @@ class TestSerialization(unittest.TestCase):
         self.assertEqual(
             model.performance_metric_keys, restored.performance_metric_keys
         )
+
+        legacy_restored = OneInputOneOutputOneEventLM.from_json(
+            model.parameters.to_json()
+        )
+        self.assertEqual(model.parameters, legacy_restored.parameters)
 
     def test_serialization_basic(self):
         batt = Battery()
@@ -107,25 +114,25 @@ class TestSerialization(unittest.TestCase):
 
         for i in range(min(len(surrogate_results.times), len(new_results.times))):
             self.assertEqual(surrogate_results.times[i], new_results.times[i])
-            for key in surrogate_results.states[0].keys():
+            for key in surrogate_results.states[0]:
                 self.assertAlmostEqual(
                     surrogate_results.states[i][key],
                     new_results.states[i][key],
                     delta=3e-01,
                 )
-            for key in surrogate_results.inputs[0].keys():
+            for key in surrogate_results.inputs[0]:
                 self.assertAlmostEqual(
                     surrogate_results.inputs[i][key],
                     new_results.inputs[i][key],
                     delta=3e-01,
                 )
-            for key in surrogate_results.outputs[0].keys():
+            for key in surrogate_results.outputs[0]:
                 self.assertAlmostEqual(
                     surrogate_results.outputs[i][key],
                     new_results.outputs[i][key],
                     delta=3e-01,
                 )
-            for key in surrogate_results.event_states[0].keys():
+            for key in surrogate_results.event_states[0]:
                 self.assertAlmostEqual(
                     surrogate_results.event_states[i][key],
                     new_results.event_states[i][key],
