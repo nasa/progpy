@@ -1,15 +1,19 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
 
-from collections import UserList, defaultdict, abc
+from collections import UserList, abc, defaultdict
 from copy import deepcopy
 from functools import cached_property
-from matplotlib.pyplot import figure
+import json
+from typing import Dict, List
+
 import numpy as np
 import pandas as pd
+from matplotlib.pyplot import figure
+
 from progpy.exceptions import warn_once
 from progpy.utils.containers import DictLikeMatrixWrapper
+from progpy.utils.serialization import CustomEncoder, custom_decoder
 from progpy.visualize import plot_timeseries
-from typing import Dict, List
 
 
 class SimResult(UserList):
@@ -155,6 +159,41 @@ class SimResult(UserList):
         #     DeprecationWarning, stacklevel=2)
 
         return self.equals(other)
+
+    def to_json(self) -> str:
+        """Serialize the simulation result's times and data to JSON."""
+        return json.dumps(
+            {"type": "SimResult", "times": self.times, "data": self.data},
+            cls=CustomEncoder,
+        )
+
+    @classmethod
+    def from_json(cls, data: str) -> "SimResult":
+        """Reconstruct a SimResult from a string produced by :meth:`to_json`.
+
+        Raises:
+            ValueError: If the JSON type is not ``SimResult`` or fields are missing.
+            TypeError: If the JSON payload is not an object or fields are not lists.
+        """
+        decoded = json.loads(data, object_hook=custom_decoder)
+        if not isinstance(decoded, dict):
+            raise TypeError("Invalid SimResult JSON: expected an object.")
+        if decoded.get("type") != "SimResult":
+            raise ValueError(
+                f"Invalid type for SimResult decoding: {decoded.get('type')}. "
+                "Expected 'SimResult'."
+            )
+        if "times" not in decoded or "data" not in decoded:
+            raise ValueError("Invalid SimResult JSON: missing 'times' or 'data'.")
+        if not isinstance(decoded["times"], list) or not isinstance(
+            decoded["data"], list
+        ):
+            raise TypeError(
+                "Invalid SimResult JSON: 'times' and 'data' must be lists."
+            )
+        if cls is not SimResult:
+            raise TypeError("SimResult JSON can only be decoded as SimResult.")
+        return cls(decoded["times"], decoded["data"])
 
     def index_of_data(self, other: dict, *args, **kwargs) -> int:
         """
@@ -409,7 +448,7 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
     def extend(self, other: "LazySimResult", _copy=True) -> None:
         """
         Extend the LazySimResult with another LazySimResult object
-        Raise ValueError if SimResult is passed
+        Raise TypeError if a non-LazySimResult is passed
         Function fcn of other LazySimResult MUST match function fcn of LazySimResult object to be extended
 
         Args:
@@ -461,7 +500,7 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
             s: State value to be removed
         """
         if sum([i is None for i in (d, t, s)]) != 2:
-            raise TypeError("Only one named argument (d, t, s) can be specified.")
+            raise ValueError("Only one named argument (d, t, s) can be specified.")
 
         if t is not None:
             target_index = self.times.index(t)

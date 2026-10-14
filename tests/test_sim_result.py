@@ -47,6 +47,35 @@ class TestSimResult(unittest.TestCase):
         except IndexError:
             pass
 
+    def test_json_serialization(self):
+        result = SimResult(
+            [0, 1],
+            [
+                {"a": 1.5, "b": 3.0},
+                DictLikeMatrixWrapper(["a", "b"], np.array([2.5, 5.0])),
+            ],
+        )
+
+        restored = SimResult.from_json(result.to_json())
+
+        self.assertEqual(restored.times, result.times)
+        self.assertEqual(restored.data[0], result.data[0])
+        self.assertIsInstance(restored.data[1], DictLikeMatrixWrapper)
+        self.assertEqual(restored.data[1].keys(), result.data[1].keys())
+        np.testing.assert_array_equal(restored.data[1].matrix, result.data[1].matrix)
+
+    def test_from_json_validates_type_and_payload(self):
+        with self.assertRaisesRegex(ValueError, "Expected 'SimResult'"):
+            SimResult.from_json('{"type": "OtherResult", "times": [], "data": []}')
+
+        with self.assertRaisesRegex(ValueError, "missing 'times' or 'data'"):
+            SimResult.from_json('{"type": "SimResult", "times": []}')
+
+        with self.assertRaisesRegex(TypeError, "must be lists"):
+            SimResult.from_json(
+                '{"type": "SimResult", "times": 0, "data": []}'
+            )
+
     def test_pickle(self):
         # Variables
         time = list(range(5))  # list of int, 0 to 4
@@ -112,12 +141,12 @@ class TestSimResult(unittest.TestCase):
         self.assertEqual(result.data, state_extended)
 
         self.assertRaises(
-            ValueError, result.extend, 0
+            TypeError, result.extend, 0
         )  # Passing non-LazySimResult types to extend method
-        self.assertRaises(ValueError, result.extend, [0, 1])
-        self.assertRaises(ValueError, result.extend, {})
-        self.assertRaises(ValueError, result.extend, set())
-        self.assertRaises(ValueError, result.extend, 1.5)
+        self.assertRaises(TypeError, result.extend, [0, 1])
+        self.assertRaises(TypeError, result.extend, {})
+        self.assertRaises(TypeError, result.extend, set())
+        self.assertRaises(TypeError, result.extend, 1.5)
 
     def test_extended_by_lazy(self):
         # Variables
@@ -642,15 +671,15 @@ class TestSimResult(unittest.TestCase):
         sim_result = SimResult(time, state)
 
         self.assertRaises(
-            ValueError, result.extend, sim_result
+            TypeError, result.extend, sim_result
         )  # Passing a SimResult to LazySimResult's extend
         self.assertRaises(
-            ValueError, result.extend, 0
+            TypeError, result.extend, 0
         )  # Passing non-LazySimResult types to extend method
-        self.assertRaises(ValueError, result.extend, [0, 1])
-        self.assertRaises(ValueError, result.extend, {})
-        self.assertRaises(ValueError, result.extend, set())
-        self.assertRaises(ValueError, result.extend, 1.5)
+        self.assertRaises(TypeError, result.extend, [0, 1])
+        self.assertRaises(TypeError, result.extend, {})
+        self.assertRaises(TypeError, result.extend, set())
+        self.assertRaises(TypeError, result.extend, 1.5)
 
     def test_lazy_pop(self):
         def f(x):
