@@ -7,7 +7,7 @@ from .multivariate_normal_dist import MultivariateNormalDist
 
 __all__ = ["UncertainData", "UnweightedSamples", "ScalarData", "MultivariateNormalDist"]
 
-def decode_json(data: dict) -> UncertainData:
+def from_json(data: dict) -> UncertainData:
     """Decode JSON serializable representation of UncertainData object.
 
     Args:
@@ -19,10 +19,10 @@ def decode_json(data: dict) -> UncertainData:
     if "type" not in data:
         raise ValueError("Invalid JSON data: missing 'type' key.")
     if data["type"] == "UnweightedSamples":
-        return UnweightedSamples.decode_json(data)
+        return UnweightedSamples.from_json(data)
     elif data["type"] == "ScalarData":
-        return ScalarData.decode_json(data)
+        return ScalarData.from_json(data)
     elif data["type"] == "MultivariateNormalDist":
-        return MultivariateNormalDist.decode_json(data)
+        return MultivariateNormalDist.from_json(data)
     else:
         raise ValueError(f"Unknown UncertainData type: {data['type']}")

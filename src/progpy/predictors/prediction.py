@@ -6,7 +6,7 @@ from typing import Dict, List
 
 from numpy import sign
 
-from ..uncertain_data import UnweightedSamples, UncertainData, decode_json
+from ..uncertain_data import UnweightedSamples, UncertainData, from_json
 
 PredictionResults = namedtuple(
     "PredictionResults",
@@ -34,7 +34,7 @@ class Prediction:
         return {
             "type": type(self).__name__,
             "times": self.times,
-            "data": [entry.encode_json() for entry in self.data],
+            "data": [entry.to_json() for entry in self.data],
         }
         
     def to_json(self) -> str:
@@ -50,7 +50,7 @@ class Prediction:
         
         
     def from_dict(cls, data: dict):
-        return cls(data["times"], [decode_json(entry) for entry in data["data"]])
+        return cls(data["times"], [from_json(entry) for entry in data["data"]])
 
     @classmethod
     def from_json(cls, data: str) -> "Prediction":
@@ -99,7 +99,7 @@ class Prediction:
                 "Invalid prediction JSON: each data entry must be an object."
             )
 
-        uncertain_data = [decode_json(entry) for entry in decoded["data"]]
+        uncertain_data = [from_json(entry) for entry in decoded["data"]]
         return prediction_class(decoded["times"], uncertain_data)
 
     def __eq__(self, other: "Prediction") -> bool:

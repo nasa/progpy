@@ -89,7 +89,7 @@ class ScalarData(UncertainData):
             for (key, x) in self.__state.items()
         }
     
-    def encode_json(self):
+    def to_json(self):
         """Encode ScalarData object to JSON serializable format.
 
         Returns:
@@ -101,7 +101,7 @@ class ScalarData(UncertainData):
         }
         
     @classmethod
-    def decode_json(cls, data):
+    def from_json(cls, data):
         """Decode JSON serializable ScalarData object.
 
         Args:

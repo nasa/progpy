@@ -102,7 +102,7 @@ class MultivariateNormalDist(UncertainData):
     def cov(self) -> array:
         return self.__covar
     
-    def encode_json(self):
+    def to_json(self):
         """Encode MultivariateNormalDist object to JSON serializable format.
 
         Returns:
@@ -116,7 +116,7 @@ class MultivariateNormalDist(UncertainData):
         }
         
     @classmethod
-    def decode_json(cls, data: dict) -> "MultivariateNormalDist":
+    def from_json(cls, data: dict) -> "MultivariateNormalDist":
         """Decode MultivariateNormalDist from JSON serializable dictionary
 
         Args:

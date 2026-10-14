@@ -299,7 +299,7 @@ class UncertainData(ABC):
         """
         
     @abstractmethod
-    def encode_json(self):
+    def to_json(self):
         """Encode UncertainData object to JSON serializable format.
 
         Returns:

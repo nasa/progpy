@@ -214,7 +214,7 @@ class UnweightedSamples(UncertainData, UserList):
             for key in keys
         }
         
-    def encode_json(self) -> dict:
+    def to_json(self) -> dict:
         """Encode UnweightedSamples to JSON serializable dictionary
 
         Returns:
@@ -226,7 +226,7 @@ class UnweightedSamples(UncertainData, UserList):
         }
         
     @classmethod
-    def decode_json(cls, data: dict) -> "UnweightedSamples":
+    def from_json(cls, data: dict) -> "UnweightedSamples":
         """Decode UnweightedSamples from JSON serializable dictionary
 
         Args:
