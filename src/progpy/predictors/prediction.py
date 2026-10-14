@@ -1,10 +1,12 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration. All Rights Reserved.
 
 from collections import UserList, defaultdict, namedtuple
+import json
 from typing import Dict, List
+
 from numpy import sign
 
-from ..uncertain_data import UnweightedSamples, UncertainData
+from ..uncertain_data import UnweightedSamples, UncertainData, decode_json
 
 PredictionResults = namedtuple(
     "PredictionResults",
@@ -26,6 +28,79 @@ class Prediction:
     def __init__(self, times: list, data: list):
         self.times = times
         self.data = data
+
+    def to_dict(self) -> dict:
+        """Serialize this prediction and its uncertain data to a dictionary."""
+        return {
+            "type": type(self).__name__,
+            "times": self.times,
+            "data": [entry.encode_json() for entry in self.data],
+        }
+        
+    def to_json(self) -> str:
+        """Serialize this prediction and its uncertain data to a JSON string.
+
+        The serialized data contains the prediction type, times, and encoded
+        uncertain-data entries. It does not include the ``PredictionResults``
+        returned alongside predictions by predictors.
+        """
+        return json.dumps(
+            self.to_dict(), sort_keys=True, indent=4, separators=(",", ": ")
+        )
+        
+        
+    def from_dict(cls, data: dict):
+        return cls(data["times"], [decode_json(entry) for entry in data["data"]])
+
+    @classmethod
+    def from_json(cls, data: str) -> "Prediction":
+        """Reconstruct a prediction from a string produced by :meth:`to_json`.
+
+        Calling this method on ``Prediction`` dispatches to the concrete
+        prediction class recorded in the JSON. Calling it on a concrete
+        subclass requires that the serialized type matches that subclass.
+
+        Raises:
+            ValueError: If the JSON envelope or prediction type is invalid.
+            TypeError: If the JSON envelope contains values of invalid types.
+        """
+        decoded = json.loads(data)
+        if not isinstance(decoded, dict):
+            raise TypeError("Invalid prediction JSON: expected an object.")
+
+        prediction_classes = {
+            "Prediction": Prediction,
+            "UnweightedSamplesPrediction": UnweightedSamplesPrediction,
+        }
+        prediction_type = decoded.get("type")
+        if (
+            not isinstance(prediction_type, str)
+            or prediction_type not in prediction_classes
+        ):
+            raise ValueError(f"Unknown prediction type: {prediction_type}")
+
+        prediction_class = prediction_classes[prediction_type]
+        if cls is not Prediction and cls is not prediction_class:
+            raise ValueError(
+                f"Invalid prediction type for {cls.__name__} decoding: "
+                f"expected '{cls.__name__}', got '{prediction_type}'."
+            )
+
+        if "times" not in decoded or "data" not in decoded:
+            raise ValueError("Invalid prediction JSON: missing 'times' or 'data'.")
+        if not isinstance(decoded["times"], list) or not isinstance(
+            decoded["data"], list
+        ):
+            raise TypeError(
+                "Invalid prediction JSON: 'times' and 'data' must be lists."
+            )
+        if not all(isinstance(entry, dict) for entry in decoded["data"]):
+            raise TypeError(
+                "Invalid prediction JSON: each data entry must be an object."
+            )
+
+        uncertain_data = [decode_json(entry) for entry in decoded["data"]]
+        return prediction_class(decoded["times"], uncertain_data)
 
     def __eq__(self, other: "Prediction") -> bool:
         """Compare 2 Predictions
