@@ -57,12 +57,20 @@ class TestSimResult(unittest.TestCase):
         )
 
         restored = SimResult.from_json(result.to_json())
+        restored_from_dict = SimResult.from_dict(result.to_dict())
 
         self.assertEqual(restored.times, result.times)
+        self.assertEqual(restored_from_dict.times, result.times)
         self.assertEqual(restored.data[0], result.data[0])
+        self.assertEqual(restored_from_dict.data[0], result.data[0])
         self.assertIsInstance(restored.data[1], DictLikeMatrixWrapper)
+        self.assertIsInstance(restored_from_dict.data[1], DictLikeMatrixWrapper)
         self.assertEqual(restored.data[1].keys(), result.data[1].keys())
+        self.assertEqual(restored_from_dict.data[1].keys(), result.data[1].keys())
         np.testing.assert_array_equal(restored.data[1].matrix, result.data[1].matrix)
+        np.testing.assert_array_equal(
+            restored_from_dict.data[1].matrix, result.data[1].matrix
+        )
 
     def test_from_json_validates_type_and_payload(self):
         with self.assertRaisesRegex(ValueError, "Expected 'SimResult'"):

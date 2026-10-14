@@ -6,6 +6,7 @@ from typing import Dict, List
 
 from numpy import sign
 
+from ..sim_result import SimResult
 from ..uncertain_data import UnweightedSamples, UncertainData, from_json
 
 PredictionResults = namedtuple(
@@ -49,8 +50,43 @@ class Prediction:
         )
         
         
+    @classmethod
     def from_dict(cls, data: dict):
-        return cls(data["times"], [from_json(entry) for entry in data["data"]])
+        if not isinstance(data, dict):
+            raise TypeError("Invalid prediction data: expected an object.")
+
+        prediction_classes = {
+            "Prediction": Prediction,
+            "UnweightedSamplesPrediction": UnweightedSamplesPrediction,
+        }
+        prediction_type = data.get("type")
+        if (
+            not isinstance(prediction_type, str)
+            or prediction_type not in prediction_classes
+        ):
+            raise ValueError(f"Unknown prediction type: {prediction_type}")
+
+        prediction_class = prediction_classes[prediction_type]
+        if cls is not Prediction and cls is not prediction_class:
+            raise ValueError(
+                f"Invalid prediction type for {cls.__name__} decoding: "
+                f"expected '{cls.__name__}', got '{prediction_type}'."
+            )
+        if "times" not in data or "data" not in data:
+            raise ValueError("Invalid prediction data: missing 'times' or 'data'.")
+        if not isinstance(data["times"], list) or not isinstance(data["data"], list):
+            raise TypeError(
+                "Invalid prediction data: 'times' and 'data' must be lists."
+            )
+        if prediction_class is UnweightedSamplesPrediction:
+            return prediction_class.from_dict(data)
+        if not all(isinstance(entry, dict) for entry in data["data"]):
+            raise TypeError(
+                "Invalid prediction data: each data entry must be an object."
+            )
+        return prediction_class(
+            data["times"], [from_json(entry) for entry in data["data"]]
+        )
 
     @classmethod
     def from_json(cls, data: str) -> "Prediction":
@@ -64,43 +100,7 @@ class Prediction:
             ValueError: If the JSON envelope or prediction type is invalid.
             TypeError: If the JSON envelope contains values of invalid types.
         """
-        decoded = json.loads(data)
-        if not isinstance(decoded, dict):
-            raise TypeError("Invalid prediction JSON: expected an object.")
-
-        prediction_classes = {
-            "Prediction": Prediction,
-            "UnweightedSamplesPrediction": UnweightedSamplesPrediction,
-        }
-        prediction_type = decoded.get("type")
-        if (
-            not isinstance(prediction_type, str)
-            or prediction_type not in prediction_classes
-        ):
-            raise ValueError(f"Unknown prediction type: {prediction_type}")
-
-        prediction_class = prediction_classes[prediction_type]
-        if cls is not Prediction and cls is not prediction_class:
-            raise ValueError(
-                f"Invalid prediction type for {cls.__name__} decoding: "
-                f"expected '{cls.__name__}', got '{prediction_type}'."
-            )
-
-        if "times" not in decoded or "data" not in decoded:
-            raise ValueError("Invalid prediction JSON: missing 'times' or 'data'.")
-        if not isinstance(decoded["times"], list) or not isinstance(
-            decoded["data"], list
-        ):
-            raise TypeError(
-                "Invalid prediction JSON: 'times' and 'data' must be lists."
-            )
-        if not all(isinstance(entry, dict) for entry in decoded["data"]):
-            raise TypeError(
-                "Invalid prediction JSON: each data entry must be an object."
-            )
-
-        uncertain_data = [from_json(entry) for entry in decoded["data"]]
-        return prediction_class(decoded["times"], uncertain_data)
+        return cls.from_dict(json.loads(data))
 
     def __eq__(self, other: "Prediction") -> bool:
         """Compare 2 Predictions
@@ -187,6 +187,59 @@ class UnweightedSamplesPrediction(Prediction, UserList):
     def __init__(self, times: list, data: list):
         super(UnweightedSamplesPrediction, self).__init__(times, data)
         self.__transformed = False  # If transform has been calculated
+
+    def to_dict(self) -> dict:
+        """Serialize each sample profile as a SimResult dictionary."""
+        profiles = []
+        for profile in self.data:
+            if isinstance(profile, SimResult):
+                serialized_profile = profile.to_dict()
+            else:
+                serialized_profile = profile.to_json()
+            if isinstance(serialized_profile, str):
+                serialized_profile = json.loads(serialized_profile)
+            profiles.append(serialized_profile)
+
+        return {
+            "type": type(self).__name__,
+            "times": self.times,
+            "data": profiles,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "UnweightedSamplesPrediction":
+        """Reconstruct a prediction from dictionaries produced by :meth:`to_dict`."""
+        if not isinstance(data, dict):
+            raise TypeError("Invalid prediction data: expected an object.")
+        if data.get("type") != cls.__name__:
+            raise ValueError(
+                f"Invalid prediction type for {cls.__name__} decoding: "
+                f"expected '{cls.__name__}', got '{data.get('type')}'."
+            )
+        if "times" not in data or "data" not in data:
+            raise ValueError("Invalid prediction data: missing 'times' or 'data'.")
+        if not isinstance(data["times"], list) or not isinstance(data["data"], list):
+            raise TypeError(
+                "Invalid prediction data: 'times' and 'data' must be lists."
+            )
+        if not all(isinstance(profile, (dict, str)) for profile in data["data"]):
+            raise TypeError(
+                "Invalid prediction data: each sample profile must be an object "
+                "or JSON string."
+            )
+        profiles = [
+            json.loads(profile) if isinstance(profile, str) else profile
+            for profile in data["data"]
+        ]
+        return cls(
+            data["times"],
+            [
+                SimResult.from_dict(profile)
+                if profile.get("type") == "SimResult"
+                else from_json(profile)
+                for profile in profiles
+            ],
+        )
 
     def __calculate_tranform(self):
         """

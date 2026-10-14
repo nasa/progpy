@@ -160,40 +160,53 @@ class SimResult(UserList):
 
         return self.equals(other)
 
+    def to_dict(self) -> dict:
+        """Serialize the simulation result's times and data to a dictionary."""
+        return json.loads(
+            json.dumps(
+                {"type": "SimResult", "times": self.times, "data": self.data},
+                cls=CustomEncoder,
+            )
+        )
+
     def to_json(self) -> str:
         """Serialize the simulation result's times and data to JSON."""
-        return json.dumps(
-            {"type": "SimResult", "times": self.times, "data": self.data},
-            cls=CustomEncoder,
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "SimResult":
+        """Reconstruct a SimResult from a dictionary produced by :meth:`to_dict`.
+
+        Raises:
+            ValueError: If the type is not ``SimResult`` or fields are missing.
+            TypeError: If the payload is not an object or fields are not lists.
+        """
+        if not isinstance(data, dict):
+            raise TypeError("Invalid SimResult data: expected a dictionary.")
+        if data.get("type") != "SimResult":
+            raise ValueError(
+                f"Invalid type for SimResult decoding: {data.get('type')}. "
+                "Expected 'SimResult'."
+            )
+        if "times" not in data or "data" not in data:
+            raise ValueError("Invalid SimResult data: missing 'times' or 'data'.")
+        if not isinstance(data["times"], list) or not isinstance(
+            data["data"], list
+        ):
+            raise TypeError(
+                "Invalid SimResult data: 'times' and 'data' must be lists."
+            )
+        if cls is not SimResult:
+            raise TypeError("SimResult data can only be decoded as SimResult.")
+        decoded = json.loads(
+            json.dumps(data, cls=CustomEncoder), object_hook=custom_decoder
         )
+        return cls(decoded["times"], decoded["data"])
 
     @classmethod
     def from_json(cls, data: str) -> "SimResult":
-        """Reconstruct a SimResult from a string produced by :meth:`to_json`.
-
-        Raises:
-            ValueError: If the JSON type is not ``SimResult`` or fields are missing.
-            TypeError: If the JSON payload is not an object or fields are not lists.
-        """
-        decoded = json.loads(data, object_hook=custom_decoder)
-        if not isinstance(decoded, dict):
-            raise TypeError("Invalid SimResult JSON: expected an object.")
-        if decoded.get("type") != "SimResult":
-            raise ValueError(
-                f"Invalid type for SimResult decoding: {decoded.get('type')}. "
-                "Expected 'SimResult'."
-            )
-        if "times" not in decoded or "data" not in decoded:
-            raise ValueError("Invalid SimResult JSON: missing 'times' or 'data'.")
-        if not isinstance(decoded["times"], list) or not isinstance(
-            decoded["data"], list
-        ):
-            raise TypeError(
-                "Invalid SimResult JSON: 'times' and 'data' must be lists."
-            )
-        if cls is not SimResult:
-            raise TypeError("SimResult JSON can only be decoded as SimResult.")
-        return cls(decoded["times"], decoded["data"])
+        """Reconstruct a SimResult from a string produced by :meth:`to_json`."""
+        return cls.from_dict(json.loads(data))
 
     def index_of_data(self, other: dict, *args, **kwargs) -> int:
         """

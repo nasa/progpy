@@ -17,6 +17,7 @@ from progpy.models import BatteryCircuit, ThrownObject
 from progpy.state_estimators import UnscentedKalmanFilter
 from progpy.predictors.prediction import UnweightedSamplesPrediction, Prediction
 from progpy.metrics import samples
+from progpy.sim_result import SimResult
 
 # This ensures that the directory containing predictor_template is in the Python search directory
 from os.path import dirname, join
@@ -359,6 +360,48 @@ class TestPredictors(unittest.TestCase):
         self.assertEqual(
             UnweightedSamplesPrediction.from_json(encoded), prediction
         )
+
+    def test_unweighted_samples_prediction_dict_serialization(self):
+        times = [0, 1]
+        profiles = [
+            SimResult([0, 1], [{"x": 0}, {"x": 1}]),
+            SimResult([0, 1], [{"x": 2}, {"x": 3}]),
+        ]
+        prediction = UnweightedSamplesPrediction(times, profiles)
+
+        encoded = prediction.to_dict()
+        restored = UnweightedSamplesPrediction.from_dict(encoded)
+        base_restored = Prediction.from_dict(encoded)
+        restored_from_json = Prediction.from_json(prediction.to_json())
+
+        self.assertEqual(restored, prediction)
+        self.assertEqual(base_restored, prediction)
+        self.assertEqual(restored_from_json, prediction)
+        self.assertIsInstance(restored[0], SimResult)
+        self.assertEqual(restored.snapshot(1), UnweightedSamples([{"x": 1}, {"x": 3}]))
+
+    def test_unweighted_samples_prediction_dict_normalizes_json_profiles(self):
+        profile = SimResult([0, 1], [{"x": 0}, {"x": 1}])
+
+        class JsonOnlyProfile:
+            def to_json(self):
+                return profile.to_json()
+
+        prediction = UnweightedSamplesPrediction([0, 1], [JsonOnlyProfile()])
+
+        encoded = prediction.to_dict()
+        self.assertIsInstance(encoded["data"][0], dict)
+        restored = UnweightedSamplesPrediction.from_dict(encoded)
+        self.assertEqual(restored[0], profile)
+
+        legacy_payload = {
+            **encoded,
+            "data": [profile.to_json()],
+        }
+        self.assertEqual(
+            UnweightedSamplesPrediction.from_dict(legacy_payload)[0], profile
+        )
+        self.assertEqual(Prediction.from_dict(legacy_payload)[0], profile)
 
     def test_prediction_from_json_validates_type_and_payload(self):
         with self.assertRaisesRegex(ValueError, "Unknown prediction type"):
