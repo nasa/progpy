@@ -281,7 +281,7 @@ class CompositeModel(PrognosticsModel):
             # Process connections
             # This initializes the states connected to outputs
             for in_key_part, in_key in self.__to_state_connections[name]:
-                if in_key in z.keys():
+                if in_key in z:
                     x_0[in_key] = z[in_key]
                 else:  # Missing from z, so estimate using initial state
                     z_ii = m.output(x_i)

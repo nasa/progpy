@@ -33,7 +33,7 @@ def euler_next_state(model, x, u, dt: float):
     PrognosticsModel.next_state
     """
     dx = model.dx(x, u)
-    return model.StateContainer({key: x[key] + dx[key] * dt for key in dx.keys()})
+    return model.StateContainer({key: x[key] + dx[key] * dt for key in dx})
 
 
 def rk4_next_state(model, x, u, dt: float):
@@ -79,7 +79,7 @@ def rk4_next_state(model, x, u, dt: float):
     x = model.StateContainer(
         {
             key: x[key] + dt / 3 * (dx1[key] / 2 + dx2[key] + dx3[key] + dx4[key] / 2)
-            for key in dx1.keys()
+            for key in dx1
         }
     )
     return x

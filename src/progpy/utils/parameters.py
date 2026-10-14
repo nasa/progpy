@@ -120,7 +120,7 @@ class PrognosticsModelParameters(UserDict):
                 self._m.next_state = types.MethodType(fcn, self._m)
                 return
             method = value.lower()
-            if method in next_state_functions.keys():
+            if method in next_state_functions:
                 self._m.next_state = types.MethodType(
                     next_state_functions[method], self._m
                 )
@@ -150,7 +150,7 @@ class PrognosticsModelParameters(UserDict):
                     noise = self["process_noise"]
                     for key in self._m.states:
                         # Set any missing keys to 0
-                        if key not in noise.keys():
+                        if key not in noise:
                             noise[key] = 0
 
                     self.data["process_noise"] = self._m.StateContainer(noise)
@@ -214,7 +214,7 @@ class PrognosticsModelParameters(UserDict):
                     noise = self["measurement_noise"]
                     for key in self._m.outputs:
                         # Set any missing keys to 0
-                        if key not in noise.keys():
+                        if key not in noise:
                             noise[key] = 0
                     self.data["measurement_noise"] = self._m.OutputContainer(noise)
 

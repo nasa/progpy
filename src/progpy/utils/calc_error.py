@@ -460,7 +460,7 @@ def DTW(m, times, inputs, outputs, **kwargs):
         transform = []
         for index in data:
             inner_list = []
-            for key in index.keys():
+            for key in index:
                 inner_list.append(index.get(key))
             transform.append(inner_list)
         for i, t in enumerate(times):
