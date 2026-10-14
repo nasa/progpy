@@ -6,6 +6,7 @@ import unittest
 
 from progpy.models import BatteryElectroChemEOD as Battery
 from progpy.data_models import DMDModel
+from progpy.models.test_models.linear_models import OneInputOneOutputOneEventLM
 
 
 class TestSerialization(unittest.TestCase):
@@ -15,6 +16,21 @@ class TestSerialization(unittest.TestCase):
 
     def tearDown(self):
         sys.stdout = sys.__stdout__
+
+    def test_prognostics_model_json_round_trip(self):
+        model = OneInputOneOutputOneEventLM()
+        model.parameters["process_noise"] = 0.1
+
+        restored = OneInputOneOutputOneEventLM.from_json(model.to_json())
+
+        self.assertEqual(model.parameters, restored.parameters)
+        self.assertEqual(model.inputs, restored.inputs)
+        self.assertEqual(model.states, restored.states)
+        self.assertEqual(model.outputs, restored.outputs)
+        self.assertEqual(model.events, restored.events)
+        self.assertEqual(
+            model.performance_metric_keys, restored.performance_metric_keys
+        )
 
     def test_serialization_basic(self):
         batt = Battery()
