@@ -66,23 +66,15 @@ class SimResult(UserList):
 
     @cached_property
     def frame(self) -> pd.DataFrame:
-        """
-        .. versionadded:: 1.5.0
+        """Return simulation data as a DataFrame indexed by time."""
+        frame = pd.DataFrame.from_records(
+            [dict(sample) for sample in self.data]
+        )
 
-            pd.DataFrame: A pandas DataFrame representing the SimResult data
-        """
-        # warn_once('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
-        if len(self.data) > 0:
-            frame = pd.concat(
-                [pd.DataFrame(dict(dframe), index=[0]) for dframe in self.data],
-                ignore_index=True,
-                axis=0,
-            )
-        else:
-            frame = pd.DataFrame()
         if self.times is not None:
             frame.insert(0, "time", self.times)
             frame = frame.set_index("time")
+
         return frame
 
     def frame_is_empty(self) -> bool:
@@ -115,7 +107,7 @@ class SimResult(UserList):
         """
         in addition to the normal functionality, updates the _frame if it exists
         """
-        self.insert(i, item)
+        super().insert(i, item)
         if "frame" in self.__dict__:
             for value in item:
                 self.__dict__["frame"].insert(i, column=[value], value=item[value])
