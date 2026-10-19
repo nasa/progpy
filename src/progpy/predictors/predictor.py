@@ -21,28 +21,33 @@ class Predictor(ABC):
         A prognostics model to be used in prediction
     kwargs : optional, keyword arguments
     """
+
     default_parameters = {}
 
     def __init__(self, model, **kwargs):
-        if not hasattr(model, 'output'):
+        if not hasattr(model, "output"):
             raise NotImplementedError("model must have `output` method")
-        if not hasattr(model, 'next_state'):
+        if not hasattr(model, "next_state"):
             raise NotImplementedError("model must have `next_state` method")
-        if not hasattr(model, 'inputs'):
+        if not hasattr(model, "inputs"):
             raise NotImplementedError("model must have `inputs` property")
-        if not hasattr(model, 'outputs'):
+        if not hasattr(model, "outputs"):
             raise NotImplementedError("model must have `outputs` property")
-        if not hasattr(model, 'states'):
+        if not hasattr(model, "states"):
             raise NotImplementedError("model must have `states` property")
-        if not hasattr(model, 'simulate_to_threshold'):
-            raise NotImplementedError("model must have `simulate_to_threshold` property")
+        if not hasattr(model, "simulate_to_threshold"):
+            raise NotImplementedError(
+                "model must have `simulate_to_threshold` property"
+            )
         self.model = model
 
         self.parameters = deepcopy(self.default_parameters)
         self.parameters.update(kwargs)
 
     @abstractmethod
-    def predict(self, state: UncertainData, future_loading_eqn: Callable, **kwargs) -> PredictionResults:
+    def predict(
+        self, state: UncertainData, future_loading_eqn: Callable, **kwargs
+    ) -> PredictionResults:
         """
         Perform a single prediction
 
@@ -66,7 +71,7 @@ class Predictor(ABC):
         Return
         ----------
         result from prediction, including: NameTuple
-            * times (List[float]): Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]            
+            * times (List[float]): Times for each savepoint such that inputs.snapshot(i), states.snapshot(i), outputs.snapshot(i), and event_states.snapshot(i) are all at times[i]
             * inputs (Prediction): Inputs at each savepoint such that inputs.snapshot(i) is the input distribution (type UncertainData) at times[i]
             * states (Prediction): States at each savepoint such that states.snapshot(i) is the state distribution (type UncertainData) at times[i]
             * outputs (Prediction): Outputs at each savepoint such that outputs.snapshot(i) is the output distribution (type UncertainData) at times[i]

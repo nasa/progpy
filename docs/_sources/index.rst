@@ -21,6 +21,7 @@ ProgPy documentation is split into three senctions described below.
 
    guide
    api_ref
+   troubleshooting
    releases
    glossary
    dev_guide
@@ -31,19 +32,19 @@ Citing This Repository
 -----------------------
 Use the following to cite this repository:
 
-@misc{2023_nasa_progpy,
+@misc{2025_nasa_progpy,
   | author    = {Christopher Teubert and Katelyn Jarvis Griffith and Matteo Corbetta and Chetan Kulkarni and Portia Banerjee and Jason Watkins and Matthew Daigle},
   | title     = {{ProgPy Python Prognostics Packages}},
   | month     = May,
-  | year      = 2024,
-  | version   = {1.7},
+  | year      = 2025,
+  | version   = {1.8},
   | url       = {https://nasa.github.io/progpy}
   | doi       = {10.5281/ZENODO.8097013}
   | }
 
 The corresponding reference should look like this:
 
-C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, J. Watkins, M. Daigle, ProgPy Python Prognostics Packages, v1.7, May 2024. URL https://github.com/nasa/progpy.
+C. Teubert, K. Jarvis Griffith, M. Corbetta, C. Kulkarni, P. Banerjee, J. Watkins, M. Daigle, ProgPy Python Prognostics Packages, v1.8, May 2025. URL https://github.com/nasa/progpy.
 
 Contributing and Partnering
 -----------------------------

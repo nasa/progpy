@@ -12,7 +12,7 @@ from . import UncertainData
 
 class UnweightedSamples(UncertainData, UserList):
     """
-    Uncertain Data represented by a set of samples. Objects of this class can be treated like a list where samples[n] returns the nth sample (Dict). 
+    Uncertain Data represented by a set of samples. Objects of this class can be treated like a list where samples[n] returns the nth sample (Dict).
 
     Args:
         samples (array, dict, or model.*Container, optional): array of samples. Defaults to empty array.\n
@@ -20,21 +20,30 @@ class UnweightedSamples(UncertainData, UserList):
             If list, must be of the form of [{key: value, ...}, ...]\n
             If InputContainer, OutputContainer, or StateContainer, must be of the form of *Container({'key': value, ...})
     """
-    def __init__(self, samples: list = [], _type=dict):
+
+    def __init__(self, samples: list = None, _type=dict):
         super().__init__(_type)
-        if isinstance(samples, dict) or isinstance(samples, DictLikeMatrixWrapper):
+        if samples is None:
+            self.data = []
+            return
+        if isinstance(samples, (dict, DictLikeMatrixWrapper)):
             # Is in form of {key: [value, ...], ...}
             # Convert to array of samples
             if len(samples.keys()) == 0:
                 self.data = []  # is empty
                 return
-            n_samples = len(list(samples.values())[0])  # Number of samples
-            self.data = [{key: value[i] for key, value in samples.items()} for i in range(n_samples)]
+            n_samples = len(next(iter(samples.values())))  # Number of samples
+            self.data = [
+                {key: value[i] for key, value in samples.items()}
+                for i in range(n_samples)
+            ]
         elif isinstance(samples, Iterable):
             # is in form of [{key: value, ...}, ...]
             self.data = samples
         else:
-            raise ValueError('Invalid input. Must be list or dict, was {}'.format(type(samples)))
+            raise TypeError(
+                f"Invalid input. Must be list or dict, was {type(samples)}"
+            )
 
     def __eq__(self, other):
         return isinstance(other, UnweightedSamples) and self.data == other.data
@@ -49,7 +58,7 @@ class UnweightedSamples(UncertainData, UserList):
         result = []
         for i in range(len(self.data)):
             new_dict = {}
-            for k,v in self.data[i].items():
+            for k, v in self.data[i].items():
                 new_dict[k] = v + other
             result.append(new_dict)
         return UnweightedSamples(result)
@@ -60,7 +69,7 @@ class UnweightedSamples(UncertainData, UserList):
     def __iadd__(self, other: int) -> "UncertainData":
         if other != 0:
             for i in range(len(self.data)):
-                for k,v in self.data[i].items():
+                for k in self.data[i]:
                     self.data[i][k] += other
         return self
 
@@ -70,7 +79,7 @@ class UnweightedSamples(UncertainData, UserList):
         result = []
         for i in range(len(self.data)):
             new_dict = {}
-            for k,v in self.data[i].items():
+            for k, v in self.data[i].items():
                 new_dict[k] = v - other
             result.append(new_dict)
         return UnweightedSamples(result)
@@ -81,12 +90,12 @@ class UnweightedSamples(UncertainData, UserList):
     def __isub__(self, other: int) -> "UncertainData":
         if other != 0:
             for i in range(len(self.data)):
-                for k,v in self.data[i].items():
+                for k in self.data[i]:
                     self.data[i][k] -= other
         return self
 
     def __reduce__(self):
-        return (UnweightedSamples, (self.data, ))
+        return (UnweightedSamples, (self.data,))
 
     def sample(self, num_samples: int = 1, replace: bool = True) -> "UnweightedSamples":
         # Completely random resample
@@ -114,31 +123,67 @@ class UnweightedSamples(UncertainData, UserList):
 
     @property
     def median(self) -> dict:
-        # Calculate Geometric median of all samples
-        min_value = float('inf')
-        none_flag = False
-        for i, datem in enumerate(self.data):
-            if datem is None:
-                continue
-            p1 = array([d for d in datem.values() if d is not None])
-            if not none_flag and len(p1) < len(datem):
-                none_flag = True
-                warn("Some samples were None, resulting median is of all non-None samples. Note: in some cases, this will bias the median result.")
-            total_dist = sum(
-                sum((p1 - array([di for di in d.values() if di is not None]))**2)  # Distance between 2 points
-                for d in self.data if d is not None)  # For each point
-            if total_dist < min_value:
-                min_index = i
-                min_value = total_dist
-        return self._type(self[min_index])
+        """Return the sample minimizing total squared distance to all samples.
+
+        This is a representative observed sample, not a coordinate-wise or
+        geometric median. Ties select the first sample in input order.
+
+        Whole missing samples (None) are ignored. Partially missing or
+        non-finite samples are rejected rather than silently misaligned.
+        """
+        import numpy as np
+
+        samples = [sample for sample in self.data if sample is not None]
+        if not samples:
+            raise ValueError("Cannot calculate median without valid samples.")
+
+        keys = tuple(samples[0].keys())
+        if not keys:
+            raise ValueError("Cannot calculate median for samples with no variables.")
+
+        expected_keys = set(keys)
+        for sample in samples:
+            if set(sample.keys()) != expected_keys:
+                raise ValueError("All samples must contain the same keys.")
+            if any(sample[key] is None for key in keys):
+                raise ValueError(
+                    "Cannot calculate median with partially missing samples."
+                )
+
+        # Use a consistent key order across samples.
+        values = np.asarray(
+            [[sample[key] for key in keys] for sample in samples],
+            dtype=np.float64,
+        )
+        if values.ndim != 2:
+            raise ValueError("Each sample variable must be a scalar.")
+        if not np.isfinite(values).all():
+            raise ValueError("Median requires finite sample values.")
+
+        if len(samples) != len(self.data):
+            warn(
+                "Some samples were None; median uses only non-None samples. "
+                "This may bias the result.",
+                stacklevel=2,
+            )
+
+        centered = values - values.mean(axis=0)
+        squared_distances = np.einsum("ij,ij->i", centered, centered)
+        index = int(np.argmin(squared_distances))
+
+        return self._type(samples[index])
 
     @property
     def mean(self) -> dict:
         mean = {}
         for key in self.keys():
-            values = array([x[key] for x in self.data if x is not None and x[key] is not None])
+            values = array(
+                [x[key] for x in self.data if x is not None and x[key] is not None]
+            )
             if len(values) < len(self.data):
-                warn("Some samples were None, resulting mean is of all non-None samples. Note: in some cases, this will bias the mean result.")
+                warn(
+                    "Some samples were None, resulting mean is of all non-None samples. Note: in some cases, this will bias the mean result."
+                )
             mean[key] = values.mean()
         return self._type(mean)
 
@@ -146,13 +191,20 @@ class UnweightedSamples(UncertainData, UserList):
     def cov(self) -> dict:
         if len(self.data) == 0:
             return [[]]
-        unlabeled_samples = array([[x[key] for x in self.data if x is not None and x[key] is not None] for key in self.keys()])
+        unlabeled_samples = array(
+            [
+                [x[key] for x in self.data if x is not None and x[key] is not None]
+                for key in self.keys()
+            ]
+        )
         if len(unlabeled_samples) < len(self.data):
-            warn("Some samples were None, resulting covariance is of all non-None samples. Note: in some cases, this will bias the covariance result.")
+            warn(
+                "Some samples were None, resulting covariance is of all non-None samples. Note: in some cases, this will bias the covariance result."
+            )
         return cov(unlabeled_samples)
 
     def __str__(self):
-        return 'UnweightedSamples({})'.format(self.data)
+        return f"UnweightedSamples({self.data})"
 
     @property
     def size(self) -> int:
@@ -170,7 +222,46 @@ class UnweightedSamples(UncertainData, UserList):
             keys = [keys]
         if isinstance(bounds, list):
             bounds = {key: bounds for key in self.keys()}
-        if not isinstance(bounds, dict) or all([isinstance(b, list) and len(b) == 2 for b in bounds]):
-            raise TypeError("Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {}".format(type(bounds)))
+        if not isinstance(bounds, dict) or all(
+            isinstance(b, list) and len(b) == 2 for b in bounds
+        ):
+            raise TypeError(
+                f"Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {type(bounds)}"
+            )
         n_elements = len(self.data)
-        return {key: sum([x is not None and x < bounds[key][1] and x > bounds[key][0] for x in self.key(key)])/n_elements for key in keys}
+        return {
+            key: sum(
+                [
+                    x is not None and x < bounds[key][1] and x > bounds[key][0]
+                    for x in self.key(key)
+                ]
+            )
+            / n_elements
+            for key in keys
+        }
+        
+    def to_json(self) -> dict:
+        """Encode UnweightedSamples to JSON serializable dictionary
+
+        Returns:
+            dict: JSON serializable dictionary
+        """
+        return {
+            "type": "UnweightedSamples",
+            'samples': self.data
+        }
+        
+    @classmethod
+    def from_json(cls, data: dict) -> "UnweightedSamples":
+        """Decode UnweightedSamples from JSON serializable dictionary
+
+        Args:
+            data (dict): JSON serializable dictionary
+        Returns:
+            UnweightedSamples: Decoded UnweightedSamples object
+        """
+        if data.get("type") != "UnweightedSamples":
+            raise ValueError(
+                f"Invalid type for UnweightedSamples decoding, expected 'UnweightedSamples', got {data.get('type')}"
+            )
+        return cls(samples=data.get("samples", []))

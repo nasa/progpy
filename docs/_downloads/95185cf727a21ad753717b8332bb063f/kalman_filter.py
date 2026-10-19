@@ -32,8 +32,8 @@ class ThrownObject(LinearModel):
     Keyword Args
     ------------
         process_noise : Optional, float or Dict[Srt, float]
-          Process noise (applied at dx/next_state). 
-          Can be number (e.g., .2) applied to every state, a dictionary of values for each 
+          Process noise (applied at dx/next_state).
+          Can be number (e.g., .2) applied to every state, a dictionary of values for each
           state (e.g., {'x1': 0.2, 'x2': 0.3}), or a function (x) -> x
         process_noise_dist : Optional, String
           distribution for process noise (e.g., normal, uniform, triangular)
@@ -53,87 +53,94 @@ class ThrownObject(LinearModel):
 
     inputs = []  # no inputs, no way to control
     states = [
-        'x',     # Position (m) 
-        'v'      # Velocity (m/s)
-        ]
+        "x",  # Position (m)
+        "v",  # Velocity (m/s)
+    ]
     outputs = [
-        'x'      # Position (m)
+        "x"  # Position (m)
     ]
     events = [
-        'impact' # Event- object has impacted ground
+        "impact"  # Event- object has impacted ground
     ]
 
     A = np.array([[0, 1], [0, 0]])
     E = np.array([[0], [-9.81]])
     C = np.array([[1, 0]])
-    F = None # Will override method
+    F = None  # Will override method
 
-    # The Default parameters. 
+    # The Default parameters.
     # Overwritten by passing parameters dictionary into constructor
     default_parameters = {
-        'thrower_height': 1.83,  # m
-        'throwing_speed': 40,  # m/s
-        'g': -9.81  # Acceleration due to gravity in m/s^2
+        "thrower_height": 1.83,  # m
+        "throwing_speed": 40,  # m/s
+        "g": -9.81,  # Acceleration due to gravity in m/s^2
     }
 
     def initialize(self, u=None, z=None):
-        return self.StateContainer({
-            'x': self.parameters['thrower_height'],
-            # Thrown, so initial altitude is height of thrower
-            'v': self.parameters['throwing_speed']
-            # Velocity at which the ball is thrown - this guy is a professional baseball pitcher
-            })
-    
+        return self.StateContainer(
+            {
+                "x": self.parameters["thrower_height"],
+                # Thrown, so initial altitude is height of thrower
+                "v": self.parameters["throwing_speed"],
+                # Velocity at which the ball is thrown - this guy is a professional baseball pitcher
+            }
+        )
+
     # This is actually optional. Leaving thresholds_met empty will use the event state to define thresholds.
-    #  Threshold is met when Event State == 0. 
+    #  Threshold is met when Event State == 0.
     # However, this implementation is more efficient, so we included it
     def threshold_met(self, x):
+        return {"falling": x["v"] < 0, "impact": x["x"] <= 0}
+
+    def event_state(self, x):
+        x_max = x["x"] + np.square(x["v"]) / (
+            -self.parameters["g"] * 2
+        )  # Use speed and position to estimate maximum height
         return {
-            'falling': x['v'] < 0,
-            'impact': x['x'] <= 0
+            "falling": np.maximum(
+                x["v"] / self.parameters["throwing_speed"], 0
+            ),  # Throwing speed is max speed
+            "impact": np.maximum(x["x"] / x_max, 0)
+            if x["v"] < 0
+            else 1,  # 1 until falling begins, then it's fraction of height
         }
 
-    def event_state(self, x): 
-        x_max = x['x'] + np.square(x['v'])/(-self.parameters['g']*2) # Use speed and position to estimate maximum height
-        return {
-            'falling': np.maximum(x['v']/self.parameters['throwing_speed'],0),  # Throwing speed is max speed
-            'impact': np.maximum(x['x']/x_max,0) if x['v'] < 0 else 1  # 1 until falling begins, then it's fraction of height
-        }
 
 def run_example():
     # Step 1: Instantiate the model
-    m = ThrownObject(process_noise = 0, measurement_noise = 0)
+    m = ThrownObject(process_noise=0, measurement_noise=0)
 
     # Step 2: Instantiate the Kalman Filter State Estimator
     # Define the initial state to be slightly off of actual
-    x_guess = m.StateContainer({'x': 1.75, 'v': 35}) # Guess of initial state
+    x_guess = m.StateContainer({"x": 1.75, "v": 35})  # Guess of initial state
     # Note: actual is {'x': 1.83, 'v': 40}
     kf = KalmanFilter(m, x_guess)
 
     # Step 3: Run the Kalman Filter State Estimator
-    # Here we're using simulated data from the thrown_object. 
+    # Here we're using simulated data from the thrown_object.
     # In a real application you would be using sensor data from the system
     dt = 0.01  # Time step (s)
     print_freq = 50  # Print every print_freq'th iteration
     x = m.initialize()
     u = m.InputContainer({})  # No input for this model
-    
+
     for i in range(500):
         # Get simulated output (would be measured in a real application)
         z = m.output(x)
 
         # Estimate New State
-        kf.estimate(i*dt, u, z)
+        kf.estimate(i * dt, u, z)
         x_est = kf.x.mean
 
         # Print Results
-        if i%print_freq == 0:  # Print every print_freq'th iteration
-            print(f"t: {i*dt:.2f}\n\tEstimate: {x_est}\n\tTruth: {x}")
+        if i % print_freq == 0:  # Print every print_freq'th iteration
+            print(f"t: {i * dt:.2f}\n\tEstimate: {x_est}\n\tTruth: {x}")
             diff = {key: x_est[key] - x[key] for key in x.keys()}
             print(f"\t Diff: {diff}")
 
         # Update Real state for next step
         x = m.next_state(x, u, dt)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_example()

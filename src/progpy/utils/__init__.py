@@ -3,4 +3,3 @@
 
 from .progress_bar import ProgressBar
 from .table import print_table_recursive
-
