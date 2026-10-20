@@ -18,7 +18,7 @@ from progpy import predictors, state_estimators, uncertain_data
 
 import warnings
 
-__version__ = "1.8.0"
+__version__ = "1.9.0"
 
 
 def run_prog_playback(obs, pred, future_loading, output_measurements, **kwargs):
