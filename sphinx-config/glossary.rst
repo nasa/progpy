@@ -99,3 +99,15 @@ Glossary
 
     system-of-systems
       A system consisting of multiple inter-related systems, where one system affects the others. In ProgPy, system-of-systems are reporsented using :term:`composite models <composite model>`. Composite models are implemented using the :py:class:`progpy.CompositeModel` class.
+
+    discrete state
+      A system state representation that can only occupy one of a finite set of predefined values. Transitions between discrete states occur based on defined logic or triggering events. Discrete states are initialized using the function :py:func:`progpy.create_discrete_state`.
+
+    continuous state
+      A system state representation that can vary smoothly over a continuous range of values. Discrete states are initialized using a floating point number.
+
+    discrete model
+      A model where state transition is discrete. Discrete models define the `next_state` equation for state transition.
+
+    continuous model
+      A model where state transition is continuous. Discrete models define the `dx` equation for state transition.

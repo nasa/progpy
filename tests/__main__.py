@@ -29,7 +29,7 @@ from tests.test_uav_model import main as uav_main
 from tests.test_uncertain_data import main as udata_main
 from tests.test_visualize import main as visualize_main
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     was_successful = True
 
     try:
@@ -135,7 +135,7 @@ if __name__ == '__main__':
         serialization_main()
     except Exception:
         was_successful = False
-    
+
     try:
         sim_result_main()
     except Exception:
@@ -172,4 +172,4 @@ if __name__ == '__main__':
         was_successful = False
 
     if not was_successful:
-        raise Exception('Tests Failed')
+        raise Exception("Tests Failed")

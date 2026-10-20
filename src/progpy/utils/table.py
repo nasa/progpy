@@ -4,11 +4,14 @@
 from collections import defaultdict
 from typing import Union
 
-MAX_COLUMN_WIDTH = 5 # numerical value will actually be min MAX_COLUMN_WIDTH-2 due to allocating spaces
+MAX_COLUMN_WIDTH = 5  # numerical value will actually be min MAX_COLUMN_WIDTH-2 due to allocating spaces
 
-def print_table_recursive(input_dict : dict, title : str, print_bool : bool = True) -> defaultdict:
+
+def print_table_recursive(
+    input_dict: dict, title: str, print_bool: bool = True
+) -> defaultdict:
     """
-    Prints a table where keys are column headers and values are items in a row. 
+    Prints a table where keys are column headers and values are items in a row.
     Returns the table formatted as a dictionary of tables represented by a list of str.
 
     Arguments
@@ -27,20 +30,23 @@ def print_table_recursive(input_dict : dict, title : str, print_bool : bool = Tr
         new_sub_table.append(row)
         if len(new_sub_table) == 7:
             if sub_tables[len(new_sub_table[0])]:
-                sub_tables[len(new_sub_table[0])].extend([new_sub_table[5], new_sub_table[6]])
+                sub_tables[len(new_sub_table[0])].extend(
+                    [new_sub_table[5], new_sub_table[6]]
+                )
             else:
                 sub_tables[len(new_sub_table[0])].extend(new_sub_table)
             new_sub_table = []
 
     if print_bool:
         for k in sorted(sub_tables.keys(), reverse=True):
-            print(*sub_tables[k], sep='\n')
+            print(*sub_tables[k], sep="\n")
     return sub_tables
 
-def _set_width(max_width : int, input_value : Union[float, int]) -> str:
+
+def _set_width(max_width: int, input_value: Union[float, int]) -> str:
     if input_value < (10**max_width):
         ndigits = len(str(input_value))
-        return f"{input_value:^{ndigits}.{max_width-ndigits}f}"
+        return f"{input_value:^{ndigits}.{max_width - ndigits}f}"
     else:
         scientific_input = f"{input_value:e}"
         split_e = scientific_input.split("e+")
@@ -51,7 +57,10 @@ def _set_width(max_width : int, input_value : Union[float, int]) -> str:
     # what happens if we have 9.999999e+100 but are limited to 5?
     # the exponent itself will occupy 5, leaving no space for the numbers in front
 
-def _print_table_recursive_helper(table_prog : list, input_dict : dict, title : str, key : str = None) -> list:
+
+def _print_table_recursive_helper(
+    table_prog: list, input_dict: dict, title: str, key: str = None
+) -> list:
     """
     Helper function to recursively build subtables as a list of str.
 
@@ -68,7 +77,7 @@ def _print_table_recursive_helper(table_prog : list, input_dict : dict, title : 
     """
     col_name_row = "| key |"
     value_row = f"| {str(key):^3} |"
-    for k,v in input_dict.items():
+    for k, v in input_dict.items():
         if isinstance(v, dict):
             if key != None:
                 to_pass = key
@@ -80,14 +89,15 @@ def _print_table_recursive_helper(table_prog : list, input_dict : dict, title : 
             col_len = len(max(str(k), str(v))) + 2
             col_name_row += f"{str(k):^{col_len}}|"
             if isinstance(v, (int, float)):
-                adj_width = _set_width(MAX_COLUMN_WIDTH-2, v)
+                adj_width = _set_width(MAX_COLUMN_WIDTH - 2, v)
                 value_row += f"{adj_width:^{col_len}}|"
             else:
                 value_row += f"{str(v):^{col_len}}|"
 
-    break_row = "+{}+".format((len(col_name_row)-2)*'-')
-    title_row = f"+{title:^{len(break_row)-2}}+".title()
-    table_prog.extend([break_row, title_row, break_row, col_name_row, break_row, value_row, break_row])
-    
-    return table_prog
+    break_row = "+{}+".format((len(col_name_row) - 2) * "-")
+    title_row = f"+{title:^{len(break_row) - 2}}+".title()
+    table_prog.extend(
+        [break_row, title_row, break_row, col_name_row, break_row, value_row, break_row]
+    )
 
+    return table_prog

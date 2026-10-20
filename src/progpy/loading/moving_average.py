@@ -4,10 +4,10 @@
 import numpy as np
 
 
-class MovingAverage():
+class MovingAverage:
     """
     .. versionadded:: 1.5.0
-    
+
     This is a simple moving average future loading class. It takes input values and stores them in a window. When called, it returns the average of the values in the window. The object replaces the future_loading_eqn for simulate_to and simulate_to_threshold.
 
     Parameters
@@ -27,6 +27,7 @@ class MovingAverage():
     >>>     future_load.add_load(load)
     >>> m.simulate_to_threshold(future_load)
     """
+
     def __init__(self, InputContainer: type, window: int = 10):
         self.window = window
         self.InputContainer = InputContainer
@@ -57,4 +58,6 @@ class MovingAverage():
         Returns:
             InputContainer: The average of the values in the window
         """
-        return self.InputContainer({key: np.mean(self.values[key]) for key in self.values})
+        return self.InputContainer(
+            {key: np.mean(self.values[key]) for key in self.values}
+        )

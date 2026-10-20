@@ -7,7 +7,7 @@ from .lstm_model import LSTMStateTransitionModel
 from .pce import PolynomialChaosExpansion, PCE
 
 SURROGATE_METHOD_LOOKUP = {
-    'dmd': DMDModel.from_model,
-    'lstm': LSTMStateTransitionModel.from_model,
-    'pce': PolynomialChaosExpansion.from_model,
+    "dmd": DMDModel.from_model,
+    "lstm": LSTMStateTransitionModel.from_model,
+    "pce": PolynomialChaosExpansion.from_model,
 }

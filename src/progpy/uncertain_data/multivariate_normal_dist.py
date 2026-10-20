@@ -15,7 +15,8 @@ class MultivariateNormalDist(UncertainData):
             mean (array[float]): Mean values for state in the same order as labels
             covar (array[array[float]]): Covariance matrix for state
     """
-    def __init__(self, labels, mean: array, covar : array, _type = dict):
+
+    def __init__(self, labels, mean: array, covar: array, _type=dict):
         self.__labels = list(labels)
         self.__mean = array(list(mean))
         self.__covar = array(list(covar))
@@ -25,45 +26,60 @@ class MultivariateNormalDist(UncertainData):
         return (MultivariateNormalDist, (self.__labels, self.__mean, self.__covar))
 
     def __eq__(self, other: "MultivariateNormalDist") -> bool:
-        return isinstance(other, MultivariateNormalDist) and self.keys() == other.keys() and self.mean == other.mean and (self.cov == other.cov).all()
+        return (
+            isinstance(other, MultivariateNormalDist)
+            and self.keys() == other.keys()
+            and self.mean == other.mean
+            and (self.cov == other.cov).all()
+        )
 
     def __add__(self, other: int) -> "UncertainData":
         if other == 0:
             return self
-        return MultivariateNormalDist(self.__labels, array([i+other for i in self.__mean]), self.__covar)
+        return MultivariateNormalDist(
+            self.__labels, array([i + other for i in self.__mean]), self.__covar
+        )
 
     def __radd__(self, other: int) -> "UncertainData":
         return self.__add__(other)
 
     def __iadd__(self, other: int) -> "UncertainData":
         if not isinstance(other, (int, float)):
-            raise TypeError(f" unsupported operand type(s) for +: '{type(other)}' and '{type(self.__mean[0])}'")
+            raise TypeError(
+                f" unsupported operand type(s) for +: '{type(other)}' and '{type(self.__mean[0])}'"
+            )
         if other != 0:
-            self.__mean = array([i+other for i in self.__mean])
+            self.__mean = array([i + other for i in self.__mean])
         return self
 
     def __sub__(self, other: int) -> "UncertainData":
         if other == 0:
             return self
-        return MultivariateNormalDist(self.__labels, array([i-other for i in self.__mean]), self.__covar)
+        return MultivariateNormalDist(
+            self.__labels, array([i - other for i in self.__mean]), self.__covar
+        )
 
     def __rsub__(self, other: int) -> "UncertainData":
         return self.__sub__(other)
 
     def __isub__(self, other: int) -> "UncertainData":
         if not isinstance(other, (int, float)):
-            raise TypeError(f" unsupported operand type(s) for -: '{type(other)}' and '{type(self.__mean[0])}'")
+            raise TypeError(
+                f" unsupported operand type(s) for -: '{type(other)}' and '{type(self.__mean[0])}'"
+            )
         if other != 0:
-            self.__mean = array([i-other for i in self.__mean])
+            self.__mean = array([i - other for i in self.__mean])
         return self
 
     def sample(self, num_samples: int = 1) -> UnweightedSamples:
         if len(self.__mean) != len(self.__labels):
             raise Exception("labels must be provided for each value")
-    
+
         samples = multivariate_normal(self.__mean, self.__covar, num_samples)
-        samples = [{key: value for (key, value) in zip(self.__labels, x)} for x in samples]
-        return UnweightedSamples(samples, _type = self._type)
+        samples = [
+            {key: value for (key, value) in zip(self.__labels, x)} for x in samples
+        ]
+        return UnweightedSamples(samples, _type=self._type)
 
     def keys(self) -> list:
         return self.__labels
@@ -75,11 +91,43 @@ class MultivariateNormalDist(UncertainData):
 
     @property
     def mean(self) -> dict:
-        return self._type({key: value for (key, value) in zip(self.__labels, self.__mean)})
+        return self._type(
+            {key: value for (key, value) in zip(self.__labels, self.__mean)}
+        )
 
     def __str__(self) -> str:
-        return 'MultivariateNormalDist(mean: {}, covar: {})'.format(self.__mean, self.__covar)     
+        return f"MultivariateNormalDist(mean: {self.__mean}, covar: {self.__covar})"
 
     @property
     def cov(self) -> array:
         return self.__covar
+    
+    def to_json(self):
+        """Encode MultivariateNormalDist object to JSON serializable format.
+
+        Returns:
+            dict: JSON serializable representation of the MultivariateNormalDist object.
+        """
+        return {
+            "type": "MultivariateNormalDist",
+            "labels": self.__labels,
+            "mean": self.__mean.tolist(),
+            "covar": self.__covar.tolist(),
+        }
+        
+    @classmethod
+    def from_json(cls, data: dict) -> "MultivariateNormalDist":
+        """Decode MultivariateNormalDist from JSON serializable dictionary
+
+        Args:
+            data (dict): JSON serializable dictionary
+        Returns:
+            MultivariateNormalDist: Decoded MultivariateNormalDist object
+        """
+        if data["type"] != "MultivariateNormalDist":
+            raise ValueError(
+                f"Invalid type for MultivariateNormalDist decoding: {data['type']}"
+            )
+        return MultivariateNormalDist(
+            labels=data["labels"], mean=array(data["mean"]), covar=array(data["covar"])
+        )
