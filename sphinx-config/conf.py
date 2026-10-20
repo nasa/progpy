@@ -16,18 +16,6 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("../../prog_algs"))
-sys.path.insert(0, os.path.abspath("../../prog_algs/src"))
-sys.path.insert(0, os.path.abspath("../../prog_algs/examples"))
-
-sys.path.insert(0, os.path.abspath("../../prog_models"))
-sys.path.insert(0, os.path.abspath("../../prog_models/src"))
-sys.path.insert(0, os.path.abspath("../../prog_models/examples"))
-
-sys.path.insert(0, os.path.abspath("../../prog_server"))
-sys.path.insert(0, os.path.abspath("../../prog_server/src"))
-sys.path.insert(0, os.path.abspath("../../prog_server/examples"))
-
 sys.path.insert(0, os.path.abspath(".."))
 sys.path.insert(0, os.path.abspath("."))
 
@@ -38,7 +26,7 @@ copyright = "2021 United States Government as represented by the Administrator o
 author = "Chris Teubert, Katelyn Jarvis, Matteo Corbetta, Chetan Kulkarni, Portia Banerjee, Jason Watkins, and Matthew Daigle"
 
 # The full version, including alpha/beta/rc tags
-release = "1.8"
+release = "1.9"
 
 # -- General configuration ---------------------------------------------------
 
