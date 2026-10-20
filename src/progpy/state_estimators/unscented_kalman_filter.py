@@ -69,8 +69,8 @@ class UnscentedKalmanFilter(state_estimator.StateEstimator):
             num_states,
             num_measurements,
             self.parameters['dt'],
-            measure,
-            state_transition,
+            self._measure,
+            self._state_transition,
             points,
         )
 
@@ -91,7 +91,7 @@ class UnscentedKalmanFilter(state_estimator.StateEstimator):
             # Size of what's being measured (not output)
             # This is determined by running the measure function on the first state
             self.parameters['R'] = diag(
-                [1.0e-3 for i in range(len(measure(self.filter.x)))]
+                [1.0e-3 for i in range(len(self._measure(self.filter.x)))]
             )
         self.filter.Q = self.parameters['Q']
         self.filter.R = self.parameters['R']
