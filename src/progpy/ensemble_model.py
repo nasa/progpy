@@ -43,6 +43,17 @@ class EnsembleModel(PrognosticsModel):
                     f"EnsembleModel requires all models to be PrognosticsModel instances. models[{i}] was {type(m)}"
                 )
 
+        self._set_model_keys(models)
+        super().__init__(**kwargs)
+        self.parameters['models'] = models
+
+    def __setstate__(self, params: dict) -> None:
+        # Copying and unpickling bypass __init__, so rebuild the dynamic
+        # keys before the base class creates the containers and parameters.
+        self._set_model_keys(params['models'])
+        super().__setstate__(params)
+
+    def _set_model_keys(self, models: list) -> None:
         inputs = set()
         states = set()
         outputs = set()
@@ -56,9 +67,6 @@ class EnsembleModel(PrognosticsModel):
         self.states = list(states)
         self.outputs = list(outputs)
         self.events = list(events)
-
-        super().__init__(**kwargs)
-        self.parameters["models"] = models
 
     def initialize(self, u=None, z=None):
         xs = [
