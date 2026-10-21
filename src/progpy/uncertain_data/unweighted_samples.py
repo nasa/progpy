@@ -123,55 +123,29 @@ class UnweightedSamples(UncertainData, UserList):
 
     @property
     def median(self) -> dict:
-        """Return the sample minimizing total squared distance to all samples.
-
-        This is a representative observed sample, not a coordinate-wise or
-        geometric median. Ties select the first sample in input order.
-
-        Whole missing samples (None) are ignored. Partially missing or
-        non-finite samples are rejected rather than silently misaligned.
-        """
-        import numpy as np
-
-        samples = [sample for sample in self.data if sample is not None]
-        if not samples:
-            raise ValueError("Cannot calculate median without valid samples.")
-
-        keys = tuple(samples[0].keys())
-        if not keys:
-            raise ValueError("Cannot calculate median for samples with no variables.")
-
-        expected_keys = set(keys)
-        for sample in samples:
-            if set(sample.keys()) != expected_keys:
-                raise ValueError("All samples must contain the same keys.")
-            if any(sample[key] is None for key in keys):
-                raise ValueError(
-                    "Cannot calculate median with partially missing samples."
+        # Calculate Geometric median of all samples
+        min_value = float("inf")
+        none_flag = False
+        for i, datem in enumerate(self.data):
+            if datem is None:
+                continue
+            p1 = array([d for d in datem.values() if d is not None])
+            if not none_flag and len(p1) < len(datem):
+                none_flag = True
+                warn(
+                    "Some samples were None, resulting median is of all non-None samples. Note: in some cases, this will bias the median result."
                 )
-
-        # Use a consistent key order across samples.
-        values = np.asarray(
-            [[sample[key] for key in keys] for sample in samples],
-            dtype=np.float64,
-        )
-        if values.ndim != 2:
-            raise ValueError("Each sample variable must be a scalar.")
-        if not np.isfinite(values).all():
-            raise ValueError("Median requires finite sample values.")
-
-        if len(samples) != len(self.data):
-            warn(
-                "Some samples were None; median uses only non-None samples. "
-                "This may bias the result.",
-                stacklevel=2,
-            )
-
-        centered = values - values.mean(axis=0)
-        squared_distances = np.einsum("ij,ij->i", centered, centered)
-        index = int(np.argmin(squared_distances))
-
-        return self._type(samples[index])
+            total_dist = sum(
+                sum(
+                    (p1 - array([di for di in d.values() if di is not None])) ** 2
+                )  # Distance between 2 points
+                for d in self.data
+                if d is not None
+            )  # For each point
+            if total_dist < min_value:
+                min_index = i
+                min_value = total_dist
+        return self._type(self[min_index])
 
     @property
     def mean(self) -> dict:
