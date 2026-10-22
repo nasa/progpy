@@ -6,7 +6,7 @@ on:
       - src/progpy/**
 
 jobs:
-  test:
+  release-tests:
     timeout-minutes: 30
     runs-on: ${{ matrix.runs-on }}
     strategy:
