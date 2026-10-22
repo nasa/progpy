@@ -101,7 +101,6 @@ A release is the merging of a PR where the target is the master branch.
 * Confirm that all issues associated with the release have been closed (i.e., requirements have been met) or assigned to another release
 * Run unit tests `python -m tests` on the following computer types:
    * Apple Silicon Mac
-   * Intel Mac
    * Windows
    * Linux 
 * If present, run manual tests `python -m tests.test_manual`
