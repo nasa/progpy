@@ -110,7 +110,7 @@ def create_discrete_state(
             transition = TRANSITION_LOOKUP[transition]
         else:
             raise Exception(
-                f"Transition name {transition} not recognized. Supported modes are {str(list(TRANSITION_LOOKUP.keys()))}"
+                f"Transition name {transition} not recognized. Supported modes are {list(TRANSITION_LOOKUP.keys())!s}"
             )
 
     if names is None:

@@ -52,14 +52,16 @@ class CompositeModel(PrognosticsModel):
     .. note:: Model parameters can be set and accessed using the '[model].[param]' format. For example, for composite model m, m['foo.bar'] would set the parameter 'bar' for the model 'foo'.
     """
 
-    def __init__(self, models: list, connections: list = [], **kwargs):
+    def __init__(self, models: list, connections: list = None, **kwargs):
         # General Input Validation
         if not isinstance(models, Iterable):
-            raise ValueError("The models argument must be a list")
+            raise TypeError("The models argument must be a list")
         if len(models) <= 1:
             raise ValueError("The models argument must contain at least two models")
+        if connections is None:
+            connections = []
         if not isinstance(connections, Iterable):
-            raise ValueError("The connections argument must be a list")
+            raise TypeError("The connections argument must be a list")
 
         # Initialize
         kwargs["model_names"] = set()
@@ -79,7 +81,7 @@ class CompositeModel(PrognosticsModel):
                         '("Batt1", BatteryElectroChem())'
                     )
                 if not isinstance(m[0], str):
-                    raise ValueError(
+                    raise TypeError(
                         "The first element of each model tuple must be a string"
                     )
             elif isinstance(m, PrognosticsModel):
@@ -87,7 +89,7 @@ class CompositeModel(PrognosticsModel):
             elif callable(m):
                 m = ("function", m)
             else:
-                raise ValueError(
+                raise TypeError(
                     f"Each model must be a PrognosticsModel or tuple (name: str, PrognosticsModel), was {type(m)}"
                 )
 
@@ -103,7 +105,7 @@ class CompositeModel(PrognosticsModel):
             elif callable(m[1]):
                 kwargs["functions"].append(m)
             else:
-                raise ValueError(
+                raise TypeError(
                     "The second element of each model tuple must be a PrognosticsModel"
                 )
 
@@ -127,18 +129,14 @@ class CompositeModel(PrognosticsModel):
 
         # update inputs, states, outputs, etc.
         for name, m in params["models"]:
-            self.inputs |= set([name + DIVIDER + u for u in m.inputs])
-            self.states |= set([name + DIVIDER + x for x in m.states])
-            self.outputs |= set([name + DIVIDER + z for z in m.outputs])
-            self.events |= set([name + DIVIDER + e for e in m.events])
-            self.performance_metric_keys |= set(
-                [name + DIVIDER + p for p in m.performance_metric_keys]
-            )
+            self.inputs |= {name + DIVIDER + u for u in m.inputs}
+            self.states |= {name + DIVIDER + x for x in m.states}
+            self.outputs |= {name + DIVIDER + z for z in m.outputs}
+            self.events |= {name + DIVIDER + e for e in m.events}
+            self.performance_metric_keys |= {name + DIVIDER + p for p in m.performance_metric_keys}
 
         for name, fcn in params["functions"]:
-            self.inputs |= set(
-                [name + DIVIDER + u for u in signature(fcn).parameters.keys()]
-            )
+            self.inputs |= {name + DIVIDER + u for u in signature(fcn).parameters.keys()}
             self.states.add(name + DIVIDER + "return")
             self.outputs.add(name + DIVIDER + "return")
 
@@ -147,7 +145,7 @@ class CompositeModel(PrognosticsModel):
             if isinstance(params["outputs"], str):
                 params["outputs"] = [params["outputs"]]
             if not isinstance(params["outputs"], Iterable):
-                raise ValueError("The outputs argument must be a list[str]")
+                raise TypeError("The outputs argument must be a list[str]")
             if not set(params["outputs"]).issubset(self.outputs):
                 raise ValueError(
                     "The outputs of the composite model must be a "
@@ -165,12 +163,12 @@ class CompositeModel(PrognosticsModel):
         for connection in params["connections"]:
             # Input validation
             if not isinstance(connection, Iterable) or len(connection) != 2:
-                raise ValueError(
+                raise TypeError(
                     "Each connection must be a tuple of the form"
                     " (input: str, output: str)"
                 )
             if not isinstance(connection[0], str) or not isinstance(connection[1], str):
-                raise ValueError(
+                raise TypeError(
                     "Each connection must be a tuple of the form"
                     " (input: str, output: str)"
                 )
@@ -178,7 +176,7 @@ class CompositeModel(PrognosticsModel):
             in_key, out_key = connection
             # Validation
             if out_key not in self.inputs:
-                raise ValueError(
+                raise TypeError(
                     f"The output key, {out_key}, must be an input"
                     " to one of the composite models. Options "
                     f"include {self.inputs}"
@@ -195,13 +193,13 @@ class CompositeModel(PrognosticsModel):
 
             # Validate parts
             if in_model == out_model:
-                raise ValueError("The input and output models must be different")
+                raise TypeError("The input and output models must be different")
             if in_model not in params["model_names"]:
-                raise ValueError(
+                raise TypeError(
                     "The input model must be one of the models in the composite model"
                 )
             if out_model not in params["model_names"]:
-                raise ValueError(
+                raise TypeError(
                     "The output model must be one of the models in the composite model"
                 )
 
@@ -225,7 +223,7 @@ class CompositeModel(PrognosticsModel):
                 )
                 self.states.add(in_key)
             else:
-                raise ValueError(f"The input key {in_key} must be an output or state")
+                raise TypeError(f"The input key {in_key} must be an output or state")
 
         # Setup callbacks
         # These callbacks will enable setting of parameters in composed models.
@@ -283,7 +281,7 @@ class CompositeModel(PrognosticsModel):
             # Process connections
             # This initializes the states connected to outputs
             for in_key_part, in_key in self.__to_state_connections[name]:
-                if in_key in z.keys():
+                if in_key in z:
                     x_0[in_key] = z[in_key]
                 else:  # Missing from z, so estimate using initial state
                     z_ii = m.output(x_i)

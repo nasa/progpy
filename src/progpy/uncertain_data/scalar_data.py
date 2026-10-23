@@ -27,7 +27,7 @@ class ScalarData(UncertainData):
     def __add__(self, other: int) -> "UncertainData":
         if other == 0:
             return self
-        new_state = dict()
+        new_state = {}
         for k, v in self.__state.items():
             new_state[k] = v + other
         return ScalarData(new_state)
@@ -37,12 +37,12 @@ class ScalarData(UncertainData):
 
     def __iadd__(self, other: int) -> "UncertainData":
         if other != 0:
-            for k in self.__state.keys():
+            for k in self.__state:
                 self.__state[k] += other
         return self
 
     def __sub__(self, other: int) -> "UncertainData":
-        new_state = dict()
+        new_state = {}
         for k, v in self.__state.items():
             new_state[k] = v - other
         return ScalarData(new_state)
@@ -52,7 +52,7 @@ class ScalarData(UncertainData):
 
     def __isub__(self, other: int) -> "UncertainData":
         if other != 0:
-            for k in self.__state.keys():
+            for k in self.__state:
                 self.__state[k] -= other
         return self
 
@@ -75,18 +75,43 @@ class ScalarData(UncertainData):
         return UnweightedSamples([self.__state] * num_samples, _type=self._type)
 
     def __str__(self) -> str:
-        return "ScalarData({})".format(self.__state)
+        return f"ScalarData({self.__state})"
 
     def percentage_in_bounds(self, bounds: Union[list, dict]) -> dict:
         if isinstance(bounds, list):
             bounds = {key: bounds for key in self.keys()}
         if not isinstance(bounds, dict) and all([isinstance(b, list) for b in bounds]):
             raise TypeError(
-                "Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {}".format(
-                    type(bounds)
-                )
+                f"Bounds must be list [lower, upper] or dict (key: [lower, upper]), was {type(bounds)}"
             )
         return {
             key: (1 if bounds[key][0] < x and bounds[key][1] > x else 0)
             for (key, x) in self.__state.items()
         }
+    
+    def to_json(self):
+        """Encode ScalarData object to JSON serializable format.
+
+        Returns:
+            dict: JSON serializable representation of the ScalarData object.
+        """
+        return {
+            "type": "ScalarData",
+            "state": self.__state,
+        }
+        
+    @classmethod
+    def from_json(cls, data):
+        """Decode JSON serializable ScalarData object.
+
+        Args:
+            data (dict): JSON serializable representation of the ScalarData object.
+
+        Returns:
+            ScalarData: Decoded ScalarData object.
+        """
+        if data["type"] != "ScalarData":
+            raise ValueError(
+                f"Invalid type for ScalarData decoding: {data['type']}. Expected 'ScalarData'."
+            )
+        return ScalarData(data["state"])

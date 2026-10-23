@@ -96,10 +96,38 @@ class MultivariateNormalDist(UncertainData):
         )
 
     def __str__(self) -> str:
-        return "MultivariateNormalDist(mean: {}, covar: {})".format(
-            self.__mean, self.__covar
-        )
+        return f"MultivariateNormalDist(mean: {self.__mean}, covar: {self.__covar})"
 
     @property
     def cov(self) -> array:
         return self.__covar
+    
+    def to_json(self):
+        """Encode MultivariateNormalDist object to JSON serializable format.
+
+        Returns:
+            dict: JSON serializable representation of the MultivariateNormalDist object.
+        """
+        return {
+            "type": "MultivariateNormalDist",
+            "labels": self.__labels,
+            "mean": self.__mean.tolist(),
+            "covar": self.__covar.tolist(),
+        }
+        
+    @classmethod
+    def from_json(cls, data: dict) -> "MultivariateNormalDist":
+        """Decode MultivariateNormalDist from JSON serializable dictionary
+
+        Args:
+            data (dict): JSON serializable dictionary
+        Returns:
+            MultivariateNormalDist: Decoded MultivariateNormalDist object
+        """
+        if data["type"] != "MultivariateNormalDist":
+            raise ValueError(
+                f"Invalid type for MultivariateNormalDist decoding: {data['type']}"
+            )
+        return MultivariateNormalDist(
+            labels=data["labels"], mean=array(data["mean"]), covar=array(data["covar"])
+        )

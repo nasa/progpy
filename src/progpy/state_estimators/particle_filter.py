@@ -39,7 +39,7 @@ class ParticleFilter(state_estimator.StateEstimator):
             Resampling function ([weights]) -> [indexes] e.g., filterpy.monte_carlo.residual_resample
     """
 
-    default_parameters = {
+    default_parameters = {  # noqa: RUF012
         "t0": -1e-99,  # practically 0, but allowing for a 0 first estimate
         "num_particles": None,
         "resample_fcn": residual_resample,
@@ -51,7 +51,7 @@ class ParticleFilter(state_estimator.StateEstimator):
         self._measure = model.output
 
         # Build array inplace
-        if isinstance(x0, DictLikeMatrixWrapper) or isinstance(x0, dict):
+        if isinstance(x0, (DictLikeMatrixWrapper, dict)):
             x0 = ScalarData(x0)
         elif not isinstance(x0, UncertainData):
             raise TypeError(
@@ -85,7 +85,7 @@ class ParticleFilter(state_estimator.StateEstimator):
             self.parameters["measurement_noise"] = {key: 0.0 for key in model.outputs}
 
     def __str__(self):
-        return "{} State Estimator".format(self.__class__)
+        return f"{self.__class__} State Estimator"
 
     def estimate(self, t: float, u, z, dt=None):
         """
@@ -166,9 +166,9 @@ class ParticleFilter(state_estimator.StateEstimator):
                     t_i += dt_i
                 for key in particles.keys():
                     self.particles[key][i] = x[key]
-                z = output(x)
+                zPredicted_i = output(x)
                 for key in measurement_keys:
-                    zPredicted[key][i] = z[key]
+                    zPredicted[key][i] = zPredicted_i[key]
             self.t = t
 
         # Calculate pdf values

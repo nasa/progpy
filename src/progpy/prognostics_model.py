@@ -4,6 +4,7 @@
 from abc import ABC
 from collections import abc, namedtuple
 from copy import deepcopy
+from importlib import import_module
 import itertools
 import json
 from numbers import Number
@@ -103,6 +104,7 @@ class PrognosticsModel(ABC):
     """
 
     is_vectorized = False
+    _model_registry = {}
 
     # Configuration Parameters for model
     default_parameters = {"process_noise": 0.0, "measurement_noise": 0.0}
@@ -123,6 +125,11 @@ class PrognosticsModel(ABC):
         "SimulationResults", ["times", "inputs", "states", "outputs", "event_states"]
     )
 
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+        model_type = f"{cls.__module__}.{cls.__qualname__}"
+        PrognosticsModel._model_registry[model_type] = cls
+
     def __init__(self, **kwargs):
         # Default params for any model
         params = PrognosticsModel.default_parameters.copy()
@@ -142,9 +149,7 @@ class PrognosticsModel(ABC):
         return self.__class__ == other.__class__ and self.parameters == other.parameters
 
     def __str__(self) -> str:
-        return "{} Prognostics Model (Events: {})".format(
-            type(self).__name__, self.events
-        )
+        return f"{type(self).__name__} Prognostics Model (Events: {self.events})"
 
     def __getstate__(self) -> dict:
         return self.parameters.data
@@ -450,13 +455,13 @@ class PrognosticsModel(ABC):
         for key, limit in self.state_limits.items():
             if np.any(np.array(x[key]) < limit[0]):
                 warn(
-                    "State {} limited to {} (was {})".format(key, limit[0], x[key]),
+                    f"State {key} limited to {limit[0]} (was {x[key]})",
                     ProgModelStateLimitWarning,
                 )
                 x[key] = np.maximum(x[key], limit[0])
             if np.any(np.array(x[key]) > limit[1]):
                 warn(
-                    "State {} limited to {} (was {})".format(key, limit[1], x[key]),
+                    f"State {key} limited to {limit[1]} (was {x[key]})",
                     ProgModelStateLimitWarning,
                 )
                 x[key] = np.minimum(x[key], limit[1])
@@ -805,7 +810,7 @@ class PrognosticsModel(ABC):
         # Input Validation
         if not isinstance(time, Number) or time < 0:
             raise ValueError(
-                "'time' must be positive, was {} (type: {})".format(time, type(time))
+                f"'time' must be positive, was {time} (type: {type(time)})"
             )
 
         # Override threshold_met_eqn and horizon
@@ -933,7 +938,7 @@ class PrognosticsModel(ABC):
         if isinstance(events, str):
             # A single event
             events = [events]
-        if (events is not None) and not all([key in self.events for key in events]):
+        if (events is not None) and not all(key in self.events for key in events):
             raise ValueError("`events` must be event names")
         if not isinstance(events, list):
             # Change to list because of the limits of jsonify
@@ -959,45 +964,31 @@ class PrognosticsModel(ABC):
             config["dt"]
         ):
             raise TypeError(
-                "'dt' must be a number or function, was a {}".format(type(config["dt"]))
+                f"'dt' must be a number or function, was a {type(config['dt'])}"
             )
         if isinstance(config["dt"], Number) and config["dt"] < 0:
-            raise ValueError("'dt' must be positive, was {}".format(config["dt"]))
+            raise ValueError(f"'dt' must be positive, was {config['dt']}")
         if not isinstance(config["save_freq"], Number) and not isinstance(
             config["save_freq"], tuple
         ):
             raise TypeError(
-                "'save_freq' must be a number, was a {}".format(
-                    type(config["save_freq"])
-                )
+                f"'save_freq' must be a number, was a {type(config['save_freq'])}"
             )
         if (isinstance(config["save_freq"], Number) and config["save_freq"] < 0) or (
             isinstance(config["save_freq"], tuple) and config["save_freq"][1] < 0
         ):
-            raise ValueError(
-                "'save_freq' must be positive, was {}".format(config["save_freq"])
-            )
+            raise ValueError(f"'save_freq' must be positive, was {config['save_freq']}")
         if not isinstance(config["save_pts"], abc.Iterable):
             raise TypeError(
-                "'save_pts' must be list or array, was a {}".format(
-                    type(config["save_pts"])
-                )
+                f"'save_pts' must be list or array, was a {type(config['save_pts'])}"
             )
         if not isinstance(config["horizon"], Number):
-            raise TypeError(
-                "'horizon' must be a number, was a {}".format(type(config["horizon"]))
-            )
+            raise TypeError(f"'horizon' must be a number, was a {type(config['horizon'])}")
         if config["horizon"] < 0:
-            raise ValueError(
-                "'horizon' must be positive, was {}".format(config["horizon"])
-            )
-        if config["x"] is not None and not all(
-            [state in config["x"] for state in self.states]
-        ):
+            raise ValueError(f"'horizon' must be positive, was {config['horizon']}")
+        if config["x"] is not None and not all(state in config["x"] for state in self.states):
             raise ValueError("'x' must contain every state in model.states")
-        if "thresholds_met_eqn" in config and not callable(
-            config["thresholds_met_eqn"]
-        ):
+        if "thresholds_met_eqn" in config and not callable(config["thresholds_met_eqn"]):
             raise TypeError(
                 "'thresholds_met_eqn' must be callable (e.g., function or lambda)"
             )
@@ -1018,7 +1009,7 @@ class PrognosticsModel(ABC):
             )
         if not isinstance(config["print"], bool):
             raise TypeError(
-                "'print' must be a bool, was a {}".format(type(config["print"]))
+                f"'print' must be a bool, was a {type(config['print'])}"
             )
 
         # Setup
@@ -1052,14 +1043,14 @@ class PrognosticsModel(ABC):
 
             def check_thresholds(thresholds_met):
                 t_met = [thresholds_met[key] for key in events]
-                if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
+                if len(t_met) > 0 and not np.isscalar(next(iter(t_met))):
                     return np.any(t_met)
                 return any(t_met)
         elif config["event_strategy"] == "all":
 
             def check_thresholds(thresholds_met):
                 t_met = [thresholds_met[key] for key in events]
-                if len(t_met) > 0 and not np.isscalar(list(t_met)[0]):
+                if len(t_met) > 0 and not np.isscalar(next(iter(t_met))):
                     return np.all(t_met)
                 return all(t_met)
         elif callable(config["event_strategy"]):
@@ -1129,13 +1120,7 @@ class PrognosticsModel(ABC):
                 saved_outputs.append(output(x))
                 saved_event_states.append(event_state(x))
                 print(
-                    "Time: {}\n\tInput: {}\n\tState: {}\n\tOutput: {}\n\tEvent State: {}\n".format(
-                        saved_times[-1],
-                        saved_inputs[-1],
-                        saved_states[-1],
-                        saved_outputs[-1],
-                        saved_event_states[-1],
-                    )
+                    f"Time: {saved_times[-1]}\n\tInput: {saved_inputs[-1]}\n\tState: {saved_states[-1]}\n\tOutput: {saved_outputs[-1]}\n\tEvent State: {saved_event_states[-1]}\n"
                 )
         else:
 
@@ -1257,7 +1242,7 @@ class PrognosticsModel(ABC):
             # Update progress bar
             if config["progress"]:
                 percentages = [1 - val for val in event_state(x).values()]
-                percentages.append((t / horizon))
+                percentages.append(t / horizon)
                 converted_iteration = int(max(min(100, max(percentages) * 100), 0))
                 if converted_iteration - last_percentage > 1:
                     simulate_progress(converted_iteration)
@@ -1368,21 +1353,21 @@ class PrognosticsModel(ABC):
             isinstance(obj, tuple(acceptable_types)) for obj in [times, inputs, outputs]
         ):
             type_error = (
-                f"Types passed in must be from the following: Sequence, np.ndarray, SimResult, or LazySimResult. Current types"
+                "Types passed in must be from the following: Sequence, np.ndarray, SimResult, or LazySimResult. Current types"
                 f"{(' at data location (' + str(_loc) + ')' if _loc is not None else '')}"
                 f": times = {type(times).__name__}, inputs = {type(inputs).__name__}, and outputs = {type(outputs).__name__}."
             )
             raise TypeError(type_error)
         if len(times) != len(inputs) or len(inputs) != len(outputs):
             len_error = (
-                f"Times, inputs, and outputs must all be the same length. Current lengths"
+                "Times, inputs, and outputs must all be the same length. Current lengths"
                 f"{(' at data location (' + str(_loc) + ')' if _loc is not None else '')}"
                 f": times = {len(times)}, inputs = {len(inputs)}, outputs = {len(outputs)}."
             )
             raise ValueError(len_error)
         if len(times) < 2:
             less_2_error = (
-                f"Must provide at least 2 data points for times, inputs, and outputs"
+                "Must provide at least 2 data points for times, inputs, and outputs"
                 f"{(' at data location (' + str(_loc) + ')' if _loc is not None else '')}."
             )
             raise ValueError(less_2_error)
@@ -1434,7 +1419,7 @@ class PrognosticsModel(ABC):
                 f"Keyword argument 'dt' must a initialized to a value greater than 0. Currently passed in {dt}."
             )
 
-        if "x0" in kwargs.keys() and not isinstance(
+        if "x0" in kwargs and not isinstance(
             kwargs["x0"], (self.StateContainer, dict)
         ):
             raise TypeError(
@@ -1487,13 +1472,12 @@ class PrognosticsModel(ABC):
         if keys is None:
             # if no keys provided, use all keys that are Numbers
             keys = [
-                key
-                for key in self.parameters.keys()
+                key for key in self.parameters
                 if isinstance(self.parameters[key], Number)
             ]
 
         if isinstance(keys, set):
-            raise ValueError(
+            raise TypeError(
                 "Can not pass in keys as a Set. Sets are unordered by construction, so bounds may be out of order."
             )
 
@@ -1571,7 +1555,7 @@ class PrognosticsModel(ABC):
         # Convert bounds
         if isinstance(config["bounds"], dict):
             # Allows for partial bounds definition, and definition by key name
-            for key in config["bounds"].keys():
+            for key in config["bounds"]:
                 if key not in self.parameters:
                     warn(
                         f"{key} is not a valid parameter (i.e., it is not a parameter present in this model) and should not be passed in to the bounds"
@@ -1582,9 +1566,7 @@ class PrognosticsModel(ABC):
         else:
             if not isinstance(config["bounds"], abc.Iterable):
                 raise ValueError(
-                    "Bounds must be a tuple of tuples or a dict, was {}".format(
-                        type(config["bounds"])
-                    )
+                    f"Bounds must be a tuple of tuples or a dict, was {type(config['bounds'])}"
                 )
             if len(config["bounds"]) != len(keys):
                 raise ValueError(
@@ -1597,9 +1579,7 @@ class PrognosticsModel(ABC):
                 )
             if (not isinstance(bound, abc.Iterable)) or (len(bound) != 2):
                 raise ValueError(
-                    "Each bound must be a tuple of format (lower, upper), was {}".format(
-                        type(config["bounds"])
-                    )
+                    f"Each bound must be a tuple of format (lower, upper), was {type(config['bounds'])}"
                 )
 
         if "x0" in kwargs and not isinstance(kwargs["x0"], self.StateContainer):
@@ -1730,11 +1710,9 @@ class PrognosticsModel(ABC):
         """
         from progpy.data_models import SURROGATE_METHOD_LOOKUP
 
-        if method not in SURROGATE_METHOD_LOOKUP.keys():
+        if method not in SURROGATE_METHOD_LOOKUP:
             raise ValueError(
-                "Method {} not supported. Supported methods: {}".format(
-                    method, SURROGATE_METHOD_LOOKUP.keys()
-                )
+                f"Method {method} not supported. Supported methods: {SURROGATE_METHOD_LOOKUP.keys()}"
             )
 
         # Configure
@@ -1755,33 +1733,33 @@ class PrognosticsModel(ABC):
 
         if len(load_functions) <= 0:
             raise ValueError("load_functions must contain at least one element")
-        if "save_pts" in config.keys():
+        if "save_pts" in config:
             raise ValueError("'save_pts' is not a valid input for DMD Surrogate Model.")
 
         if isinstance(config["input_keys"], str):
             config["input_keys"] = [config["input_keys"]]
-        if not all([x in self.inputs for x in config["input_keys"]]):
+        if not all(x in self.inputs for x in config["input_keys"]):
             raise ValueError(
                 f"Invalid 'input_keys' value ({config['input_keys']}), must be a subset of the model's inputs ({self.inputs})."
             )
 
         if isinstance(config["state_keys"], str):
             config["state_keys"] = [config["state_keys"]]
-        if not all([x in self.states for x in config["state_keys"]]):
+        if not all(x in self.states for x in config["state_keys"]):
             raise ValueError(
                 f"Invalid 'state_keys' input value ({config['state_keys']}), must be a subset of the model's states ({self.states})."
             )
 
         if isinstance(config["output_keys"], str):
             config["output_keys"] = [config["output_keys"]]
-        if not all([x in self.outputs for x in config["output_keys"]]):
+        if not all(x in self.outputs for x in config["output_keys"]):
             raise ValueError(
                 f"Invalid 'output_keys' input value ({config['output_keys']}), must be a subset of the model's outputs ({self.outputs})."
             )
 
         if isinstance(config["event_keys"], str):
             config["event_keys"] = [config["event_keys"]]
-        if not all([x in self.events for x in config["event_keys"]]):
+        if not all(x in self.events for x in config["event_keys"]):
             raise ValueError(
                 f"Invalid 'event_keys' input value ({config['event_keys']}), must be a subset of the model's events ({self.events})."
             )
@@ -1790,42 +1768,63 @@ class PrognosticsModel(ABC):
 
     def to_json(self) -> str:
         """
-        Serialize parameters as JSON objects
+        Serialize the model type and parameters as a JSON object.
 
         Returns:
-            str: Serialized PrognosticsModel parameters as string
+            str: Serialized PrognosticsModel as a string
 
         See Also
         --------
         from_json
 
-        Note
-        ----
-        This method only serializes the values of the prognostics model parameters (model.parameters)
         """
-        return json.dumps(self.parameters.data, cls=CustomEncoder)
+        return json.dumps(
+            {
+                "__progpy_model__": {
+                    "type": f"{type(self).__module__}.{type(self).__qualname__}",
+                    "parameters": self.parameters.data,
+                }
+            },
+            cls=CustomEncoder,
+        )
 
     @classmethod
     def from_json(cls, data: str):
         """
-        Create a new prognostics model from a previously generated model that was serialized as a JSON object
+        Create a model from a JSON string generated by :meth:`to_json`.
 
         Args:
             data (str):
-                JSON serialized parameters necessary to build a model
-                See to_json method
+                JSON serialized model data generated by :meth:`to_json`.
 
         Returns:
-            PrognosticsModel: Model generated from serialized parameters
+            PrognosticsModel: Model generated from the serialized model data.
 
         See Also
         ---------
         to_json
 
-        Note
-        ----
-        This serialization only works for models that include all parameters necessary to generate the model in model.parameters.
+        Built-in model classes are loaded automatically. Custom model classes must
+        be imported before they can be reconstructed.
         """
-        extract_parameters = json.loads(data, object_hook=custom_decoder)
+        decoded = json.loads(data, object_hook=custom_decoder)
+        model_data = (
+            decoded.get("__progpy_model__") if isinstance(decoded, dict) else None
+        )
 
-        return cls(**extract_parameters)
+        if model_data is None:
+            return cls(**decoded)
+
+        model_type = model_data["type"]
+        model_class = PrognosticsModel._model_registry.get(model_type)
+        if model_class is None and model_type.startswith("progpy.models."):
+            import_module("progpy.models")
+            model_class = PrognosticsModel._model_registry.get(model_type)
+        if model_class is None:
+            raise ValueError(f"Unknown PrognosticsModel type: {model_type}")
+        if not issubclass(model_class, cls):
+            raise TypeError(
+                f"Serialized model type {model_type} is not a subclass of {cls.__name__}"
+            )
+
+        return model_class(**model_data["parameters"])

@@ -4,6 +4,23 @@ Release Notes
 .. ..  contents:: 
 ..     :backlinks: top
 
+Updates in v1.9.0
+----------------------
+
+progpy
+**************
+* Support for Python 3.14
+* Improvements to serialization and pickeling
+* Various bugfixes and efficiency improvements
+
+prog_server
+************
+* Support for Python 3.14
+* Removed all use of pickle (for security) in favor of json encoded format for sending results, states, and models between server and client
+* Various bug fixes and performance improvements
+
+A big thank you to @reginaldalfret and @sylvesterkaczmarek for your contributions to this release.
+
 Updates in v1.8.0
 ----------------------
 

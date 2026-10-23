@@ -1,26 +1,25 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
-from warnings import catch_warnings, simplefilter
+import json
+import types
 from collections import UserDict, abc
 from copy import deepcopy
-import json
 from numbers import Number
+from typing import TYPE_CHECKING
+from warnings import catch_warnings, simplefilter
+
 import numpy as np
 from scipy.integrate import OdeSolver
-import types
-
 
 from progpy.utils.containers import DictLikeMatrixWrapper
-from progpy.utils.next_state import next_state_functions, SciPyIntegrateNextState
+from progpy.utils.next_state import SciPyIntegrateNextState, next_state_functions
 from progpy.utils.noise_functions import (
     measurement_noise_functions,
     process_noise_functions,
 )
 from progpy.utils.serialization import CustomEncoder, custom_decoder
 from progpy.utils.size import getsizeof
-
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     # Fix circular import issue in PrognosticsModelParameters init
@@ -121,7 +120,7 @@ class PrognosticsModelParameters(UserDict):
                 self._m.next_state = types.MethodType(fcn, self._m)
                 return
             method = value.lower()
-            if method in next_state_functions.keys():
+            if method in next_state_functions:
                 self._m.next_state = types.MethodType(
                     next_state_functions[method], self._m
                 )
@@ -151,7 +150,7 @@ class PrognosticsModelParameters(UserDict):
                     noise = self["process_noise"]
                     for key in self._m.states:
                         # Set any missing keys to 0
-                        if key not in noise.keys():
+                        if key not in noise:
                             noise[key] = 0
 
                     self.data["process_noise"] = self._m.StateContainer(noise)
@@ -215,7 +214,7 @@ class PrognosticsModelParameters(UserDict):
                     noise = self["measurement_noise"]
                     for key in self._m.outputs:
                         # Set any missing keys to 0
-                        if key not in noise.keys():
+                        if key not in noise:
                             noise[key] = 0
                     self.data["measurement_noise"] = self._m.OutputContainer(noise)
 
@@ -252,7 +251,7 @@ class PrognosticsModelParameters(UserDict):
                 # Make sure every key is present
                 # (single value already handled above)
                 if not all(
-                    [key in self["measurement_noise"] for key in self._m.outputs]
+                    key in self["measurement_noise"] for key in self._m.outputs
                 ):
                     raise ValueError(
                         "Measurement noise must have ever key in model.outputs"

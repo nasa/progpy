@@ -1388,18 +1388,18 @@ class TestModels(unittest.TestCase):
         with self.assertRaises(ValueError):
             # Too many elements
             CompositeModel([("a", m1, "Something else"), ("b", m1)])
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             # Not a string
-            CompositeModel([(m1, m1)])
-        with self.assertRaises(ValueError):
+            CompositeModel([(m1, m1), ("b", m1)])
+        with self.assertRaises(TypeError):
             # Not a model
-            CompositeModel([("a", "b")])
+            CompositeModel([("a", "b"), ("c", m1)])
         with self.assertRaises(ValueError):
             # Too few elements
             CompositeModel([(m1,)])
 
         # Incorrect connections
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             # without model name
             CompositeModel([m1, m1], connections=[("z1", "u1")])
         with self.assertRaises(ValueError):
@@ -1407,12 +1407,12 @@ class TestModels(unittest.TestCase):
             CompositeModel(
                 [m1, m1], connections=[("z1", "OneInputOneOutputNoEventLM.u1")]
             )
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             # broken out
             CompositeModel(
                 [m1, m1], connections=[("OneInputOneOutputNoEventLM.z1", "u1")]
             )
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             # Switched
             CompositeModel(
                 [m1, m1],
@@ -1420,7 +1420,7 @@ class TestModels(unittest.TestCase):
                     ("OneInputOneOutputNoEventLM.u1", "OneInputOneOutputNoEventLM_2.z1")
                 ],
             )
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             # Improper format - too long
             CompositeModel(
                 [m1, m1],
@@ -1432,13 +1432,13 @@ class TestModels(unittest.TestCase):
                     )
                 ],
             )
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             # Improper format - not a string
             CompositeModel([m1, m1], connections=[(m1, m1)])
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             # Improper format - too short
             CompositeModel([m1, m1], connections=[("OneInputOneOutputNoEventLM.z1",)])
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             # Improper format - not a tuple
             CompositeModel([m1, m1], connections=["m1"])
 

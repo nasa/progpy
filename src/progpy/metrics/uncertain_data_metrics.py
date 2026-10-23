@@ -84,15 +84,11 @@ def calc_metrics(
             return calc_metrics(data, ground_truth, **kwargs)
         else:
             raise TypeError(
-                "Data must be type Uncertain Data or array of dicts, was {}".format(
-                    type(data)
-                )
+                f"Data must be type Uncertain Data or array of dicts, was {type(data)}"
             )
     else:
         raise TypeError(
-            "Data must be type Uncertain Data or array of dicts, was {}".format(
-                type(data)
-            )
+            f"Data must be type Uncertain Data or array of dicts, was {type(data)}"
         )
 
     # If we get here then Data is a list of numbers- calculate metrics for numbers

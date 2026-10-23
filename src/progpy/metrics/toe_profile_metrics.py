@@ -56,9 +56,7 @@ def alpha_lambda(
                     print("\n", key)
                     print("\ttoe:", toe.key(key))
                     print(
-                        "\tBounds: [{} - {}]({}%)".format(
-                            bounds[key][0], bounds[key][1], pib[key]
-                        )
+                        f"\tBounds: [{bounds[key][0]} - {bounds[key][1]}]({pib[key]}%)"
                     )
             return result
 
@@ -91,7 +89,7 @@ def prognostic_horizon(
     params.update(kwargs)
 
     ph_result = {
-        k: None for k in ground_truth.keys()
+        k: None for k in ground_truth
     }  # False means not yet met; will be either a numerical value or None if met
     for t_prediction, toe in toe_profile.items():
         # Convert to TtE for toe and ground_truth
@@ -156,7 +154,7 @@ def monotonicity(toe_profile: ToEPredictionProfile, **kwargs) -> Dict[str, float
     Returns:
         dict (str, float): Dictionary where keys represent an event and values are float representing its respective monotonicitiy value between [0, 1].
     """
-    result = dict()
+    result = {}
     by_event = defaultdict(list)
     for time, uncertaindata in toe_profile.items():
         # Collect and organize mean values for each event in the individual prediction v

@@ -1076,7 +1076,7 @@ class TestEstimateParams(unittest.TestCase):
 
         # Keys are a Set. Should throw an exception.
         keys = {"thrower_height", "throwing_speed", "g"}
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             m.estimate_params(
                 times=results.times,
                 inputs=results.inputs,

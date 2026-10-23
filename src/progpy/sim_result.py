@@ -1,15 +1,19 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
 
-from collections import UserList, defaultdict, abc
+from collections import UserList, abc, defaultdict
 from copy import deepcopy
 from functools import cached_property
-from matplotlib.pyplot import figure
+import json
+from typing import Dict, List
+
 import numpy as np
 import pandas as pd
+from matplotlib.pyplot import figure
+
 from progpy.exceptions import warn_once
 from progpy.utils.containers import DictLikeMatrixWrapper
+from progpy.utils.serialization import CustomEncoder, custom_decoder
 from progpy.visualize import plot_timeseries
-from typing import Dict, List
 
 
 class SimResult(UserList):
@@ -62,23 +66,15 @@ class SimResult(UserList):
 
     @cached_property
     def frame(self) -> pd.DataFrame:
-        """
-        .. versionadded:: 1.5.0
+        """Return simulation data as a DataFrame indexed by time."""
+        frame = pd.DataFrame.from_records(
+            [dict(sample) for sample in self.data]
+        )
 
-            pd.DataFrame: A pandas DataFrame representing the SimResult data
-        """
-        # warn_once('frame will be deprecated after version 1.5 of ProgPy.', DeprecationWarning, stacklevel=2)
-        if len(self.data) > 0:
-            frame = pd.concat(
-                [pd.DataFrame(dict(dframe), index=[0]) for dframe in self.data],
-                ignore_index=True,
-                axis=0,
-            )
-        else:
-            frame = pd.DataFrame()
         if self.times is not None:
             frame.insert(0, "time", self.times)
             frame = frame.set_index("time")
+
         return frame
 
     def frame_is_empty(self) -> bool:
@@ -111,7 +107,7 @@ class SimResult(UserList):
         """
         in addition to the normal functionality, updates the _frame if it exists
         """
-        self.insert(i, item)
+        super().insert(i, item)
         if "frame" in self.__dict__:
             for value in item:
                 self.__dict__["frame"].insert(i, column=[value], value=item[value])
@@ -156,6 +152,54 @@ class SimResult(UserList):
 
         return self.equals(other)
 
+    def to_dict(self) -> dict:
+        """Serialize the simulation result's times and data to a dictionary."""
+        return json.loads(
+            json.dumps(
+                {"type": "SimResult", "times": self.times, "data": self.data},
+                cls=CustomEncoder,
+            )
+        )
+
+    def to_json(self) -> str:
+        """Serialize the simulation result's times and data to JSON."""
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "SimResult":
+        """Reconstruct a SimResult from a dictionary produced by :meth:`to_dict`.
+
+        Raises:
+            ValueError: If the type is not ``SimResult`` or fields are missing.
+            TypeError: If the payload is not an object or fields are not lists.
+        """
+        if not isinstance(data, dict):
+            raise TypeError("Invalid SimResult data: expected a dictionary.")
+        if data.get("type") != "SimResult":
+            raise ValueError(
+                f"Invalid type for SimResult decoding: {data.get('type')}. "
+                "Expected 'SimResult'."
+            )
+        if "times" not in data or "data" not in data:
+            raise ValueError("Invalid SimResult data: missing 'times' or 'data'.")
+        if not isinstance(data["times"], list) or not isinstance(
+            data["data"], list
+        ):
+            raise TypeError(
+                "Invalid SimResult data: 'times' and 'data' must be lists."
+            )
+        if cls is not SimResult:
+            raise TypeError("SimResult data can only be decoded as SimResult.")
+        decoded = json.loads(
+            json.dumps(data, cls=CustomEncoder), object_hook=custom_decoder
+        )
+        return cls(decoded["times"], decoded["data"])
+
+    @classmethod
+    def from_json(cls, data: str) -> "SimResult":
+        """Reconstruct a SimResult from a string produced by :meth:`to_json`."""
+        return cls.from_dict(json.loads(data))
+
     def index_of_data(self, other: dict, *args, **kwargs) -> int:
         """
         Get the index of the first sample where other occurs
@@ -198,7 +242,7 @@ class SimResult(UserList):
             self.times.extend(other.times)
             self.data.extend(other.data)
         else:
-            raise ValueError(f"ValueError: Argument must be of type {self.__class__}")
+            raise TypeError(f"Argument must be of type {self.__class__}")
         if "frame" in self.__dict__:
             del self.__dict__["frame"]
 
@@ -409,7 +453,7 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
     def extend(self, other: "LazySimResult", _copy=True) -> None:
         """
         Extend the LazySimResult with another LazySimResult object
-        Raise ValueError if SimResult is passed
+        Raise TypeError if a non-LazySimResult is passed
         Function fcn of other LazySimResult MUST match function fcn of LazySimResult object to be extended
 
         Args:
@@ -430,11 +474,11 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
                 else:
                     self.__dict__["data"].extend(other.data)
         elif isinstance(other, SimResult):
-            raise ValueError(
-                f"ValueError: {self.__class__} cannot be extended by SimResult. First convert to SimResult using to_simresult() method."
+            raise TypeError(
+                f"{self.__class__} cannot be extended by SimResult. First convert to SimResult using to_simresult() method."
             )
         else:
-            raise ValueError(f"ValueError: Argument must be of type {self.__class__}.")
+            raise TypeError(f"Argument must be of type {self.__class__}.")
 
     def pop(self, index: int = -1) -> dict:
         """Remove an element. If data hasn't been cached, remove the state - so it wont be calculated
@@ -461,9 +505,7 @@ class LazySimResult(SimResult):  # lgtm [py/missing-equals]
             s: State value to be removed
         """
         if sum([i is None for i in (d, t, s)]) != 2:
-            raise ValueError(
-                "ValueError: Only one named argument (d, t, s) can be specified."
-            )
+            raise ValueError("Only one named argument (d, t, s) can be specified.")
 
         if t is not None:
             target_index = self.times.index(t)

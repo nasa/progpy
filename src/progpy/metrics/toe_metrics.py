@@ -69,15 +69,11 @@ def prob_success(toe: UncertainData, time: float, **kwargs) -> float:
             return prob_success(toe, time, **kwargs)
         else:
             raise TypeError(
-                "ToE must be type Uncertain Data or array of dicts, was {}".format(
-                    type(toe)
-                )
+                f"ToE must be type Uncertain Data or array of dicts, was {type(toe)}"
             )
     else:
         raise TypeError(
-            "ToE must be type Uncertain Data or array of dicts, was {}".format(
-                type(toe)
-            )
+            f"ToE must be type Uncertain Data or array of dicts, was {type(toe)}"
         )
 
     return sum([e is None or e > time for e in toe]) / len(toe)

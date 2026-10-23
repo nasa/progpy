@@ -208,7 +208,7 @@ def MSE(
                         + (100 - (t / cutoffThreshold) * 100) * short_sim_penalty
                     )
                 else:
-                    warn("Model unstable- NaN reached in simulation (t={})".format(t))
+                    warn(f"Model unstable- NaN reached in simulation (t={t})")
                     break
             err_total += np.sum(
                 np.square(z.matrix - z_obs.matrix), where=~np.isnan(z.matrix)
@@ -460,7 +460,7 @@ def DTW(m, times, inputs, outputs, **kwargs):
         transform = []
         for index in data:
             inner_list = []
-            for key in index.keys():
+            for key in index:
                 inner_list.append(index.get(key))
             transform.append(inner_list)
         for i, t in enumerate(times):

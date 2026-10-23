@@ -1,8 +1,10 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration.  All Rights Reserved.
-import numpy as np
+import json
 import pickle
 import sys
 import unittest
+
+import numpy as np
 
 from progpy import PrognosticsModel
 from progpy.predictors import (
@@ -15,6 +17,7 @@ from progpy.models import BatteryCircuit, ThrownObject
 from progpy.state_estimators import UnscentedKalmanFilter
 from progpy.predictors.prediction import UnweightedSamplesPrediction, Prediction
 from progpy.metrics import samples
+from progpy.sim_result import SimResult
 
 # This ensures that the directory containing predictor_template is in the Python search directory
 from os.path import dirname, join
@@ -320,6 +323,104 @@ class TestPredictors(unittest.TestCase):
         # Out of range
         with self.assertRaises(Exception):
             tmp = p.times[10]
+
+    def test_prediction_json_serialization(self):
+        times = [0, 1]
+        states = [
+            MultivariateNormalDist(["a"], [1], [[0.1]]),
+            ScalarData({"a": 2}),
+        ]
+        prediction = Prediction(times, states)
+
+        encoded = prediction.to_json()
+        decoded = Prediction.from_json(encoded)
+
+        self.assertEqual(decoded, prediction)
+        self.assertIs(type(decoded), Prediction)
+        self.assertEqual(decoded.snapshot(1), states[1])
+
+    def test_unweighted_samples_prediction_json_serialization(self):
+        times = [0, 1]
+        samples_by_profile = [
+            UnweightedSamples([{"a": 0}, {"a": 1}]),
+            UnweightedSamples([{"a": 2}, {"a": 3}]),
+        ]
+        prediction = UnweightedSamplesPrediction(times, samples_by_profile)
+
+        encoded = prediction.to_json()
+        decoded = Prediction.from_json(encoded)
+
+        self.assertEqual(decoded, prediction)
+        self.assertIs(type(decoded), UnweightedSamplesPrediction)
+        self.assertEqual(decoded[0], samples_by_profile[0])
+        self.assertEqual(
+            decoded.snapshot(0), UnweightedSamples([{"a": 0}, {"a": 2}])
+        )
+        self.assertEqual(decoded.mean, [{"a": 1}, {"a": 2}])
+        self.assertEqual(
+            UnweightedSamplesPrediction.from_json(encoded), prediction
+        )
+
+    def test_unweighted_samples_prediction_dict_serialization(self):
+        times = [0, 1]
+        profiles = [
+            SimResult([0, 1], [{"x": 0}, {"x": 1}]),
+            SimResult([0, 1], [{"x": 2}, {"x": 3}]),
+        ]
+        prediction = UnweightedSamplesPrediction(times, profiles)
+
+        encoded = prediction.to_dict()
+        restored = UnweightedSamplesPrediction.from_dict(encoded)
+        base_restored = Prediction.from_dict(encoded)
+        restored_from_json = Prediction.from_json(prediction.to_json())
+
+        self.assertEqual(restored, prediction)
+        self.assertEqual(base_restored, prediction)
+        self.assertEqual(restored_from_json, prediction)
+        self.assertIsInstance(restored[0], SimResult)
+        self.assertEqual(restored.snapshot(1), UnweightedSamples([{"x": 1}, {"x": 3}]))
+
+    def test_unweighted_samples_prediction_dict_normalizes_json_profiles(self):
+        profile = SimResult([0, 1], [{"x": 0}, {"x": 1}])
+
+        class JsonOnlyProfile:
+            def to_json(self):
+                return profile.to_json()
+
+        prediction = UnweightedSamplesPrediction([0, 1], [JsonOnlyProfile()])
+
+        encoded = prediction.to_dict()
+        self.assertIsInstance(encoded["data"][0], dict)
+        restored = UnweightedSamplesPrediction.from_dict(encoded)
+        self.assertEqual(restored[0], profile)
+
+        legacy_payload = {
+            **encoded,
+            "data": [profile.to_json()],
+        }
+        self.assertEqual(
+            UnweightedSamplesPrediction.from_dict(legacy_payload)[0], profile
+        )
+        self.assertEqual(Prediction.from_dict(legacy_payload)[0], profile)
+
+    def test_prediction_from_json_validates_type_and_payload(self):
+        with self.assertRaisesRegex(ValueError, "Unknown prediction type"):
+            Prediction.from_json(json.dumps({"type": "OtherPrediction"}))
+
+        with self.assertRaisesRegex(ValueError, "missing 'times' or 'data'"):
+            Prediction.from_json(json.dumps({"type": "Prediction", "times": []}))
+
+        samples_prediction = UnweightedSamplesPrediction([0], [UnweightedSamples([])])
+        self.assertIsInstance(
+            Prediction.from_json(samples_prediction.to_json()),
+            UnweightedSamplesPrediction,
+        )
+
+        prediction = Prediction([0], [ScalarData({"a": 1})])
+        with self.assertRaisesRegex(
+            ValueError, "expected 'UnweightedSamplesPrediction'"
+        ):
+            UnweightedSamplesPrediction.from_json(prediction.to_json())
 
     def test_prediction_uwsamples(self):
         times = list(range(10))

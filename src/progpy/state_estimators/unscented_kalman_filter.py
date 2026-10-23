@@ -53,53 +53,31 @@ class UnscentedKalmanFilter(state_estimator.StateEstimator):
 
         self.__input = None
         self.x0 = x0
-        # Saving for reduce pickling
-
-        def measure(x):
-            # Disable deprecation warnings for internal progpy code.
-            x = model.StateContainer({key: value for (key, value) in zip(x0.keys(), x)})
-            R_err = model.parameters["measurement_noise"].copy()
-            with catch_warnings():
-                simplefilter("ignore", DeprecationWarning)
-                model.parameters["measurement_noise"] = dict.fromkeys(R_err, 0)
-                z = model.output(x)
-                model.parameters["measurement_noise"] = R_err
-                return array(list(z.values())).ravel()
 
         if "Q" not in self.parameters:
             self.parameters["Q"] = diag([1.0e-3 for _ in x0.keys()])
-
-        def state_transition(x, dt):
-            # Disable deprecation warnings for internal progpy code.
-            x = model.StateContainer({key: value for (key, value) in zip(x0.keys(), x)})
-            Q_err = model.parameters["process_noise"].copy()
-            with catch_warnings():
-                simplefilter("ignore", DeprecationWarning)
-                model.parameters["process_noise"] = dict.fromkeys(Q_err, 0)
-                x = model.next_state(x, self.__input, dt)
-                return array(list(x.values())).ravel()
 
         num_states = len(x0.keys())
         num_measurements = model.n_outputs
         points = kalman.MerweScaledSigmaPoints(
             num_states,
-            alpha=self.parameters["alpha"],
-            beta=self.parameters["beta"],
-            kappa=self.parameters["kappa"],
+            alpha=self.parameters['alpha'],
+            beta=self.parameters['beta'],
+            kappa=self.parameters['kappa'],
         )
         self.filter = kalman.UnscentedKalmanFilter(
             num_states,
             num_measurements,
-            self.parameters["dt"],
-            measure,
-            state_transition,
+            self.parameters['dt'],
+            self._measure,
+            self._state_transition,
             points,
         )
 
         if isinstance(x0, dict) or isinstance(x0, model.StateContainer):
             warn("Use UncertainData type if estimating filtering with uncertain data.")
             self.filter.x = array(list(x0.values()))
-            self.filter.P = self.parameters["Q"] / 10
+            self.filter.P = self.parameters['Q'] / 10
         elif isinstance(x0, UncertainData):
             x_mean = x0.mean
             self.filter.x = array(list(x_mean.values()))
@@ -112,11 +90,32 @@ class UnscentedKalmanFilter(state_estimator.StateEstimator):
         if "R" not in self.parameters:
             # Size of what's being measured (not output)
             # This is determined by running the measure function on the first state
-            self.parameters["R"] = diag(
-                [1.0e-3 for i in range(len(measure(self.filter.x)))]
+            self.parameters['R'] = diag(
+                [1.0e-3 for i in range(len(self._measure(self.filter.x)))]
             )
-        self.filter.Q = self.parameters["Q"]
-        self.filter.R = self.parameters["R"]
+        self.filter.Q = self.parameters['Q']
+        self.filter.R = self.parameters['R']
+
+    def _measure(self, x):
+        # Disable deprecation warnings for internal progpy code.
+        x = self.model.StateContainer({key: value for (key, value) in zip(self.x0.keys(), x)})
+        R_err = self.model.parameters['measurement_noise'].copy()
+        with catch_warnings():
+            simplefilter("ignore", DeprecationWarning)
+            self.model.parameters['measurement_noise'] = dict.fromkeys(R_err, 0)
+            z = self.model.output(x)
+            self.model.parameters['measurement_noise'] = R_err
+            return array(list(z.values())).ravel()
+
+    def _state_transition(self, x, dt):
+        # Disable deprecation warnings for internal progpy code.
+        x = self.model.StateContainer({key: value for (key, value) in zip(self.x0.keys(), x)})
+        Q_err = self.model.parameters['process_noise'].copy()
+        with catch_warnings():
+            simplefilter("ignore", DeprecationWarning)
+            self.model.parameters['process_noise'] = dict.fromkeys(Q_err, 0)
+            x = self.model.next_state(x, self.__input, dt)
+            return array(list(x.values())).ravel()
 
     def estimate(self, t: float, u, z, **kwargs):
         """

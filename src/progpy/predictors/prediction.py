@@ -1,10 +1,13 @@
 # Copyright © 2021 United States Government as represented by the Administrator of the National Aeronautics and Space Administration. All Rights Reserved.
 
 from collections import UserList, defaultdict, namedtuple
+import json
 from typing import Dict, List
+
 from numpy import sign
 
-from ..uncertain_data import UnweightedSamples, UncertainData
+from ..sim_result import SimResult
+from ..uncertain_data import UnweightedSamples, UncertainData, from_json
 
 PredictionResults = namedtuple(
     "PredictionResults",
@@ -26,6 +29,78 @@ class Prediction:
     def __init__(self, times: list, data: list):
         self.times = times
         self.data = data
+
+    def to_dict(self) -> dict:
+        """Serialize this prediction and its uncertain data to a dictionary."""
+        return {
+            "type": type(self).__name__,
+            "times": self.times,
+            "data": [entry.to_json() for entry in self.data],
+        }
+        
+    def to_json(self) -> str:
+        """Serialize this prediction and its uncertain data to a JSON string.
+
+        The serialized data contains the prediction type, times, and encoded
+        uncertain-data entries. It does not include the ``PredictionResults``
+        returned alongside predictions by predictors.
+        """
+        return json.dumps(
+            self.to_dict(), sort_keys=True, indent=4, separators=(",", ": ")
+        )
+        
+        
+    @classmethod
+    def from_dict(cls, data: dict):
+        if not isinstance(data, dict):
+            raise TypeError("Invalid prediction data: expected an object.")
+
+        prediction_classes = {
+            "Prediction": Prediction,
+            "UnweightedSamplesPrediction": UnweightedSamplesPrediction,
+        }
+        prediction_type = data.get("type")
+        if (
+            not isinstance(prediction_type, str)
+            or prediction_type not in prediction_classes
+        ):
+            raise ValueError(f"Unknown prediction type: {prediction_type}")
+
+        prediction_class = prediction_classes[prediction_type]
+        if cls is not Prediction and cls is not prediction_class:
+            raise ValueError(
+                f"Invalid prediction type for {cls.__name__} decoding: "
+                f"expected '{cls.__name__}', got '{prediction_type}'."
+            )
+        if "times" not in data or "data" not in data:
+            raise ValueError("Invalid prediction data: missing 'times' or 'data'.")
+        if not isinstance(data["times"], list) or not isinstance(data["data"], list):
+            raise TypeError(
+                "Invalid prediction data: 'times' and 'data' must be lists."
+            )
+        if prediction_class is UnweightedSamplesPrediction:
+            return prediction_class.from_dict(data)
+        if not all(isinstance(entry, dict) for entry in data["data"]):
+            raise TypeError(
+                "Invalid prediction data: each data entry must be an object."
+            )
+        return prediction_class(
+            data["times"], [from_json(entry) for entry in data["data"]]
+        )
+
+    @classmethod
+    def from_json(cls, data: str) -> "Prediction":
+        """Reconstruct a prediction from a string produced by :meth:`to_json`.
+
+        Calling this method on ``Prediction`` dispatches to the concrete
+        prediction class recorded in the JSON. Calling it on a concrete
+        subclass requires that the serialized type matches that subclass.
+
+        Raises:
+            ValueError: If the JSON envelope or prediction type is invalid.
+            TypeError: If the JSON envelope contains values of invalid types.
+        """
+        return cls.from_dict(json.loads(data))
 
     def __eq__(self, other: "Prediction") -> bool:
         """Compare 2 Predictions
@@ -112,6 +187,59 @@ class UnweightedSamplesPrediction(Prediction, UserList):
     def __init__(self, times: list, data: list):
         super(UnweightedSamplesPrediction, self).__init__(times, data)
         self.__transformed = False  # If transform has been calculated
+
+    def to_dict(self) -> dict:
+        """Serialize each sample profile as a SimResult dictionary."""
+        profiles = []
+        for profile in self.data:
+            if isinstance(profile, SimResult):
+                serialized_profile = profile.to_dict()
+            else:
+                serialized_profile = profile.to_json()
+            if isinstance(serialized_profile, str):
+                serialized_profile = json.loads(serialized_profile)
+            profiles.append(serialized_profile)
+
+        return {
+            "type": type(self).__name__,
+            "times": self.times,
+            "data": profiles,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "UnweightedSamplesPrediction":
+        """Reconstruct a prediction from dictionaries produced by :meth:`to_dict`."""
+        if not isinstance(data, dict):
+            raise TypeError("Invalid prediction data: expected an object.")
+        if data.get("type") != cls.__name__:
+            raise ValueError(
+                f"Invalid prediction type for {cls.__name__} decoding: "
+                f"expected '{cls.__name__}', got '{data.get('type')}'."
+            )
+        if "times" not in data or "data" not in data:
+            raise ValueError("Invalid prediction data: missing 'times' or 'data'.")
+        if not isinstance(data["times"], list) or not isinstance(data["data"], list):
+            raise TypeError(
+                "Invalid prediction data: 'times' and 'data' must be lists."
+            )
+        if not all(isinstance(profile, (dict, str)) for profile in data["data"]):
+            raise TypeError(
+                "Invalid prediction data: each sample profile must be an object "
+                "or JSON string."
+            )
+        profiles = [
+            json.loads(profile) if isinstance(profile, str) else profile
+            for profile in data["data"]
+        ]
+        return cls(
+            data["times"],
+            [
+                SimResult.from_dict(profile)
+                if profile.get("type") == "SimResult"
+                else from_json(profile)
+                for profile in profiles
+            ],
+        )
 
     def __calculate_tranform(self):
         """

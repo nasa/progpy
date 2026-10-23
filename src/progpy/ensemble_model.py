@@ -43,6 +43,17 @@ class EnsembleModel(PrognosticsModel):
                     f"EnsembleModel requires all models to be PrognosticsModel instances. models[{i}] was {type(m)}"
                 )
 
+        self._set_model_keys(models)
+        super().__init__(**kwargs)
+        self.parameters['models'] = models
+
+    def __setstate__(self, params: dict) -> None:
+        # Copying and unpickling bypass __init__, so rebuild the dynamic
+        # keys before the base class creates the containers and parameters.
+        self._set_model_keys(params['models'])
+        super().__setstate__(params)
+
+    def _set_model_keys(self, models: list) -> None:
         inputs = set()
         states = set()
         outputs = set()
@@ -56,9 +67,6 @@ class EnsembleModel(PrognosticsModel):
         self.states = list(states)
         self.outputs = list(outputs)
         self.events = list(events)
-
-        super().__init__(**kwargs)
-        self.parameters["models"] = models
 
     def initialize(self, u=None, z=None):
         xs = [
@@ -75,7 +83,7 @@ class EnsembleModel(PrognosticsModel):
                     x0[key].append(x[key])
                 else:
                     x0[key] = [x[key]]
-        for key in x0.keys():
+        for key in x0:
             x0[key] = self.parameters["aggregation_method"](x0[key])
         return self.StateContainer(x0)
 
@@ -86,12 +94,12 @@ class EnsembleModel(PrognosticsModel):
         ]
         xs_final = {}
         for x in xs:
-            for key in x.keys():
+            for key in x:
                 if key in xs_final:
                     xs_final[key].append(x[key])
                 else:
                     xs_final[key] = [x[key]]
-        for key in xs_final.keys():
+        for key in xs_final:
             xs_final[key] = self.parameters["aggregation_method"](xs_final[key])
 
         return self.StateContainer(xs_final)
@@ -100,12 +108,12 @@ class EnsembleModel(PrognosticsModel):
         zs = [m.output(m.StateContainer(x)) for m in self.parameters["models"]]
         zs_final = {}
         for z in zs:
-            for key in z.keys():
+            for key in z:
                 if key in zs_final:
                     zs_final[key].append(z[key])
                 else:
                     zs_final[key] = [z[key]]
-        for key in zs_final.keys():
+        for key in zs_final:
             zs_final[key] = self.parameters["aggregation_method"](zs_final[key])
 
         return self.OutputContainer(zs_final)
@@ -114,12 +122,12 @@ class EnsembleModel(PrognosticsModel):
         es = [m.event_state(m.StateContainer(x)) for m in self.parameters["models"]]
         es_final = {}
         for es_i in es:
-            for key in es_i.keys():
+            for key in es_i:
                 if key in es_final:
                     es_final[key].append(es_i[key])
                 else:
                     es_final[key] = [es_i[key]]
-        for key in es_final.keys():
+        for key in es_final:
             es_final[key] = self.parameters["aggregation_method"](es_final[key])
 
         return es_final
@@ -128,12 +136,12 @@ class EnsembleModel(PrognosticsModel):
         pms = [m.performance_metrics(x) for m in self.parameters["models"]]
         pms_final = {}
         for pm in pms:
-            for key in pm.keys():
+            for key in pm:
                 if key in pms_final:
                     pms_final[key].append(pm[key])
                 else:
                     pms_final[key] = [pm[key]]
-        for key in pms_final.keys():
+        for key in pms_final:
             pms_final[key] = self.parameters["aggregation_method"](pms_final[key])
 
         return pms_final
@@ -142,12 +150,12 @@ class EnsembleModel(PrognosticsModel):
         toes = [m.time_of_event(*args, **kwargs) for m in self.parameters["models"]]
         toe_final = {}
         for toe in toes:
-            for key in toe.keys():
+            for key in toe:
                 if key in toe_final:
                     toe_final[key].append(toe[key])
                 else:
                     toe_final[key] = [toe[key]]
-        for key in toe_final.keys():
+        for key in toe_final:
             toe_final[key] = self.parameters["aggregation_method"](toe_final[key])
 
         return toe_final

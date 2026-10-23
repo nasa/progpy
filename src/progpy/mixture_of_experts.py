@@ -90,7 +90,7 @@ class MixtureOfExpertsModel(CompositeModel):
         self.parameters["measurement_noise"] = kwargs.get("process_noise", 0)
         PrognosticsModel.__init__(self, **self.parameters)
 
-    def initialize(self, u={}, z={}):
+    def initialize(self, u=None, z=None):
         if u is None:
             u = {}
         if z is None:
@@ -173,7 +173,7 @@ class MixtureOfExpertsModel(CompositeModel):
 
         return x
 
-    def best_model(self, x, _excepting=[]):
+    def best_model(self, x, _excepting=None):
         """
         Get the best-performing model according to the scores
 
@@ -186,7 +186,7 @@ class MixtureOfExpertsModel(CompositeModel):
         # Identify best model
         best_value: float = -1
         for i, (key, _) in enumerate(self.parameters["models"]):
-            if key in _excepting:
+            if _excepting is not None and key in _excepting:
                 continue  # Skip excepting
             score_key = key + DIVIDER + "_score"
             if x[score_key] > best_value:
