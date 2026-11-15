@@ -2,6 +2,7 @@
 # National Aeronautics and Space Administration.  All Rights Reserved.
 
 import unittest
+from progpy import PrognosticsModel
 from progpy.models import ThrownObject, LinearThrownObject, BatteryElectroChemEOD
 
 
@@ -536,6 +537,56 @@ class TestCalcError(unittest.TestCase):
         # As such, DTW would have a naturally lower error than a standard error calculation method like 'mse'.
         MSE_err = m.calc_error(times, inputs, outputs)
         self.assertLess(DTW_err, MSE_err)
+
+    def test_DTW_accepts_dict_x0(self):
+        """
+        A plain dict x0 works for DTW, as it already does for the other methods.
+        """
+        m = ThrownObject()
+        results = m.simulate_to_threshold(save_freq=0.5)
+        x0 = dict(m.initialize())
+
+        expected = m.calc_error(
+            results.times, results.inputs, results.outputs, method="dtw"
+        )
+        actual = m.calc_error(
+            results.times, results.inputs, results.outputs, method="dtw", x0=x0
+        )
+        self.assertAlmostEqual(actual, expected)
+
+    def test_DTW_model_unstable_after_cutoff(self):
+        """
+        DTW returns a distance when the model goes unstable after stability_tol,
+        matching the behavior of the other error methods.
+        """
+
+        class LateNaN(PrognosticsModel):
+            inputs = ["u"]
+            states = ["x"]
+            outputs = ["z"]
+            events = []
+            default_parameters = {"x0": {"x": 0.0}}
+
+            def next_state(self, x, u, dt):
+                next_x = x["x"] + dt
+                if next_x > 9.5:
+                    next_x = float("nan")
+                return self.StateContainer({"x": next_x})
+
+            def output(self, x):
+                return self.OutputContainer({"z": x["x"]})
+
+        m = LateNaN()
+        times = [float(i) for i in range(11)]
+        inputs = [{"u": 0.0} for _ in times]
+        outputs = [{"z": float(i)} for i in range(11)]
+
+        with self.assertWarns(UserWarning):
+            err = m.calc_error(
+                times, inputs, outputs, method="dtw", dt=1.0, stability_tol=0.9
+            )
+        self.assertIsInstance(err, float)
+        self.assertGreaterEqual(err, 0.0)
 
 
 def main():

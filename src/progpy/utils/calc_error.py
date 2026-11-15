@@ -403,7 +403,7 @@ def DTW(m, times, inputs, outputs, **kwargs):
     stability_tol = kwargs.get("stability_tol", 0.95)
 
     if not isinstance(x, m.StateContainer):
-        x = [m.StateContainer(x_i) for x_i in x]
+        x = m.StateContainer(x)
 
     if not isinstance(inputs[0], m.InputContainer):
         inputs = [m.InputContainer(u_i) for u_i in inputs]
@@ -458,13 +458,12 @@ def DTW(m, times, inputs, outputs, **kwargs):
         recorded at a consistent rate.
         """
         transform = []
-        for index in data:
+        for index, t in zip(data, times):
             inner_list = []
             for key in index:
                 inner_list.append(index.get(key))
+            inner_list.append(t)
             transform.append(inner_list)
-        for i, t in enumerate(times):
-            transform[i].append(t)
         return transform
 
     simulated, observed = dtw_helper(simulated), dtw_helper(outputs)
